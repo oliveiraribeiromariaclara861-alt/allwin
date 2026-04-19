@@ -1,2 +1,0 @@
-# allwin
-academy
