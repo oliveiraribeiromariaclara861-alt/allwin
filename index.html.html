@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Woman Gain — Formulário de Aplicação</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vinho: #3D1A18;
+    --vinho-medio: #6B3230;
+    --branco: #FDFAF6;
+    --creme: #F2E8D9;
+    --creme-escuro: #e8d9c4;
+  }
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  body {
+    background-color: var(--branco);
+    color: var(--vinho);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+ 
+  .hero {
+    background-color: var(--vinho);
+    padding: 70px 32px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: 50%;
+    transform: translateX(-50%);
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(242,232,217,0.12);
+  }
+ 
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -100px; left: 50%;
+    transform: translateX(-50%);
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    border: 1px solid rgba(242,232,217,0.06);
+  }
+ 
+  .hero-tag {
+    font-family: 'Jost', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--creme);
+    opacity: 0.6;
+    margin-bottom: 24px;
+  }
+ 
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 9vw, 56px);
+    font-weight: 300;
+    color: var(--creme);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+ 
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+  }
+ 
+  .hero-sub {
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--creme);
+    opacity: 0.5;
+    margin-top: 20px;
+  }
+ 
+  .divider-line {
+    width: 40px;
+    height: 1px;
+    background: var(--creme);
+    opacity: 0.3;
+    margin: 28px auto 0;
+  }
+ 
+  .intro {
+    background-color: var(--creme);
+    padding: 48px 32px;
+    text-align: center;
+  }
+ 
+  .intro p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 4vw, 21px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--vinho);
+    line-height: 1.7;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+ 
+  .intro-note {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--vinho-medio);
+    margin-top: 20px;
+    opacity: 0.7;
+  }
+ 
+  .form-section {
+    padding: 56px 24px 80px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+ 
+  .form-block {
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.5s forwards;
+  }
+ 
+  .form-block:nth-child(1) { animation-delay: 0.1s; }
+  .form-block:nth-child(2) { animation-delay: 0.2s; }
+  .form-block:nth-child(3) { animation-delay: 0.3s; }
+  .form-block:nth-child(4) { animation-delay: 0.4s; }
+  .form-block:nth-child(5) { animation-delay: 0.5s; }
+  .form-block:nth-child(6) { animation-delay: 0.6s; }
+  .form-block:nth-child(7) { animation-delay: 0.7s; }
+  .form-block:nth-child(8) { animation-delay: 0.8s; }
+ 
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+ 
+  .form-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--vinho-medio);
+    opacity: 0.5;
+    margin-bottom: 8px;
+  }
+ 
+  label {
+    display: block;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 4.5vw, 22px);
+    font-weight: 400;
+    color: var(--vinho);
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+ 
+  label span {
+    font-style: italic;
+    font-weight: 300;
+  }
+ 
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  textarea,
+  select {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(61,26,24,0.25);
+    padding: 10px 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--vinho);
+    outline: none;
+    transition: border-color 0.3s;
+    -webkit-appearance: none;
+    border-radius: 0;
+  }
+ 
+  input:focus,
+  textarea:focus,
+  select:focus {
+    border-bottom-color: var(--vinho);
+  }
+ 
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba(61,26,24,0.35);
+    font-size: 13px;
+  }
+ 
+  textarea {
+    resize: none;
+    min-height: 80px;
+    line-height: 1.7;
+  }
+ 
+  select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%233D1A18' stroke-width='1.2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 24px;
+  }
+ 
+  select option { color: var(--vinho); background: var(--branco); }
+ 
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+ 
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    padding: 12px 16px;
+    border: 1px solid rgba(61,26,24,0.15);
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+ 
+  .radio-option:hover {
+    border-color: var(--vinho-medio);
+    background: var(--creme);
+  }
+ 
+  .radio-option input[type="radio"] {
+    display: none;
+  }
+ 
+  .radio-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(61,26,24,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s;
+  }
+ 
+  .radio-dot::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--vinho);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+ 
+  .radio-option input:checked ~ .radio-dot {
+    border-color: var(--vinho);
+  }
+ 
+  .radio-option input:checked ~ .radio-dot::after {
+    opacity: 1;
+  }
+ 
+  .radio-option input:checked ~ .radio-text {
+    color: var(--vinho);
+    font-weight: 400;
+  }
+ 
+  .radio-text {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    color: rgba(61,26,24,0.65);
+    transition: all 0.2s;
+  }
+ 
+  .form-separator {
+    width: 100%;
+    height: 1px;
+    background: rgba(61,26,24,0.08);
+    margin: 48px 0;
+  }
+ 
+  .submit-area {
+    text-align: center;
+    padding-top: 16px;
+  }
+ 
+  .submit-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--vinho-medio);
+    opacity: 0.7;
+    margin-bottom: 28px;
+    line-height: 1.6;
+  }
+ 
+  .btn-submit {
+    display: inline-block;
+    background: var(--vinho);
+    color: var(--creme);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 18px 48px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+ 
+  .btn-submit::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--vinho-medio);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+ 
+  .btn-submit:hover::after {
+    transform: translateX(0);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .btn-submit:disabled::after {
+    display: none;
+  }
+ 
+  .btn-submit span {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ERROR MESSAGE */
+  .error-msg {
+    display: none;
+    background: rgba(200, 50, 50, 0.08);
+    border: 1px solid rgba(200, 50, 50, 0.25);
+    color: #8B2020;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    padding: 14px 18px;
+    margin-top: 20px;
+    border-radius: 2px;
+    line-height: 1.6;
+  }
+ 
+  .success-screen {
+    display: none;
+    text-align: center;
+    padding: 80px 32px;
+    animation: fadeUp 0.6s forwards;
+  }
+ 
+  .success-icon {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+ 
+  .success-screen h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--vinho);
+    margin-bottom: 16px;
+  }
+ 
+  .success-screen p {
+    font-size: 14px;
+    color: var(--vinho-medio);
+    line-height: 1.8;
+    max-width: 360px;
+    margin: 0 auto;
+    opacity: 0.8;
+  }
+ 
+  footer {
+    background: var(--vinho);
+    padding: 32px;
+    text-align: center;
+  }
+ 
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: var(--creme);
+    opacity: 0.4;
+    text-transform: uppercase;
+  }
+ 
+  .footer-motto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--creme);
+    opacity: 0.25;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+ 
+<div class="hero">
+  <p class="hero-tag">Formulário de Aplicação</p>
+  <h1>Woman<br><em>Gain</em></h1>
+  <p class="hero-sub">Vagas Seletas · All Win Academy</p>
+  <div class="divider-line"></div>
+</div>
+ 
+<div class="intro">
+  <p>Este não é um formulário qualquer.<br>É o primeiro passo de uma mulher que decidiu parar de carregar sozinha o peso do que não foi resolvido.</p>
+  <p class="intro-note">Responda com honestidade. Aqui começa sua transformação.</p>
+</div>
+ 
+<div class="form-section">
+  <form id="wgForm">
+
+    <!-- Campo oculto obrigatório do Formspree -->
+    <input type="hidden" name="_subject" value="Nova aplicação — Woman Gain">
+    <!-- Redireciona para página de agradecimento via JS, então desabilitamos redirect do Formspree -->
+    <input type="hidden" name="_next" value="about:blank">
+ 
+    <div class="form-block">
+      <p class="form-number">01</p>
+      <label>Qual é o seu nome <span>completo?</span></label>
+      <input type="text" name="nome" placeholder="Seu nome" required>
+    </div>
+ 
+    <div class="form-block">
+      <p class="form-number">02</p>
+      <label>Qual é o seu <span>WhatsApp?</span></label>
+      <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required>
+    </div>
+ 
+    <div class="form-block">
+      <p class="form-number">03</p>
+      <label>Qual é a sua <span>área de atuação?</span></label>
+      <input type="text" name="atuacao" placeholder="Ex: estética, coaching, saúde..." required>
+    </div>
+ 
+    <div class="form-separator"></div>
+ 
+    <div class="form-block">
+      <p class="form-number">04</p>
+      <label>Qual é o seu maior desafio <span>na vida atualmente?</span></label>
+      <textarea name="desafio_vida" placeholder="Seja honesta. Esse espaço é seu." required></textarea>
+    </div>
+ 
+    <div class="form-block">
+      <p class="form-number">05</p>
+      <label>Qual é o seu maior desafio <span>no negócio?</span></label>
+      <textarea name="desafio_negocio" placeholder="O que você sente que está travando seus resultados?" required></textarea>
+    </div>
+ 
+    <div class="form-block">
+      <p class="form-number">06</p>
+      <label>Você já fez algum trabalho de <span>autoconhecimento?</span></label>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="autoconhecimento" value="Nunca fiz nada nessa área" required>
+          <span class="radio-dot"></span>
+          <span class="radio-text">Nunca fiz nada nessa área</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="autoconhecimento" value="Já li alguns livros ou fiz cursos">
+          <span class="radio-dot"></span>
+          <span class="radio-text">Já li alguns livros ou fiz cursos</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="autoconhecimento" value="Faço ou já fiz terapia">
+          <span class="radio-dot"></span>
+          <span class="radio-text">Faço ou já fiz terapia</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="autoconhecimento" value="Tenho uma prática consistente">
+          <span class="radio-dot"></span>
+          <span class="radio-text">Tenho uma prática consistente</span>
+        </label>
+      </div>
+    </div>
+ 
+    <div class="form-block">
+      <p class="form-number">07</p>
+      <label>O que te fez querer essa transformação <span>agora?</span></label>
+      <textarea name="motivacao" placeholder="Pode ser uma situação, uma sensação, um momento..." required></textarea>
+    </div>
+ 
+    <div class="form-block">
+      <p class="form-number">08</p>
+      <label>Qual é o seu faturamento <span>mensal atual?</span></label>
+      <div class="radio-group">
+        <label class="radio-option">
+          <input type="radio" name="faturamento" value="Até R$3.000" required>
+          <span class="radio-dot"></span>
+          <span class="radio-text">Até R$3.000</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="faturamento" value="Entre R$3.000 e R$8.000">
+          <span class="radio-dot"></span>
+          <span class="radio-text">Entre R$3.000 e R$8.000</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="faturamento" value="Entre R$8.000 e R$15.000">
+          <span class="radio-dot"></span>
+          <span class="radio-text">Entre R$8.000 e R$15.000</span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="faturamento" value="Acima de R$15.000">
+          <span class="radio-dot"></span>
+          <span class="radio-text">Acima de R$15.000</span>
+        </label>
+      </div>
+    </div>
+ 
+    <div class="form-block">
+      <p class="form-number">09</p>
+      <label>Como você <span>conheceu a Maria Clara?</span></label>
+      <select name="origem" required>
+        <option value="" disabled selected>Selecione</option>
+        <option value="Instagram">Instagram</option>
+        <option value="Indicação de alguém">Indicação de alguém</option>
+        <option value="Stories / Reels">Stories / Reels</option>
+        <option value="Desafio Vencendo o Sol">Desafio Vencendo o Sol</option>
+        <option value="Outro">Outro</option>
+      </select>
+    </div>
+ 
+    <div class="form-separator"></div>
+ 
+    <div class="submit-area">
+      <p class="submit-note">Após o envio, Maria Clara irá analisar<br>sua aplicação e entrar em contato pessoalmente.</p>
+      <button type="submit" class="btn-submit" id="submitBtn"><span id="btnText">Enviar minha aplicação</span></button>
+      <div class="error-msg" id="errorMsg">Ocorreu um erro ao enviar. Por favor, tente novamente em instantes.</div>
+    </div>
+ 
+  </form>
+ 
+  <div class="success-screen" id="successScreen">
+    <div class="success-icon">🥂</div>
+    <h2>Aplicação recebida.</h2>
+    <p>Sua coragem de dar esse passo já diz muito sobre quem você é. Maria Clara irá analisar com cuidado e entrar em contato em breve.</p>
+  </div>
+</div>
+ 
+<footer>
+  <p class="footer-brand">All Win Academy</p>
+  <p class="footer-motto">A disciplina constrói o que o dinheiro não compra.</p>
+</footer>
+ 
+<script>
+  // Radio visual feedback
+  document.querySelectorAll('.radio-option').forEach(option => {
+    option.addEventListener('click', function() {
+      const name = this.querySelector('input').name;
+      document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+        r.closest('.radio-option').style.borderColor = 'rgba(61,26,24,0.15)';
+        r.closest('.radio-option').style.background = 'transparent';
+      });
+      this.style.borderColor = '#3D1A18';
+      this.style.background = '#F2E8D9';
+    });
+  });
+
+  // Formspree submission
+  document.getElementById('wgForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const errorMsg = document.getElementById('errorMsg');
+
+    btn.disabled = true;
+    btnText.textContent = 'Enviando...';
+    errorMsg.style.display = 'none';
+
+    const formData = new FormData(this);
+
+    try {
+      const response = await fetch('https://formspree.io/f/mjgjrzpq', {
+        method: 'POST',
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        this.style.display = 'none';
+        const success = document.getElementById('successScreen');
+        success.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        throw new Error('Formspree error');
+      }
+    } catch (err) {
+      errorMsg.style.display = 'block';
+      btn.disabled = false;
+      btnText.textContent = 'Enviar minha aplicação';
+    }
+  });
+</script>
+</body>
+</html>
