@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0e0b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Maria Clara | All Win Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    html { background-color: #0f0e0b !important; scroll-behavior: smooth; }
+    html, body {
+      background: #0f0e0b !important;
+      color: #b0a896;
+      margin: 0; padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 300;
+      -webkit-text-size-adjust: 100%;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+
+    :root {
+      --gold: #c9a96e;
+      --gold-light: #e2c99a;
+      --cream: #b0a896;
+      --dark: #0f0e0b;
+      --dark-card: #161410;
+      --border: rgba(201,169,110,0.15);
+      --text-light: #e8dece;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 50% at 85% 5%, rgba(201,169,110,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 70% at 5% 95%, rgba(201,169,110,0.05) 0%, transparent 55%);
+    }
+
+    section, nav, footer { position: relative; z-index: 1; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 40px;
+      background: rgba(15,14,11,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-style: italic;
+      color: var(--gold-light); letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a {
+      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--cream); text-decoration: none; opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+    }
+    .hero-tag {
+      font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.7; margin-bottom: 28px;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 12vw, 110px);
+      font-weight: 300; line-height: 0.9;
+      color: var(--text-light); letter-spacing: -0.01em;
+      margin: 0 0 8px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+    .hero-name em {
+      font-style: italic; color: var(--gold-light);
+      display: block;
+    }
+    .hero-divider {
+      width: 1px; height: 60px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      margin: 32px auto;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+    .hero-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 3.5vw, 24px);
+      font-style: italic; font-weight: 300;
+      color: var(--cream); line-height: 1.6;
+      max-width: 560px;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+    .hero-cta {
+      margin-top: 48px;
+      animation: fadeUp 0.8s 0.5s ease both;
+    }
+    .btn-gold {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px; font-weight: 500;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      padding: 16px 40px; text-decoration: none;
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    }
+    .btn-gold:hover {
+      background: var(--gold); color: var(--dark);
+      box-shadow: 0 0 30px rgba(201,169,110,0.2);
+    }
+
+    /* ── SOBRE ── */
+    #sobre {
+      max-width: 900px; margin: 0 auto;
+      padding: 100px 24px;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    .sobre-label {
+      font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.6; margin-bottom: 20px;
+    }
+    .sobre-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 300; color: var(--text-light); line-height: 1.15;
+      margin: 0 0 24px;
+    }
+    .sobre-title em { font-style: italic; color: var(--gold-light); }
+    .sobre-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-style: italic;
+      line-height: 1.8; color: var(--cream); opacity: 0.85;
+    }
+    .sobre-stats {
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    .stat {
+      border-left: 1px solid var(--border);
+      padding-left: 24px;
+    }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px; font-style: italic; font-weight: 300;
+      color: var(--gold); line-height: 1;
+    }
+    .stat-label {
+      font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--cream); opacity: 0.5; margin-top: 6px;
+    }
+
+    /* ── PROGRAMAS ── */
+    #programas { padding: 100px 24px; }
+    .section-header { text-align: center; margin-bottom: 64px; }
+    .section-label {
+      font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.6; margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 6vw, 56px);
+      font-weight: 300; font-style: italic;
+      color: var(--text-light); margin: 0;
+    }
+
+    .programas-grid {
+      max-width: 1000px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2px;
+    }
+    .programa-card {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      padding: 48px 36px;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+    .programa-card:hover {
+      border-color: rgba(201,169,110,0.4);
+      transform: translateY(-4px);
+    }
+    .programa-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 11px; font-style: italic;
+      color: var(--gold); opacity: 0.4; margin-bottom: 20px;
+      letter-spacing: 0.1em;
+    }
+    .programa-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px; font-weight: 400;
+      color: var(--text-light); margin: 0 0 16px;
+      line-height: 1.2;
+    }
+    .programa-nome em { font-style: italic; color: var(--gold-light); }
+    .programa-desc {
+      font-size: 13px; line-height: 1.8;
+      color: var(--cream); opacity: 0.7;
+    }
+    .programa-tag {
+      display: inline-block; margin-top: 24px;
+      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid var(--border);
+      padding: 6px 14px; opacity: 0.6;
+    }
+
+    /* ── APLICAÇÃO ── */
+    #aplicacao { padding: 100px 24px; }
+    .form-wrap {
+      max-width: 660px; margin: 0 auto;
+    }
+    .field {
+      display: flex; flex-direction: column; gap: 10px;
+      margin-bottom: 28px;
+    }
+    label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; color: #ddd3c0; line-height: 1.4;
+    }
+    .field-hint {
+      font-size: 11px; opacity: 0.4; font-style: italic;
+      margin-top: -6px; color: var(--cream);
+    }
+    input[type="text"], input[type="email"], input[type="tel"],
+    textarea, select {
+      background: var(--dark-card);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-family: 'Montserrat', sans-serif;
+      font-size: 14px; font-weight: 300;
+      border-radius: 1px; outline: none; width: 100%;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    input[type="text"], input[type="email"], input[type="tel"] { padding: 14px 18px; }
+    textarea { padding: 16px 18px; resize: vertical; min-height: 110px; line-height: 1.7; }
+    select { padding: 14px 18px; appearance: none; cursor: pointer; }
+    input:focus, textarea:focus, select:focus {
+      border-color: rgba(201,169,110,0.5);
+      box-shadow: 0 0 0 3px rgba(201,169,110,0.06);
+    }
+    input::placeholder, textarea::placeholder { color: rgba(176,168,150,0.3); font-style: italic; }
+
+    .form-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 40px 0;
+    }
+    .form-section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--gold); opacity: 0.5; margin-bottom: 28px;
+    }
+
+    .submit-wrap { text-align: center; margin-top: 48px; }
+    button[type="submit"] {
+      background: transparent; border: 1px solid var(--gold);
+      color: var(--gold); font-family: 'Montserrat', sans-serif;
+      font-size: 11px; font-weight: 500;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      padding: 18px 56px; cursor: pointer;
+      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+      width: 100%; max-width: 320px;
+    }
+    button[type="submit"]:hover {
+      background: var(--gold); color: var(--dark);
+      box-shadow: 0 0 30px rgba(201,169,110,0.2);
+    }
+    button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── SUCCESS ── */
+    .success-msg {
+      display: none; text-align: center; padding: 60px 0;
+    }
+    .success-icon {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px; color: var(--gold); margin-bottom: 20px;
+    }
+    .success-msg h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-style: italic; font-size: 32px;
+      color: var(--text-light); margin: 0 0 12px;
+    }
+    .success-msg p {
+      font-size: 14px; color: var(--cream); opacity: 0.6; line-height: 1.8;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-style: italic; color: var(--gold-light);
+      margin-bottom: 8px;
+    }
+    .footer-sub {
+      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--cream); opacity: 0.3;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      #sobre { grid-template-columns: 1fr; gap: 40px; }
+      .sobre-stats { flex-direction: row; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">Maria Clara</div>
+  <div class="nav-links">
+    <a href="#sobre">Sobre</a>
+    <a href="#programas">Programas</a>
+    <a href="#aplicacao">Aplicar</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-tag">All Win Academy</div>
+  <h1 class="hero-name">
+    Maria<br><em>Clara</em>
+  </h1>
+  <div class="hero-divider"></div>
+  <p class="hero-desc">
+    Destravo o ecossistema de marca pessoal forte<br>
+    que faz você vender todos os meses<br>
+    com previsibilidade e constância.
+  </p>
+  <div class="hero-meta" style="margin-top:28px; animation: fadeUp 0.8s 0.45s ease both;">
+    <span style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:clamp(20px,4vw,28px); color:var(--gold-light); letter-spacing:0.02em;">
+      De 5 a 10K/mês em até 120 dias.
+    </span>
+  </div>
+  <div class="hero-cta">
+    <a href="#aplicacao" class="btn-gold">Quero aplicar</a>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="reveal">
+    <div class="sobre-label">O método</div>
+    <h2 class="sobre-title">
+      Contratos AI —<br>modelo aplicável<br><em>e replicável.</em>
+    </h2>
+    <p class="sobre-text">
+      Um ecossistema de marca pessoal construído para vender com consistência. Sem depender de viral, sem pico e sumiço. Previsibilidade real para prestadores de serviço, empresários, mentores, infoprodutores e microempresários que estão prontos para escalar.
+    </p>
+  </div>
+  <div class="sobre-stats reveal">
+    <div class="stat">
+      <div class="stat-num">120</div>
+      <div class="stat-label">Dias para resultados reais</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">10K</div>
+      <div class="stat-label">Meta de faturamento mensal</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Método. Aplicável para qualquer nicho.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PÚBLICO -->
+<section style="padding: 0 24px 80px;">
+  <div style="max-width:1000px; margin:0 auto;">
+    <div class="reveal" style="text-align:center; margin-bottom:40px;">
+      <div class="section-label">Para quem é</div>
+    </div>
+    <div class="reveal" style="display:flex; flex-wrap:wrap; gap:12px; justify-content:center;">
+      <span style="border:1px solid var(--border); padding:12px 28px; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.8;">Prestadores de Serviço</span>
+      <span style="border:1px solid var(--border); padding:12px 28px; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.8;">Empresários</span>
+      <span style="border:1px solid var(--border); padding:12px 28px; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.8;">Mentores</span>
+      <span style="border:1px solid var(--border); padding:12px 28px; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.8;">Infoprodutores</span>
+      <span style="border:1px solid var(--border); padding:12px 28px; font-size:11px; letter-spacing:0.2em; text-transform:uppercase; color:var(--gold); opacity:0.8;">Microempresários</span>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMAS -->
+<section id="programas">
+  <div class="section-header reveal">
+    <div class="section-label">O que ofereço</div>
+    <h2 class="section-title">Meus programas</h2>
+  </div>
+
+  <div class="programas-grid">
+    <div class="programa-card reveal">
+      <div class="programa-num">01 —</div>
+      <h3 class="programa-nome"><em>Contratos AI</em></h3>
+      <p class="programa-desc">Modelo de negócio aplicável e replicável para construir um ecossistema de marca pessoal forte que vende todos os meses. De 5 a 10K/mês em até 120 dias — com previsibilidade e constância.</p>
+      <span class="programa-tag">Marca pessoal · Faturamento</span>
+    </div>
+    <div class="programa-card reveal">
+      <div class="programa-num">02 —</div>
+      <h3 class="programa-nome"><em>Woman Gain</em></h3>
+      <p class="programa-desc">Mentoria para mulheres que querem crescer de verdade — desbloqueando padrões limitantes, construindo identidade sólida e transformando sua vida pessoal e profissional.</p>
+      <span class="programa-tag">Mentoria feminina</span>
+    </div>
+    <div class="programa-card reveal">
+      <div class="programa-num">03 —</div>
+      <h3 class="programa-nome"><em>Business Score</em></h3>
+      <p class="programa-desc">Consultoria de reestruturação empresarial para quem precisa de clareza estratégica, organização financeira e um negócio que funcione de verdade.</p>
+      <span class="programa-tag">Consultoria empresarial</span>
+    </div>
+  </div>
+</section>
+
+<!-- APLICAÇÃO -->
+<section id="aplicacao">
+  <div class="section-header reveal">
+    <div class="section-label">Dê o primeiro passo</div>
+    <h2 class="section-title">Quero trabalhar<br><em>com você</em></h2>
+  </div>
+
+  <div class="form-wrap">
+    <form id="appForm">
+
+      <div class="form-section-title">Sobre você</div>
+
+      <div class="field">
+        <label for="nome">Seu nome completo</label>
+        <input type="text" id="nome" name="nome" placeholder="Como prefere ser chamada" required />
+      </div>
+
+      <div class="field">
+        <label for="email">Seu e-mail</label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+      </div>
+
+      <div class="field">
+        <label for="whatsapp">WhatsApp</label>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required />
+      </div>
+
+      <div class="field">
+        <label for="instagram">Instagram</label>
+        <input type="text" id="instagram" name="instagram" placeholder="@seuperfil" />
+      </div>
+
+      <hr class="form-divider" />
+      <div class="form-section-title">Seu momento atual</div>
+
+      <div class="field">
+        <label for="programa">Qual programa te chamou mais atenção?</label>
+        <select id="programa" name="programa" required>
+          <option value="" disabled selected>Escolha uma opção</option>
+          <option value="Contratos AI">Contratos AI — Marca pessoal e faturamento</option>
+          <option value="Woman Gain">Woman Gain — Mentoria feminina</option>
+          <option value="Business Score">Business Score — Consultoria empresarial</option>
+          <option value="Não sei ainda">Ainda não sei, preciso de orientação</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="momento">Como você descreveria seu momento atual?</label>
+        <div class="field-hint">Seja honesta. Isso me ajuda a entender como posso te ajudar de verdade.</div>
+        <textarea id="momento" name="momento" placeholder="O que está acontecendo na sua vida e no seu negócio agora..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="maior_dor">Qual é o seu maior desafio hoje?</label>
+        <textarea id="maior_dor" name="maior_dor" placeholder="O que mais te trava ou te preocupa..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="objetivo">O que você quer transformar com a mentoria?</label>
+        <textarea id="objetivo" name="objetivo" placeholder="Onde quer chegar, o que quer conquistar..." required></textarea>
+      </div>
+
+      <div class="field">
+        <label for="comprometimento">Por que agora? O que te trouxe até aqui?</label>
+        <textarea id="comprometimento" name="comprometimento" placeholder="O que mudou, o que te motivou a dar esse passo..." required></textarea>
+      </div>
+
+      <div class="submit-wrap">
+        <button type="submit" id="submitBtn">Enviar minha aplicação</button>
+      </div>
+
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">✦</div>
+      <h2>Aplicação recebida.</h2>
+      <p>Obrigada por confiar em mim com a sua história.<br>Entrarei em contato em breve para conversarmos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">All Win Academy</div>
+  <div class="footer-sub">Maria Clara Oliveira Ribeiro · Terapeuta Comportamental & NLP Practitioner</div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Form submit
+  document.getElementById('appForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formspree.io/f/mjgjrzpq', {
+        method: 'POST',
+        body: new FormData(this),
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        document.getElementById('appForm').style.display = 'none';
+        document.getElementById('successMsg').style.display = 'block';
+      } else {
+        btn.textContent = 'Enviar minha aplicação';
+        btn.disabled = false;
+        alert('Algo deu errado. Tente novamente.');
+      }
+    } catch {
+      btn.textContent = 'Enviar minha aplicação';
+      btn.disabled = false;
+      alert('Erro de conexão. Tente novamente.');
+    }
+  });
+</script>
+</body>
+</html>
