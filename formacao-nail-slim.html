@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1a1612" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Formação Nail Slim — Luana Dias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { background-color: #1a1612 !important; }
+    html, body {
+      background: #1a1612 !important;
+      color: #f0ece6;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    :root {
+      --bg: #1a1612;
+      --bg2: #211d18;
+      --surface: #252018;
+      --surface2: #2e271e;
+      --border: #3a3228;
+      --border-hover: #6b5c45;
+      --gold: #c9a96e;
+      --gold-light: #e0c99a;
+      --gold-dim: #8a6f48;
+      --cream: #ffffff;
+      --text: #f0ece6;
+      --text-muted: #b8b0a4;
+      --text-label: #d4ccc0;
+    }
+
+    /* ── Noise overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      text-align: center;
+      padding: 72px 0 56px;
+      animation: fadeUp 1s ease both;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold-dim);
+      margin-bottom: 32px;
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      width: 28px;
+      height: 1px;
+      background: var(--gold-dim);
+      opacity: 0.5;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.6rem, 8vw, 4.2rem);
+      font-weight: 300;
+      color: var(--cream);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gold-dim);
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: #c0b8ae;
+      line-height: 1.9;
+      max-width: 460px;
+      margin: 0 auto 40px;
+    }
+
+    /* Badges */
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: #c0b8ae;
+      background: var(--surface);
+    }
+
+    .badge .dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+
+    .hero-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold-dim), transparent);
+      margin: 0 auto;
+      opacity: 0.4;
+    }
+
+    /* ── Form card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 48px 40px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.1s; }
+    .card:nth-child(3) { animation-delay: 0.2s; }
+    .card:nth-child(4) { animation-delay: 0.3s; }
+
+    @media (max-width: 520px) {
+      .card { padding: 32px 24px; }
+    }
+
+    .card-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--gold);
+      opacity: 0.35;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: -4px;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .card-desc {
+      font-size: 11px;
+      color: #c0b8ae;
+      line-height: 1.6;
+    }
+
+    /* Fields */
+    .field { margin-bottom: 26px; }
+    .field:last-child { margin-bottom: 0; }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 480px) {
+      .field-row { grid-template-columns: 1fr; }
+    }
+
+    label.field-label {
+      display: block;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="tel"],
+    input[type="email"],
+    input[type="number"],
+    input[type="url"],
+    textarea,
+    select {
+      width: 100%;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 0 3px rgba(160,120,64,0.1);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #c0b8ae;
+      opacity: 0.5;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+      line-height: 1.7;
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%237a6e5e' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 38px;
+    }
+
+    select option { background: #1a1612; color: #f0ece6; }
+
+    /* Scale */
+    .scale-wrap { display: flex; gap: 6px; }
+    .scale-wrap input[type="radio"] { display: none; }
+    .scale-wrap label.scale-opt {
+      flex: 1;
+      text-align: center;
+      padding: 11px 4px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0;
+      text-transform: none;
+      color: #c0b8ae;
+      transition: all 0.2s;
+      margin: 0;
+      line-height: 1;
+    }
+    .scale-wrap input[type="radio"]:checked + label.scale-opt {
+      background: rgba(160,120,64,0.12);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .scale-wrap label.scale-opt:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 6px;
+    }
+    .scale-labels span {
+      font-size: 9px;
+      color: #c0b8ae;
+      opacity: 0.6;
+      letter-spacing: 0.05em;
+    }
+
+    /* Tags */
+    .tags-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tags-wrap input[type="checkbox"] { display: none; }
+    .tags-wrap label.tag-opt {
+      padding: 8px 16px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      text-transform: none;
+      color: #c0b8ae;
+      transition: all 0.2s;
+      margin: 0;
+      white-space: nowrap;
+    }
+    .tags-wrap input[type="checkbox"]:checked + label.tag-opt {
+      background: rgba(160,120,64,0.12);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+    .tags-wrap label.tag-opt:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+
+    /* Radio cards */
+    .radio-cards { display: flex; flex-direction: column; gap: 10px; }
+    .radio-cards input[type="radio"] { display: none; }
+    .radio-cards label.radio-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 18px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin: 0;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 13px;
+      color: #c0b8ae;
+      font-weight: 300;
+      line-height: 1.5;
+    }
+    .radio-cards input[type="radio"]:checked + label.radio-card {
+      border-color: var(--gold);
+      background: rgba(160,120,64,0.08);
+      color: var(--text);
+    }
+    .radio-cards label.radio-card:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
+    .radio-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+      margin-top: 1px;
+      transition: all 0.2s;
+      position: relative;
+    }
+    .radio-cards input[type="radio"]:checked + label.radio-card .radio-dot {
+      border-color: var(--gold);
+      background: var(--gold);
+    }
+    .radio-cards input[type="radio"]:checked + label.radio-card .radio-dot::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--bg);
+    }
+
+    /* Divider */
+    .sep {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 32px 0;
+      opacity: 0.4;
+    }
+
+    /* Footer note */
+    .luana-note {
+      text-align: center;
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%);
+      margin-bottom: 40px;
+      animation: fadeUp 0.9s ease 0.35s both;
+    }
+
+    .luana-note p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--gold-dim);
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+
+    .luana-note small {
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #c0b8ae;
+      opacity: 0.6;
+    }
+
+    /* Submit */
+    .submit-wrap {
+      text-align: center;
+      animation: fadeUp 0.9s ease 0.4s both;
+    }
+
+    button[type="submit"] {
+      position: relative;
+      overflow: hidden;
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      padding: 18px 64px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color 0.35s;
+    }
+
+    button[type="submit"]::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+    }
+
+    button[type="submit"]:hover::before { transform: scaleX(1); }
+    button[type="submit"]:hover { color: var(--bg); }
+    button[type="submit"] span { position: relative; z-index: 1; }
+
+    .submit-note {
+      font-size: 10px;
+      color: #c0b8ae;
+      margin-top: 16px;
+      opacity: 0.5;
+      letter-spacing: 0.08em;
+    }
+
+    /* Success */
+    .success {
+      display: none;
+      text-align: center;
+      padding: 80px 20px;
+      animation: fadeUp 0.7s ease both;
+    }
+
+    .success-ornament {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      color: var(--gold);
+      opacity: 0.4;
+      margin-bottom: 24px;
+      letter-spacing: 0.2em;
+    }
+
+    .success h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--cream);
+      margin-bottom: 14px;
+    }
+
+    .success p {
+      font-size: 13px;
+      color: #c0b8ae;
+      line-height: 1.8;
+      max-width: 380px;
+      margin: 0 auto;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-eyebrow">Formação Exclusiva · Primeira Turma</div>
+    <h1>Nail Slim<br><em>by Luana Dias</em></h1>
+    <p class="hero-sub">Técnica Mold F1 Slim — para profissionais que querem o próximo nível</p>
+    <p class="hero-desc">Esta não é uma formação comum. É uma imersão completa com acompanhamento de perto, mentoria, certificado — e uma aula especial de mentalidade CEO com Maria Clara Oliveira. As vagas são limitadas e passam por uma seletiva.</p>
+
+    <div class="badges">
+      <span class="badge"><span class="dot"></span>Meses de acompanhamento</span>
+      <span class="badge"><span class="dot"></span>Mentoria individual</span>
+      <span class="badge"><span class="dot"></span>Certificado</span>
+      <span class="badge"><span class="dot"></span>Suporte contínuo</span>
+      <span class="badge"><span class="dot"></span>Aula CEO com Maria Clara</span>
+    </div>
+
+    <div class="hero-line"></div>
+  </div>
+
+  <form id="form">
+
+    <!-- Card 1 — Sobre você -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">01</div>
+        <div>
+          <div class="card-title">Sobre você</div>
+          <div class="card-desc">Queremos conhecer quem está por trás do interesse</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Nome completo</label>
+        <input type="text" name="nome" placeholder="Seu nome" required />
+      </div>
+
+      <div class="field field-row">
+        <div>
+          <label class="field-label">WhatsApp</label>
+          <input type="tel" name="whatsapp" placeholder="(00) 00000-0000" required />
+        </div>
+        <div>
+          <label class="field-label">Instagram</label>
+          <input type="text" name="instagram" placeholder="@seu.perfil" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Cidade e Estado</label>
+        <input type="text" name="cidade" placeholder="Ex: São Paulo — SP" />
+      </div>
+
+      <div class="field">
+        <label class="field-label">Há quanto tempo você atua na área de unhas?</label>
+        <select name="tempo_atuacao">
+          <option value="" disabled selected>Selecione</option>
+          <option>Ainda não atuo — quero começar</option>
+          <option>Menos de 1 ano</option>
+          <option>Entre 1 e 3 anos</option>
+          <option>Entre 3 e 5 anos</option>
+          <option>Mais de 5 anos</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Card 2 — Sua atuação -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">02</div>
+        <div>
+          <div class="card-title">Sua atuação profissional</div>
+          <div class="card-desc">Conte como é o seu trabalho hoje</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Quais serviços você oferece atualmente?</label>
+        <div class="tags-wrap">
+          <input type="checkbox" id="s1" name="servicos" value="Esmaltação" /><label class="tag-opt" for="s1">Esmaltação</label>
+          <input type="checkbox" id="s2" name="servicos" value="Gel" /><label class="tag-opt" for="s2">Gel</label>
+          <input type="checkbox" id="s3" name="servicos" value="Acrílico" /><label class="tag-opt" for="s3">Acrílico</label>
+          <input type="checkbox" id="s4" name="servicos" value="Fibra de vidro" /><label class="tag-opt" for="s4">Fibra de vidro</label>
+          <input type="checkbox" id="s5" name="servicos" value="Mold / Molde" /><label class="tag-opt" for="s5">Mold / Molde</label>
+          <input type="checkbox" id="s6" name="servicos" value="Nail art" /><label class="tag-opt" for="s6">Nail art</label>
+          <input type="checkbox" id="s7" name="servicos" value="Ainda não atuo" /><label class="tag-opt" for="s7">Ainda não atuo</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Você já trabalha com a técnica Slim ou algo parecido?</label>
+        <div class="radio-cards">
+          <input type="radio" id="slim1" name="slim" value="Sim, já trabalho" />
+          <label class="radio-card" for="slim1"><span class="radio-dot"></span>Sim, já trabalho com algo parecido</label>
+          <input type="radio" id="slim2" name="slim" value="Não, quero aprender do zero" />
+          <label class="radio-card" for="slim2"><span class="radio-dot"></span>Não — quero aprender do zero com a Luana</label>
+          <input type="radio" id="slim3" name="slim" value="Já tentei mas quero aprimorar" />
+          <label class="radio-card" for="slim3"><span class="radio-dot"></span>Já tentei, mas quero aprimorar e dominar a técnica</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Como você avalia seu nível técnico hoje? (1 = iniciante · 5 = avançada)</label>
+        <div class="scale-wrap">
+          <input type="radio" name="nivel" id="n1" value="1" /><label class="scale-opt" for="n1">1</label>
+          <input type="radio" name="nivel" id="n2" value="2" /><label class="scale-opt" for="n2">2</label>
+          <input type="radio" name="nivel" id="n3" value="3" /><label class="scale-opt" for="n3">3</label>
+          <input type="radio" name="nivel" id="n4" value="4" /><label class="scale-opt" for="n4">4</label>
+          <input type="radio" name="nivel" id="n5" value="5" /><label class="scale-opt" for="n5">5</label>
+        </div>
+        <div class="scale-labels"><span>Iniciante</span><span>Avançada</span></div>
+      </div>
+    </div>
+
+    <!-- Card 3 — Mentalidade -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">03</div>
+        <div>
+          <div class="card-title">Mentalidade e objetivos</div>
+          <div class="card-desc">Essa parte é a mais importante para a seletiva</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Por que você quer fazer parte desta formação?</label>
+        <textarea name="motivacao" placeholder="Seja honesta. O que te trouxe até aqui?"></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Onde você quer estar profissionalmente daqui a 12 meses?</label>
+        <textarea name="objetivo_12meses" placeholder="Descreve o que você imagina pra sua vida e negócio"></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label">O que te impede hoje de chegar lá?</label>
+        <textarea name="bloqueio" placeholder="Pode ser técnico, financeiro, de mentalidade — fala com sinceridade"></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Você está disposta a se comprometer 100% durante toda a formação?</label>
+        <div class="radio-cards">
+          <input type="radio" id="c1" name="comprometimento" value="Sim, totalmente" />
+          <label class="radio-card" for="c1"><span class="radio-dot"></span>Sim — estou pronta e comprometida</label>
+          <input type="radio" id="c2" name="comprometimento" value="Sim, com algumas ressalvas" />
+          <label class="radio-card" for="c2"><span class="radio-dot"></span>Sim, mas tenho algumas limitações de tempo</label>
+          <input type="radio" id="c3" name="comprometimento" value="Preciso entender melhor" />
+          <label class="radio-card" for="c3"><span class="radio-dot"></span>Preciso entender melhor a dinâmica antes</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Card 4 — Últimas perguntas -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-num">04</div>
+        <div>
+          <div class="card-title">Últimas perguntas</div>
+          <div class="card-desc">Quase lá 🤍</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Como você ficou sabendo da Formação Nail Slim?</label>
+        <div class="radio-cards">
+          <input type="radio" id="f1" name="origem" value="Instagram da Luana" />
+          <label class="radio-card" for="f1"><span class="radio-dot"></span>Instagram da Luana Dias</label>
+          <input type="radio" id="f2" name="origem" value="Instagram da Maria Clara" />
+          <label class="radio-card" for="f2"><span class="radio-dot"></span>Instagram da Maria Clara</label>
+          <input type="radio" id="f3" name="origem" value="Indicação de alguém" />
+          <label class="radio-card" for="f3"><span class="radio-dot"></span>Indicação de uma amiga / colega</label>
+          <input type="radio" id="f4" name="origem" value="Outro" />
+          <label class="radio-card" for="f4"><span class="radio-dot"></span>Outro</label>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Tem algo que quer acrescentar ou perguntar?</label>
+        <textarea name="observacao" placeholder="Opcional — espaço livre pra você"></textarea>
+      </div>
+    </div>
+
+    <!-- Nota da Luana -->
+    <div class="luana-note">
+      <p>"Essa formação é pra mulher que já decidiu que vai chegar lá. Estou aqui pra te levar com técnica, presença e propósito."</p>
+      <small>— Luana Dias</small>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-wrap">
+      <button type="submit"><span>Enviar minha aplicação</span></button>
+      <p class="submit-note">As vagas são limitadas · A seletiva é feita com cuidado</p>
+    </div>
+
+  </form>
+
+  <!-- Sucesso -->
+  <div class="success" id="success">
+    <div class="success-ornament">✦</div>
+    <h2>Aplicação recebida</h2>
+    <p>Obrigada por se inscrever. Sua aplicação foi enviada com sucesso e será analisada com atenção. Em breve você receberá um retorno via WhatsApp.</p>
+  </div>
+
+</div>
+
+<script>
+  document.getElementById('form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"] span');
+    btn.textContent = 'Enviando...';
+
+    try {
+      const response = await fetch('https://formspree.io/f/mjgjrzpq', {
+        method: 'POST',
+        body: new FormData(e.target),
+        headers: { 'Accept': 'application/json' }
+      });
+
+      if (response.ok) {
+        e.target.style.transition = 'opacity 0.5s, transform 0.5s';
+        e.target.style.opacity = '0';
+        e.target.style.transform = 'translateY(12px)';
+        setTimeout(() => {
+          e.target.style.display = 'none';
+          document.getElementById('success').style.display = 'block';
+        }, 500);
+      } else {
+        btn.textContent = 'Erro ao enviar — tente novamente';
+      }
+    } catch {
+      btn.textContent = 'Erro ao enviar — tente novamente';
+    }
+  });
+</script>
+</body>
+</html>
