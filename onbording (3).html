@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0e0b" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Bem-vinda, Amanda · All Win Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    html { background-color: #0f0e0b !important; }
+    html, body {
+      background: #0f0e0b !important;
+      color: #b0a896;
+      margin: 0;
+      padding: 0;
+      -webkit-text-size-adjust: 100%;
+      font-family: 'Lato', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      box-sizing: border-box;
+    }
+
+    .aw-wrap {
+      background: #0f0e0b;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 620px;
+      border: 0.5px solid #2a2820;
+    }
+
+    .aw-header {
+      background: #1a1710;
+      border-bottom: 0.5px solid #3a3526;
+      padding: 2.5rem 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .aw-logo-area {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 1.5rem;
+    }
+
+    .aw-logo-line {
+      width: 40px;
+      height: 0.5px;
+      background: #b89d6a;
+    }
+
+    .aw-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: #b89d6a;
+      text-transform: uppercase;
+    }
+
+    .aw-header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #f0e8d8;
+      line-height: 1.3;
+      margin: 0 0 0.5rem;
+    }
+
+    .aw-header-title em {
+      font-style: italic;
+      color: #b89d6a;
+    }
+
+    .aw-header-sub {
+      font-size: 12px;
+      color: #7a7060;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    .aw-body {
+      padding: 2rem 2.5rem 2.5rem;
+    }
+
+    .aw-greeting {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #f0e8d8;
+      margin: 0 0 1.5rem;
+      font-style: italic;
+    }
+
+    .aw-text {
+      font-size: 15px;
+      line-height: 1.85;
+      color: #b0a896;
+      margin: 0 0 1.2rem;
+    }
+
+    .aw-text strong {
+      color: #d4c4a0;
+      font-weight: 700;
+    }
+
+    .aw-divider {
+      border: none;
+      border-top: 0.5px solid #2a2820;
+      margin: 2rem 0;
+    }
+
+    .aw-quote {
+      border-left: 2px solid #b89d6a;
+      padding-left: 1.2rem;
+      margin: 1.5rem 0;
+    }
+
+    .aw-quote p {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #c8b898;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .aw-box {
+      background: #161410;
+      border: 0.5px solid #3a3526;
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+
+    .aw-box-title {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #b89d6a;
+      margin: 0 0 1rem;
+    }
+
+    .aw-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 1rem;
+    }
+
+    .aw-step:last-child { margin-bottom: 0; }
+
+    .aw-step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 0.5px solid #b89d6a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: #b89d6a;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .aw-step-text {
+      font-size: 14px;
+      color: #b0a896;
+      line-height: 1.6;
+    }
+
+    .aw-step-text strong {
+      color: #d4c4a0;
+    }
+
+    .aw-cta-area {
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .aw-cta-btn {
+      display: inline-block;
+      background: #b89d6a;
+      color: #0f0e0b;
+      font-family: 'Lato', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 14px 36px;
+      border-radius: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .aw-cta-sub {
+      font-size: 12px;
+      color: #5a5348;
+      margin-top: 12px;
+    }
+
+    .aw-footer {
+      background: #0a0908;
+      border-top: 0.5px solid #2a2820;
+      padding: 1.5rem 2.5rem;
+      text-align: center;
+    }
+
+    .aw-footer-text {
+      font-size: 12px;
+      color: #4a4540;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    .aw-footer-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: #7a7060;
+      font-size: 14px;
+      display: block;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 480px) {
+      .aw-header { padding: 2rem 1.5rem 1.5rem; }
+      .aw-body { padding: 1.5rem; }
+      .aw-footer { padding: 1.5rem; }
+      .aw-header-title { font-size: 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="aw-wrap">
+
+    <div class="aw-header">
+      <div class="aw-logo-area">
+        <div class="aw-logo-line"></div>
+        <div class="aw-logo-text">All Win Academy</div>
+        <div class="aw-logo-line"></div>
+      </div>
+      <h1 class="aw-header-title">Você chegou ao lugar<br><em>certo, Amanda.</em></h1>
+      <p class="aw-header-sub">Sessão Individual · Desbloqueio Emocional</p>
+    </div>
+
+    <div class="aw-body">
+
+      <p class="aw-greeting">Olá, Amanda.</p>
+
+      <p class="aw-text">
+        Antes de qualquer coisa, quero te dizer que eu sei o quanto foi preciso coragem pra chegar até aqui. Não é todo mundo que para, olha pra dentro e decide que quer mais.
+      </p>
+
+      <p class="aw-text">
+        A sessão que a gente vai fazer juntas não é só uma conversa. É um trabalho profundo, com método, com cuidado — e com muito respeito pela sua história.
+      </p>
+
+      <div class="aw-quote">
+        <p>O bloqueio que você sente hoje tem raiz. E tudo que tem raiz pode ser ressignificado.</p>
+      </div>
+
+      <p class="aw-text">
+        Antes da nossa sessão, preciso que você responda um formulário de anamnese. Ele me ajuda a <strong>entender quem você é de verdade</strong> — não só o que está incomodando agora, mas o que foi plantado lá atrás, o que você carrega sem saber, o que te faz travar mesmo quando você quer avançar.
+      </p>
+
+      <p class="aw-text">
+        Responde com calma. Sem pressa. Sem resposta certa ou errada. O que vier, veio.
+      </p>
+
+      <hr class="aw-divider" />
+
+      <div class="aw-box">
+        <p class="aw-box-title">Como vai funcionar</p>
+
+        <div class="aw-step">
+          <div class="aw-step-num">1</div>
+          <div class="aw-step-text"><strong>Preencha o formulário abaixo.</strong> São perguntas sobre sua história, suas emoções e o que você quer transformar. Leva em torno de 15 a 20 minutos.</div>
+        </div>
+
+        <div class="aw-step">
+          <div class="aw-step-num">2</div>
+          <div class="aw-step-text"><strong>Eu leio tudo antes da nossa sessão.</strong> Assim o nosso tempo juntas é 100% focado em você — sem enrolação, sem recomeço do zero.</div>
+        </div>
+
+        <div class="aw-step">
+          <div class="aw-step-num">3</div>
+          <div class="aw-step-text"><strong>Na sessão, trabalhamos sua linha do tempo.</strong> É um processo de PNL que vai direto na raiz emocional — e você sai diferente de como entrou.</div>
+        </div>
+      </div>
+
+      <div class="aw-cta-area">
+        <a class="aw-cta-btn" href="https://oliveiraribeiromariaclara861-alt.github.io/allwin/anamnese.html" target="_blank">Acessar o formulário →</a>
+        <p class="aw-cta-sub">O link também foi enviado no seu WhatsApp.</p>
+      </div>
+
+    </div>
+
+    <div class="aw-footer">
+      <p class="aw-footer-text">
+        Qualquer dúvida antes da sessão, me manda mensagem.<br>
+        Estou aqui e já estou torcendo por você.
+      </p>
+      <span class="aw-footer-name">Maria Clara Ribeiro · All Win Academy</span>
+    </div>
+
+  </div>
+
+</body>
+</html>
