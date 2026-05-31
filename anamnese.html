@@ -3,40 +3,39 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0f0e0b" />
+  <meta name="theme-color" content="#ffffff" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <title>Anamnese Emocional · All Win Academy</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
   <style>
-    html { background-color: #0f0e0b !important; }
+    html { background: #ffffff !important; }
     html, body {
-      background: #0f0e0b !important;
-      color: #b0a896;
+      background: #ffffff !important;
       margin: 0;
       padding: 0;
       -webkit-text-size-adjust: 100%;
       font-family: 'Lato', sans-serif;
+      color: #1a1a1a;
     }
 
     body {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem 4rem;
+      padding: 2.5rem 1.25rem 4rem;
       box-sizing: border-box;
     }
 
     .wrap {
       width: 100%;
-      max-width: 640px;
+      max-width: 580px;
     }
 
-    /* HEADER */
     .header {
       text-align: center;
-      padding: 2.5rem 2rem 2rem;
-      border-bottom: 0.5px solid #2a2820;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid #e8ddd4;
       margin-bottom: 2.5rem;
     }
 
@@ -44,39 +43,38 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 6px;
-      margin-bottom: 1.5rem;
+      gap: 8px;
+      margin-bottom: 2rem;
     }
 
-    .logo-line { width: 36px; height: 0.5px; background: #b89d6a; }
+    .logo-line { width: 36px; height: 1px; background: #7a4a2a; }
 
     .logo-text {
       font-family: 'Playfair Display', serif;
-      font-size: 10px;
+      font-size: 11px;
       letter-spacing: 4px;
-      color: #b89d6a;
+      color: #7a4a2a;
       text-transform: uppercase;
     }
 
     .header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 26px;
+      font-size: 28px;
       font-weight: 400;
-      color: #f0e8d8;
+      color: #1a1a1a;
       margin: 0 0 0.5rem;
       line-height: 1.3;
     }
 
-    .header h1 em { font-style: italic; color: #b89d6a; }
+    .header h1 em { font-style: italic; color: #7a4a2a; }
 
     .header p {
       font-size: 13px;
-      color: #5a5348;
+      color: #a08060;
       margin: 0;
       line-height: 1.7;
     }
 
-    /* SEÇÕES */
     .secao {
       margin-bottom: 2.5rem;
     }
@@ -85,13 +83,12 @@
       font-size: 10px;
       letter-spacing: 3px;
       text-transform: uppercase;
-      color: #b89d6a;
+      color: #7a4a2a;
       margin: 0 0 1.5rem;
       padding-bottom: 0.75rem;
-      border-bottom: 0.5px solid #2a2820;
+      border-bottom: 1px solid #e8ddd4;
     }
 
-    /* PERGUNTAS */
     .pergunta {
       margin-bottom: 1.75rem;
     }
@@ -99,20 +96,20 @@
     label {
       display: block;
       font-size: 14px;
-      color: #d4c4a0;
+      color: #1a1a1a;
       margin-bottom: 0.6rem;
       line-height: 1.5;
+      font-weight: 400;
     }
 
     input[type="text"],
     input[type="tel"],
-    textarea,
-    select {
+    textarea {
       width: 100%;
-      background: #161410;
-      border: 0.5px solid #3a3526;
+      background: #faf7f4;
+      border: 1px solid #ddd0c4;
       border-radius: 8px;
-      color: #b0a896;
+      color: #1a1a1a;
       font-family: 'Lato', sans-serif;
       font-size: 14px;
       padding: 12px 14px;
@@ -124,9 +121,8 @@
 
     input[type="text"]:focus,
     input[type="tel"]:focus,
-    textarea:focus,
-    select:focus {
-      border-color: #b89d6a;
+    textarea:focus {
+      border-color: #7a4a2a;
     }
 
     textarea {
@@ -135,7 +131,6 @@
       line-height: 1.6;
     }
 
-    /* RADIO / CHECKBOX */
     .opcoes {
       display: flex;
       flex-direction: column;
@@ -146,50 +141,46 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      background: #161410;
-      border: 0.5px solid #2a2820;
+      background: #faf7f4;
+      border: 1px solid #e0d4c8;
       border-radius: 8px;
       padding: 11px 14px;
       cursor: pointer;
       transition: border-color 0.2s;
     }
 
-    .opcao:hover { border-color: #b89d6a; }
+    .opcao:hover { border-color: #7a4a2a; }
 
     .opcao input[type="radio"] {
       width: 16px;
       height: 16px;
       min-width: 16px;
-      accent-color: #b89d6a;
+      accent-color: #7a4a2a;
       margin: 0;
       padding: 0;
-      background: transparent;
-      border: none;
       cursor: pointer;
     }
 
     .opcao span {
       font-size: 14px;
-      color: #b0a896;
+      color: #2a2a2a;
       line-height: 1.4;
     }
 
-    /* DIVISOR */
     hr {
       border: none;
-      border-top: 0.5px solid #2a2820;
+      border-top: 1px solid #e8ddd4;
       margin: 2.5rem 0;
     }
 
-    /* BOTÃO */
     .btn-area {
       text-align: center;
       margin-top: 2.5rem;
     }
 
     button[type="submit"] {
-      background: #b89d6a;
-      color: #0f0e0b;
+      background: #7a4a2a;
+      color: #ffffff;
       font-family: 'Lato', sans-serif;
       font-size: 12px;
       font-weight: 700;
@@ -207,17 +198,16 @@
 
     .btn-sub {
       font-size: 12px;
-      color: #4a4540;
+      color: #a08060;
       margin-top: 12px;
     }
 
-    /* SUCESSO */
     .sucesso {
       display: none;
       text-align: center;
       padding: 3rem 2rem;
-      background: #161410;
-      border: 0.5px solid #3a3526;
+      background: #faf7f4;
+      border: 1px solid #e8ddd4;
       border-radius: 16px;
       margin-top: 2rem;
     }
@@ -226,13 +216,13 @@
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-size: 24px;
-      color: #f0e8d8;
+      color: #1a1a1a;
       margin: 0 0 1rem;
     }
 
     .sucesso p {
       font-size: 14px;
-      color: #7a7060;
+      color: #888;
       line-height: 1.7;
       margin: 0;
     }
@@ -257,7 +247,6 @@
 
   <form id="form-anamnese" action="https://formspree.io/f/mjgjrzpq" method="POST">
 
-    <!-- IDENTIFICAÇÃO -->
     <div class="secao">
       <p class="secao-titulo">Identificação</p>
 
@@ -272,7 +261,6 @@
       </div>
     </div>
 
-    <!-- SEÇÃO 1 -->
     <div class="secao">
       <p class="secao-titulo">01 — Apresentação</p>
 
@@ -297,7 +285,6 @@
       </div>
     </div>
 
-    <!-- SEÇÃO 2 -->
     <div class="secao">
       <p class="secao-titulo">02 — Infância e ambiente familiar</p>
 
@@ -324,15 +311,15 @@
       <div class="pergunta">
         <label>Sua família falava abertamente sobre sentimentos, erros e conflitos?</label>
         <div class="opcoes">
-          <label class="opcao"><input type="radio" name="08. Família falava abertamente sobre sentimentos" value="Sim" /><span>Sim</span></label>
-          <label class="opcao"><input type="radio" name="08. Família falava abertamente sobre sentimentos" value="Às vezes" /><span>Às vezes</span></label>
-          <label class="opcao"><input type="radio" name="08. Família falava abertamente sobre sentimentos" value="Raramente" /><span>Raramente</span></label>
-          <label class="opcao"><input type="radio" name="08. Família falava abertamente sobre sentimentos" value="Nunca" /><span>Nunca</span></label>
+          <label class="opcao"><input type="radio" name="08. Família falava abertamente" value="Sim" /><span>Sim</span></label>
+          <label class="opcao"><input type="radio" name="08. Família falava abertamente" value="Às vezes" /><span>Às vezes</span></label>
+          <label class="opcao"><input type="radio" name="08. Família falava abertamente" value="Raramente" /><span>Raramente</span></label>
+          <label class="opcao"><input type="radio" name="08. Família falava abertamente" value="Nunca" /><span>Nunca</span></label>
         </div>
       </div>
 
       <div class="pergunta">
-        <label>Você se lembra de alguma situação da infância que te deixou com vergonha, medo ou humilhação? Pode compartilhar se quiser.</label>
+        <label>Você se lembra de alguma situação da infância que te deixou com vergonha, medo ou humilhação?</label>
         <textarea name="09. Situação de vergonha, medo ou humilhação na infância"></textarea>
       </div>
 
@@ -344,10 +331,10 @@
       <div class="pergunta">
         <label>Havia cobranças excessivas, comparações ou críticas frequentes?</label>
         <div class="opcoes">
-          <label class="opcao"><input type="radio" name="11. Havia cobranças excessivas ou críticas" value="Sim, muito" /><span>Sim, muito</span></label>
-          <label class="opcao"><input type="radio" name="11. Havia cobranças excessivas ou críticas" value="Às vezes" /><span>Às vezes</span></label>
-          <label class="opcao"><input type="radio" name="11. Havia cobranças excessivas ou críticas" value="Raramente" /><span>Raramente</span></label>
-          <label class="opcao"><input type="radio" name="11. Havia cobranças excessivas ou críticas" value="Não" /><span>Não</span></label>
+          <label class="opcao"><input type="radio" name="11. Havia cobranças excessivas" value="Sim, muito" /><span>Sim, muito</span></label>
+          <label class="opcao"><input type="radio" name="11. Havia cobranças excessivas" value="Às vezes" /><span>Às vezes</span></label>
+          <label class="opcao"><input type="radio" name="11. Havia cobranças excessivas" value="Raramente" /><span>Raramente</span></label>
+          <label class="opcao"><input type="radio" name="11. Havia cobranças excessivas" value="Não" /><span>Não</span></label>
         </div>
       </div>
 
@@ -363,13 +350,12 @@
       </div>
     </div>
 
-    <!-- SEÇÃO 3 -->
     <div class="secao">
       <p class="secao-titulo">03 — Crenças e padrões herdados</p>
 
       <div class="pergunta">
         <label>Qual a frase que você mais ouviu na infância sobre dinheiro?</label>
-        <textarea name="13. Frase mais ouvida sobre dinheiro na infância"></textarea>
+        <textarea name="13. Frase mais ouvida sobre dinheiro"></textarea>
       </div>
 
       <div class="pergunta">
@@ -379,17 +365,17 @@
 
       <div class="pergunta">
         <label>Como as pessoas ao seu redor encaravam o sucesso e o fracasso?</label>
-        <textarea name="15. Como as pessoas encaravam sucesso e fracasso"></textarea>
+        <textarea name="15. Como encaravam sucesso e fracasso"></textarea>
       </div>
 
       <div class="pergunta">
         <label>Você cresceu acreditando que merecia coisas boas? Por quê sim ou por quê não?</label>
-        <textarea name="16. Acreditava que merecia coisas boas na infância"></textarea>
+        <textarea name="16. Acreditava que merecia coisas boas"></textarea>
       </div>
 
       <div class="pergunta">
         <label>Existe alguma crença sua que você sente que não é sua — que veio de fora?</label>
-        <textarea name="17. Crença que sente que não é sua"></textarea>
+        <textarea name="17. Crença que não é sua"></textarea>
       </div>
 
       <div class="pergunta">
@@ -398,7 +384,6 @@
       </div>
     </div>
 
-    <!-- SEÇÃO 4 -->
     <div class="secao">
       <p class="secao-titulo">04 — Emoções e padrões atuais</p>
 
@@ -414,16 +399,16 @@
 
       <div class="pergunta">
         <label>Como você lida com frustração, rejeição ou crítica?</label>
-        <textarea name="20. Como lida com frustração, rejeição ou crítica"></textarea>
+        <textarea name="20. Como lida com frustração e rejeição"></textarea>
       </div>
 
       <div class="pergunta">
         <label>Você costuma se culpar muito quando algo dá errado?</label>
         <div class="opcoes">
-          <label class="opcao"><input type="radio" name="21. Costuma se culpar quando algo dá errado" value="Sim, sempre" /><span>Sim, sempre</span></label>
-          <label class="opcao"><input type="radio" name="21. Costuma se culpar quando algo dá errado" value="Às vezes" /><span>Às vezes</span></label>
-          <label class="opcao"><input type="radio" name="21. Costuma se culpar quando algo dá errado" value="Raramente" /><span>Raramente</span></label>
-          <label class="opcao"><input type="radio" name="21. Costuma se culpar quando algo dá errado" value="Não" /><span>Não</span></label>
+          <label class="opcao"><input type="radio" name="21. Costuma se culpar" value="Sim, sempre" /><span>Sim, sempre</span></label>
+          <label class="opcao"><input type="radio" name="21. Costuma se culpar" value="Às vezes" /><span>Às vezes</span></label>
+          <label class="opcao"><input type="radio" name="21. Costuma se culpar" value="Raramente" /><span>Raramente</span></label>
+          <label class="opcao"><input type="radio" name="21. Costuma se culpar" value="Não" /><span>Não</span></label>
         </div>
       </div>
 
@@ -447,32 +432,30 @@
       </div>
     </div>
 
-    <!-- SEÇÃO 5 -->
     <div class="secao">
       <p class="secao-titulo">05 — Corpo e manifestações físicas</p>
 
       <div class="pergunta">
         <label>Onde você sente o estresse no corpo?</label>
-        <textarea name="25. Onde sente o estresse no corpo" placeholder="Ex: aperto no peito, nó na garganta, dor de cabeça..."></textarea>
+        <textarea name="25. Onde sente o estresse no corpo" placeholder="Ex: aperto no peito, nó na garganta..."></textarea>
       </div>
 
       <div class="pergunta">
         <label>Você tem alguma queixa física recorrente sem causa médica clara?</label>
-        <textarea name="26. Queixa física recorrente sem causa médica"></textarea>
+        <textarea name="26. Queixa física recorrente"></textarea>
       </div>
 
       <div class="pergunta">
         <label>Como é sua relação com o sono e o descanso?</label>
         <div class="opcoes">
-          <label class="opcao"><input type="radio" name="27. Relação com o sono e descanso" value="Durmo bem e descanso" /><span>Durmo bem e descanso</span></label>
-          <label class="opcao"><input type="radio" name="27. Relação com o sono e descanso" value="Tenho dificuldade para dormir" /><span>Tenho dificuldade para dormir</span></label>
-          <label class="opcao"><input type="radio" name="27. Relação com o sono e descanso" value="Nunca me permito descansar" /><span>Nunca me permito descansar</span></label>
-          <label class="opcao"><input type="radio" name="27. Relação com o sono e descanso" value="Durmo mas acordo cansada" /><span>Durmo mas acordo cansada</span></label>
+          <label class="opcao"><input type="radio" name="27. Relação com o sono" value="Durmo bem e descanso" /><span>Durmo bem e descanso</span></label>
+          <label class="opcao"><input type="radio" name="27. Relação com o sono" value="Tenho dificuldade para dormir" /><span>Tenho dificuldade para dormir</span></label>
+          <label class="opcao"><input type="radio" name="27. Relação com o sono" value="Nunca me permito descansar" /><span>Nunca me permito descansar</span></label>
+          <label class="opcao"><input type="radio" name="27. Relação com o sono" value="Durmo mas acordo cansada" /><span>Durmo mas acordo cansada</span></label>
         </div>
       </div>
     </div>
 
-    <!-- SEÇÃO 6 -->
     <div class="secao">
       <p class="secao-titulo">06 — O que você quer transformar</p>
 
@@ -483,7 +466,7 @@
 
       <div class="pergunta">
         <label>O que você sente que está esperando acontecer antes de se permitir ser feliz, livre ou bem-sucedida?</label>
-        <textarea name="29. O que está esperando acontecer para se permitir ser feliz"></textarea>
+        <textarea name="29. O que está esperando para se permitir ser feliz"></textarea>
       </div>
 
       <div class="pergunta">
@@ -493,7 +476,7 @@
 
       <div class="pergunta">
         <label>Existe alguma parte de você que resiste a mudar? O que essa parte quer proteger?</label>
-        <textarea name="31. Parte que resiste à mudança e o que quer proteger"></textarea>
+        <textarea name="31. Parte que resiste e o que quer proteger"></textarea>
       </div>
     </div>
 
@@ -521,12 +504,10 @@
     btn.disabled = true;
     btn.textContent = 'Enviando...';
 
-    const data = new FormData(form);
-
     try {
       const res = await fetch(form.action, {
         method: 'POST',
-        body: data,
+        body: new FormData(form),
         headers: { 'Accept': 'application/json' }
       });
 
@@ -541,7 +522,7 @@
     } catch {
       btn.disabled = false;
       btn.textContent = 'Enviar anamnese →';
-      alert('Erro de conexão. Verifique sua internet e tente novamente.');
+      alert('Erro de conexão. Verifique sua internet.');
     }
   });
 </script>
