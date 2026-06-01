@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Devolutiva de Marca — May</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --vermelho: #8B0000;
+    --vermelho-vivo: #C0392B;
+    --preto: #0E0E0E;
+    --preto-medio: #141414;
+    --dourado: #C9A84C;
+    --dourado-claro: #E8CC7A;
+    --perola: #F5F0E8;
+    --texto-suave: rgba(240,235,224,0.62);
+    --cinza: #7A6E63;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--preto);
+    color: var(--perola);
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* TOPO */
+  .topo {
+    background: var(--vermelho);
+    padding: 13px 48px;
+    font-size: 0.68rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(240,235,224,0.8);
+    display: flex;
+    justify-content: space-between;
+  }
+  .topo span { color: var(--dourado-claro); }
+
+  /* CAPA */
+  .capa {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 80px 64px;
+    overflow: hidden;
+  }
+  .capa-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 65% 75% at 75% 15%, rgba(139,0,0,0.38) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 50% at 15% 85%, rgba(201,168,76,0.1) 0%, transparent 50%),
+      linear-gradient(180deg, #0E0E0E 0%, #180808 60%, #0E0E0E 100%);
+  }
+  .capa-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(139,0,0,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(139,0,0,0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .capa-content { position: relative; z-index: 2; }
+  .capa-pre {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--dourado);
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .capa-pre::before { content: ''; display: block; width: 36px; height: 1px; background: var(--dourado); }
+  .capa-nome {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 15vw, 11rem);
+    line-height: 0.88;
+    color: var(--perola);
+    letter-spacing: 2px;
+  }
+  .capa-nome span { color: var(--vermelho-vivo); display: block; }
+  .capa-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--texto-suave);
+    margin-top: 32px;
+    max-width: 480px;
+    line-height: 1.5;
+    border-left: 2px solid var(--vermelho-vivo);
+    padding-left: 20px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .capa-content > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+  .capa-pre { animation-delay: 0.15s; }
+  .capa-nome { animation-delay: 0.35s; }
+  .capa-tagline { animation-delay: 0.55s; }
+
+  /* SEÇÃO */
+  .secao { padding: 96px 64px; max-width: 960px; margin: 0 auto; }
+  .label {
+    font-size: 0.67rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--vermelho-vivo);
+    margin-bottom: 10px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .label::after { content: ''; flex: 1; height: 1px; background: rgba(139,0,0,0.25); max-width: 48px; }
+  .titulo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    line-height: 1;
+    color: var(--perola);
+    margin-bottom: 40px;
+    letter-spacing: 1px;
+  }
+  .titulo em { color: var(--vermelho-vivo); font-style: normal; }
+
+  /* BLOCO ARQUÉTIPO */
+  .arq {
+    background: linear-gradient(135deg, #5C0000 0%, #2A0000 100%);
+    border-radius: 3px;
+    padding: 44px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 36px;
+  }
+  .arq::after {
+    content: 'MAY';
+    position: absolute; right: -16px; bottom: -24px;
+    font-family: 'Bebas Neue'; font-size: 9rem;
+    color: rgba(255,255,255,0.035);
+    letter-spacing: 4px; line-height: 1;
+  }
+  .arq-titulo { font-family: 'Bebas Neue'; font-size: 2.2rem; color: var(--perola); margin-bottom: 14px; letter-spacing: 1px; }
+  .arq-texto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem; font-style: italic;
+    color: rgba(240,235,224,0.82); line-height: 1.75;
+    max-width: 560px;
+  }
+
+  .badges { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 48px; }
+  .badge {
+    font-size: 0.68rem; letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 5px 13px; border-radius: 2px; font-weight: 500; border: 1px solid;
+  }
+  .badge-r { background: rgba(139,0,0,0.18); border-color: rgba(192,57,43,0.35); color: #E88080; }
+  .badge-g { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.28); color: var(--dourado-claro); }
+  .badge-w { background: rgba(240,235,224,0.04); border-color: rgba(240,235,224,0.12); color: var(--texto-suave); }
+
+  /* CORES */
+  .cores { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; border-radius: 3px; overflow: hidden; margin-bottom: 40px; }
+  .cor { aspect-ratio: 1; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px; transition: transform 0.3s; cursor: default; }
+  .cor:hover { transform: scale(1.04); }
+  .cor-nome { font-size: 0.82rem; font-weight: 500; line-height: 1.2; }
+  .cor-desc { font-size: 0.68rem; opacity: 0.65; margin-top: 3px; }
+
+  /* BLOCO TEXTO */
+  .bloco {
+    background: var(--preto-medio);
+    border-left: 3px solid var(--vermelho-vivo);
+    padding: 30px 34px;
+    margin-bottom: 18px;
+    border-radius: 0 3px 3px 0;
+  }
+  .bloco-label { font-size: 0.67rem; letter-spacing: 3px; text-transform: uppercase; color: var(--dourado); margin-bottom: 10px; }
+  .bloco-texto {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem; font-style: italic;
+    color: rgba(240,235,224,0.83); line-height: 1.8;
+  }
+
+  /* PRESENÇA */
+  .presenca {
+    background: linear-gradient(135deg, #140808 0%, var(--preto-medio) 100%);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-radius: 3px;
+    padding: 36px 40px;
+    margin-bottom: 48px;
+  }
+  .presenca-titulo { font-family: 'Bebas Neue'; font-size: 1.5rem; color: var(--dourado); letter-spacing: 2px; margin-bottom: 16px; }
+  .presenca p { font-size: 0.95rem; color: var(--texto-suave); line-height: 1.9; }
+  .presenca p strong { color: var(--perola); font-weight: 500; }
+  .presenca p + p { margin-top: 14px; }
+
+  /* POSICIONAMENTO */
+  .pos {
+    border: 1px solid rgba(139,0,0,0.35);
+    border-radius: 3px;
+    padding: 44px;
+    margin-bottom: 48px;
+    position: relative;
+  }
+  .pos-aspas {
+    font-family: 'Bebas Neue'; font-size: 5.5rem;
+    color: var(--vermelho); line-height: 0.7;
+    display: block; margin-bottom: 14px; opacity: 0.55;
+  }
+  .pos-frase {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.35rem, 2.5vw, 1.9rem);
+    font-style: italic; color: var(--perola);
+    line-height: 1.5; margin-bottom: 22px;
+  }
+  .pos-desc {
+    font-size: 0.95rem; color: var(--texto-suave); line-height: 1.85;
+    border-top: 1px solid rgba(255,255,255,0.05); padding-top: 22px;
+  }
+  .pos-desc strong { color: var(--perola); font-weight: 500; }
+
+  /* VALORES */
+  .valores { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 1px; background: rgba(255,255,255,0.04); border-radius: 3px; overflow: hidden; margin-bottom: 48px; }
+  .val { background: var(--preto-medio); padding: 26px 22px; transition: background 0.2s; }
+  .val:hover { background: #1c0606; }
+  .val-num { font-family: 'Bebas Neue'; font-size: 2.8rem; color: rgba(139,0,0,0.22); line-height: 1; margin-bottom: 6px; }
+  .val-titulo { font-size: 0.9rem; font-weight: 500; color: var(--perola); margin-bottom: 5px; }
+  .val-desc { font-family: 'Cormorant Garamond', serif; font-size: 0.97rem; font-style: italic; color: var(--texto-suave); line-height: 1.5; }
+
+  /* ESTRATÉGIAS */
+  .estrategia {
+    border-radius: 3px; overflow: hidden; margin-bottom: 28px;
+  }
+  .est-header {
+    background: var(--vermelho-vivo);
+    padding: 26px 40px;
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .est-header-num { font-family: 'Bebas Neue'; font-size: 4rem; color: rgba(255,255,255,0.14); line-height: 1; flex-shrink: 0; }
+  .est-titulo { font-family: 'Bebas Neue'; font-size: 1.9rem; color: var(--perola); letter-spacing: 1px; line-height: 1; }
+  .est-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.97rem; color: rgba(240,235,224,0.72); margin-top: 5px; }
+  .est-body { background: var(--preto-medio); padding: 0 40px 36px; }
+
+  .passo { display: grid; grid-template-columns: 44px 1fr; gap: 20px; padding: 24px 0; border-bottom: 1px solid rgba(255,255,255,0.04); align-items: start; }
+  .passo:last-of-type { border-bottom: none; }
+  .passo-num { font-family: 'Bebas Neue'; font-size: 2.3rem; color: var(--vermelho); line-height: 1; padding-top: 3px; }
+  .passo-label { font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; color: var(--dourado-claro); margin-bottom: 6px; font-weight: 500; }
+  .passo-texto { font-size: 0.94rem; color: var(--texto-suave); line-height: 1.8; }
+  .passo-texto strong { color: var(--perola); font-weight: 500; }
+
+  .aviso {
+    background: rgba(139,0,0,0.12);
+    border: 1px solid rgba(139,0,0,0.28);
+    border-radius: 3px; padding: 18px 26px; margin-top: 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic; font-size: 1rem;
+    color: rgba(240,235,224,0.75); line-height: 1.6;
+  }
+
+  /* DIVISOR */
+  .div { display: flex; align-items: center; gap: 20px; padding: 0 64px; max-width: 960px; margin: 0 auto; }
+  .div-linha { flex: 1; height: 1px; background: rgba(139,0,0,0.18); }
+  .div-icon { color: var(--dourado); font-size: 0.9rem; opacity: 0.5; }
+
+  /* RODAPÉ */
+  .rodape {
+    background: #080808;
+    border-top: 1px solid rgba(139,0,0,0.25);
+    padding: 56px 64px;
+    display: flex; align-items: flex-end; justify-content: space-between; gap: 36px;
+  }
+  .rodape-frase { font-family: 'Bebas Neue'; font-size: clamp(1.9rem, 4vw, 3.2rem); color: var(--perola); line-height: 1; max-width: 460px; letter-spacing: 1px; }
+  .rodape-frase em { color: var(--vermelho-vivo); font-style: normal; }
+  .rodape-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.9rem; color: var(--cinza); text-align: right; line-height: 1.7; }
+
+  @media (max-width: 680px) {
+    .topo { padding: 12px 24px; font-size: 0.6rem; }
+    .capa { padding: 48px 28px 60px; }
+    .secao { padding: 60px 28px; }
+    .div { padding: 0 28px; }
+    .cores { grid-template-columns: repeat(2, 1fr); }
+    .est-header { padding: 22px 28px; }
+    .est-body { padding: 0 28px 28px; }
+    .pos { padding: 28px; }
+    .rodape { flex-direction: column; padding: 44px 28px; }
+    .rodape-sub { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topo">
+  Sessões Estratégicas — Devolutiva Sessão 1
+  <span>May ✦ Identidade & Essência</span>
+</div>
+
+<!-- CAPA -->
+<div class="capa">
+  <div class="capa-bg"></div>
+  <div class="capa-grid"></div>
+  <div class="capa-content">
+    <p class="capa-pre">Devolutiva de identidade de marca</p>
+    <h1 class="capa-nome">QUEM<span>É A MAY.</span></h1>
+    <p class="capa-tagline">"Estratégia de marca pra quem não nasceu pra caber no padrão."</p>
+  </div>
+</div>
+
+<!-- ARQUÉTIPO -->
+<div class="secao">
+  <div class="label">Arquétipo dominante</div>
+  <h2 class="titulo">A <em>Criadora</em> com<br>chama de Fora-da-Lei.</h2>
+
+  <div class="arq">
+    <div class="arq-titulo">Presença que não pede licença.</div>
+    <p class="arq-texto">Você não segue padrão — você define o que é padrão pra você. Cria do zero, expande sem pedir licença, e usa a comunicação como ferramenta de transformação. Você não é arrojada por estética. É arrojada por convicção. O leão que ruge não é pose — é caráter.</p>
+  </div>
+
+  <div class="badges">
+    <span class="badge badge-r">Fora do padrão</span>
+    <span class="badge badge-g">Criação do zero</span>
+    <span class="badge badge-w">Inteligência magnética</span>
+    <span class="badge badge-r">Liberdade como valor</span>
+    <span class="badge badge-g">Provocadora de ideias</span>
+    <span class="badge badge-w">Repertório vasto</span>
+    <span class="badge badge-r">Presença sem esforço</span>
+  </div>
+</div>
+
+<div class="div"><div class="div-linha"></div><div class="div-icon">✦</div><div class="div-linha"></div></div>
+
+<!-- IDENTIDADE VISUAL -->
+<div class="secao">
+  <div class="label">Identidade visual</div>
+  <h2 class="titulo">As cores que<br><em>falam</em> por você.</h2>
+
+  <div class="cores">
+    <div class="cor" style="background: linear-gradient(160deg, #8B0000, #3D0000);">
+      <div class="cor-nome">Vermelho profundo</div>
+      <div class="cor-desc">Força. Presença. Coragem.</div>
+    </div>
+    <div class="cor" style="background: linear-gradient(160deg, #1A1A1A, #0E0E0E);">
+      <div class="cor-nome">Preto absoluto</div>
+      <div class="cor-desc">Base. Peso. Autoridade.</div>
+    </div>
+    <div class="cor" style="background: linear-gradient(160deg, #C9A84C, #8B6914);">
+      <div class="cor-nome">Dourado rico</div>
+      <div class="cor-desc">Acento. Valor. Distinção.</div>
+    </div>
+    <div class="cor" style="background: linear-gradient(160deg, #F5F0E8, #D4C9B0); color: #1A1A1A;">
+      <div class="cor-nome" style="color:#1A1A1A;">Off-white pérola</div>
+      <div class="cor-desc" style="color:rgba(26,26,26,0.55);">Respiro. Contraste elegante.</div>
+    </div>
+  </div>
+
+  <div class="presenca">
+    <div class="presenca-titulo">Roupa & presença</div>
+    <p><strong>Vermelho quando quer impacto. Preto quando quer autoridade.</strong> Vestidos com intenção — fenda, ombros à mostra, silhueta que fala antes de você abrir a boca. Salto alto, sola vermelha. O detalhe que já é assinatura.</p>
+    <p>Tatuagens à mostra, nunca escondidas. <strong>Acessórios em dourado e pérola</strong> — brinco longo ou colar, nunca os dois exagerados juntos. Um fala por si.</p>
+    <p><strong>Fotos com contraste forte, luz dramática ou dourada de fim de tarde.</strong> Fundo com textura, ambiente com personalidade. Você não é minimalista — e o visual precisa refletir isso.</p>
+  </div>
+</div>
+
+<div class="div"><div class="div-linha"></div><div class="div-icon">✦</div><div class="div-linha"></div></div>
+
+<!-- POSICIONAMENTO -->
+<div class="secao">
+  <div class="label">Posicionamento de marca</div>
+  <h2 class="titulo">O que você<br><em>representa</em>.</h2>
+
+  <div class="pos">
+    <span class="pos-aspas">"</span>
+    <p class="pos-frase">Estratégia de marca pra quem não nasceu pra caber no padrão.</p>
+    <p class="pos-desc">
+      Você não organiza marcas — você as acende. Com background em design de jogos, tráfego pago e branding, você enxerga o negócio inteiro antes de abrir qualquer ferramenta. <strong>Cada cliente que passa por você sai com a cabeça cheia de possibilidades que não via antes.</strong> Não porque você complica — porque você expande o que a pessoa achava que era possível pra ela.<br><br>
+      Você disse que o marketing é mentiroso. Isso não é crítica de mercado — é o seu posicionamento. <strong>Você é a estrategista que não vende o que não acredita.</strong> Num mercado cheio de fórmula pronta, isso é raro. E raro tem valor.
+    </p>
+  </div>
+</div>
+
+<div class="div"><div class="div-linha"></div><div class="div-icon">✦</div><div class="div-linha"></div></div>
+
+<!-- VALORES -->
+<div class="secao">
+  <div class="label">Valores de caráter</div>
+  <h2 class="titulo">O que<br><em>ancora</em> a sua marca.</h2>
+
+  <div class="valores">
+    <div class="val">
+      <div class="val-num">01</div>
+      <div class="val-titulo">Liberdade</div>
+      <div class="val-desc">Você saiu do CLT e recusou o caminho óbvio. Liberdade não é benefício pra você — é condição.</div>
+    </div>
+    <div class="val">
+      <div class="val-num">02</div>
+      <div class="val-titulo">Criação</div>
+      <div class="val-desc">Você ama fazer do zero. O processo importa tanto quanto o resultado.</div>
+    </div>
+    <div class="val">
+      <div class="val-num">03</div>
+      <div class="val-titulo">Provocação</div>
+      <div class="val-desc">Ninguém sai do encontro com você do mesmo jeito que entrou. Isso é intencional.</div>
+    </div>
+    <div class="val">
+      <div class="val-num">04</div>
+      <div class="val-titulo">Repertório</div>
+      <div class="val-desc">Design de jogos, tráfego, branding. A combinação incomum é exatamente o que te diferencia.</div>
+    </div>
+  </div>
+</div>
+
+<div class="div"><div class="div-linha"></div><div class="div-icon">✦</div><div class="div-linha"></div></div>
+
+<!-- NARRATIVA -->
+<div class="secao">
+  <div class="label">Narrativa de marca</div>
+  <h2 class="titulo">Como contar<br><em>essa história</em>.</h2>
+
+  <div class="bloco">
+    <div class="bloco-label">O fio condutor</div>
+    <p class="bloco-texto">A pandemia abriu uma janela e você pulou — sem rede, sem manual. Seu pai viu o brilho nos seus olhos antes de você conseguir nomear o que estava sentindo. Quatro anos de curso, um CLT que durou pouco, e a certeza de que o que você tem não cabe em cargo nenhum. Essa trajetória não linear não é defeito — é o seu posicionamento. Você não chegou pelo caminho convencional porque o caminho convencional não daria conta do que você é.</p>
+  </div>
+
+  <div class="bloco">
+    <div class="bloco-label">A mensagem que já existe em você</div>
+    <p class="bloco-texto">No fechamento da sessão você disse: vai lá e faz, para de esperar estar pronta, se permite devaneiar. Isso não é frase motivacional — é o que você viveu. E tem uma camada a mais aqui: você prega isso e ainda trava na hora de produzir conteúdo. Quando você nomear esse contraste publicamente, vai tocar fundo em qualquer pessoa que sente o mesmo. Esse é o seu conteúdo mais poderoso.</p>
+  </div>
+
+  <div class="bloco">
+    <div class="bloco-label">O que o cliente fala sobre você</div>
+    <p class="bloco-texto">Falam da sua forma de comunicar, da sua identidade, e do fato de você fazer as pessoas pensarem. Nenhum cliente sai do encontro com você sem um turbilhão de ideias. Isso não é elogio genérico — é a descrição exata do serviço que você presta. Use essas palavras. São as mais honestas que existem sobre o que você entrega.</p>
+  </div>
+</div>
+
+<div class="div"><div class="div-linha"></div><div class="div-icon">✦</div><div class="div-linha"></div></div>
+
+<!-- ESTRATÉGIAS -->
+<div class="secao">
+  <div class="label">Estratégias práticas</div>
+  <h2 class="titulo">O que fazer<br><em>agora</em>.</h2>
+
+  <!-- ESTRATÉGIA 1 -->
+  <div class="estrategia">
+    <div class="est-header">
+      <div>
+        <div class="est-titulo">Construir desejo antes do produto</div>
+        <div class="est-sub">Roupas e acessórios — gerar audiência antes da vitrine existir</div>
+      </div>
+      <div class="est-header-num">01</div>
+    </div>
+    <div class="est-body">
+      <div class="passo">
+        <div class="passo-num">1</div>
+        <div>
+          <div class="passo-label">Aparecer vestida como a marca</div>
+          <p class="passo-texto">Vermelho, preto, dourado, pérola. <strong>Cada outfit é um post com intenção — não moda, identidade.</strong> A legenda não fala da roupa. Fala do estado de espírito que aquela escolha representa.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">2</div>
+        <div>
+          <div class="passo-label">Série "o que eu usaria se fosse pra..."</div>
+          <p class="passo-texto">Uma reunião de branding, um evento, uma apresentação de proposta. <strong>Curadoria de moda com posicionamento estratégico</strong> — sem precisar ter estoque nem produto pronto ainda.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">3</div>
+        <div>
+          <div class="passo-label">Perguntar pra audiência</div>
+          <p class="passo-texto">"Dourado ou prata?" "Pérola clássica ou barroca?" "Vocês usariam isso numa reunião?" <strong>Gera dado real e aquece o desejo antes do produto existir.</strong> Quem responde já está comprando sem saber.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">4</div>
+        <div>
+          <div class="passo-label">Conectar o acessório com a mensagem de marca</div>
+          <p class="passo-texto">Pérola com dourado não é só estético — é você dizendo que <strong>dá pra ser sofisticada e fora do padrão ao mesmo tempo.</strong> Branding no corpo, antes de qualquer loja.</p>
+        </div>
+      </div>
+      <div class="aviso">Quando o produto aparecer, a audiência já vai querer comprar antes de ver o preço — porque compra você, não só o acessório.</div>
+    </div>
+  </div>
+
+  <!-- ESTRATÉGIA 2 -->
+  <div class="estrategia">
+    <div class="est-header">
+      <div>
+        <div class="est-titulo">Separar o Instagram pessoal do profissional</div>
+        <div class="est-sub">Clareza de perfil como primeiro passo de posicionamento</div>
+      </div>
+      <div class="est-header-num">02</div>
+    </div>
+    <div class="est-body">
+      <div class="passo">
+        <div class="passo-num">1</div>
+        <div>
+          <div class="passo-label">Definir o que cada perfil comunica</div>
+          <p class="passo-texto">O perfil profissional precisa de uma resposta clara em 10 segundos: quem é você, pra quem você fala, e o que acontece quando alguém te contrata. <strong>Hoje isso não está legível.</strong> Começa aqui.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">2</div>
+        <div>
+          <div class="passo-label">Reescrever a bio com posicionamento real</div>
+          <p class="passo-texto">Não é currículo. É convite. <strong>"Estrategista de marca pra quem não nasceu pra caber no padrão"</strong> já diz mais do que uma lista de serviços.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">3</div>
+        <div>
+          <div class="passo-label">Começar a postar no seu ritmo real</div>
+          <p class="passo-texto">Você gosta de vídeo longo, trava no conteúdo curto. <strong>Começa pelo que você ama.</strong> Um Reels bem feito de algo que você domina vale mais que cinco posts feitos por obrigação.</p>
+        </div>
+      </div>
+      <div class="aviso">Consistência com frequência menor sempre bate irregularidade com frequência alta. Parte do que você consegue manter — não do ideal.</div>
+    </div>
+  </div>
+
+  <!-- ESTRATÉGIA 3 -->
+  <div class="estrategia">
+    <div class="est-header">
+      <div>
+        <div class="est-titulo">Transformar o contraste em conteúdo</div>
+        <div class="est-sub">O seu bloqueio é o seu material mais poderoso</div>
+      </div>
+      <div class="est-header-num">03</div>
+    </div>
+    <div class="est-body">
+      <div class="passo">
+        <div class="passo-num">1</div>
+        <div>
+          <div class="passo-label">Nomear o paradoxo</div>
+          <p class="passo-texto">Você diz "vai lá e faz" e ainda trava na hora de criar conteúdo. <strong>Isso não é fraqueza — é o ponto de conexão mais real que você tem com a sua audiência.</strong> Quem te segue vai se ver ali.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">2</div>
+        <div>
+          <div class="passo-label">Documentar o processo, não só o resultado</div>
+          <p class="passo-texto">Você ama criar do zero. <strong>Mostre o zero.</strong> O rascunho, a dúvida, a virada. Conteúdo de bastidor de quem tem repertório e método é viciante — e é o que te diferencia de quem só mostra o entregável final.</p>
+        </div>
+      </div>
+      <div class="passo">
+        <div class="passo-num">3</div>
+        <div>
+          <div class="passo-label">Usar o YouTube como âncora de autoridade</div>
+          <p class="passo-texto">Você gosta de vídeo longo. <strong>O YouTube é onde autoridade se constrói com profundidade.</strong> O Instagram pode ser o trailer — o YouTube, o filme. Não precisa escolher um só.</p>
+        </div>
+      </div>
+      <div class="aviso">O conteúdo que vem da sua experiência real é o único que você vai conseguir sustentar com consistência e verdade ao longo do tempo.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- RODAPÉ -->
+<div class="rodape">
+  <div class="rodape-frase">
+    VAI LÁ E FAZ.<br>
+    <em>VOCÊ NUNCA VAI</em><br>
+    ESTAR PRONTA.
+  </div>
+  <div class="rodape-sub">
+    May ✦ Sessão 1<br>
+    Identidade & Essência<br>
+    <span style="color:rgba(122,110,99,0.45); font-size:0.8rem;">Sessões Estratégicas por Maria</span>
+  </div>
+</div>
+
+</body>
+</html>
