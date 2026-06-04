@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Plano de Lançamento · Paolla</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #b8975a;
+    --gold-light: #d4b07a;
+    --white: #f0ece2;
+    --muted: #5a5448;
+    --text: #b0a896;
+    --line: rgba(184,151,90,0.2);
+  }
+
+  html {
+    background-color: #0f0e0b !important;
+  }
+
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .hero {
+    background: #0a0908;
+    padding: 52px 32px 48px;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.1s;
+  }
+
+  .hero-meta {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .hero-name {
+    font-size: clamp(3rem, 10vw, 4.8rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .hero-name em {
+    display: block;
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: clamp(2.6rem, 8vw, 4rem);
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+
+  .hero-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .hero-tag strong { color: var(--gold); font-weight: 600; }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+
+  /* intro */
+  .intro {
+    margin-bottom: 56px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    animation: fadeUp 0.85s ease forwards 0.3s;
+  }
+
+  .intro p {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .intro p strong { color: var(--white); font-weight: 400; }
+
+  /* dia */
+  .dia {
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.85s ease forwards;
+  }
+
+  .dia:nth-child(1) { animation-delay: 0.5s; }
+  .dia:nth-child(2) { animation-delay: 0.65s; }
+  .dia:nth-child(3) { animation-delay: 0.8s; }
+  .dia:nth-child(4) { animation-delay: 0.95s; }
+  .dia:nth-child(5) { animation-delay: 1.1s; }
+  .dia:nth-child(6) { animation-delay: 1.25s; }
+  .dia:nth-child(7) { animation-delay: 1.4s; }
+
+  .dia-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .dia-data {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  .dia-titulo {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.2;
+  }
+
+  .dia-titulo em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .tarefas {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .tarefa {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .tarefa-icone {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    min-width: 52px;
+    padding: 18px 14px 18px 0;
+    border-right: 1px solid var(--line);
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .tarefa-corpo {
+    padding: 16px 0 16px 20px;
+    flex: 1;
+  }
+
+  .tarefa-corpo strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--white);
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .tarefa-corpo p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin: 0;
+  }
+
+  /* destaque */
+  .highlight {
+    border-left: 2px solid var(--gold);
+    padding: 18px 22px;
+    background: rgba(184,151,90,0.04);
+    margin: 20px 0 0;
+  }
+
+  .highlight p {
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 1.1rem;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  /* mantra */
+  .mantra {
+    padding: 48px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 56px 0;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.6s;
+  }
+
+  .mantra-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .mantra p {
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.5;
+  }
+
+  .closing {
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.8s;
+  }
+
+  .closing p {
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.9;
+  }
+
+  .assinatura {
+    margin-top: 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 40px 24px 36px; }
+    .wrap { padding: 40px 24px 64px; }
+    .tarefa-icone { min-width: 40px; font-size: 7px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-meta">
+      All Win Academy · Plano de Ação<br>
+      Lançamento · Infoproduto
+    </div>
+    <div class="hero-name">
+      Paolla
+      <em>Lançamento</em>
+    </div>
+    <div class="hero-tags">
+      <div class="hero-tag">Período <strong>04 a 10 de Junho</strong></div>
+      <div class="hero-tag">Meta <strong>Primeiro Infoproduto</strong></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="intro">
+      <p>Seis dias. Produto simples, funil direto, público que já existe. Não tem espaço pra perfeccionismo aqui. Tem espaço pra execução.</p>
+      <p>O produto resolve duas dores ao mesmo tempo: quem quer <strong>empreender e revender</strong>, e quem quer só <strong>comprar mais barato pra si</strong>. Isso não é detalhe. Isso dobra o alcance sem dobrar o trabalho.</p>
+      <p>O plano é esse abaixo. Dia a dia. Sem enrolação.</p>
+    </div>
+
+    <div class="tarefas-wrap">
+
+      <!-- DIA 1 -->
+      <div class="dia">
+        <div class="dia-header">
+          <div class="dia-data">04/06 · Hoje</div>
+          <div class="dia-titulo">Aquecimento <em>começa agora</em></div>
+        </div>
+        <div class="tarefas">
+          <div class="tarefa">
+            <div class="tarefa-icone">Feed</div>
+            <div class="tarefa-corpo">
+              <strong>Story de posicionamento</strong>
+              <p>Fala que está prestes a abrir algo pequeno, seleto e muito útil. Não entrega o que é ainda. Só cria curiosidade. "Vem aí uma coisa que eu devia ter feito antes."</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">DM</div>
+            <div class="tarefa-corpo">
+              <strong>Conversa nos diretos</strong>
+              <p>Responde quem interagiu e planta a semente. "Prepara que semana que vem tem novidade." Sem explicar ainda.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIA 2 -->
+      <div class="dia">
+        <div class="dia-header">
+          <div class="dia-data">05/06 · Sexta</div>
+          <div class="dia-titulo">Abre o <em>gatilho da dor</em></div>
+        </div>
+        <div class="tarefas">
+          <div class="tarefa">
+            <div class="tarefa-icone">Story</div>
+            <div class="tarefa-corpo">
+              <strong>Fala sobre o problema</strong>
+              <p>Você já pagou mais caro num produto porque não sabia onde comprar direito? Story curto, pergunta direta, caixa de resposta aberta. Deixa o público se identificar.</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">Story</div>
+            <div class="tarefa-corpo">
+              <strong>Fala sobre a oportunidade</strong>
+              <p>Segundo story na sequência. "Tem gente que compra o mesmo produto por metade do preço. E ainda revende e lucra em cima disso." Sem entregar a solução ainda.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIA 3 -->
+      <div class="dia">
+        <div class="dia-header">
+          <div class="dia-data">06/06 · Sábado</div>
+          <div class="dia-titulo">Cria o <em>grupo de funil</em></div>
+        </div>
+        <div class="tarefas">
+          <div class="tarefa">
+            <div class="tarefa-icone">Grupo</div>
+            <div class="tarefa-corpo">
+              <strong>Abre o grupo no WhatsApp ou Telegram</strong>
+              <p>Nome direto. Pode ser algo como "Acesso Fornecedores com a Paolla" ou "Compre Mais Barato". Sem firula. Coloca a bio com uma frase de proposta de valor.</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">Story</div>
+            <div class="tarefa-corpo">
+              <strong>Chama pro grupo</strong>
+              <p>"Criei um grupo pra falar sobre algo que pode mudar como você compra e como você vende. Se quiser entrar, me chama no direct." Entrada por DM, não link aberto.</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">Grupo</div>
+            <div class="tarefa-corpo">
+              <strong>Primeira mensagem no grupo</strong>
+              <p>Se apresenta, fala o que vai rolar essa semana e já entrega um primeiro valor gratuito pequeno. Uma dica, um dado, algo que mostre que estar ali já vale.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIA 4 -->
+      <div class="dia">
+        <div class="dia-header">
+          <div class="dia-data">07/06 · Domingo</div>
+          <div class="dia-titulo">Aquece o <em>grupo</em></div>
+        </div>
+        <div class="tarefas">
+          <div class="tarefa">
+            <div class="tarefa-icone">Grupo</div>
+            <div class="tarefa-corpo">
+              <strong>Conteúdo de valor dentro do grupo</strong>
+              <p>Fala sobre o benefício de comprar direto do fornecedor. Como funciona, o que muda no bolso, o que muda na operação. Não é aula. É conversa.</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">Grupo</div>
+            <div class="tarefa-corpo">
+              <strong>Apresenta os dois caminhos</strong>
+              <p>Deixa claro que o produto serve pra dois perfis. Quem quer empreender e revender, e quem quer só economizar comprando pra si. Pergunta qual é o perfil de cada um. Gera engajamento e já segmenta.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIA 5 -->
+      <div class="dia">
+        <div class="dia-header">
+          <div class="dia-data">08/06 · Segunda</div>
+          <div class="dia-titulo">Apresenta o <em>produto</em></div>
+        </div>
+        <div class="tarefas">
+          <div class="tarefa">
+            <div class="tarefa-icone">Grupo</div>
+            <div class="tarefa-corpo">
+              <strong>Revela o infoproduto</strong>
+              <p>Fala o que é, o que tem dentro, quanto custa. Apresenta também a opção de se afiliar. Quem quiser revender e ganhar comissão já sabe que tem esse caminho disponível.</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">Story</div>
+            <div class="tarefa-corpo">
+              <strong>Abre pro público do feed também</strong>
+              <p>Não fica só no grupo. Story no perfil anunciando que o produto está disponível e como adquirir.</p>
+            </div>
+          </div>
+          <div class="highlight">
+            <p>Esse é o dia mais importante. A apresentação precisa ser direta. O que é, pra quem é, quanto custa, como compra.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIA 6 -->
+      <div class="dia">
+        <div class="dia-header">
+          <div class="dia-data">09/06 · Terça</div>
+          <div class="dia-titulo">Urgência e <em>últimas chamadas</em></div>
+        </div>
+        <div class="tarefas">
+          <div class="tarefa">
+            <div class="tarefa-icone">Grupo</div>
+            <div class="tarefa-corpo">
+              <strong>Quebra objeção</strong>
+              <p>Responde as dúvidas que apareceram. Reforça o valor. Fala de quem já comprou se tiver. Se não tiver ainda, fala do porquê você criou isso e o que a pessoa leva.</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">Story</div>
+            <div class="tarefa-corpo">
+              <strong>Contagem regressiva</strong>
+              <p>"Amanhã é o último dia nesse preço." Cria urgência real. Sem inventar. Se tiver previsão de aumentar o preço depois do lançamento, deixa isso claro aqui.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIA 7 -->
+      <div class="dia">
+        <div class="dia-header">
+          <div class="dia-data">10/06 · Quarta</div>
+          <div class="dia-titulo"><em>Lançamento.</em> Fecha aqui.</div>
+        </div>
+        <div class="tarefas">
+          <div class="tarefa">
+            <div class="tarefa-icone">Grupo</div>
+            <div class="tarefa-corpo">
+              <strong>Última chamada de manhã</strong>
+              <p>"Hoje é o último dia. Quem quiser garantir, é agora." Direto. Sem enrolação.</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">Story</div>
+            <div class="tarefa-corpo">
+              <strong>Story de encerramento</strong>
+              <p>Agradece quem comprou, fala que as vendas ficam abertas mas que aquele preço/condição se encerra hoje.</p>
+            </div>
+          </div>
+          <div class="tarefa">
+            <div class="tarefa-icone">DM</div>
+            <div class="tarefa-corpo">
+              <strong>Contato individual com quem demonstrou interesse e não comprou</strong>
+              <p>Sem pressão. Só uma mensagem gentil. "Hoje é o último dia, caso queira garantir o acesso."</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="mantra">
+      <div class="mantra-label">Foco do lançamento · Paolla</div>
+      <p>"Não precisa ser perfeito.<br>Precisa sair.<br>O mercado vai te dar o resto."</p>
+    </div>
+
+    <div class="closing">
+      <p>Você já tomou a decisão mais difícil, que foi começar.<br>Agora é só executar um dia de cada vez.<br>Estou aqui em cada passo.</p>
+      <div class="assinatura">Maria Clara · All Win Academy</div>
+    </div>
+
+  </div>
+</body>
+</html>
