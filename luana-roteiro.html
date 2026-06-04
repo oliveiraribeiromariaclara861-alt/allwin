@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0c0a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Roteiro — Luana Dias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background-color: #0f0c0a !important; }
+    html, body {
+      background: #0f0c0a !important;
+      color: #f0ebe4;
+      font-family: 'Josefin Sans', sans-serif;
+      -webkit-text-size-adjust: 100%;
+      min-height: 100vh;
+    }
+    :root {
+      --cream: #f0ebe4;
+      --bl: #c07830;
+      --bl2: #8b4c1a;
+      --black: #0f0c0a;
+      --mid: #1a1410;
+      --muted: #8a7a6a;
+      --green: #2d4a2d;
+      --green-light: #4a7c4a;
+    }
+
+    /* HEADER */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 60px 28px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(192,120,48,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-weight: 100; font-size: 9px;
+      letter-spacing: 0.6em; color: var(--bl);
+      text-transform: uppercase; margin-bottom: 16px;
+    }
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: clamp(42px, 12vw, 72px);
+      line-height: 0.9; color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .hero-title em { font-style: italic; color: var(--bl); }
+    .hero-sub {
+      font-weight: 200; font-size: 10px;
+      letter-spacing: 0.4em; color: var(--muted);
+      text-transform: uppercase; margin-top: 16px; margin-bottom: 48px;
+    }
+    .hero-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 22px;
+      color: var(--cream); opacity: 0.6;
+    }
+
+    /* INTRO BOX */
+    .intro-box {
+      max-width: 560px; margin: 0 auto 60px;
+      padding: 32px 28px;
+      border: 1px solid rgba(192,120,48,0.2);
+      border-radius: 16px;
+      background: var(--mid);
+      position: relative;
+    }
+    .intro-box::before {
+      content: '⚡';
+      position: absolute; top: -14px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--mid);
+      padding: 0 12px;
+      font-size: 20px;
+    }
+    .intro-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; color: var(--cream);
+      margin-bottom: 12px; text-align: center;
+    }
+    .intro-text {
+      font-weight: 200; font-size: 13px;
+      line-height: 1.9; color: var(--muted);
+      text-align: center; letter-spacing: 0.02em;
+    }
+    .intro-text strong { color: var(--cream); font-weight: 400; }
+
+    /* TIMELINE WRAPPER */
+    .timeline { max-width: 600px; margin: 0 auto; padding: 0 20px 80px; }
+
+    /* BLOCO DE HORÁRIO */
+    .time-block { margin-bottom: 48px; }
+    .time-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .time-badge {
+      background: var(--bl); color: var(--black);
+      font-weight: 400; font-size: 11px;
+      letter-spacing: 0.15em; padding: 6px 14px;
+      border-radius: 40px; white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .time-line { flex: 1; height: 1px; background: rgba(192,120,48,0.2); }
+    .time-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 20px; color: var(--bl);
+      flex-shrink: 0;
+    }
+
+    /* STORY CARD */
+    .story-card {
+      background: var(--mid);
+      border: 1px solid rgba(192,120,48,0.15);
+      border-radius: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .story-card-header {
+      padding: 16px 20px 12px;
+      border-bottom: 1px solid rgba(192,120,48,0.1);
+      display: flex; align-items: center; gap: 12px;
+    }
+    .story-num {
+      width: 28px; height: 28px;
+      border: 1px solid rgba(192,120,48,0.4);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; letter-spacing: 0.05em;
+      color: var(--bl); flex-shrink: 0;
+    }
+    .story-tag {
+      font-weight: 200; font-size: 9px;
+      letter-spacing: 0.35em; color: var(--muted);
+      text-transform: uppercase;
+    }
+    .story-format {
+      margin-left: auto;
+      background: rgba(192,120,48,0.1);
+      border: 1px solid rgba(192,120,48,0.25);
+      border-radius: 20px;
+      padding: 3px 10px;
+      font-size: 9px; letter-spacing: 0.2em;
+      color: var(--bl); text-transform: uppercase;
+    }
+    .story-body { padding: 20px; }
+    .story-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--cream);
+      margin-bottom: 14px; line-height: 1.2;
+    }
+
+    /* TEXTO DO STORY */
+    .story-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; line-height: 1.75;
+      color: #c8bfb4;
+      background: rgba(0,0,0,0.25);
+      border-left: 2px solid var(--bl);
+      padding: 16px 18px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 14px;
+      white-space: pre-line;
+    }
+
+    /* DICA */
+    .tip-box {
+      background: rgba(192,120,48,0.06);
+      border: 1px dashed rgba(192,120,48,0.25);
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+    .tip-label {
+      font-size: 9px; letter-spacing: 0.4em;
+      color: var(--bl); text-transform: uppercase;
+      margin-bottom: 6px; font-weight: 300;
+    }
+    .tip-text {
+      font-weight: 200; font-size: 12px;
+      line-height: 1.7; color: var(--muted);
+      letter-spacing: 0.02em;
+    }
+    .tip-text strong { color: var(--cream); font-weight: 400; }
+
+    /* GRUPO CTA */
+    .grupo-card {
+      background: linear-gradient(135deg, #1a2a1a, #0f1a0f);
+      border: 1px solid rgba(74,124,74,0.3);
+      border-radius: 16px;
+      padding: 24px 20px;
+      margin-bottom: 16px;
+    }
+    .grupo-label {
+      font-size: 9px; letter-spacing: 0.4em;
+      color: #4a7c4a; text-transform: uppercase; margin-bottom: 8px;
+    }
+    .grupo-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; color: var(--cream); margin-bottom: 12px;
+    }
+    .grupo-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; line-height: 1.75; color: #c8bfb4;
+      background: rgba(0,0,0,0.3);
+      border-left: 2px solid #4a7c4a;
+      padding: 14px 16px;
+      border-radius: 0 10px 10px 0;
+      white-space: pre-line;
+    }
+
+    /* ENCERRAMENTO */
+    .closing {
+      text-align: center;
+      padding: 60px 28px 40px;
+      border-top: 1px solid rgba(192,120,48,0.12);
+      margin-top: 20px;
+    }
+    .closing-eyebrow {
+      font-size: 9px; letter-spacing: 0.5em;
+      color: var(--bl); text-transform: uppercase; margin-bottom: 12px;
+    }
+    .closing-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 36px;
+      color: var(--cream); margin-bottom: 16px;
+    }
+    .closing-text {
+      font-weight: 200; font-size: 12px;
+      line-height: 1.9; color: var(--muted);
+      max-width: 400px; margin: 0 auto;
+      letter-spacing: 0.02em;
+    }
+
+    /* COPY BUTTON */
+    .copy-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-top: 14px;
+      padding: 10px 20px;
+      background: rgba(192,120,48,0.1);
+      border: 1px solid rgba(192,120,48,0.3);
+      border-radius: 30px;
+      font-size: 10px; letter-spacing: 0.25em;
+      color: var(--bl); text-transform: uppercase;
+      cursor: pointer; transition: all 0.25s;
+      font-family: 'Josefin Sans', sans-serif;
+    }
+    .copy-btn:hover { background: rgba(192,120,48,0.18); border-color: var(--bl); }
+    .copy-btn.copied { color: #4a7c4a; border-color: #4a7c4a; background: rgba(74,124,74,0.1); }
+
+    /* DIVIDER */
+    .divider {
+      width: 40px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--bl), transparent);
+      margin: 0 auto 48px;
+    }
+
+    /* PROGRESS BAR */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2px; background: rgba(192,120,48,0.15);
+      z-index: 100;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--bl2), var(--bl));
+      width: 0%; transition: width 0.1s linear;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero > * { animation: fadeUp 0.8s ease both; }
+    .hero-eyebrow { animation-delay: 0.1s; }
+    .hero-title { animation-delay: 0.25s; }
+    .hero-sub { animation-delay: 0.4s; }
+    .hero-date { animation-delay: 0.55s; }
+  </style>
+</head>
+<body>
+
+<div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+<!-- CAPA -->
+<section class="hero">
+  <p class="hero-eyebrow">roteiro completo</p>
+  <h1 class="hero-title">O dia em que<br>Luana <em>abriu</em><br>as portas</h1>
+  <p class="hero-sub">stories · feed · grupo — passo a passo</p>
+  <p class="hero-date">Siga exatamente como está aqui 🤎</p>
+</section>
+
+<!-- INTRO -->
+<div class="timeline">
+  <div class="intro-box">
+    <h2 class="intro-title">Antes de começar</h2>
+    <p class="intro-text">
+      Você não precisa ser perfeita hoje.<br>
+      Você precisa ser <strong>real</strong>.<br><br>
+      Esse roteiro foi feito pra você seguir sem travar.<br>
+      Cada story tem o texto pronto — é só adaptar com a sua voz.<br><br>
+      <strong>Respire. Você está pronta.</strong>
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- BLOCO 1: MANHÃ -->
+  <div class="time-block">
+    <div class="time-header">
+      <span class="time-badge">06h30</span>
+      <div class="time-line"></div>
+      <span class="time-label">A Chamada</span>
+    </div>
+
+    <!-- Story 1 -->
+    <div class="story-card">
+      <div class="story-card-header">
+        <div class="story-num">01</div>
+        <span class="story-tag">story de abertura</span>
+        <span class="story-format">stories</span>
+      </div>
+      <div class="story-body">
+        <h3 class="story-title">Apareça. Só o rosto. Sem filtro pesado.</h3>
+        <div class="story-text">Bom dia. Hoje é um dia diferente pra mim.
+
+Eu vou abrir algo que segurei por um tempo — porque eu queria ter certeza de que estava pronta pra entregar do jeito certo.
+
+Fica aqui comigo hoje. Vai valer.</div>
+        <div class="tip-box">
+          <p class="tip-label">💡 dica de gravação</p>
+          <p class="tip-text">Grave de manhã cedo, com a luz natural. Sem precisar arrumar muito — <strong>a autenticidade é o ponto</strong>. Fala olhando pra câmera, devagar.</p>
+        </div>
+        <button class="copy-btn" onclick="copyText(this, 'Bom dia. Hoje é um dia diferente pra mim.\n\nEu vou abrir algo que segurei por um tempo — porque eu queria ter certeza de que estava pronta pra entregar do jeito certo.\n\nFica aqui comigo hoje. Vai valer.')">📋 copiar texto</button>
+      </div>
+    </div>
+
+    <!-- Story 2 -->
+    <div class="story-card">
+      <div class="story-card-header">
+        <div class="story-num">02</div>
+        <span class="story-tag">sua história</span>
+        <span class="story-format">stories</span>
+      </div>
+      <div class="story-body">
+        <h3 class="story-title">Conta de onde você veio.</h3>
+        <div class="story-text">Quando eu comecei, eu não tinha ninguém me guiando de verdade.
+
+Aprendi técnica. Mas ninguém me ensinou a precificar, a me posicionar, a lidar com cliente difícil, a construir uma agenda cheia.
+
+Eu tive que descobrir tudo isso sozinha. E levei tempo.
+
+Hoje eu faço diferente.</div>
+        <div class="tip-box">
+          <p class="tip-label">💡 dica</p>
+          <p class="tip-text">Se tiver uma foto sua do começo da carreira — <strong>use aqui</strong>. Imagem do antes gera muito mais identificação do que texto.</p>
+        </div>
+        <button class="copy-btn" onclick="copyText(this, 'Quando eu comecei, eu não tinha ninguém me guiando de verdade.\n\nAprendi técnica. Mas ninguém me ensinou a precificar, a me posicionar, a lidar com cliente difícil, a construir uma agenda cheia.\n\nEu tive que descobrir tudo isso sozinha. E levei tempo.\n\nHoje eu faço diferente.')">📋 copiar texto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCO 2: MEIO-DIA -->
+  <div class="time-block">
+    <div class="time-header">
+      <span class="time-badge">12h00</span>
+      <div class="time-line"></div>
+      <span class="time-label">O Problema</span>
+    </div>
+
+    <!-- Story 3 -->
+    <div class="story-card">
+      <div class="story-card-header">
+        <div class="story-num">03</div>
+        <span class="story-tag">sequência de enquete</span>
+        <span class="story-format">stories</span>
+      </div>
+      <div class="story-body">
+        <h3 class="story-title">Nomeie a dor — sem atacar ninguém.</h3>
+        <div class="story-text">Deixa eu te perguntar uma coisa.
+
+Você já fez um curso de unhas e terminou sentindo que faltou alguma coisa?
+
+Não estou falando de técnica. Estou falando do que vem depois.
+
+Como cobrar? Como fidelizar? Como montar uma agenda que sustenta de verdade?
+
+Isso ninguém ensina. E não é culpa sua não saber.</div>
+        <div class="tip-box">
+          <p class="tip-label">💡 engajamento</p>
+          <p class="tip-text">Coloca uma caixinha de resposta com a pergunta: <strong>"Você já sentiu isso?"</strong> — as respostas vão te dar conteúdo pra próximos stories e aproximam quem está assistindo.</p>
+        </div>
+        <button class="copy-btn" onclick="copyText(this, 'Deixa eu te perguntar uma coisa.\n\nVocê já fez um curso de unhas e terminou sentindo que faltou alguma coisa?\n\nNão estou falando de técnica. Estou falando do que vem depois.\n\nComo cobrar? Como fidelizar? Como montar uma agenda que sustenta de verdade?\n\nIsso ninguém ensina. E não é culpa sua não saber.')">📋 copiar texto</button>
+      </div>
+    </div>
+
+    <!-- Story 4 -->
+    <div class="story-card">
+      <div class="story-card-header">
+        <div class="story-num">04</div>
+        <span class="story-tag">o contraste</span>
+        <span class="story-format">stories</span>
+      </div>
+      <div class="story-body">
+        <h3 class="story-title">Mostre o que é diferente.</h3>
+        <div class="story-text">A maioria dos cursos entrega técnica.
+
+Você sai sabendo fazer. Mas não sabe vender. Não sabe cobrar o que vale. Não sabe o que fazer quando a cliente some.
+
+Uma formação de verdade não termina quando você pega o certificado.
+
+Ela começa aí.</div>
+        <div class="tip-box">
+          <p class="tip-label">💡 visual</p>
+          <p class="tip-text">Use um fundo escuro com texto em letras grandes. Pode ser o próprio recurso de texto do Instagram. <strong>Menos é mais aqui.</strong></p>
+        </div>
+        <button class="copy-btn" onclick="copyText(this, 'A maioria dos cursos entrega técnica.\n\nVocê sai sabendo fazer. Mas não sabe vender. Não sabe cobrar o que vale. Não sabe o que fazer quando a cliente some.\n\nUma formação de verdade não termina quando você pega o certificado.\n\nEla começa aí.')">📋 copiar texto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCO 3: TARDE -->
+  <div class="time-block">
+    <div class="time-header">
+      <span class="time-badge">15h00</span>
+      <div class="time-line"></div>
+      <span class="time-label">A Abertura</span>
+    </div>
+
+    <!-- Story 5 -->
+    <div class="story-card">
+      <div class="story-card-header">
+        <div class="story-num">05</div>
+        <span class="story-tag">o grande momento</span>
+        <span class="story-format">stories + feed</span>
+      </div>
+      <div class="story-body">
+        <h3 class="story-title">Apresente a formação. Com calma. Com autoridade.</h3>
+        <div class="story-text">Então. Chegou a hora.
+
+Eu estou abrindo as seletivas para a minha primeira turma de formação em Nail Designer aqui em Uberaba.
+
+São 5 vagas. Só cinco.
+
+Não é pouco por capricho. É porque eu levo isso a sério. Cada aluna vai ter atenção real, acompanhamento de 3 a 6 meses, e vai sair daqui sabendo fazer, cobrar e se posicionar.
+
+Técnica. Mentalidade. Estrutura de negócio.
+
+Se você está em Uberaba e quer construir uma carreira de verdade com unhas — me chama no direct com a palavra FORMAÇÃO.</div>
+        <div class="tip-box">
+          <p class="tip-label">💡 entrega</p>
+          <p class="tip-text">Grave esse story olhando pra câmera, fala devagar e com segurança. <strong>Sem pressa.</strong> Você não está pedindo — você está oferecendo uma oportunidade. Sinta a diferença.</p>
+        </div>
+        <button class="copy-btn" onclick="copyText(this, 'Então. Chegou a hora.\n\nEu estou abrindo as seletivas para a minha primeira turma de formação em Nail Designer aqui em Uberaba.\n\nSão 5 vagas. Só cinco.\n\nNão é pouco por capricho. É porque eu levo isso a sério. Cada aluna vai ter atenção real, acompanhamento de 3 a 6 meses, e vai sair daqui sabendo fazer, cobrar e se posicionar.\n\nTécnica. Mentalidade. Estrutura de negócio.\n\nSe você está em Uberaba e quer construir uma carreira de verdade com unhas — me chama no direct com a palavra FORMAÇÃO.')">📋 copiar texto</button>
+      </div>
+    </div>
+
+    <!-- Story 6 - POST FEED -->
+    <div class="story-card">
+      <div class="story-card-header">
+        <div class="story-num">06</div>
+        <span class="story-tag">post do feed</span>
+        <span class="story-format">feed</span>
+      </div>
+      <div class="story-body">
+        <h3 class="story-title">Legenda do post — foto sua trabalhando ou das unhas.</h3>
+        <div class="story-text">Minha primeira turma.
+
+Cinco vagas. Presencial e online. Uberaba.
+
+Não é um curso de um dia. É uma formação — com acompanhamento de 3 a 6 meses, do zero à cliente fiel.
+
+Você vai aprender técnica. Mas também vai aprender a cobrar o que vale, a montar sua agenda, a fidelizar, a se posicionar.
+
+Porque uma nail designer completa não é só quem faz bonito.
+
+É quem constrói um negócio.
+
+Seletiva aberta. 5 vagas. Me chama com a palavra FORMAÇÃO.
+
+📍 Uberaba — MG
+📲 @luanadias_281</div>
+        <button class="copy-btn" onclick="copyText(this, 'Minha primeira turma.\n\nCinco vagas. Presencial e online. Uberaba.\n\nNão é um curso de um dia. É uma formação — com acompanhamento de 3 a 6 meses, do zero à cliente fiel.\n\nVocê vai aprender técnica. Mas também vai aprender a cobrar o que vale, a montar sua agenda, a fidelizar, a se posicionar.\n\nPorque uma nail designer completa não é só quem faz bonito.\n\nÉ quem constrói um negócio.\n\nSeletiva aberta. 5 vagas. Me chama com a palavra FORMAÇÃO.\n\n📍 Uberaba — MG\n📲 @luanadias_281')">📋 copiar texto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOCO 4: NOITE -->
+  <div class="time-block">
+    <div class="time-header">
+      <span class="time-badge">19h00</span>
+      <div class="time-line"></div>
+      <span class="time-label">O Grupo</span>
+    </div>
+
+    <!-- Grupo -->
+    <div class="grupo-card">
+      <p class="grupo-label">💬 mensagem pro grupo de aquecimento</p>
+      <h3 class="grupo-title">Elas são as primeiras. Trate assim.</h3>
+      <div class="grupo-text">Oi meninas. 🤎
+
+Antes de qualquer pessoa, eu quero que vocês saibam primeiro.
+
+Hoje eu abri as seletivas da minha primeira turma de formação. São 5 vagas — e vocês têm prioridade.
+
+Não é só um curso. É um acompanhamento real, de 3 a 6 meses, onde eu vou estar do seu lado do começo ao fim.
+
+Técnica, mentalidade, precificação, posicionamento, clientela — tudo.
+
+Se tiver interesse, me responde aqui com QUERO. Eu te mando todos os detalhes em particular.
+
+Com carinho,
+Luana 🤎</div>
+      <div class="tip-box" style="margin-top:16px; background: rgba(74,124,74,0.06); border-color: rgba(74,124,74,0.25);">
+        <p class="tip-label" style="color:#4a7c4a">💡 tom</p>
+        <p class="tip-text">Aqui o tom é íntimo. Elas já te conhecem. Não precisa vender — precisa <strong>convidar</strong>. Fale como se estivesse mandando mensagem pra uma amiga.</p>
+      </div>
+      <button class="copy-btn" onclick="copyText(this, 'Oi meninas. 🤎\n\nAntes de qualquer pessoa, eu quero que vocês saibam primeiro.\n\nHoje eu abri as seletivas da minha primeira turma de formação. São 5 vagas — e vocês têm prioridade.\n\nNão é só um curso. É um acompanhamento real, de 3 a 6 meses, onde eu vou estar do seu lado do começo ao fim.\n\nTécnica, mentalidade, precificação, posicionamento, clientela — tudo.\n\nSe tiver interesse, me responde aqui com QUERO. Eu te mando todos os detalhes em particular.\n\nCom carinho,\nLuana 🤎')" style="margin-top:16px">📋 copiar mensagem</button>
+    </div>
+
+    <!-- Story final -->
+    <div class="story-card">
+      <div class="story-card-header">
+        <div class="story-num">07</div>
+        <span class="story-tag">encerramento do dia</span>
+        <span class="story-format">stories</span>
+      </div>
+      <div class="story-body">
+        <h3 class="story-title">Feche o dia com leveza. Sem pressão.</h3>
+        <div class="story-text">Hoje foi grande pra mim.
+
+Abrir isso foi um passo que eu dei com o coração.
+
+Se você se identificou com tudo que eu falei hoje — se você sente que quer mais do que um curso rápido — eu quero muito te conhecer.
+
+Me chama. A gente conversa.
+
+Até amanhã. 🤎</div>
+        <div class="tip-box">
+          <p class="tip-label">💡 entrega</p>
+          <p class="tip-text">Esse story pode ser mais suave, mais íntimo. <strong>Sem vender.</strong> É o momento de humanizar e criar vínculo com quem ainda está em dúvida.</p>
+        </div>
+        <button class="copy-btn" onclick="copyText(this, 'Hoje foi grande pra mim.\n\nAbrir isso foi um passo que eu dei com o coração.\n\nSe você se identificou com tudo que eu falei hoje — se você sente que quer mais do que um curso rápido — eu quero muito te conhecer.\n\nMe chama. A gente conversa.\n\nAté amanhã. 🤎')">📋 copiar texto</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FECHAMENTO -->
+  <div class="closing">
+    <p class="closing-eyebrow">para a Luana</p>
+    <h2 class="closing-title">Você está pronta.</h2>
+    <p class="closing-text">
+      Não precisa ser perfeita.<br>
+      Não precisa ter a voz mais firme do mundo.<br>
+      Não precisa acertar cada palavra.<br><br>
+      Você só precisa aparecer — do jeito que você é.<br>
+      Doce, forte, e verdadeira.<br><br>
+      Isso já é suficiente pra mover quem é pra você.
+    </p>
+  </div>
+
+</div>
+
+<script>
+// Progress bar
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = (scrollTop / docHeight) * 100;
+  document.getElementById('progress').style.width = pct + '%';
+});
+
+// Copy button
+function copyText(btn, text) {
+  navigator.clipboard.writeText(text).then(() => {
+    btn.classList.add('copied');
+    btn.textContent = '✓ copiado!';
+    setTimeout(() => {
+      btn.classList.remove('copied');
+      btn.textContent = '📋 copiar texto';
+    }, 2500);
+  });
+}
+
+// Scroll fade-in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.story-card, .grupo-card, .time-header, .intro-box').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
