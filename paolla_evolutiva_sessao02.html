@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Evolutiva · Paolla · ——</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #b8975a;
+    --gold-light: #d4b07a;
+    --white: #f0ece2;
+    --muted: #5a5448;
+    --text: #b0a896;
+    --line: rgba(184,151,90,0.2);
+  }
+
+  html {
+    background-color: #0f0e0b !important;
+  }
+
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    font-family: 'Cormorant Garamond', serif;
+    min-height: 100%;
+    overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  .hero {
+    background: #0a0908;
+    padding: 52px 32px 48px;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.1s;
+  }
+
+  .hero-meta {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .hero-name {
+    font-size: clamp(3.2rem, 10vw, 5rem);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-name em {
+    display: block;
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: clamp(2.8rem, 9vw, 4.4rem);
+  }
+
+  .hero-tags {
+    display: flex;
+    gap: 32px;
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+
+  .hero-tag {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  .hero-tag strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+
+  .wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 56px 32px 80px;
+  }
+
+  .section {
+    margin-bottom: 56px;
+    padding-bottom: 56px;
+    border-bottom: 1px solid var(--line);
+    opacity: 0;
+    animation: fadeUp 0.85s ease forwards;
+  }
+
+  .section:last-of-type { border-bottom: none; }
+  .section:nth-child(1) { animation-delay: 0.4s; }
+  .section:nth-child(2) { animation-delay: 0.55s; }
+  .section:nth-child(3) { animation-delay: 0.7s; }
+  .section:nth-child(4) { animation-delay: 0.85s; }
+  .section:nth-child(5) { animation-delay: 1.0s; }
+
+  .section-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .section-label .num { color: var(--gold); }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .section h2 {
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 20px;
+    line-height: 1.2;
+  }
+
+  .section h2 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .section p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    line-height: 1.9;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .section p strong {
+    color: var(--white);
+    font-weight: 400;
+  }
+
+  .highlight {
+    border-left: 2px solid var(--gold);
+    padding: 20px 24px;
+    background: rgba(184,151,90,0.04);
+    margin: 24px 0;
+  }
+
+  .highlight p {
+    font-style: italic;
+    color: var(--gold-light);
+    font-size: 1.2rem;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 24px;
+  }
+
+  .step {
+    display: flex;
+    align-items: stretch;
+  }
+
+  .step-time {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    min-width: 56px;
+    padding: 22px 16px 20px 0;
+    border-right: 1px solid var(--line);
+    display: flex;
+    align-items: flex-start;
+  }
+
+  .step-body {
+    padding: 18px 0 18px 20px;
+    flex: 1;
+  }
+
+  .step-body strong {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--white);
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .step-body p {
+    font-size: 1rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin: 0;
+  }
+
+  .mantra {
+    padding: 48px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 56px 0;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.2s;
+  }
+
+  .mantra-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 8.5px;
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .mantra p {
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold-light);
+    line-height: 1.45;
+  }
+
+  .closing {
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.4s;
+  }
+
+  .closing p {
+    font-size: 1.15rem;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.9;
+  }
+
+  .assinatura {
+    margin-top: 36px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 40px 24px 36px; }
+    .wrap { padding: 40px 24px 64px; }
+    .step-time { min-width: 44px; font-size: 8px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="hero-meta">
+      All Win Academy · Devolutiva<br>
+      Mentoria Comportamental
+    </div>
+    <div class="hero-name">
+      Paolla
+      <em>Evolutiva</em>
+    </div>
+    <div class="hero-tags">
+      <div class="hero-tag">Foco <strong>Virada de Chave</strong></div>
+    </div>
+  </div>
+
+  <div class="wrap">
+
+    <div class="section">
+      <div class="section-label"><span class="num">01</span> · Onde você estava</div>
+      <h2>O ponto de <em>partida</em></h2>
+      <p>Quando a gente começou, você estava com o negócio parado, sentindo que estava descendo ladeira abaixo, com crises de ansiedade e uma paralisia que você não conseguia explicar direito.</p>
+      <p>A gente mapeou que a paralisia vinha antes da ansiedade. Que o travamento não era falta de competência. Era o peso de uma decisão que você ainda não tinha coragem de assumir de vez.</p>
+      <div class="highlight">
+        <p>Você sabia que precisava sair. Mas parte de você ainda segurava. Isso não é fraqueza. É humano. E você atravessou isso.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label"><span class="num">02</span> · O que aconteceu</div>
+      <h2>Deus falou. Você <em>ouviu.</em></h2>
+      <p>Você foi à igreja e algo aconteceu que vai além de qualquer metodologia. Deus te revelou o que você já carregava no íntimo mas ainda não tinha coragem de afirmar em voz alta.</p>
+      <p>Isso é ressignificação de verdade. Não é desistir. É soltar o que não era seu para poder segurar o que é.</p>
+      <p>E o que veio depois disso mostra que você não só ouviu. Você agiu. Reformou o quarto, tomou a decisão sobre as unhas, redirecionou sua energia para a marca pessoal e o digital. Essas não são atitudes de quem está em crise. São atitudes de quem virou a chave.</p>
+    </div>
+
+    <div class="section">
+      <div class="section-label"><span class="num">03</span> · O que eu vejo em você</div>
+      <h2>Isso aqui eu <em>admiro muito</em></h2>
+      <p>Paolla, o que você fez nesse período não é pequeno. Você passou por um processo de ressignificação real, enfrentou bloqueios que estavam travando a sua vida há tempo, e saiu do outro lado com clareza e postura.</p>
+      <p>E tem mais. Você me mandou o print da dívida quitada. Isso é resultado concreto acontecendo enquanto você ainda está no meio do processo. Não é coincidência. É alinhamento. Quando a mente começa a se organizar, a vida começa a responder.</p>
+      <div class="highlight">
+        <p>Cada dívida quitada é prova de que a virada não foi só emocional. Ela já está aparecendo no mundo real.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label"><span class="num">04</span> · Para onde você vai</div>
+      <h2>O próximo <em>movimento</em></h2>
+      <p>Você tomou a decisão. Agora é hora de construir em cima dela. A marca pessoal e o digital não são plano B. São o lugar onde o que você tem a oferecer encontra as pessoas certas.</p>
+      <p>E o primeiro infoproduto vem. Já estamos estruturando o plano de lançamento. Isso é o começo de uma operação, não de um experimento.</p>
+      <p>A postura que você mostrou aqui, a capacidade de ressignificar, de agir, de quitar dívida no meio da transição, é exatamente o que uma fundadora precisa ter. Você já tem. Agora a gente só organiza o caminho.</p>
+    </div>
+
+    <div class="mantra">
+      <div class="mantra-label">Palavra desta fase · Paolla</div>
+      <p>"Eu não estou recomeçando.<br>Eu estou chegando onde<br>sempre deveria estar."</p>
+    </div>
+
+    <div class="closing">
+      <p>Fico honrada de acompanhar esse processo.<br>O que vem pela frente é grande. E você está pronta.</p>
+      <div class="assinatura">Maria Clara · All Win Academy</div>
+    </div>
+
+  </div>
+</body>
+</html>
