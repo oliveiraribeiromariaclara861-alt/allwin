@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolutiva · Palavras Âncora | Camila</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nude: #C8B89A;
+    --chocolate: #3D2B1F;
+    --offwhite: #E8DDD0;
+    --caramel: #8B7355;
+    --chocolate-light: #5a3f2e;
+    --nude-dark: #a89578;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--offwhite);
+    color: var(--chocolate);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--chocolate);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,184,154,0.08) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    animation: pulse 6s ease-in-out infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(139,115,85,0.06) 0%, transparent 70%);
+    bottom: -80px; left: -80px;
+    animation: pulse 8s ease-in-out infinite reverse;
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+  }
+
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--nude);
+    opacity: 0.7;
+    margin-bottom: 32px;
+    animation: fadeUp 1s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(48px, 8vw, 96px);
+    font-weight: 400;
+    color: var(--offwhite);
+    text-align: center;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    animation: fadeUp 1s 0.2s ease both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--nude);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--nude);
+    opacity: 0.85;
+    text-align: center;
+    max-width: 560px;
+    line-height: 1.6;
+    animation: fadeUp 1s 0.4s ease both;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--nude);
+    opacity: 0.4;
+    margin: 40px auto;
+    animation: fadeUp 1s 0.6s ease both;
+  }
+
+  .hero-intro {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--nude);
+    opacity: 0.75;
+    text-align: center;
+    max-width: 420px;
+    line-height: 1.8;
+    letter-spacing: 0.3px;
+    animation: fadeUp 1s 0.7s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 100px 40px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    color: var(--chocolate);
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--caramel);
+  }
+
+  .body-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--chocolate);
+    line-height: 1.75;
+    opacity: 0.85;
+  }
+
+  .body-text + .body-text {
+    margin-top: 20px;
+  }
+
+  /* ── PERSONA SECTION ── */
+  .persona-section {
+    background: var(--chocolate);
+    padding: 100px 40px;
+  }
+
+  .persona-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .persona-section .section-label { color: var(--nude); opacity: 0.6; }
+  .persona-section .section-title { color: var(--offwhite); }
+  .persona-section .body-text { color: var(--nude); opacity: 0.9; }
+
+  /* ── CYCLE ── */
+  .cycle-section {
+    background: var(--offwhite);
+    padding: 100px 40px;
+  }
+
+  .cycle-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .cycle-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 400;
+    color: var(--chocolate);
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  .cycle-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-style: italic;
+    color: var(--caramel);
+    text-align: center;
+    margin-bottom: 70px;
+    opacity: 0.85;
+  }
+
+  .cycle-container {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    aspect-ratio: 1;
+  }
+
+  /* Ring SVG background */
+  .cycle-ring {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cycle-ring svg {
+    width: 100%;
+    height: 100%;
+    animation: spin 60s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Center */
+  .cycle-center {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: var(--chocolate);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 10;
+    box-shadow: 0 0 60px rgba(61,43,31,0.2);
+  }
+
+  .cycle-center-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    opacity: 0.6;
+    margin-bottom: 6px;
+  }
+
+  .cycle-center-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--offwhite);
+    line-height: 1.3;
+  }
+
+  /* Nodes */
+  .cycle-node {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    opacity: 0;
+    animation: nodeReveal 0.6s ease forwards;
+  }
+
+  .cycle-node:nth-child(2) { animation-delay: 0.2s; }
+  .cycle-node:nth-child(3) { animation-delay: 0.4s; }
+  .cycle-node:nth-child(4) { animation-delay: 0.6s; }
+  .cycle-node:nth-child(5) { animation-delay: 0.8s; }
+  .cycle-node:nth-child(6) { animation-delay: 1.0s; }
+
+  @keyframes nodeReveal {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* Positions — top, right, bottom, left, top-right, bottom-left */
+  .node-top    { top: -10px; left: 50%; transform: translateX(-50%); }
+  .node-right  { top: 50%; right: -10px; transform: translateY(-50%); }
+  .node-bottom { bottom: -10px; left: 50%; transform: translateX(-50%); }
+  .node-left   { top: 50%; left: -10px; transform: translateY(-50%); }
+  .node-tr     { top: 6%; right: 6%; }
+  .node-bl     { bottom: 6%; left: 6%; }
+
+  .node-dot {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: var(--nude);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 20px rgba(200,184,154,0.35);
+    transition: transform 0.3s ease;
+    cursor: default;
+  }
+
+  .cycle-node:hover .node-dot {
+    transform: scale(1.15);
+    background: var(--caramel);
+  }
+
+  .node-time {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 4px;
+  }
+
+  .node-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--chocolate);
+    line-height: 1.3;
+    max-width: 110px;
+  }
+
+  /* Arrow SVG overlay */
+  .cycle-arrows {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  /* Cycle note */
+  .cycle-note {
+    margin-top: 60px;
+    background: var(--chocolate);
+    border-radius: 2px;
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cycle-note::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 160px;
+    color: var(--nude);
+    opacity: 0.06;
+    position: absolute;
+    top: -30px; left: 20px;
+    line-height: 1;
+  }
+
+  .cycle-note p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--offwhite);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cycle-note span {
+    color: var(--nude);
+    font-weight: 500;
+  }
+
+  /* ── EXERCISE ── */
+  .exercise-section {
+    background: var(--chocolate);
+    padding: 100px 40px;
+  }
+
+  .exercise-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .exercise-section .section-label { color: var(--nude); opacity: 0.55; }
+  .exercise-section .section-title { color: var(--offwhite); }
+
+  .exercise-box {
+    background: rgba(200,184,154,0.07);
+    border: 1px solid rgba(200,184,154,0.15);
+    border-radius: 2px;
+    padding: 48px;
+    margin-top: 40px;
+    position: relative;
+  }
+
+  .exercise-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 400;
+    color: var(--nude);
+    line-height: 1.75;
+    margin-bottom: 40px;
+    opacity: 0.9;
+  }
+
+  .exercise-intro strong {
+    color: var(--offwhite);
+    font-weight: 500;
+  }
+
+  .exercise-rules {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin-bottom: 48px;
+  }
+
+  .exercise-rules li {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+  }
+
+  .rule-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--nude);
+    opacity: 0.5;
+    min-width: 24px;
+    margin-top: 2px;
+  }
+
+  .rule-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--nude);
+    opacity: 0.8;
+    line-height: 1.65;
+    letter-spacing: 0.2px;
+  }
+
+  .rule-text strong {
+    color: var(--offwhite);
+    font-weight: 400;
+  }
+
+  /* Word boxes */
+  .word-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-top: 40px;
+  }
+
+  .word-box {
+    border: 1px solid rgba(200,184,154,0.2);
+    border-radius: 2px;
+    padding: 18px 16px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--nude);
+    text-align: center;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+  }
+
+  .word-box:hover {
+    border-color: var(--nude);
+    opacity: 1;
+    background: rgba(200,184,154,0.06);
+    transform: translateY(-2px);
+  }
+
+  .word-box.highlight {
+    border-color: var(--caramel);
+    opacity: 1;
+    color: var(--offwhite);
+    background: rgba(139,115,85,0.12);
+  }
+
+  .word-note {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-top: 8px;
+    display: block;
+    font-style: normal;
+  }
+
+  .write-space {
+    margin-top: 48px;
+    border-top: 1px solid rgba(200,184,154,0.1);
+    padding-top: 40px;
+  }
+
+  .write-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+
+  .write-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .write-line {
+    border-bottom: 1px solid rgba(200,184,154,0.15);
+    height: 40px;
+    position: relative;
+  }
+
+  .write-line::after {
+    content: attr(data-n);
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    font-style: italic;
+    color: var(--nude);
+    opacity: 0.25;
+  }
+
+  /* ── ANCHOR NARRATIVE ── */
+  .narrative-section {
+    background: var(--offwhite);
+    padding: 100px 40px;
+  }
+
+  .narrative-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .narrative-block {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 60px;
+  }
+
+  @media (max-width: 680px) {
+    .narrative-block { grid-template-columns: 1fr; }
+  }
+
+  .narrative-card {
+    background: white;
+    border-top: 3px solid var(--nude);
+    padding: 36px 32px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .narrative-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(61,43,31,0.08);
+  }
+
+  .card-word {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--chocolate);
+    margin-bottom: 8px;
+  }
+
+  .card-desc {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--caramel);
+    line-height: 1.7;
+    letter-spacing: 0.2px;
+  }
+
+  /* ── CLOSING ── */
+  .closing {
+    background: var(--chocolate);
+    padding: 120px 40px;
+    text-align: center;
+  }
+
+  .closing-inner { max-width: 680px; margin: 0 auto; }
+
+  .closing-pre {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--nude);
+    opacity: 0.5;
+    margin-bottom: 32px;
+  }
+
+  .closing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 64px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--offwhite);
+    line-height: 1.15;
+    margin-bottom: 32px;
+  }
+
+  .closing-title em {
+    color: var(--nude);
+    font-style: normal;
+  }
+
+  .closing-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--nude);
+    line-height: 1.75;
+    opacity: 0.85;
+    margin-bottom: 16px;
+  }
+
+  .closing-sig {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--nude);
+    opacity: 0.5;
+    margin-top: 48px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    section, .cycle-section, .exercise-section, .narrative-section, .persona-section { padding: 72px 24px; }
+    .exercise-box { padding: 32px 24px; }
+    .cycle-container { max-width: 340px; }
+    .node-text { font-size: 12px; max-width: 80px; }
+    .node-dot { width: 38px; height: 38px; font-size: 16px; }
+    .cycle-center { width: 120px; height: 120px; }
+    .cycle-center-word { font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <p class="hero-label">All Win Academy · Sessões Estratégicas</p>
+  <h1 class="hero-title">Palavras que<br><em>ancoram</em></h1>
+  <div class="hero-divider"></div>
+  <p class="hero-sub">Um exercício de identidade para a sua comunicação</p>
+  <p class="hero-intro" style="margin-top:24px;">Preparado por Maria Clara · Para Camila</p>
+</div>
+
+
+<!-- ══ PERSONA ══ -->
+<div class="persona-section">
+  <div class="persona-inner">
+    <p class="section-label">Para começar</p>
+    <h2 class="section-title" style="color:var(--offwhite);">Cami, <em style="color:var(--nude);">antes do exercício</em><br>você precisa entender quem é que você quer alcançar.</h2>
+
+    <p class="body-text" style="color:var(--nude); margin-top: 40px;">
+      A mulher que precisa de você é uma mulher que está funcionando. Entregando. Dando conta de tudo. Mas por dentro ela sabe, ela sente, que está no automático. Um tanto travada e contida dentro da vida que construiu. Ela perdeu o fio de si mesma tentando dar conta de tudo ao mesmo tempo.
+    </p>
+    <p class="body-text" style="color:var(--nude); margin-top: 24px;">
+      Ela não quer discurso. Ela quer se reconhecer. Quer que alguém nomeie o que ela ainda não conseguiu nomear. E quando isso acontecer, quando ela ler algo seu e pensar "é exatamente isso", ela vai atrás de você.
+    </p>
+    <p class="body-text" style="color:var(--nude); margin-top: 24px;">
+      É por isso que as suas palavras precisam ser intencionais. Não criativas, mas sim com o MÁXIMO de verdadeiras.
+    </p>
+  </div>
+</div>
+
+
+<!-- ══ CYCLE ══ -->
+<div class="cycle-section">
+  <div class="cycle-inner">
+    <p class="section-label" style="text-align:center;">O ciclo de 24h da sua cliente</p>
+    <h2 class="cycle-title">O dia que ela vive<br>sem perceber</h2>
+    <p class="cycle-subtitle">Toda comunicação sua precisa caber dentro desse ciclo.<br>Porque é aqui que ela está.</p>
+
+    <div class="cycle-container">
+
+      <!-- Rotating dashed ring -->
+      <div class="cycle-ring">
+        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="250" cy="250" r="210"
+            fill="none"
+            stroke="#C8B89A"
+            stroke-width="1"
+            stroke-dasharray="6 14"
+            opacity="0.3"/>
+          <circle cx="250" cy="250" r="165"
+            fill="none"
+            stroke="#8B7355"
+            stroke-width="0.5"
+            opacity="0.15"/>
+        </svg>
+      </div>
+
+      <!-- Arrows SVG (static, organic curves) -->
+      <svg class="cycle-arrows" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arrow" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M1,1 L7,4 L1,7 Z" fill="#C8B89A" opacity="0.5"/>
+          </marker>
+        </defs>
+        <!-- Top → Top-right -->
+        <path d="M 265,80 Q 350,80 385,115"
+          fill="none" stroke="#C8B89A" stroke-width="1.2" stroke-dasharray="4 8"
+          marker-end="url(#arrow)" opacity="0.45"/>
+        <!-- Top-right → Right -->
+        <path d="M 410,155 Q 430,200 420,250"
+          fill="none" stroke="#C8B89A" stroke-width="1.2" stroke-dasharray="4 8"
+          marker-end="url(#arrow)" opacity="0.45"/>
+        <!-- Right → Bottom -->
+        <path d="M 415,270 Q 410,360 340,400"
+          fill="none" stroke="#C8B89A" stroke-width="1.2" stroke-dasharray="4 8"
+          marker-end="url(#arrow)" opacity="0.45"/>
+        <!-- Bottom → Bottom-left -->
+        <path d="M 235,420 Q 170,430 135,385"
+          fill="none" stroke="#C8B89A" stroke-width="1.2" stroke-dasharray="4 8"
+          marker-end="url(#arrow)" opacity="0.45"/>
+        <!-- Bottom-left → Left -->
+        <path d="M 105,355 Q 75,300 85,250"
+          fill="none" stroke="#C8B89A" stroke-width="1.2" stroke-dasharray="4 8"
+          marker-end="url(#arrow)" opacity="0.45"/>
+        <!-- Left → Top -->
+        <path d="M 90,230 Q 85,140 235,72"
+          fill="none" stroke="#C8B89A" stroke-width="1.2" stroke-dasharray="4 8"
+          marker-end="url(#arrow)" opacity="0.45"/>
+      </svg>
+
+      <!-- Center -->
+      <div class="cycle-center">
+        <span class="cycle-center-label">volta pro</span>
+        <span class="cycle-center-word">automático<br>de sempre</span>
+      </div>
+
+      <!-- Nodes -->
+      <div class="cycle-node node-top">
+        <div class="node-dot">🌅</div>
+        <span class="node-time">manhã</span>
+        <span class="node-text">Acorda querendo mudar tudo</span>
+      </div>
+
+      <div class="cycle-node node-tr">
+        <div class="node-dot">📋</div>
+        <span class="node-time">início do dia</span>
+        <span class="node-text">Lista enorme de intenções</span>
+      </div>
+
+      <div class="cycle-node node-right">
+        <div class="node-dot">⏳</div>
+        <span class="node-time">durante</span>
+        <span class="node-text">Não encontra tempo pra nada disso</span>
+      </div>
+
+      <div class="cycle-node node-bottom">
+        <div class="node-dot">🌫️</div>
+        <span class="node-time">tarde</span>
+        <span class="node-text">O desânimo chega devagar</span>
+      </div>
+
+      <div class="cycle-node node-bl">
+        <div class="node-dot">🌙</div>
+        <span class="node-time">noite</span>
+        <span class="node-text">Dorme com a sensação de "podia ter feito mais"</span>
+      </div>
+
+      <div class="cycle-node node-left">
+        <div class="node-dot">🔁</div>
+        <span class="node-time">e então</span>
+        <span class="node-text">Reinicia o ciclo. Sem sair do lugar</span>
+      </div>
+
+    </div>
+
+    <div class="cycle-note">
+      <p>Cami, a sua cliente não é preguiçosa. Ela é <span>exausta de tentar sozinha</span>. O que ela precisa não é de mais uma lista. Ela precisa de alguém que entenda o ciclo que está vivendo e aponte uma saída real. <span>Esse alguém é você.</span></p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ EXERCISE ══ -->
+<div class="exercise-section">
+  <div class="exercise-inner">
+    <p class="section-label">O exercício</p>
+    <h2 class="section-title">Suas palavras <em style="color:var(--nude);">âncora</em></h2>
+
+    <div class="exercise-box">
+      <p class="exercise-intro">
+        Mulher, o exercício é esse: <strong>você vai escolher entre 8 e 12 palavras</strong> que representam o que você acredita de verdade. Não o que soa bonito no Instagram. Não o que você acha que deveria dizer. O que você viveu. O que guia você quando ninguém está olhando.
+      </p>
+      <p class="exercise-intro" style="margin-top: 0;">
+        Pode ser substantivo, adjetivo, verbo. <strong>Escreve sem pensar demais.</strong> A análise vem depois. Esse primeiro momento é só de despejo. Deixa sair.
+      </p>
+
+      <ul class="exercise-rules">
+        <li>
+          <span class="rule-num">01</span>
+          <span class="rule-text">Não filtra. <strong>Escreve o que aparece primeiro</strong>, não o que parece mais profissional.</span>
+        </li>
+        <li>
+          <span class="rule-num">02</span>
+          <span class="rule-text">Faz sozinha, em silêncio. <strong>Sem consultar ninguém.</strong> Essa lista é sua, não do mercado.</span>
+        </li>
+        <li>
+          <span class="rule-num">03</span>
+          <span class="rule-text">Se vier mais de 12, deixa. <strong>A gente filtra junto.</strong> O problema é quando não vem nada. E com você não vai ser o caso.</span>
+        </li>
+        <li>
+          <span class="rule-num">04</span>
+          <span class="rule-text"><strong>Nada de valores genéricos</strong> como "amor", "honestidade", "respeito". Vai fundo. O que especificamente você acredita sobre essas coisas?</span>
+        </li>
+      </ul>
+
+      <!-- Seed words -->
+      <p style="font-family:'DM Sans',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--caramel); opacity:0.6; margin-bottom: 16px;">Palavras que já apareceram em você · ponto de partida</p>
+      <div class="word-grid">
+        <div class="word-box highlight">inteireza <span class="word-note">âncora</span></div>
+        <div class="word-box">presença</div>
+        <div class="word-box">verdade</div>
+        <div class="word-box">compromisso</div>
+        <div class="word-box">ritmo</div>
+        <div class="word-box">cuidado</div>
+        <div class="word-box">escolha</div>
+        <div class="word-box">limite</div>
+        <div class="word-box">consciência</div>
+        <div class="word-box">tempo</div>
+      </div>
+
+      <!-- Write space -->
+      <div class="write-space">
+        <p class="write-label">Suas palavras · escreve aqui</p>
+        <div class="write-lines">
+          <div class="write-line" data-n="01"></div>
+          <div class="write-line" data-n="02"></div>
+          <div class="write-line" data-n="03"></div>
+          <div class="write-line" data-n="04"></div>
+          <div class="write-line" data-n="05"></div>
+          <div class="write-line" data-n="06"></div>
+          <div class="write-line" data-n="07"></div>
+          <div class="write-line" data-n="08"></div>
+          <div class="write-line" data-n="09"></div>
+          <div class="write-line" data-n="10"></div>
+          <div class="write-line" data-n="11"></div>
+          <div class="write-line" data-n="12"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ NARRATIVE ══ -->
+<div class="narrative-section">
+  <div class="narrative-inner">
+    <p class="section-label">Como essas palavras funcionam</p>
+    <h2 class="section-title">Âncora não é<br><em>decoração.</em></h2>
+    <p class="body-text">
+      Palavra âncora é a que aparece nas suas legendas sem você forçar. É a que sua cliente lê e sente que você entende ela. É a costura invisível que dá identidade à sua comunicação. Aparece nas fotos, nos stories, nos títulos dos seus serviços, na forma como você descreve o que faz.
+    </p>
+    <p class="body-text" style="margin-top: 20px;">
+      Quando a gente mapear as suas palavras juntas, vamos organizar assim:
+    </p>
+
+    <div class="narrative-block">
+      <div class="narrative-card">
+        <p class="card-word">A âncora central</p>
+        <p class="card-desc">Uma palavra só. A que representa tudo o que você é. Aparece em tudo, até quando você não percebe. Pra você, o que já aparece é <em>inteireza</em>. Mas você vai confirmar isso.</p>
+      </div>
+      <div class="narrative-card">
+        <p class="card-word">As palavras de campo</p>
+        <p class="card-desc">3 a 5 palavras que orbitam a âncora. Cada uma habita um formato de conteúdo diferente. Uma aparece mais nas legendas, outra nos stories, outra no nome dos seus serviços.</p>
+      </div>
+      <div class="narrative-card">
+        <p class="card-word">As palavras do cliente</p>
+        <p class="card-desc">As que espelham o que sua cliente sente. Não é muito sobre o que você acredita, mas sim sobre o que ela VIVE na prática do dia a dia. Liberdade, tempo, travada, me perdi. Essas entram nos seus textos como ponte entre o mundo dela e o seu.</p>
+      </div>
+      <div class="narrative-card">
+        <p class="card-word">As que ficam de fora</p>
+        <p class="card-desc">Qualquer palavra que pareça artificial quando você a lê em voz alta sai da lista. Sem negociação. A sua comunicação já tem padrão internalizado alto. Você sabe a diferença.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══ CLOSING ══ -->
+<div class="closing">
+  <div class="closing-inner">
+    <p class="closing-pre">All Win Academy · Para Camila</p>
+    <h2 class="closing-title">Senhora,<br>você <em>já sabe</em><br>quem você é.</h2>
+    <p class="closing-text">
+      Esse exercício não vai te descobrir. Vai organizar o que já está em você de maneira que outras pessoas consigam enxergar também.
+    </p>
+    <p class="closing-text">
+      Traz as palavras. A gente trabalha em cima disso na próxima sessão.
+    </p>
+    <p class="closing-sig">Maria Clara · All Win Academy</p>
+  </div>
+</div>
+
+</body>
+</html>
