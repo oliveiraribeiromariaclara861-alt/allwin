@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amanda Pires — Evolutiva Inicial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --branco: #faf8f5;
+      --creme: #f0ebe3;
+      --marrom-claro: #c4956a;
+      --marrom: #8b5e3c;
+      --marrom-escuro: #5c3820;
+      --vermelho: #a33030;
+      --vermelho-suave: #c94040;
+      --vermelho-pele: #e8c4b8;
+      --preto-suave: #1a1410;
+      --cinza-texto: #3d3028;
+    }
+
+    html, body {
+      background: var(--branco);
+      color: var(--cinza-texto);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* ABERTURA */
+    .capa {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      background: var(--branco);
+    }
+
+    .capa::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at 60% 20%, rgba(163,48,48,0.06) 0%, transparent 60%),
+                  radial-gradient(ellipse at 20% 80%, rgba(139,94,60,0.07) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .linha-ornamento {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--marrom-claro), transparent);
+      margin: 0 auto 2rem;
+      animation: fadeDown 1.2s ease forwards;
+      opacity: 0;
+    }
+
+    .capa-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--marrom-claro);
+      margin-bottom: 1.5rem;
+      animation: fadeUp 1s ease 0.3s forwards;
+      opacity: 0;
+    }
+
+    .capa h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 300;
+      color: var(--preto-suave);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 1s ease 0.5s forwards;
+      opacity: 0;
+    }
+
+    .capa h1 em {
+      font-style: italic;
+      color: var(--vermelho);
+    }
+
+    .capa-subtitulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--marrom);
+      margin-top: 1.2rem;
+      max-width: 480px;
+      animation: fadeUp 1s ease 0.7s forwards;
+      opacity: 0;
+    }
+
+    .capa-data {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--marrom-claro);
+      margin-top: 2.5rem;
+      animation: fadeUp 1s ease 0.9s forwards;
+      opacity: 0;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      animation: fadeUp 1s ease 1.2s forwards;
+      opacity: 0;
+    }
+
+    .scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--marrom-claro);
+    }
+
+    .scroll-hint .seta-scroll {
+      width: 1px;
+      height: 32px;
+      background: linear-gradient(to bottom, var(--marrom-claro), transparent);
+      animation: pulseSeta 2s ease-in-out infinite;
+    }
+
+    /* SEÇÕES */
+    section {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    section.visivel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .secao-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--marrom-claro);
+      margin-bottom: 1.2rem;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 300;
+      color: var(--preto-suave);
+      line-height: 1.2;
+      margin-bottom: 1.8rem;
+    }
+
+    h2 em {
+      font-style: italic;
+      color: var(--vermelho);
+    }
+
+    p {
+      font-size: 1rem;
+      color: var(--cinza-texto);
+      line-height: 1.9;
+      margin-bottom: 1.2rem;
+    }
+
+    .destaque {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--marrom-escuro);
+      border-left: 2px solid var(--marrom-claro);
+      padding-left: 1.5rem;
+      margin: 2.5rem 0;
+      line-height: 1.6;
+    }
+
+    .divisor {
+      width: 60px;
+      height: 1px;
+      background: var(--marrom-claro);
+      margin: 4rem auto;
+      opacity: 0.4;
+    }
+
+    /* CICLO — DIAGRAMA INTERATIVO */
+    .ciclo-wrapper {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .ciclo-wrapper.visivel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .ciclo-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+      font-weight: 300;
+      color: var(--preto-suave);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .ciclo-subtitulo {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--marrom-claro);
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .ciclo-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      position: relative;
+    }
+
+    .ciclo-step {
+      display: grid;
+      grid-template-columns: 1fr 48px 1fr;
+      align-items: start;
+      gap: 0;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .ciclo-step:nth-child(odd) .ciclo-conteudo {
+      grid-column: 1;
+      text-align: right;
+      padding-right: 1.5rem;
+    }
+
+    .ciclo-step:nth-child(odd) .ciclo-vazio {
+      grid-column: 3;
+    }
+
+    .ciclo-step:nth-child(even) .ciclo-conteudo {
+      grid-column: 3;
+      text-align: left;
+      padding-left: 1.5rem;
+      order: 3;
+    }
+
+    .ciclo-step:nth-child(even) .ciclo-no {
+      order: 2;
+    }
+
+    .ciclo-step:nth-child(even) .ciclo-vazio {
+      grid-column: 1;
+      order: 1;
+    }
+
+    .ciclo-no {
+      grid-column: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .no-circulo {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--branco);
+      border: 2px solid var(--marrom-claro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--marrom);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .ciclo-step.ativo .no-circulo {
+      background: var(--vermelho);
+      border-color: var(--vermelho);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .no-linha {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--marrom-claro), rgba(196,149,106,0.2));
+    }
+
+    .no-seta {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 7px solid rgba(196,149,106,0.4);
+      margin-top: -2px;
+    }
+
+    .ciclo-conteudo {
+      padding-top: 0.5rem;
+      padding-bottom: 2rem;
+    }
+
+    .ciclo-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--marrom-escuro);
+      margin-bottom: 0.3rem;
+      transition: color 0.3s ease;
+    }
+
+    .ciclo-step.ativo .ciclo-nome {
+      color: var(--vermelho);
+    }
+
+    .ciclo-resumo {
+      font-size: 0.82rem;
+      color: var(--marrom);
+      line-height: 1.5;
+    }
+
+    .ciclo-detalhe {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.6s ease;
+    }
+
+    .ciclo-step.ativo .ciclo-detalhe {
+      max-height: 300px;
+    }
+
+    .ciclo-detalhe-inner {
+      margin-top: 0.8rem;
+      padding: 1rem;
+      background: linear-gradient(135deg, rgba(163,48,48,0.04), rgba(139,94,60,0.04));
+      border-left: 2px solid var(--vermelho-suave);
+      font-size: 0.88rem;
+      color: var(--cinza-texto);
+      line-height: 1.7;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .ciclo-step:nth-child(odd) .ciclo-detalhe-inner {
+      border-left: none;
+      border-right: 2px solid var(--vermelho-suave);
+      border-radius: 4px 0 0 4px;
+    }
+
+    .ciclo-vazio {
+      grid-column: 3;
+    }
+
+    /* FERIDAS */
+    .feridas-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .ferida-card {
+      background: var(--creme);
+      border-left: 3px solid var(--marrom-claro);
+      padding: 1.5rem 1.8rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .ferida-card.vermelha {
+      border-left-color: var(--vermelho);
+    }
+
+    .ferida-card:hover {
+      transform: translateX(4px);
+      box-shadow: -4px 0 0 var(--marrom);
+    }
+
+    .ferida-card.vermelha:hover {
+      box-shadow: -4px 0 0 var(--vermelho);
+    }
+
+    .ferida-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--marrom-escuro);
+      margin-bottom: 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .ferida-card.vermelha .ferida-titulo {
+      color: var(--vermelho);
+    }
+
+    .ferida-toggle {
+      font-size: 0.8rem;
+      color: var(--marrom-claro);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      transition: transform 0.3s ease;
+    }
+
+    .ferida-card.aberta .ferida-toggle {
+      transform: rotate(180deg);
+    }
+
+    .ferida-resumo {
+      font-size: 0.85rem;
+      color: var(--marrom);
+    }
+
+    .ferida-corpo {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .ferida-card.aberta .ferida-corpo {
+      max-height: 400px;
+    }
+
+    .ferida-corpo p {
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      margin-bottom: 0;
+      color: var(--cinza-texto);
+      border-top: 1px solid rgba(139,94,60,0.15);
+      padding-top: 1rem;
+    }
+
+    /* CARTA FINAL */
+    .carta {
+      background: linear-gradient(145deg, var(--creme), #ede5d8);
+      padding: 3.5rem 3rem;
+      border-radius: 2px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carta::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12rem;
+      color: rgba(163,48,48,0.06);
+      position: absolute;
+      top: -1rem;
+      left: 1rem;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .carta p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 300;
+      line-height: 1.9;
+      color: var(--marrom-escuro);
+      position: relative;
+      z-index: 1;
+    }
+
+    .carta-assinatura {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .carta-assinatura span {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      color: var(--marrom);
+      font-style: italic;
+    }
+
+    .carta-linha {
+      width: 40px;
+      height: 1px;
+      background: var(--marrom-claro);
+      margin-top: 0.5rem;
+    }
+
+    /* RODAPÉ */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(139,94,60,0.15);
+    }
+
+    footer p {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--marrom-claro);
+      margin-bottom: 0;
+    }
+
+    /* ANIMAÇÕES */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulseSeta {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); }
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      .carta { padding: 2.5rem 1.8rem; }
+      
+      .ciclo-step {
+        grid-template-columns: 1fr 36px 1fr;
+      }
+      
+      .no-circulo {
+        width: 36px;
+        height: 36px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- CAPA -->
+<div class="capa">
+  <div class="linha-ornamento"></div>
+  <p class="capa-label">Evolutiva Inicial — Processo de Desbloqueio</p>
+  <h1>Amanda <em>Pires</em></h1>
+  <p class="capa-subtitulo">O que foi visto nessa sessão merece ser nomeado com cuidado e verdade.</p>
+  <p class="capa-data">Junho 2026 · All Win Academy</p>
+  <div class="scroll-hint">
+    <span>continuar</span>
+    <div class="seta-scroll"></div>
+  </div>
+</div>
+
+<!-- O QUE FOI VISTO -->
+<section id="s1">
+  <p class="secao-label">O que foi enxergado</p>
+  <h2>Você chegou inteira <em>aqui.</em></h2>
+  <p>
+    Não uma versão editada, não uma versão que já sabia se estava pronta. Você chegou com tudo, as memórias que doem, as perguntas que não têm resposta fácil, e o cansaço de tanto tempo carregando sozinha.
+  </p>
+  <p>
+    Isso tem nome. Tem peso. E merece ser visto com respeito.
+  </p>
+  <div class="destaque">
+    A criança que você foi aprendeu que amor era algo que precisava ser merecido, conquistado, suportado. Que ficar era prova de amor. Que silenciar era proteger.
+  </div>
+  <p>
+    Essa criança fez o melhor que sabia com o que tinha. E não foi pouco. Foi muito, por muito tempo.
+  </p>
+</section>
+
+<div class="divisor"></div>
+
+<!-- FERIDAS -->
+<section id="s2">
+  <p class="secao-label">As feridas mapeadas</p>
+  <h2>Três raízes. <em>Uma história.</em></h2>
+  <p>
+    Nessa primeira sessão foi possível identificar com clareza três feridas que se encadeiam. Toque em cada uma para entender o que ela significa na sua história.
+  </p>
+
+  <div class="feridas-grid">
+
+    <div class="ferida-card" onclick="toggleFerida(this)">
+      <div class="ferida-titulo">
+        Abandono
+        <span class="ferida-toggle">↓</span>
+      </div>
+      <div class="ferida-resumo">A ferida mais antiga. A que veio antes de tudo.</div>
+      <div class="ferida-corpo">
+        <p>
+          Você amou a sua mãe com uma intensidade que nenhuma criança deveria precisar sustentar sozinha. E esse amor não voltou da forma que você precisava. Não foi rejeição gritada, foi ausência sentida. E a ausência dentro da presença é o tipo de abandono mais confuso que existe, porque a criança não consegue nomear, ela só sente que tem algo errado nela.
+          <br><br>
+          Esse registro emocional foi o primeiro. E ele moldou a sua leitura de amor desde então.
+        </p>
+      </div>
+    </div>
+
+    <div class="ferida-card vermelha" onclick="toggleFerida(this)">
+      <div class="ferida-titulo">
+        Rejeição
+        <span class="ferida-toggle">↓</span>
+      </div>
+      <div class="ferida-resumo">A que chegou com palavras e usou seu irmão como instrumento.</div>
+      <div class="ferida-corpo">
+        <p>
+          Com dez anos, você organizou tudo. Fez mais do que pediam. E quando ele chegou, derrubou, pegou seu irmão e disse que você merecia ficar sozinha porque era igual à sua mãe.
+          <br><br>
+          Essa frase foi uma faca precisa. Porque ela atingiu o lugar que você já carregava ferido. E o que deveria ser absurdo, virou uma pergunta que ficou dentro de você: "será que é verdade?"
+          <br><br>
+          Não era. Nunca foi.
+        </p>
+      </div>
+    </div>
+
+    <div class="ferida-card" onclick="toggleFerida(this)">
+      <div class="ferida-titulo">
+        Injustiça
+        <span class="ferida-toggle">↓</span>
+      </div>
+      <div class="ferida-resumo">A que te ensinou a carregar o que não era seu.</div>
+      <div class="ferida-corpo">
+        <p>
+          Você ficou sentada vendo sua mãe apanhar porque se mover parecia trair. Você fez mais que o seu irmão e foi punida igual. Você foi mais cuidadosa, mais dedicada, mais atenta, e o que voltou foi a culpa.
+          <br><br>
+          O padrão continuou. E hoje, no relacionamento que você está, ele se repete com outra forma mas a mesma dor: você faz, entrega, sustenta, e a conta chega no seu nome.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divisor"></div>
+
+<!-- CICLO DA DEPENDÊNCIA -->
+<div class="ciclo-wrapper" id="ciclo">
+  <h2 class="ciclo-titulo">O ciclo que <em>aprisiona</em></h2>
+  <p class="ciclo-subtitulo">Toque em cada etapa para entender o que acontece por dentro</p>
+
+  <div class="ciclo-container">
+
+    <div class="ciclo-step" onclick="toggleCiclo(this)">
+      <div class="ciclo-conteudo">
+        <div class="ciclo-nome">A ferida original</div>
+        <div class="ciclo-resumo">Amor que não voltou.</div>
+        <div class="ciclo-detalhe">
+          <div class="ciclo-detalhe-inner">
+            O sistema emocional aprendeu cedo que amor é algo que se conquista com esforço, com presença, com silêncio. Amar passou a significar suportar e permanecer.
+          </div>
+        </div>
+      </div>
+      <div class="ciclo-no">
+        <div class="no-circulo">1</div>
+        <div class="no-linha"></div>
+        <div class="no-seta"></div>
+      </div>
+      <div class="ciclo-vazio"></div>
+    </div>
+
+    <div class="ciclo-step" onclick="toggleCiclo(this)">
+      <div class="ciclo-vazio"></div>
+      <div class="ciclo-no">
+        <div class="no-circulo">2</div>
+        <div class="no-linha"></div>
+        <div class="no-seta"></div>
+      </div>
+      <div class="ciclo-conteudo">
+        <div class="ciclo-nome">O padrão se instala</div>
+        <div class="ciclo-resumo">Relacionamentos familiares com o trauma.</div>
+        <div class="ciclo-detalhe">
+          <div class="ciclo-detalhe-inner">
+            A psique reconhece o que é familiar como seguro, mesmo quando é doloroso. O ambiente tóxico parece "normal" porque é o que o sistema emocional conhece como referência de amor.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ciclo-step" onclick="toggleCiclo(this)">
+      <div class="ciclo-conteudo">
+        <div class="ciclo-nome">A identidade de salvadora</div>
+        <div class="ciclo-resumo">Salvar o outro vira propósito.</div>
+        <div class="ciclo-detalhe">
+          <div class="ciclo-detalhe-inner">
+            Quando o amor próprio ainda não existe como base, salvar o outro preenche o espaço. Enquanto ele precisar ser salvo, você tem um papel. Esse papel, por mais que doa, dá a sensação de ter valor.
+          </div>
+        </div>
+      </div>
+      <div class="ciclo-no">
+        <div class="no-circulo">3</div>
+        <div class="no-linha"></div>
+        <div class="no-seta"></div>
+      </div>
+      <div class="ciclo-vazio"></div>
+    </div>
+
+    <div class="ciclo-step" onclick="toggleCiclo(this)">
+      <div class="ciclo-vazio"></div>
+      <div class="ciclo-no">
+        <div class="no-circulo">4</div>
+        <div class="no-linha"></div>
+        <div class="no-seta"></div>
+      </div>
+      <div class="ciclo-conteudo">
+        <div class="ciclo-nome">O silêncio de si mesma</div>
+        <div class="ciclo-resumo">Você se diminui para caber no espaço dele.</div>
+        <div class="ciclo-detalhe">
+          <div class="ciclo-detalhe-inner">
+            Evitar conflito virou instinto de sobrevivência desde criança. Com ele, isso se repete: você se encolhe, cede, justifica, tudo para manter uma paz que não é sua, num ambiente que não te honra.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ciclo-step" onclick="toggleCiclo(this)">
+      <div class="ciclo-conteudo">
+        <div class="ciclo-nome">A ruptura que não acontece</div>
+        <div class="ciclo-resumo">Sair parece abandonar quem você amou.</div>
+        <div class="ciclo-detalhe">
+          <div class="ciclo-detalhe-inner">
+            Ir embora significa, inconscientemente, fazer o que fizeram com você. Significa abandonar. E como você nunca quis ser quem abandona, você fica. Mesmo quando ficar custa tudo.
+          </div>
+        </div>
+      </div>
+      <div class="ciclo-no">
+        <div class="no-circulo">5</div>
+        <div class="no-linha"></div>
+        <div class="no-seta"></div>
+      </div>
+      <div class="ciclo-vazio"></div>
+    </div>
+
+    <div class="ciclo-step" onclick="toggleCiclo(this)">
+      <div class="ciclo-vazio"></div>
+      <div class="ciclo-no">
+        <div class="no-circulo">6</div>
+        <div class="no-linha"></div>
+        <div class="no-seta"></div>
+      </div>
+      <div class="ciclo-conteudo">
+        <div class="ciclo-nome">O esgotamento</div>
+        <div class="ciclo-resumo">Você não sabe mais o que fazer.</div>
+        <div class="ciclo-detalhe">
+          <div class="ciclo-detalhe-inner">
+            Esse é o ponto em que você está. O cansaço chegou porque o ciclo não tem saída por dentro. Não existe como encontrar o caminho de dentro dele sem alguém que ajude a enxergar de fora. E foi exatamente isso que você buscou.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ciclo-step" onclick="toggleCiclo(this)">
+      <div class="ciclo-conteudo">
+        <div class="ciclo-nome">O retorno ao início</div>
+        <div class="ciclo-resumo">E o ciclo recomeça.</div>
+        <div class="ciclo-detalhe">
+          <div class="ciclo-detalhe-inner">
+            Sem intervenção, o ciclo se retroalimenta. A ferida original continua ditando as escolhas. O processo de desbloqueio existe para romper exatamente aqui: na raiz, não nos sintomas.
+          </div>
+        </div>
+      </div>
+      <div class="ciclo-no">
+        <div class="no-circulo">↺</div>
+      </div>
+      <div class="ciclo-vazio"></div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divisor"></div>
+
+<!-- A DOR REAL -->
+<section id="s3">
+  <p class="secao-label">O que essa dinâmica produz</p>
+  <h2>A dor que ninguém <em>nomeou ainda.</em></h2>
+
+  <p>
+    Quando eu perguntei sobre um ato de amor que ele teve por você, você chorou. E não conseguiu responder.
+  </p>
+  <p>
+    Isso não é fraqueza. É clareza. O seu corpo soube antes da mente chegar. Ele soube que havia algo ali que não estava sendo nomeado, e a emoção veio antes das palavras porque a dor era real demais para ser resumida numa frase.
+  </p>
+  <div class="destaque">
+    A consequência mais profunda de um relacionamento assim não é a briga, não é o grito, não é a crise de ciúme. É o esquecimento de si mesma. É acordar um dia e não saber mais o que você gosta, o que você quer, o que te faz sentir inteira.
+  </div>
+  <p>
+    Você chegou nesse ponto. E ainda assim, aqui você está.
+  </p>
+</section>
+
+<div class="divisor"></div>
+
+<!-- A CARTA -->
+<section id="s4">
+  <p class="secao-label">Um convite</p>
+  <h2>Para você, <em>Amanda.</em></h2>
+
+  <div class="carta">
+    <p>
+      Você não veio aqui porque está fraca. Você veio porque uma parte sua ainda sabe o que merece, mesmo que a outra parte ainda esteja com medo de acreditar.
+    </p>
+    <p>
+      Eu enxerguei você nessa sessão. Enxerguei a menina de dez anos que empilhou as roupas e tentou fazer tudo certo. Enxerguei a mulher que ficou sentada porque ir embora parecia uma traição. Enxerguei quem deu presente, correntinha, esforço, e ainda encontrou uma conta no próprio nome.
+    </p>
+    <p>
+      E enxerguei também algo que você talvez não veja ainda: uma mulher que chegou até aqui. Que não desistiu de si mesma completamente. Que ainda pergunta, ainda busca, ainda chora porque ainda sente.
+    </p>
+    <p>
+      Esse processo não é sobre ele. Ele nunca foi sobre ele. É sobre você se tornando a primeira pessoa que você não precisa salvar, porque você finalmente se cuida.
+    </p>
+    <p>
+      Você merece isso, Amanda. Não quando ele mudar. Não quando a situação melhorar. Agora. Exatamente do jeito que você chegou aqui, inteira e cansada e corajosa o suficiente para estar nessa cadeira.
+    </p>
+    <p>
+      Não desista desse caminho.
+    </p>
+    <div class="carta-assinatura">
+      <span>Com respeito pela sua história,</span>
+      <span>Maria Clara Ribeiro · All Win Academy</span>
+      <div class="carta-linha"></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>All Win Academy · Processo de Desbloqueio Emocional · Documento confidencial</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const observar = document.querySelectorAll('section, .ciclo-wrapper');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visivel');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  observar.forEach(el => observer.observe(el));
+
+  // Toggle feridas
+  function toggleFerida(card) {
+    const aberta = card.classList.contains('aberta');
+    document.querySelectorAll('.ferida-card').forEach(c => c.classList.remove('aberta'));
+    if (!aberta) card.classList.add('aberta');
+  }
+
+  // Toggle ciclo
+  function toggleCiclo(step) {
+    const ativo = step.classList.contains('ativo');
+    document.querySelectorAll('.ciclo-step').forEach(s => s.classList.remove('ativo'));
+    if (!ativo) step.classList.add('ativo');
+  }
+</script>
+
+</body>
+</html>
