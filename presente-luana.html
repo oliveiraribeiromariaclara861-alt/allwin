@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Para Luana Dias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Lato:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --creme: #faf7f4;
+      --marrom: #7a4a2a;
+      --marrom-suave: #b07a52;
+      --preto: #1a1008;
+      --texto: #2e1f0f;
+      --muted: #9a7a5a;
+      --linha: rgba(122, 74, 42, 0.18);
+    }
+
+    html, body {
+      background: var(--creme);
+      color: var(--texto);
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    /* CAPA */
+    .capa {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 32px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .capa::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,74,42,0.07) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .capa-ornamento {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      color: var(--marrom-suave);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: surgir 1.2s ease forwards 0.3s;
+    }
+
+    .capa-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(48px, 10vw, 82px);
+      line-height: 1.05;
+      color: var(--preto);
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: surgir 1.4s ease forwards 0.6s;
+    }
+
+    .capa-titulo em {
+      font-style: italic;
+      color: var(--marrom);
+    }
+
+    .capa-subtitulo {
+      font-size: 13px;
+      letter-spacing: 0.3em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 28px;
+      margin-bottom: 60px;
+      opacity: 0;
+      animation: surgir 1.4s ease forwards 0.9s;
+    }
+
+    .capa-linha {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(to bottom, var(--marrom), transparent);
+      margin: 0 auto;
+      opacity: 0;
+      animation: surgir 1.4s ease forwards 1.2s;
+    }
+
+    /* SEÇÕES */
+    .secao {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 100px 32px;
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+
+    .secao.visivel {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .secao-eyebrow {
+      font-size: 9px;
+      letter-spacing: 0.55em;
+      text-transform: uppercase;
+      color: var(--marrom-suave);
+      margin-bottom: 32px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .secao-eyebrow::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--linha);
+    }
+
+    .secao-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--preto);
+      margin-bottom: 32px;
+    }
+
+    .secao-titulo em {
+      font-style: italic;
+      color: var(--marrom);
+    }
+
+    .secao p {
+      font-size: 16px;
+      line-height: 1.9;
+      color: var(--texto);
+      margin-bottom: 20px;
+    }
+
+    .secao p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* DIVISOR */
+    .divisor {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .divisor-linha {
+      flex: 1;
+      height: 1px;
+      background: var(--linha);
+    }
+
+    .divisor-ornamento {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 22px;
+      color: var(--marrom-suave);
+      opacity: 0.6;
+    }
+
+    /* BLOCO DE DESTAQUE */
+    .destaque {
+      background: white;
+      border-left: 2px solid var(--marrom);
+      padding: 32px 36px;
+      margin: 40px 0;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .destaque p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.6;
+      color: var(--preto);
+      margin: 0;
+    }
+
+    /* LISTA DE CONQUISTAS */
+    .conquistas {
+      list-style: none;
+      margin: 32px 0;
+    }
+
+    .conquistas li {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--linha);
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--texto);
+    }
+
+    .conquistas li:last-child {
+      border-bottom: none;
+    }
+
+    .conquistas li::before {
+      content: '✦';
+      color: var(--marrom-suave);
+      font-size: 10px;
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    /* FECHAMENTO */
+    .fechamento {
+      background: var(--preto);
+      color: var(--creme);
+      padding: 120px 32px;
+      text-align: center;
+    }
+
+    .fechamento-inner {
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .fechamento p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 4vw, 32px);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--creme);
+      margin-bottom: 20px;
+    }
+
+    .fechamento-assinatura {
+      margin-top: 60px;
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--marrom-suave);
+    }
+
+    .fechamento-nome {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--creme);
+      margin-top: 10px;
+    }
+
+    /* ANIMAÇÕES */
+    @keyframes surgir {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      .secao { padding: 70px 24px; }
+      .destaque { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CAPA -->
+  <section class="capa">
+    <p class="capa-ornamento">Um presente para você</p>
+    <h1 class="capa-titulo">Luana,<br><em>olha até onde você chegou.</em></h1>
+    <p class="capa-subtitulo">A história que você viveu de verdade</p>
+    <div class="capa-linha"></div>
+  </section>
+
+  <!-- 1. ONDE TUDO COMEÇOU -->
+  <section class="secao">
+    <p class="secao-eyebrow">O começo</p>
+    <h2 class="secao-titulo">Você chegou carregando <em>muito.</em></h2>
+    <p>Havia uma mulher que aprendeu cedo que existir era ser útil para os outros. Que amar era se perder. Que sonhar era luxo de quem não tinha responsabilidade.</p>
+    <p>Ela cresceu, casou, trabalhou, sustentou, sobreviveu. Passou por um casamento onde o abuso psicológico foi normalizado tão devagar que ela quase não percebeu o quanto havia sumido de si mesma. Trabalhou tanto que, quando olhou para trás, parte da infância dos filhos já havia passado sem que ela estivesse de fato presente.</p>
+    <p>E em algum momento desse caminho, as unhas apareceram. Não como profissão, num primeiro instante. Como refúgio. Como o único espaço onde algo belo nascia pelas mãos dela.</p>
+
+    <div class="destaque">
+      <p>"Quando eu me pedi uma lista de sonhos, todos eles envolviam outras pessoas. Não havia um só sonho que fosse só meu."</p>
+    </div>
+
+    <p>Essa foi a primeira verdade que você trouxe para dentro do processo. E essa verdade exigiu coragem só em ser dita.</p>
+  </section>
+
+  <div class="divisor">
+    <div class="divisor-linha"></div>
+    <span class="divisor-ornamento">✦</span>
+    <div class="divisor-linha"></div>
+  </div>
+
+  <!-- 2. O QUE FOI TRABALHADO -->
+  <section class="secao">
+    <p class="secao-eyebrow">O processo</p>
+    <h2 class="secao-titulo">O que aconteceu quando você <em>parou de se abandonar.</em></h2>
+    <p>A primeira semana foi um convite simples: olhe para você. Não para o que você faz pelos outros, não para o que ainda falta. Só para você.</p>
+    <p>O que veio depois disso não foi pequeno. Foi uma mulher que começou a se reconhecer. A entender que a identidade de salvadora que ela carregava, aquela que não tinha sonhos próprios, aquela que existia em função do próximo, não era ela. Era uma armadura que ela construiu para sobreviver.</p>
+    <p>E armaduras são pesadas. Chegou a hora de pousar.</p>
+    <p>Trabalhamos as crenças herdadas, os padrões que vieram da infância, as emoções que ficaram represadas por anos, as formas como o corpo foi guardando o que a mente não conseguia processar. Cada camada foi tocada com cuidado, com presença, com respeito pelo tempo de cada coisa.</p>
+  </section>
+
+  <div class="divisor">
+    <div class="divisor-linha"></div>
+    <span class="divisor-ornamento">✦</span>
+    <div class="divisor-linha"></div>
+  </div>
+
+  <!-- 3. AS TRANSFORMAÇÕES -->
+  <section class="secao">
+    <p class="secao-eyebrow">A transformação</p>
+    <h2 class="secao-titulo">Tudo que <em>floresceu</em> em você.</h2>
+    <p>Transformação real não é um momento. É uma série de escolhas pequenas que, juntas, reescrevem quem você é. E você fez muitas dessas escolhas.</p>
+
+    <ul class="conquistas">
+      <li>Voltou para a academia e foi com disciplina, não como punição, como cuidado com o próprio corpo.</li>
+      <li>Emagreceu porque passou a se tratar como alguém que merece atenção.</li>
+      <li>Colocou lentes de contato no dente e fez ensaio fotográfico, porque decidiu aparecer no próprio reflexo.</li>
+      <li>Está encaminhando a cirurgia, não para agradar ninguém, porque quer se sentir em casa dentro do próprio corpo.</li>
+      <li>Voltou a se maquiar, a se olhar no espelho, a se cuidar com prazer.</li>
+      <li>O relacionamento com o marido mudou. Com os filhos mudou. Com a empresa mudou.</li>
+      <li>E as unhas, que nasceram como refúgio, tornaram-se palco. Tornaram-se propósito.</li>
+    </ul>
+
+    <div class="destaque">
+      <p>Quando uma mulher para de se abandonar, tudo ao redor sente. Não é metáfora. É o que aconteceu com você.</p>
+    </div>
+  </section>
+
+  <div class="divisor">
+    <div class="divisor-linha"></div>
+    <span class="divisor-ornamento">✦</span>
+    <div class="divisor-linha"></div>
+  </div>
+
+  <!-- 4. O VÍDEO QUE QUASE FOI APAGADO -->
+  <section class="secao">
+    <p class="secao-eyebrow">O momento de virada</p>
+    <h2 class="secao-titulo">O vídeo que você <em>quase apagou.</em></h2>
+    <p>Quando chegou a hora de aparecer publicamente, o corpo reagiu como sempre reage diante de uma ruptura de padrão: com medo, com desconforto, com a voz antiga dizendo que era melhor não.</p>
+    <p>Você gravou. Sentiu tudo isso. E ainda gravou.</p>
+    <p>E quando quis apagar, a resposta foi não. Porque o que vinha depois do medo não era o fim, era a prova. Era o seu sistema nervoso aprendendo que era seguro chegar lá. Que era seguro ser vista. Que era seguro ocupar espaço.</p>
+    <p>Não apagar aquele vídeo foi um dos atos mais corajosos que você praticou nesse processo. E o seu cérebro gravou isso para sempre.</p>
+
+    <div class="destaque">
+      <p>"Fiz. E nada desmoronou. Fiz. E fui vista. Fiz. E seis pessoas chegaram."</p>
+    </div>
+
+    <p>No primeiro dia de abertura de vagas para a sua formação, seis pessoas se inscreveram. Seis pessoas que sentiram algo verdadeiro do outro lado da tela, porque quem estava do outro lado era uma mulher verdadeira.</p>
+  </section>
+
+  <div class="divisor">
+    <div class="divisor-linha"></div>
+    <span class="divisor-ornamento">✦</span>
+    <div class="divisor-linha"></div>
+  </div>
+
+  <!-- 5. QUEM VOCÊ É AGORA -->
+  <section class="secao">
+    <p class="secao-eyebrow">Sua identidade hoje</p>
+    <h2 class="secao-titulo">A Luana que <em>existe agora.</em></h2>
+    <p>Você não é mais a salvadora que não tinha sonhos. Você não é mais a mulher que se apagava para que os outros brilhassem. Você não é mais a menina que aprendeu que existir era perigoso.</p>
+    <p>Você é uma mulher que sabe o que quer. Que aparece. Que executa. Que cuida de si com a mesma generosidade que sempre ofereceu ao mundo.</p>
+    <p>Você tem uma empresa que nasce da sua história, não apesar dela. Você forma outras mulheres com as mãos que um dia foram o seu único refúgio.</p>
+    <p>E o mais bonito de tudo é que isso não acabou aqui. Você apenas começou.</p>
+  </section>
+
+  <!-- FECHAMENTO -->
+  <footer class="fechamento">
+    <div class="fechamento-inner">
+      <p>Que você nunca esqueça de onde veio, não para carregar o peso, mas para saber o tamanho da sua força.</p>
+      <p>Que você continue aparecendo, mesmo quando o medo vier. Especialmente quando o medo vier.</p>
+      <p>Que os sonhos que você lista agora sejam todos seus.</p>
+
+      <div class="fechamento-assinatura">
+        Com admiração e carinho,
+      </div>
+      <div class="fechamento-nome">Maria Clara Ribeiro</div>
+      <div class="fechamento-assinatura" style="margin-top: 8px; font-size: 8px; letter-spacing: 0.5em;">All Win Academy</div>
+    </div>
+  </footer>
+
+  <script>
+    const secoes = document.querySelectorAll('.secao');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visivel');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    secoes.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>
