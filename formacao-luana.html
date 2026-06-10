@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0c0a" />
+  <title>Formação — Luana Dias</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@100;200;300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: #0f0c0a !important; }
+    html, body { background: #0f0c0a !important; color: #f0ebe4; font-family: 'Josefin Sans', sans-serif; -webkit-text-size-adjust: 100%; min-height: 100vh; }
+    :root { --cream: #f0ebe4; --bl: #c07830; --black: #0f0c0a; --mid: #1a1410; --muted: #b0a090; --deep: #140f0a; }
+
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 70px 28px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(192,120,48,0.09) 0%, transparent 65%); }
+    .hero-eyebrow { font-weight: 100; font-size: 9px; letter-spacing: 0.6em; color: var(--bl); text-transform: uppercase; margin-bottom: 16px; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(48px, 13vw, 80px); line-height: 0.88; color: var(--cream); margin-bottom: 8px; }
+    .hero-title em { font-style: italic; color: var(--bl); }
+    .hero-sub { font-weight: 200; font-size: 10px; letter-spacing: 0.45em; color: var(--muted); text-transform: uppercase; margin-top: 18px; margin-bottom: 32px; }
+    .hero-by { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: var(--cream); opacity: 0.7; }
+    .hero-tag { display: inline-block; margin-top: 20px; padding: 8px 20px; border: 1px solid rgba(192,120,48,0.3); border-radius: 30px; font-size: 10px; letter-spacing: 0.3em; color: var(--bl); text-transform: uppercase; }
+
+    .section { padding: 70px 28px; max-width: 600px; margin: 0 auto; }
+    .section-eyebrow { font-weight: 100; font-size: 9px; letter-spacing: 0.5em; color: var(--bl); text-transform: uppercase; margin-bottom: 10px; text-align: center; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 38px; color: var(--cream); text-align: center; line-height: 1.1; margin-bottom: 32px; }
+    .section-title em { font-style: italic; color: var(--bl); }
+    .divider { width: 40px; height: 1px; background: linear-gradient(90deg, transparent, var(--bl), transparent); margin: 0 auto 50px; }
+
+    .intro-text { font-family: 'Cormorant Garamond', serif; font-size: 20px; line-height: 1.85; color: #e0d8d0; text-align: center; margin-bottom: 20px; }
+    .intro-text strong { color: var(--cream); font-weight: 600; }
+
+    .pnl-block { background: var(--mid); border: 1px solid rgba(192,120,48,0.18); border-radius: 20px; padding: 32px 24px; margin-bottom: 20px; position: relative; overflow: hidden; }
+    .pnl-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--bl), transparent); }
+    .pnl-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--cream); margin-bottom: 16px; line-height: 1.2; }
+    .pnl-title em { font-style: italic; color: var(--bl); }
+    .pnl-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.9; color: #e0d8d0; }
+    .pnl-text strong { color: var(--cream); font-weight: 600; }
+    .pnl-badge { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 10px 18px; background: rgba(192,120,48,0.1); border: 1px solid rgba(192,120,48,0.3); border-radius: 30px; font-size: 11px; letter-spacing: 0.15em; color: var(--bl); }
+
+    .incluso-grid { display: flex; flex-direction: column; gap: 12px; }
+    .incluso-item { display: flex; align-items: flex-start; gap: 14px; padding: 16px 18px; background: var(--mid); border: 1px solid rgba(192,120,48,0.12); border-radius: 14px; }
+    .incluso-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .incluso-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--cream); line-height: 1.2; margin-bottom: 5px; }
+    .incluso-desc { font-weight: 200; font-size: 12px; letter-spacing: 0.05em; color: #b0a090; line-height: 1.7; }
+
+    .potencial-block { background: linear-gradient(135deg, #1a1410, #0f1a0a); border: 1px solid rgba(100,160,100,0.2); border-radius: 20px; padding: 32px 24px; margin-bottom: 20px; }
+    .potencial-title { font-family: 'Cormorant Garamond', serif; font-size: 26px; color: var(--cream); margin-bottom: 6px; }
+    .potencial-title em { font-style: italic; color: #7ab87a; }
+    .potencial-sub { font-weight: 200; font-size: 10px; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; margin-bottom: 24px; }
+    .potencial-rows { display: flex; flex-direction: column; gap: 10px; }
+    .pot-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: rgba(0,0,0,0.3); border-radius: 10px; }
+    .pot-label { font-weight: 200; font-size: 12px; letter-spacing: 0.1em; color: #c0b0a0; text-transform: uppercase; }
+    .pot-value { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: #7ab87a; }
+    .pot-note { font-weight: 200; font-size: 12px; color: #b0a090; margin-top: 16px; line-height: 1.8; letter-spacing: 0.03em; }
+    .pot-note strong { color: var(--cream); font-weight: 400; }
+
+    .planos-wrap { display: flex; flex-direction: column; gap: 24px; }
+    .plano-card { border-radius: 20px; overflow: hidden; border: 1px solid rgba(192,120,48,0.2); }
+    .plano-card.destaque { border-color: var(--bl); }
+    .plano-header { padding: 28px 24px 20px; background: var(--mid); position: relative; }
+    .plano-card.destaque .plano-header { background: linear-gradient(135deg, #241808, #1a1410); }
+    .plano-badge { display: inline-block; font-size: 9px; letter-spacing: 0.4em; color: var(--bl); text-transform: uppercase; margin-bottom: 10px; }
+    .plano-name { font-family: 'Cormorant Garamond', serif; font-size: 36px; color: var(--cream); line-height: 1; margin-bottom: 4px; }
+    .plano-name em { font-style: italic; color: var(--bl); }
+    .plano-duracao { font-weight: 200; font-size: 10px; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; }
+    .plano-preco-principal { font-family: 'Cormorant Garamond', serif; font-size: 52px; color: var(--cream); line-height: 1; }
+    .plano-preco-principal sup { font-size: 18px; vertical-align: super; color: var(--bl); opacity: 0.8; }
+    .plano-preco-label { font-weight: 200; font-size: 9px; letter-spacing: 0.3em; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+    .plano-body { padding: 20px 24px 28px; background: rgba(0,0,0,0.2); }
+    .opcao-label { font-weight: 200; font-size: 9px; letter-spacing: 0.4em; color: var(--bl); text-transform: uppercase; margin-bottom: 14px; }
+    .opcao-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(192,120,48,0.1); }
+    .opcao-row:last-of-type { border-bottom: none; }
+    .opcao-tipo { font-weight: 300; font-size: 12px; letter-spacing: 0.1em; color: #d0c8c0; text-transform: uppercase; }
+    .opcao-detalhe { font-weight: 200; font-size: 10px; color: var(--muted); letter-spacing: 0.05em; margin-top: 2px; }
+    .opcao-valor { font-family: 'Cormorant Garamond', serif; font-size: 20px; color: var(--cream); text-align: right; }
+    .boleto-note { margin-top: 14px; padding: 12px 14px; background: rgba(192,120,48,0.06); border-radius: 10px; font-weight: 200; font-size: 12px; color: #b0a090; line-height: 1.8; letter-spacing: 0.03em; }
+    .boleto-note strong { color: var(--cream); font-weight: 400; }
+    .recomendado-tag { position: absolute; top: 16px; right: 16px; background: var(--bl); color: var(--black); font-size: 8px; letter-spacing: 0.3em; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; font-weight: 400; }
+
+    .inicio-block { background: var(--mid); border: 1px solid rgba(192,120,48,0.18); border-radius: 20px; padding: 28px 24px; text-align: center; }
+    .inicio-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; color: var(--cream); margin-bottom: 12px; }
+    .inicio-title em { font-style: italic; color: var(--bl); }
+    .inicio-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.85; color: #e0d8d0; }
+
+    .closing { text-align: center; padding: 70px 28px 90px; border-top: 1px solid rgba(192,120,48,0.1); }
+    .closing-title { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 42px; color: var(--cream); margin-bottom: 14px; }
+    .closing-text { font-weight: 200; font-size: 14px; line-height: 1.95; color: #c0b0a0; max-width: 360px; margin: 0 auto 28px; letter-spacing: 0.03em; }
+    .closing-assinatura { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 26px; color: var(--cream); }
+
+    .corner { position: absolute; width: 20px; height: 20px; border-color: rgba(192,120,48,0.2); border-style: solid; }
+    .tl { top: 20px; left: 20px; border-width: 1px 0 0 1px; }
+    .tr { top: 20px; right: 20px; border-width: 1px 1px 0 0; }
+    .bl { bottom: 20px; left: 20px; border-width: 0 0 1px 1px; }
+    .br { bottom: 20px; right: 20px; border-width: 0 1px 1px 0; }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .hero > * { animation: fadeUp 0.8s ease both; }
+    .hero-eyebrow { animation-delay: 0.1s; } .hero-title { animation-delay: 0.25s; } .hero-sub { animation-delay: 0.4s; } .hero-by { animation-delay: 0.5s; } .hero-tag { animation-delay: 0.6s; }
+  </style>
+</head>
+<body>
+
+<section class="hero" style="position:relative">
+  <div class="corner tl"></div><div class="corner tr"></div>
+  <div class="corner bl"></div><div class="corner br"></div>
+  <p class="hero-eyebrow">formação completa</p>
+  <h1 class="hero-title">Nail <em>Designer</em><br>de Verdade</h1>
+  <p class="hero-sub">técnica · mentalidade · negócio</p>
+  <p class="hero-by">Luana Dias</p>
+  <span class="hero-tag">Uberaba · MG · Turma 01</span>
+</section>
+
+<div class="section">
+  <p class="section-eyebrow">o que é isso</p>
+  <h2 class="section-title">Não é um curso.<br>É uma <em>formação</em>.</h2>
+  <div class="divider"></div>
+  <p class="intro-text">
+    Eu passei anos aprendendo técnica. Mas ninguém me ensinou a cobrar o que valia, a montar uma agenda cheia, a fidelizar cliente de verdade.<br><br>
+    Tive que descobrir tudo sozinha. E levei tempo.<br><br>
+    Essa formação é o que eu queria ter tido quando comecei. Aqui você aprende a fazer <strong>e</strong> aprende a <strong>construir um negócio que sustenta de verdade</strong>.
+  </p>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" style="padding-top:0">
+  <p class="section-eyebrow">por que a pnl muda tudo</p>
+  <h2 class="section-title">A técnica você <em>aprende</em>.<br>A mentalidade você <em>constrói</em>.</h2>
+  <div class="divider"></div>
+
+  <div class="pnl-block">
+    <h3 class="pnl-title">O que ninguém te conta sobre <em>começar de verdade</em></h3>
+    <p class="pnl-text">
+      Seja você iniciante ou alguém com anos de estrada, existe um obstáculo que a técnica sozinha nunca vai resolver: <strong>a sua cabeça</strong>.<br><br>
+      Medo de cobrar. Síndrome da impostora. Dificuldade de dizer não. Sensação de que o trabalho não vale o preço. Tudo isso vive dentro, não nas mãos.<br><br>
+      A PNL trabalha exatamente isso. Ela reprograma os padrões de pensamento que travam, que fazem descontar, que fazem aceitar menos do que você merece.<br><br>
+      <strong>Nail design é hoje uma das profissões que mais tiram pessoas do desemprego no Brasil.</strong> O setor cresce com margem, escala e previsibilidade. Mas só quem tem posicionamento sólido e mentalidade alinhada transforma técnica em renda real.<br><br>
+      Eu contratei a profissional de PNL que me fez destravar. Ela vai dar três aulas exclusivas para a nossa turma. Porque eu sei o quanto essa virada representa na vida de uma mulher.
+    </p>
+    <div class="pnl-badge">✦ Imersão presencial com especialista em PNL</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" style="padding-top:0">
+  <p class="section-eyebrow">o que está incluso</p>
+  <h2 class="section-title">Tudo que você precisa<br>para <em>construir</em>.</h2>
+  <div class="divider"></div>
+
+  <div class="incluso-grid">
+    <div class="incluso-item">
+      <span class="incluso-icon">🎓</span>
+      <div>
+        <div class="incluso-name">Duas tardes de aula presencial individual</div>
+        <div class="incluso-desc">Atenção 100% em você. Sem turma grande, sem pressa. Do seu ritmo, do seu jeito.</div>
+      </div>
+    </div>
+    <div class="incluso-item">
+      <span class="incluso-icon">🧠</span>
+      <div>
+        <div class="incluso-name">Imersão presencial de PNL</div>
+        <div class="incluso-desc">3 encontros com a especialista que me destravou. Reprogramação de identidade empresarial do zero.</div>
+      </div>
+    </div>
+    <div class="incluso-item">
+      <span class="incluso-icon">🛠️</span>
+      <div>
+        <div class="incluso-name">Materiais e ferramentas para um negócio sólido</div>
+        <div class="incluso-desc">Tudo que você precisa pra construir com estrutura, não no improviso.</div>
+      </div>
+    </div>
+    <div class="incluso-item">
+      <span class="incluso-icon">🧮</span>
+      <div>
+        <div class="incluso-name">Calculadora de precificação</div>
+        <div class="incluso-desc">Chega de cobrar no achismo. Você vai saber exatamente quanto cobrar e por quê.</div>
+      </div>
+    </div>
+    <div class="incluso-item">
+      <span class="incluso-icon">🔥</span>
+      <div>
+        <div class="incluso-name">Hot seat mensal</div>
+        <div class="incluso-desc">Todo mês um encontro ao vivo para tirar dúvidas, alinhar direcionamento e avançar com clareza.</div>
+      </div>
+    </div>
+    <div class="incluso-item">
+      <span class="incluso-icon">💬</span>
+      <div>
+        <div class="incluso-name">Suporte pelo WhatsApp</div>
+        <div class="incluso-desc">Grupo exclusivo para dúvidas técnicas. Canal privado para dúvidas pessoais. Você nunca vai ficar sozinha com uma pergunta.</div>
+      </div>
+    </div>
+    <div class="incluso-item">
+      <span class="incluso-icon">🌱</span>
+      <div>
+        <div class="incluso-name">Grupo aberto de incentivo</div>
+        <div class="incluso-desc">Uma comunidade que caminha junto. Interações, celebrações e incentivo real.</div>
+      </div>
+    </div>
+    <div class="incluso-item">
+      <span class="incluso-icon">💅</span>
+      <div>
+        <div class="incluso-name">Suporte de atendimento em mesa</div>
+        <div class="incluso-desc">Dúvidas na prática, no momento que importa, quando você está com a cliente na frente.</div>
+      </div>
+    </div>
+    <div class="incluso-item">
+      <span class="incluso-icon">📱</span>
+      <div>
+        <div class="incluso-name">Repaginação do Instagram</div>
+        <div class="incluso-desc">Seu perfil vai falar por você. Posicionamento visual alinhado com quem você quer ser no mercado.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" style="padding-top:0">
+  <p class="section-eyebrow">o mercado fala</p>
+  <h2 class="section-title">Quanto você pode <em>faturar</em><br>com Molde F1</h2>
+  <div class="divider"></div>
+
+  <div class="potencial-block">
+    <h3 class="potencial-title">Simulação <em>real</em></h3>
+    <p class="potencial-sub">Molde F1 · técnica ensinada por Luana Dias</p>
+    <div class="potencial-rows">
+      <div class="pot-row">
+        <span class="pot-label">2 clientes / semana</span>
+        <span class="pot-value">R$ 1.600 / mês</span>
+      </div>
+      <div class="pot-row">
+        <span class="pot-label">3 clientes / semana</span>
+        <span class="pot-value">R$ 2.400 / mês</span>
+      </div>
+      <div class="pot-row">
+        <span class="pot-label">4 clientes / semana</span>
+        <span class="pot-value">R$ 3.200 / mês</span>
+      </div>
+      <div class="pot-row">
+        <span class="pot-label">5 clientes / semana</span>
+        <span class="pot-value">R$ 4.000 / mês</span>
+      </div>
+    </div>
+    <p class="pot-note">Simulação baseada em Aplicação com Decoração (média de R$ 200 por cliente). <strong>Nail design é hoje uma das profissões que mais tiram pessoas do desemprego no Brasil</strong> com margem, escala e previsibilidade.</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" style="padding-top:0">
+  <p class="section-eyebrow">investimento</p>
+  <h2 class="section-title">Escolha seu <em>plano</em></h2>
+  <div class="divider"></div>
+
+  <div class="planos-wrap">
+
+    <div class="plano-card">
+      <div class="plano-header">
+        <p class="plano-badge">plano essencial</p>
+        <h3 class="plano-name">3 <em>meses</em></h3>
+        <p class="plano-duracao">acompanhamento completo</p>
+        <div class="plano-preco-principal"><sup>R$</sup>1.900</div>
+        <p class="plano-preco-label">à vista · ou parcelado</p>
+      </div>
+      <div class="plano-body">
+        <p class="opcao-label">formas de pagamento</p>
+        <div class="opcao-row">
+          <div>
+            <div class="opcao-tipo">Cartão de crédito</div>
+            <div class="opcao-detalhe">sem juros</div>
+          </div>
+          <div class="opcao-valor">12x de R$ 158,33</div>
+        </div>
+        <div class="opcao-row">
+          <div>
+            <div class="opcao-tipo">Boleto parcelado</div>
+            <div class="opcao-detalhe">não consome limite do cartão</div>
+          </div>
+          <div class="opcao-valor" style="text-align:right">
+            <div>Entrada R$ 250</div>
+            <div style="font-size:16px; color:#b0a090">+ 12x de R$ 169,17</div>
+          </div>
+        </div>
+        <div class="opcao-row">
+          <div>
+            <div class="opcao-tipo">Boleto · opção curta</div>
+            <div class="opcao-detalhe">não consome limite do cartão</div>
+          </div>
+          <div class="opcao-valor" style="text-align:right">
+            <div>Entrada R$ 250</div>
+            <div style="font-size:16px; color:#b0a090">+ 7x de R$ 290,00</div>
+          </div>
+        </div>
+        <div class="boleto-note">
+          <strong>Por que boleto parcelado?</strong> Porque ele não ocupa o seu cartão de crédito. Você mantém o limite livre para outras coisas enquanto investe na sua formação.
+        </div>
+      </div>
+    </div>
+
+    <div class="plano-card destaque">
+      <div class="plano-header" style="position:relative">
+        <span class="recomendado-tag">mais completo</span>
+        <p class="plano-badge">plano imersão</p>
+        <h3 class="plano-name">6 <em>meses</em></h3>
+        <p class="plano-duracao">acompanhamento estendido</p>
+        <div class="plano-preco-principal"><sup>R$</sup>2.500</div>
+        <p class="plano-preco-label">à vista · ou parcelado</p>
+      </div>
+      <div class="plano-body">
+        <p class="opcao-label">formas de pagamento</p>
+        <div class="opcao-row">
+          <div>
+            <div class="opcao-tipo">Cartão de crédito</div>
+            <div class="opcao-detalhe">sem juros</div>
+          </div>
+          <div class="opcao-valor">12x de R$ 208,33</div>
+        </div>
+        <div class="opcao-row">
+          <div>
+            <div class="opcao-tipo">Boleto parcelado</div>
+            <div class="opcao-detalhe">não consome limite do cartão</div>
+          </div>
+          <div class="opcao-valor" style="text-align:right">
+            <div>Entrada R$ 250</div>
+            <div style="font-size:16px; color:#b0a090">+ 12x de R$ 229,17</div>
+          </div>
+        </div>
+        <div class="opcao-row">
+          <div>
+            <div class="opcao-tipo">Boleto · opção curta</div>
+            <div class="opcao-detalhe">não consome limite do cartão</div>
+          </div>
+          <div class="opcao-valor" style="text-align:right">
+            <div>Entrada R$ 250</div>
+            <div style="font-size:16px; color:#b0a090">+ 7x de R$ 392,86</div>
+          </div>
+        </div>
+        <div class="boleto-note">
+          <strong>Por que boleto parcelado?</strong> Porque ele não ocupa o seu cartão de crédito. Você mantém o limite livre para outras coisas enquanto investe na sua formação.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section" style="padding-top:0">
+  <div class="inicio-block">
+    <h3 class="inicio-title">Primeira aula em <em>junho</em></h3>
+    <p class="inicio-text">
+      A data é confirmada logo após o pagamento.<br><br>
+      Você já está aqui. O próximo passo é só um — e ele muda tudo.
+    </p>
+  </div>
+</div>
+
+<div class="closing">
+  <p class="section-eyebrow">da equipe Luana Dias</p>
+  <h2 class="closing-title">Você não vai estar sozinha.</h2>
+  <p class="closing-text">
+    Eu já estive onde você está.<br>
+    E sei o quanto faz diferença ter alguém do seu lado que já trilhou esse caminho.<br><br>
+    Essa formação é tudo que eu queria ter tido quando comecei.<br><br>
+    Estou aqui por você, do começo ao fim.
+  </p>
+  <p class="closing-assinatura">Luana Dias 🤎</p>
+  <p style="font-size:10px; letter-spacing:0.3em; color:#8a7a6a; text-transform:uppercase; margin-top:10px;">@luanadias_281 · Uberaba, MG</p>
+</div>
+
+<script>
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.pnl-block, .incluso-item, .plano-card, .potencial-block, .inicio-block, .section-title, .section-eyebrow, .intro-text').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(22px)';
+  el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+  obs.observe(el);
+});
+</script>
+</body>
+</html>
