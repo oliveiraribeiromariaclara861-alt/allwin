@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendário Editorial · Camila · Junho/Julho 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nude: #C8B89A;
+    --chocolate: #3D2B1F;
+    --offwhite: #E8DDD0;
+    --caramel: #8B7355;
+    --nude-dark: #a89578;
+
+    /* Pilares */
+    --conexao-bg: #D6E4F0;
+    --conexao-border: #7BAFD4;
+    --conexao-text: #1a3a52;
+
+    --temperamento-bg: #E8D5F0;
+    --temperamento-border: #A66DC2;
+    --temperamento-text: #3a1a52;
+
+    --identidade-bg: #FDE8D0;
+    --identidade-border: #D4845A;
+    --identidade-text: #52240a;
+
+    --5faltas-bg: #D0EDE0;
+    --5faltas-border: #5AAD7E;
+    --5faltas-text: #0a3a22;
+
+    --empreender-bg: #FFF0CC;
+    --empreender-border: #C8A030;
+    --empreender-text: #3a2a00;
+
+    --grupo-bg: #FFD6D6;
+    --grupo-border: #D45A5A;
+    --grupo-text: #520a0a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--offwhite);
+    color: var(--chocolate);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--chocolate);
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,184,154,0.07) 0%, transparent 70%);
+    top: -150px; right: -100px;
+  }
+
+  .hero-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--nude);
+    opacity: 0.6;
+    margin-bottom: 28px;
+  }
+
+  .hero-month {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 10vw, 110px);
+    font-weight: 400;
+    color: var(--offwhite);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .hero-month span {
+    color: var(--nude);
+    font-style: italic;
+  }
+
+  .hero-year {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--nude);
+    opacity: 0.7;
+    margin-bottom: 32px;
+  }
+
+  .hero-pillars {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 0;
+  }
+
+  .hero-pillar {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    opacity: 0.5;
+  }
+
+  .hero-pillar::after {
+    content: '·';
+    margin-left: 8px;
+    opacity: 0.4;
+  }
+
+  .hero-pillar:last-child::after { display: none; }
+
+  /* ── LEGEND ── */
+  .legend {
+    background: var(--chocolate);
+    padding: 0 40px 48px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px 28px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .legend-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--nude);
+    opacity: 0.65;
+  }
+
+  /* ── INTRO TEXT ── */
+  .intro-section {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 72px 40px 48px;
+    text-align: center;
+  }
+
+  .intro-section p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--chocolate);
+    line-height: 1.75;
+    opacity: 0.85;
+  }
+
+  .intro-section p + p { margin-top: 20px; }
+
+  /* ── CALENDAR GRID ── */
+  .calendar-wrap {
+    padding: 0 24px 80px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .week-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .week-day {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    text-align: center;
+    padding: 8px 0;
+    opacity: 0.7;
+  }
+
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+
+  /* Cards */
+  .day-card {
+    border-radius: 12px;
+    border-width: 2px;
+    border-style: solid;
+    padding: 14px 12px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .day-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(61,43,31,0.12);
+  }
+
+  .day-card.conexao      { background: var(--conexao-bg);      border-color: var(--conexao-border);      color: var(--conexao-text); }
+  .day-card.temperamento { background: var(--temperamento-bg); border-color: var(--temperamento-border); color: var(--temperamento-text); }
+  .day-card.identidade   { background: var(--identidade-bg);   border-color: var(--identidade-border);   color: var(--identidade-text); }
+  .day-card.faltas       { background: var(--5faltas-bg);      border-color: var(--5faltas-border);      color: var(--5faltas-text); }
+  .day-card.empreender   { background: var(--empreender-bg);   border-color: var(--empreender-border);   color: var(--empreender-text); }
+  .day-card.grupo        { background: var(--grupo-bg);        border-color: var(--grupo-border);        color: var(--grupo-text); }
+
+  .card-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: italic;
+    opacity: 0.5;
+    margin-bottom: 4px;
+  }
+
+  .card-pilar {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    opacity: 0.65;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.4;
+    flex: 1;
+  }
+
+  .card-format {
+    margin-top: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    opacity: 0.5;
+    letter-spacing: 1px;
+  }
+
+  /* Modal overlay */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(61,43,31,0.75);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.active { display: flex; }
+
+  .modal {
+    background: var(--offwhite);
+    border-radius: 16px;
+    padding: 48px;
+    max-width: 560px;
+    width: 100%;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--caramel);
+    opacity: 0.6;
+    line-height: 1;
+    padding: 4px;
+  }
+
+  .modal-close:hover { opacity: 1; }
+
+  .modal-day {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--caramel);
+    margin-bottom: 4px;
+  }
+
+  .modal-pilar {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    opacity: 0.65;
+    margin-bottom: 16px;
+  }
+
+  .modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--chocolate);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+
+  .modal-divider {
+    height: 1px;
+    background: var(--nude);
+    opacity: 0.3;
+    margin-bottom: 24px;
+  }
+
+  .modal-section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    opacity: 0.7;
+    margin-bottom: 10px;
+    margin-top: 20px;
+  }
+
+  .modal-section-label:first-of-type { margin-top: 0; }
+
+  .modal-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--chocolate);
+    line-height: 1.7;
+    opacity: 0.88;
+  }
+
+  .modal-format-tag {
+    display: inline-block;
+    background: var(--chocolate);
+    color: var(--nude);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-top: 20px;
+  }
+
+  /* ── TASK SECTION ── */
+  .task-section {
+    background: var(--chocolate);
+    padding: 80px 40px;
+  }
+
+  .task-inner {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .task-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--nude);
+    opacity: 0.55;
+    margin-bottom: 20px;
+  }
+
+  .task-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 5vw, 48px);
+    font-weight: 400;
+    color: var(--offwhite);
+    line-height: 1.15;
+    margin-bottom: 40px;
+  }
+
+  .task-title em { font-style: italic; color: var(--nude); }
+
+  .task-box {
+    background: rgba(200,184,154,0.07);
+    border: 1px solid rgba(200,184,154,0.15);
+    border-radius: 2px;
+    padding: 40px 44px;
+  }
+
+  .task-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--nude);
+    line-height: 1.75;
+    margin-bottom: 32px;
+    opacity: 0.9;
+  }
+
+  .task-intro strong { color: var(--offwhite); font-weight: 500; }
+
+  .task-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .task-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .step-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: var(--nude);
+    opacity: 0.45;
+    min-width: 22px;
+    margin-top: 2px;
+  }
+
+  .step-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--nude);
+    opacity: 0.8;
+    line-height: 1.65;
+  }
+
+  .step-text strong { color: var(--offwhite); font-weight: 400; }
+
+  /* ── CLOSING ── */
+  .closing {
+    padding: 100px 40px;
+    text-align: center;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .closing-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    opacity: 0.6;
+    margin-bottom: 28px;
+  }
+
+  .closing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    color: var(--chocolate);
+    line-height: 1.15;
+    margin-bottom: 28px;
+  }
+
+  .closing-title em { font-style: italic; color: var(--caramel); }
+
+  .closing-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: var(--chocolate);
+    line-height: 1.75;
+    opacity: 0.8;
+  }
+
+  .closing-sig {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-style: italic;
+    color: var(--caramel);
+    opacity: 0.55;
+    margin-top: 48px;
+  }
+
+  /* ── BÚSSOLA ── */
+  .bussola-section {
+    background: var(--offwhite);
+    padding: 100px 40px;
+  }
+
+  .bussola-inner {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .bussola-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    opacity: 0.6;
+    margin-bottom: 20px;
+  }
+
+  .bussola-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 400;
+    color: var(--chocolate);
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .bussola-title em { font-style: italic; color: var(--caramel); }
+
+  .bussola-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--chocolate);
+    line-height: 1.75;
+    opacity: 0.82;
+    max-width: 680px;
+    margin-bottom: 64px;
+  }
+
+  .bussola-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 48px;
+  }
+
+  .bussola-card {
+    background: white;
+    padding: 40px 36px;
+    transition: background 0.25s ease;
+  }
+
+  .bussola-card:hover { background: #f5ede3; }
+
+  .bussola-card-label {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--caramel);
+    opacity: 0.65;
+    margin-bottom: 14px;
+  }
+
+  .bussola-card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--chocolate);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .bussola-card-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--chocolate);
+    line-height: 1.7;
+    opacity: 0.75;
+    margin-bottom: 20px;
+  }
+
+  .bussola-checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .bussola-check {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+  }
+
+  .check-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #a89578;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .bussola-check.done .check-box {
+    background: var(--chocolate);
+    border-color: var(--chocolate);
+  }
+
+  .check-tick {
+    display: none;
+    color: var(--nude);
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  .bussola-check.done .check-tick { display: block; }
+
+  .check-text {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--chocolate);
+    line-height: 1.6;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+  }
+
+  .bussola-check.done .check-text {
+    opacity: 0.4;
+    text-decoration: line-through;
+  }
+
+  .bussola-frase {
+    background: var(--chocolate);
+    border-radius: 2px;
+    padding: 36px 44px;
+    text-align: center;
+    margin-top: 48px;
+  }
+
+  .bussola-frase p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--offwhite);
+    line-height: 1.65;
+  }
+
+  .bussola-frase span { color: var(--nude); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .calendar-grid, .week-header { grid-template-columns: repeat(4, 1fr); }
+    .week-header { display: none; }
+  }
+
+  @media (max-width: 600px) {
+    .calendar-grid { grid-template-columns: repeat(2, 1fr); }
+    .calendar-wrap { padding: 0 16px 60px; }
+    .modal { padding: 32px 24px; }
+    .task-box { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <p class="hero-label">All Win Academy · Calendário Editorial · Camila</p>
+  <h1 class="hero-month">Junho <span>/ Julho</span></h1>
+  <p class="hero-year">2026</p>
+  <div class="hero-pillars">
+    <span class="hero-pillar">Temperamentos</span>
+    <span class="hero-pillar">Identidade</span>
+    <span class="hero-pillar">5 Faltas</span>
+    <span class="hero-pillar">Empreender</span>
+    <span class="hero-pillar">Conexão</span>
+    <span class="hero-pillar">Grupo Privado</span>
+  </div>
+</div>
+
+<!-- ══ LEGEND ══ -->
+<div class="legend">
+  <div class="legend-item">
+    <div class="legend-dot" style="background:var(--conexao-border)"></div>
+    <span class="legend-name">Conexão</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:var(--temperamento-border)"></div>
+    <span class="legend-name">Temperamentos</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:var(--identidade-border)"></div>
+    <span class="legend-name">Identidade</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:var(--5faltas-border)"></div>
+    <span class="legend-name">5 Faltas</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:var(--empreender-border)"></div>
+    <span class="legend-name">Empreender</span>
+  </div>
+  <div class="legend-item">
+    <div class="legend-dot" style="background:var(--grupo-border)"></div>
+    <span class="legend-name">Grupo Privado</span>
+  </div>
+</div>
+
+<!-- ══ INTRO ══ -->
+<div class="intro-section">
+  <p>Cami, esse calendário foi construído pra você não precisar acordar todo dia perguntando o que postar. Cada dia tem uma intenção. Cada intenção tem um lugar na sua narrativa.</p>
+  <p>Você não está produzindo conteúdo. Você está construindo presença. Clica em cada card pra ver o que fazer e como fazer.</p>
+</div>
+
+<!-- ══ CALENDAR ══ -->
+<div class="calendar-wrap">
+  <div class="week-header">
+    <div class="week-day">Qua</div>
+    <div class="week-day">Qui</div>
+    <div class="week-day">Sex</div>
+    <div class="week-day">Sáb</div>
+    <div class="week-day">Dom</div>
+    <div class="week-day">Seg</div>
+    <div class="week-day">Ter</div>
+  </div>
+
+  <div class="calendar-grid" id="calGrid"></div>
+</div>
+
+<!-- ══ TASK: GRUPO ══ -->
+<div class="task-section">
+  <div class="task-inner">
+    <p class="task-label">Tarefa da semana</p>
+    <h2 class="task-title">Cria o seu<br><em>grupo no WhatsApp</em></h2>
+
+    <div class="task-box">
+      <p class="task-intro">
+        Mulher, esse grupo não é uma lista de transmissão. Ele é o lugar onde as pessoas que já te seguem vão sentir que fazem parte de algo. <strong>É o seu funil invisível.</strong> Quem entra ali já está dentro da sua órbita antes de qualquer venda acontecer.
+      </p>
+
+      <div class="task-steps">
+        <div class="task-step">
+          <span class="step-num">01</span>
+          <span class="step-text">Cria o grupo no WhatsApp com um nome que carregue identidade. Algo simples como <strong>"Inteireza · Camila"</strong> ou <strong>"Cami e você"</strong>. O nome precisa soar como convite, não como produto.</span>
+        </div>
+        <div class="task-step">
+          <span class="step-num">02</span>
+          <span class="step-text">No primeiro story que você fizer a chamada pro grupo, <strong>não explica o que é</strong>. Fala assim: "Criei um espaço pra quem quer estar mais perto. O link está aqui." Simples. Quem é pra entrar, entra.</span>
+        </div>
+        <div class="task-step">
+          <span class="step-num">03</span>
+          <span class="step-text">Dentro do grupo, a regra é uma só: <strong>você é quem fala</strong>. Compartilha uma coisa real por dia, pode ser um pensamento, uma pergunta, um trecho de algo que te moveu. Sem pressão de produção.</span>
+        </div>
+        <div class="task-step">
+          <span class="step-num">04</span>
+          <span class="step-text">Todo dia de <strong>Grupo Privado</strong> marcado no calendário, você faz um story chamando pras pessoas entrarem. Varia o convite, mas mantém a mesma energia: <strong>proximidade, não urgência.</strong></span>
+        </div>
+        <div class="task-step">
+          <span class="step-num">05</span>
+          <span class="step-text">Censo de comunidade: na primeira semana, manda uma pergunta simples dentro do grupo. Algo como <strong>"Me conta: qual é a sua maior travação hoje?"</strong> Escuta. Não resolve ainda. Só escuta.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BÚSSOLA DO GRUPO ══ -->
+<div class="bussola-section">
+  <div class="bussola-inner">
+    <p class="bussola-label">Bússola do grupo</p>
+    <h2 class="bussola-title">Como você <em>aparece</em><br>dentro do grupo</h2>
+    <p class="bussola-intro">
+      Cami, essa bússola existe pra você não perder o fio de quem você é quando estiver dentro do grupo. Clica em cada item quando fizer. Vai marcando conforme avança.
+    </p>
+
+    <div class="bussola-grid">
+
+      <!-- Card 1 -->
+      <div class="bussola-card">
+        <p class="bussola-card-label">Âncora de temperamento</p>
+        <p class="bussola-card-title">Uma pergunta por semana</p>
+        <p class="bussola-card-text">Manda uma pergunta simples sobre comportamento. Sem explicar o porquê ainda. Só acende a curiosidade sobre si mesma em quem lê.</p>
+        <ul class="bussola-checklist">
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Mandei a pergunta da semana no grupo</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Respondi quem interagiu, mesmo que rapidinho</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Guardei as respostas pra virar conteúdo depois</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bussola-card">
+        <p class="bussola-card-label">Âncora de identidade</p>
+        <p class="bussola-card-title">Uma coisa real por dia</p>
+        <p class="bussola-card-text">Compartilha um pensamento que está vivo em você naquele momento. Pode ser uma frase, uma observação de atendimento, algo que o seu filho falou. O filtro é um só: é real pra você agora.</p>
+        <ul class="bussola-checklist">
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Compartilhei algo real hoje no grupo</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Não copiei do feed. Foi exclusivo pra quem está lá</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Falei na primeira pessoa, sem embelezar</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bussola-card">
+        <p class="bussola-card-label">Âncora de dinheiro</p>
+        <p class="bussola-card-title">Uma vez por mês, mentalidade financeira</p>
+        <p class="bussola-card-text">Fala sobre o que muda quando você para de gastar no pânico e começa a construir com consciência. Você viveu isso. Essa autoridade é sua e de mais ninguém.</p>
+        <ul class="bussola-checklist">
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Falei sobre dinheiro de forma direta esse mês</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Compartilhei da minha experiência real, sem didatismo</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Não ensinei a investir. Falei sobre mentalidade</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="bussola-card">
+        <p class="bussola-card-label">Âncora de presença</p>
+        <p class="bussola-card-title">Aparecer e sumir com intenção</p>
+        <p class="bussola-card-text">De vez em quando você some por um dia e quando volta fala sobre isso. Sem justificar demais. Isso ensina pela postura que quem cuida de si tem mais pra dar.</p>
+        <ul class="bussola-checklist">
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Tirei um dia pra mim sem culpa essa semana</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Quando voltei, compartilhei o que esse espaço me deu</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Mantive a energia de proximidade, não de urgência</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="bussola-card">
+        <p class="bussola-card-label">Censo de comunidade</p>
+        <p class="bussola-card-title">Escuta antes de falar</p>
+        <p class="bussola-card-text">Na primeira semana manda uma pergunta só. "Me conta: o que está te travando de verdade agora?" Você não resolve ainda. Só escuta. O que aparecer vira conteúdo nos próximos dias.</p>
+        <ul class="bussola-checklist">
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Mandei a pergunta do censo na primeira semana</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Escutei sem tentar resolver na hora</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Usei as respostas como base pra conteúdos da semana</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="bussola-card">
+        <p class="bussola-card-label">O que nunca entra no grupo</p>
+        <p class="bussola-card-title">A linha que você não cruza</p>
+        <p class="bussola-card-text">O grupo tem algo que só quem está lá dentro recebe. Mesmo que seja só a energia mais próxima de você. Quem entra precisa sentir que chegou num lugar diferente.</p>
+        <ul class="bussola-checklist">
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Não mandei promoção direta sem contexto</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Não repliquei conteúdo do feed sem adaptar</span>
+          </li>
+          <li class="bussola-check" onclick="toggleCheck(this)">
+            <div class="check-box"><span class="check-tick">✓</span></div>
+            <span class="check-text">Mantive o grupo como espaço de proximidade, não de venda</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="bussola-frase">
+      <p>O grupo é um espaço pra quem está se reconectando com quem é de verdade. <span>Tudo que você compartilha lá precisa caber dentro dessa frase.</span></p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ CLOSING ══ -->
+<div class="closing">
+  <p class="closing-label">All Win Academy · Para Camila</p>
+  <h2 class="closing-title">30 dias de<br><em>presença intencional.</em></h2>
+  <p class="closing-text">
+    Não é sobre postar todo dia. É sobre aparecer com intenção todo dia. Tem dias que vai ser mais fácil, tem dias que vai ser mais pesado. Mas você vai ter aqui o que fazer, o que dizer e o porquê de cada escolha.
+  </p>
+  <p class="closing-text" style="margin-top:20px;">
+    Confio no que você está construindo, Cami. Agora vai.
+  </p>
+  <p class="closing-sig">Maria Clara · All Win Academy</p>
+</div>
+
+<!-- ══ MODAL ══ -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('active')">✕</button>
+    <p class="modal-day" id="modalDay"></p>
+    <p class="modal-pilar" id="modalPilar"></p>
+    <h2 class="modal-title" id="modalTitle"></h2>
+    <div class="modal-divider"></div>
+    <p class="modal-section-label">Como fazer</p>
+    <p class="modal-text" id="modalHow"></p>
+    <p class="modal-section-label">O que dizer</p>
+    <p class="modal-text" id="modalWhat"></p>
+    <span class="modal-format-tag" id="modalFormat"></span>
+  </div>
+</div>
+
+<script>
+function toggleCheck(el) {
+  el.classList.toggle('done');
+}
+
+
+  // Dia 1 - 11/06 Qua
+  { pilar: 'conexao', pilarLabel: 'Conexão', title: 'Quem eu sou quando ninguém está olhando', format: 'Carrossel ou Reels curto',
+    how: 'Fala de um hábito seu que as pessoas não veem. Pode ser a forma como você organiza o dia, como você processa as coisas antes de tomar decisão, como você cuida de você antes de cuidar dos outros.',
+    what: 'Começa com uma frase direta sobre você. Sem introdução longa. Já entra no que é real.' },
+
+  // Dia 2 - 12/06 Qui
+  { pilar: 'temperamento', pilarLabel: 'Temperamentos', title: 'Por que algumas pessoas desistem mais fácil que outras', format: 'Carrossel educativo',
+    how: 'Explica como cada temperamento lida com dificuldade. Usa exemplos do dia a dia. Fala de comportamento, não de rótulo.',
+    what: 'Termina chamando pro grupo privado: "Quer entender qual é o seu padrão? O link do grupo está aqui."' },
+
+  // Dia 3 - 13/06 Sex
+  { pilar: 'grupo', pilarLabel: 'Grupo Privado', title: 'Tem um espaço aberto pra você', format: 'Stories',
+    how: 'Faz um story simples, sem elaborar demais. Fala que criou um grupo pra quem quer estar mais perto. Link na bio ou caixa de resposta.',
+    what: '"Criei um espaço pra quem quer estar mais perto do que eu compartilho. O link está aqui. Quem é pra entrar, entra."' },
+
+  // Dia 4 - 14/06 Sáb
+  { pilar: 'identidade', pilarLabel: 'Identidade', title: 'A versão de você que você ainda não apresentou', format: 'Reels ou foto com legenda',
+    how: 'Fala sobre a transição que você está vivendo. Nail tech que virou mentora comportamental. Sem esconder nenhum dos dois.',
+    what: 'Mostra que os dois lados coexistem e que isso te faz diferente. Não precisa explicar demais, só mostrar.' },
+
+  // Dia 5 - 15/06 Dom
+  { pilar: 'faltas', pilarLabel: '5 Faltas', title: 'O que está faltando não é esforço', format: 'Carrossel',
+    how: 'Introduz o conceito das 5 faltas de forma leve. Fala que por trás de toda travação tem uma falta específica. Não entrega tudo ainda.',
+    what: '"Às vezes a pessoa faz tudo certo e continua no lugar. O problema não é o esforço. É o que está faltando por dentro."' },
+
+  // Dia 6 - 16/06 Seg
+  { pilar: 'empreender', pilarLabel: 'Empreender', title: 'O que muda quando você para de trabalhar por hora', format: 'Carrossel',
+    how: 'Fala sobre a virada de mentalidade de quem sai do operacional. Não é sobre abandonar o estúdio, é sobre enxergar o negócio maior.',
+    what: 'Fala da sua própria experiência. Como você começou a ver o dinheiro diferente, a guardar, a investir.' },
+
+  // Dia 7 - 17/06 Ter
+  { pilar: 'conexao', pilarLabel: 'Conexão', title: 'Uma coisa difícil que eu fiz essa semana mesmo assim', format: 'Stories ou Reels',
+    how: 'Compartilha algo real da sua semana. Um movimento que você fez mesmo com medo, ou uma escolha que custou.',
+    what: 'Fala na primeira pessoa, sem embelezar. Quanto mais simples, mais poderoso.' },
+
+  // Dia 8 - 18/06 Qua
+  { pilar: 'temperamento', pilarLabel: 'Temperamentos', title: 'Como o seu temperamento está sabotando seus resultados', format: 'Carrossel',
+    how: 'Fala dos padrões inconscientes de cada temperamento. Usa situações reais do cotidiano, não termos técnicos.',
+    what: '"Não é falta de vontade. É padrão de temperamento. E quando você entende o seu, muda tudo."' },
+
+  // Dia 9 - 19/06 Qui
+  { pilar: 'grupo', pilarLabel: 'Grupo Privado', title: 'Censo de comunidade', format: 'Stories',
+    how: 'Faz um story com caixa de pergunta. Pergunta simples: "Qual é a sua maior travação hoje?" Usa as respostas como conteúdo nos próximos dias.',
+    what: '"Quero te ouvir. Me conta: o que está te travando agora?" Responde quem responder, mesmo que rapidinho.' },
+
+  // Dia 10 - 20/06 Sex
+  { pilar: 'faltas', pilarLabel: '5 Faltas', title: 'Quando a falta de acolhimento aparece nos resultados', format: 'Carrossel ou Reels',
+    how: 'Fala sobre como a falta de acolhimento impacta a maneira como a pessoa empreende, se relaciona, toma decisão.',
+    what: 'Conecta com a clientela dela: mulheres que dão conta de tudo mas se sentem sozinhas por dentro.' },
+
+  // Dia 11 - 21/06 Sáb
+  { pilar: 'identidade', pilarLabel: 'Identidade', title: 'O que eu acredito que a maioria não fala', format: 'Legenda longa ou Carrossel',
+    how: 'Pega uma das suas palavras âncora e constrói um post inteiro em volta dela. Expansão, leveza, clareza, qualquer uma que estiver viva em você nesse dia.',
+    what: 'Fala o que você acredita de verdade. Sem suavizar pra agradar, sem endurecer pra parecer autoridade.' },
+
+  // Dia 12 - 22/06 Dom
+  { pilar: 'conexao', pilarLabel: 'Conexão', title: 'Como eu organizo minha cabeça quando está tudo ao mesmo tempo', format: 'Reels ou Stories',
+    how: 'Mostra seu processo real de se reorganizar. Pode ser uma prática, um hábito, uma âncora emocional que você usa.',
+    what: 'As pessoas que te seguem estão no caos. Quando você mostra que também vive isso e tem um jeito de atravessar, cria identificação real.' },
+
+  // Dia 13 - 23/06 Seg
+  { pilar: 'empreender', pilarLabel: 'Empreender', title: 'Por que nail tech que só vende unha está deixando dinheiro na mesa', format: 'Carrossel',
+    how: 'Fala sobre o que está por trás do serviço de unhas quando quem atende tem formação comportamental. Valor agregado real.',
+    what: 'Não é sobre diminuir a unha. É sobre mostrar o que mais existe no atendimento dela.' },
+
+  // Dia 14 - 24/06 Ter
+  { pilar: 'grupo', pilarLabel: 'Grupo Privado', title: 'Chamada de grupo', format: 'Stories',
+    how: 'Story direto. Uma frase só chamando pro grupo. Pode usar uma resposta do censo que você fez no dia 9 como gancho.',
+    what: '"Recebi respostas que me tocaram. Compartilhei no grupo pra quem está dentro. O link está aqui."' },
+
+  // Dia 15 - 25/06 Qua
+  { pilar: 'temperamento', pilarLabel: 'Temperamentos', title: 'Por que a pessoa mais esforçada da sala nem sempre é a que chega mais longe', format: 'Carrossel',
+    how: 'Fala sobre o temperamento e o esforço desalinhado. Quando a pessoa dá tudo mas em direção errada.',
+    what: '"Tem gente que trabalha o dobro e chega na metade. Não é falta de garra. É falta de direção alinhada com quem ela é."' },
+
+  // Dia 16 - 26/06 Qui
+  { pilar: 'faltas', pilarLabel: '5 Faltas', title: 'A falta que ninguém admite ter', format: 'Reels curto',
+    how: 'Escolhe uma das 5 faltas e fala sobre ela de forma direta. Sem rodeio. Nomeia o que a pessoa sente mas não consegue dizer.',
+    what: 'Quanto mais específica você for, mais a pessoa vai sentir que você está falando com ela.' },
+
+  // Dia 17 - 27/06 Sex
+  { pilar: 'identidade', pilarLabel: 'Identidade', title: 'Crescimento não é só faturamento', format: 'Legenda ou Carrossel',
+    how: 'Fala sobre o que crescimento significa pra você. Usa as palavras âncora: expansão, maturidade, direção, clareza.',
+    what: '"Crescimento pra mim é quando você para de reagir e começa a escolher. É quando o que você faz começa a ter o seu nome de verdade."' },
+
+  // Dia 18 - 28/06 Sáb
+  { pilar: 'conexao', pilarLabel: 'Conexão', title: 'Um sábado real na minha vida', format: 'Stories ou Reels',
+    how: 'Mostra como é o seu sábado. Simples, real. Sem glamourizar, sem performance. É o dia de aparecer como pessoa, não como profissional.',
+    what: 'Só compartilha. Você arrumada, em casa, com o filho, no estúdio. O que for real.' },
+
+  // Dia 19 - 29/06 Dom
+  { pilar: 'empreender', pilarLabel: 'Empreender', title: 'O que eu faria diferente se estivesse começando do zero hoje', format: 'Carrossel ou Reels',
+    how: 'Fala com honestidade sobre o que aprendeu. Sem romantizar, sem lamentar. Só o que é verdade.',
+    what: 'Esse tipo de conteúdo atrai exatamente quem está no começo e precisa de alguém que já atravessou.' },
+
+  // Dia 20 - 30/06 Seg
+  { pilar: 'grupo', pilarLabel: 'Grupo Privado', title: 'Encerramento de junho', format: 'Stories',
+    how: 'Faz um story de fechamento de mês. Agradece quem esteve com você, anuncia que julho vai ser diferente. Chama pro grupo.',
+    what: '"Junho foi de plantio. Julho é de movimento. Se você quer estar mais perto de como isso acontece, o grupo está aqui."' },
+
+  // Dia 21 - 01/07 Ter
+  { pilar: 'temperamento', pilarLabel: 'Temperamentos', title: 'Como cada temperamento reage quando a vida aperta', format: 'Carrossel',
+    how: 'Mostra os 4 temperamentos em situação de pressão. Usa exemplos cotidianos concretos. Faz a pessoa se reconhecer.',
+    what: 'Pergunta no final: "Qual é o seu padrão quando a vida aperta?" Resposta nos comentários ou no grupo.' },
+
+  // Dia 22 - 02/07 Qua
+  { pilar: 'identidade', pilarLabel: 'Identidade', title: 'Por que eu não me identifico com a maioria dos perfis que ensinam o que eu ensino', format: 'Reels ou legenda',
+    how: 'Fala o que te diferencia sem atacar ninguém. Só mostra o que você acredita e como isso se traduz no seu trabalho.',
+    what: 'Usa leveza e firmeza ao mesmo tempo. Você sabe o que é seu.' },
+
+  // Dia 23 - 03/07 Qui
+  { pilar: 'faltas', pilarLabel: '5 Faltas', title: 'Quando a falta de direção aparece disfarçada de preguiça', format: 'Carrossel',
+    how: 'Desmonta o mito da preguiça. Fala sobre como quem parece parado muitas vezes está paralisado por falta de direção interna.',
+    what: '"Preguiça é raro. Desorientação é comum. E tem solução."' },
+
+  // Dia 24 - 04/07 Sex
+  { pilar: 'grupo', pilarLabel: 'Grupo Privado', title: 'Chamada de grupo', format: 'Stories',
+    how: 'Story simples. Pode usar uma frase que você compartilhou no grupo essa semana como prévia.',
+    what: '"Essa semana no grupo eu falei sobre algo que poucas pessoas tocam. Se você ainda não está lá, o link é esse aqui."' },
+
+  // Dia 25 - 05/07 Sáb
+  { pilar: 'conexao', pilarLabel: 'Conexão', title: 'O que a maternidade me ensinou sobre liderança', format: 'Reels ou legenda longa',
+    how: 'Conecta maternidade com gestão de si mesma, de negócio, de pessoas. Sem clichê de "ser mãe me fez mais forte".',
+    what: 'Vai fundo. O que especificamente a maternidade mudou na forma como você toma decisão, como você se posiciona, como você cuida.' },
+
+  // Dia 26 - 06/07 Dom
+  { pilar: 'empreender', pilarLabel: 'Empreender', title: 'Reserva de emergência não é luxo', format: 'Carrossel',
+    how: 'Fala sobre dinheiro com naturalidade. Você guarda, você investe, você construiu isso. Mostra o caminho sem exibicionismo.',
+    what: '"A virada não foi ganhar mais. Foi parar de gastar no pânico e começar a guardar com intenção."' },
+
+  // Dia 27 - 07/07 Seg
+  { pilar: 'temperamento', pilarLabel: 'Temperamentos', title: 'Por que o relacionamento trava quando os temperamentos batem de frente', format: 'Carrossel',
+    how: 'Fala sobre temperamento nas relações pessoais. Pode ser casal, mãe e filho, sócias, amigas.',
+    what: 'Esse assunto abre muito porque todo mundo está dentro de um relacionamento difícil em alguma área da vida.' },
+
+  // Dia 28 - 08/07 Ter
+  { pilar: 'faltas', pilarLabel: '5 Faltas', title: 'A sessão que virou o jogo', format: 'Reels ou stories',
+    how: 'Conta uma história de atendimento sem revelar a identidade da cliente. Mostra o antes e o depois de trabalhar uma das faltas.',
+    what: 'Não precisa revelar qual falta foi. Só mostra o que mudou e o que foi possível depois.' },
+
+  // Dia 29 - 09/07 Qua
+  { pilar: 'grupo', pilarLabel: 'Grupo Privado', title: 'Chamada de grupo', format: 'Stories',
+    how: 'Essa semana você já tem conteúdo acumulado. Usa o que gerou mais resposta como gancho pra chamar pro grupo.',
+    what: '"As conversas mais honestas estão acontecendo lá dentro. Ainda dá tempo de entrar."' },
+
+  // Dia 30 - 10/07 Qui
+  { pilar: 'identidade', pilarLabel: 'Identidade', title: '30 dias. O que mudou em mim e o que vem por aí', format: 'Reels ou legenda',
+    how: 'Faz um fechamento de ciclo. Fala sobre o que esse período de 30 dias representou. O que você construiu, o que aprendeu, o que confirma.',
+    what: '"Não é sobre o que eu postei. É sobre quem eu fui enquanto postava. Obrigada por estar aqui."' },
+];
+
+const dateLabels = [
+  '11/06', '12/06', '13/06', '14/06', '15/06', '16/06', '17/06',
+  '18/06', '19/06', '20/06', '21/06', '22/06', '23/06', '24/06',
+  '25/06', '26/06', '27/06', '28/06', '29/06', '30/06',
+  '01/07', '02/07', '03/07', '04/07', '05/07', '06/07', '07/07',
+  '08/07', '09/07', '10/07'
+];
+
+const weekDays = ['Qua','Qui','Sex','Sáb','Dom','Seg','Ter'];
+
+const grid = document.getElementById('calGrid');
+
+days.forEach((d, i) => {
+  const card = document.createElement('div');
+  card.className = `day-card ${d.pilar}`;
+  card.innerHTML = `
+    <div class="card-num">${i + 1}</div>
+    <div class="card-pilar">${d.pilarLabel}</div>
+    <div class="card-title">${d.title}</div>
+    <div class="card-format">${d.format}</div>
+  `;
+  card.addEventListener('click', () => openModal(d, i));
+  grid.appendChild(card);
+});
+
+function openModal(d, i) {
+  document.getElementById('modalDay').textContent = `Dia ${i + 1} · ${dateLabels[i]} · ${weekDays[i % 7]}`;
+  document.getElementById('modalPilar').textContent = d.pilarLabel;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalHow').textContent = d.how;
+  document.getElementById('modalWhat').textContent = d.what;
+  document.getElementById('modalFormat').textContent = d.format;
+  document.getElementById('modalOverlay').classList.add('active');
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('active');
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.getElementById('modalOverlay').classList.remove('active');
+});
+</script>
+</body>
+</html>
