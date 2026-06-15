@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Devolutiva · May</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0a0804; --bg2: #110f0a; --bg3: #1a1710;
+      --gold: #c9a84c; --gold-dim: #7a6330;
+      --cream: #e8dfc8; --muted: #8a7f6a;
+      --line: rgba(201,168,76,0.15);
+    }
+    html { background: #0a0804 !important; }
+    html, body {
+      background: #0a0804 !important; color: var(--cream);
+      font-family: 'Montserrat', sans-serif; font-weight: 300;
+      min-height: 100vh; overflow-x: hidden; -webkit-text-size-adjust: 100%;
+    }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.3;
+    }
+    .wrap { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; padding: 0 24px 100px; }
+
+    .header { padding: 70px 0 56px; border-bottom: 1px solid var(--line); text-align: center; }
+    .eyebrow { font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .header h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(34px, 7vw, 58px); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.1; }
+    .header h1 span { color: var(--gold); }
+    .header-sub { font-size: 12px; color: var(--muted); margin-top: 14px; line-height: 1.7; }
+
+    .section { padding: 56px 0; border-bottom: 1px solid var(--line); opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .section.visible { opacity: 1; transform: translateY(0); }
+    .section:last-child { border-bottom: none; }
+    .section-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 5vw, 38px); font-weight: 300; font-style: italic; color: var(--cream); line-height: 1.2; margin-bottom: 22px; }
+    .section-body { font-size: 13px; line-height: 1.9; color: #b0a896; }
+    .section-body p + p { margin-top: 12px; }
+
+    .quote { background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(201,168,76,0.02)); border: 1px solid var(--line); border-left: 3px solid var(--gold); padding: 28px 24px; margin: 28px 0; position: relative; overflow: hidden; }
+    .quote::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 90px; color: var(--gold); opacity: 0.07; position: absolute; top: -8px; left: 14px; line-height: 1; }
+    .quote p { font-family: 'Cormorant Garamond', serif; font-size: clamp(16px, 3vw, 22px); font-style: italic; color: var(--cream); line-height: 1.5; position: relative; z-index: 1; }
+    .quote-sub { font-size: 11px; color: var(--muted); margin-top: 10px; letter-spacing: 1px; }
+
+    .insight { background: rgba(201,168,76,0.05); border: 1px solid var(--line); border-left: 3px solid var(--gold); padding: 18px 22px; margin-top: 20px; }
+    .insight-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .insight-text { font-size: 12px; line-height: 1.7; color: #b0a896; }
+
+    /* GRID 2 COLUNAS */
+    .duas-colunas { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 28px; }
+    @media (max-width: 540px) { .duas-colunas { grid-template-columns: 1fr; } }
+    .coluna { background: var(--bg2); padding: 28px 24px; }
+    .coluna-label { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+    .coluna.evita .coluna-label { color: var(--muted); }
+    .coluna.busca .coluna-label { color: var(--gold); }
+    .coluna-item { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+    .coluna-icon { font-size: 11px; min-width: 14px; margin-top: 2px; }
+    .coluna.evita .coluna-icon { color: #6b5a4e; }
+    .coluna.busca .coluna-icon { color: var(--gold); }
+    .coluna-text { font-size: 12px; line-height: 1.6; color: #b0a896; }
+
+    /* PIPELINE */
+    .pipeline { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--line); margin-top: 28px; }
+    .pipe-item { display: grid; grid-template-columns: 100px 1fr; border-bottom: 1px solid var(--line); }
+    .pipe-item:last-child { border-bottom: none; }
+    .pipe-label-wrap { background: var(--bg2); border-right: 1px solid var(--line); padding: 22px 16px; display: flex; align-items: center; }
+    .pipe-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); line-height: 1.4; }
+    .pipe-content { padding: 22px 24px; }
+    .pipe-titulo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-style: italic; color: var(--cream); margin-bottom: 8px; }
+    .pipe-desc { font-size: 12px; line-height: 1.8; color: var(--muted); }
+    .pipe-desc strong { color: #b0a896; font-weight: 500; }
+    @media (max-width: 540px) { .pipe-item { grid-template-columns: 1fr; } .pipe-label-wrap { border-right: none; border-bottom: 1px solid var(--line); padding: 12px 16px; } }
+
+    /* PONTO CEGO */
+    .ponto-cego { background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.02)); border: 1px solid var(--gold-dim); padding: 32px 28px; margin-top: 28px; position: relative; overflow: hidden; }
+    .pc-label { font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .pc-titulo { font-family: 'Cormorant Garamond', serif; font-size: clamp(22px, 4.5vw, 32px); font-style: italic; color: var(--cream); line-height: 1.4; margin-bottom: 16px; }
+    .pc-desc { font-size: 13px; line-height: 1.9; color: #b0a896; }
+    .pc-desc p + p { margin-top: 12px; }
+
+    /* NICHOS */
+    .nichos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 28px; }
+    @media (max-width: 520px) { .nichos-grid { grid-template-columns: 1fr; } }
+    .nicho-card { background: var(--bg2); border: 1px solid var(--line); padding: 22px 20px; position: relative; overflow: hidden; transition: border-color 0.3s; }
+    .nicho-card:hover { border-color: var(--gold-dim); }
+    .nicho-card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, var(--gold), transparent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s; }
+    .nicho-card:hover::after { transform: scaleX(1); }
+    .nicho-nome { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-style: italic; color: var(--cream); margin-bottom: 10px; }
+    .nicho-desc { font-size: 12px; line-height: 1.7; color: var(--muted); }
+
+    /* COPY */
+    .copy-cards { display: flex; flex-direction: column; gap: 16px; margin-top: 28px; }
+    .copy-card { background: var(--bg2); border: 1px solid var(--line); padding: 24px; }
+    .copy-label { font-size: 8px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .copy-texto { font-size: 13px; line-height: 1.9; color: #b0a896; white-space: pre-line; margin-bottom: 16px; }
+    .copy-texto em { color: var(--cream); font-style: normal; }
+    .copy-btn { width: 100%; padding: 10px; background: transparent; border: 1px solid var(--line); color: var(--muted); font-family: 'Montserrat', sans-serif; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.25s; }
+    .copy-btn:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+    /* MANIFESTO */
+    .manifesto-block { padding: 40px 0 0; text-align: center; }
+    .manifesto-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(17px, 3.5vw, 24px); font-style: italic; font-weight: 300; color: var(--cream); line-height: 1.7; max-width: 600px; margin: 0 auto; }
+    .manifesto-text em { color: var(--gold); font-style: normal; }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <p class="eyebrow">Devolutiva · Sessão de Persona & Comunicação</p>
+    <h1>Para <span>May</span></h1>
+    <p class="header-sub">Construído a partir das suas respostas, como se você estivesse na sessão<br>Maria Clara · All Win Academy</p>
+  </div>
+
+  <!-- O QUE EU OUVI -->
+  <div class="section">
+    <p class="section-label">O que eu ouvi de você</p>
+    <h2 class="section-title">May, você já sabe quem você é.</h2>
+    <div class="section-body">
+      <p>Lendo suas respostas, uma coisa ficou clara antes de qualquer outra: você não está em busca de identidade. Você já tem identidade: o que falta é coragem de comunicar sem filtro.</p>
+      <p>Você não aguenta clientes que travam, que vivem no talvez, que pedem mudança de comunicação no meio do caminho. E ao mesmo tempo, você sonha com liberdade: viajar, perfumar, ser você mesma sem precisar performar uma personalidade "profissional" genérica.</p>
+      <p>Isso não é contradição. É coerência. Você quer trabalhar com gente que também já sabe quem é, porque só assim você consegue mergulhar de verdade.</p>
+    </div>
+
+    <div class="quote">
+      <p>Eu mergulho muito no negócio da pessoa. Procuro a entrega única de cada uma.</p>
+      <p class="quote-sub">sua resposta sobre o que as clientes diriam de você</p>
+    </div>
+  </div>
+
+  <!-- PERSONA -->
+  <div class="section">
+    <p class="section-label">Persona</p>
+    <h2 class="section-title">Quem você evita. Quem você busca.</h2>
+    <div class="section-body">
+      <p>Sua persona não é definida apenas pelo nicho. É definida pelo comportamento. Essas duas listas são o filtro mais importante da sua comunicação a partir de hoje.</p>
+    </div>
+
+    <div class="duas-colunas">
+      <div class="coluna evita">
+        <p class="coluna-label">Quem você evita</p>
+        <div class="coluna-item"><span class="coluna-icon">✕</span><p class="coluna-text">Não paga / discute valor</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✕</span><p class="coluna-text">Vive na incerteza: "talvez", "vamos ver"</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✕</span><p class="coluna-text">Rígida demais com as próprias coisas</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✕</span><p class="coluna-text">Sem criatividade, quer fórmula pronta</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✕</span><p class="coluna-text">Sempre "dona da razão"</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✕</span><p class="coluna-text">Não cumpre prazos</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✕</span><p class="coluna-text">Desmarca em cima da hora</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✕</span><p class="coluna-text">Pouca execução, fica só na ideia</p></div>
+      </div>
+      <div class="coluna busca">
+        <p class="coluna-label">Quem você busca</p>
+        <div class="coluna-item"><span class="coluna-icon">✦</span><p class="coluna-text">Sabe o valor do que faz e paga por isso</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✦</span><p class="coluna-text">Decide. Não vive no talvez.</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✦</span><p class="coluna-text">Flexível, aberta ao processo criativo</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✦</span><p class="coluna-text">Quer ser ela mesma, não seguir fórmula de mercado</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✦</span><p class="coluna-text">Aberta a ouvir, troca de verdade</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✦</span><p class="coluna-text">Comprometida com prazos e processo</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✦</span><p class="coluna-text">Presente, confiável</p></div>
+        <div class="coluna-item"><span class="coluna-icon">✦</span><p class="coluna-text">Executa, tira ideia do papel</p></div>
+      </div>
+    </div>
+
+    <div class="insight">
+      <p class="insight-label">✦ O que isso revela</p>
+      <p class="insight-text">May, o que você descreveu não é "cliente ideal" no sentido genérico. É alguém com a mesma relação com o trabalho que você tem. Comprometimento, execução, autenticidade. Você não está vendendo design de comunicação. Está procurando parceria de verdade.</p>
+    </div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="section">
+    <p class="section-label">A Jornada Completa</p>
+    <h2 class="section-title">Dor → Desejo → Frustração → Transformação → Prova.</h2>
+    <div class="section-body">
+      <p>Essa é a estrutura que vai sustentar toda sua comunicação. Cada etapa veio direto das suas respostas, apenas organizada.</p>
+    </div>
+
+    <div class="pipeline">
+      <div class="pipe-item">
+        <div class="pipe-label-wrap"><p class="pipe-label">Dor</p></div>
+        <div class="pipe-content">
+          <p class="pipe-titulo">Clientes que dão dor de cabeça e querem mudar a comunicação no meio do caminho</p>
+          <p class="pipe-desc">Essa é a dor que você vive, e é também a dor que conecta com quem busca alguém como você. Cliente que já passou por isso com outros profissionais reconhece imediatamente: <strong>"finalmente alguém que não vai me deixar largada no meio do processo."</strong></p>
+        </div>
+      </div>
+
+      <div class="pipe-item">
+        <div class="pipe-label-wrap"><p class="pipe-label">Desejo</p></div>
+        <div class="pipe-content">
+          <p class="pipe-titulo">Liberdade pra ser ela mesma, sem fórmula, sem cópia</p>
+          <p class="pipe-desc">Você quer viajar, ter tempo, ser autêntica. E a cliente ideal quer exatamente isso pro próprio negócio: <strong>parar de seguir o que "todo mundo faz" e finalmente comunicar quem ela realmente é.</strong> O desejo de vocês duas se encontra aqui.</p>
+        </div>
+      </div>
+
+      <div class="pipe-item">
+        <div class="pipe-label-wrap"><p class="pipe-label">Frustração</p></div>
+        <div class="pipe-content">
+          <p class="pipe-titulo">Já tentou fórmulas prontas e se adaptar ao que o mercado pede, e não funcionou</p>
+          <p class="pipe-desc">Isso é universal entre os nichos que você quer atender. Arquitetos, esteticistas, designers de interiores, fotógrafos: todos já tentaram um "modelo de Instagram" genérico e sentiram que <strong>aquilo não era eles.</strong> Essa frustração é a porta de entrada da sua comunicação.</p>
+        </div>
+      </div>
+
+      <div class="pipe-item">
+        <div class="pipe-label-wrap"><p class="pipe-label">Transformação</p></div>
+        <div class="pipe-content">
+          <p class="pipe-titulo">Clareza do potencial que a marca pessoal já tem</p>
+          <p class="pipe-desc">O resultado que você entrega não é "mais seguidores" ou "mais posts." É <strong>a pessoa enxergar o que já existia nela, que estava escondido</strong> atrás de fórmulas genéricas. Esse é o "depois" que sua cliente sente, antes mesmo de qualquer resultado em número.</p>
+        </div>
+      </div>
+
+      <div class="pipe-item">
+        <div class="pipe-label-wrap"><p class="pipe-label">Prova social</p></div>
+        <div class="pipe-content">
+          <p class="pipe-titulo">"Ela mergulha muito no meu negócio. Busca minha entrega única."</p>
+          <p class="pipe-desc">Essa é a frase que sua cliente diria pra uma amiga. <strong>Não é sobre estética bonita. É sobre ser vista de verdade.</strong> Esse é seu diferencial mais forte, e o que ninguém mais entrega da mesma forma.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PONTO CEGO -->
+  <div class="section">
+    <p class="section-label">O Ponto Cego</p>
+    <h2 class="section-title">O que você não está vendo, May.</h2>
+
+    <div class="ponto-cego">
+      <p class="pc-label">✦ Insight central</p>
+      <p class="pc-titulo">Você está pedindo da sua cliente a mesma coisa que você quer pra você.</p>
+      <div class="pc-desc">
+        <p>Olha de novo a sua lista de "quem você busca": decide, é flexível, é autêntica, comprometida, executa. Agora olha a sua lista de desejos pessoais: liberdade, autenticidade, fluxo, ser ela mesma sem seguir fórmula.</p>
+        <p>São as mesmas palavras, May. Você está procurando clientes que vivem o que você valoriza, porque só com essas pessoas o seu trabalho flui de verdade.</p>
+        <p>O ponto cego é: <strong style="color:var(--gold)">você ainda está se comunicando como "designer de comunicação para empresas", quando na verdade você é a profissional que revela quem a pessoa já é por trás do negócio.</strong></p>
+        <p>Isso não é storytelling bonito. É a frase que conecta sua dor, seu desejo e sua entrega numa coisa só. E é isso que vai atrair quem você quer atender, e afastar quem te dá dor de cabeça.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- NICHOS -->
+  <div class="section">
+    <p class="section-label">Onde aplicar</p>
+    <h2 class="section-title">Os nichos que você escolheu, e por quê funcionam.</h2>
+    <div class="section-body">
+      <p>Escritórios de arquitetura, clínicas de estética, design de interiores e fotógrafos com personalidade: não é coincidência que esses quatro nichos apareceram juntos. Todos compartilham a mesma característica.</p>
+    </div>
+
+    <div class="nichos-grid">
+      <div class="nicho-card">
+        <p class="nicho-nome">Escritórios de arquitetura</p>
+        <p class="nicho-desc">Profissionais que criam algo único pra cada cliente, mas comunicam de forma genérica, igual a qualquer outro escritório. A dissonância entre o trabalho (autoral) e a comunicação (padronizada) é gritante.</p>
+      </div>
+      <div class="nicho-card">
+        <p class="nicho-nome">Clínicas de estética</p>
+        <p class="nicho-desc">Mercado saturado de fórmulas: antes/depois, promoção, gatilho de urgência. Quem tem personalidade própria e quer fugir desse padrão é exatamente quem você quer atrair.</p>
+      </div>
+      <div class="nicho-card">
+        <p class="nicho-nome">Design de interiores</p>
+        <p class="nicho-desc">Assim como arquitetura, trabalho 100% autoral, comunicação 100% replicada. Profissionais que sentem que o Instagram não reflete o talento real que têm.</p>
+      </div>
+      <div class="nicho-card">
+        <p class="nicho-nome">Fotógrafos com personalidade</p>
+        <p class="nicho-desc">"Com personalidade" é a chave, você já filtrou. Não é qualquer fotógrafo. É quem já tem voz própria mas não sabe como traduzir isso em comunicação consistente.</p>
+      </div>
+    </div>
+
+    <div class="insight">
+      <p class="insight-label">✦ O fio condutor</p>
+      <p class="insight-text">Todos esses nichos entregam trabalho autoral, mas comunicam de forma genérica. Esse é o gap que você preenche. Sua comunicação pode nomear exatamente isso: "Seu trabalho é único. Sua comunicação não é. Vamos mudar isso."</p>
+    </div>
+  </div>
+
+  <!-- COPY PRONTO -->
+  <div class="section" style="border-bottom:none;">
+    <p class="section-label">Copy pronto · Instagram</p>
+    <h2 class="section-title">3 textos prontos pra usar.</h2>
+    <div class="section-body">
+      <p>Cada um nasce direto das suas respostas, sem genérico, sem fórmula (ironicamente, o que você mais evita).</p>
+    </div>
+
+    <div class="copy-cards">
+
+      <div class="copy-card">
+        <p class="copy-label">Post de posicionamento · fixar no perfil</p>
+        <p class="copy-texto">Seu trabalho é autoral.
+
+Cada projeto que você entrega tem a sua marca: sua forma de pensar, de resolver, de criar.
+
+Mas a sua comunicação?
+
+Provavelmente parece igual a de qualquer outro escritório, clínica ou estúdio do seu segmento.
+
+Mesmo template. Mesma estética. Mesmas frases.
+
+Eu mergulho no seu negócio pra encontrar o que só você tem, e transformar isso em comunicação que parece com você.
+
+Não é sobre seguir fórmula.
+É sobre parar de seguir.</p>
+        <button class="copy-btn" onclick="copiar(this, 'Seu trabalho é autoral.\n\nCada projeto que você entrega tem a sua marca: sua forma de pensar, de resolver, de criar.\n\nMas a sua comunicação?\n\nProvavelmente parece igual a de qualquer outro escritório, clínica ou estúdio do seu segmento.\n\nMesmo template. Mesma estética. Mesmas frases.\n\nEu mergulho no seu negócio pra encontrar o que só você tem, e transformar isso em comunicação que parece com você.\n\nNão é sobre seguir fórmula.\nÉ sobre parar de seguir.')">Copiar texto</button>
+      </div>
+
+      <div class="copy-card">
+        <p class="copy-label">Post de identificação · a frustração</p>
+        <p class="copy-texto">Você já tentou.
+
+Já testou modelo de feed, já copiou referência, já seguiu "o que o mercado pede."
+
+E sentiu que aquilo não era você.
+
+Não foi falta de tentativa. Foi tentar se encaixar numa fórmula que nunca foi feita pra alguém com a sua identidade.
+
+Arquitetos, designers de interiores, esteticistas, fotógrafos: quem tem trabalho autoral não cabe em template genérico.
+
+A comunicação que funciona é a que parte de quem você é, não da última tendência.</p>
+        <button class="copy-btn" onclick="copiar(this, 'Você já tentou.\n\nJá testou modelo de feed, já copiou referência, já seguiu \"o que o mercado pede.\"\n\nE sentiu que aquilo não era você.\n\nNão foi falta de tentativa. Foi tentar se encaixar numa fórmula que nunca foi feita pra alguém com a sua identidade.\n\nArquitetos, designers de interiores, esteticistas, fotógrafos: quem tem trabalho autoral não cabe em template genérico.\n\nA comunicação que funciona é a que parte de quem você é, não da última tendência.')">Copiar texto</button>
+      </div>
+
+      <div class="copy-card">
+        <p class="copy-label">Post de filtro · quem é pra você</p>
+        <p class="copy-texto">Eu não trabalho com todo mundo.
+
+Não é arrogância. É clareza.
+
+Funciono melhor com quem decide, cumpre prazo, está presente e quer executar, não só sonhar.
+
+Se você é arquiteta, faz design de interiores, tem clínica de estética ou é fotógrafa e sabe que seu trabalho tem uma identidade forte, mas sua comunicação ainda não reflete isso,
+
+provavelmente é por aqui que a gente se encontra.
+
+<em>Eu mergulho no seu negócio. Procuro sua entrega única.</em></p>
+        <button class="copy-btn" onclick="copiar(this, 'Eu não trabalho com todo mundo.\n\nNão é arrogância. É clareza.\n\nFunciono melhor com quem decide, cumpre prazo, está presente e quer executar, não só sonhar.\n\nSe você é arquiteta, faz design de interiores, tem clínica de estética ou é fotógrafa e sabe que seu trabalho tem uma identidade forte, mas sua comunicação ainda não reflete isso,\n\nprovavelmente é por aqui que a gente se encontra.\n\nEu mergulho no seu negócio. Procuro sua entrega única.')">Copiar texto</button>
+      </div>
+
+    </div>
+
+    <div class="manifesto-block">
+      <p class="manifesto-text">
+        Seu trabalho já é <em>único</em>.<br>
+        Sua comunicação ainda não.<br><br>
+        Eu não trago fórmula.<br>
+        Eu trago <em>você</em>, organizada, visível, inconfundível.<br><br>
+        Pra quem decide. Pra quem executa.<br>
+        Pra quem já sabe que copiar não é o caminho.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.06 });
+  document.querySelectorAll('.section').forEach(s => obs.observe(s));
+
+  function copiar(btn, texto) {
+    navigator.clipboard.writeText(texto).then(() => {
+      btn.textContent = 'Copiado ✓';
+      setTimeout(() => btn.textContent = 'Copiar texto', 2000);
+    });
+  }
+</script>
+</body>
+</html>
