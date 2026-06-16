@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Calendário de Conteúdo | May</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+html{background:#fff!important}
+html,body{background:#fff!important;color:#1a1612;-webkit-text-size-adjust:100%;margin:0;padding:0;font-family:'Lora',Georgia,serif;min-height:100vh}
+:root{
+--gold:#b8860b;--gold-l:#d4a017;--border:#e8e0d0;--dim:#8a7a6a;
+--cx:#0066cc;--cx-bg:#cce0ff;--cx-t:#003d80;
+--ob:#cc4400;--ob-bg:#ffd6c2;--ob-t:#7a2200;
+--vd:#007a2f;--vd-bg:#b8f0cc;--vd-t:#004018;
+--bs:#6600cc;--bs-bg:#e8ccff;--bs-t:#3d0080;
+--au:#cc0044;--au-bg:#ffc2d4;--au-t:#7a0028;
+--ed:#aa7700;--ed-bg:#fff0b3;--ed-t:#664400;
+}
+*{box-sizing:border-box}
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+.hdr{text-align:center;margin-bottom:40px;padding-bottom:28px;border-bottom:2px solid var(--border)}
+.hdr .marca{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.hdr h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);font-weight:300;color:#1a1612;margin:0 0 6px;line-height:1.1}
+.hdr h1 span{color:var(--gold);font-style:italic}
+.hdr .sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;line-height:1.8}
+.pos{display:inline-block;margin-top:12px;font-family:'Lora',serif;font-size:13px;font-style:italic;color:#5a4a3a;border-left:3px solid var(--gold);padding:6px 14px;text-align:left}
+.leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;justify-content:center}
+.li{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase;font-weight:600}
+.ld{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.mes-label{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin:32px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.dh{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+.dh div{text-align:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:6px 0;font-family:'Cormorant Garamond',serif;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+.card{border-radius:8px;padding:10px 8px;min-height:100px;cursor:pointer;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;border:2px solid transparent;position:relative}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.15);z-index:2}
+.card.vz{background:transparent;border:2px dashed #e0d8cc;cursor:default;opacity:0.2;min-height:100px}
+.card.vz:hover{transform:none;box-shadow:none}
+.num{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;line-height:1;margin-bottom:5px}
+.pn{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:5px;opacity:.75}
+.id{font-size:10px;line-height:1.4;flex:1}
+.rb{position:absolute;top:7px;right:7px;font-size:8px;background:rgba(0,0,0,.12);border-radius:10px;padding:2px 6px;font-weight:700}
+.cx{background:var(--cx-bg);border-color:var(--cx);color:var(--cx-t)}
+.ob{background:var(--ob-bg);border-color:var(--ob);color:var(--ob-t)}
+.vd{background:var(--vd-bg);border-color:var(--vd);color:var(--vd-t)}
+.bs{background:var(--bs-bg);border-color:var(--bs);color:var(--bs-t)}
+.au{background:var(--au-bg);border-color:var(--au);color:var(--au-t)}
+.ed{background:var(--ed-bg);border-color:var(--ed);color:var(--ed-t)}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:center;justify-content:center;padding:20px}
+.ov.on{display:flex}
+.modal{background:#fff;border-radius:14px;max-width:500px;width:100%;padding:32px;position:relative;max-height:88vh;overflow-y:auto;border-top:5px solid #1a1612}
+.cls{position:absolute;top:14px;right:18px;background:none;border:none;font-size:24px;cursor:pointer;color:#888;line-height:1}
+.mdt{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;font-family:'Cormorant Garamond',serif}
+.mbg{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:4px}
+.mrl{display:inline-block;margin-left:8px;font-size:9px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:#1a1612;color:#fff}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#1a1612;margin:0 0 20px;line-height:1.25}
+.sec h4{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 5px}
+.sec p{font-size:13px;line-height:1.75;color:#2a2420;margin:0 0 16px}
+.int{background:#f8f6f2;border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;font-size:12px;color:#5a4a2a;margin-top:4px;font-style:italic}
+.rlb{background:#1a1612;color:#fff;border-radius:8px;padding:12px 16px;margin-top:16px;font-size:12px;line-height:1.6}
+.rlb strong{color:var(--gold-l);font-size:10px;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:4px}
+.ftr{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
+.ftr span{color:var(--gold)}
+@media(max-width:600px){.grid{gap:3px}.card{min-height:72px;padding:7px 5px}.num{font-size:16px}.pn{font-size:7px}.id,.rb{display:none}.modal{padding:22px 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="marca">May · Branding & Comunicação</div>
+    <h1>16 Jun <span>—</span> 15 Jul <span>2026</span></h1>
+    <div class="sub">Identidade · Branding Autoral · Comunicação que parece com você</div>
+    <div class="pos">"Seu trabalho é único. Sua comunicação ainda não. Vamos mudar isso."</div>
+  </div>
+
+  <div class="leg">
+    <div class="li"><div class="ld" style="background:var(--cx)"></div>Conexão</div>
+    <div class="li"><div class="ld" style="background:var(--ob)"></div>Quebra de Objeção</div>
+    <div class="li"><div class="ld" style="background:var(--vd)"></div>Venda</div>
+    <div class="li"><div class="ld" style="background:var(--bs)"></div>Aumento de Base</div>
+    <div class="li"><div class="ld" style="background:var(--au)"></div>Autoridade</div>
+    <div class="li"><div class="ld" style="background:var(--ed)"></div>Educação</div>
+  </div>
+
+  <div class="mes-label">Junho 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gjun"></div>
+
+  <div class="mes-label">Julho 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gjul"></div>
+</div>
+
+<div class="ov" id="ov" onclick="fc(event)">
+  <div class="modal">
+    <button class="cls" onclick="fc()">×</button>
+    <div class="mdt" id="mdt"></div>
+    <span class="mbg" id="mbg"></span><span class="mrl" id="mrl" style="display:none">🎬 REEL</span>
+    <h2 id="mti"></h2>
+    <div class="sec"><h4>Gancho</h4><p id="mga"></p></div>
+    <div class="sec"><h4>Desenvolvimento</h4><p id="mdv"></p></div>
+    <div class="sec"><h4>CTA</h4><p id="mct"></p></div>
+    <div class="int" id="min"></div>
+    <div class="rlb" id="mrb" style="display:none"><strong>🎬 Ideia de Reel</strong><span id="mrt"></span></div>
+  </div>
+</div>
+
+<script>
+// Dias: d=dia, m=mes(6ou7), p=pilar, pN=nome, r=reel, i=ideia, g=gancho, dv=dev, c=cta, in=interacao, rt=reelTexto
+const D=[
+// JUNHO
+{d:16,m:6,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"Fórmula pronta parece com todo mundo menos com você",
+g:"Você seguiu o passo a passo. Postou no horário certo, usou a fonte certa, copiou o estilo que estava funcionando. E ficou parecendo uma versão apagada de outra pessoa.",
+dv:"A dor de quem é autoral e tentou encaixar a autoria numa fórmula é real. Não é que a fórmula é errada para todo mundo — é que para quem tem identidade forte, fórmula apaga exatamente o que faz essa pessoa inconfundível. O trabalho de May começa aqui: encontrar o que é só seu e fazer isso comunicar.",
+c:"Você já se sentiu invisível dentro da sua própria comunicação? Me conta aqui.",
+in:"Enquete nos stories: 'Você já tentou fórmula pronta e sentiu que não era você?'",
+rt:"Câmera direta, sem roteiro aparente. 'Você seguiu tudo certo. Postou no horário, usou a paleta, fez o carrossel. E mesmo assim pareceu genérico.' Pausa. 'Não é você que está errada. É que fórmula apaga identidade.' Encerra olhando na câmera."},
+
+{d:17,m:6,p:"vd",pN:"Venda",r:false,
+i:"O que acontece quando a comunicação finalmente parece com você",
+g:"Ela entregava trabalho autoral há anos. A comunicação dela parecia uma agência qualquer. Depois de dois meses, os clientes começaram a dizer: 'eu te escolhi porque parece que você é a única que faz isso.'",
+dv:"Caso real, antes e depois específico. Antes: comunicação genérica, clientes que chegavam pelo preço, energia de convencer. Depois: comunicação que filtra, clientes que chegam prontos, energia de confirmar. Vende a transformação, não o processo.",
+c:"Se isso ressoa, a gente pode conversar. Link na bio.",
+in:"Link na bio + DM aberta"},
+
+{d:18,m:6,p:"bs",pN:"Aumento de Base",r:true,
+i:"Arquiteto que comunica como todo mundo perde para quem comunica como ele mesmo",
+g:"Dois arquitetos. Portfólio parecido. Um tem fila de espera. O outro está sempre justificando o preço. A diferença não é o trabalho — é a comunicação.",
+dv:"Conteúdo feito para circular no nicho — arquitetos, designers, fotógrafos, esteticistas. Cada um que lê se vê no exemplo. O compartilhamento acontece porque parece que foi escrito para alguém específico que a pessoa conhece.",
+c:"Salva e manda para quem você conhece que está nesse lugar.",
+in:"'Marca aquele profissional autoral que ainda comunica de forma genérica'",
+rt:"Reel com dois personagens contrastantes — pode ser você fazendo os dois papéis ou só narração. 'Mesmo portfólio. Resultado diferente. O que muda?' — pausa — 'A comunicação que parece com quem é.'"},
+
+{d:19,m:6,p:"au",pN:"Autoridade",r:false,
+i:"O que eu encontro quando mergulho em um negócio",
+g:"Quando começo a trabalhar com alguém, a primeira coisa que faço não é perguntar sobre o cliente. É perguntar sobre ela. Porque o que faz o negócio ser único está em quem a pessoa é — não no que ela entrega.",
+dv:"Mostra o processo de May sem revelar tudo. O que ela pergunta, onde a identidade aparece, o momento em que a cliente percebe o que é só dela. Autoridade construída em como ela trabalha, não em quantos anos tem de mercado.",
+c:"Tem dúvida sobre como o processo funciona? Me pergunta.",
+in:"Caixinha nos stories: 'Me faz uma pergunta sobre como eu trabalho'"},
+
+{d:20,m:6,p:"ed",pN:"Educação",r:true,
+i:"Comunicação genérica não é falta de conteúdo — é excesso de comparação",
+g:"Você olha para o que está funcionando para os outros e tenta adaptar. O resultado é uma comunicação que parece com o mercado e não parece com você. E quem poderia te contratar passa sem te reconhecer.",
+dv:"Educa sobre o mecanismo que gera comunicação genérica — não é preguiça nem falta de talento. É o instinto de imitar o que parece seguro. Para profissionais autorais, o risco real é o contrário: comunicar igual ao mercado apaga exatamente o diferencial que justifica o preço.",
+c:"Salva esse. Ele explica muito sobre por que você ainda não está sendo reconhecida pelo que realmente faz.",
+in:"Salvar",
+rt:"Reel conceitual, tom direto. 'Você não tem comunicação genérica porque não sabe o que fazer. Tem porque ficou olhando para os outros e tentando encaixar o que é seu no molde deles.' Pausa. 'Isso se resolve.'"},
+
+{d:21,m:6,p:"cx",pN:"Conexão",r:false,
+i:"Um domingo real — o que te alimenta fora do trabalho",
+g:"Mostra um pedaço do seu dia sem narrativa profissional. O que você faz quando não está criando para ninguém.",
+dv:"Stories ou carrossel leve. A ideia é aparecer como pessoa inteira — não só como profissional de comunicação. Quem te vê sendo real, sente que a comunicação que você cria também vai ser real.",
+c:"Me conta o que alimenta você fora do trabalho.",
+in:"Caixinha nos stories: 'O que você fez hoje que não foi trabalho?'"},
+
+{d:22,m:6,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Minha área é muito visual, comunicação é só estética'",
+g:"Arquitetos e designers vivem disso. A comunicação é portfolio, é foto, é feed bonito. E mesmo assim o cliente chega e não sente que só você pode fazer aquilo.",
+dv:"Desmonta a crença de que comunicação autoral para profissionais visuais é questão de estética. Estética sem identidade é decoração. Identidade com estética é presença inconfundível. O cliente que decide pelo feeling — não pelo portfólio — chega quando a comunicação revela quem você é, não só o que você faz.",
+c:"Você comunica seu trabalho ou comunica quem você é? Me conta.",
+in:"Enquete: 'Você acha que sua comunicação revela quem você é de verdade?'",
+rt:"Reel com antes e depois visual — feed bonito vs comunicação com identidade. 'Feed lindo não é marca pessoal. Marca pessoal é quando alguém te vê e pensa: só ela faz assim.'"},
+
+{d:23,m:6,p:"vd",pN:"Venda",r:false,
+i:"O que está incluído — clareza da entrega",
+g:"Não é um pacote de posts. É um mergulho no que você já tem e ainda não consegue mostrar.",
+dv:"Apresenta o processo de May como experiência, não como serviço. O que acontece dentro, como a cliente chega e como sai. A entrega é clareza — saber o que é único, como comunicar isso, e ter a linguagem que finalmente parece com ela.",
+c:"Vagas abertas. Me chama no direct.",
+in:"DM direta + link na bio"},
+
+{d:24,m:6,p:"bs",pN:"Aumento de Base",r:true,
+i:"Por que profissional bom com comunicação fraca perde para profissional mediano com comunicação forte",
+g:"O mercado não premia o melhor trabalho. Premia o trabalho que é mais fácil de reconhecer, de confiar, de escolher.",
+dv:"Conteúdo de impacto para circular no nicho criativo. Verdade que incomoda quem é bom mas invisível. Compartilhável porque toda profissional autoral já sentiu isso — e vai mandar para alguém que também sente.",
+c:"Salva e manda para quem você conhece que entrega bem mas ainda não é reconhecida pelo que vale.",
+in:"'Marca quem precisa ouvir isso'",
+rt:"Reel direto: 'Você entrega melhor do que a concorrência. E ainda assim o cliente escolhe ela.' Pausa. 'Não é sobre o trabalho. É sobre o quanto a comunicação dela cria confiança antes da reunião.'"},
+
+{d:25,m:6,p:"au",pN:"Autoridade",r:false,
+i:"O momento em que a cliente percebe o que é só dela",
+g:"Tem um ponto na conversa onde ela para. Respira. E diz: 'nunca tinha pensado nisso assim.' Esse é o momento que eu mais espero.",
+dv:"Descreve com precisão o momento de virada que acontece no processo de May — quando a cliente encontra o que é inconfundível nela e nunca tinha nomeado. Sem revelar o método completo. Autoridade em evidência, não em explicação.",
+c:"Se você sente que tem algo único que ainda não consegue mostrar, esse momento pode ser seu. Me chama.",
+in:"Caixinha: 'Você sabe o que te faz inconfundível no que você faz?'"},
+
+{d:26,m:6,p:"ed",pN:"Educação",r:true,
+i:"Identidade de marca não é nicho — é ponto de vista",
+g:"Você pode ter o mesmo nicho que outras dez profissionais e ainda ser completamente inconfundível. O que diferencia não é o que você faz. É o jeito único como você vê o que faz.",
+dv:"Educa sobre a diferença entre nicho e identidade de marca. Nicho é território. Identidade é ponto de vista dentro desse território. Uma esteticista que acredita que beleza é expressão de quem a pessoa é já comunicou diferente de uma que acredita que beleza é correção. Mesmo nicho, mundos diferentes.",
+c:"Salva esse. É um dos conceitos mais libertadores que existem para quem quer parar de competir por preço.",
+in:"Salvar",
+rt:"Reel conceitual: 'Você não precisa de um nicho diferente. Você precisa mostrar o seu ponto de vista dentro do nicho que você já tem.' Exemplos rápidos, encerra com frase de impacto."},
+
+{d:27,m:6,p:"cx",pN:"Conexão",r:false,
+i:"Uma coisa que você fez essa semana que foi completamente você",
+g:"Não o que foi estratégico. O que foi genuinamente seu — no trabalho, na vida, no jeito de resolver algo.",
+dv:"Conexão através da autenticidade cotidiana. Mostra que ser ela mesma não é postura de marca — é como ela realmente funciona. Isso é o que ela ajuda as clientes a encontrar também.",
+c:"Me conta uma coisa que você fez essa semana que foi completamente você.",
+in:"Caixinha nos stories: 'Me conta o seu'"},
+
+{d:28,m:6,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Já investi em comunicação e não funcionou'",
+g:"Você contratou alguém. Criaram um visual bonito, uma bio organizada, uma estratégia de conteúdo. E ainda assim parecia que estava usando roupa de outra pessoa.",
+dv:"Desmonta a objeção com precisão. O que não funcionou antes provavelmente era estratégia sem identidade — comunicação construída de fora para dentro. O processo de May é o contrário: começa de dentro, de quem você é, e constrói comunicação a partir disso. Por isso o resultado parece com a cliente, não com o portfólio da agência.",
+c:"Me chama. Vamos entender o que faltou e o que é possível agora.",
+in:"Enquete: 'Você já investiu em comunicação e sentiu que não era você no resultado?'",
+rt:"Reel de reframe: 'Não é que investimento em comunicação não funciona. É que comunicação sem identidade é decoração.' Pausa. 'E decoração não cria conexão.'"},
+
+{d:29,m:6,p:"vd",pN:"Venda",r:false,
+i:"Depoimento em destaque",
+g:"As palavras da sua cliente dizem mais do que qualquer copy.",
+dv:"Print do depoimento com autorização — especialmente se tiver a frase 'ela mergulha no meu negócio, encontra o que só eu tenho.' Duas linhas contextualizando o antes e depois. Deixa o resultado falar.",
+c:"A próxima pode ser você. Link na bio.",
+in:"Link na bio"},
+
+{d:30,m:6,p:"bs",pN:"Aumento de Base",r:true,
+i:"O que separa o profissional que tem fila de espera do que justifica preço toda semana",
+g:"Não é o portfólio. Não é a experiência. É o quanto a comunicação deles cria convicção antes da primeira conversa.",
+dv:"Conteúdo de alcance máximo para o nicho criativo. Cada profissional autoral que lê se vê no dilema. Feito para circular, para ser salvo, para ser mandado para colegas.",
+c:"Salva e compartilha com quem você conhece que está nesse ciclo.",
+in:"Compartilhar + salvar",
+rt:"Reel de impacto: dois cenários paralelos, ritmo rápido. 'Um justifica o preço em toda reunião. O outro recebe o depósito antes de explicar o processo. O trabalho é parecido. A comunicação não é.'"},
+
+// JULHO
+{d:1,m:7,p:"au",pN:"Autoridade",r:false,
+i:"Por que eu não trabalho com fórmula",
+g:"Fórmula existe para escalar. Meu trabalho existe para revelar. São objetivos diferentes — e eu escolhi o segundo.",
+dv:"Posicionamento claro e direto. May não é uma agência, não é uma estrategista de conteúdo de massa. Ela mergulha em um negócio de cada vez e encontra o que é único. Isso não escala da forma convencional — e é exatamente por isso que o resultado é diferente.",
+c:"Tem dúvida se o meu processo faz sentido para você? Me pergunta.",
+in:"Caixinha nos stories: 'Me faz uma pergunta sobre como eu trabalho'"},
+
+{d:2,m:7,p:"ed",pN:"Educação",r:true,
+i:"Como saber se você está comunicando identidade ou imitando o mercado",
+g:"Tem um teste simples. Troca o nome e o logo da sua comunicação pelo da sua concorrente. Se ainda faz sentido, você está comunicando o mercado, não você.",
+dv:"Educa com ferramenta prática. O teste da substituição revela se a comunicação tem identidade própria ou é intercambiável. Para profissionais autorais, intercambiável é o pior resultado possível — porque o trabalho delas não é intercambiável.",
+c:"Faz o teste e me conta o resultado. Caixinha aberta.",
+in:"Caixinha nos stories: 'Você fez o teste? O que descobriu?'",
+rt:"Reel de desafio: 'Eu vou te dar um teste de 30 segundos que mostra se sua comunicação tem identidade ou não.' Explica o teste. Convida para fazer e compartilhar."},
+
+{d:3,m:7,p:"cx",pN:"Conexão",r:false,
+i:"O tipo de cliente que faz o trabalho valer",
+g:"Ela chegou sabendo o que queria. Cumpriu o prazo. Executou. No final disse: isso mudou como eu me vejo profissionalmente. Esse é o trabalho que faz sentido para mim.",
+dv:"Conexão através do filtro de cliente ideal. Ao descrever quem faz o trabalho valer, May atrai exatamente esse perfil e repele o oposto — sem precisar listar o que não quer. Autenticidade como curadoria.",
+c:"Me conta o tipo de cliente que faz o seu trabalho valer.",
+in:"Caixinha nos stories"},
+
+{d:4,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Meu trabalho fala por si mesmo, não preciso me comunicar'",
+g:"O trabalho fala para quem já está olhando. A comunicação traz quem ainda não sabe que você existe.",
+dv:"Objeção clássica de profissionais autorais que entregam muito e comunicam pouco. O trabalho excepcional precisa de comunicação excepcional para chegar em quem tem condições de valorizá-lo. Sem comunicação, o trabalho excepcional é visto só por quem já chegou — e o ciclo não se expande.",
+c:"Seu trabalho merece ser visto por quem pode valorizá-lo de verdade. Me chama.",
+in:"Enquete: 'Você acredita que seu trabalho fala por si mesmo?'",
+rt:"Reel direto: 'Seu trabalho é excelente. E está sendo visto por poucas pessoas.' Pausa. 'Não porque o mercado não valoriza. Porque a comunicação ainda não chegou em quem valorizaria.'"},
+
+{d:5,m:7,p:"vd",pN:"Venda",r:false,
+i:"O que muda quando a comunicação finalmente filtra",
+g:"Ela parou de reunião que não vira contrato. Parou de justificar preço. Os clientes que chegam agora chegam prontos — porque a comunicação já fez o trabalho antes da conversa.",
+dv:"Vende o resultado mais desejado pelo nicho de May: parar de convencer e começar a confirmar. Clientes que chegam prontos, que executam, que pagam o valor. A comunicação como filtro.",
+c:"Vagas abertas. Me chama no direct.",
+in:"DM direta + link na bio"},
+
+{d:6,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Fotógrafo autoral que comunica como stock photo perde cliente para quem comunica como artista",
+g:"A foto é única. O feed parece banco de imagens. O cliente olha, acha bonito, e contrata outra.",
+dv:"Versão do conteúdo de alcance focada em fotógrafos — um dos nichos de May. Específico o suficiente para ressoar fundo com quem é fotógrafo e amplo o suficiente para qualquer profissional autoral se ver.",
+c:"Salva e manda para o fotógrafo que você conhece que entrega diferente mas ainda não comunica diferente.",
+in:"'Marca aquele fotógrafo que você sabe que é bom mas que ainda não aparece como deveria'",
+rt:"Reel visual: imagens de trabalho autoral com comunicação genérica vs comunicação com identidade. 'O trabalho é o mesmo. O que muda é o quanto a comunicação revela quem está por trás.'"},
+
+{d:7,m:7,p:"au",pN:"Autoridade",r:false,
+i:"O que ninguém vê no processo — o que eu faço antes de criar qualquer coisa",
+g:"Antes de escrever uma palavra ou definir uma cor, eu passo horas entendendo quem você é. Não o que você faz. Quem você é.",
+dv:"Abre o processo sem revelar tudo. Mostra que o trabalho de May começa antes da estratégia — começa na identidade. Isso diferencia de qualquer serviço de comunicação que começa pelo visual ou pelo conteúdo.",
+c:"Se você quer entender como isso funcionaria para o seu negócio, me chama.",
+in:"Salvar + DM"},
+
+{d:8,m:7,p:"ed",pN:"Educação",r:true,
+i:"A diferença entre tom de voz e voz de verdade",
+g:"Tom de voz é uma lista de adjetivos: profissional, próximo, acolhedor. Voz de verdade é quando você lê e sabe que só aquela pessoa escreveria assim.",
+dv:"Educa sobre um dos conceitos centrais do trabalho de May. Tom de voz é ferramenta. Voz é identidade. A maioria das marcas tem tom de voz definido e comunicação intercambiável — porque tom sem voz é adjetivo sem pessoa.",
+c:"Salva esse. É um dos conceitos que mais muda o jeito de pensar comunicação.",
+in:"Salvar",
+rt:"Reel de contraste: lê um exemplo de tom de voz genérico vs um exemplo de voz com identidade real. 'Qual das duas você conseguiria trocar pelo nome de outra marca?' A resposta é óbvia."},
+
+{d:9,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Por que liberdade geográfica é o meu projeto de vida — e como comunicação tem tudo a ver com isso",
+g:"Eu não quero trabalhar de qualquer lugar porque é tendência. Quero porque preciso de movimento para pensar, de paisagem para criar, de não ter o mesmo teto todos os dias.",
+dv:"Conexão através do desejo pessoal de May. Autenticidade sobre o que a motiva além do trabalho. Liberdade geográfica como consequência de comunicação que atrai o cliente certo — que confia, paga o valor, e não precisa de presença física para sentir o trabalho.",
+c:"Me conta o que liberdade significa para você.",
+in:"Caixinha nos stories: 'O que liberdade significa para você?'"},
+
+{d:10,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Não tenho tempo para cuidar da comunicação agora'",
+g:"Você não tem tempo porque está numa roda que exige que você convença todo cliente do zero. Comunicação forte quebra essa roda.",
+dv:"Reframe direto: falta de tempo para comunicação é sintoma de comunicação fraca, não justificativa para não cuidar dela. Quanto mais genérica a comunicação, mais energia vai para convencer, explicar, justificar. Comunicação com identidade reduz o ciclo de venda — e devolve tempo.",
+c:"Me chama. Vamos entender o que é possível com o tempo que você tem.",
+in:"Enquete: 'Você sente que gasta energia demais convencendo o cliente antes de fechar?'",
+rt:"Reel de causa e efeito: 'Você diz que não tem tempo para comunicação. Mas gasta horas convencendo cliente que ainda não decidiu.' Pausa. 'Comunicação forte resolve isso antes da reunião acontecer.'"},
+
+{d:11,m:7,p:"vd",pN:"Venda",r:false,
+i:"Convite direto — sem rodeio",
+g:"Você está aqui há alguns dias. Já sabe o que eu faço. Se ressoou, talvez seja hora de conversar.",
+dv:"Post curto, direto, sem pressão. Reconhece quem acompanha, nomeia a entrega com clareza, convida para a ação. O mais simples às vezes é o mais eficaz.",
+c:"Me chama no direct. Vamos conversar sem compromisso.",
+in:"DM direta"},
+
+{d:12,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Esteticista autoral que comunica como clínica corporativa perde a cliente que pagaria o dobro",
+g:"O trabalho é cuidado, personalizado, com olhar único. A comunicação parece de franquia. E a cliente que buscaria exatamente esse olhar passa sem reconhecer.",
+dv:"Versão do conteúdo de alcance focada em esteticistas — outro nicho de May. Específico, circulável, verdadeiro. A cliente ideal de uma esteticista autoral está procurando alguém que parece com ela — e não vai encontrar se a comunicação parecer com o mercado.",
+c:"Salva e manda para a esteticista que você conhece que entrega de forma única mas ainda não comunica assim.",
+in:"'Marca aquela esteticista que você ama mas que ainda não aparece como deveria'",
+rt:"Reel de reconhecimento: 'Você já foi em um espaço que parecia completamente diferente — mas o Instagram delas parecia qualquer outro?' Desenvolve. 'Comunicação que parece com o espaço traz a cliente que pertence a ele.'"},
+
+{d:13,m:7,p:"au",pN:"Autoridade",r:false,
+i:"O que acontece quando a cliente finalmente para de se explicar",
+g:"Tem clientes que passam anos tentando explicar o que fazem de diferente. Quando a comunicação finalmente captura isso, elas param de explicar. O trabalho passa a falar antes delas.",
+dv:"Descreve o resultado mais profundo do trabalho de May: a cliente para de se subestimar, para de se explicar, para de justificar o preço. A comunicação passa a fazer isso por ela — antes de qualquer conversa.",
+c:"Se você está cansada de se explicar, pode ser hora de parar. Me chama.",
+in:"Caixinha: 'Você ainda sente que precisa se explicar para o cliente entender seu valor?'"},
+
+{d:14,m:7,p:"ed",pN:"Educação",r:true,
+i:"Por que designer de interiores com comunicação autoral fecha mais do que com portfólio maior",
+g:"Portfólio impressiona. Comunicação convence. E convencimento acontece antes da reunião — quando a cliente já decidiu que só você pode fazer o que ela precisa.",
+dv:"Educa sobre o mecanismo de decisão do cliente de serviço autoral. A decisão raramente é racional — é de reconhecimento. 'Ela entende o que eu quero sem que eu precise explicar.' Comunicação com identidade cria esse reconhecimento antes do primeiro contato.",
+c:"Salva esse. É o conceito que mais muda a forma de ver comunicação para profissionais criativos.",
+in:"Salvar",
+rt:"Reel de mecanismo: 'O cliente que contrata você sem precisar de três reuniões não chegou convencido. Chegou reconhecendo.' Como criar esse reconhecimento — explicado em 60 segundos."},
+
+{d:15,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Um mês de conteúdo — o que ficou e o que vem",
+g:"Esse foi o primeiro mês que eu me propus a aparecer de forma consistente sendo completamente eu mesma. E vou te contar o que aprendi.",
+dv:"Post de encerramento honesto. O que funcionou, o que foi difícil, o que vai mudar. Fecha o ciclo do mês com presença e clareza. Abre o próximo com intenção.",
+c:"Me conta: o que você quer diferente na sua comunicação a partir de agora?",
+in:"Caixinha nos stories: 'O que você quer mudar na sua comunicação?'"}
+];
+
+const COR={
+ob:['var(--ob-bg)','var(--ob-t)'],
+vd:['var(--vd-bg)','var(--vd-t)'],
+bs:['var(--bs-bg)','var(--bs-t)'],
+au:['var(--au-bg)','var(--au-t)'],
+cx:['var(--cx-bg)','var(--cx-t)'],
+ed:['var(--ed-bg)','var(--ed-t)']
+};
+
+// Junho: dia 16 começa numa terça (índice 1 = terça)
+// Grid de junho: preenche vazios para segunda, depois dias 16-30
+function renderJun(){
+  const g=document.getElementById('gjun');
+  // 1 vazio (segunda 15 já passou)
+  const vz=document.createElement('div');
+  vz.className='card vz';
+  g.appendChild(vz);
+
+  D.filter(d=>d.m===6).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'junho');
+    g.appendChild(el);
+  });
+}
+
+// Julho: dia 1 começa na quarta (índice 2)
+// Preenche 2 vazios (seg, ter) antes do dia 1
+function renderJul(){
+  const g=document.getElementById('gjul');
+  [0,1].forEach(()=>{
+    const vz=document.createElement('div');
+    vz.className='card vz';
+    g.appendChild(vz);
+  });
+  D.filter(d=>d.m===7).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'julho');
+    g.appendChild(el);
+  });
+}
+
+const SEMJUN=['Terça','Quarta','Quinta','Sexta','Sábado','Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo','Segunda','Terça'];
+const SEMJUL=['Quarta','Quinta','Sexta','Sábado','Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo','Segunda','Terça','Quarta'];
+
+function ab(d, mes){
+  const sem = mes==='junho' ? SEMJUN[d.d-16] : SEMJUL[d.d-1];
+  document.getElementById('mdt').textContent=`${sem}, ${d.d} de ${mes} de 2026`;
+  const bg=document.getElementById('mbg');
+  bg.textContent=d.pN;
+  bg.style.background=COR[d.p][0];
+  bg.style.color=COR[d.p][1];
+  document.getElementById('mrl').style.display=d.r?'inline-block':'none';
+  document.getElementById('mti').textContent=d.i;
+  document.getElementById('mga').textContent=d.g;
+  document.getElementById('mdv').textContent=d.dv;
+  document.getElementById('mct').textContent=d.c;
+  document.getElementById('min').textContent='💬 Interação: '+d.in;
+  const rb=document.getElementById('mrb');
+  if(d.r&&d.rt){rb.style.display='block';document.getElementById('mrt').textContent=d.rt;}
+  else rb.style.display='none';
+  document.getElementById('ov').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function fc(e){
+  if(!e||e.target===document.getElementById('ov')||e.target.classList.contains('cls')){
+    document.getElementById('ov').classList.remove('on');
+    document.body.style.overflow='';
+  }
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fc();});
+renderJun();
+renderJul();
+</script>
+
+<div class="ftr"><span>May</span> · Toque em qualquer dia para ver o roteiro completo · 🎬 = tem ideia de reel</div>
+</body>
+</html>
