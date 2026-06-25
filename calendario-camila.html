@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Calendário de Conteúdo | Camila</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+html{background:#fff!important}
+html,body{background:#fff!important;color:#1a1612;-webkit-text-size-adjust:100%;margin:0;padding:0;font-family:'Lora',Georgia,serif;min-height:100vh}
+:root{
+--gold:#b8860b;--gold-l:#d4a017;--border:#e8e0d0;--dim:#8a7a6a;
+--cx:#0066cc;--cx-bg:#cce0ff;--cx-t:#003d80;
+--ob:#cc4400;--ob-bg:#ffd6c2;--ob-t:#7a2200;
+--vd:#007a2f;--vd-bg:#b8f0cc;--vd-t:#004018;
+--bs:#6600cc;--bs-bg:#e8ccff;--bs-t:#3d0080;
+--au:#cc0044;--au-bg:#ffc2d4;--au-t:#7a0028;
+--ed:#aa7700;--ed-bg:#fff0b3;--ed-t:#664400;
+}
+*{box-sizing:border-box}
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+.hdr{text-align:center;margin-bottom:40px;padding-bottom:28px;border-bottom:2px solid var(--border)}
+.hdr .marca{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.hdr h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);font-weight:300;color:#1a1612;margin:0 0 6px;line-height:1.1}
+.hdr h1 span{color:var(--gold);font-style:italic}
+.hdr .sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;line-height:1.8}
+.pos{display:inline-block;margin-top:12px;font-family:'Lora',serif;font-size:13px;font-style:italic;color:#5a4a3a;border-left:3px solid var(--gold);padding:6px 14px;text-align:left}
+.leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;justify-content:center}
+.li{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase;font-weight:600}
+.ld{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.mes-label{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin:32px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.dh{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+.dh div{text-align:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:6px 0;font-family:'Cormorant Garamond',serif;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+.card{border-radius:8px;padding:10px 8px;min-height:100px;cursor:pointer;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;border:2px solid transparent;position:relative}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.15);z-index:2}
+.card.vz{background:transparent;border:2px dashed #e0d8cc;cursor:default;opacity:0.2;min-height:100px}
+.card.vz:hover{transform:none;box-shadow:none}
+.num{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;line-height:1;margin-bottom:5px}
+.pn{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:5px;opacity:.75}
+.id{font-size:10px;line-height:1.4;flex:1}
+.rb{position:absolute;top:7px;right:7px;font-size:8px;background:rgba(0,0,0,.12);border-radius:10px;padding:2px 6px;font-weight:700}
+.cx{background:var(--cx-bg);border-color:var(--cx);color:var(--cx-t)}
+.ob{background:var(--ob-bg);border-color:var(--ob);color:var(--ob-t)}
+.vd{background:var(--vd-bg);border-color:var(--vd);color:var(--vd-t)}
+.bs{background:var(--bs-bg);border-color:var(--bs);color:var(--bs-t)}
+.au{background:var(--au-bg);border-color:var(--au);color:var(--au-t)}
+.ed{background:var(--ed-bg);border-color:var(--ed);color:var(--ed-t)}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:center;justify-content:center;padding:20px}
+.ov.on{display:flex}
+.modal{background:#fff;border-radius:14px;max-width:500px;width:100%;padding:32px;position:relative;max-height:88vh;overflow-y:auto;border-top:5px solid #1a1612}
+.cls{position:absolute;top:14px;right:18px;background:none;border:none;font-size:24px;cursor:pointer;color:#888;line-height:1}
+.mdt{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;font-family:'Cormorant Garamond',serif}
+.mbg{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:4px}
+.mrl{display:inline-block;margin-left:8px;font-size:9px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:#1a1612;color:#fff}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#1a1612;margin:0 0 20px;line-height:1.25}
+.sec h4{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 5px}
+.sec p{font-size:13px;line-height:1.75;color:#2a2420;margin:0 0 16px}
+.int{background:#f8f6f2;border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;font-size:12px;color:#5a4a2a;margin-top:4px;font-style:italic}
+.rlb{background:#1a1612;color:#fff;border-radius:8px;padding:12px 16px;margin-top:16px;font-size:12px;line-height:1.6}
+.rlb strong{color:var(--gold-l);font-size:10px;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:4px}
+.ftr{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
+.ftr span{color:var(--gold)}
+@media(max-width:600px){.grid{gap:3px}.card{min-height:72px;padding:7px 5px}.num{font-size:16px}.pn{font-size:7px}.id,.rb{display:none}.modal{padding:22px 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="marca">Camila · Mentora Comportamental & Analista de Temperamentos</div>
+    <h1>26 Jun <span>—</span> 25 Jul <span>2026</span></h1>
+    <div class="sub">Expansão · Clareza · Direção · Presença · Verdade · Compromisso</div>
+    <div class="pos">"A maternidade foi combustível. Não desculpa."</div>
+  </div>
+  <div class="leg">
+    <div class="li"><div class="ld" style="background:var(--cx)"></div>Conexão</div>
+    <div class="li"><div class="ld" style="background:var(--ob)"></div>Quebra de Objeção</div>
+    <div class="li"><div class="ld" style="background:var(--vd)"></div>Venda</div>
+    <div class="li"><div class="ld" style="background:var(--bs)"></div>Aumento de Base</div>
+    <div class="li"><div class="ld" style="background:var(--au)"></div>Autoridade</div>
+    <div class="li"><div class="ld" style="background:var(--ed)"></div>Educação</div>
+  </div>
+  <div class="mes-label">Junho 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gjun"></div>
+  <div class="mes-label">Julho 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gjul"></div>
+</div>
+
+<div class="ov" id="ov" onclick="fc(event)">
+  <div class="modal">
+    <button class="cls" onclick="fc()">×</button>
+    <div class="mdt" id="mdt"></div>
+    <span class="mbg" id="mbg"></span><span class="mrl" id="mrl" style="display:none">🎬 REEL</span>
+    <h2 id="mti"></h2>
+    <div class="sec"><h4>Gancho</h4><p id="mga"></p></div>
+    <div class="sec"><h4>Desenvolvimento</h4><p id="mdv"></p></div>
+    <div class="sec"><h4>CTA</h4><p id="mct"></p></div>
+    <div class="int" id="min"></div>
+    <div class="rlb" id="mrb" style="display:none"><strong>🎬 Ideia de Reel</strong><span id="mrt"></span></div>
+  </div>
+</div>
+
+<script>
+const D=[
+{d:26,m:6,p:"cx",pN:"Conexão",r:true,
+i:"Sou a mesma mulher em todos os lugares",
+g:"Mãe, mentora, CLT, dona de estúdio. Eu não divido porque não acredito nessa divisão. Sou a mesma em todos os lugares e foi exatamente isso que me fez construir algo com o meu nome de verdade.",
+dv:"A integração entre vida pessoal e profissional aqui não é descuido de posicionamento, é o posicionamento. Camila aparece inteira, sem separar papéis. Quem se vê fragmentada e cansada de fingir que consegue separar vai sentir isso como um espelho imediato.",
+c:"Me conta: você também sente que precisa ser uma pessoa diferente em cada papel que ocupa?",
+in:"Caixinha nos stories: 'Você consegue ser a mesma em todos os lugares?'",
+rt:"Câmera direta, tom firme e acolhedor. 'Mãe. Mentora. CLT. Dona de estúdio. As pessoas ficam esperando eu dizer qual é a principal. Todas são. Sou a mesma mulher em todos os lugares.' Pausa. Encerra com olho na câmera."},
+
+{d:27,m:6,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"Estar funcionando não significa estar bem",
+g:"Você está dando conta. Entregando. Cumprindo prazo. E por dentro sente que está no automático, como se a vida estivesse passando enquanto você executa.",
+dv:"Essa é a dor central da persona de Camila. A mulher que está funcionando mas não está presente. Que construiu uma vida que parece certa por fora e travou por dentro. Produtividade alta e presença baixa coexistem. O automático é sintoma, não conquista, e nomear isso em voz alta já quebra algo em quem está vivendo isso.",
+c:"Você está funcionando ou está viva dentro do que constrói? Me conta aqui.",
+in:"Enquete nos stories: 'Você se sente mais no automático ou presente no que faz?'",
+rt:"Reel de reconhecimento. 'Você entrega. Você dá conta. Você está funcionando.' Pausa longa. 'Mas você está presente?' Tom calmo, sem drama. Deixa a pergunta no ar."},
+
+{d:28,m:6,p:"bs",pN:"Aumento de Base",r:true,
+i:"A maternidade foi combustível. Não desculpa.",
+g:"Tem mulher que usa a maternidade para explicar por que não foi. Eu usei para entender por que precisava ir. Isso nunca foi sobre sacrifício. Foi sobre clareza.",
+dv:"Conteúdo de impacto feito para circular. Fala com mães empreendedoras, com mulheres em transição, com quem está no operacional e sente que poderia ser mais. A frase âncora de Camila vira conteúdo de identidade compartilhável e magnético.",
+c:"Salva e manda para a mãe empreendedora que você admira.",
+in:"'Marca aquela mãe que constrói mesmo com tudo pesando'",
+rt:"Reel de impacto, frase na tela, Camila fala por cima. 'Teve um momento que eu poderia ter parado e dito: não dá, sou mãe, é muita coisa.' Pausa. 'Escolhi entender o que a maternidade estava tentando me mostrar sobre mim mesma.' Encerra firme."},
+
+{d:29,m:6,p:"au",pN:"Autoridade",r:false,
+i:"Saí do operacional com consciência, não com pressa",
+g:"Saí do operacional sem abandonar o que eu era. Construí algo novo enquanto ainda sustentava o que havia. Guardei. Planejei. Mantive o que me sustentava enquanto criava o que queria.",
+dv:"Camila fala de construção consciente, não de ruptura dramática. Ela tem reserva, investe, constrói com intenção. Isso conecta com a persona que desconfia de promessa fácil e quer ver alguém que chegou onde chegou com os pés no chão.",
+c:"Se você está querendo sair do operacional mas não sabe como fazer isso sem quebrar o que já tem, me chama.",
+in:"Caixinha nos stories: 'Você está saindo ou querendo sair do operacional?'"},
+
+{d:30,m:6,p:"ed",pN:"Educação",r:true,
+i:"O que é o Protocolo das Cinco Faltas",
+g:"Cinco faltas que toda mulher que está no automático carrega. Você sente. Você não consegue nomear. E por isso fica tentando resolver o que aparece por fora enquanto o que falta está dentro.",
+dv:"Introdução ao protocolo central de Camila. Sem revelar tudo, o suficiente para despertar reconhecimento em quem vive essa sensação. As cinco faltas não são déficits, são ausências que a mulher nem consegue nomear mas sente toda vez que para e respira.",
+c:"Salva esse post. Ele vai fazer sentido de um jeito diferente em momentos diferentes.",
+in:"Salvar",
+rt:"Reel conceitual, voz calma e direta. 'Você sabe que falta alguma coisa. Mas não consegue nomear o quê.' Pausa. 'Eu chamo isso de as cinco faltas. E hoje eu vou te contar a primeira.' Introduz uma delas. Deixa as outras como promessa."},
+
+{d:1,m:7,p:"cx",pN:"Conexão",r:false,
+i:"O tipo de mulher com quem eu trabalho",
+g:"Ela chegou. Construiu. Está entregando. E ainda assim sente que cabe mais do que está ocupando na própria vida.",
+dv:"Descrição precisa da persona sem julgamento e sem drama. A mulher que lê e pensa 'sou eu' já está dentro. A que lê e não se reconhece já entendeu que o trabalho de Camila não é pra ela. Filtro natural, sem lista de exclusão.",
+c:"Se você se viu aqui, a conversa que você está evitando pode ser a mais importante que você tem. Me chama.",
+in:"Caixinha nos stories: 'Você se sentiu descrita aqui?'"},
+
+{d:2,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"Promessa fácil já te custou caro antes",
+g:"Você já comprou a promessa. Seguiu o método. E no final foi você que teve que fazer o trabalho de qualquer jeito, só que com a expectativa errada no ombro.",
+dv:"Camila nomeia a desconfiança antes que a persona precise nomear. Ela não vende transformação mágica, trabalha com quem está disposta a se mover. Ao ser a primeira a falar sobre promessa fácil, ela já se diferencia de tudo que a persona já tentou antes.",
+c:"Não vou te prometer que vai ser fácil. Vou trabalhar com você de verdade. Me chama.",
+in:"Enquete: 'Você já comprou uma promessa que não entregou o que esperava?'",
+rt:"Reel direto. 'Eu poderia te prometer resultado em 30 dias. Não vou.' Pausa. 'Porque o que eu faço com você tem que durar, e coisa que dura leva o tempo que leva.'"},
+
+{d:3,m:7,p:"vd",pN:"Venda",r:false,
+i:"O que acontece no atendimento de desbloqueio",
+g:"Você chega sabendo que tem algo travado. Sai sabendo o que era e com o padrão identificado, não só sentido.",
+dv:"Apresenta o atendimento como experiência com resultado concreto. Acolhimento e precisão juntos. A cliente sai com clareza de onde veio o padrão e o que muda a partir de agora. Vende a objetividade do processo, que é exatamente o que a persona desconfiada de promessa fácil quer ver.",
+c:"Vagas abertas. Me chama no direct.",
+in:"DM direta + link na bio"},
+
+{d:4,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"CLT e empreendedora ao mesmo tempo, e isso não precisa ser contradição",
+g:"Você não precisa largar tudo para construir algo seu. Você precisa de clareza sobre o que está construindo enquanto sustenta o que já tem.",
+dv:"Conteúdo de alcance para CLTs que querem empreender mas não têm espaço para o salto dramático. Camila viveu isso e construiu com intenção. Fala com a mulher que se sente presa entre os dois mundos e carrega culpa dos dois lados.",
+c:"Salva e manda para a CLT que você conhece que sonha em construir algo com o nome dela.",
+in:"'Marca aquela amiga que está nos dois mundos ao mesmo tempo'",
+rt:"Reel de validação. 'Você está no emprego de dia e construindo o seu à noite. E se sente culpada pelos dois lados.' Pausa. 'Isso tem nome. E tem saída.'"},
+
+{d:5,m:7,p:"au",pN:"Autoridade",r:false,
+i:"Análise de temperamentos revela o que autoconhecimento comum não alcança",
+g:"Temperamento você trouxe. Personalidade você constrói. Quando você entende o que trouxe, para de brigar com o que você é e começa a trabalhar com isso.",
+dv:"Posiciona a análise de temperamentos como ferramenta de precisão, não de rotulação. Camila usa isso para ajudar a cliente a entender seus padrões de resposta, seus pontos cegos, seu modo natural de funcionar. Autoridade técnica com linguagem de quem já fez esse trabalho em si mesma primeiro.",
+c:"Se você vive se cobrando por reagir sempre do mesmo jeito, pode ser que você esteja brigando com o seu temperamento. Me chama.",
+in:"Caixinha: 'Você já fez análise de temperamentos?'"},
+
+{d:6,m:7,p:"ed",pN:"Educação",r:true,
+i:"Ocupada e construindo são coisas diferentes",
+g:"Agenda cheia parece progresso. Mas ocupada sem direção é movimento que não chega em lugar nenhum.",
+dv:"Educa sobre a distinção entre movimento e construção consciente. A persona de Camila vive ocupada e confunde isso com avanço. Esse conteúdo nomeia algo que ela sente mas não consegue articular, e abre a pergunta: para onde esse movimento está indo?",
+c:"Salva esse post. Lê de novo quando a semana estiver cheia e você não souber se está avançando.",
+in:"Salvar",
+rt:"Reel de distinção. 'Você está ocupada. Mas está construindo?' Exemplos concretos de cada uma. Encerra com: 'Direção é o que transforma movimento em construção.'"},
+
+{d:7,m:7,p:"cx",pN:"Conexão",r:false,
+i:"O que minha filha me ensinou sobre presença",
+g:"Ela não quer que eu faça tudo certo. Ela quer que eu esteja lá de verdade quando estou.",
+dv:"Conexão através da maternidade como escola de presença. Camila não usa a filha como prova de que é boa mãe. Usa como espelho do que ela mesma aprendeu sobre estar presente. Isso ressoa com mães que se sentem culpadas por estarem sempre fazendo e nunca estando.",
+c:"Me conta o que os seus filhos ou quem você ama já te ensinou sobre presença.",
+in:"Caixinha nos stories"},
+
+{d:8,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"Pronta você vai estar depois",
+g:"Você está esperando estar pronta para olhar para o que está travando. A trava não vai embora enquanto você espera.",
+dv:"Quebra a ideia de prontidão como pré-requisito com tom acolhedor e direto. A cliente não precisa estar pronta. Precisa estar disposta. São coisas diferentes e Camila conhece essa diferença porque passou por ela.",
+c:"Disposta é suficiente. Me chama.",
+in:"Enquete: 'Você está esperando estar pronta para mudar algo?'",
+rt:"Reel calmo e certeiro. 'Pronta você vai estar depois. Disposta você precisa ser agora.' Pausa. 'Essa é a única diferença que importa.'"},
+
+{d:9,m:7,p:"vd",pN:"Venda",r:false,
+i:"Mentoria comportamental — o que muda depois",
+g:"Ela chegou sabendo que tinha um padrão que se repetia. Saiu sabendo de onde ele vinha e com clareza de como sair do automático.",
+dv:"Caso real de mentoria comportamental. Antes: sensação de loop, de que já tentou tudo, de que é o jeito dela ser. Depois: nome para o padrão, origem identificada, direção clara. Vende o resultado concreto, não a experiência emocional.",
+c:"Se você reconhece esse loop, pode ser a hora de nomear o que está rodando. Me chama.",
+in:"Link na bio + DM"},
+
+{d:10,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Nail designer que fica só na técnica chega num teto que mais curso não quebra",
+g:"Você aprende. Você pratica. Você entrega bem. E ainda cobra menos do que sabe que vale porque a técnica sozinha não cria autoridade.",
+dv:"Conteúdo de alcance para o nicho de beleza. Fala com quem está no operacional e sente o teto sem conseguir nomear o que falta. Camila viveu isso e sabe que o que move a agulha a partir de um ponto não é mais técnica.",
+c:"Salva e manda para a nail designer que você conhece que entrega bem mas ainda não cobra o que vale.",
+in:"'Marca aquela profissional que você sabe que é boa mas que ainda não cobra o que vale'",
+rt:"Reel direto para o nicho. 'Você aprendeu a técnica. Você pratica. Você entrega bem. E ainda negocia preço toda semana.' Pausa. 'O que falta não vem em curso.'"},
+
+{d:11,m:7,p:"au",pN:"Autoridade",r:false,
+i:"Construí com reserva e não me arrependo",
+g:"Eu não dei salto de fé. Eu guardei. Planejei. Mantive o que sustentava enquanto construía o que queria. E hoje tenho o que tenho porque não tive pressa.",
+dv:"Camila como referência de construção consciente e financeiramente responsável. Em um mercado cheio de 'larga tudo e vai', ela é a que diz: constrói com intenção, com reserva, sem romantizar a ruptura. Isso atrai a persona que desconfia de salto dramático e quer ver alguém que chegou lá com os pés no chão.",
+c:"Se você quer construir algo seu sem quebrar o que já tem, a gente pode conversar sobre isso. Me chama.",
+in:"Caixinha: 'Você está construindo com reserva ou sentindo que precisa largar tudo?'"},
+
+{d:12,m:7,p:"ed",pN:"Educação",r:true,
+i:"Temperamento explica mais sobre você do que você imagina",
+g:"Você reage sempre do mesmo jeito em certas situações. Se cobra por isso. Tenta mudar. E volta. Isso tem origem e tem nome.",
+dv:"Educa sobre temperamento de forma acessível. Quando a mulher entende seu temperamento, para de se cobrar por ser como é e começa a trabalhar com o que tem em vez de tentar mudar o que não muda à força.",
+c:"Salva esse post. Ele explica muita coisa sobre você que você ainda está tentando mudar à força.",
+in:"Salvar",
+rt:"Reel de revelação. 'Você já tentou mudar uma reação sua mais de três vezes e ela volta?' Pausa. 'Pode ser que você esteja brigando com o seu temperamento.' Explica em 60 segundos o que é e como trabalhar com isso."},
+
+{d:13,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Uma coisa que eu não abro mão dentro e fora do trabalho",
+g:"Compromisso. O que eu cumpro e o que eu exijo de volta. Cobro porque me comprometo de verdade.",
+dv:"Conexão através de valor central. Isso filtra cliente naturalmente e mostra quem Camila é antes de qualquer conversa comercial. Quem valoriza compromisso reconhece e se aproxima. Quem não valoriza já entendeu que não encaixa.",
+c:"Me conta: o que você não abre mão, independente de tudo?",
+in:"Caixinha nos stories"},
+
+{d:14,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"Técnica te trouxe até aqui. Comportamento determina onde você chega.",
+g:"Você fez o curso. O avançado. Praticou. E ainda sente um teto que mais conhecimento técnico não quebra.",
+dv:"Desmonta a crença de que mentoria comportamental é para quem tem problema emocional grave. Ela é para quem chegou num teto que técnica não quebra. A maioria das profissionais de beleza e nail está nesse teto sem saber nomear o que está impedindo.",
+c:"Se você sente que chegou num limite que mais curso não resolve, me chama.",
+in:"Enquete: 'Você sente que chegou num limite que mais técnica não vai resolver?'",
+rt:"Reel direto. 'Você fez o curso. Fez o avançado. E ainda sente que tem um teto.' Pausa. 'Técnica tem limite. Comportamento não tem teto.'"},
+
+{d:15,m:7,p:"vd",pN:"Venda",r:false,
+i:"Depoimento em destaque",
+g:"As palavras de quem passou pelo processo dizem mais do que qualquer descrição.",
+dv:"Print de depoimento com autorização. Foco em resultado concreto e específico. O antes e depois que a própria cliente descreveu é o conteúdo de venda mais poderoso que existe.",
+c:"A próxima pode ser você. Link na bio.",
+in:"Link na bio"},
+
+{d:16,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Você não está presa. Está contida numa versão pequena de si mesma.",
+g:"Presa implica que alguém colocou você aí. Contida é quando você mesma parou de ocupar o espaço que poderia.",
+dv:"Conteúdo de alcance máximo. A distinção entre presa e contida ressoa com qualquer mulher que sente que cabe mais do que está mostrando. Feito para circular, para ser salvo, para ser mandado para alguém que precisa ouvir isso hoje.",
+c:"Salva e manda para a mulher que você sabe que está contida numa versão pequena dela mesma.",
+in:"'Marca quem você sabe que cabe muito mais do que está mostrando'",
+rt:"Reel de impacto. 'Você não está presa.' Pausa. 'Você está contida. E são coisas completamente diferentes.' Desenvolve a distinção. Encerra com: 'Expansão começa quando você para de fingir que o espaço que ocupa é suficiente.'"},
+
+{d:17,m:7,p:"au",pN:"Autoridade",r:false,
+i:"Eu escolho com quem trabalho. E isso eleva o resultado pra todo mundo.",
+g:"Quando trabalho com quem não está disposta a se mover, nem eu nem ela chegamos onde precisamos. Então eu escolho. E a escolhida sabe que foi escolhida.",
+dv:"Posicionamento de governante com alma de cuidadora. Autoridade natural sem arrogância. Camila não atende a qualquer cliente porque o resultado depende do comprometimento de ambas. Isso eleva o valor percebido e atrai a cliente que quer ser escolhida por quem tem critério.",
+c:"Se você quer trabalhar com alguém que se compromete de verdade com o seu processo, me chama.",
+in:"Caixinha: 'O que você busca em quem você contrata para trabalhar contigo mesma?'"},
+
+{d:18,m:7,p:"ed",pN:"Educação",r:true,
+i:"Consciência financeira para quem está saindo do operacional",
+g:"Sair do operacional sem reserva é só trocar uma prisão por outra. Liberdade real tem estrutura embaixo.",
+dv:"Educa sobre o pilar financeiro da transição de carreira. Camila viveu isso e ensina a partir da própria trajetória. Guardar, investir, ter reserva antes de dar o próximo passo. A persona que desconfia de promessa fácil quer ver exatamente esse nível de responsabilidade.",
+c:"Salva esse post se você está planejando uma transição e ainda não organizou a base financeira.",
+in:"Salvar",
+rt:"Reel prático. 'Você quer sair do operacional. Antes de qualquer coisa, me responde uma pergunta.' Pergunta sobre reserva. Desenvolve por que isso é o primeiro passo real antes de qualquer movimento."},
+
+{d:19,m:7,p:"cx",pN:"Conexão",r:false,
+i:"O que mudou em mim depois que saí do automático",
+g:"A agenda ficou parecida. O que mudou foi a qualidade de presença dentro do tempo que tenho.",
+dv:"Conexão através da transformação pessoal de Camila. O que mudou não foi a quantidade de trabalho, foi a qualidade de presença. Isso fala diretamente com a persona que está ocupada mas não está presente.",
+c:"Me conta: o que você faria diferente se tivesse mais presença no que já faz?",
+in:"Caixinha nos stories"},
+
+{d:20,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"Você está na sua própria lista de prioridades?",
+g:"Você cuida de todo mundo. Seu filho, seu cliente, sua equipe, seu parceiro. Quando foi a última vez que você foi cuidada por você mesma?",
+dv:"Quebra com acolhimento e firmeza. A falta de tempo para si mesma é sintoma de uma estrutura que foi construída ao redor de todo mundo exceto ela. Camila trabalha a raiz disso, não o sintoma.",
+c:"Se você chegou num ponto em que a única que não está na sua agenda é você, me chama.",
+in:"Enquete: 'Você está na sua própria lista de prioridades?'",
+rt:"Reel direto e acolhedor. 'Você cuida de todo mundo.' Pausa. 'Quando foi a última vez que você foi cuidada por você mesma?' Deixa a pergunta no ar."},
+
+{d:21,m:7,p:"vd",pN:"Venda",r:false,
+i:"Convite direto",
+g:"Você está aqui há algum tempo. Já sabe com quem está falando. Se ressoou em algum momento, talvez seja a hora.",
+dv:"Post curto e direto. Reconhece quem acompanha, nomeia o que oferece com clareza e convida para a ação sem pressão. O mais simples às vezes é o mais honesto.",
+c:"Me chama no direct com a palavra JULHO. Vamos conversar.",
+in:"DM com palavra-chave JULHO"},
+
+{d:22,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Mulher que constrói no silêncio entrega mais do que quem anuncia o tempo todo",
+g:"Você não precisa postar cada passo da sua construção para provar que está construindo. Mas quando você aparece, precisa aparecer sendo você.",
+dv:"Conteúdo de alcance que fala com a mulher que constrói de forma discreta e se sente invisível por isso. Valida o silêncio da construção e aponta que aparecer com identidade real é o que faz a diferença quando ela decide aparecer.",
+c:"Salva e manda para a mulher que você sabe que está construindo em silêncio.",
+in:"'Marca quem está construindo sem fazer barulho'",
+rt:"Reel de validação. 'Você não precisa anunciar cada passo.' Pausa. 'Mas quando você aparece, aparece sendo você.' Tom firme, encerra com presença."},
+
+{d:23,m:7,p:"au",pN:"Autoridade",r:false,
+i:"O estúdio de unhas como escola de negócio consciente",
+g:"Aprendi mais sobre comportamento humano atrás da mesa de nail do que em qualquer livro. Cliente que desaparece, que muda de ideia, que não paga. Esses são padrões. E padrões têm origem.",
+dv:"Posiciona a experiência prática de Camila como fonte de autoridade real. Ela não aprendeu comportamento só em formação, aprendeu no operacional. Isso conecta com a persona que está no operacional e se sente sozinha tentando entender os padrões do próprio negócio.",
+c:"Se você está no operacional e reconhece esses padrões, me chama. Vamos entender o que está rodando.",
+in:"Caixinha: 'Você reconhece algum padrão que se repete no seu negócio?'"},
+
+{d:24,m:7,p:"ed",pN:"Educação",r:true,
+i:"As cinco faltas. A segunda.",
+g:"A primeira falta é presença. A segunda é direção. Quando você não sabe para onde está indo, qualquer caminho parece certo e nenhum parece suficiente.",
+dv:"Continua a série do Protocolo das Cinco Faltas. Cada post da série aprofunda uma falta sem revelar todas de uma vez. Cria continuidade, razão para acompanhar e posiciona o protocolo como método central de Camila.",
+c:"Salva esse post. A série das cinco faltas vai fazer cada vez mais sentido.",
+in:"Salvar + 'Você sente essa falta de direção?'",
+rt:"Reel da série. 'Segunda falta: direção.' Explica com exemplo concreto da vida real de quem está no automático. Encerra com: 'Semana que vem, a terceira falta.'"},
+
+{d:25,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Um mês de presença. O que ficou.",
+g:"Trinta dias aparecendo sendo eu mesma. O que aprendi, o que foi difícil, o que não abro mão daqui pra frente.",
+dv:"Encerramento honesto do mês. Balanço de presença e aprendizado, não de números. Fecha o ciclo com clareza e abre o próximo com intenção. Quem acompanhou sente que fez parte de algo real.",
+c:"Me conta: o que ficou pra você desse mês?",
+in:"Caixinha nos stories: 'O que ficou pra você?'"}
+];
+
+const COR={ob:['var(--ob-bg)','var(--ob-t)'],vd:['var(--vd-bg)','var(--vd-t)'],bs:['var(--bs-bg)','var(--bs-t)'],au:['var(--au-bg)','var(--au-t)'],cx:['var(--cx-bg)','var(--cx-t)'],ed:['var(--ed-bg)','var(--ed-t)']};
+const SEMJUN={26:'Sexta',27:'Sábado',28:'Domingo',29:'Segunda',30:'Terça'};
+const SEMJUL={1:'Quarta',2:'Quinta',3:'Sexta',4:'Sábado',5:'Domingo',6:'Segunda',7:'Terça',8:'Quarta',9:'Quinta',10:'Sexta',11:'Sábado',12:'Domingo',13:'Segunda',14:'Terça',15:'Quarta',16:'Quinta',17:'Sexta',18:'Sábado',19:'Domingo',20:'Segunda',21:'Terça',22:'Quarta',23:'Quinta',24:'Sexta',25:'Sábado'};
+
+function renderJun(){
+  const g=document.getElementById('gjun');
+  [0,1,2,3].forEach(()=>{const v=document.createElement('div');v.className='card vz';g.appendChild(v);});
+  D.filter(d=>d.m===6).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'junho');
+    g.appendChild(el);
+  });
+}
+
+function renderJul(){
+  const g=document.getElementById('gjul');
+  [0,1].forEach(()=>{const v=document.createElement('div');v.className='card vz';g.appendChild(v);});
+  D.filter(d=>d.m===7).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'julho');
+    g.appendChild(el);
+  });
+}
+
+function ab(d,mes){
+  const sem=mes==='junho'?SEMJUN[d.d]:SEMJUL[d.d];
+  document.getElementById('mdt').textContent=`${sem}, ${d.d} de ${mes} de 2026`;
+  const bg=document.getElementById('mbg');
+  bg.textContent=d.pN;bg.style.background=COR[d.p][0];bg.style.color=COR[d.p][1];
+  document.getElementById('mrl').style.display=d.r?'inline-block':'none';
+  document.getElementById('mti').textContent=d.i;
+  document.getElementById('mga').textContent=d.g;
+  document.getElementById('mdv').textContent=d.dv;
+  document.getElementById('mct').textContent=d.c;
+  document.getElementById('min').textContent='💬 Interação: '+d.in;
+  const rb=document.getElementById('mrb');
+  if(d.r&&d.rt){rb.style.display='block';document.getElementById('mrt').textContent=d.rt;}
+  else rb.style.display='none';
+  document.getElementById('ov').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function fc(e){
+  if(!e||e.target===document.getElementById('ov')||e.target.classList.contains('cls')){
+    document.getElementById('ov').classList.remove('on');
+    document.body.style.overflow='';
+  }
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fc();});
+renderJun();
+renderJul();
+</script>
+<div class="ftr"><span>Camila</span> · Toque em qualquer dia para ver o roteiro completo · 🎬 = tem ideia de reel</div>
+</body>
+</html>
