@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Calendário de Conteúdo | Luana Dias</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+html{background:#fff!important}
+html,body{background:#fff!important;color:#1a1612;-webkit-text-size-adjust:100%;margin:0;padding:0;font-family:'Lora',Georgia,serif;min-height:100vh}
+:root{
+--gold:#b8860b;--gold-l:#d4a017;--border:#e8e0d0;--dim:#8a7a6a;
+--cx:#0066cc;--cx-bg:#cce0ff;--cx-t:#003d80;
+--ob:#cc4400;--ob-bg:#ffd6c2;--ob-t:#7a2200;
+--vd:#007a2f;--vd-bg:#b8f0cc;--vd-t:#004018;
+--bs:#6600cc;--bs-bg:#e8ccff;--bs-t:#3d0080;
+--au:#cc0044;--au-bg:#ffc2d4;--au-t:#7a0028;
+--ed:#aa7700;--ed-bg:#fff0b3;--ed-t:#664400;
+}
+*{box-sizing:border-box}
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+.hdr{text-align:center;margin-bottom:40px;padding-bottom:28px;border-bottom:2px solid var(--border)}
+.hdr .marca{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.hdr h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);font-weight:300;color:#1a1612;margin:0 0 6px;line-height:1.1}
+.hdr h1 span{color:var(--gold);font-style:italic}
+.hdr .sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;line-height:1.8}
+.pos{display:inline-block;margin-top:12px;font-family:'Lora',serif;font-size:13px;font-style:italic;color:#5a4a3a;border-left:3px solid var(--gold);padding:6px 14px;text-align:left}
+.leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;justify-content:center}
+.li{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase;font-weight:600}
+.ld{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.mes-label{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin:32px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.dh{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+.dh div{text-align:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:6px 0;font-family:'Cormorant Garamond',serif;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+.card{border-radius:8px;padding:10px 8px;min-height:100px;cursor:pointer;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;border:2px solid transparent;position:relative}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.15);z-index:2}
+.card.vz{background:transparent;border:2px dashed #e0d8cc;cursor:default;opacity:0.2;min-height:100px}
+.card.vz:hover{transform:none;box-shadow:none}
+.num{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;line-height:1;margin-bottom:5px}
+.pn{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:5px;opacity:.75}
+.id{font-size:10px;line-height:1.4;flex:1}
+.rb{position:absolute;top:7px;right:7px;font-size:8px;background:rgba(0,0,0,.12);border-radius:10px;padding:2px 6px;font-weight:700}
+.cx{background:var(--cx-bg);border-color:var(--cx);color:var(--cx-t)}
+.ob{background:var(--ob-bg);border-color:var(--ob);color:var(--ob-t)}
+.vd{background:var(--vd-bg);border-color:var(--vd);color:var(--vd-t)}
+.bs{background:var(--bs-bg);border-color:var(--bs);color:var(--bs-t)}
+.au{background:var(--au-bg);border-color:var(--au);color:var(--au-t)}
+.ed{background:var(--ed-bg);border-color:var(--ed);color:var(--ed-t)}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:center;justify-content:center;padding:20px}
+.ov.on{display:flex}
+.modal{background:#fff;border-radius:14px;max-width:500px;width:100%;padding:32px;position:relative;max-height:88vh;overflow-y:auto;border-top:5px solid #1a1612}
+.cls{position:absolute;top:14px;right:18px;background:none;border:none;font-size:24px;cursor:pointer;color:#888;line-height:1}
+.mdt{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;font-family:'Cormorant Garamond',serif}
+.mbg{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:4px}
+.mrl{display:inline-block;margin-left:8px;font-size:9px;font-weight:700;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:#1a1612;color:#fff}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#1a1612;margin:0 0 20px;line-height:1.25}
+.sec h4{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 5px}
+.sec p{font-size:13px;line-height:1.75;color:#2a2420;margin:0 0 16px}
+.int{background:#f8f6f2;border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;font-size:12px;color:#5a4a2a;margin-top:4px;font-style:italic}
+.rlb{background:#1a1612;color:#fff;border-radius:8px;padding:12px 16px;margin-top:16px;font-size:12px;line-height:1.6}
+.rlb strong{color:var(--gold-l);font-size:10px;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:4px}
+.ftr{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
+.ftr span{color:var(--gold)}
+@media(max-width:600px){.grid{gap:3px}.card{min-height:72px;padding:7px 5px}.num{font-size:16px}.pn{font-size:7px}.id,.rb{display:none}.modal{padding:22px 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="marca">Luana Dias · Nail Designer & Instrutora</div>
+    <h1>26 Jun <span>—</span> 25 Jul <span>2026</span></h1>
+    <div class="sub">Técnica · Negócio · Vida Real · Liberdade</div>
+    <div class="pos">"Saí de só fazer unhas para construir algo com o meu nome."</div>
+  </div>
+
+  <div class="leg">
+    <div class="li"><div class="ld" style="background:var(--cx)"></div>Conexão</div>
+    <div class="li"><div class="ld" style="background:var(--ob)"></div>Quebra de Objeção</div>
+    <div class="li"><div class="ld" style="background:var(--vd)"></div>Venda</div>
+    <div class="li"><div class="ld" style="background:var(--bs)"></div>Aumento de Base</div>
+    <div class="li"><div class="ld" style="background:var(--au)"></div>Autoridade</div>
+    <div class="li"><div class="ld" style="background:var(--ed)"></div>Educação</div>
+  </div>
+
+  <div class="mes-label">Junho 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gjun"></div>
+
+  <div class="mes-label">Julho 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gjul"></div>
+</div>
+
+<div class="ov" id="ov" onclick="fc(event)">
+  <div class="modal">
+    <button class="cls" onclick="fc()">×</button>
+    <div class="mdt" id="mdt"></div>
+    <span class="mbg" id="mbg"></span><span class="mrl" id="mrl" style="display:none">🎬 REEL</span>
+    <h2 id="mti"></h2>
+    <div class="sec"><h4>Gancho</h4><p id="mga"></p></div>
+    <div class="sec"><h4>Desenvolvimento</h4><p id="mdv"></p></div>
+    <div class="sec"><h4>CTA</h4><p id="mct"></p></div>
+    <div class="int" id="min"></div>
+    <div class="rlb" id="mrb" style="display:none"><strong>🎬 Ideia de Reel</strong><span id="mrt"></span></div>
+  </div>
+</div>
+
+<script>
+const D=[
+// JUNHO — começa sexta 26/06
+{d:26,m:6,p:"cx",pN:"Conexão",r:true,
+i:"Quem é a Luana além das unhas",
+g:"Você provavelmente chegou até mim pelo trabalho. Mas antes de tudo isso, deixa eu te contar quem eu sou.",
+dv:"Apresentação real e humana. Mãe, nail designer, instrutora em construção, mulher que trabalha de casa e tem tempo de qualidade com a filha. A vida que ela construiu com as próprias mãos. Quem compra de quem confia — e confiança começa em conhecer a pessoa.",
+c:"Me conta uma coisa sobre você que a maioria das pessoas não sabe.",
+in:"Caixinha nos stories: 'Me faz uma pergunta sobre mim'",
+rt:"Câmera direta, sem filtro. Apresentação pessoal de 60 segundos. Mãe, nail, estúdio em casa, liberdade, filha. Real e simples."},
+
+{d:27,m:6,p:"bs",pN:"Aumento de Base",r:true,
+i:"Eu coloquei lente nos dentes. E não foi só sobre o sorriso.",
+g:"Sempre foi um sonho. Fiz com o dinheiro que o meu estúdio gerou. Isso mudou o jeito que eu olho para o que construí.",
+dv:"Conquista real como prova de negócio. A lente não é vaidade — é evidência de que o estúdio sustenta, que o trabalho dela tem valor, que ela construiu algo real. Conteúdo de impacto que circula porque toda mulher tem um sonho esperando para ser realizado com o próprio dinheiro.",
+c:"Salva e manda para aquela amiga que está construindo algo e ainda não acredita no que está fazendo.",
+in:"'Marca quem você sabe que está mais perto do sonho do que imagina'",
+rt:"Reel de conquista. Mostra o sorriso, conta a história em 60 segundos. 'Não foi um presente. Foi o meu estúdio que pagou isso.' Encerra com o sorriso na câmera."},
+
+{d:28,m:6,p:"cx",pN:"Conexão",r:false,
+i:"Como é trabalhar de casa com a minha filha por perto",
+g:"Não é perfeito. Tem dia que ela interrompe no meio de um atendimento. E eu não mudaria por nada.",
+dv:"Vida real de quem tem liberdade geográfica e tempo de qualidade com a filha. Sem glamourizar. Mostra os dois lados — a bagunça e a beleza de estar presente. Isso conecta com qualquer mãe que sonha em trabalhar sem abrir mão de estar perto.",
+c:"Me conta: qual é o seu sonho de liberdade no trabalho?",
+in:"Caixinha nos stories: 'Como você imagina seu dia de trabalho ideal?'"},
+
+{d:29,m:6,p:"au",pN:"Autoridade",r:true,
+i:"O que faz uma nail designer ter estúdio próprio e fila de espera",
+g:"Não é só a técnica. É o conjunto — acabamento, atendimento, a experiência que a cliente vai ter do começo ao fim.",
+dv:"Posiciona Luana como referência que construiu algo além da técnica. Fala sobre o que diferencia uma profissional que tem negócio de uma que só faz unhas. Cutilagem, gel, acabamento, atendimento — tudo junto forma uma marca.",
+c:"Se você quer entender como construir isso, me segue. Vem muito conteúdo por aí.",
+in:"Salvar + 'Você pensa no seu trabalho como negócio ou como serviço?'",
+rt:"Reel mostrando o estúdio, o processo, o resultado. Voz over explicando o que está por trás de cada detalhe."},
+
+{d:30,m:6,p:"ed",pN:"Educação",r:true,
+i:"Cutilagem que transforma o resultado — o que a maioria erra",
+g:"A cutilagem é onde o trabalho começa de verdade. E é onde a maioria das nail designers ainda deixa a desejar.",
+dv:"Conteúdo educativo sobre cutilagem com autoridade real. O que a maioria faz no automático, o que muda quando você faz com atenção, o impacto no resultado final. Luana ensina a partir do que ela mesma pratica no estúdio.",
+c:"Salva esse. É o tipo de conteúdo que muda o seu resultado amanhã de manhã.",
+in:"Salvar + 'Você tem dificuldade com cutilagem?'",
+rt:"Reel de técnica. Mãos em close, passo a passo real da cutilagem com narração. Simples e direto."},
+
+// JULHO
+{d:1,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Julho começa. O que esse mês significa pra mim.",
+g:"Julho pra mim é o mês que eu decidi aparecer de verdade. Sem filtro, sem roteiro, sendo eu mesma.",
+dv:"Virada de mês com intenção. Luana compartilha o que julho representa na sua jornada de construção de marca pessoal. Conecta com quem também está começando a aparecer e sente o mesmo peso de se mostrar.",
+c:"Me conta o que julho significa pra você.",
+in:"Caixinha nos stories: 'O que você quer que seja diferente em julho?'"},
+
+{d:2,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Tenho medo de aparecer e ser julgada'",
+g:"Eu também tinha. Ainda tenho às vezes. E posto assim mesmo.",
+dv:"Quebra o medo de aparecer com honestidade. Luana não superou o medo — ela aprendeu a agir junto com ele. Isso é mais real e mais poderoso do que qualquer discurso de confiança perfeita. Fala com toda nail que quer criar conteúdo mas trava antes de apertar o botão.",
+c:"Se você também sente isso, me conta aqui. Você não está sozinha.",
+in:"Enquete nos stories: 'Você trava antes de postar?'",
+rt:"Reel direto para a câmera. 'Eu postei esse vídeo com medo.' Pausa. 'E vou continuar postando assim mesmo.'"},
+
+{d:3,m:7,p:"vd",pN:"Venda",r:false,
+i:"O que você aprende quando estuda comigo",
+g:"Você não vai aprender só técnica. Vai aprender a transformar técnica em negócio.",
+dv:"Apresenta a proposta de valor da Luana instrutora. Não é mais um curso de nail — é método, acabamento, atendimento, posicionamento. A aluna sai sabendo fazer e sabendo cobrar. Vende a transformação, não o conteúdo.",
+c:"Vagas abertas. Me chama no direct.",
+in:"DM direta + link na bio"},
+
+{d:4,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Nail designer que só faz unhas tem teto. Quem constrói método não tem.",
+g:"Chegou um momento em que eu percebi que o meu tempo tinha limite. O meu conhecimento não.",
+dv:"Conteúdo de alcance para nail designers que sentem o teto do operacional. Luana viveu isso e encontrou na instrução a forma de multiplicar sem multiplicar horas. Compartilhável por qualquer profissional de beleza que está nessa fase.",
+c:"Salva e manda para a nail que você conhece que está sentindo esse teto.",
+in:"'Marca aquela nail que você sabe que tem muito mais a oferecer'",
+rt:"Reel conceitual. 'O meu tempo tem limite. O meu método não.' Explica em 60 segundos a diferença entre vender hora e vender conhecimento."},
+
+{d:5,m:7,p:"au",pN:"Autoridade",r:true,
+i:"Gel — o que faz o resultado durar e não descascar",
+g:"Gel que descasca em uma semana não é culpa do produto. Na maioria das vezes, é de preparo.",
+dv:"Conteúdo técnico de autoridade sobre aplicação de gel. O que interfere na durabilidade — preparo da unha, primer, quantidade de produto, selagem. Luana ensina a partir da sua prática real no estúdio.",
+c:"Salva esse. Resolve um dos problemas mais comuns de quem trabalha com gel.",
+in:"Salvar + 'Você tem problema com descascamento?'",
+rt:"Reel de técnica com close nas mãos. Mostra o processo passo a passo com narração direta. Sem edição elaborada."},
+
+{d:6,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Um dia real no meu estúdio em casa",
+g:"Esse é o meu escritório. A minha sala de aula. O lugar onde tudo acontece.",
+dv:"Bastidor do estúdio em casa. Mostra o ambiente de trabalho real — a mesa, os produtos, a organização, a filha passando ao fundo. Sem glamourizar. Quem assiste sente que é possível construir algo real dentro de casa.",
+c:"Me conta: você sonha em ter o seu próprio estúdio?",
+in:"Caixinha nos stories: 'Qual é o seu sonho de espaço de trabalho?'"},
+
+{d:7,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Não sei se tenho nível para ensinar'",
+g:"Você não precisa saber tudo para ensinar. Você precisa saber mais do que quem está começando.",
+dv:"Quebra a síndrome do impostor da nail que quer instruir mas acha que não está pronta. Luana estava nesse lugar. O que a fez dar o próximo passo não foi sentir que sabia tudo — foi entender que o que ela já sabe transforma quem está no início.",
+c:"Se você já pensa em ensinar mas trava no 'ainda não estou pronta', me chama.",
+in:"Enquete: 'Você já pensou em ensinar o que sabe?'",
+rt:"Reel direto. 'Você não precisa ser a melhor do mundo para ensinar. Precisa ser melhor do que quem está começando.' Pausa. 'E você já é.'"},
+
+{d:8,m:7,p:"vd",pN:"Venda",r:false,
+i:"Resultado de aluna — o que mudou depois do curso",
+g:"Ela chegou sem saber por onde começar. Saiu com método, posicionamento e primeiras clientes.",
+dv:"Caso real de aluna. Antes e depois específico — não só técnica, mas negócio, confiança, posicionamento. Quanto mais específico o resultado, mais a futura aluna se vê no lugar.",
+c:"A próxima pode ser você. Me chama no direct.",
+in:"Link na bio + DM"},
+
+{d:9,m:7,p:"ed",pN:"Educação",r:true,
+i:"Atendimento que fideliza — o que a cliente sente antes mesmo de ver o resultado",
+g:"A cliente decide se volta antes de você terminar o trabalho. E isso começa no momento em que ela entra.",
+dv:"Educa sobre atendimento como diferencial. Recepção, comunicação, conforto, como você apresenta o serviço, como você encerra. O resultado técnico é o mínimo esperado — o que fideliza é a experiência completa.",
+c:"Salva esse. Ele muda o jeito que você pensa sobre atendimento.",
+in:"Salvar + 'Você pensa no atendimento como parte do seu diferencial?'",
+rt:"Reel de bastidor de atendimento. Mostra o momento de receber a cliente, a comunicação, os detalhes. Voz over sobre o que cada momento representa."},
+
+{d:10,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Trabalho de casa com filho não é desculpa — é combustível",
+g:"Minha filha não me atrapalha. Ela me lembra por que eu construí tudo isso.",
+dv:"Conteúdo de alcance para mães que trabalham de casa e às vezes se sentem culpadas pelos dois lados. Luana virou a narrativa — a filha não é obstáculo, é o motivo. Isso circula porque toda mãe empreendedora sente isso.",
+c:"Salva e manda para a mãe que você sabe que está construindo mesmo com tudo pesando.",
+in:"'Marca aquela mãe que não para nunca'",
+rt:"Reel de vida real. Ela trabalhando, a filha ao fundo. Uma frase de impacto. Sem texto elaborado — a cena fala."},
+
+{d:11,m:7,p:"au",pN:"Autoridade",r:false,
+i:"Como eu monto o preço do meu serviço — e por que a maioria cobra errado",
+g:"Eu cobrava pelo tempo. Até entender que o que tenho que cobrar é pelo resultado.",
+dv:"Posiciona Luana como referência de negócio além de técnica. Fala sobre precificação baseada em valor e não em hora. Cutilagem + gel + acabamento + atendimento + experiência = preço que não precisa ser justificado.",
+c:"Se você ainda tem dificuldade de precificar, me chama. Tenho conteúdo sobre isso.",
+in:"Caixinha nos stories: 'Você tem dificuldade de precificar o seu serviço?'"},
+
+{d:12,m:7,p:"cx",pN:"Conexão",r:false,
+i:"O relacionamento que me faz trabalhar melhor",
+g:"Quando a sua vida pessoal está bem, o seu trabalho sente. Não é teoria — é o que eu vivo.",
+dv:"Conexão através do equilíbrio entre vida pessoal e profissional. Luana tem um bom relacionamento e isso faz parte de quem ela é. Sem expor demais — só mostrar que uma vida equilibrada é parte da marca dela.",
+c:"Me conta: o que na sua vida pessoal te faz trabalhar melhor?",
+in:"Caixinha nos stories"},
+
+{d:13,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Nail designer não ganha bem'",
+g:"Eu sustento minha casa, pago minhas contas, realizei um sonho e ainda tenho tempo com minha filha. Tudo com as unhas.",
+dv:"Quebra o preconceito sobre ganho na área com prova real. Luana não usa dado de mercado — usa a própria vida. Estúdio próprio, lente nos dentes, liberdade geográfica, tempo com a filha. Isso fala mais do que qualquer estatística.",
+c:"Se alguém te disse que nail não tem futuro, me manda essa pessoa.",
+in:"Enquete: 'Alguém já te disse que nail não ia te sustentar?'",
+rt:"Reel direto e com energia. Lista as conquistas reais uma por uma. Encerra com: 'Tudo isso com as unhas.'"},
+
+{d:14,m:7,p:"vd",pN:"Venda",r:false,
+i:"Convite direto — para quem quer sair de só fazer unhas",
+g:"Você está aqui, me acompanhando. Se a ideia de ensinar já passou pela sua cabeça, esse convite é pra você.",
+dv:"Post curto e direto. Reconhece quem acompanha, nomeia o que Luana oferece com clareza e convida para a ação sem pressão. Para a nail que quer diversificar e construir marca pessoal.",
+c:"Me chama no direct com a palavra JULHO. Vamos conversar.",
+in:"DM com palavra-chave JULHO"},
+
+{d:15,m:7,p:"ed",pN:"Educação",r:true,
+i:"O que é acabamento de verdade — e como ele muda o seu portfólio",
+g:"Duas nails com a mesma técnica. Uma tem acabamento, a outra não. O portfólio delas é completamente diferente.",
+dv:"Educa sobre acabamento como diferencial visível e mensurável. O que caracteriza um acabamento de qualidade — limpeza de bordas, cor uniforme, selagem perfeita, ausência de bolhas. Conteúdo técnico que posiciona Luana como referência de padrão.",
+c:"Salva esse se você quer elevar o seu portfólio.",
+in:"Salvar + 'Você se preocupa com acabamento?'",
+rt:"Reel de antes e depois de acabamento. Close nas unhas. Mostra o que muda com atenção aos detalhes. Narração simples."},
+
+{d:16,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Liberdade geográfica não é só praia com notebook",
+g:"Liberdade geográfica pra mim é buscar minha filha na escola sem pedir licença pra ninguém.",
+dv:"Redefine liberdade geográfica no contexto real de Luana. Não é lifestyle de influencer — é presença, autonomia, escolha. Conteúdo que ressoa com qualquer profissional que sonha em trabalhar nos próprios termos.",
+c:"Salva e manda para quem você sabe que merece esse tipo de liberdade.",
+in:"'Marca quem você sabe que merece trabalhar do jeito que quer'",
+rt:"Reel de vida real. Cena cotidiana de liberdade — buscando a filha, trabalhando de casa, sem horário fixo. Uma frase de impacto. Sem glamour, só verdade."},
+
+{d:17,m:7,p:"au",pN:"Autoridade",r:false,
+i:"Como eu organizo minha agenda para ter tempo de qualidade com a minha filha",
+g:"Minha agenda não é cheia. Ela é estratégica. Aprendi que tempo de qualidade não é quantidade de horas.",
+dv:"Mostra como Luana organiza o negócio para ter presença real com a filha. Quantos clientes por dia, como distribui os horários, o que ela não aceita mais na agenda. Autoridade de negócio construída na experiência real.",
+c:"Se você quer organizar a sua agenda de forma mais inteligente, me conta como está hoje.",
+in:"Caixinha nos stories: 'Como você organiza sua agenda hoje?'"},
+
+{d:18,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Curso online não ensina o mesmo que presencial'",
+g:"Depende do que você quer aprender. Técnica em vídeo aprende sim. O que muda é o que você faz com ela depois.",
+dv:"Quebra a resistência ao curso online com honestidade. Técnica em vídeo com boa didática funciona — e Luana prova com resultados de alunas. O que o online agrega que o presencial às vezes não tem: possibilidade de rever, ritmo próprio, custo menor.",
+c:"Se você está em dúvida se o online funciona pra você, me chama. Vamos conversar.",
+in:"Enquete: 'Você prefere aprender presencial ou online?'",
+rt:"Reel de bastidor de aula online. Mostra como Luana grava, como organiza o conteúdo, o que a aluna recebe. Desmistifica com presença."},
+
+{d:19,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Uma conquista que ninguém viu acontecer",
+g:"Essa conquista não foi num dia. Foi numa série de dias que eu escolhi continuar quando estava difícil.",
+dv:"Conexão através de conquista silenciosa. Pode ser o estúdio, as lentes, a primeira aluna, a fila de espera. O que importa é mostrar que o resultado visível tem uma história invisível atrás. Isso é o que conecta com quem está no meio do processo.",
+c:"Me conta uma conquista sua que demorou pra chegar mas chegou.",
+in:"Caixinha nos stories: 'Me conta a sua conquista silenciosa'"},
+
+{d:20,m:7,p:"vd",pN:"Venda",r:false,
+i:"Depoimento de aluna em destaque",
+g:"Ela me contou o resultado e eu pedi licença para compartilhar. Porque isso precisa ser visto.",
+dv:"Print ou relato de depoimento real com autorização. Foco em resultado específico — primeira cliente, primeiro valor cobrado, primeira aluna. O concreto convence mais que o emocional.",
+c:"A próxima pode ser você. Link na bio.",
+in:"Link na bio"},
+
+{d:21,m:7,p:"ed",pN:"Educação",r:true,
+i:"Como construir um portfólio que atrai cliente — não qualquer cliente",
+g:"Portfólio não é álbum de fotos. É uma seleção estratégica do que você quer continuar fazendo.",
+dv:"Educa sobre portfólio como ferramenta de atração de cliente ideal. O que colocar, o que tirar, como fotografar, que trabalhos mostram o seu melhor. Conteúdo prático que muda a forma como a nail pensa o próprio Instagram.",
+c:"Salva esse se você quer que o seu portfólio trabalhe por você.",
+in:"Salvar + 'Você tem critério na hora de escolher o que posta?'",
+rt:"Reel mostrando como selecionar e fotografar trabalho para o portfólio. Dicas práticas e rápidas."},
+
+{d:22,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Nail que tem método não depende de tendência",
+g:"Tendência muda toda semana. Método fica. E quem tem método atende qualquer pedido com a mesma qualidade.",
+dv:"Conteúdo de alcance sobre método versus tendência. A nail que corre atrás de cada novidade fica sempre correndo. A que tem método sólido aplica qualquer técnica com resultado consistente. Isso é o que Luana ensina.",
+c:"Salva e manda para a nail que você conhece que está sempre tentando aprender a próxima tendência.",
+in:"'Marca aquela nail que precisa ouvir isso'",
+rt:"Reel conceitual. 'Tendência muda. Método fica.' Exemplos rápidos. Encerra com frase de impacto."},
+
+{d:23,m:7,p:"au",pN:"Autoridade",r:false,
+i:"O que eu olho primeiro quando vejo o trabalho de outra nail",
+g:"Não é a cor. Não é o design. É a cutilagem e o acabamento. Eles entregam tudo.",
+dv:"Conteúdo de olhar técnico apurado. Luana compartilha o que o olho treinado dela vê — o que revela nível técnico real antes de qualquer detalhe estético. Isso posiciona ela como referência de padrão e educa quem está desenvolvendo o olhar.",
+c:"Me conta: o que você olha primeiro no trabalho de outra nail?",
+in:"Comentário + 'Você tem olhar crítico para o próprio trabalho?'"},
+
+{d:24,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Já tem muita nail designer no mercado'",
+g:"Tem muita nail. Mas poucas com método, com atendimento, com resultado consistente. Esse espaço está sempre aberto.",
+dv:"Quebra a saturação de mercado com precisão. O mercado cheio é de profissionais sem diferencial. A nail com método, atendimento e posicionamento tem espaço garantido porque o cliente ideal não está procurando qualquer uma — está procurando ela.",
+c:"Se você quer ser essa nail, me chama.",
+in:"Enquete: 'Você sente que o mercado está saturado?'",
+rt:"Reel direto. 'O mercado não está cheio de nails com método. Está cheio de nails sem diferencial.' Pausa. 'Esses são dois mercados diferentes.'"},
+
+{d:25,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Um mês aparecendo. O que esse mês me ensinou.",
+g:"Trinta dias me mostrando, postando, sendo eu mesma no Instagram. Vou te contar o que aprendi.",
+dv:"Encerramento honesto do mês. O que foi difícil, o que surpreendeu, o que ela não abre mão de levar para o próximo mês. Fecha o ciclo com presença e abre o próximo com intenção.",
+c:"Me conta: o que você vai levar de julho pra frente?",
+in:"Caixinha nos stories: 'O que julho te ensinou?'"}
+];
+
+const COR={ob:['var(--ob-bg)','var(--ob-t)'],vd:['var(--vd-bg)','var(--vd-t)'],bs:['var(--bs-bg)','var(--bs-t)'],au:['var(--au-bg)','var(--au-t)'],cx:['var(--cx-bg)','var(--cx-t)'],ed:['var(--ed-bg)','var(--ed-t)']};
+
+const SEMJUN={26:'Sexta',27:'Sábado',28:'Domingo',29:'Segunda',30:'Terça'};
+const SEMJUL={1:'Quarta',2:'Quinta',3:'Sexta',4:'Sábado',5:'Domingo',6:'Segunda',7:'Terça',8:'Quarta',9:'Quinta',10:'Sexta',11:'Sábado',12:'Domingo',13:'Segunda',14:'Terça',15:'Quarta',16:'Quinta',17:'Sexta',18:'Sábado',19:'Domingo',20:'Segunda',21:'Terça',22:'Quarta',23:'Quinta',24:'Sexta',25:'Sábado'};
+
+function renderJun(){
+  const g=document.getElementById('gjun');
+  [0,1,2,3].forEach(()=>{const v=document.createElement('div');v.className='card vz';g.appendChild(v);});
+  D.filter(d=>d.m===6).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'junho');
+    g.appendChild(el);
+  });
+}
+
+function renderJul(){
+  const g=document.getElementById('gjul');
+  [0,1].forEach(()=>{const v=document.createElement('div');v.className='card vz';g.appendChild(v);});
+  D.filter(d=>d.m===7).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'julho');
+    g.appendChild(el);
+  });
+}
+
+function ab(d,mes){
+  const sem=mes==='junho'?SEMJUN[d.d]:SEMJUL[d.d];
+  document.getElementById('mdt').textContent=`${sem}, ${d.d} de ${mes} de 2026`;
+  const bg=document.getElementById('mbg');
+  bg.textContent=d.pN;bg.style.background=COR[d.p][0];bg.style.color=COR[d.p][1];
+  document.getElementById('mrl').style.display=d.r?'inline-block':'none';
+  document.getElementById('mti').textContent=d.i;
+  document.getElementById('mga').textContent=d.g;
+  document.getElementById('mdv').textContent=d.dv;
+  document.getElementById('mct').textContent=d.c;
+  document.getElementById('min').textContent='💬 Interação: '+d.in;
+  const rb=document.getElementById('mrb');
+  if(d.r&&d.rt){rb.style.display='block';document.getElementById('mrt').textContent=d.rt;}
+  else rb.style.display='none';
+  document.getElementById('ov').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function fc(e){
+  if(!e||e.target===document.getElementById('ov')||e.target.classList.contains('cls')){
+    document.getElementById('ov').classList.remove('on');
+    document.body.style.overflow='';
+  }
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fc();});
+renderJun();
+renderJul();
+</script>
+<div class="ftr"><span>Luana Dias</span> · Toque em qualquer dia para ver o roteiro completo · 🎬 = tem ideia de reel</div>
+</body>
+</html>
