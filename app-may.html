@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0d0d0d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>May — Rotina Intencional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0d0d0d !important; }
+  html, body {
+    background: #0d0d0d !important;
+    color: #f0f0f0;
+    margin: 0; padding: 0;
+    font-family: 'Inter', sans-serif;
+    -webkit-text-size-adjust: 100%;
+    min-height: 100vh;
+  }
+  * { box-sizing: border-box; }
+
+  /* HEADER */
+  .header {
+    background: linear-gradient(160deg, #1a0a0a 0%, #0d0d0d 60%);
+    padding: 48px 24px 32px;
+    border-bottom: 1px solid #2a1515;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, #8B1A1A22 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8B1A1A;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0 0 6px;
+    line-height: 1.2;
+  }
+  .header-sub {
+    font-size: 12px;
+    color: #7a5c5c;
+    letter-spacing: 0.5px;
+  }
+
+  /* SCORE CARD */
+  .score-card {
+    margin: 20px 20px 0;
+    background: linear-gradient(135deg, #1f0d0d, #170909);
+    border: 1px solid #3d1515;
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .score-card::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; right: -20px;
+    width: 100px; height: 100px;
+    background: radial-gradient(circle, #8B1A1A18 0%, transparent 70%);
+  }
+  .score-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+  .score-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #7a5c5c;
+  }
+  .score-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 700;
+    color: #8B1A1A;
+    line-height: 1;
+  }
+  .score-number span {
+    font-size: 16px;
+    color: #5a3a3a;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+  }
+  .score-msg {
+    font-size: 12px;
+    color: #c4a882;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    margin-top: 4px;
+  }
+  .progress-bar-bg {
+    background: #2a1515;
+    border-radius: 100px;
+    height: 6px;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  .progress-bar-fill {
+    background: linear-gradient(90deg, #8B1A1A, #c0392b);
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* STATS ROW */
+  .stats-row {
+    display: flex;
+    gap: 10px;
+    padding: 16px 20px;
+  }
+  .stat-box {
+    flex: 1;
+    background: #130808;
+    border: 1px solid #2a1515;
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    color: #8B1A1A;
+    font-size: 22px;
+    font-weight: 700;
+    display: block;
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 9px;
+    color: #5a3a3a;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 4px;
+    display: block;
+  }
+
+  /* WEEK NAV */
+  .week-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-bottom: 1px solid #1a0a0a;
+  }
+  .week-label {
+    font-size: 11px;
+    color: #7a5c5c;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .week-days {
+    display: flex;
+    gap: 6px;
+  }
+  .week-day {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid #2a1515;
+    background: transparent;
+    color: #5a3a3a;
+    font-size: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0;
+  }
+  .week-day.active {
+    background: #8B1A1A;
+    border-color: #8B1A1A;
+    color: #fff;
+  }
+  .week-day.has-data {
+    border-color: #5a2020;
+    color: #8B1A1A;
+  }
+
+  /* SECTION */
+  .section {
+    margin: 0;
+    border-bottom: 1px solid #1a0a0a;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: #0d0d0d;
+    transition: background 0.2s;
+  }
+  .section-header:active { background: #130808; }
+  .section-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #f0f0f0;
+    display: block;
+  }
+  .section-time {
+    font-size: 10px;
+    color: #5a3a3a;
+    margin-top: 2px;
+    display: block;
+    letter-spacing: 0.5px;
+  }
+  .section-progress {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-pct {
+    font-size: 11px;
+    color: #8B1A1A;
+    font-weight: 600;
+    min-width: 30px;
+    text-align: right;
+  }
+  .chevron {
+    color: #3a1515;
+    font-size: 14px;
+    transition: transform 0.3s;
+  }
+  .chevron.open { transform: rotate(90deg); }
+
+  /* ITEMS */
+  .section-items {
+    display: none;
+    padding: 0 20px 16px;
+    background: #0d0d0d;
+  }
+  .section-items.open { display: block; }
+  .item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 11px 0;
+    border-bottom: 1px solid #130808;
+    cursor: pointer;
+  }
+  .item:last-child { border-bottom: none; }
+  .item-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1.5px solid #3a1515;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: transparent;
+  }
+  .item-check.done {
+    background: #8B1A1A;
+    border-color: #8B1A1A;
+  }
+  .item-check.done::after {
+    content: '✓';
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .item-content { flex: 1; }
+  .item-name {
+    font-size: 13px;
+    color: #f0f0f0;
+    line-height: 1.4;
+    transition: color 0.2s;
+  }
+  .item-name.done {
+    color: #3a2020;
+    text-decoration: line-through;
+    text-decoration-color: #2a1515;
+  }
+  .item-meta {
+    font-size: 10px;
+    color: #5a3a3a;
+    margin-top: 3px;
+    letter-spacing: 0.3px;
+  }
+  .item-points {
+    font-size: 10px;
+    color: #8B1A1A;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  /* RESULTADO SEMANAL */
+  .resultado-card {
+    margin: 20px;
+    background: #130808;
+    border: 1px solid #2a1515;
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .resultado-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    color: #c4a882;
+    margin: 0 0 16px;
+  }
+  .resultado-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .resultado-label {
+    font-size: 11px;
+    color: #7a5c5c;
+    flex: 1;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+  .resultado-bar-bg {
+    width: 100px;
+    height: 5px;
+    background: #2a1515;
+    border-radius: 100px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .resultado-bar-fill {
+    height: 100%;
+    background: #8B1A1A;
+    border-radius: 100px;
+    transition: width 0.8s ease;
+  }
+  .resultado-val {
+    font-size: 11px;
+    color: #8B1A1A;
+    font-weight: 600;
+    min-width: 28px;
+    text-align: right;
+  }
+
+  /* MENSAGEM COLÉRICA */
+  .colerica-msg {
+    margin: 0 20px 20px;
+    padding: 16px;
+    background: linear-gradient(135deg, #1f0d0d, #170909);
+    border-left: 3px solid #8B1A1A;
+    border-radius: 0 12px 12px 0;
+  }
+  .colerica-msg p {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: #c4a882;
+    font-style: italic;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .footer {
+    padding: 40px 20px;
+    text-align: center;
+    color: #3a2020;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .footer span {
+    color: #8B1A1A;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .reset-btn {
+    margin-top: 16px;
+    padding: 10px 24px;
+    background: transparent;
+    border: 1px solid #2a1515;
+    border-radius: 100px;
+    color: #3a2020;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .reset-btn:active { border-color: #8B1A1A; color: #8B1A1A; }
+
+  .notif-banner {
+    margin: 16px 20px 0;
+    padding: 12px 16px;
+    background: #1f0d0d;
+    border: 1px solid #3d1515;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .notif-banner span { font-size: 12px; color: #c4a882; flex: 1; }
+  .notif-btn {
+    background: #8B1A1A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .notif-banner.granted { border-color: #1a3d15; background: #0a1308; }
+  .notif-banner.granted span { color: #4a8B4a; }
+
+  #loading {
+    text-align: center;
+    padding: 80px 20px;
+    color: #5a3a3a;
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">All Win Academy</div>
+  <h1>Rotina da May</h1>
+  <div class="header-sub">Branding & Posicionamento — Construída pra medir</div>
+</div>
+
+<div id="loading">Carregando sua rotina...</div>
+
+<div id="app" style="display:none">
+
+  <div class="notif-banner" id="notif-banner">
+    <span>Ativar lembretes da rotina no celular</span>
+    <button class="notif-btn" onclick="requestNotif()">Ativar</button>
+  </div>
+
+  <div class="score-card">
+    <div class="score-top">
+      <div>
+        <div class="score-label">Pontuação do dia</div>
+        <div class="score-msg" id="score-msg">Vamos começar.</div>
+      </div>
+      <div>
+        <div class="score-number" id="score-num">0<span>/100</span></div>
+      </div>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="score-bar" style="width:0%"></div>
+    </div>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box">
+      <span class="stat-number" id="s-feitos">0</span>
+      <span class="stat-label">Feitos hoje</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number" id="s-semana">0%</span>
+      <span class="stat-label">Semana</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number" id="s-sequencia">0</span>
+      <span class="stat-label">Dias seguidos</span>
+    </div>
+  </div>
+
+  <!-- NAVEGAÇÃO SEMANAL -->
+  <div class="week-nav">
+    <span class="week-label">Esta semana</span>
+    <div class="week-days" id="week-days"></div>
+  </div>
+
+  <!-- BLOCOS DA ROTINA -->
+  <div id="rotina-blocks"></div>
+
+  <!-- RESULTADO SEMANAL -->
+  <div class="resultado-card">
+    <div class="resultado-title">Onde você está crescendo</div>
+    <div class="resultado-row">
+      <span class="resultado-label">Essência</span>
+      <div class="resultado-bar-bg"><div class="resultado-bar-fill" id="rb-essencia" style="width:0%"></div></div>
+      <span class="resultado-val" id="rv-essencia">0%</span>
+    </div>
+    <div class="resultado-row">
+      <span class="resultado-label">Corpo</span>
+      <div class="resultado-bar-bg"><div class="resultado-bar-fill" id="rb-corpo" style="width:0%"></div></div>
+      <span class="resultado-val" id="rv-corpo">0%</span>
+    </div>
+    <div class="resultado-row">
+      <span class="resultado-label">Conteúdo</span>
+      <div class="resultado-bar-bg"><div class="resultado-bar-fill" id="rb-conteudo" style="width:0%"></div></div>
+      <span class="resultado-val" id="rv-conteudo">0%</span>
+    </div>
+    <div class="resultado-row">
+      <span class="resultado-label">Negócio</span>
+      <div class="resultado-bar-bg"><div class="resultado-bar-fill" id="rb-negocio" style="width:0%"></div></div>
+      <span class="resultado-val" id="rv-negocio">0%</span>
+    </div>
+    <div class="resultado-row">
+      <span class="resultado-label">Conexão</span>
+      <div class="resultado-bar-bg"><div class="resultado-bar-fill" id="rb-conexao" style="width:0%"></div></div>
+      <span class="resultado-val" id="rv-conexao">0%</span>
+    </div>
+    <div class="resultado-row">
+      <span class="resultado-label">Relacionamento</span>
+      <div class="resultado-bar-bg"><div class="resultado-bar-fill" id="rb-relacionamento" style="width:0%"></div></div>
+      <span class="resultado-val" id="rv-relacionamento">0%</span>
+    </div>
+  </div>
+
+  <div class="colerica-msg" id="colerica-msg">
+    <p>Mesmo que hoje não seja 100%, cada item marcado é um padrão que você quebrou.</p>
+  </div>
+
+  <div class="footer">
+    <span>Brindaremos.</span>
+    All Win Academy © 2026
+    <br><button class="reset-btn" onclick="resetDay()">Reiniciar dia</button>
+  </div>
+
+</div>
+
+<script>
+const SUPABASE_URL = 'https://ynahmfqywuykbglebasn.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_hSWqz8N5FcbMMbnTlPKEvw_3qd8tbBU';
+const USER_ID = 'may_rotina';
+
+const ROTINA = [
+  {
+    id: 'essencia',
+    icon: '🌙',
+    iconBg: '#1a0808',
+    title: 'Ritual de Essência',
+    time: '07:00 — 07:45',
+    categoria: 'essencia',
+    items: [
+      { id: 'acorda', name: 'Acordar sem snooze', meta: 'O primeiro ato do dia é um contrato com você mesma', pts: 10 },
+      { id: 'silencio', name: '10 minutos de silêncio intencional', meta: 'Sem celular. Só você.', pts: 10 },
+      { id: 'intencao', name: 'Definir a intenção do dia em uma palavra', meta: 'Escreve no caderno ou no Notes', pts: 8 },
+      { id: 'gratidao', name: 'Três gratidões rápidas', meta: 'Treina o cérebro pra enxergar avanço', pts: 7 },
+    ]
+  },
+  {
+    id: 'corpo',
+    icon: '🔥',
+    iconBg: '#1a0a00',
+    title: 'Corpo em Movimento',
+    time: '07:45 — 08:30',
+    categoria: 'corpo',
+    items: [
+      { id: 'exercicio', name: 'Exercício físico', meta: 'Caminhada, treino em casa ou academia', pts: 15 },
+      { id: 'agua', name: 'Beber água ao acordar', meta: '500ml antes do café', pts: 5 },
+      { id: 'refeicao', name: 'Café da manhã intencional', meta: 'Sentar e comer, não comer correndo', pts: 5 },
+    ]
+  },
+  {
+    id: 'conteudo',
+    icon: '📲',
+    iconBg: '#0a0a1a',
+    title: 'Criação de Conteúdo',
+    time: '09:00 — 11:00',
+    categoria: 'conteudo',
+    items: [
+      { id: 'hook', name: 'Escrever 1 hook do dia', meta: 'Antes de gravar, a ideia no papel', pts: 10 },
+      { id: 'gravar', name: 'Gravar ao menos 1 vídeo', meta: 'Feito é melhor que perfeito', pts: 15 },
+      { id: 'postar', name: 'Postar 1 conteúdo no Instagram', meta: 'Feed, Reels ou Stories com posicionamento', pts: 10 },
+      { id: 'stories', name: '3 Stories de bastidor ou marca pessoal', meta: 'Mostre o processo, não só o resultado', pts: 8 },
+    ]
+  },
+  {
+    id: 'negocio',
+    icon: '🎁',
+    iconBg: '#0a1a0a',
+    title: 'Negócio & Branding',
+    time: '11:00 — 13:00',
+    categoria: 'negocio',
+    items: [
+      { id: 'prospectar', name: 'Prospectar 1 cliente ou parceiro', meta: 'DM, indicação ou networking ativo', pts: 15 },
+      { id: 'orcamento', name: 'Enviar orçamento ou proposta', meta: 'Mesmo que pequena', pts: 12 },
+      { id: 'followup', name: 'Dar follow-up em conversa em aberto', meta: 'Quem não aparece é esquecido', pts: 10 },
+      { id: 'aprender', name: '20 minutos de aprendizado de negócio', meta: 'Podcast, aula ou leitura de nicho', pts: 8 },
+    ]
+  },
+  {
+    id: 'conexao',
+    icon: '🌍',
+    iconBg: '#1a1a0a',
+    title: 'Ambiente & Conexão',
+    time: '14:00 — 16:00',
+    categoria: 'conexao',
+    items: [
+      { id: 'sair', name: 'Trabalhar fora de casa ao menos 1x na semana', meta: 'Café, biblioteca, coworking', pts: 12 },
+      { id: 'networking', name: 'Interagir com 3 perfis do nicho', meta: 'Comentar, responder, aparecer', pts: 8 },
+      { id: 'experiencia', name: 'Viver uma experiência que vire conteúdo', meta: 'Almoço bonito, evento, lugar novo', pts: 10 },
+    ]
+  },
+  {
+    id: 'relacionamento',
+    icon: '❤️',
+    iconBg: '#1a0a10',
+    title: 'Relacionamento & Família',
+    time: '18:00 — 20:00',
+    categoria: 'relacionamento',
+    items: [
+      { id: 'namorado', name: 'Momento intencional com o namorado', meta: 'Sem celular, presença real', pts: 10 },
+      { id: 'pai', name: 'Contato com o pai', meta: 'Ligação, visita ou mensagem de verdade', pts: 8 },
+      { id: 'desconectar', name: 'Desconectar do trabalho após as 20h', meta: 'Colérica precisa de descanso real também', pts: 7 },
+    ]
+  }
+];
+
+const MSGS = {
+  0: 'Vamos começar. O primeiro passo é o mais importante.',
+  10: 'Você já está na frente de quem não começou.',
+  25: 'Bom começo. Mantém o ritmo.',
+  50: 'Metade do caminho. Você não para aqui.',
+  75: 'Quase lá. Esse é o ponto que separa quem entrega de quem quase entregou.',
+  90: 'Dia forte. Você está construindo a versão que sempre quis ser.',
+  100: 'Dia 100%. Esse resultado é seu. Brindaremos.'
+};
+
+const DIAS = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+
+let allData = {};
+let selectedDay = getTodayKey();
+let saving = false;
+
+function getTodayKey() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function getWeekDays() {
+  const days = [];
+  const today = new Date();
+  const dow = today.getDay();
+  const monday = new Date(today);
+  monday.setDate(today.getDate() - dow + (dow === 0 ? -6 : 1));
+  for (let i = 0; i < 7; i++) {
+    const d = new Date(monday);
+    d.setDate(monday.getDate() + i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    days.push({ key, label: DIAS[d.getDay()], isToday: key === getTodayKey() });
+  }
+  return days;
+}
+
+function getDayData() {
+  return allData[selectedDay] || {};
+}
+
+function itemKey(secId, itemId) { return `${secId}_${itemId}`; }
+
+function toggle(secId, itemId) {
+  if (!allData[selectedDay]) allData[selectedDay] = {};
+  const k = itemKey(secId, itemId);
+  allData[selectedDay][k] = !allData[selectedDay][k];
+  render();
+  save();
+}
+
+function toggleSection(id) {
+  const el = document.getElementById('items_' + id);
+  const ch = document.getElementById('chev_' + id);
+  if (el) { el.classList.toggle('open'); ch.classList.toggle('open'); }
+}
+
+function selectDay(key) {
+  selectedDay = key;
+  render();
+}
+
+function resetDay() {
+  if (confirm('Reiniciar o dia de hoje?')) {
+    allData[selectedDay] = {};
+    render();
+    save();
+  }
+}
+
+function calcScore() {
+  const dayData = getDayData();
+  let total = 0, earned = 0;
+  ROTINA.forEach(sec => {
+    sec.items.forEach(item => {
+      total += item.pts;
+      if (dayData[itemKey(sec.id, item.id)]) earned += item.pts;
+    });
+  });
+  return { pct: total > 0 ? Math.round((earned / total) * 100) : 0, earned, total };
+}
+
+function calcCatPct(catId) {
+  const dayData = getDayData();
+  const sec = ROTINA.find(s => s.id === catId);
+  if (!sec) return 0;
+  const done = sec.items.filter(i => dayData[itemKey(sec.id, i.id)]).length;
+  return Math.round((done / sec.items.length) * 100);
+}
+
+function calcWeekPct() {
+  const days = getWeekDays();
+  let total = 0;
+  days.forEach(d => {
+    const data = allData[d.key] || {};
+    let pts = 0, maxPts = 0;
+    ROTINA.forEach(sec => sec.items.forEach(item => {
+      maxPts += item.pts;
+      if (data[itemKey(sec.id, item.id)]) pts += item.pts;
+    }));
+    total += maxPts > 0 ? (pts / maxPts) * 100 : 0;
+  });
+  return Math.round(total / 7);
+}
+
+function calcStreak() {
+  let streak = 0;
+  const today = new Date();
+  for (let i = 0; i < 30; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() - i);
+    const key = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+    const data = allData[key] || {};
+    let pts = 0, maxPts = 0;
+    ROTINA.forEach(sec => sec.items.forEach(item => {
+      maxPts += item.pts;
+      if (data[itemKey(sec.id, item.id)]) pts += item.pts;
+    }));
+    const pct = maxPts > 0 ? (pts / maxPts) * 100 : 0;
+    if (pct >= 50) streak++;
+    else if (i > 0) break;
+  }
+  return streak;
+}
+
+function getMsg(pct) {
+  const keys = Object.keys(MSGS).map(Number).sort((a,b) => b-a);
+  for (const k of keys) { if (pct >= k) return MSGS[k]; }
+  return MSGS[0];
+}
+
+function render() {
+  const score = calcScore();
+  const dayData = getDayData();
+
+  document.getElementById('score-num').innerHTML = `${score.pct}<span>/100</span>`;
+  document.getElementById('score-bar').style.width = score.pct + '%';
+  document.getElementById('score-msg').textContent = getMsg(score.pct);
+
+  const feitos = Object.values(dayData).filter(Boolean).length;
+  document.getElementById('s-feitos').textContent = feitos;
+  document.getElementById('s-semana').textContent = calcWeekPct() + '%';
+  document.getElementById('s-sequencia').textContent = calcStreak();
+
+  // Week days
+  const weekDays = getWeekDays();
+  const wd = document.getElementById('week-days');
+  wd.innerHTML = weekDays.map(d => {
+    const data = allData[d.key] || {};
+    const hasData = Object.values(data).some(Boolean);
+    const isSelected = d.key === selectedDay;
+    return `<div class="week-day${isSelected ? ' active' : hasData ? ' has-data' : ''}" onclick="selectDay('${d.key}')">${d.label}</div>`;
+  }).join('');
+
+  // Blocos
+  const blocks = document.getElementById('rotina-blocks');
+  blocks.innerHTML = ROTINA.map(sec => {
+    const doneSec = sec.items.filter(i => dayData[itemKey(sec.id, i.id)]).length;
+    const pctSec = Math.round((doneSec / sec.items.length) * 100);
+    return `
+      <div class="section">
+        <div class="section-header" onclick="toggleSection('${sec.id}')">
+          <div class="section-header-left">
+            <div class="section-icon" style="background:${sec.iconBg}">${sec.icon}</div>
+            <div>
+              <span class="section-title">${sec.title}</span>
+              <span class="section-time">${sec.time}</span>
+            </div>
+          </div>
+          <div class="section-progress">
+            <span class="section-pct">${pctSec}%</span>
+            <span class="chevron" id="chev_${sec.id}">›</span>
+          </div>
+        </div>
+        <div class="section-items" id="items_${sec.id}">
+          ${sec.items.map(item => {
+            const done = !!dayData[itemKey(sec.id, item.id)];
+            return `
+              <div class="item" onclick="toggle('${sec.id}','${item.id}')">
+                <div class="item-check${done ? ' done' : ''}"></div>
+                <div class="item-content">
+                  <div class="item-name${done ? ' done' : ''}">${item.name}</div>
+                  <div class="item-meta">${item.meta}</div>
+                </div>
+                <div class="item-points">+${item.pts}</div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  // Resultado por categoria
+  const cats = ['essencia','corpo','conteudo','negocio','conexao','relacionamento'];
+  cats.forEach(c => {
+    const pct = calcCatPct(c);
+    document.getElementById(`rb-${c}`).style.width = pct + '%';
+    document.getElementById(`rv-${c}`).textContent = pct + '%';
+  });
+
+  // Mensagem colérica
+  const msgs = [
+    'Mesmo sem 100%, cada item marcado é um padrão que você quebrou.',
+    'Colérica mede por resultado. Mas resultado se constrói em atos diários.',
+    'Você não procrastinou porque é preguiçosa. Procrastinação é proteção. E você está vencendo ela.',
+    'O dia que você acha que foi fraco pode ser o mais importante da semana.',
+    '50% cumprido já é mais do que zero. Isso se chama avanço.',
+  ];
+  const idx = Math.floor(score.pct / 20);
+  document.getElementById('colerica-msg').querySelector('p').textContent = msgs[Math.min(idx, msgs.length-1)];
+}
+
+async function requestNotif() {
+  if (!('Notification' in window)) return alert('Seu navegador não suporta notificações.');
+  const perm = await Notification.requestPermission();
+  if (perm === 'granted') {
+    scheduleNotifs();
+    updateNotifBanner('granted');
+  }
+}
+
+function updateNotifBanner(state) {
+  const banner = document.getElementById('notif-banner');
+  if (state === 'granted') {
+    banner.className = 'notif-banner granted';
+    banner.innerHTML = '<span>✓ Lembretes ativados</span>';
+  }
+}
+
+function scheduleNotifs() {
+  if (Notification.permission !== 'granted') return;
+  const horarios = [
+    { hora: 7, min: 0, titulo: 'Ritual de Essência', sub: '07:00 — Conexão consigo mesma' },
+    { hora: 7, min: 45, titulo: 'Corpo em Movimento', sub: '07:45 — Exercício físico' },
+    { hora: 9, min: 0, titulo: 'Criação de Conteúdo', sub: '09:00 — Hora de criar' },
+    { hora: 11, min: 0, titulo: 'Negócio & Branding', sub: '11:00 — Foco no negócio' },
+    { hora: 14, min: 0, titulo: 'Ambiente & Conexão', sub: '14:00 — Sair e se conectar' },
+    { hora: 18, min: 0, titulo: 'Relacionamento & Família', sub: '18:00 — Presença real' },
+  ];
+  const now = new Date();
+  horarios.forEach(h => {
+    const t = new Date();
+    t.setHours(h.hora, h.min, 0, 0);
+    const diff = t - now;
+    if (diff > 0) {
+      setTimeout(() => {
+        new Notification('May — ' + h.titulo, { body: h.sub });
+      }, diff);
+    }
+  });
+}
+
+async function load() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/progress?id=eq.${USER_ID}&select=done`, {
+      headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+    });
+    const data = await res.json();
+    if (data && data[0] && data[0].done) allData = data[0].done;
+  } catch(e) { console.error(e); }
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  if (Notification.permission === 'granted') {
+    scheduleNotifs();
+    updateNotifBanner('granted');
+  }
+  render();
+}
+
+async function save() {
+  if (saving) return;
+  saving = true;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/progress?id=eq.${USER_ID}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ done: allData })
+    });
+  } catch(e) { console.error(e); }
+  saving = false;
+}
+
+load();
+</script>
+</body>
+</html>
