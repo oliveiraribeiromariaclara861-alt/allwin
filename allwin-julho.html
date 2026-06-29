@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1a0a0a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>All Win — Julho 2026</title>
+<style>
+  html { background-color: #1a0a0a !important; }
+  html, body {
+    background: #1a0a0a !important;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    font-family: 'Georgia', serif;
+    -webkit-text-size-adjust: 100%;
+    min-height: 100vh;
+  }
+
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap');
+
+  * { box-sizing: border-box; }
+
+  .header {
+    background: linear-gradient(180deg, #231010 0%, #1a0a0a 100%);
+    padding: 32px 20px 24px;
+    text-align: center;
+    border-bottom: 1px solid #3d1515;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #8B1A1A;
+    font-size: 22px;
+    margin: 0 0 4px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .header p {
+    font-size: 12px;
+    color: #c4a882;
+    margin: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .progress-section {
+    padding: 24px 20px 16px;
+    background: #1f0d0d;
+    border-bottom: 1px solid #3d1515;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  .progress-label span {
+    font-size: 11px;
+    color: #c4a882;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .progress-label strong {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #8B1A1A;
+    font-size: 18px;
+  }
+
+  .progress-bar-bg {
+    background: #3d1515;
+    border-radius: 100px;
+    height: 8px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    background: linear-gradient(90deg, #8B1A1A, #a82020);
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.6s ease;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    background: #1a0a0a;
+    border-bottom: 1px solid #2a1010;
+  }
+
+  .stat-box {
+    flex: 1;
+    background: #1f0d0d;
+    border: 1px solid #3d1515;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #8B1A1A;
+    font-size: 20px;
+    font-weight: 700;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 10px;
+    color: #c4a882;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 2px;
+    display: block;
+  }
+
+  .filter-row {
+    display: flex;
+    gap: 8px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    background: #1a0a0a;
+    border-bottom: 1px solid #2a1010;
+  }
+
+  .filter-row::-webkit-scrollbar { display: none; }
+
+  .filter-btn {
+    flex-shrink: 0;
+    padding: 7px 16px;
+    border-radius: 100px;
+    border: 1px solid #3d1515;
+    background: transparent;
+    color: #c4a882;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+
+  .filter-btn.active {
+    background: #8B1A1A;
+    border-color: #8B1A1A;
+    color: #1a0a0a;
+    font-weight: 600;
+  }
+
+  .day-block {
+    margin: 0;
+    border-bottom: 1px solid #2a1010;
+  }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    background: #1a0a0a;
+    transition: background 0.2s;
+  }
+
+  .day-header:active { background: #1f0d0d; }
+
+  .day-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .day-date {
+    font-family: 'Playfair Display', Georgia, serif;
+    color: #8B1A1A;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .day-label {
+    font-size: 11px;
+    color: #c4a882;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .club-badge {
+    background: #8B1A1A;
+    color: #1a0a0a;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 100px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .day-progress-mini {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .mini-dots {
+    display: flex;
+    gap: 4px;
+  }
+
+  .mini-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #3d1515;
+    transition: background 0.2s;
+  }
+
+  .mini-dot.done { background: #8B1A1A; }
+
+  .chevron {
+    color: #5c2a2a;
+    font-size: 14px;
+    transition: transform 0.3s;
+    margin-left: 8px;
+  }
+
+  .chevron.open { transform: rotate(90deg); }
+
+  .hooks-list {
+    display: none;
+    padding: 0 20px 16px;
+    background: #1a0a0a;
+  }
+
+  .hooks-list.open { display: block; }
+
+  .hook-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #221010;
+    cursor: pointer;
+  }
+
+  .hook-item:last-child { border-bottom: none; }
+
+  .hook-check {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid #5c2a2a;
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: transparent;
+  }
+
+  .hook-check.done {
+    background: #8B1A1A;
+    border-color: #8B1A1A;
+  }
+
+  .hook-check.done::after {
+    content: '✓';
+    color: #1a0a0a;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .hook-text {
+    font-size: 14px;
+    line-height: 1.55;
+    color: #ffffff;
+    flex: 1;
+    transition: color 0.2s;
+  }
+
+  .hook-text.done {
+    color: #6b3333;
+    text-decoration: line-through;
+    text-decoration-color: #5c2a2a;
+  }
+
+  .hook-number {
+    font-size: 10px;
+    color: #5c2a2a;
+    font-family: 'Playfair Display', Georgia, serif;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .club-hook {
+    background: linear-gradient(135deg, #231010, #1f0d0d);
+    border: 1px solid #1e1530;
+    border-radius: 10px;
+    padding: 12px;
+    margin-top: 4px;
+  }
+
+  .club-hook .hook-text {
+    color: #f5f0e8;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #5c2a2a;
+    font-size: 13px;
+  }
+
+  .footer {
+    padding: 40px 20px;
+    text-align: center;
+    color: #5c2a2a;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .footer span {
+    color: #8B1A1A;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 13px;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .reset-btn {
+    margin-top: 20px;
+    padding: 10px 24px;
+    background: transparent;
+    border: 1px solid #3d1515;
+    border-radius: 100px;
+    color: #6b3333;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+
+  .reset-btn:active {
+    border-color: #8B1A1A;
+    color: #8B1A1A;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>All Win Academy</h1>
+  <p>Calendário de Conteúdo — Julho 2026</p>
+</div>
+
+<div class="progress-section">
+  <div class="progress-label">
+    <span>Execução do mês</span>
+    <strong id="pct">0%</strong>
+  </div>
+  <div class="progress-bar-bg">
+    <div class="progress-bar-fill" id="bar" style="width:0%"></div>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-box">
+    <span class="stat-number" id="s-done">0</span>
+    <span class="stat-label">Gravados</span>
+  </div>
+  <div class="stat-box">
+    <span class="stat-number" id="s-left">155</span>
+    <span class="stat-label">Restantes</span>
+  </div>
+  <div class="stat-box">
+    <span class="stat-number" id="s-days">0</span>
+    <span class="stat-label">Dias ativos</span>
+  </div>
+</div>
+
+<div class="filter-row">
+  <button class="filter-btn active" onclick="setFilter('all', this)">Todos</button>
+  <button class="filter-btn" onclick="setFilter('pending', this)">Pendentes</button>
+  <button class="filter-btn" onclick="setFilter('done', this)">Concluídos</button>
+  <button class="filter-btn" onclick="setFilter('club', this)">Club ♥</button>
+</div>
+
+<div id="loading" style="text-align:center;padding:60px 20px;color:#c4a882;font-size:13px;letter-spacing:1px;">Carregando seu progresso...</div>
+<div id="calendar" style="display:none"></div>
+
+<div class="footer">
+  <span>Brindaremos.</span>
+  All Win Academy © 2026
+  <br>
+  <button class="reset-btn" onclick="resetAll()">Reiniciar progresso</button>
+</div>
+
+<script>
+const DAYS = [
+  { date: "29/06", label: "Segunda", club: false, hooks: [
+    "Você não tem medo de terminar. Você tem medo de confirmar que desperdiçou tempo",
+    "Você escolheu ele sabendo ou escolheu precisando",
+    "Toda vez que você abriu mão do que sentia ela ficou um pouco menor. Você sabe quem é ela",
+    "As pessoas mentem menos quando estão com raiva de você. Presta atenção no que ouviu",
+    "Você fatura, entrega resultado e ainda duvida se merece cobrar mais. Isso tem raiz"
+  ]},
+  { date: "30/06", label: "Terça", club: false, hooks: [
+    "Você não tem um problema de relacionamento. Você tem um problema de autoestima que aparece no relacionamento",
+    "Mulher que se anula acha que é amor. É medo com outro nome",
+    "Você perdoou rápido demais e chamou isso de maturidade",
+    "Quando alguém te trata mal e você explica o comportamento dele pra todo mundo, o problema não é ele",
+    "Você tem cliente, tem resultado, tem método. Ainda espera alguém te dar permissão pra cobrar caro"
+  ]},
+  { date: "01/07", label: "Quarta", club: true, hooks: [
+    "Você repete o mesmo ciclo em relacionamentos e sabe disso. Só não sabe como sair",
+    "Mulher que não se conhece escolhe mal. Sempre",
+    "Você aguenta o que não deveria e chama isso de força",
+    "Ele não mudou. Você só cansou de fingir que não via",
+    "Pelo valor de um body splash da Virgínia você entra no Club e para de repetir o que você já sabe que não funciona"
+  ]},
+  { date: "02/07", label: "Quinta", club: false, hooks: [
+    "Você não é difícil de amar. Você é difícil de controlar. Aprende a diferença",
+    "Relacionamento que te faz diminuir a voz não é relacionamento. É jaula com decoração",
+    "Você esperou ele mudar por anos. Ele esperou você desistir de pedir",
+    "Mulher que se conhece não implora. Ela decide",
+    "Você tem medo de parecer arrogante cobrando o que vale. Ele não teve medo nenhum de te pagar menos"
+  ]},
+  { date: "03/07", label: "Sexta", club: false, hooks: [
+    "Você chama de amor o que te faz precisar de validação todo dia",
+    "Ele nunca foi ambíguo. Você traduziu o silêncio dele do jeito que queria ouvir",
+    "Mulher com autoestima baixa não escolhe mal por acaso. Ela escolhe o que conhece",
+    "Você se acostumou a ser a que mais esforça. E chamou isso de parceria",
+    "Sua concorrente não vende mais que você porque é melhor. Ela acredita que merece mais que você"
+  ]},
+  { date: "04/07", label: "Sábado", club: false, hooks: [
+    "Você não tem medo de ficar sozinha. Você tem medo de descobrir que preferiu",
+    "Toda mulher que tolera demais tem uma versão de si mesma que ela ainda não conheceu",
+    "Você explica ele pra sua mãe, pra sua amiga, pra você mesma. Cansa não",
+    "Mulher que se sabota encontra relacionamento que confirma o que ela pensa de si mesma",
+    "Você posta, entrega, aparece todo dia e ainda acha que não é suficiente pra crescer"
+  ]},
+  { date: "05/07", label: "Domingo", club: false, hooks: [
+    "Você não ficou por amor. Você ficou porque sair exigia se escolher primeiro",
+    "Ele te escolheu quando você precisava. Sumiu quando você ficou inteira",
+    "Mulher que não se respeita treina as pessoas ao redor a não respeitarem também",
+    "Você mudou tudo por ele e ele não mudou nada por você. E você ainda se pergunta o que fez de errado",
+    "Você tem medo de aparecer de verdade porque se aparecer e não der certo não tem mais desculpa"
+  ]},
+  { date: "06/07", label: "Segunda", club: false, hooks: [
+    "Você não é intensa. Você é clara. E clareza assusta quem não quer ser visto",
+    "Mulher que sabe o que quer parece difícil pra quem nunca quis nada de verdade",
+    "Você diminuiu sua voz tantas vezes que esqueceu como ela soa quando é sua",
+    "Ele não te amava mal. Ele te amava no limite do que ele conseguia. O problema é que você merecia mais",
+    "Você tem método, resultado e história. Ainda vende como se estivesse pedindo um favor"
+  ]},
+  { date: "07/07", label: "Terça", club: false, hooks: [
+    "Você não é ciumenta. Você está com alguém que te dá motivo e chama você de louca",
+    "Mulher que se perde em relacionamento não perdeu o rumo. Ela nunca tinha se encontrado",
+    "Você aguenta em silêncio e chama isso de paciência. Seu corpo já chamou de outro nome faz tempo",
+    "Ele te escolheu incompleta porque completa você não ficaria",
+    "Você fica esperando o momento certo pra lançar. O momento certo foi ontem"
+  ]},
+  { date: "08/07", label: "Quarta", club: true, hooks: [
+    "Você sabe exatamente onde se perdeu. Só ainda não decidiu se quer se achar",
+    "Mulher que não se conhece repete. Sempre. Em tudo",
+    "Você chama de destino o que é padrão. E padrão tem solução",
+    "Ele não te destruiu. Ele só encontrou o que já estava frágil",
+    "Pelo valor de um body splash da Virgínia você entra no Club e começa a entender por que você repete o que repete"
+  ]},
+  { date: "09/07", label: "Quinta", club: false, hooks: [
+    "Você não precisa de um homem melhor. Você precisa de uma versão sua que não aceita menos",
+    "Mulher que se cuida assusta. Mulher que se conhece ameaça. Seja as duas",
+    "Você deu chances demais pra quem não pediu desculpa nem uma vez",
+    "Relacionamento não te completa. Ele revela o que você já é",
+    "Sua audiência não está pequena porque você não aparece. Está pequena porque você aparece com medo"
+  ]},
+  { date: "10/07", label: "Sexta", club: false, hooks: [
+    "Você tentou consertar o que ele quebrou e esqueceu de perguntar se ele queria ser consertado",
+    "Mulher que se anula vira invisível dentro do próprio relacionamento",
+    "Você não é difícil. Você só parou de ser fácil de ignorar",
+    "Ele sumiu quando você ficou boa demais pra ele segurar",
+    "Você entrega conteúdo de milhares e cobra centavos. Isso não é humildade. É crença"
+  ]},
+  { date: "11/07", label: "Sábado", club: false, hooks: [
+    "Você perdoou sem receber explicação e chamou isso de evolução",
+    "Mulher que se respeita não convence ninguém a ficar. Ela deixa ir",
+    "Você ficou tão ocupada salvando ele que esqueceu que estava se afogando",
+    "Autoestima baixa não grita. Ela sussurra em cada escolha que você faz",
+    "Você tem medo de ser grande demais e perder quem está do seu lado agora"
+  ]},
+  { date: "12/07", label: "Domingo", club: false, hooks: [
+    "Você não precisa explicar por que saiu. Precisava ter saído antes",
+    "Mulher que se conhece não negocia o que ela vale",
+    "Você carregou o relacionamento nas costas e ainda se perguntou por que estava cansada",
+    "Ele não era seu lar. Era seu hábito",
+    "Você cresce quando para de pedir permissão pra ocupar espaço"
+  ]},
+  { date: "13/07", label: "Segunda", club: false, hooks: [
+    "Você chama de amor o que te faz precisar provar que merece ficar",
+    "Mulher que não se escolhe sempre encontra alguém que também não a escolhe",
+    "Você ficou pequena pra ele se sentir grande. E ainda assim não foi suficiente",
+    "Ele te tratava bem na frente dos outros. Você sabe o que acontecia quando ficavam a sós",
+    "Você tem medo de cobrar caro e perder o cliente. Já pensou no que perde cobrando barato todo mês"
+  ]},
+  { date: "14/07", label: "Terça", club: false, hooks: [
+    "Você não é dramática. Você é uma mulher que sente e não foi ensinada que isso é permitido",
+    "Mulher que tolera migalha aprende a chamar migalha de banquete",
+    "Você esperou ele perceber seu valor. Ele só percebe o que resolve o problema dele",
+    "Relacionamento que te faz se sentir sortuda por atenção básica não é relacionamento",
+    "Você passa horas ajudando cliente de graça e dez minutos travada na hora de mandar o preço"
+  ]},
+  { date: "15/07", label: "Quarta", club: true, hooks: [
+    "Você já sabe que merece mais. Só ainda não acreditou o suficiente pra exigir",
+    "Mulher que repete padrão não é fraca. É uma mulher que ainda não entendeu a origem",
+    "Você se acostumou a ser a última da sua própria lista",
+    "Ele não era o problema. O padrão que te levou até ele era",
+    "Pelo valor de um body splash da Virgínia você entra no Club e para de ser a última da sua própria lista"
+  ]},
+  { date: "16/07", label: "Quinta", club: false, hooks: [
+    "Você não tem problema de relacionamento. Você tem uma ferida que escolhe o mesmo tipo de pessoa pra confirmá-la",
+    "Mulher inteira intimida. Por isso te pediram pra ser menos a vida toda",
+    "Você confundiu intensidade com amor e ficou viciada no caos",
+    "Ele te amava do jeito que ele sabia. O problema é que você sabia mais",
+    "Você não trava na hora de vender por timidez. Você trava porque ainda não acredita que o que tem vale"
+  ]},
+  { date: "17/07", label: "Sexta", club: false, hooks: [
+    "Você não é exigente. Você só parou de aceitar o mínimo e assustou quem só tinha o mínimo pra dar",
+    "Mulher que se conhece não discute o óbvio. Ela age",
+    "Você investiu anos em alguém que investia semanas em você",
+    "Autoestima não é amar seu corpo. É não deixar ninguém te convencer de que você precisa ser menos",
+    "Sua história de superação vale mais que qualquer diploma. Para de esconder ela"
+  ]},
+  { date: "18/07", label: "Sábado", club: false, hooks: [
+    "Você não tem ciúme. Você tem memória",
+    "Mulher que se perdeu dentro de um relacionamento não some de uma vez. Ela vai embora aos poucos",
+    "Você sorria pra fora e pedia socorro por dentro. Todo mundo viu o sorriso",
+    "Ele não te machucou porque era mau. Te machucou porque você deixou ele achar que podia",
+    "Você trabalha mais que todo mundo e ainda acha que não faz o suficiente pra crescer"
+  ]},
+  { date: "19/07", label: "Domingo", club: false, hooks: [
+    "Você ficou tanto tempo sendo o que ele precisava que esqueceu o que você queria",
+    "Mulher que se respeita não explica a ausência dela. Ela simplesmente não volta",
+    "Você não terminou porque ainda amava. Terminou porque não aguentava mais não se reconhecer",
+    "Relacionamento não te salva. Te revela",
+    "Você adia lançar porque quer estar pronta. Pronta é uma mentira que o medo inventou"
+  ]},
+  { date: "20/07", label: "Segunda", club: false, hooks: [
+    "Você se acostumou tanto com a dor que a paz parece estranha",
+    "Mulher que não se escolhe transforma qualquer homem no centro da sua vida",
+    "Você deu o melhor de você pra alguém que deu o resto pra você",
+    "Ele não era tóxico. Vocês eram incompatíveis e você ficou tentando ser compatível",
+    "Você tem medo de aparecer demais e incomodar. Enquanto isso alguém menos qualificado ocupa o espaço que é seu"
+  ]},
+  { date: "21/07", label: "Terça", club: false, hooks: [
+    "Você chama de saudade o que é vício em alguém que não te fazia bem",
+    "Mulher que se conhece não volta pra quem a fez duvidar de si mesma",
+    "Você foi fiel a ele e traidora de você mesma por anos",
+    "Ele voltou diferente. Você voltou esperançosa. Uma das duas estava certa",
+    "Você cresce quando para de explicar seu preço e começa a defender seu valor"
+  ]},
+  { date: "22/07", label: "Quarta", club: true, hooks: [
+    "Você sabe que algo está errado mas tem medo do que vai encontrar quando parar de se distrair",
+    "Mulher que se anula acha que está preservando o relacionamento. Está se perdendo",
+    "Você foi ensinada que amar é se sacrificar. Ninguém te ensinou que amor próprio vem antes",
+    "Ele era o sintoma. A ferida estava antes dele",
+    "Pelo valor de um body splash da Virgínia você entra no Club e descobre a ferida que está escolhendo por você"
+  ]},
+  { date: "23/07", label: "Quinta", club: false, hooks: [
+    "Você não precisa de closure. Você precisa parar de precisar de explicação de quem nunca te respeitou",
+    "Mulher que se cuida primeiro não é egoísta. É a única que sobra inteira pra quem ama",
+    "Você esperou ele te escolher tanto que esqueceu de se escolher",
+    "Relacionamento saudável não dói todo dia. Isso não é frase de autoajuda. É diagnóstico",
+    "Você tem conteúdo, tem método, tem resultado. Falta acreditar que isso é suficiente pra ocupar espaço grande"
+  ]},
+  { date: "24/07", label: "Sexta", club: false, hooks: [
+    "Você não é cansativa. Você é intensa demais pra quem vive no raso",
+    "Mulher que se perde em relacionamento não perdeu o caminho. Ela nunca tinha parado pra traçar o seu",
+    "Você ficou tanto tempo sendo forte que ninguém perguntou se você estava bem",
+    "Ele te escolheu quando você estava quebrada. Quando você se reconstruiu ele foi embora. Isso diz tudo sobre ele",
+    "Você não precisa de mais seguidores. Precisa de mais convicção no que já tem"
+  ]},
+  { date: "25/07", label: "Sábado", club: false, hooks: [
+    "Você confundiu lealdade com resignação e ficou num lugar que não era seu",
+    "Mulher que se respeita não negocia paz de espírito por companhia",
+    "Você ficou esperando ele perceber. Ele percebeu. Só não quis mudar",
+    "Autoestima não é o que você sente quando está bonita. É o que você exige quando está vulnerável",
+    "Você tem medo de ser grande e perder quem está pequeno do seu lado agora. Esse medo tem nome"
+  ]},
+  { date: "26/07", label: "Domingo", club: false, hooks: [
+    "Você não errou em amar. Errou em continuar quando o amor virou obrigação",
+    "Mulher que se conhece sabe a diferença entre relacionamento difícil e relacionamento errado",
+    "Você guardou a melhor versão de você pra alguém que nunca valorizou nem a versão comum",
+    "Ele não era seu parceiro. Era seu projeto. E você já sabe que projeto não te abraça de volta",
+    "Você entrega resultado real e ainda cobra preço de quem está começando. Isso vai mudar ou vai continuar"
+  ]},
+  { date: "27/07", label: "Segunda", club: false, hooks: [
+    "Você não tem medo de ficar sozinha. Você tem medo de descobrir o quanto preferia estar",
+    "Mulher que para de se anular assusta todo mundo que se beneficiava da sua ausência",
+    "Você se acostumou a ser escolhida por último e chamou isso de humildade",
+    "Ele sumiu quando você ficou boa demais pra precisar dele",
+    "Você tem audiência que confia em você e ainda pede desculpa antes de fazer oferta"
+  ]},
+  { date: "28/07", label: "Terça", club: false, hooks: [
+    "Você não precisa de validação dele. Você precisa parar de precisar de validação",
+    "Mulher que se escolhe todos os dias não espera ninguém vir escolher por ela",
+    "Você foi paciente demais com quem não merecia e impaciente demais com você mesma",
+    "Relacionamento que te faz menor não é amor. É dependência com outro nome",
+    "Você para de crescer quando para de se desafiar. Julho é agora"
+  ]},
+  { date: "29/07", label: "Quarta", club: true, hooks: [
+    "Você chegou até aqui carregando peso que não era seu. Já pode pousar",
+    "Mulher que se entende para de se sabotar sem perceber",
+    "Você repetiu o padrão mais de uma vez. Não é azar. É algo que ainda não foi resolvido",
+    "Ele foi embora e você ficou se perguntando o que fez de errado. A pergunta certa é outra",
+    "Pelo valor de um body splash da Virgínia você entra no Club e para de carregar o que não é seu"
+  ]},
+  { date: "30/07", label: "Quinta", club: false, hooks: [
+    "Você não é o que ele fez com você. Você é o que você decidiu depois",
+    "Mulher que se reconstrói não volta pra ser quem era. Ela descobre quem sempre deveria ter sido",
+    "Você sobreviveu a tudo que jurou que não ia aguentar. Isso tem nome e você ainda não chamou pelo nome certo",
+    "Autoestima não é conquista. É decisão. E você pode tomar agora",
+    "Julho acabando e você executou ou ficou planejando. Uma das duas vai aparecer em agosto"
+  ]},
+  { date: "31/07", label: "Sexta", club: false, hooks: [
+    "Você entrou em julho de um jeito e vai sair de outro. Ou vai",
+    "Mulher que se conhece não termina o mês igual começou",
+    "Você não precisa estar pronta. Você precisa estar decidida",
+    "O relacionamento que você quer começa no relacionamento que você tem com você mesma",
+    "Brindaremos com quem executou em julho"
+  ]}
+];
+
+const SUPABASE_URL = 'https://ynahmfqywuykbglebasn.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_hSWqz8N5FcbMMbnTlPKEvw_3qd8tbBU';
+const USER_ID = 'maria_clara';
+
+let done = {};
+let filter = 'all';
+let saving = false;
+
+async function loadFromSupabase() {
+  try {
+    const res = await fetch(`${SUPABASE_URL}/rest/v1/progress?id=eq.${USER_ID}&select=done`, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      }
+    });
+    const data = await res.json();
+    if (data && data[0] && data[0].done) {
+      done = data[0].done;
+    }
+  } catch(e) {
+    console.error('Erro ao carregar:', e);
+  }
+  render();
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('calendar').style.display = 'block';
+}
+
+async function saveToSupabase() {
+  if (saving) return;
+  saving = true;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/progress?id=eq.${USER_ID}`, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ done })
+    });
+  } catch(e) {
+    console.error('Erro ao salvar:', e);
+  }
+  saving = false;
+}
+
+function key(d, h) { return d + '_' + h; }
+
+function toggle(dayIdx, hookIdx) {
+  const k = key(dayIdx, hookIdx);
+  done[k] = !done[k];
+  render();
+  saveToSupabase();
+}
+
+function setFilter(f, btn) {
+  filter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  render();
+}
+
+function toggleDay(id) {
+  const el = document.getElementById('hooks_' + id);
+  const ch = document.getElementById('chev_' + id);
+  el.classList.toggle('open');
+  ch.classList.toggle('open');
+}
+
+async function resetAll() {
+  if (confirm('Reiniciar todo o progresso?')) {
+    done = {};
+    render();
+    await saveToSupabase();
+  }
+}
+
+function render() {
+  const total = DAYS.reduce((a, d) => a + d.hooks.length, 0);
+  const doneCount = Object.values(done).filter(Boolean).length;
+  const pct = Math.round((doneCount / total) * 100);
+
+  document.getElementById('bar').style.width = pct + '%';
+  document.getElementById('pct').textContent = pct + '%';
+  document.getElementById('s-done').textContent = doneCount;
+  document.getElementById('s-left').textContent = total - doneCount;
+
+  const activeDays = DAYS.filter((d, i) =>
+    d.hooks.some((_, j) => done[key(i, j)])
+  ).length;
+  document.getElementById('s-days').textContent = activeDays;
+
+  const cal = document.getElementById('calendar');
+  cal.innerHTML = '';
+
+  DAYS.forEach((day, di) => {
+    const dayDone = day.hooks.filter((_, hi) => done[key(di, hi)]).length;
+    const allDone = dayDone === day.hooks.length;
+    const hasAny = dayDone > 0;
+
+    if (filter === 'done' && dayDone === 0) return;
+    if (filter === 'club' && !day.club) return;
+
+    const block = document.createElement('div');
+    block.className = 'day-block';
+
+    const dots = day.hooks.map((_, hi) =>
+      `<div class="mini-dot${done[key(di, hi)] ? ' done' : ''}"></div>`
+    ).join('');
+
+    block.innerHTML = `
+      <div class="day-header" onclick="toggleDay(${di})">
+        <div class="day-header-left">
+          <div>
+            <div class="day-date">${day.date}</div>
+            <div class="day-label">${day.label}${day.club ? '' : ''}</div>
+          </div>
+          ${day.club ? '<span class="club-badge">Club</span>' : ''}
+        </div>
+        <div class="day-progress-mini">
+          <div class="mini-dots">${dots}</div>
+          <span class="chevron" id="chev_${di}">›</span>
+        </div>
+      </div>
+      <div class="hooks-list" id="hooks_${di}">
+        ${day.hooks.map((hook, hi) => {
+          const isDone = done[key(di, hi)];
+          const isClub = day.club && hi === 4;
+          return `
+            <div class="hook-item${isClub ? ' club-hook' : ''}" onclick="toggle(${di}, ${hi})">
+              <div class="hook-check${isDone ? ' done' : ''}"></div>
+              <div class="hook-text${isDone ? ' done' : ''}">${hook}</div>
+              <div class="hook-number">${hi + 1}</div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+
+    cal.appendChild(block);
+  });
+}
+
+loadFromSupabase();
+</script>
+</body>
+</html>
