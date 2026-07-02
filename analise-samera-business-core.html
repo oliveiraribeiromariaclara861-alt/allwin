@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Análise de Temperamento e Dor · Sâmera · Business Core</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 16px;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 26px 90px;
+  }
+
+  /* Cabeçalho */
+  .marca {
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #8a7d5c;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 1.25;
+    color: #e8dfc9;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .subtitulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #c9a45c;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .nome {
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #8a7d5c;
+    margin-bottom: 50px;
+  }
+
+  .divisor {
+    width: 54px;
+    height: 1px;
+    background: #c9a45c;
+    margin: 46px auto;
+    opacity: 0.6;
+  }
+
+  /* Seções */
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a45c;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 25px;
+    color: #e8dfc9;
+    margin: 0 0 18px;
+    line-height: 1.3;
+  }
+  p { margin: 0 0 18px; }
+  strong { color: #d8cdb2; font-weight: 500; }
+  em {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12em;
+    color: #c9a45c;
+  }
+
+  /* As duas camadas */
+  .camadas {
+    display: grid;
+    gap: 20px;
+    margin: 30px 0 10px;
+  }
+  .camada {
+    border: 1px solid #2a2620;
+    border-left: 3px solid #c9a45c;
+    padding: 24px 24px 14px;
+    background: #14120e;
+  }
+  .camada.dor { border-left-color: #6b5a3e; }
+  .camada .rotulo {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a45c;
+    margin-bottom: 10px;
+  }
+  .camada.dor .rotulo { color: #8a7d5c; }
+  .camada h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #e8dfc9;
+    margin: 0 0 12px;
+  }
+
+  /* Sinais */
+  .sinais { margin: 8px 0 20px; padding: 0; list-style: none; }
+  .sinais li {
+    padding: 10px 0;
+    border-bottom: 1px solid #221f19;
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .sinais li:last-child { border-bottom: none; }
+  .sinais .ponto {
+    color: #c9a45c;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  /* Citação central */
+  .verso {
+    text-align: center;
+    padding: 38px 20px;
+    margin: 44px 0;
+    border-top: 1px solid #2a2620;
+    border-bottom: 1px solid #2a2620;
+  }
+  .verso p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #e8dfc9;
+    margin: 0 0 10px;
+  }
+  .verso span {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8a7d5c;
+  }
+
+  /* Direcionamento */
+  .chave {
+    background: #14120e;
+    border: 1px solid #2a2620;
+    padding: 26px;
+    margin: 26px 0;
+  }
+  .chave h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 19px;
+    color: #c9a45c;
+    margin: 0 0 12px;
+  }
+  .chave p:last-child { margin-bottom: 0; }
+
+  /* Síntese final */
+  .sintese {
+    text-align: center;
+    margin-top: 60px;
+  }
+  .sintese p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    line-height: 1.55;
+    color: #e8dfc9;
+    max-width: 560px;
+    margin: 0 auto 26px;
+  }
+  .assinatura {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: #c9a45c;
+  }
+
+  @media print {
+    html, body { background: #0f0e0b !important; }
+  }
+  @media (max-width: 480px) {
+    h1 { font-size: 28px; }
+    .verso p { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="marca">All Win Academy · Business Core</div>
+  <h1>Análise de Temperamento<br>e Dor de Origem</h1>
+  <div class="subtitulo">Como enxergamos você por inteiro</div>
+  <div class="nome">Sâmera Darlen Rodrigues Flor</div>
+
+  <div class="eyebrow">O nosso olhar</div>
+  <h2>Antes da dor, já existia você</h2>
+  <p>Toda criança nasce com uma natureza própria. Um jeito de sentir, de se mover e de estar no mundo que vem antes de qualquer ferida. A vida acontece, a dor chega, e muitas vezes essa natureza se veste de proteção para sobreviver. Com o tempo, a mulher adulta olha no espelho e confunde a armadura com a própria pele.</p>
+  <p>No método All Win, nós separamos essas camadas com cuidado. Primeiro reconhecemos a essência, aquilo que sempre esteve em você. Depois olhamos a dor de frente, com respeito, para devolver a ela o tamanho que ela realmente tem. Cicatriz conta a sua história. Quem define a sua identidade é a sua natureza.</p>
+
+  <div class="camadas">
+    <div class="camada">
+      <div class="rotulo">Primeira camada · Sua natureza</div>
+      <h3>Temperamento central: Sanguínea</h3>
+      <p>Existe em você um fio colérico de apoio, que aparece na urgência de sair do lugar e conquistar. Mas a sua base é sanguínea, e ela nunca deixou de dar sinais:</p>
+      <ul class="sinais">
+        <li><span class="ponto">✦</span> Você chega em qualquer lugar e começa a prosear com estranhos, com facilidade e calor.</li>
+        <li><span class="ponto">✦</span> Era uma criança respondona. Tinha voz antes de aprender a se calar.</li>
+        <li><span class="ponto">✦</span> Entre a rapidez e a excelência, escolhe a rapidez. Seu combustível é movimento.</li>
+        <li><span class="ponto">✦</span> Rotina para você pesa como prisão. Sua alma pede ritmo e variedade.</li>
+        <li><span class="ponto">✦</span> Relaxa com prazeres simples e sensoriais: a ducha morninha, a cama, a comidinha saborosa.</li>
+      </ul>
+      <p>Essa é a menina original. Comunicativa, quente, veloz, feita para gente e para vida.</p>
+    </div>
+
+    <div class="camada dor">
+      <div class="rotulo">Segunda camada · A ferida</div>
+      <h3>Dor central: Rejeição</h3>
+      <p>Aos 4 anos, o nascimento do seu irmão prematuro mudou o seu lugar no mundo. Toda a atenção se voltou para ele, e você sentiu o abandono. A última festa que foi só sua aconteceu antes dele chegar. Depois, até o aniversário passou a ser dividido.</p>
+      <p>Ali nasceu uma crença silenciosa: <em>o meu espaço no mundo é emprestado</em>. As palavras duras da sua mãe somaram culpa a essa ferida, e a menina sanguínea entendeu que se expressar custava caro. Então ela se recolheu. A timidez da escola, a tristeza, a solidão no canto da sala. Nada disso era o seu temperamento. Era proteção.</p>
+      <p>Dessa mesma raiz cresceram os galhos que você reconhece hoje: a dificuldade de dizer não, o medo e a insegurança na hora de decidir, as amizades por interesse que aceitou porque quem tem fome de pertencimento se senta em qualquer mesa.</p>
+    </div>
+  </div>
+
+  <div class="verso">
+    <p>&ldquo;Medo de nada dar certo<br>e eu não sair do lugar.&rdquo;</p>
+    <span>A frase que revela tudo</span>
+  </div>
+
+  <p>Para uma sanguínea, ficar parada é a morte simbólica. O seu medo mais profundo não é fracassar em uma tarefa. É ficar presa, revivendo a sensação da infância de estar em um lugar que você não escolheu e do qual não podia se mover. Quando você entende isso, o medo perde o disfarce.</p>
+
+  <div class="divisor"></div>
+
+  <div class="eyebrow">O caminho no Business Core</div>
+  <h2>O que a sua natureza pede</h2>
+
+  <div class="chave">
+    <h3>Metas curtas, vitórias visíveis</h3>
+    <p>Você floresce com movimento e reconhecimento. Vamos trabalhar com ciclos curtos, conquistas celebradas e progresso que se enxerga. Cada vitória devolve à menina de 4 anos a prova de que o lugar dela existe.</p>
+  </div>
+
+  <div class="chave">
+    <h3>Estrutura leve, com ritmo</h3>
+    <p>Disciplina para você precisa respirar. Vamos construir um método com variedade dentro de uma estrutura simples, para que a constância venha do prazer de avançar, e o compromisso seja com você mesma.</p>
+  </div>
+
+  <div class="chave">
+    <h3>Um território que é só seu</h3>
+    <p>O trabalho mais profundo desta jornada é devolver o que a rejeição levou: a experiência de ter algo inteiramente seu. O seu negócio será esse território. Não dividido, não emprestado. Seu, pela primeira vez.</p>
+  </div>
+
+  <div class="sintese">
+    <p>Uma sanguínea ferida pela rejeição, que aprendeu a se encolher para caber. A travessia agora é ocupar, com coragem, o lugar que sempre foi seu.</p>
+    <div class="assinatura">Eu sou o meu maior patrimônio. Brindaremos. 🍷</div>
+  </div>
+
+</div>
+</body>
+</html>
