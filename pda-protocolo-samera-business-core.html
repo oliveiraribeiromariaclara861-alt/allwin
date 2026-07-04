@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>PDA Programa de Aceleração · Protocolo · Sâmera</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 16px;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 26px 90px;
+  }
+
+  .marca {
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #8a7d5c;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 1.25;
+    color: #e8dfc9;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .subtitulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #c9a45c;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .nome {
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #8a7d5c;
+    margin-bottom: 50px;
+  }
+
+  .divisor {
+    width: 54px;
+    height: 1px;
+    background: #c9a45c;
+    margin: 46px auto;
+    opacity: 0.6;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a45c;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 25px;
+    color: #e8dfc9;
+    margin: 0 0 18px;
+    line-height: 1.3;
+  }
+  p { margin: 0 0 18px; }
+  strong { color: #d8cdb2; font-weight: 500; }
+  em {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12em;
+    color: #c9a45c;
+  }
+
+  .abertura {
+    border: 1px solid #2a2620;
+    border-left: 3px solid #c9a45c;
+    background: #14120e;
+    padding: 26px;
+    margin-bottom: 20px;
+  }
+  .abertura p:last-child { margin-bottom: 0; }
+
+  /* Frentes profissionais */
+  .frente {
+    background: #14120e;
+    border: 1px solid #2a2620;
+    padding: 26px;
+    margin: 24px 0;
+  }
+  .frente .quando {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a45c;
+    margin-bottom: 8px;
+  }
+  .frente h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 21px;
+    color: #e8dfc9;
+    margin: 0 0 12px;
+  }
+  .frente p { margin-bottom: 14px; }
+  .frente p:last-child { margin-bottom: 0; }
+  .passos { margin: 6px 0 0; padding: 0; list-style: none; }
+  .passos li {
+    padding: 9px 0;
+    border-bottom: 1px solid #221f19;
+    display: flex;
+    gap: 13px;
+    align-items: baseline;
+  }
+  .passos li:last-child { border-bottom: none; }
+  .passos .ponto {
+    color: #c9a45c;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .verso {
+    text-align: center;
+    padding: 38px 20px;
+    margin: 44px 0;
+    border-top: 1px solid #2a2620;
+    border-bottom: 1px solid #2a2620;
+  }
+  .verso p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #e8dfc9;
+    margin: 0 0 10px;
+  }
+  .verso span {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8a7d5c;
+  }
+
+  .sintese {
+    text-align: center;
+    margin-top: 60px;
+  }
+  .sintese p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    line-height: 1.55;
+    color: #e8dfc9;
+    max-width: 560px;
+    margin: 0 auto 26px;
+  }
+  .assinatura {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: #c9a45c;
+  }
+
+  @media print {
+    html, body { background: #0f0e0b !important; }
+  }
+  @media (max-width: 480px) {
+    h1 { font-size: 28px; }
+    .verso p { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="marca">All Win Academy · Business Core</div>
+  <h1>PDA<br>Programa de Aceleração</h1>
+  <div class="subtitulo">Protocolo da área profissional</div>
+  <div class="nome">Sâmera Darlen Rodrigues Flor</div>
+
+  <div class="abertura">
+    <div class="eyebrow">Como este protocolo funciona</div>
+    <p>Este documento caminha de mãos dadas com o seu Plano de Metas da Travessia. Enquanto ele cuida da sua vida, este cuida do seu negócio, e os dois seguem o mesmo calendário. Cada frente abaixo tem a sua data, e quando você olhar os dois materiais lado a lado vai enxergar a vida e a profissão andando no mesmo passo.</p>
+    <p>Aqui vive a construção da fisioterapeuta empresária: contrato, finanças, preço, presença digital, funil e a semente da sua escola.</p>
+  </div>
+
+  <div class="frente">
+    <div class="quando">Julho 2026 · junto do primeiro fruto</div>
+    <h3>Frente 1 · O contrato anual dos aparelhos</h3>
+    <p>Todos os aparelhos alugados juntos, em um único contrato de doze meses. Uma renda previsível caindo todo mês, como um aluguel de imóvel, enquanto você vive o resguardo em paz. Para um contrato desse tamanho, as regras de ouro ganham reforço:</p>
+    <ul class="passos">
+      <li><span class="ponto">✦</span> Valor mensal definido antes da conversa, com pesquisa e dignidade. Desconto nascido do medo fica proibido.</li>
+      <li><span class="ponto">✦</span> Contrato por escrito com prazo de doze meses, valor, data de pagamento e multa por atraso.</li>
+      <li><span class="ponto">✦</span> Garantia combinada: caução ou fiador, porque um ano é tempo longo.</li>
+      <li><span class="ponto">✦</span> Manutenção e cuidados de uso definidos em cláusula, com devolução no estado de entrega.</li>
+      <li><span class="ponto">✦</span> Primeiro pagamento em mãos antes de qualquer aparelho sair da sua casa.</li>
+    </ul>
+  </div>
+
+  <div class="frente">
+    <div class="quando">Agosto 2026 · junto do mapa das dívidas</div>
+    <h3>Frente 2 · Reestruturação financeira</h3>
+    <p>Chegou a hora de separar as águas. Enquanto a casa e o trabalho moram no mesmo bolso, você nunca saberá se o seu negócio dá lucro. Este mês nasce a organização que sustenta todo o resto:</p>
+    <ul class="passos">
+      <li><span class="ponto">✦</span> Uma conta para a vida, outra para o negócio. O aluguel dos aparelhos e os atendimentos entram na conta do negócio.</li>
+      <li><span class="ponto">✦</span> Definição do seu salário: um valor fixo que o negócio paga para você todo mês.</li>
+      <li><span class="ponto">✦</span> Registro simples de tudo que entra e sai, em planilha ou caderno, sem sofisticação, com constância.</li>
+      <li><span class="ponto">✦</span> O mapa das dívidas do Plano de Metas entra aqui como peça viva, com prioridade de quitação definida.</li>
+    </ul>
+  </div>
+
+  <div class="frente">
+    <div class="quando">Setembro 2026 · antes do retorno à agenda</div>
+    <h3>Frente 3 · Precificação com dignidade</h3>
+    <p>O preço se calcula frio, no papel, antes de qualquer cliente perguntar. E aqui mora uma verdade para você guardar: quem carrega a ferida da rejeição sente vontade de cobrar barato para ser escolhida. O seu preço novo nasce da conta, e a conta protege você da ferida.</p>
+    <ul class="passos">
+      <li><span class="ponto">✦</span> Cálculo do custo da sua hora: tempo, insumos, deslocamento e estrutura.</li>
+      <li><span class="ponto">✦</span> Margem digna somada ao custo. Você é fisioterapeuta formada, com anos de estrada, e o preço carrega essa bagagem.</li>
+      <li><span class="ponto">✦</span> Tabela fechada por serviço: massagem, drenagem, limpeza de pele e protocolos combinados.</li>
+      <li><span class="ponto">✦</span> As promoções de cem e cento e cinquenta ficam guardadas na memória como ferramenta de uma fase que passou.</li>
+      <li><span class="ponto">✦</span> A tabela vira regra inegociável antes da primeira cliente voltar.</li>
+    </ul>
+  </div>
+
+  <div class="frente">
+    <div class="quando">Setembro e outubro 2026 · nascendo com o posicionamento certo</div>
+    <h3>Frente 4 · O Instagram novo</h3>
+    <p>Perfil novo, história nova. Ele nasce apresentando a fisioterapeuta que cuida de mulheres com as próprias mãos, e já deixa a porta aberta para as profissionais que um dia vão querer aprender com você.</p>
+    <ul class="passos">
+      <li><span class="ponto">✦</span> Nome e bio definidos com a Maria Clara: quem você é, o que entrega e para quem.</li>
+      <li><span class="ponto">✦</span> Identidade visual simples e sua: fotos reais, luz natural, o seu rosto e as suas mãos trabalhando.</li>
+      <li><span class="ponto">✦</span> Destaques organizados: serviços, resultados, bastidores e o caminho para agendar.</li>
+      <li><span class="ponto">✦</span> Primeiras publicações contando a sua história: a fisioterapeuta, a mãe, o recomeço.</li>
+    </ul>
+  </div>
+
+  <div class="frente">
+    <div class="quando">Novembro 2026 em diante · com a agenda rodando</div>
+    <h3>Frente 5 · Conteúdo e funil de vendas</h3>
+    <p>O seu funil nasce simples e forte, do jeito que o seu temperamento pede: leve de produzir e direto para vender.</p>
+    <ul class="passos">
+      <li><span class="ponto">✦</span> Conteúdo que atrai: bastidores do atendimento, resultados de clientes com autorização, e a rotina real de mãe fisioterapeuta. Verdade performa mais que roteiro.</li>
+      <li><span class="ponto">✦</span> Ritmo sustentável: três conteúdos por semana valem mais que sete numa semana e zero na outra.</li>
+      <li><span class="ponto">✦</span> Direct como ponte: toda publicação convida para a conversa.</li>
+      <li><span class="ponto">✦</span> WhatsApp fechando: tabela firme na mão, agenda aberta e a regra de ouro do preço sem desconto de medo.</li>
+    </ul>
+  </div>
+
+  <div class="verso">
+    <p>&ldquo;Ninguém aprende com quem fracassou.<br>Toda mulher aprende com quem atravessou.&rdquo;</p>
+    <span>A frente que muda a sua história</span>
+  </div>
+
+  <div class="frente">
+    <div class="quando">Dezembro 2026 · a semente</div>
+    <h3>Frente 6 · A formação nasce no papel</h3>
+    <p>Enquanto atende, você documenta o próprio método: protocolos, sequências, cuidados e segredos de mão que só a experiência ensina. Sem esforço extra, apenas registrando a excelência que já existe. Esse caderno vira a base da sua escola.</p>
+  </div>
+
+  <div class="frente">
+    <div class="quando">Janeiro 2027 · o desenho</div>
+    <h3>Frente 7 · A imersão desenhada</h3>
+    <p>Com os aparelhos alugados e rendendo, a sua formação nasce do que ninguém pode alugar: as suas mãos. Uma imersão presencial de um dia, para um grupo pequeno de profissionais, com maca, técnica e protocolo.</p>
+    <ul class="passos">
+      <li><span class="ponto">✦</span> Conteúdo programático fechado a partir do caderno de dezembro.</li>
+      <li><span class="ponto">✦</span> Preço definido com a mesma régua de dignidade dos atendimentos.</li>
+      <li><span class="ponto">✦</span> Divulgação começando pelo Instagram, que já vem preparando esse público desde setembro.</li>
+    </ul>
+  </div>
+
+  <div class="frente">
+    <div class="quando">Março 2027 · o brinde</div>
+    <h3>Frente 8 · A primeira turma</h3>
+    <p>Você fecha o ciclo tendo formado as suas primeiras alunas, com três fontes de renda vivas: os atendimentos, a locação anual e a formação. A mulher que saiu de uma empresa falida encerra o ciclo como fundadora da própria escola. O próximo capítulo, com mentoria e conteúdo gravado para escalar, abre no ciclo seguinte.</p>
+  </div>
+
+  <div class="divisor"></div>
+
+  <div class="sintese">
+    <p>Um contrato que paga o ano, um preço que honra a sua história, uma vitrine que conta quem você é, e uma escola nascendo das suas mãos. Isso tem nome: aceleração.</p>
+    <div class="assinatura">Eu sou o meu maior patrimônio. Brindaremos. 🍷</div>
+  </div>
+
+</div>
+</body>
+</html>

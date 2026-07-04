@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Plano de Metas da Travessia · Sâmera · Business Core</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #ffffff !important; }
+  html, body {
+    background: #ffffff !important;
+    color: #3a352c;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 16px;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 26px 90px;
+  }
+
+  .marca {
+    text-align: center;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-size: 11px;
+    color: #8a6d2f;
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 34px;
+    line-height: 1.25;
+    color: #1c1913;
+    text-align: center;
+    margin: 0 0 8px;
+  }
+  .subtitulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: #8a6d2f;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .nome {
+    text-align: center;
+    font-size: 13px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #857c6a;
+    margin-bottom: 50px;
+  }
+
+  .divisor {
+    width: 54px;
+    height: 1px;
+    background: #8a6d2f;
+    margin: 46px auto;
+    opacity: 0.7;
+  }
+
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8a6d2f;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 25px;
+    color: #1c1913;
+    margin: 0 0 18px;
+    line-height: 1.3;
+  }
+  p { margin: 0 0 18px; }
+  strong { color: #1c1913; font-weight: 500; }
+  em {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.12em;
+    color: #8a6d2f;
+  }
+
+  .abertura {
+    border: 1px solid #e6e0d2;
+    border-left: 3px solid #8a6d2f;
+    background: #faf8f3;
+    padding: 26px;
+    margin-bottom: 20px;
+  }
+  .abertura p:last-child { margin-bottom: 0; }
+
+  /* Linha do tempo */
+  .linha {
+    position: relative;
+    margin: 36px 0 10px;
+    padding-left: 30px;
+  }
+  .linha::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: #e6e0d2;
+  }
+  .mes {
+    position: relative;
+    padding: 0 0 40px;
+  }
+  .mes:last-child { padding-bottom: 0; }
+  .mes::before {
+    content: '';
+    position: absolute;
+    left: -30px;
+    top: 8px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #8a6d2f;
+  }
+  .mes.forte::before { background: #8a6d2f; }
+  .mes .quando {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8a6d2f;
+    margin-bottom: 6px;
+  }
+  .mes h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 21px;
+    color: #1c1913;
+    margin: 0 0 12px;
+  }
+  .mes p { margin-bottom: 14px; }
+  .metas { margin: 6px 0 0; padding: 0; list-style: none; }
+  .metas li {
+    padding: 9px 0;
+    border-bottom: 1px solid #efeadd;
+    display: flex;
+    gap: 13px;
+    align-items: baseline;
+  }
+  .metas li:last-child { border-bottom: none; }
+  .metas .ponto {
+    color: #8a6d2f;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .pda {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #8a6d2f;
+    border: 1px solid #d9cfb6;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-top: 4px;
+  }
+
+  .verso {
+    text-align: center;
+    padding: 38px 20px;
+    margin: 44px 0;
+    border-top: 1px solid #e6e0d2;
+    border-bottom: 1px solid #e6e0d2;
+  }
+  .verso p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #1c1913;
+    margin: 0 0 10px;
+  }
+  .verso span {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #857c6a;
+  }
+
+  .sintese {
+    text-align: center;
+    margin-top: 60px;
+  }
+  .sintese p {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    line-height: 1.55;
+    color: #1c1913;
+    max-width: 560px;
+    margin: 0 auto 26px;
+  }
+  .assinatura {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: #8a6d2f;
+  }
+
+  @media print {
+    html, body { background: #ffffff !important; }
+  }
+  @media (max-width: 480px) {
+    h1 { font-size: 28px; }
+    .verso p { font-size: 21px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="marca">All Win Academy · Business Core</div>
+  <h1>Plano de Metas<br>da Travessia</h1>
+  <div class="subtitulo">Julho de 2026 a março de 2027</div>
+  <div class="nome">Sâmera Darlen Rodrigues Flor</div>
+
+  <div class="abertura">
+    <div class="eyebrow">Antes de tudo, uma verdade</div>
+    <p>Você já saiu do lugar. Com uma bebê de um mês nos braços e o coração atravessando tempestades, você anunciou os seus aparelhos por conta própria e atraiu interessados. A mulher que um dia teve medo de ficar parada começou a andar sozinha, antes mesmo do plano existir.</p>
+    <p>Este documento honra esse movimento e dá a ele ritmo, direção e proteção. Nove meses, uma vitória palpável por vez. E ele caminha junto do seu PDA, o Protocolo do Programa de Aceleração, que cuida da área profissional nas mesmas datas.</p>
+  </div>
+
+  <div class="linha">
+
+    <div class="mes forte">
+      <div class="quando">Julho 2026</div>
+      <h3>O solo sagrado e o primeiro fruto</h3>
+      <p>Mês de resguardo pleno. O salário maternidade é o seu colchão nesta fase, e ele existe justamente para que você viva a Ana Helena por inteiro, com o sustento garantido e o coração em paz.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> Cuidar de você e da bebê: comida de verdade, descanso possível e sol quando o corpo permitir.</li>
+        <li><span class="ponto">✦</span> Fechar o contrato anual dos aparelhos: todos juntos, doze meses, renda previsível caindo todo mês.</li>
+        <li><span class="ponto">✦</span> Manter a ponte diária com a Maria Clara.</li>
+      </ul>
+      <span class="pda">PDA · Frente 1, as regras do contrato anual</span>
+    </div>
+
+    <div class="mes">
+      <div class="quando">Agosto 2026</div>
+      <h3>Nomear o que existe</h3>
+      <p>Com o corpo saindo do resguardo, chega a hora de enxergar tudo com coragem e sem pressa de resolver.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> Escrever o mapa completo das dívidas, cada uma com valor e juros.</li>
+        <li><span class="ponto">✦</span> Colocar no papel o valor exato do que a antiga sócia deve. Apenas nomear, ainda sem cobrar.</li>
+        <li><span class="ponto">✦</span> Separar as águas do dinheiro: uma conta para a vida, outra para o negócio.</li>
+      </ul>
+      <span class="pda">PDA · Frente 2, a reestruturação financeira</span>
+    </div>
+
+    <div class="mes">
+      <div class="quando">Setembro 2026</div>
+      <h3>O chão da vida</h3>
+      <p>Mês de definir estrutura, porque toda construção pede alicerce.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> Definir o endereço da sua vida com a Ana Helena e a logística com o pai dela.</li>
+        <li><span class="ponto">✦</span> Matrícula na autoescola. A CNH B começa aqui.</li>
+        <li><span class="ponto">✦</span> Fechar com a Maria Clara o plano de cobrança da antiga sócia, com forma e prazo definidos.</li>
+        <li><span class="ponto">✦</span> Tabela de preços nova fechada, calculada fria no papel.</li>
+      </ul>
+      <span class="pda">PDA · Frentes 3 e 4, precificação e Instagram novo</span>
+    </div>
+
+    <div class="mes forte">
+      <div class="quando">Outubro 2026</div>
+      <h3>O último mês do colchão</h3>
+      <p>O salário maternidade se despede. A régua deste mês é uma só: quando o benefício terminar, a sua renda própria já precisa ter começado a responder.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> Retorno aos atendimentos em agenda parcial, respeitando a fase da bebê, já com a tabela nova.</li>
+        <li><span class="ponto">✦</span> Contrato anual rodando e sendo pago em dia.</li>
+        <li><span class="ponto">✦</span> A cobrança da antiga sócia sai do papel e acontece, com o plano combinado.</li>
+      </ul>
+      <span class="pda">PDA · Frente 4, o Instagram novo no ar</span>
+    </div>
+
+    <div class="mes">
+      <div class="quando">Novembro 2026</div>
+      <h3>A prova de fogo</h3>
+      <p>Primeiro mês vivendo do que você mesma construiu. Se novembro fechar de pé, você ganha a prova definitiva de que sai do lugar, e essa vitória cura fundo.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> Agenda de atendimentos subindo um degrau, com meta semanal de clientes.</li>
+        <li><span class="ponto">✦</span> Aulas práticas da CNH a todo vapor.</li>
+        <li><span class="ponto">✦</span> Conteúdo rodando no ritmo sustentável de três publicações por semana.</li>
+      </ul>
+      <span class="pda">PDA · Frente 5, conteúdo e funil de vendas</span>
+    </div>
+
+    <div class="mes">
+      <div class="quando">Dezembro 2026</div>
+      <h3>A colheita</h3>
+      <p>Alta temporada de estética e autocuidado. O mês de faturamento mais alto do ano, e o nascimento de algo inédito na sua história.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> Meta de faturamento no ponto mais alto do ciclo.</li>
+        <li><span class="ponto">✦</span> Primeira reserva de emergência criada com o excedente, mesmo que pequena.</li>
+        <li><span class="ponto">✦</span> Fechar o ano com dinheiro guardado e renda própria rodando.</li>
+      </ul>
+      <span class="pda">PDA · Frente 6, a semente da formação</span>
+    </div>
+
+    <div class="mes forte">
+      <div class="quando">Janeiro 2027</div>
+      <h3>A habilitação na mão</h3>
+      <p>O símbolo da mulher que conduz a própria vida chega no início do ano novo.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> Prova prática e CNH B conquistada.</li>
+        <li><span class="ponto">✦</span> Revisão do mapa de dívidas: celebrar o que caiu e renegociar o que restou.</li>
+        <li><span class="ponto">✦</span> Definir com a Maria Clara o projeto do próximo trimestre, com orçamento fechado.</li>
+      </ul>
+      <span class="pda">PDA · Frente 7, a imersão desenhada</span>
+    </div>
+
+    <div class="mes">
+      <div class="quando">Fevereiro 2027</div>
+      <h3>O ninho e o volante</h3>
+      <p>Mês de construir com maturidade financeira, dentro do combinado.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> Execução do projeto escolhido em janeiro, o quartinho da Ana Helena ou a meta que entrar no lugar dele, sem parcela que sufoque.</li>
+        <li><span class="ponto">✦</span> Simulação real do Etios: entrada, parcela e a regra sagrada de que a parcela só entra se os últimos três meses de renda sustentarem.</li>
+      </ul>
+    </div>
+
+    <div class="mes forte">
+      <div class="quando">Março 2027</div>
+      <h3>O brinde da travessia</h3>
+      <p>Fechamento do ciclo com balanço completo e taça erguida.</p>
+      <ul class="metas">
+        <li><span class="ponto">✦</span> CNH na mão, contrato anual rendendo, dívidas domadas, reserva iniciada, projeto do ninho realizado.</li>
+        <li><span class="ponto">✦</span> Decisão do Etios tomada com números na mesa.</li>
+        <li><span class="ponto">✦</span> Abertura do próximo ciclo: cozinha planejada e a casa própria no horizonte.</li>
+      </ul>
+      <span class="pda">PDA · Frente 8, a primeira turma da formação</span>
+    </div>
+
+  </div>
+
+  <div class="verso">
+    <p>&ldquo;Cada compromisso cumprido no prazo<br>é um ato de fidelidade<br>de você com você.&rdquo;</p>
+    <span>A quebra do ciclo</span>
+  </div>
+
+  <div class="eyebrow">As costuras de todos os meses</div>
+  <h2>Regras que atravessam a travessia</h2>
+  <p><strong>A regra da noite de sono.</strong> Mensagem difícil se responde depois de dormir. Conversa delicada acontece sem a Ana Helena no colo. A mulher madura escolhe a hora de responder, e essa escolha protege você e a sua filha.</p>
+  <p><strong>O espaço protegido.</strong> As questões do coração e do casamento vivem nas sessões, com escuta completa e sem pressa. Decisão definitiva se toma com o chão firme, e o seu chão está sendo construído mês a mês, bem aqui.</p>
+
+  <div class="sintese">
+    <p>Nove meses, nove vitórias, uma mulher ocupando o lugar que sempre foi dela. Você já começou a andar. Agora nós vamos juntas até o fim.</p>
+    <div class="assinatura">Eu sou o meu maior patrimônio. Brindaremos. 🍷</div>
+  </div>
+
+</div>
+</body>
+</html>
