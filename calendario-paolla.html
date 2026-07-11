@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Calendário de Conteúdo | Paolla</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+html{background:#fff!important}
+html,body{background:#fff!important;color:#1a1612;-webkit-text-size-adjust:100%;margin:0;padding:0;font-family:'Lora',Georgia,serif;min-height:100vh}
+:root{
+--gold:#b8860b;--gold-l:#d4a017;--border:#e8e0d0;--dim:#8a7a6a;
+--cx:#0066cc;--cx-bg:#cce0ff;--cx-t:#003d80;
+--ob:#cc4400;--ob-bg:#ffd6c2;--ob-t:#7a2200;
+--vd:#007a2f;--vd-bg:#b8f0cc;--vd-t:#004018;
+--bs:#6600cc;--bs-bg:#e8ccff;--bs-t:#3d0080;
+--au:#cc0044;--au-bg:#ffc2d4;--au-t:#7a0028;
+--ed:#aa7700;--ed-bg:#fff0b3;--ed-t:#664400;
+}
+*{box-sizing:border-box}
+.wrap{max-width:960px;margin:0 auto;padding:40px 20px 80px}
+.hdr{text-align:center;margin-bottom:40px;padding-bottom:28px;border-bottom:2px solid var(--border)}
+.hdr .marca{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.hdr h1{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,7vw,52px);font-weight:300;color:#1a1612;margin:0 0 6px;line-height:1.1}
+.hdr h1 span{color:var(--gold);font-style:italic}
+.hdr .sub{font-size:11px;color:var(--dim);letter-spacing:2px;text-transform:uppercase;line-height:1.8}
+.pos{display:inline-block;margin-top:12px;font-family:'Lora',serif;font-size:13px;font-style:italic;color:#5a4a3a;border-left:3px solid var(--gold);padding:6px 14px;text-align:left}
+.prod-info{display:flex;gap:12px;margin:20px auto 32px;max-width:640px;flex-wrap:wrap;justify-content:center}
+.prod-card{flex:1;min-width:240px;background:#f8f6f2;border-radius:10px;padding:14px 18px;border-left:4px solid var(--gold)}
+.prod-card h4{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 6px}
+.prod-card p{font-size:12px;line-height:1.6;color:#3a3020;margin:0}
+.leg{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;justify-content:center}
+.li{display:flex;align-items:center;gap:7px;font-size:11px;letter-spacing:.5px;color:var(--dim);text-transform:uppercase;font-weight:600}
+.ld{width:12px;height:12px;border-radius:3px;flex-shrink:0}
+.mes-label{font-family:'Cormorant Garamond',serif;font-size:13px;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin:32px 0 10px;border-bottom:1px solid var(--border);padding-bottom:6px}
+.dh{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+.dh div{text-align:center;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:6px 0;font-family:'Cormorant Garamond',serif;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:5px}
+.card{border-radius:8px;padding:10px 8px;min-height:100px;cursor:pointer;transition:transform .18s,box-shadow .18s;display:flex;flex-direction:column;border:2px solid transparent;position:relative}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.15);z-index:2}
+.card.vz{background:transparent;border:2px dashed #e0d8cc;cursor:default;opacity:0.2;min-height:100px}
+.card.vz:hover{transform:none;box-shadow:none}
+.num{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:300;line-height:1;margin-bottom:5px}
+.pn{font-size:7.5px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:5px;opacity:.75}
+.id{font-size:10px;line-height:1.4;flex:1}
+.rb{position:absolute;top:7px;right:7px;font-size:8px;background:rgba(0,0,0,.12);border-radius:10px;padding:2px 6px;font-weight:700}
+.cx{background:var(--cx-bg);border-color:var(--cx);color:var(--cx-t)}
+.ob{background:var(--ob-bg);border-color:var(--ob);color:var(--ob-t)}
+.vd{background:var(--vd-bg);border-color:var(--vd);color:var(--vd-t)}
+.bs{background:var(--bs-bg);border-color:var(--bs);color:var(--bs-t)}
+.au{background:var(--au-bg);border-color:var(--au);color:var(--au-t)}
+.ed{background:var(--ed-bg);border-color:var(--ed);color:var(--ed-t)}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:100;align-items:center;justify-content:center;padding:20px}
+.ov.on{display:flex}
+.modal{background:#fff;border-radius:14px;max-width:500px;width:100%;padding:32px;position:relative;max-height:88vh;overflow-y:auto;border-top:5px solid #1a1612}
+.cls{position:absolute;top:14px;right:18px;background:none;border:none;font-size:24px;cursor:pointer;color:#888;line-height:1}
+.mdt{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:6px;font-family:'Cormorant Garamond',serif}
+.mbg{display:inline-block;font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:4px}
+.mprod-tag{display:inline-block;margin-left:8px;font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;background:#1a1612;color:#fff}
+.mrl{display:inline-block;margin-left:8px;font-size:9px;font-weight:700;padding:4px 10px;border-radius:20px;background:#555;color:#fff}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:400;color:#1a1612;margin:0 0 20px;line-height:1.25}
+.sec h4{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0 0 5px}
+.sec p{font-size:13px;line-height:1.75;color:#2a2420;margin:0 0 16px}
+.int{background:#f8f6f2;border-left:3px solid var(--gold);padding:10px 14px;border-radius:0 8px 8px 0;font-size:12px;color:#5a4a2a;margin-top:4px;font-style:italic}
+.rlb{background:#1a1612;color:#fff;border-radius:8px;padding:12px 16px;margin-top:16px;font-size:12px;line-height:1.6}
+.rlb strong{color:var(--gold-l);font-size:10px;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:4px}
+.ftr{text-align:center;margin-top:40px;padding-top:20px;border-top:1px solid var(--border);font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
+.ftr span{color:var(--gold)}
+@media(max-width:600px){.grid{gap:3px}.card{min-height:72px;padding:7px 5px}.num{font-size:16px}.pn{font-size:7px}.id,.rb{display:none}.modal{padding:22px 16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div class="marca">Paolla · Fábrica Pink & Femme</div>
+    <h1>11 Jul <span>—</span> 09 Ago <span>2026</span></h1>
+    <div class="sub">Marca Pessoal · Infoprodutos · Digital do zero com intenção</div>
+    <div class="pos">"Construindo no digital do jeito certo. Com consistência e sem enrolação."</div>
+  </div>
+
+  <div class="prod-info">
+    <div class="prod-card">
+      <h4>🛍 Fábrica Pink</h4>
+      <p>Ebook + área de membros + lista de fornecedores. Para quem quer comprar mais barato para uso próprio ou revenda.</p>
+    </div>
+    <div class="prod-card">
+      <h4>🖤 Femme</h4>
+      <p>Para quem quer começar no digital com perfil dark e receitas prontas para aplicar.</p>
+    </div>
+  </div>
+
+  <div class="leg">
+    <div class="li"><div class="ld" style="background:var(--cx)"></div>Conexão</div>
+    <div class="li"><div class="ld" style="background:var(--ob)"></div>Quebra de Objeção</div>
+    <div class="li"><div class="ld" style="background:var(--vd)"></div>Venda</div>
+    <div class="li"><div class="ld" style="background:var(--bs)"></div>Aumento de Base</div>
+    <div class="li"><div class="ld" style="background:var(--au)"></div>Autoridade</div>
+    <div class="li"><div class="ld" style="background:var(--ed)"></div>Educação</div>
+  </div>
+
+  <div class="mes-label">Julho 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gjul"></div>
+
+  <div class="mes-label">Agosto 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gago"></div>
+</div>
+
+<div class="ov" id="ov" onclick="fc(event)">
+  <div class="modal">
+    <button class="cls" onclick="fc()">×</button>
+    <div class="mdt" id="mdt"></div>
+    <span class="mbg" id="mbg"></span><span class="mprod-tag" id="mptag" style="display:none"></span><span class="mrl" id="mrl" style="display:none">🎬 REEL</span>
+    <h2 id="mti"></h2>
+    <div class="sec"><h4>Gancho</h4><p id="mga"></p></div>
+    <div class="sec"><h4>Desenvolvimento</h4><p id="mdv"></p></div>
+    <div class="sec"><h4>CTA</h4><p id="mct"></p></div>
+    <div class="int" id="min"></div>
+    <div class="rlb" id="mrb" style="display:none"><strong>🎬 Ideia de Reel</strong><span id="mrt"></span></div>
+  </div>
+</div>
+
+<script>
+const D=[
+// JULHO — dia 11 = sexta (índice 4), 4 vazios antes
+{d:11,m:7,p:"cx",pN:"Conexão",prod:"",r:true,
+i:"Quem é a Paolla antes dos produtos",
+g:"Antes de falar do que eu vendo, deixa eu te contar quem eu sou e por que estou aqui.",
+dv:"Apresentação real. Saiu do mercado de unhas, está construindo sua operação digital do zero, com consistência e intenção. A transição de carreira como história humana que conecta com qualquer mulher que está mudando de rota ou quer começar algo novo.",
+c:"Me conta nos comentários: você também está em transição ou quer começar algo no digital?",
+in:"Caixinha nos stories: 'Me faz uma pergunta sobre mim'",
+rt:"Câmera direta, sem roteiro decorado. Apresentação em 60 segundos. Quem ela era, o que mudou, onde está agora."},
+
+{d:12,m:7,p:"bs",pN:"Aumento de Base",prod:"",r:true,
+i:"Economizar não é austeridade — é inteligência",
+g:"Você não precisa ganhar mais para sobrar mais. Precisa saber de onde vem o que você compra.",
+dv:"Conteúdo de alcance sobre consumo inteligente e acesso a fornecedor. Fala com a mulher que quer esticar o orçamento sem abrir mão de qualidade. Compartilhável porque toda mulher quer economizar.",
+c:"Salva e manda pra quem você sabe que está pagando mais caro do que precisava.",
+in:"'Marca aquela amiga que nunca sabe onde comprar mais barato'",
+rt:"Reel de impacto. 'Você está pagando preço de varejo no que poderia comprar direto.' Explica a lógica em 60 segundos."},
+
+{d:13,m:7,p:"cx",pN:"Conexão",prod:"",r:false,
+i:"Por que saí das unhas e fui pro digital",
+g:"Não foi de repente. Foi uma percepção que foi crescendo até que eu não consegui mais ignorar.",
+dv:"História real da transição de carreira. O que ela sentiu, o que mudou, o que a fez dar o próximo passo. Sem glamourizar a ruptura — mostrando o processo real de quem decidiu construir algo diferente com intenção.",
+c:"Me conta: você já sentiu que queria mudar de rota mas teve medo?",
+in:"Caixinha nos stories: 'Você está num momento de transição também?'"},
+
+{d:14,m:7,p:"ed",pN:"Educação",prod:"🛍 Fábrica Pink",r:true,
+i:"Como funciona a lista de fornecedores na prática",
+g:"Você compra uma coisa por R$80. A mesma coisa existe por R$25 se você souber onde procurar.",
+dv:"Educa sobre o funcionamento de lista de fornecedores sem revelar os contatos. O que muda quando você tem acesso direto, para que tipo de compra faz sentido, como usar para uso próprio ou revenda. Fábrica Pink entra como o atalho.",
+c:"Salva esse. E se quiser o acesso à lista, link na bio.",
+in:"Salvar + link na bio",
+rt:"Reel de revelação. 'Vou te mostrar a diferença de preço da mesma coisa no varejo e no fornecedor.' Números reais. Encerra com CTA para a Fábrica Pink."},
+
+{d:15,m:7,p:"au",pN:"Autoridade",prod:"",r:false,
+i:"O que aprendi construindo minha operação digital do zero",
+g:"Ninguém me ensinou. Fui testando, errando, ajustando. Hoje eu sei o que funciona e o que é só ruído.",
+dv:"Posiciona Paolla como referência de quem fez o caminho e está compartilhando o que aprendeu. Sem fingir que foi fácil. A autoridade vem da experiência real, não de certificado.",
+c:"Se você está começando no digital e não sabe por onde ir, me segue. Vou mostrando o caminho.",
+in:"Salvar + 'Você está no começo da sua operação digital?'"},
+
+{d:16,m:7,p:"ob",pN:"Quebra de Objeção",prod:"🛍 Fábrica Pink",r:true,
+i:"'Não tenho dinheiro para começar a revender'",
+g:"O ponto de entrada no Fábrica Pink cabe no orçamento de quem está começando. E a primeira compra no fornecedor já paga o investimento.",
+dv:"Quebra a barreira de entrada com lógica financeira real. A lista de fornecedores reduz o custo de aquisição a ponto de tornar o investimento no ebook recuperável na primeira compra. Fala com a mulher que quer empreender mas acha que precisa de capital alto.",
+c:"Quer entender se faz sentido pra você? Me chama no direct.",
+in:"DM aberta",
+rt:"Reel de conta rápida. 'Você vai gastar X no produto. Com o fornecedor do Fábrica Pink, você gasta Y. A diferença paga o ebook na primeira compra.' Números reais."},
+
+{d:17,m:7,p:"cx",pN:"Conexão",prod:"",r:false,
+i:"Um bastidor real da minha semana de construção",
+g:"Essa semana eu fiz isso, isso e isso. Não foi perfeito. Mas foi real e foi pra frente.",
+dv:"Bastidor da operação digital em construção. O que Paolla fez na semana — posts, produto, aprendizado, ajuste. Sem glamourizar a produtividade. Mostra que construção digital é feita de dias reais, não de dias perfeitos.",
+c:"Me conta o que você fez essa semana que foi pra frente, mesmo que pequeno.",
+in:"Caixinha nos stories: 'O que você construiu essa semana?'"},
+
+{d:18,m:7,p:"vd",pN:"Venda",prod:"🖤 Femme",r:true,
+i:"Femme — para quem quer começar no digital hoje",
+g:"Você não precisa saber tudo sobre marketing digital para começar. Você precisa de receitas prontas e de um perfil que já tem identidade.",
+dv:"Apresenta o Femme como porta de entrada no digital para quem está começando do zero. Perfil dark com identidade, receitas prontas para aplicar, sem precisar criar do nada. Vende a facilidade de começar sem a paralisia da tela em branco.",
+c:"Quer começar no digital ainda essa semana? Entra no grupo pelo link na bio — é lá que as oportunidades saem primeiro.",
+in:"Link na bio para o grupo de funil",
+rt:"Reel mostrando exemplos do perfil dark e das receitas prontas. 'Você não precisa criar do zero. Você precisa de um ponto de partida que já funciona.'"},
+
+{d:19,m:7,p:"bs",pN:"Aumento de Base",prod:"",r:true,
+i:"Mulher que quer empreender não precisa de capital alto para começar",
+g:"O maior erro de quem quer empreender é esperar ter dinheiro suficiente. Dinheiro suficiente vem depois de começar.",
+dv:"Conteúdo de alcance sobre empreendedorismo feminino com baixo capital inicial. Fala com a mulher que quer construir algo mas acha que não está na hora. A lógica de começar pequeno e ir crescendo com o próprio resultado.",
+c:"Salva e manda pra aquela amiga que está esperando o momento certo para começar.",
+in:"'Marca quem está esperando ter dinheiro pra começar'",
+rt:"Reel de virada de perspectiva. 'Você está esperando ter dinheiro pra começar. Mas o dinheiro vem depois de começar.' Exemplos concretos."},
+
+{d:20,m:7,p:"au",pN:"Autoridade",prod:"🛍 Fábrica Pink",r:false,
+i:"Como a lista de fornecedores funciona para revenda",
+g:"Muita gente começa a revender sem saber que está pagando preço de varejo no que poderia estar comprando por preço de atacado.",
+dv:"Educa sobre a lógica de compra para revenda com fornecedor direto. Margem, custo de aquisição, preço de venda, ponto de equilíbrio. Paolla fala com propriedade porque está dentro disso. Fábrica Pink entra como o acesso a essa lógica.",
+c:"Se você quer entender como funciona na prática, link na bio.",
+in:"Link na bio + Salvar"},
+
+{d:21,m:7,p:"cx",pN:"Conexão",prod:"",r:false,
+i:"O que me faz continuar quando o digital parece lento",
+g:"Tem semanas que parece que nada está avançando. E eu continuo assim mesmo. Vou te contar por quê.",
+dv:"Vulnerabilidade real sobre o processo de construção no digital. Não é linear, não é rápido, não é glamouroso. O que faz Paolla continuar é o que vai conectar com a mulher que também está no processo e sente o mesmo.",
+c:"Me conta o que te faz continuar quando parece que nada está acontecendo.",
+in:"Caixinha nos stories: 'O que te faz continuar?'"},
+
+{d:22,m:7,p:"ob",pN:"Quebra de Objeção",prod:"🖤 Femme",r:true,
+i:"'Não entendo nada de digital, não é pra mim'",
+g:"O Femme foi feito exatamente pra você. Receita pronta não exige que você saiba como a cozinha funciona.",
+dv:"Quebra a barreira de entrada do Femme para quem se sente fora do digital. A proposta do produto é justamente eliminar a curva de aprendizado inicial — perfil pronto, receitas prontas, identidade construída. Você aplica, não precisa entender tudo primeiro.",
+c:"Se você quer começar e não sabe por onde, o Femme resolve isso. Link na bio.",
+in:"Link na bio + DM",
+rt:"Reel de comparação. 'Sem o Femme: tela em branco, não sabe o que postar, desiste em duas semanas. Com o Femme: perfil com identidade, receitas prontas, começa hoje.' Simples e direto."},
+
+{d:23,m:7,p:"vd",pN:"Venda",prod:"🛍 Fábrica Pink",r:false,
+i:"Resultado real — o que muda com acesso a fornecedor",
+g:"Ela comprava no varejo há dois anos. Mudou pro fornecedor e a conta fechou diferente no final do mês.",
+dv:"Caso real de quem usa a lista do Fábrica Pink. Quanto pagava antes, quanto paga agora, o que fez com a diferença. Resultado concreto e específico convence mais do que qualquer argumento.",
+c:"Quer ter esse acesso? Entra no grupo pelo link na bio e fica por dentro das condições especiais.",
+in:"Link na bio para o grupo de funil"},
+
+{d:24,m:7,p:"ed",pN:"Educação",prod:"🖤 Femme",r:true,
+i:"O que é um perfil dark e por que ele converte bem",
+g:"Perfil dark não é só estética. É posicionamento. E posicionamento certo atrai a pessoa certa.",
+dv:"Educa sobre a lógica de perfil dark no digital — identidade visual forte, comunicação direta, público específico que se identifica com o estilo. Femme entra como o caminho para construir isso sem partir do zero.",
+c:"Salva esse se você quer entender o que faz um perfil converter de verdade.",
+in:"Salvar + 'Você já pensou em ter um perfil com identidade forte?'",
+rt:"Reel mostrando exemplos de perfil dark e explicando o que cada elemento comunica. 'Não é só cor preta. É uma decisão de posicionamento.'"},
+
+{d:25,m:7,p:"bs",pN:"Aumento de Base",prod:"",r:true,
+i:"Você não precisa de muita coisa para começar a empreender",
+g:"A maioria das mulheres que começa a empreender começa com o que já tem. O capital inicial é menor do que você imagina.",
+dv:"Conteúdo de alcance sobre baixo capital de entrada no empreendedorismo feminino. Exemplos reais de como começar pequeno. Conecta com o universo dos dois produtos de Paolla — acesso a fornecedor e presença digital — sem precisar citar diretamente.",
+c:"Salva e manda pra quem você sabe que está pronta pra começar mas ainda não acreditou nisso.",
+in:"'Marca ela aqui'",
+rt:"Reel de lista rápida. 'O que você precisa para começar a empreender hoje:' — lista curta, real, acessível. Encerra com frase de impacto."},
+
+{d:26,m:7,p:"au",pN:"Autoridade",prod:"",r:false,
+i:"O que aprendi sobre consistência no digital que ninguém me contou",
+g:"Consistência no digital não é postar todo dia. É aparecer com intenção sempre que você aparece.",
+dv:"Posiciona Paolla como referência de quem está construindo com estratégia, não com volume. A diferença entre consistência de presença e consistência de frequência. Isso é o que ela aplica e o que vai ensinar através do próprio exemplo.",
+c:"Salva esse se você está tentando ser consistente no digital mas se sente perdida.",
+in:"Salvar + 'Você se considera consistente no seu conteúdo?'"},
+
+{d:27,m:7,p:"cx",pN:"Conexão",prod:"",r:false,
+i:"Por que eu construo em público",
+g:"Eu poderia esperar estar pronta para aparecer. Mas pronta você fica depois, não antes.",
+dv:"Conexão através da decisão de construir em público. Paolla está mostrando o processo enquanto vive ele. Isso é o que cria comunidade real — não o resultado final entregue do nada, mas a jornada compartilhada.",
+c:"Me conta: você também está construindo algo? Me conta o que é.",
+in:"Caixinha nos stories: 'O que você está construindo agora?'"},
+
+{d:28,m:7,p:"ob",pN:"Quebra de Objeção",prod:"🛍 Fábrica Pink",r:true,
+i:"'Já tem muita coisa de fornecedor na internet'",
+g:"Tem. E a maioria está desatualizada, com contatos que não funcionam mais ou com fornecedores que não entregam.",
+dv:"Quebra a objeção de saturação com diferencial real. O Fábrica Pink não é uma lista genérica — é curada, atualizada e vem com área de membros e suporte. A diferença entre uma lista jogada e um produto com estrutura.",
+c:"Quer ver a diferença? Link na bio.",
+in:"Link na bio + DM",
+rt:"Reel de comparação direta. 'Lista genérica da internet vs Fábrica Pink.' Lista os diferenciais de forma rápida e visual."},
+
+{d:29,m:7,p:"vd",pN:"Venda",prod:"🖤 Femme",r:false,
+i:"Femme — convite direto",
+g:"Se você já pensou em ter presença no digital mas travou na tela em branco, o Femme resolve isso.",
+dv:"Post de venda direta do Femme. Curto, claro, sem enrolação. Nomeia o problema, apresenta a solução, convida para a ação. A persona que chegou até aqui já tem contexto suficiente para decidir.",
+c:"Quer começar? Entra no grupo pelo link na bio. É lá que eu libero as condições pra quem está acompanhando.",
+in:"Link na bio para o grupo de funil + DM"},
+
+{d:30,m:7,p:"bs",pN:"Aumento de Base",prod:"",r:true,
+i:"Digital não é só pra quem já nasceu sabendo",
+g:"Eu aprendi tudo que sei sobre digital depois dos 20 e tantos anos. Ninguém nasce sabendo. Aprende quem começa.",
+dv:"Conteúdo de alcance que desmonta o mito de que digital é para nativo digital. Paolla aprendeu construindo. Isso fala com a mulher que acha que é tarde ou que é complicado demais.",
+c:"Salva e manda pra quem acha que digital não é pra ela.",
+in:"'Marca quem você sabe que poderia estar no digital mas ainda não começou'",
+rt:"Reel pessoal. 'Eu não sabia nada sobre digital quando comecei.' O que ela aprendeu, como aprendeu, onde está agora."},
+
+{d:31,m:7,p:"cx",pN:"Conexão",prod:"",r:false,
+i:"Um mês de julho construindo. O que ficou.",
+g:"Julho foi o mês que eu decidi aparecer com intenção. Vou te contar o que aprendi.",
+dv:"Encerramento honesto de julho. O que aconteceu, o que foi difícil, o que vai levar para agosto. Fecha o ciclo com presença e abre o próximo com clareza.",
+c:"Me conta: o que julho te ensinou?",
+in:"Caixinha nos stories: 'O que você vai levar de julho?'"},
+
+// AGOSTO — dia 1 = sábado (índice 5)
+{d:1,m:8,p:"ed",pN:"Educação",prod:"🛍 Fábrica Pink",r:true,
+i:"Como usar o Fábrica Pink para compra pessoal — não só para revenda",
+g:"Muita gente pensa que lista de fornecedor é só para quem quer revender. O maior benefício pode ser para o que você já compra todo mês.",
+dv:"Educa sobre o uso do Fábrica Pink para consumo próprio — produtos que você já compra no varejo e pode comprar mais barato no fornecedor. Abre o leque de persona além de quem quer empreender.",
+c:"Salva esse e pensa em quanto você gasta por mês no varejo no que poderia estar comprando diferente.",
+in:"Salvar + link na bio",
+rt:"Reel de exemplos práticos. 'Você compra X todo mês. Com o Fábrica Pink, você paga Y.' Concreto e rápido."},
+
+{d:2,m:8,p:"au",pN:"Autoridade",prod:"🖤 Femme",r:false,
+i:"O que faz um perfil digital converter — além do conteúdo",
+g:"Conteúdo bom em perfil sem identidade converte pouco. Identidade forte com conteúdo mediano converte mais.",
+dv:"Educa sobre os elementos que fazem um perfil digital funcionar além do conteúdo em si — identidade visual, consistência estética, linguagem, posicionamento. Femme entrega isso pronto para quem está começando.",
+c:"Se você quer entender o que está faltando no seu perfil, me chama.",
+in:"DM + Salvar"},
+
+{d:3,m:8,p:"ob",pN:"Quebra de Objeção",prod:"",r:true,
+i:"'Digital é muito concorrido, não vou conseguir espaço'",
+g:"O digital é concorrido para quem não tem posicionamento. Para quem tem, o espaço está sempre aberto.",
+dv:"Quebra o medo de saturação com lógica de posicionamento. O mercado cheio é de quem publica sem identidade. Quem tem posicionamento claro e comunica com consistência ocupa um espaço que não tem concorrente direto.",
+c:"Me conta nos comentários o que você quer construir no digital.",
+in:"Comentário + Caixinha nos stories",
+rt:"Reel direto. 'O digital não está cheio. Está cheio de gente sem posicionamento.' Explica a diferença em 60 segundos."},
+
+{d:4,m:8,p:"vd",pN:"Venda",prod:"🛍 Fábrica Pink",r:false,
+i:"Fábrica Pink — para quem quer economizar ou empreender",
+g:"Um produto. Dois caminhos. Você escolhe o que faz mais sentido pra você agora.",
+dv:"Post de venda do Fábrica Pink apresentando os dois perfis de comprador — quem quer economizar no consumo próprio e quem quer usar para revenda. Cada perfil tem um benefício claro e imediato.",
+c:"Qual dos dois é você? Me conta aqui ou entra no grupo pelo link na bio. Lá você acompanha tudo antes de todo mundo.",
+in:"Link na bio para o grupo de funil"},
+
+{d:5,m:8,p:"cx",pN:"Conexão",prod:"",r:false,
+i:"O que eu não esperava encontrar no digital",
+g:"Eu vim pro digital buscando renda. Encontrei algo que não esperava.",
+dv:"Conexão através de uma descoberta real no processo de construção digital — pode ser comunidade, clareza, autoconhecimento, capacidade que ela não sabia que tinha. O que a surpreendeu além do resultado financeiro.",
+c:"Me conta: o que você encontrou no processo de construir algo que não esperava?",
+in:"Caixinha nos stories"},
+
+{d:6,m:8,p:"bs",pN:"Aumento de Base",prod:"",r:true,
+i:"Toda mulher deveria saber onde comprar mais barato",
+g:"Não é sobre ser mão fechada. É sobre não jogar dinheiro fora quando existe outra opção.",
+dv:"Conteúdo de alcance sobre acesso a fornecedor como inteligência financeira feminina. Fala com a mulher que gerencia o orçamento da casa e pode ser mais estratégica nas compras. Compartilhável por qualquer perfil.",
+c:"Salva e manda pra quem você sabe que está pagando mais caro do que precisa.",
+in:"'Marca ela'",
+rt:"Reel de educação financeira leve. 'Você sabia que pode comprar X por Y?' Exemplos de diferença de preço entre varejo e fornecedor."},
+
+{d:7,m:8,p:"au",pN:"Autoridade",prod:"",r:false,
+i:"O que mudou em mim desde que comecei a construir no digital",
+g:"Não é só a renda que muda. É a forma como você se vê.",
+dv:"Posiciona Paolla como referência de transformação pessoal através da construção digital. O que mudou além dos resultados financeiros — clareza, presença, identidade. Autoridade construída na própria jornada.",
+c:"Se você está considerando dar o próximo passo no digital, me conta onde você está agora.",
+in:"Caixinha nos stories: 'Onde você está no digital hoje?'"},
+
+{d:8,m:8,p:"ob",pN:"Quebra de Objeção",prod:"🖤 Femme",r:true,
+i:"'Não tenho tempo para construir presença digital'",
+g:"O Femme não pede que você construa do zero. Pede que você aplique o que já está pronto.",
+dv:"Quebra a objeção de tempo com o diferencial real do Femme — receitas prontas significam menos tempo de criação. Você não precisa pensar no que postar, não precisa criar identidade do zero, não precisa aprender tudo antes de começar.",
+c:"Se tempo é o que falta, o Femme foi feito pra você. Entra no grupo pelo link na bio — é lá que eu mostro tudo com mais detalhe.",
+in:"Link na bio para o grupo de funil",
+rt:"Reel rápido. 'Sem o Femme: horas pensando no que postar. Com o Femme: receita pronta, aplica e posta.' Simples e direto."},
+
+{d:9,m:8,p:"cx",pN:"Conexão",prod:"",r:false,
+i:"30 dias construindo. O que esse mês me ensinou.",
+g:"Trinta dias aparecendo, postando, construindo. Vou te contar o que ficou e o que vem.",
+dv:"Encerramento dos 30 dias com presença e verdade. O que aconteceu, o que foi difícil, o que Paolla aprendeu e o que vai fazer diferente. Fecha o ciclo com clareza e convida para continuar acompanhando.",
+c:"Me conta: o que você está construindo? Quero saber.",
+in:"Caixinha nos stories: 'O que você está construindo?'"}
+];
+
+const COR={ob:['var(--ob-bg)','var(--ob-t)'],vd:['var(--vd-bg)','var(--vd-t)'],bs:['var(--bs-bg)','var(--bs-t)'],au:['var(--au-bg)','var(--au-t)'],cx:['var(--cx-bg)','var(--cx-t)'],ed:['var(--ed-bg)','var(--ed-t)']};
+
+// Julho 2026: dia 11 = sexta (índice 4), 4 vazios antes
+// Agosto 2026: dia 1 = sábado (índice 5), 5 vazios antes
+const SEMJUL={11:'Sexta',12:'Sábado',13:'Domingo',14:'Segunda',15:'Terça',16:'Quarta',17:'Quinta',18:'Sexta',19:'Sábado',20:'Domingo',21:'Segunda',22:'Terça',23:'Quarta',24:'Quinta',25:'Sexta',26:'Sábado',27:'Domingo',28:'Segunda',29:'Terça',30:'Quarta',31:'Quinta'};
+const SEMAGO={1:'Sábado',2:'Domingo',3:'Segunda',4:'Terça',5:'Quarta',6:'Quinta',7:'Sexta',8:'Sábado',9:'Domingo'};
+
+function renderJul(){
+  const g=document.getElementById('gjul');
+  [0,1,2,3].forEach(()=>{const v=document.createElement('div');v.className='card vz';g.appendChild(v);});
+  D.filter(d=>d.m===7).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'julho');
+    g.appendChild(el);
+  });
+}
+
+function renderAgo(){
+  const g=document.getElementById('gago');
+  [0,1,2,3,4].forEach(()=>{const v=document.createElement('div');v.className='card vz';g.appendChild(v);});
+  D.filter(d=>d.m===8).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'agosto');
+    g.appendChild(el);
+  });
+}
+
+function ab(d,mes){
+  const sem=mes==='julho'?SEMJUL[d.d]:SEMAGO[d.d];
+  document.getElementById('mdt').textContent=`${sem}, ${d.d} de ${mes} de 2026`;
+  const bg=document.getElementById('mbg');
+  bg.textContent=d.pN;bg.style.background=COR[d.p][0];bg.style.color=COR[d.p][1];
+  const pt=document.getElementById('mptag');
+  if(d.prod){pt.style.display='inline-block';pt.textContent=d.prod;}
+  else pt.style.display='none';
+  document.getElementById('mrl').style.display=d.r?'inline-block':'none';
+  document.getElementById('mti').textContent=d.i;
+  document.getElementById('mga').textContent=d.g;
+  document.getElementById('mdv').textContent=d.dv;
+  document.getElementById('mct').textContent=d.c;
+  document.getElementById('min').textContent='💬 Interação: '+d.in;
+  const rb=document.getElementById('mrb');
+  if(d.r&&d.rt){rb.style.display='block';document.getElementById('mrt').textContent=d.rt;}
+  else rb.style.display='none';
+  document.getElementById('ov').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function fc(e){
+  if(!e||e.target===document.getElementById('ov')||e.target.classList.contains('cls')){
+    document.getElementById('ov').classList.remove('on');
+    document.body.style.overflow='';
+  }
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fc();});
+renderJul();
+renderAgo();
+</script>
+<div class="ftr"><span>Paolla · Fábrica Pink & Femme</span> · Toque em qualquer dia para ver o roteiro completo · 🎬 = tem ideia de reel</div>
+</body>
+</html>
