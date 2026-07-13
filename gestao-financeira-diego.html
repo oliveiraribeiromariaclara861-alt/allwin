@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Gestão Financeira do Trader · Diego Sanches · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16.5px;
+    line-height: 1.75;
+    padding-bottom: 70px;
+  }
+  .wrap { max-width: 660px; margin: 0 auto; padding: 0 24px; }
+
+  .capa { padding: 76px 0 44px; text-align: center; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: #c9a15a; font-weight: 500; margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    font-size: clamp(32px, 7.5vw, 44px); color: #e8e0d0;
+    line-height: 1.15; margin-bottom: 12px;
+  }
+  .capa .nome {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 20px; color: #c9a15a;
+  }
+
+  section { padding: 34px 0 6px; }
+  .gold-line { width: 44px; height: 2px; background: #c9a15a; border: 0; margin: 0 0 16px; }
+  h2 {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    font-size: 26px; color: #e8e0d0; margin-bottom: 16px; line-height: 1.25;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    font-size: 18px; color: #c9a15a; margin: 0 0 8px;
+  }
+  p { margin-bottom: 16px; }
+  strong { color: #e8e0d0; font-weight: 500; }
+  em { color: #d6cdbb; }
+
+  .destaque {
+    border-left: 3px solid #c9a15a;
+    background: rgba(201,161,90,0.06);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 22px; margin: 24px 0;
+  }
+  .destaque p { margin-bottom: 0; }
+  .frase {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 21px; color: #e8e0d0; line-height: 1.5;
+    text-align: center; padding: 26px 10px; margin: 6px 0;
+  }
+
+  .conta {
+    background: #16140f; border: 1px solid #2a2620; border-radius: 14px;
+    padding: 22px 20px; margin-bottom: 14px;
+  }
+  .conta .num {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 15px; color: #c9a15a; letter-spacing: 0.1em; margin-bottom: 6px;
+  }
+  .conta p { font-size: 15px; margin-bottom: 10px; }
+  .conta p:last-child { margin-bottom: 0; }
+  .regra-vale {
+    font-size: 13px; color: #8a8171; border-top: 1px solid #2a2620;
+    padding-top: 10px; margin-top: 12px;
+  }
+  .regra-vale strong { color: #c9a15a; font-weight: 500; }
+
+  .fluxo {
+    background: #16140f; border: 1px solid #2a2620; border-radius: 14px;
+    padding: 24px 20px; margin: 20px 0; text-align: center;
+  }
+  .fluxo-passo {
+    font-size: 15px; color: #d6cdbb; padding: 10px 0;
+  }
+  .fluxo-seta { color: #c9a15a; font-size: 18px; line-height: 1; }
+
+  .alerta {
+    background: #16140f; border: 1px solid #2a2620; border-radius: 12px;
+    padding: 16px 18px; margin-bottom: 10px; font-size: 15px;
+  }
+  .alerta strong { color: #c9a15a; }
+
+  .preencher {
+    display: inline-block; min-width: 120px;
+    border-bottom: 1px solid #57503f; color: #8a8171;
+    font-style: italic; font-size: 14px; text-align: center;
+  }
+
+  footer { margin-top: 60px; padding-top: 30px; border-top: 1px solid #2a2620; text-align: center; }
+  .brindaremos {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 22px; color: #c9a15a; margin-bottom: 12px;
+  }
+  footer p { font-size: 13px; color: #8a8171; line-height: 1.7; margin: 0; }
+  footer strong { color: #b0a896; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="capa">
+    <p class="eyebrow">All Win Academy · Protocolo Financeiro</p>
+    <h1>Gestão Financeira do Trader</h1>
+    <p class="nome">Diego Sanches</p>
+  </header>
+
+  <section>
+    <hr class="gold-line">
+    <h2>O princípio que rege tudo</h2>
+    <p>Diego, o trader profissional que você está se tornando se diferencia do apostador por uma única coisa antes de qualquer gráfico: <strong>a relação dele com o dinheiro</strong>. O apostador tem um bolso só, onde vida e jogo se misturam, e por isso cada operação carrega o peso da família inteira. O trader tem territórios separados, e opera leve porque sabe que a vida dele está protegida aconteça o que acontecer na tela.</p>
+    <p class="frase">Dinheiro de vida não opera.<br>Dinheiro de operação não sustenta a vida.</p>
+    <p>Esse princípio também desarma a ferida antiga. Quando a banca está separada da vida, o loss deixa de ameaçar sua família e vira o que ele sempre foi: um custo previsto de treino. E custo previsto ninguém precisa vingar.</p>
+  </section>
+
+  <section>
+    <hr class="gold-line">
+    <h2>Os quatro territórios do seu dinheiro</h2>
+
+    <div class="conta">
+      <p class="num">TERRITÓRIO 01</p>
+      <h3>Conta da Vida</h3>
+      <p>Onde entra sua renda do trabalho e de onde saem as contas da casa, os filhos, o dia a dia. Este território é <strong>sagrado e intocável</strong>: nenhum real daqui entra em operação, em nenhuma circunstância, nem "só dessa vez".</p>
+      <p class="regra-vale"><strong>Regra:</strong> a operação nunca vê essa conta. Nem pra repor, nem pra aproveitar oportunidade, nem pra recuperar.</p>
+    </div>
+
+    <div class="conta">
+      <p class="num">TERRITÓRIO 02</p>
+      <h3>Porto Seguro</h3>
+      <p>A conta da sua esposa. Você já descobriu esse caminho sozinho no dia em que sacou e mandou o que restou pra ela. Agora isso vira oficial: <strong>todo lucro sacado vai pro Porto Seguro</strong>, e o que entra lá não volta pra operação.</p>
+      <p>Existe uma beleza nisso que eu quero que você enxergue: sua mente escolheu como cofre exatamente a pessoa que representa segurança na sua vida. O Porto Seguro protege o dinheiro de você mesmo nos dias em que a voz antiga gritar.</p>
+      <p class="regra-vale"><strong>Regra:</strong> o que entra, fica. Saque é caminho de mão única.</p>
+    </div>
+
+    <div class="conta">
+      <p class="num">TERRITÓRIO 03</p>
+      <h3>Banca de Treino</h3>
+      <p>O valor destinado ao seu período de adaptação, com teto definido em sessão: <span class="preencher">R$ definido juntos</span>. Esse valor é tratado como <strong>mensalidade do seu treinamento</strong>, um custo de formação, como seria o valor de um curso. Se um mês fechar no negativo dentro do teto, o treino cumpriu o papel dele mesmo assim.</p>
+      <p class="regra-vale"><strong>Regras:</strong> a banca nunca é recomposta no mesmo dia de um loss. Recomposição só acontece na virada do mês, com valor planejado, vindo de renda de trabalho, nunca do Porto Seguro. E meta e stop reduzidos valem como combinamos: percentuais menores até a mente se adaptar à nova rotina.</p>
+    </div>
+
+    <div class="conta">
+      <p class="num">TERRITÓRIO 04</p>
+      <h3>Reserva da Transição</h3>
+      <p>O território do seu Ponto B. Uma parte de todo lucro sacado vai virando fundo pros seus estudos, pros cursos que você já escolheu como destino e pra sustentar a travessia de carreira, incluindo a saída das formaturas e das viagens.</p>
+      <p>Cada real que entra aqui tem nome e endereço: é o Diego trader financiando a própria formação. É o dinheiro deixando de ser prova de valor e virando construção de futuro.</p>
+      <p class="regra-vale"><strong>Regra:</strong> percentual fixo de todo saque, definido em sessão: <span class="preencher">% definida juntos</span>. Esse fundo só se move pra educação e transição.</p>
+    </div>
+  </section>
+
+  <section>
+    <hr class="gold-line">
+    <h2>O ciclo do dinheiro</h2>
+    <p>Toda semana, o dinheiro percorre o mesmo caminho, sem exceção e sem emoção:</p>
+    <div class="fluxo">
+      <p class="fluxo-passo"><strong>Semana de operação</strong> dentro da janela e das regras</p>
+      <p class="fluxo-seta">↓</p>
+      <p class="fluxo-passo"><strong>Saque semanal do lucro</strong> em dia fixo, combinado em sessão</p>
+      <p class="fluxo-seta">↓</p>
+      <p class="fluxo-passo">Uma parte vira <strong>Reserva da Transição</strong></p>
+      <p class="fluxo-seta">↓</p>
+      <p class="fluxo-passo">O restante descansa no <strong>Porto Seguro</strong></p>
+      <p class="fluxo-seta">↓</p>
+      <p class="fluxo-passo">A banca volta ao <strong>tamanho padrão</strong> pra semana seguinte</p>
+    </div>
+    <p>O saque semanal tem função emocional, não só financeira: ele materializa a vitória. O colérico precisa ver o resultado sair da tela e virar realidade. Dinheiro parado na plataforma é número; dinheiro no Porto Seguro é conquista.</p>
+  </section>
+
+  <section>
+    <hr class="gold-line">
+    <h2>Sinais de alerta</h2>
+    <p>Estes quatro movimentos são a ferida tentando assumir a gestão. Se qualquer um aparecer, é hora de acionar o combinado das 24 horas comigo:</p>
+    <div class="alerta"><strong>01.</strong> Vontade de aumentar a banca ou a mão logo depois de dias bons, porque "agora vai".</div>
+    <div class="alerta"><strong>02.</strong> Impulso de repor a banca no mesmo dia de um loss pra recuperar o que saiu.</div>
+    <div class="alerta"><strong>03.</strong> Qualquer pensamento de usar a Conta da Vida ou o Porto Seguro pra operar.</div>
+    <div class="alerta"><strong>04.</strong> Vontade de esconder uma movimentação da sua esposa ou de mim.</div>
+    <div class="destaque">
+      <p><strong>Lembra do combinado:</strong> se algum limite estourar, você me conta em até 24 horas, sem julgamento. Você já fez isso uma vez por conta própria e viu o resultado: o erro falado virou ajuste, e a semana seguiu. O erro escondido é o único que tem poder de crescer.</p>
+    </div>
+  </section>
+
+  <section>
+    <hr class="gold-line">
+    <h2>Rumo ao Ponto B</h2>
+    <p>Essa estrutura existe pra servir um destino: o Diego trader profissional, estudando o novo operacional, formado nos cursos que escolheu, fora da estrada, presente em casa, e um dia ensinando outras pessoas com a própria história.</p>
+    <p>A partir de agora, o seu dinheiro trabalha nessa direção. Cada saque semanal é um tijolo. Cada regra cumprida é um dia de distância entre você e o apostador que operava pra provar valor. E cada extrato do Porto Seguro é uma carta escrita pro seu filho dizendo: <em>seu pai construiu isso com disciplina</em>.</p>
+    <p>Estou com você em cada etapa.</p>
+  </section>
+
+  <footer>
+    <p class="brindaremos">Brindaremos.</p>
+    <p><strong>Maria Clara</strong><br>Treinadora e Terapeuta Comportamental · Practitioner em PNL<br>All Win Academy</p>
+  </footer>
+
+</div>
+</body>
+</html>

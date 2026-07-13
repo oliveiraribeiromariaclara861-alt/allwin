@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Ponte de Transição · Diego Sanches · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 16.5px;
+    line-height: 1.75;
+    padding-bottom: 70px;
+  }
+  .wrap { max-width: 660px; margin: 0 auto; padding: 0 24px; }
+
+  .capa { padding: 76px 0 44px; text-align: center; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 0.32em; text-transform: uppercase;
+    color: #c9a15a; font-weight: 500; margin-bottom: 20px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    font-size: clamp(32px, 7.5vw, 44px); color: #e8e0d0;
+    line-height: 1.15; margin-bottom: 12px;
+  }
+  .capa .nome {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 20px; color: #c9a15a;
+  }
+
+  section { padding: 34px 0 6px; }
+  .gold-line { width: 44px; height: 2px; background: #c9a15a; border: 0; margin: 0 0 16px; }
+  h2 {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    font-size: 26px; color: #e8e0d0; margin-bottom: 16px; line-height: 1.25;
+  }
+  h3 {
+    font-family: 'Playfair Display', serif; font-weight: 600;
+    font-size: 18px; color: #c9a15a; margin: 0 0 10px;
+  }
+  p { margin-bottom: 16px; }
+  strong { color: #e8e0d0; font-weight: 500; }
+  em { color: #d6cdbb; }
+
+  .pontos {
+    display: grid; grid-template-columns: 1fr; gap: 14px; margin: 22px 0;
+  }
+  @media (min-width: 560px) { .pontos { grid-template-columns: 1fr 1fr; } }
+  .ponto {
+    background: #16140f; border: 1px solid #2a2620; border-radius: 14px;
+    padding: 22px 20px;
+  }
+  .ponto .rotulo {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 15px; color: #c9a15a; letter-spacing: 0.12em; margin-bottom: 8px;
+  }
+  .ponto p { font-size: 14.5px; margin-bottom: 8px; }
+  .ponto p:last-child { margin-bottom: 0; }
+
+  .destaque {
+    border-left: 3px solid #c9a15a;
+    background: rgba(201,161,90,0.06);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 22px; margin: 24px 0;
+  }
+  .destaque p { margin-bottom: 0; }
+  .frase {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 21px; color: #e8e0d0; line-height: 1.5;
+    text-align: center; padding: 26px 10px; margin: 6px 0;
+  }
+
+  .fase {
+    background: #16140f; border: 1px solid #2a2620; border-radius: 14px;
+    padding: 24px 22px; margin-bottom: 18px; position: relative;
+  }
+  .fase-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 12px; }
+  .fase-num {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: 30px; color: #c9a15a; line-height: 1;
+  }
+  .fase-head h3 { margin: 0; font-size: 19px; color: #e8e0d0; }
+  .fase-periodo {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #8a8171; margin-bottom: 14px;
+  }
+  .fase p { font-size: 15px; margin-bottom: 12px; }
+  .fase-bloco { border-top: 1px solid #2a2620; padding-top: 12px; margin-top: 4px; }
+  .fase-bloco .mini {
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: #c9a15a; margin-bottom: 6px;
+  }
+  .fase-bloco p { font-size: 14px; color: #b0a896; margin-bottom: 8px; }
+  .fase-bloco p:last-child { margin-bottom: 0; }
+
+  footer { margin-top: 60px; padding-top: 30px; border-top: 1px solid #2a2620; text-align: center; }
+  .brindaremos {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    font-size: 22px; color: #c9a15a; margin-bottom: 12px;
+  }
+  footer p { font-size: 13px; color: #8a8171; line-height: 1.7; margin: 0; }
+  footer strong { color: #b0a896; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="capa">
+    <p class="eyebrow">All Win Academy · Plano de Travessia</p>
+    <h1>A Ponte de Transição</h1>
+    <p class="nome">Diego Sanches</p>
+  </header>
+
+  <section>
+    <hr class="gold-line">
+    <h2>De onde você parte, pra onde você vai</h2>
+    <div class="pontos">
+      <div class="ponto">
+        <p class="rotulo">PONTO A</p>
+        <p>Dez anos num mercado que esgota e paga pouco. Três noites por semana na estrada, longe de casa. E a operação carregando o peso de provar valor, com a perda virando revanche e o dia ruim chegando na família.</p>
+      </div>
+      <div class="ponto">
+        <p class="rotulo">PONTO B</p>
+        <p>Trader profissional, formado, operando com método e paz. Fora da estrada, presente em casa todas as noites. Com uma história que um dia vai ensinar outras pessoas, e um filho com orgulho do pai que construiu isso.</p>
+      </div>
+    </div>
+    <p>Entre um ponto e outro existe uma ponte, e ponte se atravessa por etapas, na ordem, com cada pé firmado antes do próximo passo. Este documento é o desenho da sua travessia de um ano, e do meu lugar ao seu lado em cada trecho dela.</p>
+    <p class="frase">A pressa é a voz antiga.<br>A consistência é a sua nova língua.</p>
+  </section>
+
+  <section>
+    <hr class="gold-line">
+    <h2>As quatro fases da travessia</h2>
+
+    <div class="fase">
+      <div class="fase-head"><span class="fase-num">01</span><h3>Fundação</h3></div>
+      <p class="fase-periodo">Primeiro trimestre</p>
+      <p>Aqui a gente firma o chão. A rotina com o ritual matinal vira hábito, a gestão financeira com os quatro territórios entra em vigor, e o período de treino roda com meta e stop reduzidos até a mente se adaptar. É a fase de menor risco financeiro e maior trabalho interno.</p>
+      <div class="fase-bloco">
+        <p class="mini">Trabalho emocional</p>
+        <p>Sessões de Timeline nas raízes: o confronto do seu pai e o luto da sua mãe. E a sessão com sua esposa em agosto, consolidando a vulnerabilidade que a noite da carta abriu.</p>
+      </div>
+      <div class="fase-bloco">
+        <p class="mini">Como eu te acompanho</p>
+        <p>Sessões regulares, o protocolo das 24 horas sempre ativo, e leitura do seu checklist e dos seus registros pra ajustarmos o que precisar.</p>
+      </div>
+      <div class="fase-bloco">
+        <p class="mini">Critério pra avançar</p>
+        <p>Semanas consecutivas de rotina cumprida e regras respeitadas, no número que definirmos juntos em sessão. O placar do seu app é quem diz quando a ponte libera o próximo trecho.</p>
+      </div>
+    </div>
+
+    <div class="fase">
+      <div class="fase-head"><span class="fase-num">02</span><h3>Estudo do Novo Operacional</h3></div>
+      <p class="fase-periodo">Segundo trimestre</p>
+      <p>Com a disciplina provada, o bloco da tarde ganha destino fixo: estudar o mercado financeiro. Fundamentos, gestão de risco, análise, e prática em conta demonstração, onde se aprende sem sangrar. A Reserva da Transição segue crescendo a cada saque semanal, se aproximando dos cursos que você escolheu como formação.</p>
+      <div class="fase-bloco">
+        <p class="mini">Trabalho emocional</p>
+        <p>Consolidação da nova identidade: o homem que estuda antes de arriscar. Vamos trabalhar a paciência do colérico, porque é nessa fase que a pressa costuma atacar.</p>
+      </div>
+      <div class="fase-bloco">
+        <p class="mini">Como eu te acompanho</p>
+        <p>Acompanhamento do plano de estudos, sessões de estado emocional, e vigilância conjunta sobre o sinal de alerta número um: a vontade de encurtar caminho.</p>
+      </div>
+      <div class="fase-bloco">
+        <p class="mini">Critério pra avançar</p>
+        <p>Consistência mantida na operação atual, plano de estudos cumprido e Reserva da Transição no valor que definirmos como marco.</p>
+      </div>
+    </div>
+
+    <div class="fase">
+      <div class="fase-head"><span class="fase-num">03</span><h3>A Travessia</h3></div>
+      <p class="fase-periodo">Terceiro trimestre</p>
+      <p>A fase da mudança concreta. A formação escolhida é contratada com o dinheiro da Reserva, que você mesmo construiu com disciplina. Começa a operação no mercado financeiro em escala pequena, com as mesmas regras de ouro que você já domina. E desenhamos juntos o plano de redução das formaturas e das viagens, com datas e números, pra sua saída da estrada ser planejada e segura pra família.</p>
+      <div class="fase-bloco">
+        <p class="mini">Trabalho emocional</p>
+        <p>Sustentação nos momentos de medo, porque mudança real assusta, e o colérico diante do medo tende a acelerar. Aqui, cada decisão grande passa por sessão antes de virar ação.</p>
+      </div>
+      <div class="fase-bloco">
+        <p class="mini">Como eu te acompanho</p>
+        <p>Sessões de estratégia pra cada degrau da saída das formaturas, suporte na adaptação ao novo operacional, e Timeline de resgate se algum trecho travar.</p>
+      </div>
+      <div class="fase-bloco">
+        <p class="mini">Critério pra avançar</p>
+        <p>Formação em andamento, operação nova rodando dentro das regras e plano de saída da estrada em execução.</p>
+      </div>
+    </div>
+
+    <div class="fase">
+      <div class="fase-head"><span class="fase-num">04</span><h3>Consolidação</h3></div>
+      <p class="fase-periodo">Quarto trimestre</p>
+      <p>A identidade firmada. O Diego trader operando com rotina, método e gestão, dormindo em casa todas as noites. Fechamos o ano revisando a jornada inteira, marco por marco, e começamos a desenhar o capítulo que você sonhou: transformar sua história em algo que ensina, no tempo certo e do jeito certo.</p>
+      <div class="fase-bloco">
+        <p class="mini">Trabalho emocional</p>
+        <p>Blindagem contra recaídas, celebração nomeada de cada conquista, e a devolutiva de encerramento com a sua travessia inteira documentada, um documento pra guardar e um dia mostrar pro seu filho.</p>
+      </div>
+      <div class="fase-bloco">
+        <p class="mini">Como eu te acompanho</p>
+        <p>Sessões de manutenção, revisão dos protocolos pro novo momento, e o planejamento do seu futuro como alguém que também vai ensinar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <hr class="gold-line">
+    <h2>As leis da ponte</h2>
+    <p><strong>Uma fase de cada vez.</strong> A ponte não aceita atalho. Cada trecho só libera quando o critério do anterior for cumprido, e isso protege você do maior inimigo da travessia: a pressa de provar.</p>
+    <p><strong>A recaída não derruba a ponte.</strong> Se acontecer, ela vira sessão, ajuste e recomeço do trecho, nunca o fim da travessia. Você já provou no Marco 03 que sabe errar do jeito novo.</p>
+    <p><strong>A família atravessa junto.</strong> Sua esposa caminha ao seu lado nessa ponte, informada e envolvida. A travessia que você faz é de vocês.</p>
+    <p><strong>E eu estou na ponte com você.</strong> Do primeiro ao último trecho, em cada sessão, em cada ajuste, em cada vitória nomeada. Um ano de caminhada, lado a lado.</p>
+    <p class="frase">Do apostador que provava valor<br>ao trader que constrói legado.</p>
+  </section>
+
+  <footer>
+    <p class="brindaremos">Brindaremos.</p>
+    <p><strong>Maria Clara</strong><br>Treinadora e Terapeuta Comportamental · Practitioner em PNL<br>All Win Academy</p>
+  </footer>
+
+</div>
+</body>
+</html>
