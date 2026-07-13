@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0d0d0d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Time Gold">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Time Gold · Gold Spell</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap');
+html,body{margin:0;padding:0;background:#0d0d0d;color:#e8e0d0;font-family:'Lora',Georgia,serif;min-height:100vh;-webkit-text-size-adjust:100%}
+*{box-sizing:border-box}
+.nav{display:flex;background:#0d0d0d;border-bottom:1px solid #2a2420;position:sticky;top:0;z-index:50}
+.nav-btn{flex:1;padding:14px 8px;background:none;border:none;color:#6b5a4a;font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-family:'Lora',serif;transition:color .2s;border-bottom:2px solid transparent}
+.nav-btn.ativo{color:#c9a84c;border-bottom:2px solid #c9a84c}
+.tela{display:none;padding:24px 16px 80px}
+.tela.ativa{display:block}
+.hdr{text-align:center;padding:32px 16px 24px;border-bottom:1px solid #2a2420;margin-bottom:28px}
+.hdr .marca{font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:#c9a84c;margin-bottom:10px}
+.hdr h1{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,7vw,44px);font-weight:300;color:#e8dcc8;margin:0 0 6px;line-height:1.1}
+.hdr h1 em{color:#c9a84c;font-style:italic}
+.hdr .sub{font-size:10px;color:#6b5a4a;letter-spacing:2px;text-transform:uppercase;line-height:1.8}
+.gold-card{background:#1a1612;border-left:3px solid #c9a84c;border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0 0;text-align:left}
+.gold-card p{font-size:12px;line-height:1.75;color:#b0a090;margin:0;font-style:italic}
+.leg{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;justify-content:center}
+.li{display:flex;align-items:center;gap:6px;font-size:10px;color:#6b5a4a;text-transform:uppercase;font-weight:600;letter-spacing:.5px}
+.ld{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+.mes-label{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#6b5a4a;margin:24px 0 8px;border-bottom:1px solid #2a2420;padding-bottom:6px}
+.dh{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}
+.dh div{text-align:center;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#4a3a2a;padding:5px 0;font-family:'Cormorant Garamond',serif}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:4px}
+.card{border-radius:6px;padding:8px 6px;min-height:80px;cursor:pointer;transition:transform .15s,box-shadow .15s;display:flex;flex-direction:column;border:1px solid transparent;position:relative}
+.card:hover,.card:active{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.5);z-index:2}
+.card.vz{background:transparent;border:1px dashed #2a2420;cursor:default;opacity:0.15}
+.card.vz:hover{transform:none;box-shadow:none}
+.num{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:300;line-height:1;margin-bottom:4px}
+.pn{font-size:6.5px;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:4px;opacity:.7}
+.id{font-size:9px;line-height:1.3;flex:1}
+.rb{position:absolute;top:5px;right:5px;font-size:7px;background:rgba(255,255,255,.1);border-radius:8px;padding:1px 5px;font-weight:700}
+.cx{background:#0a1a2e;border-color:#0066cc;color:#5599dd}
+.ob{background:#2e1208;border-color:#cc4400;color:#dd7744}
+.vd{background:#081a0e;border-color:#007a2f;color:#44aa66}
+.bs{background:#1a0a2e;border-color:#6600cc;color:#9966dd}
+.au{background:#2e0812;border-color:#cc0044;color:#dd4466}
+.ed{background:#2a1e00;border-color:#aa7700;color:#ccaa33}
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:100;align-items:center;justify-content:center;padding:16px}
+.ov.on{display:flex}
+.modal{background:#141210;border-radius:14px;max-width:480px;width:100%;padding:28px;position:relative;max-height:88vh;overflow-y:auto;border-top:3px solid #c9a84c}
+.cls{position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#6b5a4a;line-height:1}
+.mdt{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#6b5a4a;margin-bottom:6px;font-family:'Cormorant Garamond',serif}
+.mbg{display:inline-block;font-size:8px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:3px 10px;border-radius:16px;margin-bottom:4px}
+.mrl{display:inline-block;margin-left:6px;font-size:8px;font-weight:700;padding:3px 8px;border-radius:16px;background:#2a2420;color:#c9a84c}
+.modal h2{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;color:#e8dcc8;margin:0 0 16px;line-height:1.25}
+.exec-box{background:#1a1612;border-radius:8px;padding:10px 14px;margin-bottom:14px;border-left:2px solid #c9a84c}
+.exec-box h4{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c9a84c;margin:0 0 5px}
+.exec-box p{font-size:12px;line-height:1.65;color:#9a8a7a;margin:0}
+.adapt-box{background:#1e1a14;border-radius:8px;padding:12px 14px;margin-bottom:14px;border:1px solid #3a2e1a}
+.adapt-box h4{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c9a84c;margin:0 0 8px}
+.adapt-item{margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #2a2420}
+.adapt-item:last-child{margin:0;padding:0;border:none}
+.adapt-item .tag{font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#c9a84c;font-weight:700;display:block;margin-bottom:3px}
+.adapt-item p{font-size:11px;line-height:1.6;color:#9a8a7a;margin:0}
+.sec h4{font-size:8px;letter-spacing:2px;text-transform:uppercase;color:#c9a84c;margin:0 0 4px}
+.sec p{font-size:12px;line-height:1.7;color:#b0a090;margin:0 0 14px}
+.int{background:#1a1612;border-left:2px solid #c9a84c;padding:8px 12px;border-radius:0 6px 6px 0;font-size:11px;color:#8a7a6a;margin-top:4px;font-style:italic}
+.rlb{background:#1a1612;border:1px solid #2a2420;border-radius:8px;padding:10px 14px;margin-top:14px;font-size:11px;line-height:1.6;color:#9a8a7a}
+.rlb strong{color:#c9a84c;font-size:8px;letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:4px}
+.insight-card{background:#141210;border:1px solid #2a2420;border-radius:12px;padding:20px;margin-bottom:16px;border-left:3px solid #c9a84c}
+.insight-card .ic-num{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#c9a84c;margin-bottom:6px}
+.insight-card h3{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:#e8dcc8;margin:0 0 10px;line-height:1.2}
+.insight-card p{font-size:12px;line-height:1.75;color:#9a8a7a;margin:0 0 10px}
+.insight-card .tag{display:inline-block;font-size:8px;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:16px;background:#2a1e00;color:#c9a84c;font-weight:700}
+.sobre-box{background:#141210;border:1px solid #2a2420;border-radius:12px;padding:20px;margin-bottom:16px}
+.sobre-box h3{font-family:'Cormorant Garamond',serif;font-size:16px;color:#c9a84c;margin:0 0 10px;letter-spacing:2px;text-transform:uppercase}
+.sobre-box p{font-size:12px;line-height:1.75;color:#9a8a7a;margin:0 0 8px}
+.sobre-box p:last-child{margin:0}
+.install-banner{background:#1a1612;border:1px solid #c9a84c;border-radius:10px;padding:14px 16px;margin-bottom:20px;display:flex;align-items:center;gap:12px}
+.install-banner .ib-text{flex:1;font-size:11px;line-height:1.5;color:#9a8a7a}
+.install-banner .ib-text strong{color:#c9a84c;display:block;margin-bottom:2px;font-size:12px}
+.install-btn{background:#c9a84c;color:#0d0d0d;border:none;border-radius:8px;padding:8px 14px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;cursor:pointer;white-space:nowrap;font-family:'Lora',serif}
+.ftr{text-align:center;padding:20px;font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#4a3a2a}
+.ftr span{color:#c9a84c}
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <button class="nav-btn ativo" onclick="irPara('calendario',this)">📅 Calendário</button>
+  <button class="nav-btn" onclick="irPara('insights',this)">💡 Insights</button>
+  <button class="nav-btn" onclick="irPara('sobre',this)">✨ Time Gold</button>
+</div>
+
+<div class="tela ativa" id="t-calendario">
+  <div class="hdr">
+    <div class="marca">Gold Spell · Time Gold · Dandara</div>
+    <h1>14 Jul <em>—</em> 14 Ago <em>2026</em></h1>
+    <div class="sub">Autocuidado · Autoestima · Cabelo como ferramenta</div>
+    <div class="gold-card">
+      <p>Você não precisa ser influenciadora de cabelo para criar conteúdo que conecta. Você precisa ser você — e mostrar como o cuidado com você mesma transforma o seu dia. O cabelo é a ferramenta. Você é o centro.</p>
+    </div>
+  </div>
+
+  <div class="leg">
+    <div class="li"><div class="ld" style="background:#0066cc"></div>Conexão</div>
+    <div class="li"><div class="ld" style="background:#cc4400"></div>Objeção</div>
+    <div class="li"><div class="ld" style="background:#007a2f"></div>Venda</div>
+    <div class="li"><div class="ld" style="background:#6600cc"></div>Base</div>
+    <div class="li"><div class="ld" style="background:#cc0044"></div>Autoridade</div>
+    <div class="li"><div class="ld" style="background:#aa7700"></div>Educação</div>
+  </div>
+
+  <div class="mes-label">Julho 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gjul"></div>
+
+  <div class="mes-label">Agosto 2026</div>
+  <div class="dh"><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div><div>Dom</div></div>
+  <div class="grid" id="gago"></div>
+
+  <div class="ftr"><span>Time Gold</span> · Toque no dia para ver o roteiro · 🎬 = reel</div>
+</div>
+
+<div class="tela" id="t-insights">
+  <div style="text-align:center;margin-bottom:24px;padding-top:8px">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#c9a84c;margin-bottom:8px">Time Gold · Insights</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;color:#e8dcc8">O que transforma conteúdo em conexão</div>
+    <div style="font-size:11px;color:#6b5a4a;margin-top:6px">Leia um por semana. Deixa trabalhar.</div>
+  </div>
+
+  <div class="insight-card">
+    <div class="ic-num">Insight 01</div>
+    <h3>Você não está vendendo produto. Está vendendo confiança.</h3>
+    <p>Quem compra de você não compra o produto. Compra a confiança que tem em você. O produto é o objeto da transação. O que convence é quem você é quando fala sobre ele. Por isso o conteúdo de vida real converte mais do que o conteúdo de anúncio.</p>
+    <span class="tag">Conexão · Presença</span>
+  </div>
+
+  <div class="insight-card">
+    <div class="ic-num">Insight 02</div>
+    <h3>O cabelo é a ferramenta. Você é o centro.</h3>
+    <p>Você não precisa criar conteúdo só sobre cabelo para vender produto de cabelo. Quando você aparece cuidada, presente, bem com você mesma — o cabelo está lá como parte disso. A venda mais poderosa é aquela que ninguém percebeu que era venda.</p>
+    <span class="tag">Posicionamento · Produto</span>
+  </div>
+
+  <div class="insight-card">
+    <div class="ic-num">Insight 03</div>
+    <h3>O post que você tem medo de publicar é o que mais conecta.</h3>
+    <p>A vulnerabilidade real — o dia difícil, a conquista pequena, o bastidor imperfeito — é o que para o scroll. Porque todo mundo está passando por algo parecido e não vê ninguém falando sobre isso com honestidade. Você pode ser essa pessoa.</p>
+    <span class="tag">Autenticidade · Alcance</span>
+  </div>
+
+  <div class="insight-card">
+    <div class="ic-num">Insight 04</div>
+    <h3>Consistência de presença vale mais do que consistência de frequência.</h3>
+    <p>Postar todo dia sem intenção cansa você e cansa quem te segue. Aparecer três vezes por semana sendo você de verdade constrói mais do que sete posts no piloto automático. O que a sua audiência sente quando você aparece é o que determina se ela fica.</p>
+    <span class="tag">Consistência · Estratégia</span>
+  </div>
+
+  <div class="insight-card">
+    <div class="ic-num">Insight 05</div>
+    <h3>Quem você atrai no conteúdo de conexão é quem compra no dia de venda.</h3>
+    <p>Os pilares do calendário trabalham juntos. Conexão aquece. Educação constrói confiança. Quebra de objeção remove o obstáculo. Venda converte quem já estava pronta. Pule uma etapa e a próxima não funciona.</p>
+    <span class="tag">Funil · Pilares</span>
+  </div>
+
+  <div class="insight-card">
+    <div class="ic-num">Insight 06</div>
+    <h3>Autocuidado no conteúdo não é falar de produto. É mostrar como você vive.</h3>
+    <p>Quando o produto aparece naturalmente no seu dia — na rotina de cabelo, no momento de cuidar de você — ele vende sem parecer venda. Você não precisa fazer um post de review toda semana. Precisa aparecer cuidada e presente.</p>
+    <span class="tag">Autocuidado · Rotina Real</span>
+  </div>
+
+  <div class="insight-card">
+    <div class="ic-num">Insight 07</div>
+    <h3>Resultado não aparece na semana que você mais postou. Aparece nas semanas depois.</h3>
+    <p>O algoritmo funciona por acumulação. Quem compra de você hoje estava te acompanhando há semanas. A semente que você planta hoje germina quando você menos esperar. Parar quando parece que nada está acontecendo é o erro que impede o resultado de chegar.</p>
+    <span class="tag">Consistência · Paciência</span>
+  </div>
+
+  <div class="insight-card">
+    <div class="ic-num">Insight 08</div>
+    <h3>Interação vale mais do que alcance.</h3>
+    <p>Um post que chega em 300 pessoas e gera 30 respostas vale mais do que um que chega em 3000 e gera 5 curtidas. O algoritmo distribui para quem engaja. Faça perguntas reais, responda comentários, crie conversa. Isso é o que cresce perfil de verdade.</p>
+    <span class="tag">Engajamento · Algoritmo</span>
+  </div>
+</div>
+
+<div class="tela" id="t-sobre">
+  <div style="padding-top:8px">
+    <div style="text-align:center;margin-bottom:24px">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#c9a84c;margin-bottom:8px">Gold Spell</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#e8dcc8">Time Gold</div>
+      <div style="font-size:11px;color:#6b5a4a;margin-top:4px">Gestora Dandara</div>
+    </div>
+
+    <div class="install-banner" id="install-banner" style="display:none">
+      <div class="ib-text"><strong>Salva como app</strong>Acessa mais rápido direto da sua tela inicial</div>
+      <button class="install-btn" id="install-btn">Instalar</button>
+    </div>
+
+    <div class="sobre-box">
+      <h3>A proposta do Time Gold</h3>
+      <p>Você não precisa ser influenciadora de cabelo para criar conteúdo que conecta e vende. Você precisa aparecer sendo você — com autocuidado, com presença, com autoestima.</p>
+      <p>O cabelo é a ferramenta. Você é o centro. Quando o centro está bem, tudo ao redor funciona melhor.</p>
+    </div>
+
+    <div class="sobre-box">
+      <h3>Como usar esse app</h3>
+      <p><strong style="color:#c9a84c">📅 Calendário</strong> — Toque em qualquer dia para ver o roteiro completo com gancho, o que falar, opções adaptativas para o seu perfil, CTA e interação. Os dias com 🎬 têm ideia de reel.</p>
+      <p><strong style="color:#c9a84c">💡 Insights</strong> — Leia um por semana. São os conceitos que mudam o jeito de criar conteúdo e pensar a própria presença.</p>
+      <p><strong style="color:#c9a84c">✨ Time Gold</strong> — Aqui você instala o app e entende a proposta do time.</p>
+    </div>
+
+    <div class="sobre-box">
+      <h3>Os produtos Gold Spell</h3>
+      <p><strong style="color:#c9a84c">Fioterapia</strong> — Alisamento que trata enquanto transforma.</p>
+      <p><strong style="color:#c9a84c">Tônico de Crescimento</strong> — O mais eficaz do país para estimular o crescimento capilar.</p>
+      <p><strong style="color:#c9a84c">Cápsulas de Cabelos e Unhas</strong> — Nutrição de dentro para fora.</p>
+      <p style="margin-top:10px;font-style:italic;color:#6b5a4a">Os produtos aparecem no conteúdo de forma natural — como parte da sua rotina, não como anúncio. Você usa, você mostra. Simples assim.</p>
+    </div>
+
+    <div class="sobre-box">
+      <h3>A semente</h3>
+      <p>Cada post é uma semente. O fruto vem para quem não para de plantar — mesmo nos dias que parece que ninguém está vendo.</p>
+      <p>Você está construindo algo real. Continue.</p>
+    </div>
+  </div>
+</div>
+
+<div class="ov" id="ov" onclick="fc(event)">
+  <div class="modal">
+    <button class="cls" onclick="fc()">×</button>
+    <div class="mdt" id="mdt"></div>
+    <span class="mbg" id="mbg"></span><span class="mrl" id="mrl" style="display:none">🎬 REEL</span>
+    <h2 id="mti"></h2>
+    <div class="exec-box"><h4>Como gravar em 5 a 10 minutos</h4><p id="mexec"></p></div>
+    <div class="adapt-box">
+      <h4>Opções adaptativas — escolha a que faz sentido pra você</h4>
+      <div id="madapt"></div>
+    </div>
+    <div class="sec"><h4>Gancho base</h4><p id="mga"></p></div>
+    <div class="sec"><h4>O que mostrar ou falar</h4><p id="mdv"></p></div>
+    <div class="sec"><h4>CTA</h4><p id="mct"></p></div>
+    <div class="int" id="min"></div>
+    <div class="rlb" id="mrb" style="display:none"><strong>🎬 Ideia de Reel</strong><span id="mrt"></span></div>
+  </div>
+</div>
+
+<script>
+const D=[
+{d:14,m:7,p:"cx",pN:"Conexão",r:true,
+i:"Quem é você além do produto",
+exec:"Stories ou vídeo curto de onde você estiver. 30 a 60 segundos. Sem edição.",
+adapt:[
+  {tag:"Sou mãe","txt":"Começa mostrando um momento real com seu filho. 'Antes de falar de qualquer coisa, deixa eu te apresentar por que eu faço o que eu faço.'"},
+  {tag:"Sou CLT","txt":"Começa no ambiente de trabalho ou saindo dele. 'Trabalho o dia todo, ainda assim encontro tempo pra cuidar de mim. Deixa eu te contar quem eu sou.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Apresentação sem mencionar produto. Só você — o que te move, o que te faz levantar todo dia. O produto aparece depois."}
+],
+g:"Antes de qualquer produto, antes de qualquer parceria — quem é você?",
+dv:"Apresentação pessoal real. Nome, o que você faz na vida, o que te move. Quem compra de influenciadora compra de pessoa, não de catálogo.",
+c:"Me conta uma coisa sobre você que a maioria das pessoas não sabe.",
+in:"Caixinha nos stories: 'Me faz uma pergunta sobre mim'",
+rt:"Câmera direta, 60 segundos. Apresentação real sem roteiro decorado."},
+
+{d:15,m:7,p:"ed",pN:"Educação",r:true,
+i:"O que o Tônico de Crescimento faz na sua rotina",
+exec:"Vídeo com o produto na mão ou no momento de usar. Fale o que você sabe de verdade.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Entre uma coisa e outra, esse é o meu minuto de cuidado. Boto o tônico e sigo. Simples assim.'"},
+  {tag:"Sou CLT","txt":"'Antes de sair pro trabalho ou depois de chegar, esse produto entrou na minha rotina e ficou.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Não precisa apresentar o produto como protagonista. Mostra ele em uso durante a rotina. Aparece, mas não domina o post."}
+],
+g:"Aprendi que cuidar do cabelo não precisa de muito tempo. Precisa de consistência.",
+dv:"Experiência real com o Tônico de Crescimento. O que percebeu, como encaixa no dia a dia. Quanto mais específico, mais credível.",
+c:"Salva esse se você está tentando criar uma rotina de cuidado que realmente dure.",
+in:"Salvar + 'Você usa tônico de crescimento?'",
+rt:"Reel de rotina real. Produto aparece naturalmente. Fala direta, sem edição elaborada."},
+
+{d:16,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Autocuidado não é luxo — é o que mantém você funcionando",
+exec:"Stories ou vídeo em qualquer momento real. Pode ser durante o cuidado com o cabelo, tomando café, qualquer pausa real.",
+adapt:[
+  {tag:"Sou mãe","txt":"'A gente cuida de todo mundo. E quando aprende a se cuidar também, muda tudo ao redor. Inclusive a qualidade que você entrega pra quem você ama.'"},
+  {tag:"Sou CLT","txt":"'Saio do trabalho exausta. E mesmo assim reservo esse momento pra mim. Não é opcional. É o que me mantém inteira.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Fala sobre autocuidado amplo — pode ser sono, alimentação, pausa. O cabelo entra como um dos pilares, não o único."}
+],
+g:"Você cuida de todo mundo. Quando foi a última vez que cuidou de você sem culpa?",
+dv:"Conecta autocuidado com autoestima real. Cuidar do cabelo, da pele, do corpo é a base para tudo o mais funcionar melhor.",
+c:"Salva e manda pra aquela amiga que cuida de todo mundo menos dela mesma.",
+in:"'Marca ela aqui'",
+rt:"Reel de autocuidado real. Momento cotidiano sem filtro. Uma frase de impacto no final."},
+
+{d:17,m:7,p:"au",pN:"Autoridade",r:false,
+i:"Minha experiência com a Fioterapia",
+exec:"Vídeo mostrando o produto ou o resultado no cabelo. Fale com naturalidade.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Com filho pequeno, não tenho tempo pra ir ao salão toda semana. A Fioterapia virou minha solução em casa.'"},
+  {tag:"Sou CLT","txt":"'Trabalho o dia todo e quero chegar em casa com o cabelo no ponto. Isso aqui me ajuda a manter.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Apresenta o produto como parte da sua busca por praticidade. Não como review técnica — como solução real que você encontrou."}
+],
+g:"Precisava de resultado sem precisar de muito tempo. A Fioterapia foi o que ficou.",
+dv:"Experiência real com a Fioterapia. Como você usa, o que percebeu, como encaixa. Experiência vale mais que argumento técnico.",
+c:"Tem dúvida sobre a Fioterapia? Me pergunta nos comentários.",
+in:"Caixinha nos stories: 'Me pergunta sobre a Fioterapia'"},
+
+{d:18,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Não tenho tempo para criar conteúdo'",
+exec:"Vídeo curto e direto. Pode gravar em qualquer lugar em 2 minutos.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Mãe de filho pequeno, CLT, rotina cheia. Eu também disse que não tinha tempo. E mesmo assim estou aqui.' Mostra que é possível com o tempo que existe."},
+  {tag:"Sou CLT","txt":"'Gravo no carro antes de entrar no trabalho. No intervalo do almoço. Na saída. Conteúdo não precisa de estúdio.' Mostra a realidade do bastidor."},
+  {tag:"Ainda não falo só de cabelo","txt":"'Você não precisa criar conteúdo de cabelo. Você precisa aparecer. O produto entra quando faz sentido.' Reduz a pressão de ter que falar de produto sempre."}
+],
+g:"Eu também falei isso. Até entender que conteúdo não precisa ser perfeito para conectar.",
+dv:"Quebra a barreira do tempo com honestidade. Conteúdo de 30 segundos gravado no celular pode conectar mais do que produção elaborada. O que importa é presença real.",
+c:"Me conta nos comentários qual é o seu maior obstáculo pra criar conteúdo.",
+in:"Enquete nos stories: 'Qual é o que mais te trava: tempo, não saber o que falar ou medo de aparecer?'",
+rt:"Reel de bastidor real. Mostra você gravando num momento improvisado. 'Esse vídeo foi gravado em 3 minutos entre uma coisa e outra.' A imperfeição é o ponto."},
+
+{d:19,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Um dia real da minha vida",
+exec:"Stories durante o dia. Momentos reais sem roteiro. O cotidiano que as pessoas não veem.",
+adapt:[
+  {tag:"Sou mãe","txt":"Mostra a rotina com filho — café da manhã, levar na escola, o que acontece no meio. Sem glamourizar a bagunça."},
+  {tag:"Sou CLT","txt":"Bastidor do dia de trabalho — o caminho, o intervalo, como você se cuida no meio disso tudo."},
+  {tag:"Ainda não falo só de cabelo","txt":"Qualquer momento real do seu dia. Você não precisa aparecer com o cabelo impecável. Apareça sendo você."}
+],
+g:"Esse é o meu dia. Do jeito que é — sem filtro.",
+dv:"Bastidor real da rotina. A vida que acontece entre os posts. Quem assiste se reconhece porque está vivendo algo parecido.",
+c:"Me conta o que você está fazendo agora enquanto assiste isso.",
+in:"Caixinha nos stories: 'O que você está fazendo agora?'"},
+
+{d:20,m:7,p:"vd",pN:"Venda",r:false,
+i:"O produto que entrou na minha rotina e ficou",
+exec:"Vídeo ou stories mostrando o produto no contexto real do seu dia.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Esse produto ficou porque cabe na minha rotina de mãe. Não precisa de muito tempo. Precisa de consistência.'"},
+  {tag:"Sou CLT","txt":"'Esse produto ficou porque funciona mesmo quando eu estou exausta. Simples de usar e o resultado aparece.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Mostra o produto na rotina de autocuidado, não como protagonista. Ele é uma das coisas que você faz por você."}
+],
+g:"Tem produto que você compra, usa uma vez e some. Esse ficou.",
+dv:"Fale sobre o produto Gold Spell que você mais usa com a sua experiência real. Por que ficou, o que percebeu, como encaixa.",
+c:"Quer saber mais? Entra no canal pelo link na bio.",
+in:"Link na bio + DM"},
+
+{d:21,m:7,p:"ed",pN:"Educação",r:true,
+i:"Cápsulas de cabelos e unhas — resultado de dentro pra fora",
+exec:"Vídeo falando sobre a experiência com as cápsulas. Pode mostrar o produto.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Com a rotina de mãe, às vezes esqueço de comer direito. As cápsulas entraram como uma forma de nutrir o cabelo mesmo quando a alimentação não tá 100%.'"},
+  {tag:"Sou CLT","txt":"'Estresse do trabalho aparece no cabelo. As cápsulas ajudam a nutrir de dentro, mesmo quando tudo de fora está pesado.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Conecta as cápsulas com cuidado interno — saúde, nutrição, bem-estar. Não só estética."}
+],
+g:"Resultado de cabelo começa de dentro. Aprendi isso na prática.",
+dv:"Experiência real com as cápsulas Gold Spell. O que percebeu com o uso contínuo, como encaixa na rotina.",
+c:"Salva esse se você quer entender como cuidar do cabelo além do que você aplica nele.",
+in:"Salvar + 'Você já usou cápsulas para cabelo?'",
+rt:"Reel sobre nutrição interna e resultado externo. Produto na mão, fala direta."},
+
+{d:22,m:7,p:"bs",pN:"Aumento de Base",r:true,
+i:"Mulher que se cuida entrega mais — pra todo mundo",
+exec:"Vídeo ou stories em qualquer momento. Pode ser depois de um momento de autocuidado.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Quando eu me cuido, minha filha vê isso. E aprende que também merece se cuidar.' O autocuidado como exemplo."},
+  {tag:"Sou CLT","txt":"'Quando chego descansada e cuidada, meu trabalho melhora. Meu humor muda. Minha entrega muda.' Resultado prático do autocuidado."},
+  {tag:"Ainda não falo só de cabelo","txt":"Autocuidado amplo — sono, pausa, saúde emocional, cabelo. Tudo faz parte."}
+],
+g:"Quando você cuida de você, sobra mais para todo mundo que você ama.",
+dv:"Quebra a culpa de se cuidar. Autocuidado não é egoísmo — é sustentação. A mulher que cuida de si mesma tem mais energia, mais presença, mais para dar.",
+c:"Salva e manda pra quem se sente culpada toda vez que para pra se cuidar.",
+in:"'Marca ela aqui'",
+rt:"Reel de validação. Uma frase de impacto. Sem complicar."},
+
+{d:23,m:7,p:"au",pN:"Autoridade",r:false,
+i:"As dúvidas mais comuns que chegam pra mim",
+exec:"Vídeo respondendo 3 perguntas reais que você já recebeu. Simples, sem edição.",
+adapt:[
+  {tag:"Sou mãe","txt":"Inclui perguntas sobre como manter rotina capilar com filho pequeno ou como usar os produtos sem muito tempo."},
+  {tag:"Sou CLT","txt":"Inclui perguntas sobre praticidade, resultado rápido, o que usar com rotina corrida."},
+  {tag:"Ainda não falo só de cabelo","txt":"Responde perguntas sobre você mesma, não só sobre o produto. Quem você é, como você usa, por que você escolheu estar aqui."}
+],
+g:"Toda semana alguém me pergunta a mesma coisa. Resolvi responder pra todo mundo de uma vez.",
+dv:"Q&A baseado em dúvidas reais. Mostra que você é referência, que as pessoas te procuram e confiam na sua opinião.",
+c:"Tem mais dúvida? Me manda aqui.",
+in:"Caixinha nos stories: 'Me manda sua dúvida'"},
+
+{d:24,m:7,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Produto de indicação é só marketing'",
+exec:"Vídeo direto e honesto. Tom seguro e acolhedor.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Eu não indicaria nada que eu não usasse na minha filha ou em mim. A responsabilidade que eu tenho como mãe é a mesma que tenho como quem indica.'"},
+  {tag:"Sou CLT","txt":"'Eu pesquiso antes de usar. Não tenho tempo pra gastar com coisa que não funciona. Indico porque testei e funcionou na minha rotina real.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Eu estou aqui porque acredito no produto — não porque sou obrigada a falar bem. E se tivesse algo que não funcionasse, eu não falaria.'"}
+],
+g:"Eu entendo essa desconfiança. Antes de usar eu também tinha.",
+dv:"Fale sobre a sua relação real com o produto. Honestidade sobre o que funciona cria mais confiança do que qualquer argumento.",
+c:"Se tiver curiosidade sobre qualquer produto que eu uso, me pergunta. Respondo com base no que vivi.",
+in:"Caixinha nos stories: 'Me pergunta sobre o que eu uso'",
+rt:"Reel honesto. 'Eu poderia estar indicando qualquer coisa. Indico o Gold Spell porque...' Conta o motivo real."},
+
+{d:25,m:7,p:"cx",pN:"Conexão",r:false,
+i:"Uma coisa que te faz continuar quando o dia está pesado",
+exec:"Stories ou vídeo curto. Pode ser em qualquer momento real.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Tem dia que a rotina pesa. E aí eu olho pra ela e lembro por que eu não posso parar.'"},
+  {tag:"Sou CLT","txt":"'Saí do trabalho exausta hoje. E mesmo assim criei esse conteúdo. Vou te contar o que me fez fazer isso.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Qualquer coisa real da sua vida que te move. Não precisa ser sobre produto ou conteúdo."}
+],
+g:"Teve um dia essa semana que pesou. E eu continuei assim mesmo.",
+dv:"Conexão através de vulnerabilidade real. Você tem dias difíceis e continua. Isso é o que conecta com a mulher que também está na luta.",
+c:"Me conta o que te faz continuar quando o dia aperta.",
+in:"Caixinha nos stories: 'O que te faz continuar?'"},
+
+// AGOSTO
+{d:1,m:8,p:"bs",pN:"Aumento de Base",r:true,
+i:"Agosto começa. O que você quer diferente esse mês?",
+exec:"Stories ou vídeo rápido de virada de mês. Pode gravar de manhã.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Agosto começa. E eu decidi que esse mês vou aparecer mais — pra mim mesma primeiro, e pra quem me acompanha.'"},
+  {tag:"Sou CLT","txt":"'Novo mês, nova intenção. Esse mês eu quero ser mais consistente no meu autocuidado mesmo com a rotina cheia.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Agosto é a chance de aparecer do jeito que eu quero. Com presença, com intenção, sendo eu mesma.'"}
+],
+g:"Agosto chegou. E eu fiz uma pergunta pra mim mesma que quero te fazer também.",
+dv:"Virada de mês com intenção. O que você quer que seja diferente — no autocuidado, na presença, em como você aparece.",
+c:"Me conta nos comentários o que você quer diferente em agosto.",
+in:"Caixinha nos stories: 'O que você quer que seja diferente em agosto?'",
+rt:"Reel de virada. Tom firme e acolhedor. Encerra com olho na câmera."},
+
+{d:2,m:8,p:"vd",pN:"Venda",r:false,
+i:"Resultado real — o que mudou com consistência",
+exec:"Vídeo ou foto mostrando o seu cabelo. Fale com naturalidade sobre o processo.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Com filho pequeno, manter consistência é difícil. Mas o resultado veio quando eu não desisti.'"},
+  {tag:"Sou CLT","txt":"'Com a rotina puxada, o cabelo foi o que mais sentiu. Quando comecei a cuidar de forma consistente, tudo mudou.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Conecta o resultado do cabelo com o resultado do autocuidado geral. Quando você prioriza você, o cabelo é um dos primeiros a mostrar."}
+],
+g:"Resultado não vem em uma semana. Mas quando vem, você sente.",
+dv:"Conteúdo de prova real com a sua experiência. Quanto tempo de uso, o que percebeu, o que mudou.",
+c:"Quer entrar no canal para acompanhar as novidades? Link na bio.",
+in:"Link na bio + DM"},
+
+{d:3,m:8,p:"ed",pN:"Educação",r:true,
+i:"A diferença entre cabelo hidratado e cabelo nutrido",
+exec:"Vídeo explicativo simples. Pode usar os produtos como exemplo.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Aprendi isso quando o meu cabelo começou a cair depois da gestação. Entender o que ele precisava mudou o resultado.'"},
+  {tag:"Sou CLT","txt":"'O estresse do trabalho resseca o cabelo. Aprendi que hidratar e nutrir são coisas diferentes — e precisava fazer as duas.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Ensina o conceito de forma simples. Você não precisa ser especialista — só compartilhar o que aprendeu."}
+],
+g:"Aprendi a diferença entre hidratar e nutrir o cabelo. E aí o resultado mudou.",
+dv:"Educa sobre as etapas do cuidado capilar de forma simples. Como os produtos Gold Spell se encaixam em cada etapa.",
+c:"Salva esse para não errar mais na hora de cuidar do cabelo.",
+in:"Salvar + 'Você sabia essa diferença?'",
+rt:"Reel explicativo com produto. Simples, direto, educativo."},
+
+{d:4,m:8,p:"cx",pN:"Conexão",r:false,
+i:"O autocuidado que cabe em qualquer dia",
+exec:"Stories ou vídeo em um momento real de autocuidado.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Cinco minutos enquanto o filho dorme. Dez minutos no banho. É o que cabe — e é suficiente.'"},
+  {tag:"Sou CLT","txt":"'No intervalo do almoço. Na saída do trabalho. O autocuidado cabe nos espaços que você decide criar.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Qualquer momento de cuidado consigo mesma. Pode ser mental, físico, emocional. O cabelo entra como parte, não como todo."}
+],
+g:"Autocuidado pra mim não é um ritual elaborado. É o que eu consigo fazer dentro da vida que eu tenho.",
+dv:"Mostra que autocuidado não precisa de hora marcada nem de rotina perfeita. O produto aparece naturalmente, não como protagonista.",
+c:"Me conta: qual é o seu autocuidado que cabe em qualquer dia?",
+in:"Caixinha nos stories: 'Seu autocuidado do dia a dia'"},
+
+{d:5,m:8,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Não sei o que falar no conteúdo'",
+exec:"Vídeo direto e acolhedor. Fale para quem sente isso.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Fala da sua rotina de mãe. Da conquista pequena. Do dia difícil. Do produto que salvou o seu cabelo numa semana corrida. Você tem mais conteúdo do que imagina.'"},
+  {tag:"Sou CLT","txt":"'Fala de como você se cuida com a rotina de trabalho. Do que você usa, do que te ajuda, de como você encontra tempo pra você. Isso é conteúdo.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Você não precisa falar só de cabelo. Fala de você. O produto aparece quando faz sentido. A sua vida real é o seu conteúdo.'"}
+],
+g:"Se você está aqui sem saber o que falar, esse vídeo é pra você.",
+dv:"Quebra a paralisia de não saber o que postar com exemplos concretos e adaptados para cada perfil. O conteúdo de vida real é sempre o ponto de partida.",
+c:"Me conta o que você mais gosta de compartilhar — mesmo que não seja sobre cabelo.",
+in:"Enquete nos stories: 'O que você mais gosta de criar conteúdo?'",
+rt:"Reel de revelação. 'Você acha que não tem conteúdo. Mas você acaba de me contar três coisas que poderiam virar post.' Lista as ideias ao vivo."},
+
+{d:6,m:8,p:"au",pN:"Autoridade",r:false,
+i:"O que eu aprendi sobre consistência no digital",
+exec:"Vídeo falando com experiência real. Pode ser num momento de pausa.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Aprendi que consistência de mãe não é todos os dias — é toda semana. O que importa é não desaparecer.'"},
+  {tag:"Sou CLT","txt":"'Aprendi que gravar no carro, no banheiro, no intervalo — conta. Quantidade não. Presença sim.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Aprendi que não preciso criar conteúdo de cabelo todo dia para ser lembrada como alguém que cuida de si mesma.'"}
+],
+g:"O que eu aprendi sobre criar conteúdo que ninguém me contou antes.",
+dv:"Experiência real de quem está construindo presença digital com a vida que tem. Sem fórmula, sem promessa. O que funcionou na prática.",
+c:"Salva esse se você está tentando ser consistente no digital mas se sente perdida.",
+in:"Salvar + 'Você se considera consistente no seu conteúdo?'"},
+
+{d:7,m:8,p:"bs",pN:"Aumento de Base",r:true,
+i:"Autoestima começa em como você se trata",
+exec:"Stories ou vídeo em um momento de autocuidado real.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Quando eu me cuido, minha autoestima muda. E quando minha autoestima muda, eu sou uma mãe melhor. Não dá pra separar.'"},
+  {tag:"Sou CLT","txt":"'Tem dias que o trabalho derruba. E o autocuidado é o que me levanta de volta. Cabelo, pele, saúde — tudo junto.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Autocuidado como pilar central. O cabelo é um dos elementos, não o único."}
+],
+g:"Quando você se olha no espelho e gosta do que vê, algo muda no dia inteiro.",
+dv:"Conecta autocuidado e autoestima de forma genuína. Cuidar do cabelo não é vaidade — é a relação que você tem com você mesma.",
+c:"Salva e manda pra quem precisa ouvir isso hoje.",
+in:"'Marca aquela mulher que merece se sentir assim'",
+rt:"Reel de autoestima. Você em um momento de cuidado. Uma frase de impacto. Sem filtro."},
+
+{d:8,m:8,p:"cx",pN:"Conexão",r:false,
+i:"Uma conquista sua dessa semana",
+exec:"Stories ou vídeo curto. Pode ser algo pequeno.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Essa semana eu consegui um momento só meu enquanto a casa dormia. Isso foi a minha conquista.'"},
+  {tag:"Sou CLT","txt":"'Essa semana eu saí do trabalho no horário e fiz algo por mim. Pequeno. Real. Meu.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"Qualquer conquista real. Pode ser ter postado, ter se cuidado, ter dito não, ter feito algo por você."}
+],
+g:"Essa semana eu fiz algo que quero compartilhar com você.",
+dv:"Conexão através de conquista real. O resultado visível tem uma história invisível atrás. Isso é o que conecta com quem está no meio do processo.",
+c:"Me conta uma conquista sua dessa semana. Por menor que pareça.",
+in:"Caixinha nos stories: 'Sua conquista da semana'"},
+
+{d:9,m:8,p:"vd",pN:"Venda",r:false,
+i:"Para quem o Gold Spell faz sentido",
+exec:"Vídeo claro e direto. Tom de quem está ajudando, não vendendo.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Pra mãe que precisa de produto que funciona rápido, que dura, que não exige ritual elaborado.'"},
+  {tag:"Sou CLT","txt":"'Pra quem tem pouco tempo e quer resultado consistente. Que não precisa ir ao salão toda semana.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Pra mulher que quer cuidar de si mesma de dentro pra fora. O produto é uma ferramenta. Você é o centro.'"}
+],
+g:"Antes de indicar qualquer coisa, preciso saber se faz sentido pra você.",
+dv:"Qualifica a audiência antes da venda. Para quem cada produto faz mais sentido, que resultado esperar.",
+c:"Quer saber se é pra você? Me manda uma mensagem.",
+in:"DM aberta + link na bio"},
+
+{d:10,m:8,p:"ed",pN:"Educação",r:true,
+i:"Como montar uma rotina capilar que você realmente consegue seguir",
+exec:"Vídeo simples explicando sua própria rotina.",
+adapt:[
+  {tag:"Sou mãe","txt":"'A minha rotina capilar cabe em 10 minutos. Vou te mostrar como.'"},
+  {tag:"Sou CLT","txt":"'Com a agenda que eu tenho, simplificar foi a solução. Vou te contar o que eu não abro mão.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Rotina capilar não precisa ser complicada para funcionar. A minha é simples — e encaixa em qualquer semana.'"}
+],
+g:"Rotina de cabelo não precisa ser elaborada pra funcionar. A minha é simples e eu consigo manter.",
+dv:"Ensina como montar uma rotina realista com os produtos Gold Spell. Frequência, o que é essencial, o que pode ser simplificado.",
+c:"Salva esse para montar a sua rotina essa semana.",
+in:"Salvar + 'Você tem uma rotina de cabelo definida?'",
+rt:"Reel de rotina real. Mostra os produtos e o processo de forma natural."},
+
+{d:11,m:8,p:"ob",pN:"Quebra de Objeção",r:true,
+i:"'Já tentei de tudo e nada funcionou'",
+exec:"Vídeo acolhedor e honesto.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Depois da gestação tentei vários produtos. O que mudou foi entender o que o meu cabelo precisava — não só trocar de produto.'"},
+  {tag:"Sou CLT","txt":"'Com o estresse do trabalho, o cabelo pede mais do que produto. Pede consistência e cuidado interno também.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Pode ser que o produto não seja o problema. Pode ser a consistência, pode ser o que está acontecendo por dentro.'"}
+],
+g:"Eu entendo. Eu também já comprei coisa que não entregou o que prometia.",
+dv:"Acolhe a frustração de quem já tentou e não viu resultado. Resultado vem de hábito e cuidado consistente, não de produto mágico.",
+c:"Se você ainda não encontrou o que funciona pra você, me manda mensagem.",
+in:"DM aberta",
+rt:"Reel de reframe acolhedor. 'Pode ser que o problema não era o produto. Era o contexto.'"},
+
+{d:12,m:8,p:"bs",pN:"Aumento de Base",r:true,
+i:"Você está construindo algo — mesmo quando não parece",
+exec:"Stories ou vídeo reflexivo.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Cada dia que você aparece, cada vez que você se cuida, cada post que você faz — você está plantando. Mesmo quando parece que nada está acontecendo.'"},
+  {tag:"Sou CLT","txt":"'Você trabalha, cuida de você mesma, ainda encontra tempo pra criar conteúdo. Isso é construção. Mesmo quando o resultado demora.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Consistência não é perfeição. É não parar. Você está aqui. Isso já é muito.'"}
+],
+g:"Às vezes parece que você está no mesmo lugar. Mas você está construindo enquanto caminha.",
+dv:"Motivação real sobre consistência e processo. Cada post é uma semente. O fruto vem para quem não para.",
+c:"Salva e manda pra quem você sabe que está plantando em silêncio.",
+in:"'Marca quem está construindo sem fazer barulho'",
+rt:"Reel de impacto. A metáfora da semente. Encerra com presença."},
+
+{d:13,m:8,p:"au",pN:"Autoridade",r:false,
+i:"O que aprendi sobre cuidado capilar que ninguém me ensinou",
+exec:"Vídeo falando sobre um aprendizado real.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Depois da gestação aprendi que o cabelo precisa de cuidado de dentro pra fora. Só produto externo não resolveu.'"},
+  {tag:"Sou CLT","txt":"'O estresse aparece no cabelo antes de qualquer lugar. Aprendi a tratar o cabelo como termômetro do meu estado interno.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Aprendi que o cabelo é um reflexo de como você está cuidando de você mesma como um todo.'"}
+],
+g:"Passei tempo fazendo errado sem saber. Quando aprendi isso, o resultado mudou.",
+dv:"Compartilha um aprendizado real sobre cuidado capilar nascido da própria experiência. O produto Gold Spell entra como parte da solução que funcionou.",
+c:"Salva esse se você também está aprendendo a cuidar melhor de você mesma.",
+in:"Salvar + 'Você também já fez isso sem saber que estava errado?'"},
+
+{d:14,m:8,p:"cx",pN:"Conexão",r:false,
+i:"Um mês plantando. O que ficou.",
+exec:"Stories ou vídeo reflexivo de encerramento. Fale com autenticidade.",
+adapt:[
+  {tag:"Sou mãe","txt":"'Esse mês eu apareci mesmo nos dias difíceis de mãe. E aprendi que não precisa ser perfeito para ser real.'"},
+  {tag:"Sou CLT","txt":"'Esse mês eu provei pra mim mesma que dá pra criar conteúdo com a vida que eu tenho — não com a que eu gostaria de ter.'"},
+  {tag:"Ainda não falo só de cabelo","txt":"'Esse mês eu aprendi que aparecer sendo eu mesma conecta mais do que qualquer estratégia.'"}
+],
+g:"Trinta dias aparecendo, plantando, sendo eu mesma. Vou te contar o que ficou.",
+dv:"Encerramento honesto. O que foi difícil, o que surpreendeu, o que ela não abre mão de levar pra frente. Fecha o ciclo com presença.",
+c:"Me conta: o que você plantou esse mês que ainda não viu florescer mas sabe que está crescendo?",
+in:"Caixinha nos stories: 'O que você plantou esse mês?'"}
+];
+
+const COR={cx:['#0a1a2e','#5599dd'],ob:['#2e1208','#dd7744'],vd:['#081a0e','#44aa66'],bs:['#1a0a2e','#9966dd'],au:['#2e0812','#dd4466'],ed:['#2a1e00','#ccaa33']};
+const SEMJUL={14:'Segunda',15:'Terça',16:'Quarta',17:'Quinta',18:'Sexta',19:'Sábado',20:'Domingo',21:'Segunda',22:'Terça',23:'Quarta',24:'Quinta',25:'Sexta'};
+const SEMAGO={1:'Sábado',2:'Domingo',3:'Segunda',4:'Terça',5:'Quarta',6:'Quinta',7:'Sexta',8:'Sábado',9:'Domingo',10:'Segunda',11:'Terça',12:'Quarta',13:'Quinta',14:'Sexta'};
+
+function renderJul(){
+  const g=document.getElementById('gjul');
+  D.filter(d=>d.m===7).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'julho');
+    g.appendChild(el);
+  });
+  const v=document.createElement('div');v.className='card vz';g.appendChild(v);
+}
+
+function renderAgo(){
+  const g=document.getElementById('gago');
+  [0,1,2,3,4].forEach(()=>{const v=document.createElement('div');v.className='card vz';g.appendChild(v);});
+  D.filter(d=>d.m===8).forEach(d=>{
+    const el=document.createElement('div');
+    el.className=`card ${d.p}`;
+    el.innerHTML=`<div class="num">${d.d}</div><div class="pn">${d.pN}</div><div class="id">${d.i}</div>${d.r?'<div class="rb">🎬</div>':''}`;
+    el.onclick=()=>ab(d,'agosto');
+    g.appendChild(el);
+  });
+}
+
+function irPara(tela,btn){
+  document.querySelectorAll('.tela').forEach(t=>t.classList.remove('ativa'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('ativo'));
+  document.getElementById('t-'+tela).classList.add('ativa');
+  btn.classList.add('ativo');
+  window.scrollTo(0,0);
+}
+
+function ab(d,mes){
+  const sem=mes==='julho'?SEMJUL[d.d]:SEMAGO[d.d];
+  document.getElementById('mdt').textContent=`${sem}, ${d.d} de ${mes} de 2026`;
+  const bg=document.getElementById('mbg');
+  bg.textContent=d.pN;bg.style.background=COR[d.p][0];bg.style.color=COR[d.p][1];
+  document.getElementById('mrl').style.display=d.r?'inline-block':'none';
+  document.getElementById('mti').textContent=d.i;
+  document.getElementById('mexec').textContent=d.exec;
+  const ad=document.getElementById('madapt');
+  ad.innerHTML='';
+  d.adapt.forEach(a=>{
+    const div=document.createElement('div');
+    div.className='adapt-item';
+    div.innerHTML=`<span class="tag">${a.tag}</span><p>${a.txt}</p>`;
+    ad.appendChild(div);
+  });
+  document.getElementById('mga').textContent=d.g;
+  document.getElementById('mdv').textContent=d.dv;
+  document.getElementById('mct').textContent=d.c;
+  document.getElementById('min').textContent='💬 Interação: '+d.in;
+  const rb=document.getElementById('mrb');
+  if(d.r&&d.rt){rb.style.display='block';document.getElementById('mrt').textContent=d.rt;}
+  else rb.style.display='none';
+  document.getElementById('ov').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+
+function fc(e){
+  if(!e||e.target===document.getElementById('ov')||e.target.classList.contains('cls')){
+    document.getElementById('ov').classList.remove('on');
+    document.body.style.overflow='';
+  }
+}
+
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fc();});
+
+let installPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{
+  e.preventDefault();installPrompt=e;
+  document.getElementById('install-banner').style.display='flex';
+});
+document.getElementById('install-btn').addEventListener('click',async()=>{
+  if(!installPrompt)return;
+  installPrompt.prompt();
+  const r=await installPrompt.userChoice;
+  if(r.outcome==='accepted')document.getElementById('install-banner').style.display='none';
+});
+
+renderJul();
+renderAgo();
+</script>
+</body>
+</html>

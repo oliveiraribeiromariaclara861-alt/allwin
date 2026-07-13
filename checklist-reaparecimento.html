@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Checklist de Reaparecimento | All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body { background: #0f0e0b !important; color: #b0a896; -webkit-text-size-adjust: 100%; margin: 0; padding: 0; }
+  * { box-sizing: border-box; }
+  body { font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.6; }
+
+  .wrap { max-width: 640px; margin: 0 auto; padding: 48px 22px 80px; }
+
+  .eyebrow { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: #c9a15a; text-align: center; margin-bottom: 14px; }
+  h1 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 34px; color: #f0e9dc; text-align: center; line-height: 1.2; margin: 0 0 10px; }
+  h1 em { font-style: italic; color: #c9a15a; }
+  .sub { text-align: center; font-size: 15px; color: #8a8172; max-width: 440px; margin: 0 auto 8px; }
+
+  .progress-zone { margin: 34px 0 40px; text-align: center; }
+  .progress-count { font-family: 'Playfair Display', serif; font-size: 15px; color: #c9a15a; font-style: italic; margin-bottom: 10px; }
+  .bar { height: 3px; background: #26231c; border-radius: 3px; overflow: hidden; }
+  .bar span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, #a37f3e, #c9a15a, #e6c98a); transition: width .5s ease; }
+
+  .fase { margin-bottom: 38px; }
+  .fase-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 6px; }
+  .fase-num { font-family: 'Playfair Display', serif; font-style: italic; color: #c9a15a; font-size: 20px; }
+  .fase-title { font-family: 'Playfair Display', serif; font-size: 21px; color: #f0e9dc; font-weight: 600; }
+  .fase-quando { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #6e6656; margin-bottom: 16px; padding-left: 32px; }
+
+  .item { display: flex; gap: 14px; padding: 14px 16px; border: 1px solid #26231c; border-radius: 10px; margin-bottom: 10px; cursor: pointer; transition: border-color .25s, background .25s; }
+  .item:hover { border-color: #3a352a; }
+  .item.done { background: #16140f; border-color: #3d3223; }
+  .box { flex: 0 0 auto; width: 22px; height: 22px; margin-top: 2px; border: 1.5px solid #c9a15a; border-radius: 6px; display: flex; align-items: center; justify-content: center; transition: background .25s; }
+  .item.done .box { background: #c9a15a; }
+  .box svg { width: 13px; height: 13px; opacity: 0; transition: opacity .2s; }
+  .item.done .box svg { opacity: 1; }
+  .item-text strong { display: block; color: #ddd3c0; font-weight: 500; font-size: 15.5px; margin-bottom: 2px; }
+  .item.done .item-text strong { color: #8a8172; text-decoration: line-through; text-decoration-color: #c9a15a55; }
+  .item-text span { font-size: 13.5px; color: #8a8172; }
+
+  .lembrete { margin-top: 54px; padding: 26px 24px; border: 1px solid #3d3223; border-radius: 12px; text-align: center; }
+  .lembrete p { font-family: 'Playfair Display', serif; font-style: italic; font-size: 18px; color: #ddd3c0; margin: 0 0 6px; line-height: 1.5; }
+  .lembrete small { font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #c9a15a; }
+
+  .celebra { display: none; text-align: center; margin-top: 30px; font-family: 'Playfair Display', serif; font-size: 22px; color: #c9a15a; font-style: italic; }
+  .celebra.show { display: block; animation: fade .8s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  footer { text-align: center; margin-top: 60px; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #55503f; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">All Win Academy · uso pessoal</p>
+  <h1>Checklist de <em>Reaparecimento</em></h1>
+  <p class="sub">Voltar pequeno, voltar verdadeira, voltar em movimento. Um passo de cada vez.</p>
+
+  <div class="progress-zone">
+    <div class="progress-count" id="count">0 de 12 passos vividos</div>
+    <div class="bar"><span id="fill"></span></div>
+  </div>
+
+  <div class="fase">
+    <div class="fase-head"><span class="fase-num">I.</span><span class="fase-title">Zerar a culpa</span></div>
+    <p class="fase-quando">Hoje</p>
+    <div class="item" data-k="a1"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Finalizar os materiais atrasados</strong><span>Formulários e protocolos pendentes. Um por vez, sem perfeccionismo.</span></div></div>
+    <div class="item" data-k="a2"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Avisar quem estava esperando</strong><span>Uma linha basta: "Tive uma emergência familiar, seu material chega hoje."</span></div></div>
+    <div class="item" data-k="a3"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Responder a seguidora que se abriu</strong><span>No privado, com carinho. Ela representa muitas que ficaram caladas.</span></div></div>
+  </div>
+
+  <div class="fase">
+    <div class="fase-head"><span class="fase-num">II.</span><span class="fase-title">Stories de reencontro</span></div>
+    <p class="fase-quando">Hoje ou amanhã</p>
+    <div class="item" data-k="b1"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Story 1 e 2: abrir a porta</strong><span>"Oi mulher, sumi. Quero te contar de onde estou voltando." O susto em uma frase.</span></div></div>
+    <div class="item" data-k="b2"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Story 3 e 4: a parte honesta</strong><span>Voltar é mais difícil que sumir. Estou voltando pequena, imperfeita e em movimento.</span></div></div>
+    <div class="item" data-k="b3"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Story 5: caixinha de pergunta</strong><span>"Você já travou assim, sem saber como voltar pra algo que ama?"</span></div></div>
+  </div>
+
+  <div class="fase">
+    <div class="fase-head"><span class="fase-num">III.</span><span class="fase-title">O Reel da travessia</span></div>
+    <p class="fase-quando">Dia seguinte</p>
+    <div class="item" data-k="c1"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Gravar o Reel do travamento pós pausa</strong><span>A mente transforma o retorno num evento. Evento exige perfeição. A saída: rebaixar a régua de entrada.</span></div></div>
+    <div class="item" data-k="c2"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Convidar para o grupo do WhatsApp</strong><span>Nos stories e na legenda: "montei um plano gratuito pra quem também travou, está no grupo."</span></div></div>
+  </div>
+
+  <div class="fase">
+    <div class="fase-head"><span class="fase-num">IV.</span><span class="fase-title">Documentar a reconstrução</span></div>
+    <p class="fase-quando">Ao longo da semana</p>
+    <div class="item" data-k="d1"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Primeiro treino de 20 minutos em casa</strong><span>Devolver ao corpo a sensação de comando. E mostrar nos stories.</span></div></div>
+    <div class="item" data-k="d2"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Documentar em vez de produzir</strong><span>Story simples, legenda curta. Essa semana o conteúdo é sua reconstrução real.</span></div></div>
+    <div class="item" data-k="d3"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Anotar a reflexão que o susto trouxe</strong><span>Vida e propósito. Sem engolir para voltar logo ao trabalho. Isso é material precioso.</span></div></div>
+    <div class="item" data-k="d4"><div class="box"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5L6 12L13.5 4" stroke="#0f0e0b" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="item-text"><strong>Cuidar de quem importa</strong><span>Ele, você, a casa. Presença primeiro. O resto acompanha.</span></div></div>
+  </div>
+
+  <div class="celebra" id="celebra">Você voltou. E voltou inteira. Brindaremos. 🥂</div>
+
+  <div class="lembrete">
+    <p>"Você não sumiu. Você esteve presente onde a vida exigiu presença."</p>
+    <small>Reaparecer é método, não evento</small>
+  </div>
+
+  <footer>All Win Academy</footer>
+</div>
+
+<script>
+  var KEY = 'allwin-reaparecimento';
+  var items = document.querySelectorAll('.item');
+  var state = {};
+  try { state = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch(e) { state = {}; }
+
+  function render() {
+    var done = 0;
+    items.forEach(function(el){
+      var k = el.getAttribute('data-k');
+      if (state[k]) { el.classList.add('done'); done++; }
+      else { el.classList.remove('done'); }
+    });
+    document.getElementById('count').textContent = done + ' de ' + items.length + ' passos vividos';
+    document.getElementById('fill').style.width = (done / items.length * 100) + '%';
+    document.getElementById('celebra').classList.toggle('show', done === items.length);
+  }
+
+  items.forEach(function(el){
+    el.addEventListener('click', function(){
+      var k = el.getAttribute('data-k');
+      state[k] = !state[k];
+      try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+      render();
+    });
+  });
+
+  render();
+</script>
+</body>
+</html>
