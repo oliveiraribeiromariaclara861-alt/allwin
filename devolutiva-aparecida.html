@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Devolutiva | Aparecida Jaqueline — All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    font-size: 1.06rem;
+    line-height: 1.85;
+    letter-spacing: 0.01em;
+  }
+
+  .wrap {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 26px 90px;
+  }
+
+  /* ---------- Capa ---------- */
+  .capa {
+    min-height: 92vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 70px 10px 50px;
+    position: relative;
+  }
+  .capa .marca {
+    font-family: 'Jost', sans-serif;
+    font-weight: 400;
+    font-size: 0.78rem;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: #c9a15a;
+    margin-bottom: 46px;
+  }
+  .capa h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1.22;
+    color: #ede6d6;
+    margin: 0 0 26px;
+  }
+  .capa h1 em {
+    font-style: italic;
+    color: #c9a15a;
+  }
+  .capa .nome {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.15rem;
+    color: #b0a896;
+    margin-bottom: 8px;
+  }
+  .capa .sub {
+    font-size: 0.82rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: #6f6858;
+  }
+  .filete {
+    width: 54px;
+    height: 1px;
+    background: #c9a15a;
+    margin: 34px auto;
+    opacity: 0.85;
+  }
+  .capa .desce {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #6f6858;
+  }
+
+  /* ---------- Abertura ---------- */
+  .abertura {
+    text-align: center;
+    padding: 30px 0 10px;
+  }
+  .abertura p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.16rem;
+    line-height: 1.9;
+    color: #cfc7b4;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* ---------- Seções ---------- */
+  section { padding-top: 62px; }
+
+  .rotulo {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.38em;
+    text-transform: uppercase;
+    color: #c9a15a;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(1.5rem, 5vw, 1.9rem);
+    line-height: 1.3;
+    color: #ede6d6;
+    margin: 0 0 26px;
+  }
+  p { margin: 0 0 22px; }
+  strong { font-weight: 500; color: #d8d0bd; }
+
+  /* Destaque em citação */
+  .destaque {
+    border-left: 2px solid #c9a15a;
+    padding: 6px 0 6px 24px;
+    margin: 34px 0;
+  }
+  .destaque p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.22rem;
+    line-height: 1.75;
+    color: #ede6d6;
+    margin: 0;
+  }
+
+  /* Card do marco 40 dias */
+  .marco {
+    background: linear-gradient(160deg, #17150f 0%, #131109 100%);
+    border: 1px solid #2b2618;
+    border-radius: 14px;
+    padding: 40px 32px;
+    text-align: center;
+    margin: 40px 0;
+  }
+  .marco .numero {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 3.4rem;
+    line-height: 1;
+    color: #c9a15a;
+    margin-bottom: 6px;
+  }
+  .marco .legenda {
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #b0a896;
+    margin-bottom: 18px;
+  }
+  .marco p {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    color: #cfc7b4;
+    margin: 0;
+    line-height: 1.8;
+  }
+
+  /* Ciclo do padrão */
+  .ciclo {
+    margin: 36px 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: passo;
+  }
+  .ciclo li {
+    counter-increment: passo;
+    position: relative;
+    padding: 0 0 26px 52px;
+  }
+  .ciclo li::before {
+    content: counter(passo);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #c9a15a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.92rem;
+    color: #c9a15a;
+  }
+  .ciclo li::after {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 36px;
+    bottom: 4px;
+    width: 1px;
+    background: #2b2618;
+  }
+  .ciclo li:last-child::after { display: none; }
+  .ciclo li p { margin: 0; padding-top: 3px; }
+
+  /* Caminho a partir daqui */
+  .caminho { margin: 36px 0 10px; }
+  .caminho .etapa {
+    display: flex;
+    gap: 20px;
+    padding: 22px 0;
+    border-bottom: 1px solid #221e14;
+  }
+  .caminho .etapa:last-child { border-bottom: none; }
+  .caminho .num {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #c9a15a;
+    min-width: 34px;
+    line-height: 1.4;
+  }
+  .caminho .etapa p { margin: 0; }
+
+  /* Fechamento */
+  .fechamento {
+    text-align: center;
+    padding-top: 80px;
+  }
+  .fechamento .frase {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 4.6vw, 1.7rem);
+    line-height: 1.7;
+    color: #ede6d6;
+    max-width: 560px;
+    margin: 0 auto 10px;
+  }
+  .fechamento .frase em { color: #c9a15a; font-style: italic; }
+  .brinde {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #c9a15a;
+    margin-top: 44px;
+    letter-spacing: 0.04em;
+  }
+  .assinatura {
+    margin-top: 50px;
+  }
+  .assinatura .quem {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #ede6d6;
+    margin-bottom: 6px;
+  }
+  .assinatura .cargo {
+    font-size: 0.78rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: #6f6858;
+    line-height: 2;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 20px 70px; }
+    .marco { padding: 32px 22px; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    section, .abertura {
+      animation: sobe 0.9s ease both;
+    }
+    @keyframes sobe {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- CAPA -->
+  <div class="capa">
+    <div class="marca">All Win Academy</div>
+    <h1>Um encontro<br>com <em>você mesma</em></h1>
+    <div class="filete"></div>
+    <div class="nome">Aparecida Jaqueline Fernandes de Oliveira Alves</div>
+    <div class="sub">Devolutiva de Análise Comportamental</div>
+    <div class="desce">Leia com calma</div>
+  </div>
+
+  <!-- ABERTURA -->
+  <div class="abertura">
+    <p>O que você vai ler aqui nasceu das suas próprias palavras. Eu apenas organizei o que você já sabia, mas talvez nunca tenha visto com clareza. Leia sem pressa e sem julgamento. Este material existe pra te devolver algo que sempre foi seu.</p>
+    <div class="filete"></div>
+  </div>
+
+  <!-- TEMPERAMENTO -->
+  <section>
+    <div class="rotulo">Sua essência</div>
+    <h2>A mulher que nasceu pra brilhar entre pessoas</h2>
+    <p>Aparecida, sua essência é <strong>sanguínea</strong>. E eu quero que você entenda o que isso significa de verdade.</p>
+    <p>Você nasceu com facilidade de se conectar. Sempre se enturmou bem, sempre gostou de festa, de gente, de vínculo. Você relaxa com música, com o violão, com uma novela boa. Você sente a vida pela presença e pelo afeto. Sua energia quer movimento, quer resolver agora, quer viver intensamente. Isso é dom. Isso é você.</p>
+    <p>E existe em você um valor lindo que apareceu na sua resposta sobre o que mais admira em alguém: <strong>parceria, independente do que aconteça</strong>. Lealdade é o seu coração falando. Você não quer muita gente ao redor, você quer gente verdadeira. Amizades sólidas, que perduram. Isso também é essência.</p>
+    <p>E tem mais uma coisa que pulsa em você e que eu preciso nomear: <strong>ambição</strong>. Fome de realização, de conquista, de sair do lugar. Isso também nasceu com você. Guarda essa informação, porque ela vai ser importante mais à frente.</p>
+  </section>
+
+  <!-- ESSÊNCIA X FERIDA -->
+  <section>
+    <div class="rotulo">Duas camadas</div>
+    <h2>O que é seu e o que foi colocado em você</h2>
+    <p>Agora eu preciso te mostrar algo importante. Nem tudo que você carrega hoje nasceu com você. Algumas coisas foram instaladas pela dor. E separar essas duas camadas é o começo da sua liberdade.</p>
+    <p>A menina que se enturma fácil, que ama música, que valoriza lealdade, que quer viver intensamente: essa é a <strong>Aparecida de fábrica</strong>.</p>
+    <p>A mulher que precisa ser perfeita pra entregar, que evita decisão quando sente vergonha, que não consegue dizer não, que busca agradar pra não perder ninguém: essa é a <strong>Aparecida que a ferida construiu pra sobreviver</strong>.</p>
+  </section>
+
+  <!-- A FRASE -->
+  <section>
+    <div class="rotulo">A raiz</div>
+    <h2>A frase que virou sentença</h2>
+    <p>Você me contou que seu pai dizia que você não prestava pra nada. E você me contou, em outra pergunta, que seu maior medo hoje é nada dar certo e você não sair do lugar.</p>
+    <p>Aparecida, olha esses dois pontos juntos. O seu maior medo hoje é a frase do seu pai falando dentro de você, em primeira pessoa. Você passou a vida inteira tentando provar valor pra ele. Virou a aluna número 1, a CDF, a que tirava as melhores notas. E até hoje, quando falha, sente culpa e sente que não é suficiente.</p>
+    <div class="destaque">
+      <p>Uma criança não tem que provar valor pra ser amada. Aquela frase falava sobre a dor dele. Nunca falou sobre você.</p>
+    </div>
+  </section>
+
+  <!-- DUAS MENSAGENS -->
+  <section>
+    <div class="rotulo">O pai</div>
+    <h2>As duas mensagens do seu pai</h2>
+    <p>Existe uma camada dessa história que precisa de luz. O mesmo pai que dizia que você não prestava é o pai que sempre guardou dinheiro e sempre socorreu você, seu marido e seus filhos quando foi preciso.</p>
+    <p>Você recebeu a vida inteira duas mensagens ao mesmo tempo. Pelas palavras: <strong>você não dá conta</strong>. Pelo dinheiro: <strong>deixa que eu resolvo por você</strong>. E o seu coração aprendeu a viver em dívida com ele, muito antes de qualquer empréstimo. Por isso você sente que é seu dever fazer pelo seu pai, e sente vergonha cada vez que precisa dele.</p>
+    <p>Eu quero te devolver a leitura verdadeira dessa cena: cada vez que você aceita ajuda e se sente pequena, quem está falando é a menina que ainda tenta quitar uma dívida que nunca existiu. <strong>Filha não deve nada por ser amparada.</strong> E o amparo do seu pai, ainda que ele nunca tenha sabido dizer com palavras, sempre foi a forma que ele encontrou de te amar.</p>
+  </section>
+
+  <!-- O JOGO -->
+  <section>
+    <div class="rotulo">Verdade e cuidado</div>
+    <h2>O jogo: entendendo o que aconteceu de verdade</h2>
+    <p>Aparecida, eu preciso falar sobre o jogo com você, e vou falar do jeito que você merece: com verdade e sem julgamento.</p>
+    <p>O jogo nunca foi sobre dinheiro. Pra uma mulher com a sua energia e a sua história, cada aposta carregava uma esperança secreta: a de que uma vitória grande finalmente provaria que você consegue sozinha. Cada jogada era uma tentativa de calar aquela frase antiga. E cada perda parecia confirmar a sentença. Aí vinha a vergonha, e com a vergonha o silêncio, e no silêncio a dívida crescia. <strong>Você não estava jogando por fraqueza. Você estava tentando se curar no lugar errado.</strong></p>
+
+    <div class="marco">
+      <div class="numero">+40</div>
+      <div class="legenda">dias sem jogar</div>
+      <p>Quarenta dias, um a um, escolhidos por você. A mulher que acreditava que não consegue sozinha está conseguindo todos os dias.</p>
+    </div>
+
+    <p>Esse é o dado mais importante desta devolutiva inteira. Isso derruba a frase do seu pai na prática. Eu quero que você conte esses dias, comemore esses dias, porque cada um deles é uma resposta àquela sentença.</p>
+    <p>E um combinado entre nós, selado aqui: <strong>se algum dia o pé escorregar, você me conta em até 24 horas.</strong> Sem vergonha, sem esconder. Recaída faz parte de processo de cura, e o que adoece nunca foi o erro. O que adoece é o esconderijo. Nós vamos treinar juntas o caminho oposto: errar e falar rápido.</p>
+  </section>
+
+  <!-- DÍVIDAS -->
+  <section>
+    <div class="rotulo">Da névoa ao papel</div>
+    <h2>As dívidas: tirando o peso do escuro</h2>
+    <p>Hoje existem dívidas com pessoas que você ama, e eu sei o tamanho da vergonha que isso te causa. Então vamos fazer com elas o que se faz com todo medo: colocar na luz.</p>
+    <p><strong>Vergonha cresce no escuro e encolhe no papel.</strong> Na nossa sessão, vamos montar juntas o seu mapa financeiro completo: cada valor, cada parcela, cada data. Quando a dívida vira número, ela para de ser um monstro e vira uma tarefa. E tarefa se resolve com plano, e plano é algo que nós duas sabemos construir.</p>
+    <p>E quero plantar uma semente com todo o cuidado: hoje existe algo que você ainda não conseguiu contar pra quem vive ao seu lado. Eu entendo o medo, e você não precisa fazer nada agora. Mas guarda isso no coração: nós vamos fortalecer a sua voz primeiro, e um dia, quando você estiver pronta, essa conversa vai acontecer com você inteira, de pé, e vai ser um dos dias mais livres da sua vida. Segredo pesa mais que dívida. E você não vai carregar nenhum dos dois pra sempre.</p>
+  </section>
+
+  <!-- CASAMENTO -->
+  <section>
+    <div class="rotulo">O afeto</div>
+    <h2>O casamento e a fome de carinho</h2>
+    <p>Você me contou que sente falta de diálogo, que as conversas terminam em briga, que beijo só existe na hora do sexo e que carinho quase não existe. E que você não se sente livre pra ser mais sexy, pra usar uma lingerie mais ousada, pra se expressar como mulher.</p>
+    <p>Eu quero honrar a sua coragem de falar disso, porque aqui mora uma fome antiga. Lá atrás, a menina aprendeu que aceitação tinha preço, e o corpo dela pagou esse preço na escola pra pertencer. Hoje, a mulher vive num casamento onde o afeto é escasso, e de novo o corpo dela fica sem voz e sem liberdade.</p>
+    <p>Você percebeu sozinha que seu marido carrega um pouco do seu pai. Ele não elogia e não critica, e esse silêncio toca exatamente na sua ferida mais antiga, a da menina que nunca ouviu que tinha valor. E quando ele disse que a situação de vocês é culpa sua, a humilhação que você sentiu foi a mesma de sempre, com outra voz.</p>
+    <div class="destaque">
+      <p>Querer ser tocada, beijada, admirada e ouvida dentro do próprio casamento é o mínimo. Desejar isso não te torna exigente.</p>
+    </div>
+    <p>Esse território nós vamos trabalhar no tempo certo, porque primeiro vem a sua voz. Mulher com voz conversa diferente, e conversa diferente constrói casamento diferente.</p>
+  </section>
+
+  <!-- PADRÃO CENTRAL -->
+  <section>
+    <div class="rotulo">O desenho completo</div>
+    <h2>O padrão central: agora você consegue ver</h2>
+    <p>Deixa eu te mostrar o desenho completo, porque quando você enxerga o padrão, ele perde força.</p>
+    <ol class="ciclo">
+      <li><p>Você aceita pouco pra se sentir pertencente.</p></li>
+      <li><p>Aceitar pouco te machuca e você se sente culpada.</p></li>
+      <li><p>A culpa rouba a sua voz.</p></li>
+      <li><p>Sem voz, você se esconde.</p></li>
+      <li><p>Escondida, você adoece em silêncio: no jogo, na dívida ou na falta de carinho.</p></li>
+    </ol>
+    <p>Esse ciclo se repetiu na escola, na casa do seu pai e no seu casamento. E ele termina onde começa: <strong>na voz</strong>. O nosso trabalho inteiro é te devolver a voz. Voz pra dizer não. Voz pra pedir carinho. Voz pra falar de dinheiro. Voz pra existir sem pedir desculpa.</p>
+  </section>
+
+  <!-- CAMINHO -->
+  <section>
+    <div class="rotulo">Próximos passos</div>
+    <h2>O caminho a partir daqui</h2>
+    <div class="caminho">
+      <div class="etapa">
+        <div class="num">I</div>
+        <p>Vamos proteger e celebrar a sua vitória sobre o jogo, dia após dia, com o nosso combinado de honestidade.</p>
+      </div>
+      <div class="etapa">
+        <div class="num">II</div>
+        <p>Vamos à raiz na sessão de Timeline: a cena da frase do seu pai, que alimenta o perfeccionismo, o medo de ficar parada e a fome de aprovação.</p>
+      </div>
+      <div class="etapa">
+        <div class="num">III</div>
+        <p>O mapa financeiro no concreto, pra tirar a vergonha do comando e colocar você no comando.</p>
+      </div>
+      <div class="etapa">
+        <div class="num">IV</div>
+        <p>E no dia a dia, disciplina do seu jeito: metas pequenas, entregas rápidas, vitórias celebradas. Entregue imperfeito e entregue hoje. Cada entrega imperfeita é uma resposta direta àquela frase antiga.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FECHAMENTO -->
+  <div class="fechamento">
+    <div class="filete"></div>
+    <p class="frase">Você é a mulher que passou a vida inteira provando valor pra quem não conseguia enxergar. Chegou a hora de viver a partir do seu valor, <em>e ele sempre esteve aí</em>.</p>
+    <p style="margin-top:26px;">Estou com você nessa travessia.</p>
+    <div class="brinde">Brindaremos.</div>
+    <div class="assinatura">
+      <div class="quem">Maria Clara</div>
+      <div class="cargo">Terapeuta Comportamental<br>Practitioner em PNL<br>All Win Academy</div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
