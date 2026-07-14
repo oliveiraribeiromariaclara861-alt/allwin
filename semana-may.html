@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Semana em Blocos | May</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+html{background:#fff!important}
+html,body{background:#fff!important;color:#1a1612;-webkit-text-size-adjust:100%;margin:0;padding:0;font-family:'Lora',Georgia,serif;min-height:100vh}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+--ink:#1a1612;--dim:#8a7a6a;--line:#ece5d8;--soft:#faf8f4;
+--gold:#b8860b;
+}
+.wrap{max-width:640px;margin:0 auto;padding:28px 18px calc(96px + env(safe-area-inset-bottom))}
+
+.hdr{text-align:center;padding:10px 0 22px;border-bottom:1px solid var(--line);margin-bottom:20px}
+.hdr .marca{font-family:'Cormorant Garamond',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.hdr h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:34px;margin:0 0 6px;letter-spacing:.5px}
+.hdr p{font-size:13.5px;color:var(--dim);margin:0;font-style:italic;line-height:1.55}
+
+.tabs{display:flex;gap:8px;margin-bottom:22px}
+.tab{flex:1;padding:11px 0;border:1px solid var(--line);background:#fff;border-radius:999px;font-family:'Lora',serif;font-size:13.5px;color:var(--dim);text-align:center;cursor:pointer;transition:.2s}
+.tab.on{border-color:var(--gold);color:var(--gold);font-weight:600}
+
+.view{display:none}
+.view.on{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ---- SEMANA ---- */
+.painel-exec{border:1px solid var(--line);border-radius:16px;padding:16px 16px 14px;margin-bottom:16px;background:linear-gradient(180deg,#fdfbf6,#fff)}
+.exec-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:10px}
+.exec-nome{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;letter-spacing:.4px}
+.exec-num{font-size:12px;color:var(--dim)}
+.exec-barra{height:10px;border-radius:999px;background:#f0e9da;overflow:hidden}
+.exec-fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#c9a15a,var(--gold));transition:width .5s ease}
+.exec-frase{font-size:12px;color:var(--dim);font-style:italic;margin-top:9px;line-height:1.5}
+.dia{border:1px solid var(--line);border-radius:16px;padding:16px 16px 12px;margin-bottom:14px;background:#fff}
+.dia-top{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:8px}
+.dia-nome{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;letter-spacing:.5px}
+.dia-conta{font-size:11.5px;color:var(--dim)}
+.dia-vazio{font-size:13px;color:var(--dim);font-style:italic;padding:6px 0 10px;line-height:1.5}
+.item{display:flex;align-items:flex-start;gap:10px;padding:9px 2px;border-top:1px dashed var(--line)}
+.item:first-of-type{border-top:none}
+.chk{flex:none;width:20px;height:20px;border-radius:50%;border:1.6px solid var(--dim);margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff;cursor:pointer;transition:.15s}
+.item.feito .chk{background:var(--gold);border-color:var(--gold)}
+.item .tx{flex:1;font-size:14.5px;line-height:1.45}
+.item.feito .tx{color:var(--dim);text-decoration:line-through;text-decoration-color:#c9b98f}
+.item .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;position:relative;top:-1px}
+.item .rm{flex:none;border:none;background:none;color:#c8bda9;font-size:16px;padding:2px 4px;cursor:pointer;line-height:1}
+.dia-add{margin-top:8px;width:100%;padding:10px 0;border:1px dashed #d8cdb8;background:var(--soft);border-radius:12px;font-family:'Lora',serif;font-size:13px;color:var(--gold);cursor:pointer}
+
+.semana-acao{display:flex;gap:8px;margin:4px 0 18px}
+.btn-suave{flex:1;padding:10px 0;border:1px solid var(--line);background:#fff;border-radius:12px;font-family:'Lora',serif;font-size:12.5px;color:var(--dim);cursor:pointer}
+
+/* ---- BLOCOS ---- */
+.area{border:1px solid var(--line);border-left:4px solid var(--ac,#999);border-radius:14px;padding:14px 14px 12px;margin-bottom:14px;background:#fff}
+.area-top{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.area-nome{flex:1;font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;color:var(--ac);cursor:pointer}
+.area-btn{border:none;background:none;color:#c8bda9;font-size:15px;padding:4px 6px;cursor:pointer}
+.area-nota{font-size:12px;color:var(--dim);font-style:italic;margin-bottom:8px;cursor:pointer}
+.bi{display:flex;align-items:center;gap:8px;padding:8px 2px;border-top:1px dashed var(--line)}
+.bi .tx{flex:1;font-size:14px;line-height:1.4;cursor:pointer}
+.bi .rm{border:none;background:none;color:#c8bda9;font-size:16px;padding:2px 4px;cursor:pointer}
+.bi-add{margin-top:8px;width:100%;padding:9px 0;border:1px dashed #d8cdb8;background:var(--soft);border-radius:10px;font-size:12.5px;font-family:'Lora',serif;color:var(--gold);cursor:pointer}
+.area-nova{width:100%;padding:13px 0;border:1px dashed #d8cdb8;background:var(--soft);border-radius:14px;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--gold);cursor:pointer;margin-bottom:6px}
+
+.dados{display:flex;gap:8px;margin-top:20px}
+.dica{font-size:11.5px;color:var(--dim);text-align:center;line-height:1.6;margin-top:18px;font-style:italic}
+
+.rodape{text-align:center;margin-top:34px;padding-top:18px;border-top:1px solid var(--line)}
+.rodape .m{font-family:'Cormorant Garamond',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:#c9b98f}
+
+/* ---- PICKER / FOLHA ---- */
+.veu{position:fixed;inset:0;background:rgba(26,22,18,.45);display:none;z-index:40}
+.veu.on{display:block}
+.folha{position:fixed;left:0;right:0;bottom:0;max-height:78vh;overflow:auto;background:#fff;border-radius:22px 22px 0 0;padding:20px 18px calc(24px + env(safe-area-inset-bottom));z-index:50;display:none;box-shadow:0 -8px 40px rgba(26,22,18,.18)}
+.folha.on{display:block;animation:sobe .25s ease}
+@keyframes sobe{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+.folha h3{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;margin:0 0 4px}
+.folha .sub{font-size:12.5px;color:var(--dim);font-style:italic;margin-bottom:14px}
+.p-area{margin-bottom:14px}
+.p-area .nm{font-family:'Cormorant Garamond',serif;font-size:16px;font-weight:600;margin-bottom:6px}
+.p-item{display:flex;align-items:center;gap:9px;padding:9px 10px;border:1px solid var(--line);border-radius:10px;margin-bottom:6px;font-size:13.5px;cursor:pointer;transition:.15s}
+.p-item.sel{border-color:var(--gold);background:#fdf9ef}
+.p-item .dot{width:8px;height:8px;border-radius:50%;flex:none}
+.p-livre{width:100%;padding:11px;border:1px dashed #d8cdb8;border-radius:10px;background:var(--soft);font-family:'Lora',serif;font-size:13px;color:var(--gold);cursor:pointer;margin-top:2px}
+.folha-ok{position:sticky;bottom:0;margin-top:12px;width:100%;padding:13px 0;border:none;border-radius:999px;background:var(--gold);color:#fff;font-family:'Lora',serif;font-size:14.5px;font-weight:600;cursor:pointer}
+
+/* editor de texto */
+.ed-campo{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font-family:'Lora',serif;font-size:14.5px;margin:8px 0 12px;color:var(--ink);background:#fff}
+.ed-campo:focus{outline:none;border-color:var(--gold)}
+.ed-acoes{display:flex;gap:8px}
+.ed-ok{flex:1;padding:12px 0;border:none;border-radius:999px;background:var(--gold);color:#fff;font-family:'Lora',serif;font-size:14px;font-weight:600;cursor:pointer}
+.ed-nao{flex:1;padding:12px 0;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--dim);font-family:'Lora',serif;font-size:14px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div class="marca">May</div>
+    <h1>Semana em Blocos</h1>
+    <p>Seu ritmo, suas áreas, do seu jeito.<br>Nada aqui é fixo. Tudo aqui é seu.</p>
+  </div>
+
+  <div class="tabs">
+    <div class="tab on" id="tab-semana" onclick="trocar('semana')">Minha semana</div>
+    <div class="tab" id="tab-blocos" onclick="trocar('blocos')">Meus blocos</div>
+  </div>
+
+  <div class="view on" id="v-semana">
+    <div class="painel-exec" id="exec" style="display:none">
+      <div class="exec-top">
+        <div class="exec-nome">Sua semana em movimento</div>
+        <div class="exec-num" id="exec-num"></div>
+      </div>
+      <div class="exec-barra"><div class="exec-fill" id="exec-fill"></div></div>
+      <div class="exec-frase" id="exec-frase"></div>
+    </div>
+    <div class="semana-acao">
+      <button class="btn-suave" onclick="limparFeitos()">Desmarcar tudo</button>
+      <button class="btn-suave" onclick="novaSemana()">Começar semana nova</button>
+    </div>
+    <div id="dias"></div>
+    <div class="dica">Toque no círculo para marcar o que já viveu.<br>O dia não precisa estar cheio para estar completo.</div>
+  </div>
+
+  <div class="view" id="v-blocos">
+    <div id="areas"></div>
+    <button class="area-nova" onclick="novaArea()">+ criar nova área</button>
+    <div class="dados">
+      <button class="btn-suave" onclick="exportar()">Guardar cópia</button>
+      <button class="btn-suave" onclick="document.getElementById('imp').click()">Trazer cópia</button>
+      <input type="file" id="imp" accept=".json" style="display:none" onchange="importar(event)">
+    </div>
+    <div class="dica">Toque no nome ou em qualquer item para editar.<br>Este painel salva sozinho no seu aparelho.</div>
+  </div>
+
+  <div class="rodape"><div class="m">All Win Academy</div></div>
+</div>
+
+<div class="veu" id="veu" onclick="fecharTudo()"></div>
+
+<div class="folha" id="picker">
+  <h3 id="pk-titulo">Compor o dia</h3>
+  <div class="sub">Escolha os blocos que fazem sentido hoje. Pode ser um. Pode ser nenhum.</div>
+  <div id="pk-corpo"></div>
+  <button class="folha-ok" onclick="confirmarPicker()">Colocar no dia</button>
+</div>
+
+<div class="folha" id="editor">
+  <h3 id="ed-titulo">Editar</h3>
+  <input class="ed-campo" id="ed-campo" type="text" autocomplete="off">
+  <div class="ed-acoes">
+    <button class="ed-nao" onclick="fecharTudo()">Cancelar</button>
+    <button class="ed-ok" onclick="salvarEditor()">Salvar</button>
+  </div>
+</div>
+
+<script>
+const CHAVE='may-semana-blocos-v1';
+const DIAS=['Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'];
+const PALETA=['#6600cc','#007a2f','#0066cc','#cc4400','#aa7700','#cc0044','#008080','#8a2be2'];
+
+let dados=null;
+
+function uid(){return Math.random().toString(36).slice(2,9)}
+
+function base(){
+  return {
+    areas:[
+      {id:uid(),nome:'Essência',nota:'Prefiro praticar pela manhã',cor:'#6600cc',itens:[
+        {id:uid(),tx:'Preparar chá em silêncio ao acordar'},
+        {id:uid(),tx:'Escrita no diário'},
+        {id:uid(),tx:'Leitura de livros e artigos'},
+        {id:uid(),tx:'Se arrumar para o dia'},
+        {id:uid(),tx:'Estudo livre, 30min de um assunto de interesse'}
+      ]},
+      {id:uid(),nome:'Corpo e movimento',nota:'',cor:'#007a2f',itens:[
+        {id:uid(),tx:'Água e chá pela manhã'},
+        {id:uid(),tx:'Caminhada ou academia'},
+        {id:uid(),tx:'Café da manhã intencional'},
+        {id:uid(),tx:'Banho premium'}
+      ]},
+      {id:uid(),nome:'Criação e conteúdo',nota:'',cor:'#0066cc',itens:[
+        {id:uid(),tx:'Roteiro bem estruturado (1 a 2 por semana)'},
+        {id:uid(),tx:'Escrever uma parte do artigo da semana'},
+        {id:uid(),tx:'Aparecer nos stories com bastidor e conexão'}
+      ]},
+      {id:uid(),nome:'Negócio e Branding',nota:'',cor:'#cc4400',itens:[
+        {id:uid(),tx:'Criação de estratégias, campanhas ou funis'},
+        {id:uid(),tx:'Prospectar clientes ou parceiros'},
+        {id:uid(),tx:'Follow up'},
+        {id:uid(),tx:'Estudo profissional: branding, finanças ou negócios'}
+      ]},
+      {id:uid(),nome:'Ambiente e conexão',nota:'',cor:'#aa7700',itens:[
+        {id:uid(),tx:'Tarefas domésticas'},
+        {id:uid(),tx:'Trabalhar fora de casa'},
+        {id:uid(),tx:'Interagir com perfis do nicho'},
+        {id:uid(),tx:'Viver uma experiência que vire conteúdo'}
+      ]},
+      {id:uid(),nome:'Relacionamento',nota:'',cor:'#cc0044',itens:[
+        {id:uid(),tx:'Desconectar do trabalho às 18h'},
+        {id:uid(),tx:'Contato com o pai'},
+        {id:uid(),tx:'Visitar parentes'},
+        {id:uid(),tx:'Momento com o namorado'},
+        {id:uid(),tx:'Jogos com amigos'},
+        {id:uid(),tx:'Escrita criativa, as histórias'}
+      ]}
+    ],
+    semana:{}
+  };
+}
+
+function carregar(){
+  try{
+    const s=localStorage.getItem(CHAVE);
+    if(s){dados=JSON.parse(s);return}
+  }catch(e){}
+  dados=base();
+  salvar();
+}
+function salvar(){
+  try{localStorage.setItem(CHAVE,JSON.stringify(dados))}catch(e){}
+}
+
+function areaPor(id){return dados.areas.find(a=>a.id===id)}
+function itemPor(a,id){return a?a.itens.find(i=>i.id===id):null}
+
+/* ---------- SEMANA ---------- */
+function renderSemana(){
+  renderExec();
+  const box=document.getElementById('dias');
+  box.innerHTML='';
+  DIAS.forEach(d=>{
+    const lista=dados.semana[d]||[];
+    const feitos=lista.filter(e=>e.feito).length;
+    const card=document.createElement('div');card.className='dia';
+    let html=`<div class="dia-top"><div class="dia-nome">${d}</div><div class="dia-conta">${lista.length?feitos+' de '+lista.length:''}</div></div>`;
+    if(!lista.length){
+      html+=`<div class="dia-vazio">Dia em branco. Componha do seu jeito quando fizer sentido.</div>`;
+    }else{
+      lista.forEach((e,idx)=>{
+        const a=areaPor(e.areaId);
+        const cor=a?a.cor:'#999';
+        html+=`<div class="item ${e.feito?'feito':''}">
+          <div class="chk" onclick="alternar('${d}',${idx})">${e.feito?'✓':''}</div>
+          <div class="tx"><span class="dot" style="background:${cor}"></span>${e.tx}</div>
+          <button class="rm" onclick="tirarDoDia('${d}',${idx})">×</button>
+        </div>`;
+      });
+    }
+    html+=`<button class="dia-add" onclick="abrirPicker('${d}')">+ compor o dia</button>`;
+    card.innerHTML=html;
+    box.appendChild(card);
+  });
+}
+function renderExec(){
+  const painel=document.getElementById('exec');
+  let total=0,feitos=0;
+  DIAS.forEach(d=>(dados.semana[d]||[]).forEach(e=>{total++;if(e.feito)feitos++}));
+  if(!total){painel.style.display='none';return}
+  painel.style.display='block';
+  const pct=Math.round(feitos/total*100);
+  document.getElementById('exec-num').textContent=feitos+' de '+total+' · '+pct+'%';
+  document.getElementById('exec-fill').style.width=pct+'%';
+  let frase='';
+  if(pct===0)frase='A semana está desenhada. Agora é viver, um bloco de cada vez.';
+  else if(pct<35)frase='Começou. E começar já é movimento.';
+  else if(pct<70)frase='Olha você fluindo. A semana está tomando a sua cara.';
+  else if(pct<100)frase='Quase lá. E do seu jeito, que é o que importa.';
+  else frase='Semana inteira vivida. Isso é presença, não perfeição.';
+  document.getElementById('exec-frase').textContent=frase;
+}
+function alternar(d,idx){
+  dados.semana[d][idx].feito=!dados.semana[d][idx].feito;
+  salvar();renderSemana();
+}
+function tirarDoDia(d,idx){
+  dados.semana[d].splice(idx,1);
+  salvar();renderSemana();
+}
+function limparFeitos(){
+  DIAS.forEach(d=>(dados.semana[d]||[]).forEach(e=>e.feito=false));
+  salvar();renderSemana();
+}
+function novaSemana(){
+  if(confirm('Começar uma semana nova? Os dias ficam em branco e seus blocos continuam guardados.')){
+    dados.semana={};salvar();renderSemana();
+  }
+}
+
+/* ---------- PICKER ---------- */
+let pkDia=null,pkSel=[];
+function abrirPicker(d){
+  pkDia=d;pkSel=[];
+  document.getElementById('pk-titulo').textContent='Compor '+d.toLowerCase();
+  const corpo=document.getElementById('pk-corpo');
+  corpo.innerHTML='';
+  dados.areas.forEach(a=>{
+    const g=document.createElement('div');g.className='p-area';
+    let html=`<div class="nm" style="color:${a.cor}">${a.nome}</div>`;
+    a.itens.forEach(i=>{
+      html+=`<div class="p-item" data-a="${a.id}" data-i="${i.id}" onclick="pkToggle(this)"><span class="dot" style="background:${a.cor}"></span>${i.tx}</div>`;
+    });
+    g.innerHTML=html;
+    corpo.appendChild(g);
+  });
+  const livre=document.createElement('button');
+  livre.className='p-livre';livre.textContent='+ escrever algo só deste dia';
+  livre.onclick=()=>{fecharTudo();abrirEditor('Algo só deste dia','',v=>{
+    if(!dados.semana[pkDia])dados.semana[pkDia]=[];
+    dados.semana[pkDia].push({areaId:null,itemId:null,tx:v,feito:false});
+    salvar();renderSemana();
+  })};
+  corpo.appendChild(livre);
+  document.getElementById('veu').classList.add('on');
+  document.getElementById('picker').classList.add('on');
+}
+function pkToggle(el){
+  el.classList.toggle('sel');
+  const k=el.dataset.a+'|'+el.dataset.i;
+  const p=pkSel.indexOf(k);
+  if(p>=0)pkSel.splice(p,1);else pkSel.push(k);
+}
+function confirmarPicker(){
+  if(!dados.semana[pkDia])dados.semana[pkDia]=[];
+  pkSel.forEach(k=>{
+    const [aId,iId]=k.split('|');
+    const a=areaPor(aId),i=itemPor(a,iId);
+    if(i)dados.semana[pkDia].push({areaId:aId,itemId:iId,tx:i.tx,feito:false});
+  });
+  salvar();fecharTudo();renderSemana();
+}
+
+/* ---------- BLOCOS ---------- */
+function renderBlocos(){
+  const box=document.getElementById('areas');
+  box.innerHTML='';
+  dados.areas.forEach(a=>{
+    const card=document.createElement('div');card.className='area';
+    card.style.setProperty('--ac',a.cor);
+    let html=`<div class="area-top">
+      <div class="area-nome" onclick="editarNomeArea('${a.id}')">${a.nome}</div>
+      <button class="area-btn" onclick="apagarArea('${a.id}')">×</button>
+    </div>
+    <div class="area-nota" onclick="editarNotaArea('${a.id}')">${a.nota?a.nota:'toque para escrever uma nota sua'}</div>`;
+    a.itens.forEach(i=>{
+      html+=`<div class="bi">
+        <div class="tx" onclick="editarItem('${a.id}','${i.id}')">${i.tx}</div>
+        <button class="rm" onclick="apagarItem('${a.id}','${i.id}')">×</button>
+      </div>`;
+    });
+    html+=`<button class="bi-add" onclick="novoItem('${a.id}')">+ adicionar</button>`;
+    card.innerHTML=html;
+    box.appendChild(card);
+  });
+}
+function editarNomeArea(id){
+  const a=areaPor(id);
+  abrirEditor('Nome da área',a.nome,v=>{a.nome=v;salvar();renderBlocos();renderSemana()});
+}
+function editarNotaArea(id){
+  const a=areaPor(id);
+  abrirEditor('Sua nota para esta área',a.nota,v=>{a.nota=v;salvar();renderBlocos()},true);
+}
+function apagarArea(id){
+  const a=areaPor(id);
+  if(confirm('Apagar a área "'+a.nome+'" e tudo dentro dela?')){
+    dados.areas=dados.areas.filter(x=>x.id!==id);
+    salvar();renderBlocos();renderSemana();
+  }
+}
+function novaArea(){
+  abrirEditor('Nome da nova área','',v=>{
+    const cor=PALETA[dados.areas.length%PALETA.length];
+    dados.areas.push({id:uid(),nome:v,nota:'',cor:cor,itens:[]});
+    salvar();renderBlocos();
+  });
+}
+function novoItem(aId){
+  abrirEditor('Novo item','',v=>{
+    areaPor(aId).itens.push({id:uid(),tx:v});
+    salvar();renderBlocos();
+  });
+}
+function editarItem(aId,iId){
+  const i=itemPor(areaPor(aId),iId);
+  abrirEditor('Editar item',i.tx,v=>{i.tx=v;salvar();renderBlocos()});
+}
+function apagarItem(aId,iId){
+  const a=areaPor(aId);
+  a.itens=a.itens.filter(x=>x.id!==iId);
+  salvar();renderBlocos();
+}
+
+/* ---------- EDITOR ---------- */
+let edCb=null,edOpc=false;
+function abrirEditor(titulo,valor,cb,opcional){
+  edCb=cb;edOpc=!!opcional;
+  document.getElementById('ed-titulo').textContent=titulo;
+  const c=document.getElementById('ed-campo');
+  c.value=valor||'';
+  document.getElementById('veu').classList.add('on');
+  document.getElementById('editor').classList.add('on');
+  setTimeout(()=>c.focus(),80);
+}
+function salvarEditor(){
+  const v=document.getElementById('ed-campo').value.trim();
+  if(!v && !edOpc)return;
+  const cb=edCb;fecharTudo();
+  if(cb)cb(v);
+}
+function fecharTudo(){
+  document.getElementById('veu').classList.remove('on');
+  document.getElementById('picker').classList.remove('on');
+  document.getElementById('editor').classList.remove('on');
+}
+document.getElementById('ed-campo').addEventListener('keydown',e=>{if(e.key==='Enter')salvarEditor()});
+
+/* ---------- DADOS ---------- */
+function exportar(){
+  const blob=new Blob([JSON.stringify(dados,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='minha-semana-may.json';
+  a.click();
+}
+function importar(ev){
+  const f=ev.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      if(d.areas){dados=d;salvar();renderBlocos();renderSemana();alert('Pronto. Sua cópia voltou para o painel.')}
+      else alert('Este arquivo não parece ser uma cópia do painel.');
+    }catch(e){alert('Não consegui ler este arquivo.')}
+  };
+  r.readAsText(f);
+  ev.target.value='';
+}
+
+/* ---------- NAV ---------- */
+function trocar(v){
+  document.getElementById('v-semana').classList.toggle('on',v==='semana');
+  document.getElementById('v-blocos').classList.toggle('on',v==='blocos');
+  document.getElementById('tab-semana').classList.toggle('on',v==='semana');
+  document.getElementById('tab-blocos').classList.toggle('on',v==='blocos');
+}
+
+carregar();
+renderSemana();
+renderBlocos();
+</script>
+</body>
+</html>
