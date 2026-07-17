@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Manual de Boas-Vindas · Consultoria BC · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.75;
+    padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom);
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 28px; }
+
+  /* ===== HERO ===== */
+  .hero { padding: 90px 0 70px; text-align: center; }
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a15a;
+    margin-bottom: 26px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(38px, 8vw, 58px);
+    line-height: 1.15;
+    color: #f0e9dc;
+    margin-bottom: 8px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: #c9a15a;
+  }
+  .hero .sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: #8f8776;
+    margin-top: 14px;
+  }
+  .hero-rule {
+    width: 56px; height: 1px;
+    background: #c9a15a;
+    margin: 44px auto 0;
+  }
+
+  /* ===== CARTA ===== */
+  .carta { padding: 30px 0 10px; }
+  .carta p { margin-bottom: 22px; }
+  .carta .destaque {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 21px;
+    line-height: 1.6;
+    color: #f0e9dc;
+    padding: 8px 0 8px 22px;
+    border-left: 2px solid #c9a15a;
+    margin: 34px 0;
+  }
+  .assinatura {
+    margin-top: 36px;
+  }
+  .assinatura .brinde {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: #c9a15a;
+  }
+  .assinatura .nome {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8f8776;
+    margin-top: 6px;
+  }
+
+  /* ===== SEÇÕES ===== */
+  section { padding: 64px 0; }
+  .sec-label {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: #c9a15a;
+    margin-bottom: 14px;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: clamp(28px, 6vw, 38px);
+    color: #f0e9dc;
+    line-height: 1.25;
+    margin-bottom: 26px;
+  }
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(to right, transparent, #2c2820, transparent);
+  }
+
+  /* ===== FASES ===== */
+  .fase {
+    position: relative;
+    padding: 34px 0 34px 46px;
+    border-left: 1px solid #2c2820;
+  }
+  .fase:last-child { padding-bottom: 6px; }
+  .fase::before {
+    content: '';
+    position: absolute;
+    left: -6px; top: 46px;
+    width: 11px; height: 11px;
+    border-radius: 50%;
+    background: #0f0e0b;
+    border: 1px solid #c9a15a;
+  }
+  .fase-meses {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #8f8776;
+    margin-bottom: 8px;
+  }
+  .fase h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 26px;
+    color: #c9a15a;
+    margin-bottom: 4px;
+  }
+  .fase .foco {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: #f0e9dc;
+    margin-bottom: 14px;
+  }
+  .fase p { margin-bottom: 16px; font-size: 16px; }
+  .entregas {
+    background: #16140f;
+    border: 1px solid #2c2820;
+    border-radius: 10px;
+    padding: 20px 24px;
+  }
+  .entregas .titulo {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a15a;
+    margin-bottom: 12px;
+  }
+  .entregas ul { list-style: none; }
+  .entregas li {
+    font-size: 15px;
+    padding: 7px 0 7px 24px;
+    position: relative;
+    border-bottom: 1px solid #211e17;
+  }
+  .entregas li:last-child { border-bottom: none; }
+  .entregas li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: #c9a15a;
+    font-size: 9px;
+    top: 13px;
+  }
+
+  /* ===== RITMO ===== */
+  .ritmo-grid { display: grid; gap: 14px; margin-top: 8px; }
+  .ritmo-card {
+    background: #16140f;
+    border: 1px solid #2c2820;
+    border-radius: 10px;
+    padding: 22px 26px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+  }
+  .ritmo-card .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    color: #c9a15a;
+    min-width: 52px;
+    text-align: center;
+  }
+  .ritmo-card .txt { font-size: 15px; }
+  .ritmo-card .txt strong {
+    display: block;
+    color: #f0e9dc;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+  .nota {
+    font-size: 14px;
+    color: #8f8776;
+    font-style: italic;
+    margin-top: 20px;
+  }
+
+  /* ===== COMBINADOS ===== */
+  .combinado { margin-bottom: 30px; }
+  .combinado h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 20px;
+    color: #c9a15a;
+    margin-bottom: 8px;
+  }
+  .combinado p { font-size: 16px; }
+
+  /* ===== COMPROMISSO ===== */
+  .pacto {
+    background: #16140f;
+    border: 1px solid #c9a15a44;
+    border-radius: 12px;
+    padding: 40px 34px;
+    text-align: center;
+  }
+  .pacto .frase {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 23px;
+    line-height: 1.55;
+    color: #f0e9dc;
+    margin-bottom: 22px;
+  }
+  .pacto p { font-size: 15px; }
+
+  /* ===== PRÓXIMOS PASSOS ===== */
+  .passos { list-style: none; counter-reset: passo; }
+  .passos li {
+    counter-increment: passo;
+    display: flex;
+    gap: 22px;
+    padding: 20px 0;
+    border-bottom: 1px solid #211e17;
+    align-items: baseline;
+  }
+  .passos li::before {
+    content: counter(passo, decimal-leading-zero);
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: #c9a15a;
+    min-width: 40px;
+  }
+  .passos li:last-child { border-bottom: none; }
+  .passos strong { color: #f0e9dc; font-weight: 500; }
+
+  footer {
+    text-align: center;
+    padding: 70px 0 60px;
+  }
+  footer .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    color: #f0e9dc;
+    letter-spacing: 1px;
+  }
+  footer .logo span { color: #c9a15a; }
+  footer p {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #5c5648;
+    margin-top: 10px;
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 0 22px; }
+    .hero { padding: 70px 0 54px; }
+    section { padding: 50px 0; }
+    .fase { padding-left: 34px; }
+    .ritmo-card { padding: 18px 20px; gap: 14px; }
+    .pacto { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="eyebrow">All Win Academy · Consultoria BC</div>
+    <h1>Bem-vinda à sua <em>travessia</em></h1>
+    <p class="sub">Doze meses entre a mulher que você é e a empresária que você decidiu ser.</p>
+    <div class="hero-rule"></div>
+  </div>
+
+  <!-- CARTA -->
+  <div class="carta">
+    <p>Mulher,</p>
+    <p>Você acabou de tomar uma decisão que a maioria adia a vida inteira. Investiu em você antes de investir em mais uma ferramenta, mais um curso, mais uma promessa de atalho. E eu quero que você saiba de algo desde a primeira página deste manual: eu levo essa decisão tão a sério quanto você.</p>
+    <div class="destaque">Nos próximos doze meses, nós vamos reconstruir você, o seu dinheiro e o seu negócio, nessa ordem. Porque negócio nenhum cresce mais do que a mulher que o carrega.</div>
+    <p>Este manual existe para você saber exatamente onde está pisando: o caminho, o ritmo, o que você recebe em cada fase e os combinados que protegem a nossa jornada. Leia com calma. Volte aqui sempre que precisar se localizar.</p>
+    <p>Seja muito bem-vinda à Consultoria BC.</p>
+    <div class="assinatura">
+      <div class="brinde">Brindaremos,</div>
+      <div class="nome">Maria Clara · All Win Academy</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- O MÉTODO -->
+  <section>
+    <div class="sec-label">O Método</div>
+    <h2>Primeiro a mulher. Depois o dinheiro. Depois o negócio. Depois o legado.</h2>
+    <p>A Consultoria BC segue uma ordem que quase ninguém respeita no mercado. Aqui, nós só desenhamos o seu produto depois de reestruturar a sua vida financeira e descobrir quanto custa ser você. Só criamos o seu funil depois de destravar a mulher que vai executá-lo. Cada fase prepara o terreno da próxima, e é isso que faz o resultado ficar de pé por anos.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- AS 4 FASES -->
+  <section>
+    <div class="sec-label">A Jornada</div>
+    <h2>As quatro fases da sua travessia</h2>
+
+    <div class="fase">
+      <div class="fase-meses">Meses 1 a 3</div>
+      <h3>Fase 1 · Raiz</h3>
+      <div class="foco">A mulher</div>
+      <p>Tudo começa em você. Análise profunda de temperamento, identificação dos bloqueios emocionais que travam sua execução, mapeamento honesto de forças e fraquezas. Daqui você sai com propósito definido, metas claras e um plano de vida de cinco anos assinado por você mesma.</p>
+      <div class="entregas">
+        <div class="titulo">Você recebe</div>
+        <ul>
+          <li>Devolutiva de Temperamento da Empresária</li>
+          <li>Ficha de Forças e Fraquezas</li>
+          <li>Mapa de Propósito e Metas</li>
+          <li>Plano de Vida de 5 Anos</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fase">
+      <div class="fase-meses">Meses 3 e 4</div>
+      <h3>Fase 2 · Alicerce</h3>
+      <div class="foco">O dinheiro</div>
+      <p>Antes de precificar qualquer produto, você vai descobrir o número que a sua vida exige. Reestruturamos suas finanças pessoais e calculamos o seu Custo de Ser Você. É esse número que sustenta todas as decisões de negócio que vêm depois.</p>
+      <div class="entregas">
+        <div class="titulo">Você recebe</div>
+        <ul>
+          <li>Raio-X Financeiro com plano de reestruturação</li>
+          <li>Custo de Ser Você calculado e documentado</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fase">
+      <div class="fase-meses">Meses 5 a 8</div>
+      <h3>Fase 3 · Construção</h3>
+      <div class="foco">O negócio</div>
+      <p>Com a mulher destravada e o dinheiro organizado, construímos. Projetamos o seu produto principal, montamos o seu plano anual de produtos e criamos a sua mentoria própria, com licença oficial para aplicar o método All Win, validado em mais de 1.500 pessoas, e estrutura completa na plataforma parceira.</p>
+      <div class="entregas">
+        <div class="titulo">Você recebe</div>
+        <ul>
+          <li>Blueprint do Produto Principal</li>
+          <li>Plano Anual de Produtos</li>
+          <li>Licença do Método All Win para sua mentoria</li>
+          <li>Guia de Implantação na Plataforma</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="fase">
+      <div class="fase-meses">Meses 9 a 12</div>
+      <h3>Fase 4 · Expansão</h3>
+      <div class="foco">O legado</div>
+      <p>Agora o negócio ganha repetição. Você recebe o seu funil de vendas documentado para rodar quantas vezes quiser, o calendário anual que norteia a intenção de cada mês e o estudo de marca pessoal e criação de desejo que transforma o seu conteúdo em atração. Fechamos com a sua projeção dos próximos cinco anos, assinada.</p>
+      <div class="entregas">
+        <div class="titulo">Você recebe</div>
+        <ul>
+          <li>Mapa do Funil Replicável com checklist de execução</li>
+          <li>Calendário Esqueleto Anual interativo</li>
+          <li>Apostila de Marca Pessoal e Criação de Desejo</li>
+          <li>Devolutiva Final da Jornada + Projeção de 5 Anos</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RITMO -->
+  <section>
+    <div class="sec-label">O Ritmo</div>
+    <h2>Suas 20 sessões estratégicas</h2>
+    <p>Nossas sessões são individuais, ao vivo e distribuídas com intenção. O início da jornada pede intensidade, por isso nos encontramos com mais frequência nos primeiros meses e depois ampliamos o espaço entre as sessões, para você executar e colher.</p>
+    <div class="ritmo-grid">
+      <div class="ritmo-card">
+        <div class="num">8</div>
+        <div class="txt"><strong>Meses 1 a 3 · sessões semanais e quinzenais</strong>Fase de diagnóstico e desbloqueio. É aqui que a transformação acelera.</div>
+      </div>
+      <div class="ritmo-card">
+        <div class="num">8</div>
+        <div class="txt"><strong>Meses 4 a 8 · sessões quinzenais</strong>Fase de construção. Cada encontro gera um entregável ou uma decisão de negócio.</div>
+      </div>
+      <div class="ritmo-card">
+        <div class="num">4</div>
+        <div class="txt"><strong>Meses 9 a 12 · sessões mensais</strong>Fase de expansão e sustentação. Você executa, eu ajusto a rota com você.</div>
+      </div>
+    </div>
+    <p class="nota">Cada sessão ganha registro no seu Diário de Bordo, para você acompanhar a evolução acumulada da jornada.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMBINADOS -->
+  <section>
+    <div class="sec-label">Nossos Combinados</div>
+    <h2>O que protege a nossa jornada</h2>
+
+    <div class="combinado">
+      <h4>Agendamento e remarcação</h4>
+      <p>As sessões são agendadas com antecedência e confirmadas na véspera. Precisou remarcar? Sem problema, com aviso de pelo menos 24 horas. Sessões desmarcadas em cima da hora ou não comparecidas contam como realizadas, porque a sua vaga na minha agenda foi reservada para você.</p>
+    </div>
+
+    <div class="combinado">
+      <h4>Acesso pelo WhatsApp</h4>
+      <p>Você tem acesso direto a mim durante os 12 meses para dúvidas, direcionamentos e decisões entre as sessões. Respondo em horário comercial, de segunda a sexta, dentro de até 24 horas úteis. Áudios são muito bem-vindos, do tamanho que você precisar, porque às vezes a fala organiza o que a escrita trava. E se for urgente de verdade, me dá um toque de ligação no WhatsApp: quando o telefone toca, eu sei que é urgente e priorizo você. O WhatsApp é canal de direcionamento, e os aprofundamentos ficam para as sessões, onde eles rendem de verdade.</p>
+    </div>
+
+    <div class="combinado">
+      <h4>Entregáveis</h4>
+      <p>Todo material da sua jornada é entregue em formato digital, com link próprio, no padrão All Win Academy. Eles são seus para sempre, produzidos para o seu caso, e de uso pessoal e intransferível.</p>
+    </div>
+
+    <div class="combinado">
+      <h4>Confidencialidade</h4>
+      <p>Tudo o que acontece nas nossas sessões fica entre nós. Seus dados, seus números e sua história são tratados com sigilo absoluto, nos dois sentidos: o que é meu método permanece protegido pela sua licença de uso, e o que é sua vida permanece protegido por mim.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PACTO -->
+  <section>
+    <div class="pacto">
+      <div class="frase">"Eu entrego o método, a estratégia e a minha presença inteira. Você entrega a verdade, a constância e a coragem de executar."</div>
+      <p>Esse é o nosso pacto. Os doze meses vão passar de qualquer jeito. A diferença entre chegar do outro lado transformada ou chegar igual está no que nós duas fazemos com cada semana deles.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PRÓXIMOS PASSOS -->
+  <section>
+    <div class="sec-label">Começando</div>
+    <h2>Seus próximos passos</h2>
+    <ul class="passos">
+      <li><span><strong>Leia este manual até o fim</strong> e anote qualquer dúvida para a nossa primeira sessão.</span></li>
+      <li><span><strong>Responda o formulário inicial</strong> que você vai receber no WhatsApp. Ele alimenta a sua análise de temperamento e o seu Raio-X.</span></li>
+      <li><span><strong>Confirme a data da Sessão 1</strong>, onde abrimos oficialmente a Fase Raiz.</span></li>
+      <li><span><strong>Separe um caderno ou pasta digital</strong> exclusiva da BC. Essa jornada merece um lugar só dela.</span></li>
+    </ul>
+  </section>
+
+  <footer>
+    <div class="logo">All Win <span>Academy</span></div>
+    <p>Consultoria BC · Material exclusivo e intransferível</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
