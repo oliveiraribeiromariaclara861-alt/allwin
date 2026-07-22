@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Diário de Conquistas | Camila Leite — All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    font-size: 16px;
+    min-height: 100vh;
+  }
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 22px 90px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: #c9a15a;
+    margin-bottom: 14px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: clamp(28px, 7vw, 38px);
+    color: #f0e9dc;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .sub {
+    font-size: 14px;
+    color: #8a8172;
+    margin-bottom: 30px;
+  }
+  .intro {
+    background: #17150f;
+    border: 1px solid #262218;
+    border-left: 2px solid #c9a15a;
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 34px;
+    font-size: 15px;
+    color: #b0a896;
+  }
+  .intro strong { color: #d9cfba; font-weight: 500; }
+
+  /* Métricas do topo */
+  .metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+  .metric {
+    background: #17150f;
+    border: 1px solid #262218;
+    border-radius: 12px;
+    padding: 16px 10px;
+    text-align: center;
+  }
+  .metric .n {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #c9a15a;
+    line-height: 1;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .metric .lbl {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #8a8172;
+  }
+  @media (max-width: 480px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .metric .n { font-size: 26px; }
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 20px;
+    color: #e8dfcf;
+    margin: 0 0 16px;
+  }
+  h2 span { color: #c9a15a; font-style: italic; }
+
+  .section { margin-bottom: 40px; }
+
+  /* Formulário de nova conquista */
+  .add-form {
+    background: #17150f;
+    border: 1px solid #262218;
+    border-radius: 14px;
+    padding: 20px;
+    margin-bottom: 26px;
+  }
+  .add-form label {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #8a8172;
+    margin-bottom: 8px;
+  }
+  .types {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .type-btn {
+    background: transparent;
+    border: 1px solid #3a3222;
+    color: #b0a896;
+    padding: 8px 14px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .type-btn:hover { border-color: #c9a15a; }
+  .type-btn.active {
+    background: #c9a15a;
+    color: #0f0e0b;
+    border-color: #c9a15a;
+    font-weight: 500;
+  }
+  .add-form textarea {
+    width: 100%;
+    background: #0f0e0b;
+    border: 1px solid #262218;
+    border-radius: 10px;
+    padding: 14px;
+    color: #e8dfcf;
+    font-family: inherit;
+    font-size: 15px;
+    resize: vertical;
+    min-height: 70px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .add-form textarea:focus { border-color: #c9a15a; }
+  .add-form textarea::placeholder { color: #6a6252; }
+  .save-btn {
+    width: 100%;
+    background: #c9a15a;
+    color: #0f0e0b;
+    border: none;
+    padding: 14px;
+    border-radius: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 14px;
+    transition: all 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .save-btn:hover { background: #d9b56a; transform: translateY(-1px); }
+  .save-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  /* Lista de conquistas */
+  .entry {
+    background: #17150f;
+    border: 1px solid #262218;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    animation: fadeIn 0.4s ease;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .entry .icon {
+    font-size: 20px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .entry .body { flex: 1; min-width: 0; }
+  .entry .type-tag {
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c9a15a;
+    margin-bottom: 4px;
+  }
+  .entry .text {
+    color: #d9cfba;
+    font-size: 15px;
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+  .entry .date {
+    font-size: 12px;
+    color: #6a6252;
+    margin-top: 6px;
+  }
+  .entry .del {
+    background: transparent;
+    border: none;
+    color: #4a4234;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.2s;
+  }
+  .entry .del:hover { color: #c9a15a; }
+
+  .empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #6a6252;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+  }
+
+  /* Toast de celebração */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #c9a15a;
+    color: #0f0e0b;
+    padding: 14px 26px;
+    border-radius: 100px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 0 10px 40px rgba(201, 161, 90, 0.3);
+    opacity: 0;
+    transition: all 0.4s ease;
+    z-index: 100;
+    letter-spacing: 0.04em;
+  }
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  .divider {
+    width: 46px;
+    height: 1px;
+    background: #c9a15a;
+    margin: 44px auto;
+  }
+
+  .seal {
+    text-align: center;
+    margin-top: 30px;
+  }
+  .seal .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #c9a15a;
+  }
+  .seal .sig {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: #d9cfba;
+    margin-top: 8px;
+  }
+
+  .loading {
+    text-align: center;
+    padding: 40px;
+    color: #6a6252;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Diário de Conquistas</p>
+  <h1>Camila Leite</h1>
+  <p class="sub">All Win Academy · Cada passo importa</p>
+
+  <div class="intro">
+    Camila, esse espaço é só seu. Cada vez que você chamar alguém, gravar um conteúdo, publicar, fizer uma oferta ou dar qualquer passo em direção ao que você quer, registra aqui. A sua mente precisa <strong>ver a prova</strong> de que você é uma mulher que age. Não existe conquista pequena demais. Se você fez, celebra.
+  </div>
+
+  <!-- Métricas -->
+  <div class="metrics" id="metrics">
+    <div class="metric"><div class="n" id="m-total">0</div><div class="lbl">Total</div></div>
+    <div class="metric"><div class="n" id="m-chamadas">0</div><div class="lbl">Chamadas</div></div>
+    <div class="metric"><div class="n" id="m-ofertas">0</div><div class="lbl">Ofertas</div></div>
+    <div class="metric"><div class="n" id="m-conteudos">0</div><div class="lbl">Conteúdos</div></div>
+  </div>
+
+  <!-- Formulário -->
+  <div class="section">
+    <h2>Registrar <span>conquista</span></h2>
+    <div class="add-form">
+      <label>O que você conquistou?</label>
+      <div class="types" id="types">
+        <button class="type-btn active" data-type="chamada" data-icon="💬">Chamei alguém</button>
+        <button class="type-btn" data-type="oferta" data-icon="✨">Fiz uma oferta</button>
+        <button class="type-btn" data-type="gravado" data-icon="🎬">Gravei conteúdo</button>
+        <button class="type-btn" data-type="publicado" data-icon="📱">Publiquei</button>
+        <button class="type-btn" data-type="outra" data-icon="🌟">Outra vitória</button>
+      </div>
+      <label>Conta em uma linha</label>
+      <textarea id="text" placeholder="Ex: chamei a Ana para uma conversa sobre acompanhamento"></textarea>
+      <button class="save-btn" id="save">Registrar conquista</button>
+    </div>
+  </div>
+
+  <!-- Lista de conquistas -->
+  <div class="section">
+    <h2>Suas <span>conquistas</span></h2>
+    <div id="list" class="loading">Carregando...</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="seal">
+    <p class="brand">All Win Academy</p>
+    <p class="sig">Brindaremos.</p>
+  </div>
+
+</div>
+
+<div class="toast" id="toast">Registrado. Você está em movimento.</div>
+
+<script>
+  const TYPES = {
+    chamada: { icon: '💬', label: 'Chamei alguém' },
+    oferta: { icon: '✨', label: 'Fiz uma oferta' },
+    gravado: { icon: '🎬', label: 'Gravei conteúdo' },
+    publicado: { icon: '📱', label: 'Publiquei' },
+    outra: { icon: '🌟', label: 'Outra vitória' }
+  };
+
+  const CELEBRATIONS = [
+    'Registrado. Você está em movimento.',
+    'Mais um passo. Brindaremos.',
+    'Isso é ação. Continue.',
+    'Mais uma prova para a sua mente.',
+    'Você fez. Isso importa.',
+    'Constância se constrói assim.'
+  ];
+
+  let selectedType = 'chamada';
+  let entries = [];
+
+  // Seleção de tipo
+  document.querySelectorAll('.type-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedType = btn.dataset.type;
+    });
+  });
+
+  // Carregar entradas do storage
+  async function loadEntries() {
+    try {
+      const result = await window.storage.get('conquistas');
+      if (result && result.value) {
+        entries = JSON.parse(result.value);
+      }
+    } catch (e) {
+      entries = [];
+    }
+    render();
+  }
+
+  // Salvar entradas no storage
+  async function saveEntries() {
+    try {
+      await window.storage.set('conquistas', JSON.stringify(entries));
+    } catch (e) {
+      console.error('Erro ao salvar', e);
+    }
+  }
+
+  // Registrar nova conquista
+  document.getElementById('save').addEventListener('click', async () => {
+    const text = document.getElementById('text').value.trim();
+    if (!text) {
+      document.getElementById('text').focus();
+      return;
+    }
+    const btn = document.getElementById('save');
+    btn.disabled = true;
+    btn.textContent = 'Registrando...';
+
+    const entry = {
+      id: Date.now(),
+      type: selectedType,
+      text: text,
+      date: new Date().toISOString()
+    };
+    entries.unshift(entry);
+    await saveEntries();
+
+    document.getElementById('text').value = '';
+    render();
+    showToast();
+
+    btn.disabled = false;
+    btn.textContent = 'Registrar conquista';
+  });
+
+  // Deletar entrada
+  async function deleteEntry(id) {
+    entries = entries.filter(e => e.id !== id);
+    await saveEntries();
+    render();
+  }
+
+  // Renderizar
+  function render() {
+    // Métricas
+    document.getElementById('m-total').textContent = entries.length;
+    document.getElementById('m-chamadas').textContent = entries.filter(e => e.type === 'chamada').length;
+    document.getElementById('m-ofertas').textContent = entries.filter(e => e.type === 'oferta').length;
+    document.getElementById('m-conteudos').textContent = entries.filter(e => e.type === 'gravado' || e.type === 'publicado').length;
+
+    // Lista
+    const list = document.getElementById('list');
+    if (entries.length === 0) {
+      list.className = 'empty';
+      list.innerHTML = 'A sua primeira conquista está a um clique daqui.';
+      return;
+    }
+    list.className = '';
+    list.innerHTML = entries.map(e => {
+      const type = TYPES[e.type] || TYPES.outra;
+      const date = formatDate(e.date);
+      const safeText = e.text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      return `
+        <div class="entry">
+          <div class="icon">${type.icon}</div>
+          <div class="body">
+            <div class="type-tag">${type.label}</div>
+            <div class="text">${safeText}</div>
+            <div class="date">${date}</div>
+          </div>
+          <button class="del" onclick="deleteEntry(${e.id})" title="Remover">×</button>
+        </div>
+      `;
+    }).join('');
+  }
+
+  // Formatar data
+  function formatDate(iso) {
+    const d = new Date(iso);
+    const now = new Date();
+    const diff = Math.floor((now - d) / 1000);
+    if (diff < 60) return 'agora mesmo';
+    if (diff < 3600) return `há ${Math.floor(diff/60)} min`;
+    if (diff < 86400) return `há ${Math.floor(diff/3600)}h`;
+    const dias = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    return `${dias[d.getDay()]}, ${d.getDate()} ${meses[d.getMonth()]} · ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
+  }
+
+  // Toast de celebração
+  function showToast() {
+    const toast = document.getElementById('toast');
+    toast.textContent = CELEBRATIONS[Math.floor(Math.random() * CELEBRATIONS.length)];
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 2600);
+  }
+
+  // Enter no textarea envia (Shift+Enter faz quebra de linha)
+  document.getElementById('text').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      document.getElementById('save').click();
+    }
+  });
+
+  // Init
+  loadEntries();
+</script>
+</body>
+</html>
