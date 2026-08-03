@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Desafio D2D — 21 Dias</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'DM Sans', sans-serif;
+  }
+  * { box-sizing: border-box; }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .kicker {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #c9a15a;
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 34px;
+    color: #f2ead9;
+    margin: 0 0 12px;
+    line-height: 1.25;
+  }
+
+  .sub {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #b0a896;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  .divider {
+    width: 60px;
+    height: 1px;
+    background: #c9a15a;
+    margin: 28px auto;
+    opacity: 0.6;
+  }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 32px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .legend span { display: flex; align-items: center; gap: 6px; }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+  .dot.clareza { background: #c9a15a; }
+  .dot.decisao { background: #8a9a7e; }
+  .dot.comportamento { background: #b98a7a; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 14px 6px;
+    border-bottom: 1px solid rgba(201,161,90,0.35);
+  }
+  thead th.dia { text-align: left; color: #f2ead9; }
+  thead th.clareza { color: #c9a15a; }
+  thead th.decisao { color: #8a9a7e; }
+  thead th.comportamento { color: #b98a7a; }
+
+  tbody td {
+    padding: 10px 6px;
+    text-align: center;
+    border-bottom: 1px solid rgba(176,168,150,0.12);
+  }
+  tbody td.dia {
+    text-align: left;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #f2ead9;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) { background: rgba(201,161,90,0.04); }
+
+  input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid #6b6556;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    background: transparent;
+  }
+  input[type="checkbox"]:checked {
+    background: #c9a15a;
+    border-color: #c9a15a;
+  }
+  input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid #0f0e0b;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .pillars {
+    margin-top: 56px;
+    display: grid;
+    gap: 18px;
+  }
+  .pillar-card {
+    border: 1px solid rgba(201,161,90,0.25);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .pillar-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0 0 10px;
+  }
+  .pillar-card.clareza h3 { color: #c9a15a; }
+  .pillar-card.decisao h3 { color: #8a9a7e; }
+  .pillar-card.comportamento h3 { color: #b98a7a; }
+  .pillar-card p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #b0a896;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 56px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(201,161,90,0.2);
+  }
+  footer .signature {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #c9a15a;
+  }
+  footer .handle {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #6b6556;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 480px) {
+    h1 { font-size: 26px; }
+    table { font-size: 11px; }
+    thead th { padding: 10px 3px; font-size: 9px; }
+    tbody td { padding: 7px 3px; }
+    input[type="checkbox"] { width: 15px; height: 15px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="kicker">All Win Academy</div>
+    <h1>Desafio D2D<br>21 dias de constância</h1>
+    <p class="sub">21 dias é pouco tempo pra mudar sua vida inteira. É tempo suficiente pra você provar pra si mesma que consegue sustentar um compromisso. Marque seus três pilares todos os dias.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  <div class="legend">
+    <span><span class="dot clareza"></span>Clareza</span>
+    <span><span class="dot decisao"></span>Decisão</span>
+    <span><span class="dot comportamento"></span>Comportamento</span>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th class="dia">Dia</th>
+        <th class="clareza">Clareza</th>
+        <th class="decisao">Decisão</th>
+        <th class="comportamento">Comportamento</th>
+      </tr>
+    </thead>
+    <tbody id="tracker-body"></tbody>
+  </table>
+
+  <div class="pillars">
+    <div class="pillar-card clareza">
+      <h3>Clareza</h3>
+      <p>Escrever a meta do dia antes de abrir o Instagram · Anotar 1 decisão que está sendo adiada · Ler 10 minutos sobre o próprio negócio · Revisar o propósito por 5 minutos</p>
+    </div>
+    <div class="pillar-card decisao">
+      <h3>Decisão</h3>
+      <p>Cumprir o que está na agenda sem negociar com o cansaço · Se mover por pelo menos 20 minutos · Beber água antes do primeiro café · Dormir cedo o suficiente pra sustentar o dia seguinte</p>
+    </div>
+    <div class="pillar-card comportamento">
+      <h3>Comportamento</h3>
+      <p>Fechar o dia com gratidão pelo próprio negócio · Dizer não pra uma tarefa que não é sua · Comemorar uma vitória pequena em voz alta · Se tratar com a mesma gentileza que trata sua cliente</p>
+    </div>
+  </div>
+
+  <footer>
+    <div class="signature">Brindaremos aos 21 dias que separam quem você é de quem você está virando.</div>
+    <div class="handle">@allwinacademy</div>
+  </footer>
+
+</div>
+
+<script>
+  const body = document.getElementById('tracker-body');
+  for (let i = 1; i <= 21; i++) {
+    const tr = document.createElement('tr');
+    const diaLabel = 'Dia ' + String(i).padStart(2, '0');
+    tr.innerHTML = `
+      <td class="dia">${diaLabel}</td>
+      <td><input type="checkbox"></td>
+      <td><input type="checkbox"></td>
+      <td><input type="checkbox"></td>
+    `;
+    body.appendChild(tr);
+  }
+</script>
+
+</body>
+</html>
