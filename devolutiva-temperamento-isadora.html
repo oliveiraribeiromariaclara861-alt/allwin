@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Devolutiva de Temperamento · Isadora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #0f0e0b !important; }
+  html, body {
+    background: #0f0e0b !important;
+    color: #b0a896;
+    -webkit-text-size-adjust: 100%;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0f0e0b;
+    --gold: #c9a15a;
+    --gold-soft: #d8b878;
+    --ink: #b0a896;
+    --ink-strong: #d7cfbf;
+    --line: rgba(201, 161, 90, 0.22);
+    --card: rgba(201, 161, 90, 0.05);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.85;
+    font-size: 17px;
+    letter-spacing: 0.1px;
+  }
+
+  .wrap {
+    max-width: 660px;
+    margin: 0 auto;
+    padding: 68px 26px 90px;
+  }
+
+  /* ---- Cabeçalho ---- */
+  .brand {
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 40px;
+  }
+  .eyebrow {
+    text-align: center;
+    font-size: 11.5px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(176, 168, 150, 0.65);
+    margin-bottom: 16px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 42px;
+    line-height: 1.15;
+    text-align: center;
+    color: var(--ink-strong);
+    margin-bottom: 14px;
+  }
+  h1 span { color: var(--gold); font-style: italic; }
+  .rule {
+    width: 54px; height: 1px;
+    background: var(--gold);
+    margin: 32px auto 46px;
+    opacity: 0.7;
+  }
+
+  p { margin-bottom: 22px; }
+  p.lead {
+    font-size: 18.5px;
+    color: var(--ink-strong);
+    line-height: 1.9;
+  }
+
+  /* ---- Rótulos de seção ---- */
+  .section-label {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 58px 0 22px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .section-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 27px;
+    color: var(--ink-strong);
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  /* ---- Destaque central do temperamento ---- */
+  .verdict {
+    text-align: center;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 40px 20px;
+    margin: 10px 0 40px;
+  }
+  .verdict .small {
+    font-size: 11.5px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(176, 168, 150, 0.6);
+    margin-bottom: 18px;
+  }
+  .verdict .big {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 34px;
+    line-height: 1.25;
+    color: var(--gold-soft);
+  }
+  .verdict .big b { font-weight: 600; font-style: italic; color: var(--gold); }
+
+  /* ---- Cartão de destaque ---- */
+  .point {
+    border-left: 2px solid var(--gold);
+    background: var(--card);
+    padding: 22px 26px;
+    margin: 30px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .point .tag {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 10px;
+  }
+  .point .tag em {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 20px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink-strong);
+    display: block;
+    margin-top: 4px;
+  }
+  .point p:last-child { margin-bottom: 0; }
+
+  /* ---- Palavra-chave destacada no corpo ---- */
+  mark {
+    background: transparent;
+    color: var(--gold-soft);
+    font-weight: 400;
+  }
+  strong { color: var(--ink-strong); font-weight: 500; }
+  em.q {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--ink-strong);
+  }
+
+  /* ---- Pontos de virada ---- */
+  .turn {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .turn:first-of-type { border-top: 1px solid var(--line); }
+  .turn h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    font-size: 21px;
+    color: var(--gold-soft);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .turn p { margin-bottom: 0; font-size: 16.5px; }
+
+  /* ---- Fecho ---- */
+  .close {
+    margin-top: 64px;
+    text-align: center;
+  }
+  .close .brinde {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 30px;
+    color: var(--gold);
+    margin-top: 30px;
+  }
+  .sign {
+    margin-top: 8px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(176, 168, 150, 0.7);
+  }
+
+  @media (max-width: 480px) {
+    .wrap { padding: 52px 22px 72px; }
+    h1 { font-size: 34px; }
+    .verdict .big { font-size: 27px; }
+    body { font-size: 16.5px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brand">All Win Academy</div>
+  <div class="eyebrow">Devolutiva de Temperamento</div>
+  <h1>Isadora, <span>essa é você</span></h1>
+  <div class="rule"></div>
+
+  <p class="lead">Eu li cada palavra que você me confiou, e vou te dizer com carinho e com verdade, porque você merece as duas coisas. Você chegou aqui com uma consciência de si que muita mulher leva anos pra alcançar. Você já sabe nomear o que sente, e isso, minha querida, já é meia jornada andada. O que eu vou fazer nas próximas linhas é te devolver o mapa inteiro, pra você enxergar de fora aquilo que às vezes de dentro parece confuso.</p>
+
+  <div class="section-label">O seu temperamento</div>
+
+  <div class="verdict">
+    <div class="small">A sua natureza é</div>
+    <div class="big"><b>Sanguínea</b> dominante,<br>com <b>colérico</b> de apoio</div>
+  </div>
+
+  <p>O <mark>sanguíneo</mark> mora em quase tudo que você contou. Está na sua facilidade de fazer amizade em qualquer roda, no seu amor pelo movimento e pelo esporte desde menina, na vaidade bonita que sempre te acompanhou, no seu gosto por festa, por reunir gente, por celebrar. É a mulher calorosa, expressiva, que ilumina o ambiente. E é também de onde vem aquela sua <em class="q">oscilação</em>, os dias de confiança plena e os dias de dúvida, porque o coração sanguíneo sente forte e sente rápido.</p>
+
+  <p>O <mark>colérico</mark> é o motor que dorme embaixo. Ele é aquela mulher que você mesma descreveu, a que metia a cara e fazia acontecer mesmo sem ter todas as respostas. Está nas suas metas claras, na sua ambição, na sua coragem de se posicionar quando o assunto toca no que você acredita. Ele anda mais quietinho hoje, mas ele existe, e ele é seu. Reacender essa chama vai ser uma das coisas mais bonitas do nosso caminho juntas.</p>
+
+  <div class="point">
+    <span class="tag">Guarde isso<em>A sua doçura de hoje é aprendida, não é raiz</em></span>
+    <p>Aquele hábito de ceder pra manter a paz, de evitar conflito, de se calar, você mesma me contou que passou a agir assim depois de um relacionamento. Quer dizer que isso é roupa que você vestiu num tempo em que se encolher pareceu mais seguro. E roupa a gente tira. Por baixo dela sempre existiu uma menina corajosa, e ela vai voltar.</p>
+  </div>
+
+  <div class="section-label">O que vive por dentro</div>
+
+  <p>Toda mulher carrega marcas que moldam o jeito de sentir o mundo. As suas não são feridas de abandono de amor, porque amor você teve, e teve bonito. São outras histórias, e conhecê-las é o que te liberta delas.</p>
+
+  <div class="point">
+    <span class="tag">A mais presente<em>A ferida da rejeição</em></span>
+    <p>Ela aparece na vergonha de apresentar em público desde a escola, na vontade antiga de provar o seu valor, e no medo que você declarou com todas as letras, o <strong>medo de não ter resultado</strong>. Hoje, pra você, valor e resultado ainda andam de mãos dadas. E é justamente isso que aperta o seu peito na hora de decidir. O nosso trabalho vai devolver o seu valor pra dentro de você, onde ele nunca dependeu de resultado nenhum.</p>
+  </div>
+
+  <div class="point">
+    <span class="tag">A silenciosa<em>A ferida do abandono</em></span>
+    <p>Ela apareceu quando seus pais se separaram e você tomou dores que não eram suas, se colocando num lugar de filha que não te cabia. E ela reaparece quietinha na <strong>comida e no consumo como conforto</strong>. Você cresceu recebendo muito carinho através do dar do seu pai generoso, e aprendeu cedo a ligar merecimento a receber, a comprar, a se presentear. Quando o dia aperta, é pra esse consumo que você corre. A boa notícia é que a falta aqui nunca foi de amor. É só de uma outra linguagem de cuidado consigo, e essa a gente aprende junta.</p>
+  </div>
+
+  <div class="point">
+    <span class="tag">A exigente<em>A ferida da injustiça</em></span>
+    <p>Ela veste o seu perfeccionismo. Você escolhe a excelência sobre a rapidez, se cobra, capricha, admira honestidade e verdade acima de quase tudo. Isso tem a mão do seu pai mais rígido e controlador, que você mesma descreveu com tanto amor. A menina que caprichava pra não desagradar virou a mulher que refina demais pra não errar. Vamos afrouxar essa régua com delicadeza, porque ela hoje te protege, mas também te atrasa.</p>
+  </div>
+
+  <div class="section-label">Os seus pontos de virada</div>
+
+  <p>Aqui estão os cinco lugares onde a sua energia hoje trava. Eu não os chamo de defeitos, minha querida, eu os chamo de portas. Cada um deles, quando a gente abre, devolve pra você uma parte da mulher inteira que você já é.</p>
+
+  <div class="turn">
+    <h3>O medo de dar certo</h3>
+    <p>Você é rara nisso. Você não teme só errar, você teme acertar. Se pergunta <em class="q">será que vou conseguir sustentar o próximo nível</em>. Esse é o freio mais forte, porque ele te faz hesitar bem na hora de avançar. É o teto de vidro que a gente vai quebrar primeiro.</p>
+  </div>
+
+  <div class="turn">
+    <h3>A confiança que oscila</h3>
+    <p>A sua base sanguínea te dá brilho, e também te dá instabilidade. Sem uma âncora firme por dentro, você vai do topo ao chão em questão de dias. Construir essa âncora é o que vai te dar constância.</p>
+  </div>
+
+  <div class="turn">
+    <h3>A dificuldade de dizer não</h3>
+    <p>Você prioriza o bem-estar dos outros, cede, se sobrecarrega, tudo pra não desagradar. Numa mulher que atende e vende, isso é combustível puro sendo desperdiçado. Dizer não vai virar uma forma de você se respeitar, e de proteger o que importa.</p>
+  </div>
+
+  <div class="turn">
+    <h3>A comida e o consumo como alívio</h3>
+    <p>Você já enxerga esse padrão, e isso é ouro puro. O nosso trabalho aqui é gentil. É te oferecer outras portas de prazer e de merecimento, devolvendo a certeza de que você já é digna antes de consumir qualquer coisa.</p>
+  </div>
+
+  <div class="turn">
+    <h3>O perfeccionismo que segura a entrega</h3>
+    <p>Enquanto tudo precisar ficar perfeito pra provar o seu valor, você vai segurar, refinar, adiar. Baixar essa régua é o que vai soltar a mulher de ação que já vive em você.</p>
+  </div>
+
+  <div class="section-label">O caminho que a gente vai fazer</div>
+
+  <p>Tudo isso se costura numa crença só, e é nela que eu vou tocar com você: a ideia de que o seu valor está pendurado no resultado e no reconhecimento. Movida essa crença, o tabuleiro inteiro se move.</p>
+
+  <p>O nosso percurso segue a ordem que eu chamo de <strong>CDC</strong>, e ele é bonito no seu caso. Primeiro a gente reconstrói a base, a sua <mark>clareza</mark> e a sua confiança, pra você parar de decidir a partir do medo. Depois a gente reacende aquele colérico corajoso que já existe na sua história, te dando permissão pra fazer feito no lugar de fazer perfeito, que é a sua <mark>decisão</mark>. E aí o <mark>comportamento</mark> novo sobe sozinho, porque a estrutura embaixo finalmente aguenta o peso do sonho.</p>
+
+  <div class="section-label">O que você já traz de bonito</div>
+
+  <p>E eu não vou te deixar sair dessa leitura só olhando pro que falta, porque você tem muito. Você tem uma base afetiva segura, uma autoconsciência madura de sobra, uma sociabilidade natural que é uma bênção pra quem trabalha com beleza e estética, coragem já provada no seu próprio passado e metas nítidas do que quer. Você não precisa de ambição, minha querida. Você já tem. O que a gente vai construir juntas é o <strong>chão</strong> firme pra essa ambição pisar.</p>
+
+  <div class="close">
+    <p class="lead">Eu vi tudo isso em você. Agora é a sua vez de ver.</p>
+    <div class="brinde">Brindaremos.</div>
+    <div class="sign">Maria Clara · All Win Academy</div>
+  </div>
+
+</div>
+</body>
+</html>
