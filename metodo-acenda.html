@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Método Acenda · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0f0e0b;
+    --ink:#b0a896;
+    --cream:#e8dcc0;
+    --gold:#c9a15a;
+    --gold-soft:rgba(201,161,90,.28);
+    --bordo:#6e2233;
+    --line:rgba(201,161,90,.22);
+    --ease:cubic-bezier(.2,.65,.2,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{background-color:#0f0e0b !important;scroll-behavior:smooth}
+  html,body{background:#0f0e0b !important;color:#b0a896;-webkit-text-size-adjust:100%}
+  body{
+    font-family:"DM Sans",system-ui,sans-serif;
+    font-weight:300;
+    line-height:1.7;
+    font-size:17px;
+    letter-spacing:.005em;
+    overflow-x:hidden;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 26px}
+
+  .eyebrow{
+    font-family:"DM Mono",monospace;
+    font-size:12px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+  }
+
+  /* REVEAL ON SCROLL */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* HERO */
+  .hero{position:relative;padding:92px 0 62px;text-align:center}
+  .hero::before{
+    content:"";position:absolute;left:50%;top:120px;transform:translateX(-50%);
+    width:340px;height:340px;border-radius:50%;
+    background:radial-gradient(circle,rgba(201,161,90,.20) 0%,rgba(110,34,51,.10) 42%,transparent 70%);
+    filter:blur(8px);z-index:0;pointer-events:none;
+    animation:ember 6s ease-in-out infinite;
+  }
+  @keyframes ember{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.07)}}
+  .hero > .wrap > *{position:relative;z-index:1}
+  @keyframes riseIn{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+  .hero .flame{font-size:26px;color:var(--gold);margin-bottom:22px;line-height:1;animation:riseIn .8s var(--ease) both}
+  .hero .eyebrow{display:inline-block;animation:riseIn .8s var(--ease) .12s both}
+  .hero h1{
+    font-family:"Playfair Display",serif;
+    font-weight:600;
+    font-size:clamp(52px,15vw,84px);
+    line-height:.98;
+    color:var(--cream);
+    letter-spacing:.01em;
+    margin:6px 0 20px;
+    animation:riseIn .9s var(--ease) .26s both;
+  }
+  .hero .tag{font-size:18px;color:var(--ink);max-width:30ch;margin:0 auto;animation:riseIn .9s var(--ease) .42s both}
+  .hero .tag em{font-style:italic;color:var(--gold);font-family:"Playfair Display",serif}
+
+  /* SECTION */
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  .label{margin-bottom:20px;display:block}
+  h2{
+    font-family:"Playfair Display",serif;
+    font-weight:500;
+    font-size:clamp(26px,7vw,34px);
+    color:var(--cream);
+    line-height:1.15;
+    margin-bottom:16px;
+  }
+  p + p{margin-top:16px}
+  .lead{font-size:19px;color:#c5bca6}
+
+  /* TIMELINE STEPS */
+  .steps{margin-top:10px;position:relative;padding-left:38px}
+  .steps::before{
+    content:"";position:absolute;left:11px;top:8px;bottom:8px;width:1px;
+    background:linear-gradient(var(--gold),var(--bordo));
+    transform:scaleY(0);transform-origin:top center;
+    transition:transform 1s var(--ease) .15s;
+  }
+  .steps.in::before{transform:scaleY(1)}
+  .step{position:relative;padding:0 0 30px}
+  .step:last-child{padding-bottom:0}
+  .step .node{
+    position:absolute;left:-38px;top:1px;width:24px;height:24px;border-radius:50%;
+    background:var(--bg);border:1px solid var(--gold);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"DM Mono",monospace;font-size:12px;color:var(--gold);
+    box-shadow:0 0 0 4px rgba(15,14,11,1),0 0 14px var(--gold-soft);
+  }
+  .step h3{font-family:"Playfair Display",serif;font-weight:500;font-size:21px;color:var(--cream);margin-bottom:6px}
+  .step p{font-size:16px}
+
+  /* LIST */
+  ul.leva{list-style:none;margin-top:6px}
+  ul.leva li{position:relative;padding:12px 0 12px 26px;border-bottom:1px solid var(--line);font-size:16px}
+  ul.leva li:last-child{border-bottom:none}
+  ul.leva li::before{content:"";position:absolute;left:0;top:20px;width:7px;height:7px;border-radius:50%;background:var(--gold)}
+
+  /* FORMAT */
+  .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:8px}
+  @media(min-width:520px){.grid{grid-template-columns:1fr 1fr}}
+  .card{border:1px solid var(--line);border-radius:14px;padding:18px 20px;background:rgba(201,161,90,.03)}
+  .card .k{font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+  .card .v{font-size:17px;color:var(--cream)}
+  .card .v .sub{display:block;margin-top:5px;font-family:"DM Mono",monospace;font-size:12px;letter-spacing:.05em;color:var(--gold)}
+  .cadencia{margin-top:20px;font-family:"Playfair Display",serif;font-style:italic;font-size:16px;color:var(--gold)}
+
+  /* CLOSING */
+  .cta{text-align:center;padding:58px 0 34px;border-top:1px solid var(--line)}
+  .cta h2{margin-bottom:0}
+  .sign{text-align:center;padding:20px 0 74px}
+  .sign .brinda{font-family:"Playfair Display",serif;font-style:italic;font-size:24px;color:var(--gold)}
+  .sign .brand{font-family:"DM Mono",monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--ink);margin-top:10px}
+
+  @media (prefers-reduced-motion:reduce){
+    .hero::before{animation:none}
+    .hero .flame,.hero .eyebrow,.hero h1,.hero .tag{animation:none}
+    .reveal{opacity:1;transform:none;transition:none}
+    .steps::before{transform:scaleY(1);transition:none}
+    *{scroll-behavior:auto}
+  }
+</style>
+<noscript><style>.reveal{opacity:1;transform:none}.steps::before{transform:scaleY(1)}</style></noscript>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="flame">&#9826;</div>
+      <span class="eyebrow">Mentoria individual</span>
+      <h1>Acenda</h1>
+      <p class="tag">O trabalho um a um que <em>acende de dentro pra fora</em>.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="wrap">
+      <span class="eyebrow label reveal">A promessa</span>
+      <p class="lead reveal" style="transition-delay:.08s">Existe uma versão sua que já sabe o caminho, já tem clareza e já decidiu. Ela só está esperando você tirar o peso de cima.</p>
+      <p class="reveal" style="transition-delay:.16s">O Acenda é a mentoria individual onde a gente faz isso junto, mulher, no seu tempo e na sua medida. A gente encontra a emoção que trava, solta a raiz e devolve pra você o comando do seu próprio movimento.</p>
+    </section>
+
+    <section class="wrap">
+      <span class="eyebrow label reveal">Pra quem é</span>
+      <h2 class="reveal" style="transition-delay:.08s">Pra você que sabe o que precisa fazer e ainda assim se vê parada.</h2>
+      <p class="reveal" style="transition-delay:.16s">Você empreende, entende o próximo passo e mesmo assim se pega adiando, se sabotando, esperando o dia certo que nunca chega. A vontade está aí e a informação também. O que pede movimento agora é destravar o que segura o seu passo.</p>
+    </section>
+
+    <section class="wrap">
+      <span class="eyebrow label reveal">Como funciona</span>
+      <h2 class="reveal" style="transition-delay:.08s">Uma jornada em quatro tempos.</h2>
+      <div class="steps draw">
+        <div class="step reveal" style="transition-delay:0s">
+          <span class="node">01</span>
+          <h3>Leitura de temperamento</h3>
+          <p>A gente começa entendendo a sua natureza. Seu temperamento mostra como você sente, decide e se bloqueia, e é daqui que todo o trabalho ganha precisão.</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.12s">
+          <span class="node">02</span>
+          <h3>Linha do tempo</h3>
+          <p>Voltamos com cuidado às cenas que instalaram o travamento e soltamos a carga emocional presa nelas. O passado para de puxar o seu presente.</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.24s">
+          <span class="node">03</span>
+          <h3>As 5 Faltas</h3>
+          <p>Passamos pelo protocolo das 5 Faltas pra enxergar, com nome e endereço, o que está faltando pra você destravar de vez.</p>
+        </div>
+        <div class="step reveal" style="transition-delay:.36s">
+          <span class="node">04</span>
+          <h3>CDC: Clareza, Decisão, Comportamento</h3>
+          <p>O que foi solto vira ação. Você sai com clareza do próximo passo, a decisão tomada e um comportamento novo pra sustentar.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap">
+      <span class="eyebrow label reveal">O que você leva</span>
+      <ul class="leva">
+        <li class="reveal" style="transition-delay:0s">Encontros individuais conduzidos por mim, um a um</li>
+        <li class="reveal" style="transition-delay:.1s">Sua leitura de temperamento completa</li>
+        <li class="reveal" style="transition-delay:.2s">Devolutiva de cada sessão pra acompanhar sua evolução</li>
+        <li class="reveal" style="transition-delay:.3s">Um plano de comportamento pra sustentar o desbloqueio depois da mentoria</li>
+      </ul>
+    </section>
+
+    <section class="wrap">
+      <span class="eyebrow label reveal">Formato e investimento</span>
+      <div class="grid">
+        <div class="card reveal" style="transition-delay:0s"><div class="k">Formato</div><div class="v">Individual e online</div></div>
+        <div class="card reveal" style="transition-delay:.1s"><div class="k">Duração</div><div class="v">6 meses de perto</div></div>
+        <div class="card reveal" style="transition-delay:.2s"><div class="k">Encontros</div><div class="v">10 sessões completas</div></div>
+        <div class="card reveal" style="transition-delay:.3s"><div class="k">Investimento</div><div class="v">Apenas 12x de R$460,49<span class="sub">ou R$4.300 à vista</span></div></div>
+      </div>
+      <p class="cadencia reveal" style="transition-delay:.2s">No primeiro mês nos vemos toda semana. Depois, de quinze em quinze dias, de perto, até o sexto mês.</p>
+    </section>
+
+    <section class="cta wrap">
+      <h2 class="reveal">Quando você estiver pronta pra acender, me chama.</h2>
+    </section>
+
+    <div class="sign reveal">
+      <div class="brinda">Brindaremos.</div>
+      <div class="brand">All Win Academy</div>
+    </div>
+  </main>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.reveal,.draw');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+    });
+  },{threshold:0.15,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e);});
+})();
+</script>
+</body>
+</html>
