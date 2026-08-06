@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#E35A1C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Consórcio Beauty">
+<title>Seu Destino · Consórcio Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #FFF7F0 !important; }
+  html, body { background: #FFF7F0 !important; color: #2A1509; -webkit-text-size-adjust: 100%; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+  :root {
+    --orange: #E35A1C;
+    --orange-deep: #B8410F;
+    --cream: #FFF7F0;
+    --white: #FFFFFF;
+    --ink: #2A1509;
+    --ink-soft: #7A5544;
+    --line: #F0E1D6;
+    --green: #2F7D52;
+    --green-bg: #E7F3EC;
+    --amber: #B8410F;
+    --amber-bg: #FCE9DE;
+  }
+
+  body { font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.65; padding-bottom: 60px; }
+  .page { max-width: 520px; margin: 0 auto; padding: 40px 18px 40px; }
+
+  /* Cabeçalho */
+  header { text-align: center; margin-bottom: 26px; }
+  header .k { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--orange); font-weight: 500; }
+  header h1 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 34px; color: var(--ink); margin: 8px 0 6px; line-height: 1.15; }
+  header p { font-size: 14px; color: var(--ink-soft); max-width: 380px; margin: 0 auto; }
+
+  /* Progresso */
+  .progress-wrap { background: var(--white); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; margin-bottom: 26px; position: sticky; top: 8px; z-index: 5; box-shadow: 0 6px 20px rgba(184,65,15,0.06); }
+  .progress-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+  .progress-top .lab { font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; }
+  .progress-top .val { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 22px; color: var(--orange); }
+  .bar { height: 8px; background: #F3E7DD; border-radius: 100px; overflow: hidden; }
+  .bar span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--orange), var(--orange-deep)); border-radius: 100px; transition: width .35s ease; }
+
+  /* Cartões */
+  .card { background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 22px 20px; margin-bottom: 20px; box-shadow: 0 8px 26px rgba(184,65,15,0.05); }
+  .card-label { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); font-weight: 500; margin-bottom: 6px; }
+  .card h2 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 25px; color: var(--ink); line-height: 1.2; margin-bottom: 14px; }
+  .card p.intro { font-size: 14.5px; color: var(--ink-soft); margin-bottom: 4px; }
+
+  /* Regra de ouro */
+  .golden { background: linear-gradient(135deg, var(--orange), var(--orange-deep)); color: #fff; border: none; }
+  .golden .card-label { color: #FFE2CE; }
+  .golden h2 { color: #fff; }
+  .golden p { color: #FFF0E6; font-size: 15px; }
+  .golden .rule-num { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 21px; display: block; margin-top: 10px; color: #fff; }
+
+  /* Calculadora */
+  .field { margin-bottom: 15px; }
+  .field label { display: block; font-size: 13px; font-weight: 400; color: var(--ink); margin-bottom: 6px; }
+  .field label small { color: var(--ink-soft); font-weight: 300; }
+  .inp { display: flex; align-items: center; border: 1.5px solid var(--line); border-radius: 10px; overflow: hidden; background: #FFFCFA; }
+  .inp:focus-within { border-color: var(--orange); }
+  .inp .pre { padding: 0 10px; color: var(--ink-soft); font-size: 15px; background: #FBF2EA; align-self: stretch; display: flex; align-items: center; }
+  .inp input { flex: 1; border: none; outline: none; background: transparent; padding: 12px 12px; font-family: 'Jost', sans-serif; font-size: 17px; color: var(--ink); font-weight: 400; width: 100%; }
+
+  .results { border-top: 1px dashed var(--line); margin-top: 6px; padding-top: 16px; }
+  .rrow { display: flex; justify-content: space-between; align-items: baseline; padding: 7px 0; }
+  .rrow .rl { font-size: 14px; color: var(--ink-soft); }
+  .rrow .rv { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 20px; color: var(--ink); }
+  .rrow.hi .rv { color: var(--orange); font-size: 24px; }
+  .rrow.hi .rl { color: var(--ink); font-weight: 500; }
+
+  .badge { margin-top: 14px; border-radius: 12px; padding: 14px 16px; font-size: 14px; line-height: 1.5; display: flex; gap: 10px; align-items: flex-start; }
+  .badge .dot { font-size: 17px; line-height: 1.3; }
+  .badge.ok { background: var(--green-bg); color: var(--green); }
+  .badge.warn { background: var(--amber-bg); color: var(--amber); }
+  .badge b { font-weight: 600; }
+
+  /* Checklist */
+  .phase { margin-bottom: 8px; }
+  .phase-h { display: flex; align-items: center; gap: 10px; margin: 26px 2px 12px; }
+  .phase-h .pn { width: 26px; height: 26px; border-radius: 50%; background: var(--orange); color: #fff; font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 16px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .phase-h .pt { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 21px; color: var(--ink); }
+
+  .step { display: flex; gap: 13px; align-items: flex-start; background: var(--white); border: 1px solid var(--line); border-radius: 13px; padding: 15px 16px; margin-bottom: 10px; cursor: pointer; transition: border-color .2s, background .2s; }
+  .step:active { background: #FFFCFA; }
+  .step.done { background: #FBF6F2; border-color: #EBD9CC; }
+  .box { width: 26px; height: 26px; border-radius: 8px; border: 2px solid var(--orange); flex-shrink: 0; display: flex; align-items: center; justify-content: center; margin-top: 1px; transition: background .2s; }
+  .box svg { width: 15px; height: 15px; opacity: 0; transform: scale(.6); transition: opacity .2s, transform .2s; }
+  .step.done .box { background: var(--orange); }
+  .step.done .box svg { opacity: 1; transform: scale(1); }
+  .step .txt { font-size: 15px; color: var(--ink); line-height: 1.5; font-weight: 400; }
+  .step .txt small { display: block; color: var(--ink-soft); font-weight: 300; font-size: 13.5px; margin-top: 3px; }
+  .step.done .txt { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: rgba(122,85,68,0.4); }
+  .step.done .txt small { text-decoration: none; }
+
+  .done-msg { display: none; text-align: center; background: var(--green-bg); color: var(--green); border-radius: 14px; padding: 20px; margin: 18px 0 6px; }
+  .done-msg.show { display: block; }
+  .done-msg .big { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 24px; }
+
+  .reset { display: block; margin: 8px auto 0; background: none; border: none; color: var(--ink-soft); font-family: 'Jost', sans-serif; font-size: 12.5px; letter-spacing: 1px; text-decoration: underline; cursor: pointer; padding: 6px; }
+
+  /* Home screen */
+  .home .card-label { color: var(--orange); }
+  .hs-block { margin-top: 14px; }
+  .hs-block .hs-t { font-weight: 500; font-size: 14px; color: var(--ink); margin-bottom: 6px; }
+  .hs-block ol { margin: 0 0 0 18px; padding: 0; }
+  .hs-block li { font-size: 14px; color: var(--ink-soft); margin-bottom: 5px; line-height: 1.5; }
+  .hs-block li b { color: var(--ink); font-weight: 500; }
+
+  footer { text-align: center; margin-top: 34px; }
+  footer .brinde { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 22px; color: var(--orange); }
+  footer .nm { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-soft); margin-top: 4px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="k">Seu Painel</div>
+    <h1>Consórcio Beauty</h1>
+    <p>Um passo de cada vez, Isadora. Marque cada check e sinta você executando. Sua cabeça pensa em mil coisas, esse painel pensa em uma só.</p>
+  </header>
+
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span class="lab">Seu progresso</span>
+      <span class="val" id="pval">0 de 13</span>
+    </div>
+    <div class="bar"><span id="pbar"></span></div>
+  </div>
+
+  <!-- REGRA DE OURO -->
+  <div class="card golden">
+    <div class="card-label">A regra de ouro</div>
+    <h2>Nunca aplique sem cobrir o seu custo</h2>
+    <p>Antes de passar qualquer valor pra paciente, rode a calculadora. A primeira parcela precisa cobrir mais de 50% do procedimento, e no mínimo o seu custo de insumos. Assim você aplica já no primeiro mês sem ficar no prejuízo.
+    <span class="rule-num">Primeira parcela &gt; 50% do procedimento.</span></p>
+  </div>
+
+  <!-- CALCULADORA -->
+  <div class="card">
+    <div class="card-label">Calcule antes de falar preço</div>
+    <h2>Calculadora do procedimento</h2>
+    <p class="intro">Preencha e veja na hora sua margem e se o primeiro mês te protege.</p>
+
+    <div class="results" style="border:none;padding-top:14px;">
+      <div class="field">
+        <label>Custo do procedimento <small>(insumos, o que sai do seu bolso)</small></label>
+        <div class="inp"><span class="pre">R$</span><input id="custo" type="number" inputmode="decimal" placeholder="0"></div>
+      </div>
+      <div class="field">
+        <label>Margem de lucro que você quer <small>(%)</small></label>
+        <div class="inp"><input id="margem" type="number" inputmode="decimal" placeholder="60"><span class="pre">%</span></div>
+      </div>
+
+      <div class="rrow hi" style="background:#FBF2EA;border-radius:10px;padding:12px 14px;margin:6px 0 18px;">
+        <span class="rl">Preço sugerido de venda</span>
+        <span class="rv" id="sugerido">R$ 0,00</span>
+      </div>
+
+      <div class="field">
+        <label>Valor que você vai cobrar <small>(use o sugerido ou ajuste)</small></label>
+        <div class="inp"><span class="pre">R$</span><input id="venda" type="number" inputmode="decimal" placeholder="0"></div>
+      </div>
+      <div class="field">
+        <label>Em quantas parcelas</label>
+        <div class="inp"><input id="parcelas" type="number" inputmode="numeric" placeholder="4"><span class="pre">x</span></div>
+      </div>
+      <div class="field">
+        <label>Entrada / primeira parcela <small>(acima de 50%)</small></label>
+        <div class="inp"><input id="entrada" type="number" inputmode="decimal" placeholder="55"><span class="pre">%</span></div>
+      </div>
+
+      <div class="results">
+        <div class="rrow"><span class="rl">Seu lucro na venda</span><span class="rv" id="lucro">R$ 0,00</span></div>
+        <div class="rrow"><span class="rl">Margem real</span><span class="rv" id="margemreal">0%</span></div>
+        <div class="rrow hi"><span class="rl">Primeira parcela</span><span class="rv" id="primeira">R$ 0,00</span></div>
+        <div class="rrow"><span class="rl">Demais parcelas</span><span class="rv" id="demais">R$ 0,00</span></div>
+        <div class="badge warn" id="badge"><span class="dot">•</span><span id="badgetxt">Preencha os campos pra ver se o primeiro mês te protege.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="phase">
+    <div class="phase-h"><span class="pn">1</span><span class="pt">Deixe a casa pronta</span></div>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Colocar a logomarca do Consórcio Beauty como foto de perfil ou destaque<small>use o símbolo isolado do kit</small></span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Fixar o carrossel de destaque no perfil</span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Deixar o grupo aberto pra receber as ofertas por enquanto</span></label>
+  </div>
+
+  <div class="phase">
+    <div class="phase-h"><span class="pn">2</span><span class="pt">Chame uma a uma</span></div>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Postar a manifestação nos stories às 11h30</span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Mandar mensagem no privado de todas que entrarem no grupo<small>chamando pra agendar a avaliação</small></span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Ao agendar, pedir o sinal de confirmação<small>ele é abatido do valor total depois do fechamento</small></span></label>
+  </div>
+
+  <div class="phase">
+    <div class="phase-h"><span class="pn">3</span><span class="pt">Na avaliação, antes de falar preço</span></div>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Abrir a calculadora e rodar os números do procedimento</span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Conferir a margem e se a primeira parcela cobre o seu custo</span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Só então passar o orçamento pra paciente</span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Apresentar o Consórcio Beauty<small>juros zero, aplicação imediata, primeira parcela cobrindo mais de 50%</small></span></label>
+  </div>
+
+  <div class="phase">
+    <div class="phase-h"><span class="pn">4</span><span class="pt">Feche e execute</span></div>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Fechar o contrato</span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Abater o sinal do valor total dos procedimentos</span></label>
+    <label class="step"><span class="box"><svg viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-9" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="txt">Agendar e aplicar o primeiro procedimento já no primeiro mês</span></label>
+  </div>
+
+  <div class="done-msg" id="donemsg">
+    <div class="big">Você executou tudo.</div>
+    <p style="margin-top:6px;font-size:14px;">O sonho de alguém virou agenda marcada por causa de você.</p>
+  </div>
+  <button class="reset" id="reset">limpar todos os checks</button>
+
+  <!-- HOME SCREEN -->
+  <div class="card home" style="margin-top:24px;">
+    <div class="card-label">Deixe na frente do celular</div>
+    <h2>Fixe seus apps na tela inicial</h2>
+    <p class="intro">Assim esse painel e o app de mapa mental ficam sempre na sua mão, marcadinhos e à vista.</p>
+
+    <div class="hs-block">
+      <div class="hs-t">No iPhone</div>
+      <ol>
+        <li>Abra o app no <b>Safari</b>.</li>
+        <li>Toque no botão de <b>Compartilhar</b>, o quadradinho com a seta pra cima, embaixo da tela.</li>
+        <li>Desça e toque em <b>Adicionar à Tela de Início</b>.</li>
+        <li>Toque em <b>Adicionar</b>. Pronto, o ícone aparece na sua tela.</li>
+      </ol>
+    </div>
+
+    <div class="hs-block">
+      <div class="hs-t">No Android</div>
+      <ol>
+        <li>Abra o app no <b>Chrome</b>.</li>
+        <li>Toque nos <b>três pontinhos</b> no canto de cima.</li>
+        <li>Toque em <b>Adicionar à tela inicial</b>.</li>
+        <li>Confirme em <b>Adicionar</b>. O ícone aparece na sua tela.</li>
+      </ol>
+    </div>
+  </div>
+
+  <footer>
+    <div class="brinde">Um passo de cada vez.</div>
+    <div class="nm">Consórcio Beauty · Dra Isadora</div>
+  </footer>
+
+</div>
+
+<script>
+  var STORE = 'cb_destino_v1';
+  function load(){ try{ var s = localStorage.getItem(STORE); return s ? JSON.parse(s) : {}; }catch(e){ return {}; } }
+  function save(d){ try{ localStorage.setItem(STORE, JSON.stringify(d)); }catch(e){} }
+
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.step'));
+  var state = load();
+
+  steps.forEach(function(step, i){
+    if(state['s'+i]){ step.classList.add('done'); }
+    step.addEventListener('click', function(ev){
+      ev.preventDefault();
+      step.classList.toggle('done');
+      state['s'+i] = step.classList.contains('done');
+      save(state);
+      updateProgress();
+    });
+  });
+
+  function updateProgress(){
+    var total = steps.length;
+    var done = steps.filter(function(s){ return s.classList.contains('done'); }).length;
+    document.getElementById('pval').textContent = done + ' de ' + total;
+    document.getElementById('pbar').style.width = (done/total*100) + '%';
+    document.getElementById('donemsg').classList.toggle('show', done === total);
+  }
+
+  document.getElementById('reset').addEventListener('click', function(){
+    steps.forEach(function(s, i){ s.classList.remove('done'); state['s'+i] = false; });
+    save(state);
+    updateProgress();
+  });
+
+  updateProgress();
+
+  /* ---- Calculadora ---- */
+  var fmt = function(v){ return (isFinite(v) ? v : 0).toLocaleString('pt-BR', { style:'currency', currency:'BRL' }); };
+  var $ = function(id){ return document.getElementById(id); };
+  var num = function(id){ var v = parseFloat($(id).value.replace(',', '.')); return isNaN(v) ? 0 : v; };
+
+  function calc(){
+    var custo = num('custo');
+    var margem = num('margem');
+    var venda = num('venda');
+    var parcelas = num('parcelas');
+    var entrada = num('entrada');
+
+    // preço sugerido pela margem
+    var sugerido = 0;
+    if(custo > 0 && margem > 0 && margem < 100){ sugerido = custo / (1 - margem/100); }
+    $('sugerido').textContent = fmt(sugerido);
+
+    var lucro = venda - custo;
+    var margemReal = venda > 0 ? (lucro / venda * 100) : 0;
+    var primeira = venda * (entrada/100);
+    var demais = (parcelas > 1) ? (venda - primeira) / (parcelas - 1) : (parcelas === 1 ? venda - primeira : 0);
+
+    $('lucro').textContent = fmt(lucro);
+    $('margemreal').textContent = (venda > 0 ? margemReal.toFixed(0) : 0) + '%';
+    $('primeira').textContent = fmt(primeira);
+    $('demais').textContent = (parcelas > 1) ? fmt(demais) : '—';
+
+    var badge = $('badge'), txt = $('badgetxt');
+    if(venda <= 0){
+      badge.className = 'badge warn';
+      txt.innerHTML = 'Preencha o valor de venda pra ver se o primeiro mês te protege.';
+      return;
+    }
+    var pct = venda > 0 ? (primeira/venda*100) : 0;
+    if(entrada <= 50){
+      badge.className = 'badge warn';
+      txt.innerHTML = 'Sua entrada está em <b>' + pct.toFixed(0) + '%</b>. Suba pra passar de 50% e o primeiro mês fica seguro.';
+    } else if(primeira < custo){
+      badge.className = 'badge warn';
+      txt.innerHTML = 'A primeira parcela é <b>' + fmt(primeira) + '</b> e ainda não cobre o seu custo de <b>' + fmt(custo) + '</b>. Aumente a entrada ou reduza as parcelas.';
+    } else {
+      badge.className = 'badge ok';
+      txt.innerHTML = 'Pode aplicar tranquila. A primeira parcela é <b>' + pct.toFixed(0) + '%</b> do procedimento e já cobre o seu custo no primeiro mês.';
+    }
+  }
+
+  ['custo','margem','venda','parcelas','entrada'].forEach(function(id){
+    $(id).addEventListener('input', calc);
+  });
+  calc();
+</script>
+</body>
+</html>

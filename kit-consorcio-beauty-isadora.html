@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#E35A1C">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Kit de Lançamento · Consórcio Beauty · Dra Isadora</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #FFF7F0 !important; }
+  html, body {
+    background: #FFF7F0 !important;
+    color: #2A1509;
+    -webkit-text-size-adjust: 100%;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --orange: #E35A1C;
+    --orange-deep: #B8410F;
+    --cream: #FFF7F0;
+    --white: #FFFFFF;
+    --ink: #2A1509;
+    --ink-soft: #7A5544;
+  }
+
+  body { font-family: 'Jost', sans-serif; font-weight: 300; line-height: 1.7; }
+  .page { max-width: 560px; margin: 0 auto; padding: 46px 20px 80px; }
+
+  .kit-head { text-align: center; margin-bottom: 14px; }
+  .kit-head .k { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: var(--orange); font-weight: 500; }
+  .kit-head h1 { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: 30px; color: var(--ink); margin-top: 8px; line-height: 1.2; }
+  .kit-note { text-align: center; font-size: 13px; color: var(--ink-soft); max-width: 380px; margin: 10px auto 0; }
+
+  .divider { display: flex; align-items: center; gap: 14px; margin: 52px 4px 26px; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--orange); font-weight: 500; }
+  .divider::before, .divider::after { content: ""; height: 1px; background: rgba(227,90,28,0.3); flex: 1; }
+
+  .cap { text-align: center; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-soft); margin: 10px 0 30px; }
+
+  .logo-frame { border-radius: 14px; overflow: hidden; display: flex; align-items: center; justify-content: center; min-height: 300px; padding: 46px 30px; box-shadow: 0 14px 40px rgba(184,65,15,0.10); }
+  .bg-cream { background: var(--cream); }
+  .bg-white { background: var(--white); border: 1px solid #F0E4DA; }
+  .bg-orange { background: var(--orange); }
+
+  .emblem { width: 96px; height: 96px; display: block; margin: 0 auto 20px; }
+  .emblem.sm { width: 60px; height: 60px; margin-bottom: 14px; }
+
+  .lockup { text-align: center; }
+  .wm-sup { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 13px; letter-spacing: 8px; text-transform: uppercase; }
+  .wm-main { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500; font-size: 58px; line-height: 0.95; margin: 2px 0 6px; }
+  .wm-sub { font-family: 'Jost', sans-serif; font-weight: 400; font-size: 12px; letter-spacing: 5px; text-transform: uppercase; }
+  .wm-tag { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; margin-top: 14px; }
+  .on-light .wm-sup { color: var(--orange); }
+  .on-light .wm-main { color: var(--ink); }
+  .on-light .wm-sub { color: var(--ink-soft); }
+  .on-light .wm-tag { color: var(--orange-deep); }
+  .on-orange .wm-sup { color: rgba(255,255,255,0.85); }
+  .on-orange .wm-main { color: #FFFFFF; }
+  .on-orange .wm-sub { color: rgba(255,255,255,0.85); }
+  .on-orange .wm-tag { color: #FFF1E6; }
+
+  .sym-row { display: flex; gap: 16px; }
+  .sym-row .logo-frame { flex: 1; min-height: 190px; padding: 30px; }
+
+  .slide { width: 100%; max-width: 440px; margin: 0 auto; aspect-ratio: 4 / 5; border-radius: 16px; overflow: hidden; position: relative; display: flex; flex-direction: column; justify-content: center; padding: 44px 38px; box-shadow: 0 16px 44px rgba(184,65,15,0.12); }
+  .slide.orange { background: var(--orange); color: #FFFFFF; }
+  .slide.white  { background: var(--white); color: var(--ink); border: 1px solid #F1E5DB; }
+
+  .slide .eyebrow { font-family: 'Jost', sans-serif; font-weight: 500; font-size: 11px; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 22px; }
+  .slide.orange .eyebrow { color: #FFE2CE; }
+  .slide.white  .eyebrow { color: var(--orange); }
+
+  .slide h2 { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 34px; line-height: 1.16; }
+  .slide h2 em { font-style: italic; }
+  .slide.white h2 em { color: var(--orange); }
+  .slide.orange h2 em { color: #FFEAD9; }
+
+  .slide p { font-family: 'Jost', sans-serif; font-weight: 300; font-size: 16px; line-height: 1.65; margin-top: 18px; }
+  .slide.orange p { color: #FFF0E6; }
+  .slide.white p { color: var(--ink-soft); }
+
+  .slide .big { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 30px; margin-top: 16px; line-height: 1.1; }
+  .slide.white .big { color: var(--orange); }
+  .slide.orange .big { color: #FFFFFF; }
+
+  .steps { margin-top: 22px; }
+  .step { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 16px; }
+  .step .n { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 26px; line-height: 1; min-width: 26px; color: var(--orange); }
+  .step .t { font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 400; line-height: 1.4; }
+  .slide.white .step .t { color: var(--ink); }
+
+  .cta-pill { display: inline-block; align-self: flex-start; margin-top: 24px; font-family: 'Jost', sans-serif; font-weight: 500; font-size: 14px; letter-spacing: 1px; padding: 12px 24px; border-radius: 100px; }
+  .slide.orange .cta-pill { background: #FFFFFF; color: var(--orange); }
+  .slide.white .cta-pill { background: var(--orange); color: #FFFFFF; }
+
+  .brandline { position: absolute; bottom: 24px; left: 38px; right: 38px; font-family: 'Jost', sans-serif; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; display: flex; justify-content: space-between; }
+  .slide.orange .brandline { color: rgba(255,255,255,0.7); }
+  .slide.white .brandline { color: var(--ink-soft); }
+
+  .slidecap { text-align: center; font-family: 'Jost', sans-serif; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--ink-soft); margin: 12px 0 34px; }
+
+  @media (max-width: 420px) {
+    .wm-main { font-size: 46px; }
+    .slide { padding: 36px 28px; }
+    .slide h2 { font-size: 29px; }
+    .sym-row { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="kit-head">
+    <div class="k">Kit de Lançamento</div>
+    <h1>Consórcio Beauty</h1>
+  </div>
+  <p class="kit-note">Identidade da Dra Isadora, laranja e branco. Tire print de cada quadro pra postar. A logomarca vem em quatro versões, o carrossel em sete telas de destaque.</p>
+
+  <!-- ============ LOGOMARCA ============ -->
+  <div class="divider">A Logomarca</div>
+
+  <div class="logo-frame bg-cream on-light">
+    <div class="lockup">
+      <svg class="emblem" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" stroke="#E35A1C" stroke-width="1.4"/>
+        <circle cx="50" cy="50" r="39" stroke="#E35A1C" stroke-width="0.7" opacity="0.55"/>
+        <path d="M50 21 l3.2 6.5 L60 28 l-4.6 5.1 L57 40 l-7-3 -7 3 1.6-6.8 L40 28 l6.8-.5 z" fill="#E35A1C"/>
+        <text x="50" y="66" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-weight="600" font-size="30" fill="#2A1509" letter-spacing="1">CB</text>
+      </svg>
+      <div class="wm-sup">Consórcio</div>
+      <div class="wm-main">Beauty</div>
+      <div class="wm-sub">por Dra Isadora</div>
+      <div class="wm-tag">Realize agora, pague fazendo</div>
+    </div>
+  </div>
+  <div class="cap">Versão principal</div>
+
+  <div class="logo-frame bg-orange on-orange">
+    <div class="lockup">
+      <svg class="emblem" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" stroke="#FFFFFF" stroke-width="1.4"/>
+        <circle cx="50" cy="50" r="39" stroke="#FFFFFF" stroke-width="0.7" opacity="0.55"/>
+        <path d="M50 21 l3.2 6.5 L60 28 l-4.6 5.1 L57 40 l-7-3 -7 3 1.6-6.8 L40 28 l6.8-.5 z" fill="#FFFFFF"/>
+        <text x="50" y="66" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-weight="600" font-size="30" fill="#FFFFFF" letter-spacing="1">CB</text>
+      </svg>
+      <div class="wm-sup">Consórcio</div>
+      <div class="wm-main">Beauty</div>
+      <div class="wm-sub">por Dra Isadora</div>
+    </div>
+  </div>
+  <div class="cap">Versão sobre o laranja</div>
+
+  <div class="sym-row">
+    <div class="logo-frame bg-white on-light">
+      <svg class="emblem sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" stroke="#E35A1C" stroke-width="1.6"/>
+        <circle cx="50" cy="50" r="39" stroke="#E35A1C" stroke-width="0.8" opacity="0.55"/>
+        <path d="M50 21 l3.2 6.5 L60 28 l-4.6 5.1 L57 40 l-7-3 -7 3 1.6-6.8 L40 28 l6.8-.5 z" fill="#E35A1C"/>
+        <text x="50" y="66" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-weight="600" font-size="30" fill="#2A1509" letter-spacing="1">CB</text>
+      </svg>
+    </div>
+    <div class="logo-frame bg-orange">
+      <svg class="emblem sm" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" stroke="#FFFFFF" stroke-width="1.6"/>
+        <circle cx="50" cy="50" r="39" stroke="#FFFFFF" stroke-width="0.8" opacity="0.55"/>
+        <path d="M50 21 l3.2 6.5 L60 28 l-4.6 5.1 L57 40 l-7-3 -7 3 1.6-6.8 L40 28 l6.8-.5 z" fill="#FFFFFF"/>
+        <text x="50" y="66" text-anchor="middle" font-family="Cormorant Garamond, serif" font-style="italic" font-weight="600" font-size="30" fill="#FFFFFF" letter-spacing="1">CB</text>
+      </svg>
+    </div>
+  </div>
+  <div class="cap">Símbolo isolado, para selo, story e assinatura</div>
+
+  <!-- ============ CARROSSEL ============ -->
+  <div class="divider">Carrossel de Destaque</div>
+
+  <div class="slide orange">
+    <div class="eyebrow">Consórcio Beauty</div>
+    <h2>Quantas vezes você se olhou no espelho e <em>adiou</em> o seu sonho?</h2>
+    <div class="brandline"><span>Dra Isadora</span><span>arraste →</span></div>
+  </div>
+  <div class="slidecap">Slide 1 · gancho</div>
+
+  <div class="slide white">
+    <div class="eyebrow">O incômodo que você conhece</div>
+    <h2>As linhas que surgiram. A boca sem volume. O sorriso que você <em>esconde na foto</em>.</h2>
+    <p>Você sempre soube o que queria cuidar. Toda vez que se olhava, a vontade estava lá.</p>
+    <div class="brandline"><span>Dra Isadora</span><span>arraste →</span></div>
+  </div>
+  <div class="slidecap">Slide 2 · dor</div>
+
+  <div class="slide orange">
+    <div class="eyebrow">A verdade</div>
+    <h2>A vontade sempre existiu.</h2>
+    <p>O que faltava era poder pagar tudo de uma vez. O limite do cartão travava. O valor cheio no Pix não cabia. E o sonho ficou pra depois.</p>
+    <div class="brandline"><span>Dra Isadora</span><span>arraste →</span></div>
+  </div>
+  <div class="slidecap">Slide 3 · o que travava</div>
+
+  <div class="slide white">
+    <div class="eyebrow">Por que eu criei isso</div>
+    <h2>Toda vez que uma paciente adiava, eu pensava em <em>como viabilizar</em>.</h2>
+    <p>Sem nunca abrir mão da qualidade, porque é justo que muito custe o que muito vale. Foi pensando em você que eu trouxe o Consórcio Beauty pra dentro da minha clínica.</p>
+    <div class="brandline"><span>Dra Isadora</span><span>arraste →</span></div>
+  </div>
+  <div class="slidecap">Slide 4 · a história dela</div>
+
+  <div class="slide orange">
+    <div class="eyebrow">Esse mês tem presente</div>
+    <h2>Eu faço aniversário. E o presente é <em>seu</em>.</h2>
+    <div class="big">Consórcio Beauty com juros zero.</div>
+    <p>E você começa agora, sem precisar terminar de pagar. Depois da avaliação, já faz o primeiro procedimento no primeiro mês e vai pagando enquanto realiza.</p>
+    <div class="brandline"><span>Dra Isadora</span><span>arraste →</span></div>
+  </div>
+  <div class="slidecap">Slide 5 · o presente</div>
+
+  <div class="slide white">
+    <div class="eyebrow">Como funciona</div>
+    <div class="steps">
+      <div class="step"><span class="n">1</span><span class="t">Você faz sua avaliação comigo e a gente desenha o seu plano.</span></div>
+      <div class="step"><span class="n">2</span><span class="t">Entra no Consórcio Beauty, com juros zero.</span></div>
+      <div class="step"><span class="n">3</span><span class="t">Começa o procedimento já no primeiro mês e vai pagando enquanto realiza.</span></div>
+    </div>
+    <div class="brandline"><span>Dra Isadora</span><span>arraste →</span></div>
+  </div>
+  <div class="slidecap">Slide 6 · o passo a passo</div>
+
+  <div class="slide orange">
+    <div class="eyebrow">Começa essa semana</div>
+    <h2>São apenas <em>10 vagas</em>.</h2>
+    <p>Dez, porque a minha agenda é minha e o cuidado é um de cada vez. Esse presente é pra quem decidir agora. Entre no grupo e eu te mostro tudo lá dentro.</p>
+    <span class="cta-pill">Entrar no grupo →</span>
+    <div class="brandline"><span>Consórcio Beauty</span><span>Dra Isadora</span></div>
+  </div>
+  <div class="slidecap">Slide 7 · urgência e chamada</div>
+
+</div>
+</body>
+</html>
