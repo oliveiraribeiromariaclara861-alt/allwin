@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
+<title>Consultoria Business Core · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  html { background:#ffffff !important; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:#ffffff;
+    font-family:'DM Sans',sans-serif;
+    font-weight:400;
+    font-size:17px;
+    line-height:1.75;
+    color:#3a352d;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 30px;}
+
+  /* HERO */
+  .hero{padding:96px 0 70px;text-align:center;}
+  .selo{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:#c9a15a;margin-bottom:26px;}
+  h1{
+    font-family:'Playfair Display',serif;font-weight:600;
+    font-size:clamp(40px,8.5vw,64px);line-height:1.1;color:#1c1914;
+  }
+  h1 em{font-style:italic;color:#c9a15a;}
+  .hero .sub{
+    font-family:'Playfair Display',serif;font-style:italic;font-size:20px;
+    color:#8a8271;margin-top:22px;max-width:500px;margin-left:auto;margin-right:auto;
+  }
+  .hero-rule{width:56px;height:1px;background:#c9a15a;margin:44px auto 0;}
+
+  section{padding:66px 0;}
+  .divider{width:100%;height:1px;background:linear-gradient(to right,transparent,#e4ddce,transparent);}
+  .tag{
+    display:inline-block;font-size:11px;letter-spacing:4px;text-transform:uppercase;
+    color:#fff;background:#c9a15a;padding:6px 18px;border-radius:30px;margin-bottom:20px;font-weight:600;
+  }
+  h2{
+    font-family:'Playfair Display',serif;font-weight:600;
+    font-size:clamp(29px,6vw,40px);color:#1c1914;line-height:1.22;margin-bottom:24px;
+  }
+  h3{font-family:'Playfair Display',serif;font-weight:500;font-size:23px;color:#a07f42;margin:38px 0 12px;}
+  p{margin-bottom:20px;}
+  strong{font-weight:600;color:#1c1914;}
+  .citacao{
+    font-family:'Playfair Display',serif;font-style:italic;font-size:22px;line-height:1.6;
+    color:#1c1914;border-left:3px solid #c9a15a;padding:10px 0 10px 26px;margin:34px 0;
+  }
+
+  .box{background:#faf6ee;border:1px solid #e9dfc8;border-radius:14px;padding:28px 30px;margin:30px 0;}
+  .box .bt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#a07f42;font-weight:700;margin-bottom:12px;}
+  .box p:last-child{margin-bottom:0;}
+  .box-dark{background:#1c1914;border-radius:14px;padding:30px 32px;margin:30px 0;color:#d8d2c4;}
+  .box-dark .bt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#c9a15a;font-weight:700;margin-bottom:12px;}
+  .box-dark strong{color:#f0e9dc;}
+  .box-dark p:last-child{margin-bottom:0;}
+
+  /* PASSOS */
+  .passos{display:grid;gap:16px;margin-top:26px;}
+  .passo{display:flex;gap:22px;align-items:flex-start;background:#fbf9f4;border:1px solid #eee7d8;border-radius:14px;padding:24px 26px;}
+  .passo .n{font-family:'Playfair Display',serif;font-size:30px;color:#c9a15a;min-width:40px;line-height:1;}
+  .passo .t strong{display:block;font-size:17px;margin-bottom:4px;}
+  .passo .t{font-size:15.5px;line-height:1.65;}
+
+  /* CALCULADORA */
+  .calc{
+    background:#1c1914;border-radius:22px;padding:44px 38px;margin:40px 0 10px;color:#d8d2c4;
+  }
+  .calc-head{text-align:center;margin-bottom:34px;}
+  .calc-head .ct{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#c9a15a;margin-bottom:12px;}
+  .calc-head h3{font-family:'Playfair Display',serif;font-size:30px;color:#f5efe3;margin:0;font-weight:600;}
+  .calc-head p{font-size:14.5px;color:#9c9484;margin:10px 0 0;}
+
+  .campo{margin-bottom:26px;}
+  .campo label{
+    display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;
+    color:#c9a15a;font-weight:600;margin-bottom:10px;
+  }
+  .campo .valor-atual{
+    font-family:'Playfair Display',serif;font-size:26px;color:#f5efe3;margin-bottom:8px;
+  }
+  input[type=range]{
+    -webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:3px;
+    background:#3d372c;outline:none;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;
+    background:#c9a15a;cursor:pointer;border:3px solid #1c1914;box-shadow:0 0 0 1px #c9a15a;
+  }
+  input[type=range]::-moz-range-thumb{
+    width:22px;height:22px;border-radius:50%;background:#c9a15a;cursor:pointer;border:3px solid #1c1914;
+  }
+  .range-limites{display:flex;justify-content:space-between;font-size:11.5px;color:#77705f;margin-top:8px;}
+
+  .resultado{border-top:1px solid #3d372c;margin-top:36px;padding-top:32px;}
+  .res-linha{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:15px 0;border-bottom:1px solid #2a251d;gap:14px;
+  }
+  .res-linha:last-of-type{border-bottom:none;}
+  .res-linha .rl{font-size:14.5px;color:#9c9484;flex:1;}
+  .res-linha .rv{font-family:'Playfair Display',serif;font-size:23px;color:#f5efe3;white-space:nowrap;}
+  .res-destaque{
+    background:#c9a15a;border-radius:14px;padding:26px 28px;margin-top:26px;text-align:center;
+  }
+  .res-destaque .dl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#fff8ea;font-weight:600;}
+  .res-destaque .dv{font-family:'Playfair Display',serif;font-size:clamp(34px,8vw,46px);color:#fff;line-height:1.15;margin-top:8px;}
+  .res-destaque .dn{font-size:13.5px;color:#fff8ea;margin-top:8px;}
+  .aviso-calc{font-size:12.5px;color:#77705f;font-style:italic;text-align:center;margin-top:22px;line-height:1.6;}
+
+  /* TABELA */
+  table{width:100%;border-collapse:collapse;margin:30px 0;font-size:15px;}
+  th{background:#1c1914;color:#f0e9dc;font-weight:600;text-align:left;padding:14px 16px;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;}
+  th:first-child{border-radius:10px 0 0 0;}
+  th:last-child{border-radius:0 10px 0 0;}
+  td{padding:13px 16px;border-bottom:1px solid #eee7d8;vertical-align:top;}
+  tr:nth-child(even) td{background:#fbf9f4;}
+  td.v{text-align:right;white-space:nowrap;font-weight:600;color:#1c1914;}
+  tr.total td{background:#1c1914 !important;color:#f5efe3;font-weight:700;font-size:16px;}
+  tr.total td.v{color:#c9a15a;}
+
+  /* ENTREGÁVEIS */
+  .fase-bloco{margin-bottom:34px;}
+  .fase-bloco .fh{
+    display:flex;align-items:baseline;gap:14px;border-bottom:2px solid #c9a15a;padding-bottom:10px;margin-bottom:6px;
+  }
+  .fase-bloco .fh .fn{font-family:'Playfair Display',serif;font-size:22px;color:#c9a15a;font-weight:600;}
+  .fase-bloco .fh .fd{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#8a8271;}
+  ul.entregas{list-style:none;}
+  ul.entregas li{padding:11px 0 11px 28px;position:relative;border-bottom:1px solid #f0ead9;font-size:15.5px;}
+  ul.entregas li:last-child{border-bottom:none;}
+  ul.entregas li::before{content:'◆';position:absolute;left:0;top:14px;color:#c9a15a;font-size:10px;}
+
+  /* INVESTIMENTO */
+  .investimento{
+    border:2px solid #c9a15a;border-radius:22px;padding:44px 36px;text-align:center;background:#fffdf8;margin-top:10px;
+  }
+  .investimento .il{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#a07f42;font-weight:700;}
+  .investimento .riscado{
+    font-family:'Playfair Display',serif;font-size:24px;color:#b3ab9a;text-decoration:line-through;margin-top:16px;
+  }
+  .investimento .preco{
+    font-family:'Playfair Display',serif;font-size:clamp(48px,11vw,68px);color:#1c1914;line-height:1.05;margin-top:10px;font-weight:600;
+  }
+  .investimento .parcela{font-size:17px;color:#5c5648;margin-top:10px;}
+  .investimento .nota-inv{font-size:14px;color:#8a8271;margin-top:22px;font-style:italic;}
+
+  .cta{
+    display:inline-block;background:#1c1914;color:#f5efe3;text-decoration:none;
+    padding:18px 44px;border-radius:40px;font-size:14px;letter-spacing:2px;
+    text-transform:uppercase;font-weight:600;margin-top:28px;
+  }
+
+  .encerra{text-align:center;padding:70px 0 40px;}
+  .encerra .brinde{font-family:'Playfair Display',serif;font-style:italic;font-size:25px;color:#c9a15a;margin-top:26px;}
+  .encerra .nome{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8a8271;margin-top:8px;}
+
+  footer{text-align:center;padding:0 0 60px;}
+  footer .logo{font-family:'Playfair Display',serif;font-size:19px;color:#1c1914;}
+  footer .logo span{color:#c9a15a;}
+  footer p{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#b3ab9a;margin-top:8px;}
+
+  @media(max-width:480px){
+    .wrap{padding:0 20px;}
+    section{padding:50px 0;}
+    .calc{padding:32px 22px;border-radius:18px;}
+    .box,.box-dark{padding:24px 20px;}
+    .investimento{padding:34px 22px;}
+    td,th{padding:11px 10px;font-size:13.5px;}
+    .passo{padding:20px 18px;gap:16px;}
+    .res-linha .rv{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="selo">All Win Academy · Consultoria de Alto Valor</div>
+    <h1>Business <em>Core</em></h1>
+    <p class="sub">Doze meses reestruturando a empresária, o dinheiro e o negócio. Com o Consórcio Beauty implementado dentro da sua clínica.</p>
+    <div class="hero-rule"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- A CONSULTORIA -->
+  <section>
+    <div class="tag">A consultoria</div>
+    <h2>Primeiro a mulher. Depois o dinheiro. Depois o negócio.</h2>
+    <p>A Business Core é um acompanhamento de doze meses, com vinte sessões estratégicas individuais, construído sobre uma ordem que quase ninguém no mercado respeita: nós só projetamos o seu negócio depois de destravar a empresária e reestruturar a vida financeira dela.</p>
+    <p>Ao longo do ano, a clínica recebe estrutura completa: análise comportamental, precificação com margem calculada, funil de vendas replicável, calendário anual e materiais de conteúdo prontos. E dentro dessa jornada, na fase de construção, entra o plano que mais rápido devolve dinheiro para o caixa.</p>
+    <div class="box">
+      <div class="bt">Onde o Consórcio Beauty entra</div>
+      <p>O Consórcio Beauty é <strong>um dos planos implementados dentro da consultoria</strong>, na Fase 3. Ele existe para resolver a maior perda de faturamento do setor, e é ele que costuma pagar o investimento inteiro da Business Core ainda nos primeiros meses. A consultoria é a jornada. O consórcio é uma das estruturas que ela instala na sua clínica.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- O PROBLEMA -->
+  <section>
+    <div class="tag">O plano dentro da Fase 3</div>
+    <h2>A sua agenda não está vazia. Ela está represada.</h2>
+    <p>Toda clínica que atende bem tem uma fila invisível: mulheres que fizeram a avaliação, se apaixonaram pelo protocolo, saíram dizendo que iam pensar e nunca voltaram. Elas queriam. Elas ainda querem.</p>
+    <p>Duas frases explicam quase toda venda perdida na estética:</p>
+    <div class="citacao">"Está caro demais."<br>"Não tenho limite no cartão."</div>
+    <p>A primeira frase raramente é sobre preço. É sobre o mesmo dinheiro tendo outro destino naquele mês. A segunda é literal, e é aí que mora a maior perda de faturamento do setor: a paciente tem renda, tem desejo, tem urgência estética, e o limite do cartão decide sozinho quem entra na sua cadeira.</p>
+    <div class="box-dark">
+      <div class="bt">A virada de chave</div>
+      <p>Enquanto o mercado inteiro deixa o <strong>cartão de crédito ser o porteiro da clínica</strong>, o Consórcio Beauty tira essa decisão das mãos da bandeira e devolve para a paciente. Ela entra pelo plano, você recebe o seu, e uma equipe especializada cuida de toda a cobrança recorrente.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- COMO FUNCIONA -->
+  <section>
+    <div class="tag">A mecânica</div>
+    <h2>Como o Consórcio Beauty funciona</h2>
+    <p>Um modelo de assinatura recorrente desenhado para a realidade da estética brasileira, com margem protegida desde o primeiro atendimento.</p>
+    <div class="passos">
+      <div class="passo">
+        <div class="n">01</div>
+        <div class="t"><strong>A avaliação vira compromisso</strong>Ao agendar, a paciente paga um sinal de confirmação, que depois é abatido do valor total do protocolo. Isso reduz falta na agenda e já qualifica quem chega.</div>
+      </div>
+      <div class="passo">
+        <div class="n">02</div>
+        <div class="t"><strong>O plano é montado com margem protegida</strong>A primeira parcela é estruturada para cobrir mais de metade do protocolo e, no mínimo, todo o custo dos insumos. Você calcula a margem antes de apresentar o orçamento, nunca depois.</div>
+      </div>
+      <div class="passo">
+        <div class="n">03</div>
+        <div class="t"><strong>A clínica recebe, a paciente é atendida</strong>Ela entra no plano de fidelidade e começa o protocolo. Sem depender de limite de cartão, sem depender de ter o valor inteiro guardado.</div>
+      </div>
+      <div class="passo">
+        <div class="n">04</div>
+        <div class="t"><strong>A cobrança sai das suas costas</strong>Uma empresa parceira administra toda a recorrência. Inadimplência interrompe o próximo procedimento e corre juros até a negociação, então a clínica nunca fica exposta.</div>
+      </div>
+      <div class="passo">
+        <div class="n">05</div>
+        <div class="t"><strong>A receita vira previsível</strong>Cada paciente que entra hoje continua entrando na conta nos próximos meses. Isso muda a natureza do seu faturamento: sai do sobe e desce e vira base recorrente.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CALCULADORA -->
+  <section>
+    <div class="tag">Simulador</div>
+    <h2>Quanto vale apenas este plano</h2>
+    <p>Mova os controles com os números reais do seu atendimento. A conta é feita ao vivo, considerando apenas as pacientes que hoje você perde por limite de cartão ou por não conseguir pagar à vista.</p>
+    <p>Guarde uma coisa enquanto olha os números: <strong>isto é um plano entre vários</strong> dentro da consultoria. A reestruturação financeira, a precificação de todos os protocolos, o funil e o conteúdo continuam rendendo por fora desta simulação.</p>
+
+    <div class="calc">
+      <div class="calc-head">
+        <div class="ct">Calculadora Consórcio Beauty</div>
+        <h3>Simule o seu retorno</h3>
+        <p>Ajuste os valores e veja o resultado mudar</p>
+      </div>
+
+      <div class="campo">
+        <label>Valor médio do protocolo</label>
+        <div class="valor-atual" id="v-protocolo">R$ 4.500</div>
+        <input type="range" id="protocolo" min="500" max="20000" step="100" value="4500">
+        <div class="range-limites"><span>R$ 500</span><span>R$ 20.000</span></div>
+      </div>
+
+      <div class="campo">
+        <label>Parcelas do plano</label>
+        <div class="valor-atual" id="v-parcelas">10 parcelas</div>
+        <input type="range" id="parcelas" min="3" max="18" step="1" value="10">
+        <div class="range-limites"><span>3</span><span>18</span></div>
+      </div>
+
+      <div class="campo">
+        <label>Peso da primeira parcela</label>
+        <div class="valor-atual" id="v-entrada">50% do protocolo</div>
+        <input type="range" id="entrada" min="30" max="70" step="5" value="50">
+        <div class="range-limites"><span>30%</span><span>70%</span></div>
+      </div>
+
+      <div class="campo">
+        <label>Novas pacientes no plano por mês</label>
+        <div class="valor-atual" id="v-clientes">10 pacientes</div>
+        <input type="range" id="clientes" min="1" max="40" step="1" value="10">
+        <div class="range-limites"><span>1</span><span>40</span></div>
+      </div>
+
+      <div class="campo">
+        <label>Custo de insumos por protocolo</label>
+        <div class="valor-atual" id="v-custo">25% do valor</div>
+        <input type="range" id="custo" min="5" max="60" step="5" value="25">
+        <div class="range-limites"><span>5%</span><span>60%</span></div>
+      </div>
+
+      <div class="resultado">
+        <div class="res-linha">
+          <span class="rl">Primeira parcela de cada paciente</span>
+          <span class="rv" id="r-primeira">R$ 2.250</span>
+        </div>
+        <div class="res-linha">
+          <span class="rl">Demais parcelas</span>
+          <span class="rv" id="r-demais">R$ 250</span>
+        </div>
+        <div class="res-linha">
+          <span class="rl">Margem já coberta no primeiro atendimento</span>
+          <span class="rv" id="r-margem">sim</span>
+        </div>
+        <div class="res-linha">
+          <span class="rl">Receita nova no primeiro mês</span>
+          <span class="rv" id="r-mes1">R$ 22.500</span>
+        </div>
+        <div class="res-linha">
+          <span class="rl">Receita nova no sexto mês</span>
+          <span class="rv" id="r-mes6">R$ 35.000</span>
+        </div>
+        <div class="res-linha">
+          <span class="rl">Lucro líquido em 12 meses</span>
+          <span class="rv" id="r-lucro">R$ 0</span>
+        </div>
+
+        <div class="res-destaque">
+          <div class="dl">Receita adicional em 12 meses</div>
+          <div class="dv" id="r-ano">R$ 0</div>
+          <div class="dn" id="r-payback">O investimento na consultoria se paga em breve</div>
+        </div>
+
+        <p class="aviso-calc">Simulação construída sobre pacientes que hoje não fecham por limite ou por falta do valor à vista. Cada paciente que entra continua gerando receita nos meses seguintes, e é isso que faz a curva subir.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- O QUE ELA RECEBE -->
+  <section>
+    <div class="tag">Os entregáveis</div>
+    <h2>Tudo que entra na sua clínica</h2>
+    <p>Você não contrata um plano de pagamento. Você contrata doze meses de reestruturação, e o Consórcio Beauty é uma das peças que se instalam nesse caminho. Abaixo, tudo que entra na sua clínica ao longo da jornada.</p>
+
+    <div class="fase-bloco">
+      <div class="fh"><span class="fn">Fase 1 · Raiz</span><span class="fd">Meses 1 a 3</span></div>
+      <ul class="entregas">
+        <li>Análise completa de temperamento aplicada à empresária</li>
+        <li>Identificação dos bloqueios emocionais que travam a execução</li>
+        <li>Ficha de forças e fraquezas a serem trabalhadas</li>
+        <li>Definição de propósito, metas e plano de vida de cinco anos</li>
+      </ul>
+    </div>
+
+    <div class="fase-bloco">
+      <div class="fh"><span class="fn">Fase 2 · Alicerce</span><span class="fd">Meses 3 e 4</span></div>
+      <ul class="entregas">
+        <li>Raio-X financeiro pessoal com plano de reestruturação</li>
+        <li>Framework Custo de Ser Você, o número que sustenta toda decisão de preço</li>
+        <li>Separação entre o dinheiro da empresa e o dinheiro da mulher</li>
+      </ul>
+    </div>
+
+    <div class="fase-bloco">
+      <div class="fh"><span class="fn">Fase 3 · Construção</span><span class="fd">Meses 5 a 8</span></div>
+      <ul class="entregas">
+        <li>Implantação completa do Consórcio Beauty na clínica</li>
+        <li>Precificação de cada protocolo com margem calculada antes do orçamento</li>
+        <li>Estrutura do plano de fidelidade e regras de recorrência</li>
+        <li>Conexão com a empresa parceira que administra todas as cobranças</li>
+        <li>Roteiro comercial da avaliação, do sinal de confirmação ao fechamento</li>
+        <li>Blueprint do produto principal e plano anual de produtos e protocolos</li>
+      </ul>
+    </div>
+
+    <div class="fase-bloco">
+      <div class="fh"><span class="fn">Fase 4 · Expansão</span><span class="fd">Meses 9 a 12</span></div>
+      <ul class="entregas">
+        <li>Funil de vendas replicável, documentado com checklist de execução</li>
+        <li>Calendário anual esqueleto com a intenção de cada mês</li>
+        <li>Posts e carrosséis prontos explicando o Consórcio Beauty para as pacientes</li>
+        <li>Apostilas de estudo da All Win, entre elas a Pirâmide Invertida: criação de desejo e marca pessoal</li>
+        <li>Estrutura das quatro engrenagens: marketing, produto, comercial e vendas</li>
+        <li>Devolutiva final da jornada com projeção assinada dos próximos cinco anos</li>
+      </ul>
+    </div>
+
+    <div class="fase-bloco">
+      <div class="fh"><span class="fn">Durante os 12 meses</span><span class="fd">Sempre</span></div>
+      <ul class="entregas">
+        <li>Vinte sessões estratégicas individuais, ao vivo, com mais intensidade no começo</li>
+        <li>Acesso direto por WhatsApp para decisões entre as sessões</li>
+        <li>Manual de boas-vindas e Diário de Bordo da jornada</li>
+        <li>Todos os materiais em formato digital exclusivo, seus para sempre</li>
+      </ul>
+    </div>
+
+    <div class="box">
+      <div class="bt">O diferencial que ninguém entrega junto</div>
+      <p>Consultoria de negócio sem trabalho emocional entrega planilha bonita e execução travada. Terapia sem estratégia entrega clareza sem faturamento. Aqui as duas coisas acontecem na mesma jornada, com análise comportamental e estrutura empresarial na mesma sessão.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ANCORAGEM -->
+  <section>
+    <div class="tag">O valor real</div>
+    <h2>Quanto isso custaria separado</h2>
+    <table>
+      <tr><th>Entregável</th><th style="text-align:right">Valor</th></tr>
+      <tr><td>Análise de temperamento e mapeamento de bloqueios</td><td class="v">R$ 2.000</td></tr>
+      <tr><td>Reestruturação financeira e Custo de Ser Você</td><td class="v">R$ 2.500</td></tr>
+      <tr><td>Plano de vida e metas de cinco anos</td><td class="v">R$ 1.500</td></tr>
+      <tr><td>Implantação completa do Consórcio Beauty</td><td class="v">R$ 6.000</td></tr>
+      <tr><td>Precificação de protocolos com margem protegida</td><td class="v">R$ 2.500</td></tr>
+      <tr><td>Roteiro comercial da avaliação ao fechamento</td><td class="v">R$ 2.000</td></tr>
+      <tr><td>Funil de vendas replicável documentado</td><td class="v">R$ 3.500</td></tr>
+      <tr><td>Calendário anual e materiais de conteúdo prontos</td><td class="v">R$ 2.500</td></tr>
+      <tr><td>Apostilas de estudo da All Win</td><td class="v">R$ 2.000</td></tr>
+      <tr><td>Vinte sessões estratégicas individuais</td><td class="v">R$ 12.000</td></tr>
+      <tr><td>Acesso direto por doze meses</td><td class="v">R$ 1.500</td></tr>
+      <tr class="total"><td>Valor total</td><td class="v">R$ 38.000</td></tr>
+    </table>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- INVESTIMENTO -->
+  <section>
+    <div class="tag">O investimento</div>
+    <h2>O seu lugar na Business Core</h2>
+    <p>O valor abaixo é a condição de entrada para as clínicas que implementam o Consórcio Beauty ainda neste ciclo. Compare com o número que apareceu na sua simulação ali em cima.</p>
+
+    <div class="investimento">
+      <div class="il">Consultoria Business Core · 12 meses</div>
+      <div class="riscado">R$ 38.000</div>
+      <div class="preco">R$ 12.000</div>
+      <div class="parcela">à vista, ou em até 12x</div>
+      <a href="#" class="cta">Quero implementar</a>
+      <p class="nota-inv">Vagas limitadas por ciclo, porque cada clínica recebe acompanhamento individual durante os doze meses.</p>
+    </div>
+
+    <div class="box-dark" style="margin-top:34px;">
+      <div class="bt">A conta que importa</div>
+      <p>Volte na calculadora e olhe a receita adicional de doze meses. Na maioria das simulações reais, <strong>um único plano da consultoria devolve o investimento inteiro antes do terceiro mês</strong>. E ele fica na sua clínica para sempre, rendendo muito depois do nosso ano juntas. Tudo o mais que você recebe nas quatro fases vem por cima disso.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="encerra">
+    <h2 style="font-size:clamp(26px,5.5vw,34px)">Suas pacientes já querem. Falta o caminho.</h2>
+    <p style="max-width:540px;margin:0 auto;">Cada mês que passa sem o modelo implementado é uma fila de mulheres que se apaixonaram pelo seu protocolo e foram embora por causa de um limite de cartão. Elas voltam quando você abre a porta certa.</p>
+    <div class="brinde">Brindaremos,</div>
+    <div class="nome">Maria Clara · All Win Academy</div>
+  </div>
+
+  <footer>
+    <div class="logo">All Win <span>Academy</span></div>
+    <p>Consultoria Business Core · Consórcio Beauty é um dos planos da Fase 3</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var ids = ['protocolo','parcelas','entrada','clientes','custo'];
+  var el = {};
+  ids.forEach(function(i){ el[i] = document.getElementById(i); });
+
+  function moeda(n){
+    return 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+  }
+
+  function calcular(){
+    var P   = +el.protocolo.value;
+    var N   = +el.parcelas.value;
+    var ent = +el.entrada.value / 100;
+    var C   = +el.clientes.value;
+    var cst = +el.custo.value / 100;
+
+    var primeira = P * ent;
+    var demais   = N > 1 ? (P - primeira) / (N - 1) : 0;
+    var custoIns = P * cst;
+
+    // Rótulos dos controles
+    document.getElementById('v-protocolo').textContent = moeda(P);
+    document.getElementById('v-parcelas').textContent  = N + (N === 1 ? ' parcela' : ' parcelas');
+    document.getElementById('v-entrada').textContent   = (ent*100) + '% do protocolo';
+    document.getElementById('v-clientes').textContent  = C + (C === 1 ? ' paciente' : ' pacientes');
+    document.getElementById('v-custo').textContent     = (cst*100) + '% do valor';
+
+    // Receita mês a mês em 12 meses
+    var mensal = [];
+    for (var m = 1; m <= 12; m++){
+      var receita = C * primeira; // coorte nova do mês
+      for (var k = 1; k < N; k++){ // coortes anteriores ainda pagando
+        if (m - k >= 1) receita += C * demais;
+      }
+      mensal.push(receita);
+    }
+    var totalAno = mensal.reduce(function(a,b){ return a+b; }, 0);
+    var custoAno = C * 12 * custoIns;
+    var lucroAno = totalAno - custoAno - 12000;
+
+    // Payback do investimento de 12 mil
+    var acum = 0, paybackMes = 0;
+    for (var i = 0; i < 12; i++){
+      acum += mensal[i] - (C * custoIns);
+      if (acum >= 12000 && paybackMes === 0) paybackMes = i + 1;
+    }
+
+    document.getElementById('r-primeira').textContent = moeda(primeira);
+    document.getElementById('r-demais').textContent   = moeda(demais) + ' cada';
+    document.getElementById('r-margem').textContent   = primeira >= custoIns ? 'Sim, protegida' : 'Atenção, exposta';
+    document.getElementById('r-margem').style.color   = primeira >= custoIns ? '#f5efe3' : '#e08a6a';
+    document.getElementById('r-mes1').textContent     = moeda(mensal[0]);
+    document.getElementById('r-mes6').textContent     = moeda(mensal[5]);
+    document.getElementById('r-lucro').textContent    = moeda(lucroAno);
+    document.getElementById('r-ano').textContent      = moeda(totalAno);
+
+    var txt;
+    if (paybackMes === 1)      txt = 'O investimento de R$ 12.000 se paga já no primeiro mês';
+    else if (paybackMes > 1)   txt = 'O investimento de R$ 12.000 se paga no mês ' + paybackMes;
+    else                       txt = 'Com esse volume, o retorno acontece ao longo do ciclo';
+    document.getElementById('r-payback').textContent = txt;
+  }
+
+  ids.forEach(function(i){ el[i].addEventListener('input', calcular); });
+  calcular();
+})();
+</script>
+
+</body>
+</html>
