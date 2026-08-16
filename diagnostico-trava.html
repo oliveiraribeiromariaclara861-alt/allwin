@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico da Trava · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Newsreader:ital,opsz,wght@0,6..72,300..600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --creme:#FAF7F2;--creme-2:#F3ECE2;--tinta:#1F1A18;
+    --vinho:#360000;--vinho-leg:#4E0D16;--ouro:#C9A15A;--ouro-suave:#E7D3A8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--creme);color:var(--vinho-leg);
+    font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto;
+    font-size:18px;line-height:1.6;-webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ouro);font-weight:500;}
+  h1,h2,h3{font-family:"Fraunces",Georgia,serif;color:var(--vinho);line-height:1.1;font-weight:500;}
+  strong{color:var(--vinho);font-weight:600;}
+
+  .capa{background:var(--vinho);color:var(--creme);padding:64px 24px 52px;text-align:center;}
+  .capa .eyebrow{color:var(--ouro-suave);}
+  .capa h1{color:var(--creme);font-size:clamp(34px,8vw,54px);font-weight:400;margin:16px 0 18px;}
+  .capa h1 em{font-style:italic;color:var(--ouro-suave);}
+  .capa p{color:#E9DED0;font-style:italic;font-size:18px;max-width:440px;margin:0 auto;}
+
+  section{padding:44px 0;}
+  .passo{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.24em;text-transform:uppercase;color:var(--ouro);font-weight:600;display:block;margin-bottom:10px;}
+  .q-title{font-family:"Fraunces",serif;font-size:24px;color:var(--vinho);font-weight:400;margin-bottom:6px;}
+  .q-sub{font-size:16px;opacity:0.8;margin-bottom:22px;}
+
+  .item{margin-bottom:22px;border-bottom:1px solid #E7DDCE;padding-bottom:20px;}
+  .item p.frase{font-family:"Fraunces",serif;font-size:19px;color:var(--vinho);margin-bottom:12px;font-weight:400;}
+  .opcoes{display:flex;gap:8px;flex-wrap:wrap;}
+  .opt{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.04em;
+    padding:9px 14px;border:1px solid #D8C9B4;border-radius:2px;
+    background:transparent;color:var(--vinho-leg);cursor:pointer;
+    transition:all .18s ease;
+  }
+  .opt:hover{border-color:var(--ouro);}
+  .opt[aria-pressed="true"]{background:var(--vinho);color:var(--ouro-suave);border-color:var(--vinho);}
+  .opt:focus-visible{outline:2px solid var(--ouro);outline-offset:2px;}
+
+  .chips{display:flex;gap:9px;flex-wrap:wrap;}
+  .chip{
+    font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.04em;
+    padding:10px 16px;border:1px solid #D8C9B4;border-radius:2px;
+    background:transparent;color:var(--vinho-leg);cursor:pointer;transition:all .18s ease;
+  }
+  .chip:hover{border-color:var(--ouro);}
+  .chip[aria-pressed="true"]{background:var(--ouro);color:var(--vinho);border-color:var(--ouro);font-weight:500;}
+  .chip:focus-visible{outline:2px solid var(--ouro);outline-offset:2px;}
+
+  .btn{
+    font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;
+    background:var(--vinho);color:var(--ouro-suave);border:none;
+    padding:16px 30px;border-radius:2px;cursor:pointer;margin-top:8px;font-weight:500;
+    transition:opacity .18s ease;
+  }
+  .btn:hover{opacity:0.92;}
+  .btn:disabled{opacity:0.4;cursor:not-allowed;}
+  .btn:focus-visible{outline:2px solid var(--ouro);outline-offset:3px;}
+  .aviso{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--vinho-leg);opacity:0.6;margin-top:12px;letter-spacing:0.04em;}
+
+  /* resultado */
+  #resultado{display:none;}
+  .resultado-card{
+    background:var(--tinta);color:var(--creme);border-radius:4px;
+    padding:40px 28px;margin-top:10px;
+  }
+  .resultado-card .eyebrow{color:var(--ouro-suave);}
+  .nivel-nome{font-family:"Fraunces",serif;font-size:clamp(30px,7vw,44px);color:var(--creme);font-weight:400;margin:8px 0 4px;}
+  .nivel-nome em{font-style:italic;color:var(--ouro-suave);}
+
+  .barra-box{margin:26px 0 8px;}
+  .barra{position:relative;height:14px;border-radius:8px;overflow:hidden;background:#2c2624;}
+  .barra .fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:8px;
+    background:linear-gradient(90deg,#7a5a5a,#C9A15A);transition:width 1.1s cubic-bezier(.2,.7,.2,1);}
+  .barra-legenda{display:flex;justify-content:space-between;margin-top:10px;
+    font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:#B7A98F;}
+  .barra-legenda span.on{color:var(--ouro-suave);font-weight:600;}
+
+  .resumo{margin:24px 0 4px;font-size:17px;color:#EDE4D7;line-height:1.6;}
+  .resumo b{color:var(--ouro-suave);font-weight:600;}
+  .leitura{font-family:"Fraunces",serif;font-style:italic;font-size:20px;color:#fff;margin:20px 0 4px;line-height:1.45;}
+
+  /* desafio */
+  .desafio{background:var(--vinho);color:var(--creme);border-radius:4px;padding:34px 28px;margin-top:22px;}
+  .desafio .eyebrow{color:var(--ouro-suave);}
+  .desafio h3{color:var(--creme);font-size:26px;font-weight:400;margin:10px 0 14px;}
+  .desafio p{color:#E9DED0;font-size:17px;margin-bottom:14px;}
+  .desafio ol{margin:0 0 6px 20px;color:#EDE4D7;}
+  .desafio ol li{margin-bottom:9px;font-size:16px;}
+  .pergunta-final{font-family:"Fraunces",serif;font-style:italic;font-size:20px;color:var(--ouro-suave);margin-top:18px;line-height:1.45;}
+
+  .refazer{background:none;border:none;color:var(--vinho-leg);opacity:0.6;text-decoration:underline;cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:12px;margin-top:22px;}
+
+  .assina{text-align:center;padding:36px 0 54px;}
+  .brinde{font-family:"Fraunces",serif;font-style:italic;font-size:20px;color:var(--vinho);}
+  .marca{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ouro);margin-top:12px;}
+
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;}.barra .fill{transition:none;}}
+  @media print{.capa,.resultado-card,.desafio{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
+</style>
+</head>
+<body>
+
+  <header class="capa">
+    <span class="eyebrow">Diagnóstico · All Win Academy</span>
+    <h1>Qual o seu <em>nível de trava</em>?</h1>
+    <p>Um retrato honesto de hoje, pra você entender onde está e o que o seu momento pede.</p>
+  </header>
+
+  <main class="wrap">
+
+    <section id="etapa-frases">
+      <span class="passo">Etapa 1 · Se enxergue</span>
+      <p class="q-title">Leia cada frase com carinho e marque o quanto ela é você.</p>
+      <p class="q-sub">Sem julgamento. Só verdade, do jeito que ela é hoje.</p>
+      <div id="lista-frases"></div>
+    </section>
+
+    <section id="etapa-tempo">
+      <span class="passo">Etapa 2 · Há quanto tempo</span>
+      <p class="q-title">Faz quanto tempo que você se sente travada assim?</p>
+      <div class="chips" id="chips-tempo" role="group" aria-label="Tempo travada">
+        <button class="chip" data-val="Menos de 3 meses">Menos de 3 meses</button>
+        <button class="chip" data-val="De 3 a 6 meses">3 a 6 meses</button>
+        <button class="chip" data-val="De 6 meses a 1 ano">6 meses a 1 ano</button>
+        <button class="chip" data-val="Mais de 1 ano">Mais de 1 ano</button>
+        <button class="chip" data-val="Não lembro de quando começou">Nem lembro quando começou</button>
+      </div>
+    </section>
+
+    <section id="etapa-area">
+      <span class="passo">Etapa 3 · Onde dói mais</span>
+      <p class="q-title">Em qual área da sua vida essa trava aparece com mais força?</p>
+      <p class="q-sub">Escolha a que pesa mais no momento.</p>
+      <div class="chips" id="chips-area" role="group" aria-label="Área da vida">
+        <button class="chip" data-val="Financeira">Financeira</button>
+        <button class="chip" data-val="Negócio e carreira">Negócio e carreira</button>
+        <button class="chip" data-val="Autoimagem e autoestima">Autoimagem e autoestima</button>
+        <button class="chip" data-val="Exposição e visibilidade">Exposição e visibilidade</button>
+        <button class="chip" data-val="Relacionamentos">Relacionamentos</button>
+        <button class="chip" data-val="Energia e constância">Energia e constância</button>
+      </div>
+      <div style="margin-top:34px;">
+        <button class="btn" id="btn-resultado" disabled>Ver meu retrato</button>
+        <p class="aviso" id="aviso-btn">Responda as frases e escolha o tempo e a área pra liberar.</p>
+      </div>
+    </section>
+
+    <section id="resultado">
+      <div class="resultado-card">
+        <span class="eyebrow">O seu retrato de hoje</span>
+        <div class="nivel-nome" id="nivel-nome"></div>
+        <div class="barra-box">
+          <div class="barra"><div class="fill" id="barra-fill"></div></div>
+          <div class="barra-legenda">
+            <span id="lg-baixo">Baixo</span>
+            <span id="lg-medio">Médio</span>
+            <span id="lg-alto">Avançado</span>
+          </div>
+        </div>
+        <p class="resumo" id="resumo-linha"></p>
+        <p class="leitura" id="leitura-nivel"></p>
+      </div>
+
+      <div class="desafio">
+        <span class="eyebrow">O seu desafio</span>
+        <h3>Compartilha o seu retrato no Club</h3>
+        <p>Esse retrato só vira virada quando sai de dentro de você e ganha testemunha. Então aqui vai o convite:</p>
+        <ol>
+          <li>Tira o print dessa tela com o seu resultado.</li>
+          <li>Envia no Conceito Woman Club e conta em uma frase o que você sentiu vendo isso.</li>
+          <li>Deixa a gente te enxergar de perto pra entender o seu momento com você.</li>
+        </ol>
+        <p class="pergunta-final">A pergunta que fica é essa: sozinha, você acredita mesmo que atravessa isso, ou o seu momento está pedindo um passo de entrada no acompanhamento pra você não fazer sozinha o que já tentou sozinha por tanto tempo?</p>
+      </div>
+
+      <button class="refazer" id="refazer">refazer o diagnóstico</button>
+    </section>
+
+    <div class="assina">
+      <p class="brinde">Brindaremos.</p>
+      <div class="marca">All Win Academy · Maria Clara</div>
+    </div>
+
+  </main>
+
+<script>
+  var frases = [
+    "Eu gravo stories de oferta e apago antes de postar.",
+    "Eu suavizo a minha mensagem pra não parecer demais pra alguém específico.",
+    "Eu peço desculpa, direta ou indireta, quando vou vender.",
+    "Eu deixo o meu produto quietinho pra não parecer a vendedora chata.",
+    "Eu diminuo o meu preço antes mesmo de alguém questionar.",
+    "Eu apareço bastante nos stories, mas quase nunca faço uma oferta de verdade."
+  ];
+  var escala = [
+    {label:"É bem eu", val:2},
+    {label:"Um pouco", val:1},
+    {label:"Não sou eu", val:0}
+  ];
+
+  var respostas = new Array(frases.length).fill(null);
+  var tempoSel = null;
+  var areaSel = null;
+
+  var lista = document.getElementById('lista-frases');
+  frases.forEach(function(f, i){
+    var div = document.createElement('div');
+    div.className = 'item';
+    var p = document.createElement('p');
+    p.className = 'frase';
+    p.textContent = f;
+    div.appendChild(p);
+    var box = document.createElement('div');
+    box.className = 'opcoes';
+    box.setAttribute('role','group');
+    escala.forEach(function(o){
+      var b = document.createElement('button');
+      b.className = 'opt';
+      b.textContent = o.label;
+      b.setAttribute('aria-pressed','false');
+      b.addEventListener('click', function(){
+        respostas[i] = o.val;
+        Array.prototype.forEach.call(box.children, function(c){ c.setAttribute('aria-pressed','false'); });
+        b.setAttribute('aria-pressed','true');
+        checarCompleto();
+      });
+      box.appendChild(b);
+    });
+    div.appendChild(box);
+    lista.appendChild(div);
+  });
+
+  function grupoUnico(containerId, setter){
+    var cont = document.getElementById(containerId);
+    Array.prototype.forEach.call(cont.children, function(btn){
+      btn.setAttribute('aria-pressed','false');
+      btn.addEventListener('click', function(){
+        Array.prototype.forEach.call(cont.children, function(c){ c.setAttribute('aria-pressed','false'); });
+        btn.setAttribute('aria-pressed','true');
+        setter(btn.getAttribute('data-val'));
+        checarCompleto();
+      });
+    });
+  }
+  grupoUnico('chips-tempo', function(v){ tempoSel = v; });
+  grupoUnico('chips-area', function(v){ areaSel = v; });
+
+  var btn = document.getElementById('btn-resultado');
+  var aviso = document.getElementById('aviso-btn');
+  function completo(){
+    return respostas.every(function(r){ return r !== null; }) && tempoSel && areaSel;
+  }
+  function checarCompleto(){
+    if(completo()){ btn.disabled = false; aviso.style.display = 'none'; }
+    else { btn.disabled = true; aviso.style.display = 'block'; }
+  }
+
+  function nivelDe(score){
+    if(score <= 4) return {nome:'Trava baixa', chave:'baixo'};
+    if(score <= 8) return {nome:'Trava média', chave:'medio'};
+    return {nome:'Trava avançada', chave:'alto'};
+  }
+
+  var leituras = {
+    baixo: "Você já tem consciência e algum movimento. O que falta agora é constância pra não deixar a trava crescer de novo. Um empurrão certo, no momento certo, faz você destravar rápido.",
+    medio: "Você entende o que trava, mas ainda gira em volta. A consciência já veio, a execução ainda escorrega. Esse é o ponto em que caminhar acompanhada muda tudo, porque sozinha você tende a voltar pro mesmo lugar.",
+    alto: "A trava já está morando na sua rotina e mexendo no seu dinheiro. Isso não é fraqueza, é uma ferida que ficou grande de tanto ser carregada em silêncio. E ferida grande pede colo firme e método, não mais uma tentativa solitária."
+  };
+
+  document.getElementById('btn-resultado').addEventListener('click', function(){
+    var score = respostas.reduce(function(a,b){ return a+b; }, 0);
+    var maxScore = frases.length * 2;
+    var pct = Math.round((score / maxScore) * 100);
+    var nv = nivelDe(score);
+
+    document.getElementById('nivel-nome').innerHTML = 'Você está em <em>' + nv.nome.toLowerCase() + '</em>';
+    document.getElementById('resumo-linha').innerHTML =
+      'Você se sente travada há <b>' + tempoSel.toLowerCase() + '</b>, e isso pesa mais na sua vida <b>' + areaSel.toLowerCase() + '</b>.';
+    document.getElementById('leitura-nivel').textContent = leituras[nv.chave];
+
+    ['lg-baixo','lg-medio','lg-alto'].forEach(function(id){ document.getElementById(id).classList.remove('on'); });
+    document.getElementById(nv.chave === 'baixo' ? 'lg-baixo' : nv.chave === 'medio' ? 'lg-medio' : 'lg-alto').classList.add('on');
+
+    document.getElementById('resultado').style.display = 'block';
+    var alvo = Math.max(pct, 6);
+    setTimeout(function(){ document.getElementById('barra-fill').style.width = alvo + '%'; }, 120);
+    document.getElementById('resultado').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+
+  document.getElementById('refazer').addEventListener('click', function(){
+    respostas = new Array(frases.length).fill(null);
+    tempoSel = null; areaSel = null;
+    document.querySelectorAll('.opt,.chip').forEach(function(b){ b.setAttribute('aria-pressed','false'); });
+    document.getElementById('barra-fill').style.width = '0';
+    document.getElementById('resultado').style.display = 'none';
+    checarCompleto();
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+</body>
+</html>
