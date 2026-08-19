@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Retrato da Cliente Ideal · Consultoria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --creme:#F6F0E9;
+    --papel:#FCFAF6;
+    --marsala:#7A2733;
+    --marsala-esc:#571A24;
+    --terra:#A86B54;
+    --terra-cl:#C08A6E;
+    --nude:#E4CFC3;
+    --nude-cl:#EFE1D8;
+    --tinta:#382622;
+    --tinta-suave:#6E574F;
+    --ouro:#C6A15B;
+    --salvia:#7C8A69;
+    --linha:#E7D7CB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--creme);color:var(--tinta);
+    font-family:'Jost',sans-serif;font-weight:400;line-height:1.6;
+    -webkit-font-smoothing:antialiased;padding:0 0 90px;
+  }
+  .wrap{max-width:700px;margin:0 auto;padding:0 22px}
+
+  /* Cabeçalho */
+  header{
+    background:linear-gradient(160deg,var(--marsala) 0%,var(--marsala-esc) 100%);
+    color:var(--creme);padding:46px 0 40px;position:relative;overflow:hidden;
+  }
+  header::after{
+    content:"R";position:absolute;right:-26px;bottom:-58px;
+    font-family:'Cormorant Garamond',serif;font-size:290px;font-weight:500;font-style:italic;
+    color:rgba(198,161,91,.10);line-height:1;pointer-events:none;
+  }
+  .eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;font-weight:500;color:var(--ouro);margin-bottom:14px}
+  header h1{
+    font-family:'Cormorant Garamond',serif;font-weight:500;font-size:43px;line-height:1.06;
+    letter-spacing:.5px;margin-bottom:14px;position:relative;z-index:1;
+  }
+  header h1 em{font-style:italic;color:var(--nude-cl)}
+  header p{max-width:460px;font-size:15.5px;font-weight:300;color:rgba(246,240,233,.84);position:relative;z-index:1}
+
+  /* Aviso de salvamento */
+  .salvo{
+    background:var(--papel);border:1px solid var(--linha);border-radius:16px;
+    padding:14px 20px;margin:-22px auto 30px;position:relative;z-index:2;
+    box-shadow:0 16px 36px -26px rgba(87,26,36,.45);
+    display:flex;align-items:center;gap:11px;font-size:13.5px;color:var(--tinta-suave);
+  }
+  .ponto{width:9px;height:9px;border-radius:50%;background:var(--salvia);flex:0 0 auto;box-shadow:0 0 0 4px rgba(124,138,105,.16)}
+
+  /* Intro pedagógica */
+  .intro{
+    background:var(--papel);border:1px solid var(--linha);border-left:3px solid var(--terra);
+    border-radius:14px;padding:20px 22px;margin-bottom:34px;
+  }
+  .intro p{font-size:14.5px;font-weight:300;color:var(--tinta-suave);line-height:1.68}
+  .intro p+p{margin-top:10px}
+  .intro b{font-weight:500;color:var(--marsala)}
+
+  /* Seções */
+  .parte{margin-bottom:40px}
+  .parte-cab{display:flex;align-items:center;gap:14px;margin-bottom:6px}
+  .parte-num{font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:500;font-size:27px;color:var(--terra);min-width:44px}
+  .parte-cab h2{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:26px;letter-spacing:.3px;color:var(--marsala);line-height:1.1}
+  .parte-sub{margin:0 0 20px 58px;font-size:14px;font-weight:300;color:var(--tinta-suave);line-height:1.6}
+  @media(max-width:480px){.parte-sub{margin-left:0}}
+
+  /* Campo */
+  .campo{
+    background:var(--papel);border:1px solid var(--linha);border-radius:16px;
+    padding:16px 18px;margin-bottom:13px;transition:border-color .2s;
+  }
+  .campo:focus-within{border-color:var(--terra-cl)}
+  .campo label{display:block;font-family:'Jost',sans-serif;font-weight:500;font-size:15px;color:var(--tinta);margin-bottom:3px}
+  .campo .dica{display:block;font-size:12.8px;font-weight:300;color:var(--tinta-suave);margin-bottom:11px;line-height:1.5}
+  .campo textarea,.campo input{
+    width:100%;border:none;background:transparent;resize:none;
+    font-family:'Jost',sans-serif;font-size:15px;font-weight:400;color:var(--tinta);line-height:1.62;
+  }
+  .campo textarea{min-height:74px;overflow:hidden}
+  .campo textarea:focus,.campo input:focus{outline:none}
+  .campo textarea::placeholder,.campo input::placeholder{color:#c3ab9d;font-weight:300}
+  .dupla{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+  @media(max-width:520px){.dupla{grid-template-columns:1fr}}
+
+  /* faixa de momento do dia */
+  .momento{
+    display:inline-block;font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:500;color:var(--terra);margin-bottom:4px;
+  }
+
+  /* Ações */
+  .barra-acoes{
+    display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
+    margin-top:14px;padding-top:26px;border-top:1px solid var(--linha);
+  }
+  .btn{
+    font-family:'Jost',sans-serif;font-size:13.5px;font-weight:500;letter-spacing:.06em;
+    padding:13px 26px;border-radius:30px;cursor:pointer;border:1.5px solid var(--marsala);transition:.2s;
+  }
+  .btn-cheio{background:var(--marsala);color:var(--creme)}
+  .btn-cheio:hover{background:var(--marsala-esc);border-color:var(--marsala-esc)}
+  .btn-vazio{background:transparent;color:var(--marsala)}
+  .btn-vazio:hover{background:var(--nude-cl)}
+  .assinatura{margin-top:22px;text-align:center;font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--tinta-suave)}
+  .assinatura b{color:var(--marsala);font-style:normal;font-weight:600;letter-spacing:.3px}
+
+  :focus-visible{outline:2.5px solid var(--ouro);outline-offset:2px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+  /* Impressão */
+  @media print{
+    body{background:#fff;padding:0}
+    header{background:#fff;color:var(--marsala);padding:0 0 16px;border-bottom:2px solid var(--marsala)}
+    header::after,.salvo,.barra-acoes,.intro .noprint{display:none}
+    header h1{font-size:30px}header h1 em{color:var(--terra)}
+    header p,.eyebrow{color:var(--tinta-suave)}
+    .campo,.intro{border:none;box-shadow:none;padding:6px 0;page-break-inside:avoid}
+    .campo{border-bottom:1px solid var(--linha);border-radius:0}
+    textarea{min-height:auto!important}
+    .parte-num,.parte-cab h2{color:var(--marsala)}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Consultoria · Retrato da Cliente Ideal</div>
+    <h1>Quem senta na<br>sua <em>cadeira</em></h1>
+    <p>Antes de comunicar qualquer procedimento, você desenha a mulher que você quer alcançar. Uma só, com rosto e nome. Escreva com calma, o que você preenche fica guardado sozinho.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="salvo"><span class="ponto"></span><span id="salvo-txt">Tudo que você escrever é salvo automaticamente neste aparelho.</span></div>
+
+  <div class="intro">
+    <p><b>Por que esse exercício vem primeiro.</b> Quando você conhece essa mulher por dentro, o conteúdo para de ser sobre o que você faz e passa a ser sobre o que ela vive. É assim que ela se reconhece na tela e sente que você fala com ela.</p>
+    <p>Você vai atravessar o dia dela duas vezes. Primeiro as vinte e quatro horas de hoje, carregando a incômodo silencioso. Depois as mesmas vinte e quatro horas, agora com a virada que o seu cuidado trouxe. No meio dos dois está o seu trabalho.</p>
+  </div>
+
+  <!-- PARTE I -->
+  <section class="parte">
+    <div class="parte-cab"><span class="parte-num">I</span><h2>O retrato dela</h2></div>
+    <p class="parte-sub">Uma mulher só, real o bastante pra você imaginar o rosto. Dê a ela um nome e deixe de ser um público pra virar uma pessoa.</p>
+
+    <div class="dupla">
+      <div class="campo">
+        <label for="nome">O nome dela</label>
+        <span class="dica">Um nome fictício. Ele transforma público em gente.</span>
+        <input id="nome" placeholder="ex: Juliana">
+      </div>
+      <div class="campo">
+        <label for="idade">Idade e momento de vida</label>
+        <span class="dica">Casada, mãe, no auge da carreira, recomeçando.</span>
+        <input id="idade" placeholder="ex: 38 anos, dois filhos, voltando a se cuidar">
+      </div>
+    </div>
+
+    <div class="campo">
+      <label for="rotina">Como é a rotina dela</label>
+      <span class="dica">O que ela faz, com quem convive, onde passa o dia. Quanto mais concreto, mais fácil escrever pra ela depois.</span>
+      <textarea id="rotina" placeholder="Trabalha fora, cuida da casa, vive correndo entre as obrigações e quase nunca sobra tempo pra ela mesma..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="dor">O que ela vê no espelho e não gosta</label>
+      <span class="dica">O incômodo silencioso, aquele que ela não conta pra ninguém.</span>
+      <textarea id="dor" placeholder="Evita se olhar de perto, acha que envelheceu de repente, sente que perdeu o próprio brilho..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="desejo">O que ela deseja em segredo</label>
+      <span class="dica">O sonho por trás do procedimento. Quase nunca é sobre estética, é sobre como ela quer se sentir.</span>
+      <textarea id="desejo" placeholder="Voltar a se reconhecer, se sentir bonita sem esforço, receber um olhar de admiração de novo..."></textarea>
+    </div>
+
+    <div class="campo">
+      <label for="objecao">O que já a impediu de fazer</label>
+      <span class="dica">O medo, a culpa, a frase que ela repete pra si mesma. Aqui costuma morar a falta de limite no cartão, que é a vilã da sua história.</span>
+      <textarea id="objecao" placeholder="Acha caro, sente culpa de gastar consigo, o limite do cartão não fecha, tem medo de ficar artificial..."></textarea>
+    </div>
+  </section>
+
+  <!-- PARTE II -->
+  <section class="parte">
+    <div class="parte-cab"><span class="parte-num">II</span><h2>Vinte e quatro horas antes</h2></div>
+    <p class="parte-sub">O dia dela hoje, do jeito que ele é. Passeie pela manhã, pela tarde e pela noite e mostre onde o incômodo aparece em cada momento.</p>
+
+    <div class="campo">
+      <span class="momento">De manhã</span>
+      <label for="antes-manha">Quando ela acorda e se arruma</label>
+      <span class="dica">O primeiro olhar no espelho, a maquiagem que tenta esconder, o suspiro antes de sair.</span>
+      <textarea id="antes-manha" placeholder="Ela acorda cansada, passa mais base pra disfarçar, evita a luz do banheiro..."></textarea>
+    </div>
+    <div class="campo">
+      <span class="momento">Durante o dia</span>
+      <label for="antes-tarde">Nos encontros e nas fotos</label>
+      <span class="dica">A reunião, o almoço, o momento em que alguém tira uma foto e ela desvia.</span>
+      <textarea id="antes-tarde" placeholder="Foge das fotos, se compara com as colegas, se sente menor sem saber explicar..."></textarea>
+    </div>
+    <div class="campo">
+      <span class="momento">À noite</span>
+      <label for="antes-noite">Quando o dia acaba</label>
+      <span class="dica">O que ela pensa sozinha, o que promete a si mesma e adia de novo.</span>
+      <textarea id="antes-noite" placeholder="Deita pensando que precisa se cuidar, promete que ano que vem resolve, adia mais uma vez..."></textarea>
+    </div>
+  </section>
+
+  <!-- PARTE III -->
+  <section class="parte">
+    <div class="parte-cab"><span class="parte-num">III</span><h2>Vinte e quatro horas depois</h2></div>
+    <p class="parte-sub">O mesmo dia, agora atravessado pelo seu cuidado. Mostre a virada em cada momento, e lembre que o que muda de verdade é como ela se sente e como o mundo a vê.</p>
+
+    <div class="campo">
+      <span class="momento">De manhã</span>
+      <label for="depois-manha">Quando ela acorda e se arruma</label>
+      <span class="dica">O mesmo espelho, outro olhar. O que ela faz diferente sem nem perceber.</span>
+      <textarea id="depois-manha" placeholder="Acorda e se olha de frente, passa menos base, sai de casa mais leve..."></textarea>
+    </div>
+    <div class="campo">
+      <span class="momento">Durante o dia</span>
+      <label for="depois-tarde">Nos encontros e nas fotos</label>
+      <span class="dica">Agora ela chama a foto. Alguém comenta. Como isso reverbera nela.</span>
+      <textarea id="depois-tarde" placeholder="Aceita a foto, recebe um elogio sincero, sente que voltou a ocupar o próprio espaço..."></textarea>
+    </div>
+    <div class="campo">
+      <span class="momento">À noite</span>
+      <label for="depois-noite">Quando o dia acaba</label>
+      <span class="dica">O que ela sente ao deitar, o que deixou de adiar.</span>
+      <textarea id="depois-noite" placeholder="Deita em paz, feliz por ter cuidado de si, pensando em quando volta pra continuar..."></textarea>
+    </div>
+    <div class="campo">
+      <label for="depois-outros">O que as pessoas ao redor percebem</label>
+      <span class="dica">Marido, filhos, amigas, colegas. Nem sempre sabem o que mudou, só sentem que ela está diferente.</span>
+      <textarea id="depois-outros" placeholder="Perguntam se ela viajou, se está descansada, dizem que ela está radiante sem saber o porquê..."></textarea>
+    </div>
+  </section>
+
+  <!-- PARTE IV -->
+  <section class="parte">
+    <div class="parte-cab"><span class="parte-num">IV</span><h2>As três narrativas que sustentam</h2></div>
+    <p class="parte-sub">Agora você reúne tudo em três fios. São eles que vão alimentar cada post, cada reel, cada conversa no direct. Escreva cada um como uma cena que ela reconheça na hora.</p>
+
+    <div class="campo">
+      <label for="narr-dor">A narrativa da dor</label>
+      <span class="dica">A cena do incômodo, contada em poucas linhas. Ela precisa pensar: é exatamente isso que eu sinto.</span>
+      <textarea id="narr-dor" placeholder="Escreva a cena que resume o que ela carrega hoje..."></textarea>
+    </div>
+    <div class="campo">
+      <label for="narr-desejo">A narrativa do desejo</label>
+      <span class="dica">O sonho vestido de cena. Onde ela se imagina quando fecha os olhos.</span>
+      <textarea id="narr-desejo" placeholder="Escreva a cena do que ela deseja se tornar..."></textarea>
+    </div>
+    <div class="campo">
+      <label for="narr-transf">A narrativa da transformação</label>
+      <span class="dica">A ponte entre as duas. O antes e depois emocional, muito além do rosto. É o que o seu trabalho realmente entrega.</span>
+      <textarea id="narr-transf" placeholder="Escreva a virada: quem ela era, quem ela passou a ser, e o seu cuidado no meio..."></textarea>
+    </div>
+  </section>
+
+  <div class="barra-acoes">
+    <button class="btn btn-cheio" id="imprimir">Salvar em PDF ou imprimir</button>
+    <button class="btn btn-vazio" id="limpar">Recomeçar</button>
+  </div>
+  <div class="assinatura">com carinho, <b>All Win Academy</b></div>
+</div>
+
+<script>
+const CHAVE = "mapa-cliente-ideal-v1";
+const campos = document.querySelectorAll('input, textarea');
+
+// carrega
+let dados = {};
+try{ dados = JSON.parse(localStorage.getItem(CHAVE)) || {}; }catch(e){ dados = {}; }
+campos.forEach(c=>{
+  if(dados[c.id] !== undefined){ c.value = dados[c.id]; }
+  ajusta(c);
+});
+
+// autosave + textarea que cresce
+let timer;
+campos.forEach(c=>{
+  c.addEventListener('input', ()=>{
+    ajusta(c);
+    dados[c.id] = c.value;
+    clearTimeout(timer);
+    timer = setTimeout(salva, 300);
+  });
+});
+
+function ajusta(c){
+  if(c.tagName === 'TEXTAREA'){
+    c.style.height = 'auto';
+    c.style.height = (c.scrollHeight) + 'px';
+  }
+}
+
+function salva(){
+  try{
+    localStorage.setItem(CHAVE, JSON.stringify(dados));
+    const t = document.getElementById('salvo-txt');
+    t.textContent = 'Salvo ✓  ' + new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    setTimeout(()=>{ t.textContent = 'Tudo que você escrever é salvo automaticamente neste aparelho.'; }, 2600);
+  }catch(e){}
+}
+
+document.getElementById('imprimir').addEventListener('click', ()=>window.print());
+
+document.getElementById('limpar').addEventListener('click', ()=>{
+  if(confirm('Isso apaga tudo que você escreveu e recomeça do zero. Deseja continuar?')){
+    dados = {};
+    try{ localStorage.removeItem(CHAVE); }catch(e){}
+    campos.forEach(c=>{ c.value=''; ajusta(c); });
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+});
+</script>
+</body>
+</html>
