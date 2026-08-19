@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Primeiros Passos · Consórcio Beauty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --creme:#F6F0E9;
+    --papel:#FCFAF6;
+    --marsala:#7A2733;
+    --marsala-esc:#571A24;
+    --terra:#A86B54;
+    --terra-cl:#C08A6E;
+    --nude:#E4CFC3;
+    --nude-cl:#EFE1D8;
+    --tinta:#382622;
+    --tinta-suave:#6E574F;
+    --ouro:#C6A15B;
+    --salvia:#7C8A69;
+    --linha:#E7D7CB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--creme);
+    color:var(--tinta);
+    font-family:'Jost',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    padding:0 0 80px;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 22px}
+
+  /* ---------- Cabeçalho ---------- */
+  header{
+    background:var(--marsala);
+    background:linear-gradient(160deg,var(--marsala) 0%,var(--marsala-esc) 100%);
+    color:var(--creme);
+    padding:46px 0 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  header::after{
+    content:"R";
+    position:absolute;
+    right:-26px;bottom:-58px;
+    font-family:'Cormorant Garamond',serif;
+    font-size:290px;
+    font-weight:500;
+    font-style:italic;
+    color:rgba(198,161,91,.10);
+    line-height:1;
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-size:12px;
+    letter-spacing:.32em;
+    text-transform:uppercase;
+    font-weight:500;
+    color:var(--ouro);
+    margin-bottom:14px;
+  }
+  header h1{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:500;
+    font-size:42px;
+    line-height:1.08;
+    letter-spacing:.5px;
+    margin-bottom:12px;
+    position:relative;z-index:1;
+  }
+  header h1 em{font-style:italic;color:var(--nude-cl)}
+  header p{
+    max-width:430px;
+    font-size:15.5px;
+    font-weight:300;
+    color:rgba(246,240,233,.82);
+    position:relative;z-index:1;
+  }
+
+  /* ---------- Painel de progresso ---------- */
+  .painel{
+    background:var(--papel);
+    border:1px solid var(--linha);
+    border-radius:20px;
+    padding:22px 24px 24px;
+    margin:-26px auto 34px;
+    position:relative;z-index:2;
+    box-shadow:0 18px 40px -24px rgba(87,26,36,.45);
+  }
+  .painel-topo{
+    display:flex;
+    align-items:baseline;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:16px;
+  }
+  .painel-topo .rotulo{
+    font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--terra);font-weight:500;
+  }
+  .contador{font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--tinta-suave);font-style:italic}
+  .contador b{color:var(--marsala);font-style:normal;font-weight:600}
+  .barra{
+    height:12px;border-radius:20px;
+    background:var(--nude-cl);
+    overflow:hidden;position:relative;
+  }
+  .barra-preenche{
+    height:100%;width:0;
+    background:linear-gradient(90deg,var(--terra) 0%,var(--marsala) 78%);
+    border-radius:20px;
+    transition:width .6s cubic-bezier(.22,.61,.36,1);
+    position:relative;
+  }
+  .barra-preenche::after{
+    content:"";position:absolute;right:0;top:0;bottom:0;width:26px;
+    background:linear-gradient(90deg,transparent,rgba(198,161,91,.55));
+  }
+  .percent{
+    margin-top:12px;
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;font-size:15px;color:var(--tinta-suave);
+  }
+  .percent b{color:var(--marsala);font-style:normal;font-weight:600}
+
+  /* ---------- Fases ---------- */
+  .fase{margin-bottom:34px}
+  .fase-cab{
+    display:flex;align-items:center;gap:14px;
+    margin-bottom:6px;
+  }
+  .fase-num{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;font-weight:500;
+    font-size:26px;color:var(--terra);
+    min-width:44px;
+  }
+  .fase-cab h2{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;font-size:25px;letter-spacing:.3px;
+    color:var(--marsala);line-height:1.1;
+  }
+  .fase-sub{
+    margin:0 0 16px 58px;
+    font-size:14px;font-weight:300;color:var(--tinta-suave);
+  }
+  @media(max-width:480px){.fase-sub{margin-left:0}}
+
+  /* ---------- Item ---------- */
+  .item{
+    display:flex;gap:15px;align-items:flex-start;
+    background:var(--papel);
+    border:1px solid var(--linha);
+    border-radius:16px;
+    padding:16px 18px;
+    margin-bottom:11px;
+    cursor:pointer;
+    transition:border-color .25s, background .25s, transform .1s;
+    user-select:none;
+  }
+  .item:hover{border-color:var(--terra-cl)}
+  .item:active{transform:scale(.994)}
+  .item.feito{background:#F1F0E7;border-color:#D9DCC9}
+  .marca{
+    flex:0 0 auto;width:25px;height:25px;margin-top:2px;
+    border-radius:50%;
+    border:1.8px solid var(--terra);
+    display:grid;place-items:center;
+    transition:.28s;
+    position:relative;
+  }
+  .marca svg{width:13px;height:13px;opacity:0;transform:scale(.4);transition:.28s}
+  .item.feito .marca{background:var(--salvia);border-color:var(--salvia)}
+  .item.feito .marca svg{opacity:1;transform:scale(1)}
+  .item.feito .marca svg path{stroke:#fff}
+  .txt h3{
+    font-family:'Jost',sans-serif;
+    font-weight:500;font-size:16px;line-height:1.35;
+    color:var(--tinta);margin-bottom:3px;
+    transition:.25s;
+  }
+  .item.feito .txt h3{color:var(--tinta-suave);text-decoration:line-through;text-decoration-color:var(--nude)}
+  .txt p{font-size:13.6px;font-weight:300;color:var(--tinta-suave);line-height:1.55}
+
+  /* ---------- Selo final ---------- */
+  .selo{
+    display:none;
+    text-align:center;
+    background:var(--marsala);
+    background:linear-gradient(160deg,var(--marsala),var(--marsala-esc));
+    color:var(--creme);
+    border-radius:22px;
+    padding:38px 30px;
+    margin:6px 0 30px;
+  }
+  .selo.ver{display:block;animation:sobe .7s ease}
+  @keyframes sobe{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .selo .estrela{font-family:'Cormorant Garamond',serif;font-size:40px;color:var(--ouro);line-height:1;margin-bottom:8px}
+  .selo h2{font-family:'Cormorant Garamond',serif;font-weight:500;font-style:italic;font-size:30px;margin-bottom:10px}
+  .selo p{font-weight:300;font-size:15px;color:rgba(246,240,233,.85);max-width:400px;margin:0 auto}
+
+  /* ---------- Rodapé ---------- */
+  .rodape{
+    text-align:center;margin-top:30px;
+    padding-top:24px;border-top:1px solid var(--linha);
+  }
+  .recomecar{
+    background:none;border:none;cursor:pointer;
+    font-family:'Jost',sans-serif;font-size:13px;font-weight:400;
+    letter-spacing:.12em;text-transform:uppercase;
+    color:var(--terra);padding:8px 14px;border-radius:20px;
+    transition:.2s;
+  }
+  .recomecar:hover{color:var(--marsala);background:var(--nude-cl)}
+  .assinatura{
+    margin-top:18px;font-family:'Cormorant Garamond',serif;
+    font-style:italic;font-size:15px;color:var(--tinta-suave);
+  }
+  .assinatura b{color:var(--marsala);font-style:normal;font-weight:600;letter-spacing:.3px}
+
+  :focus-visible{outline:2.5px solid var(--ouro);outline-offset:3px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Consultoria · Consórcio Beauty</div>
+    <h1>Primeiros passos<br>das suas <em>redes</em></h1>
+    <p>O caminho pra abrir o consórcio beauty no seu perfil com leveza e firmeza. Marque cada passo conforme ele acontece, o seu progresso fica guardado sozinho.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="painel">
+    <div class="painel-topo">
+      <span class="rotulo">Seu progresso</span>
+      <span class="contador"><b id="feitos">0</b> de <span id="total">0</span> passos</span>
+    </div>
+    <div class="barra"><div class="barra-preenche" id="preenche"></div></div>
+    <div class="percent"><b id="pct">0%</b> do caminho já é seu</div>
+  </div>
+
+  <div class="selo" id="selo">
+    <div class="estrela">✦</div>
+    <h2>Está de pé</h2>
+    <p>Sua presença nasceu inteira. Agora é postar com constância e deixar o consórcio beauty fazer o convite por você.</p>
+  </div>
+
+  <div id="lista"></div>
+
+  <div class="rodape">
+    <button class="recomecar" id="recomecar">Recomeçar do zero</button>
+    <div class="assinatura">com carinho, <b>All Win Academy</b></div>
+  </div>
+</div>
+
+<script>
+const fases = [
+  {
+    num:"I", titulo:"Alicerce da presença",
+    sub:"Antes do primeiro post, a clareza de quem você é e do que só a sua clínica entrega.",
+    itens:[
+      {t:"Assumir o posicionamento do consórcio beauty", d:"Ele é o seu método de assinatura recorrente. A palavra cartão fica de fora da sua fala e entra só como a vilã da história, a que trava o sonho da paciente."},
+      {t:"Reescrever a bio com a sua promessa", d:"Em poucas linhas, quem senta na sua cadeira precisa entender o resultado que só você conduz e por que vale a pena."},
+      {t:"Travar a identidade visual", d:"Paleta, tipografia e tom repetidos em todos os posts. É a constância que faz o olho reconhecer você antes de ler o nome."},
+      {t:"Escolher a foto de autoridade", d:"A imagem que abre o perfil conta sua história em um segundo. Escolha uma que traga presença e cuidado ao mesmo tempo."}
+    ]
+  },
+  {
+    num:"II", titulo:"Os três fixados",
+    sub:"Três posts no topo do perfil sustentam toda a sua narrativa: quem você é, quem ela é, e como funciona.",
+    itens:[
+      {t:"Fixado de identidade", d:"A sua essência e o porquê do seu trabalho. Aqui a paciente sente com quem ela está falando."},
+      {t:"Fixado de comportamento", d:"A dor e o desejo de quem procura você. Ela precisa se ver na tela e pensar: é exatamente isso que eu sinto."},
+      {t:"Fixado de modelo de negócio", d:"Como o consórcio beauty funciona, com os números na mesa. É o post que transforma vontade em decisão."}
+    ]
+  },
+  {
+    num:"III", titulo:"Conteúdo que move",
+    sub:"O trio que faz a paciente andar: dor, desejo e solução, um de cada vez.",
+    itens:[
+      {t:"Carrossel da dor", d:"O procedimento adiado, o sonho guardado por falta de limite. Mostre a cena que ela conhece bem."},
+      {t:"Reel do desejo", d:"A transformação que ela quer ver no espelho. Faça o resultado parecer possível e perto."},
+      {t:"Post da solução", d:"O consórcio beauty aberto passo a passo. A clínica recebe, ela recebe o procedimento, e uma equipe cuida de cada pagamento."}
+    ]
+  },
+  {
+    num:"IV", titulo:"Prova e convite",
+    sub:"O que faz a paciente confiar e dar o próximo passo até você.",
+    itens:[
+      {t:"Antes e depois com narrativa", d:"A foto sozinha impressiona, a história convence. Conte o que mudou na vida dela, não só no rosto."},
+      {t:"Case com número real", d:"Dez pessoas, uma parcela, receita nova no mesmo mês. O número torna concreto o que parecia distante."},
+      {t:"Chamada pra avaliação com sinal", d:"Convide pra avaliação e cobre um sinal de confirmação, depois abatido do valor. Quem confirma com sinal chega comprometida."}
+    ]
+  },
+  {
+    num:"V", titulo:"Rotina viva",
+    sub:"A presença que nasceu precisa de constância pra crescer forte.",
+    itens:[
+      {t:"Calendário semanal simples", d:"Poucos posts bem pensados valem mais que muitos apressados. Defina os dias e cumpra com leveza."},
+      {t:"Stories todos os dias", d:"É onde a proximidade acontece. Bastidor, rotina, uma pergunta, um resultado. Presença diária cria intimidade."},
+      {t:"Prospecção ativa no direct", d:"Não espere só chegarem. Apresente o método a quem faz sentido, com a mão estendida de quem tem algo bom pra oferecer."}
+    ]
+  }
+];
+
+const CHAVE = "consorcio-beauty-passos-v1";
+let estado = {};
+try{ estado = JSON.parse(localStorage.getItem(CHAVE)) || {}; }catch(e){ estado = {}; }
+
+const lista = document.getElementById('lista');
+let total = 0;
+let id = 0;
+
+fases.forEach(f=>{
+  const bloco = document.createElement('section');
+  bloco.className = 'fase';
+  bloco.innerHTML = `
+    <div class="fase-cab"><span class="fase-num">${f.num}</span><h2>${f.titulo}</h2></div>
+    <p class="fase-sub">${f.sub}</p>`;
+  f.itens.forEach(it=>{
+    total++;
+    const key = 'p'+(id++);
+    const feito = !!estado[key];
+    const el = document.createElement('div');
+    el.className = 'item'+(feito?' feito':'');
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-pressed', feito?'true':'false');
+    el.dataset.key = key;
+    el.innerHTML = `
+      <span class="marca"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <div class="txt"><h3>${it.t}</h3><p>${it.d}</p></div>`;
+    el.addEventListener('click', ()=>alterna(el));
+    el.addEventListener('keydown', e=>{
+      if(e.key===' '||e.key==='Enter'){ e.preventDefault(); alterna(el); }
+    });
+    bloco.appendChild(el);
+  });
+  lista.appendChild(bloco);
+});
+
+document.getElementById('total').textContent = total;
+
+function alterna(el){
+  const key = el.dataset.key;
+  const agora = !el.classList.contains('feito');
+  el.classList.toggle('feito', agora);
+  el.setAttribute('aria-pressed', agora?'true':'false');
+  estado[key] = agora;
+  salva();
+  atualiza();
+}
+
+function salva(){
+  try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){}
+}
+
+function atualiza(){
+  const feitos = Object.values(estado).filter(Boolean).length;
+  const pct = total ? Math.round(feitos/total*100) : 0;
+  document.getElementById('feitos').textContent = feitos;
+  document.getElementById('pct').textContent = pct+'%';
+  document.getElementById('preenche').style.width = pct+'%';
+  document.getElementById('selo').classList.toggle('ver', feitos===total && total>0);
+}
+
+document.getElementById('recomecar').addEventListener('click', ()=>{
+  if(confirm('Isso apaga todos os checks e recomeça do zero. Deseja continuar?')){
+    estado = {}; salva();
+    document.querySelectorAll('.item').forEach(el=>{
+      el.classList.remove('feito');
+      el.setAttribute('aria-pressed','false');
+    });
+    atualiza();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+});
+
+atualiza();
+</script>
+</body>
+</html>
