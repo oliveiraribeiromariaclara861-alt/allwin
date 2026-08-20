@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F2">
+<title>Modelo de Recorrência · Nutrição · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--vinho:#7E1F31;--ouro:#C9A15A;--creme:#FAF7F2;--tinta:#1F1A18;}
+  html{background:var(--creme)!important;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--creme);color:#4a423d;font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.78;-webkit-text-size-adjust:100%;}
+  .wrap{max-width:780px;margin:0 auto;padding:0 26px;}
+
+  .hero{padding:86px 0 56px;text-align:center;}
+  .selo{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--vinho);font-weight:600;margin-bottom:24px;}
+  h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(37px,8vw,56px);line-height:1.12;color:var(--tinta);}
+  h1 em{font-style:italic;color:var(--vinho);}
+  .hero .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:19px;color:#8a7f78;margin-top:20px;max-width:520px;margin-left:auto;margin-right:auto;}
+  .risco{width:52px;height:2px;background:var(--ouro);margin:34px auto 0;}
+
+  section{padding:60px 0;}
+  .divider{width:100%;height:1px;background:linear-gradient(to right,transparent,#e5ddd3,transparent);}
+  .tag{display:inline-block;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#fff;background:var(--vinho);padding:6px 18px;border-radius:30px;margin-bottom:20px;font-weight:600;}
+  h2{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(28px,6vw,40px);color:var(--tinta);line-height:1.22;margin-bottom:22px;}
+  h3{font-family:'Playfair Display',serif;font-weight:600;font-size:22px;color:var(--vinho);margin:36px 0 12px;}
+  p{margin-bottom:20px;}
+  strong{font-weight:700;color:var(--vinho);}
+  .citacao{font-family:'Playfair Display',serif;font-style:italic;font-size:22px;line-height:1.6;color:var(--tinta);border-left:3px solid var(--vinho);padding:12px 0 12px 26px;margin:32px 0;}
+
+  .box{background:#fff;border:1px solid #ece4d9;border-radius:14px;padding:28px 30px;margin:28px 0;}
+  .box .bt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--vinho);font-weight:700;margin-bottom:12px;}
+  .box p:last-child{margin-bottom:0;}
+  .box-escuro{background:var(--tinta);border-radius:16px;padding:32px;margin:28px 0;color:#d5cbc0;}
+  .box-escuro .bt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);font-weight:700;margin-bottom:12px;}
+  .box-escuro strong{color:#fff;}
+  .box-escuro p:last-child{margin-bottom:0;}
+
+  .passos{display:grid;gap:14px;margin-top:24px;}
+  .passo{display:flex;gap:20px;background:#fff;border:1px solid #ece4d9;border-radius:14px;padding:22px 24px;align-items:flex-start;}
+  .passo .n{font-family:'Playfair Display',serif;font-size:29px;color:var(--vinho);min-width:40px;line-height:1;font-weight:600;}
+  .passo .t{font-size:15.5px;line-height:1.65;}
+  .passo .t strong{display:block;color:var(--tinta);margin-bottom:3px;font-size:16.5px;}
+
+  table{width:100%;border-collapse:collapse;margin:28px 0;font-size:15px;}
+  th{background:var(--tinta);color:#f5efe3;font-weight:600;text-align:left;padding:14px 16px;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;}
+  th:first-child{border-radius:10px 0 0 0;}
+  th:last-child{border-radius:0 10px 0 0;}
+  td{padding:13px 16px;border-bottom:1px solid #ece4d9;vertical-align:top;}
+  tr:nth-child(even) td{background:#fdfbf7;}
+  td.v{text-align:right;white-space:nowrap;font-weight:700;color:var(--tinta);}
+  tr.forte td{background:#7E1F31!important;color:#fff;font-weight:700;}
+  tr.forte td.v{color:#F0C9A0;}
+
+  /* CALCULADORA */
+  .calc{background:var(--tinta);border-radius:22px;padding:42px 36px;margin:34px 0 10px;color:#d5cbc0;}
+  .calc-head{text-align:center;margin-bottom:32px;}
+  .calc-head .ct{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--ouro);margin-bottom:12px;font-weight:600;}
+  .calc-head h3{font-family:'Playfair Display',serif;font-size:29px;color:#fff;margin:0;font-weight:600;}
+  .calc-head p{font-size:14.5px;color:#9c9184;margin:10px 0 0;}
+  .campo{margin-bottom:26px;}
+  .campo label{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--ouro);font-weight:600;margin-bottom:10px;}
+  .campo .val{font-family:'Playfair Display',serif;font-size:26px;color:#fff;margin-bottom:8px;}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:3px;background:#3d332f;outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:var(--vinho);cursor:pointer;border:3px solid var(--tinta);box-shadow:0 0 0 1.5px var(--ouro);}
+  input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--vinho);cursor:pointer;border:3px solid var(--tinta);}
+  .lim{display:flex;justify-content:space-between;font-size:11.5px;color:#79706a;margin-top:8px;}
+  .res{border-top:1px solid #3d332f;margin-top:34px;padding-top:30px;}
+  .rl{display:flex;justify-content:space-between;align-items:baseline;padding:15px 0;border-bottom:1px solid #2c2422;gap:14px;}
+  .rl:last-of-type{border-bottom:none;}
+  .rl .a{font-size:14.5px;color:#9c9184;flex:1;}
+  .rl .b{font-family:'Playfair Display',serif;font-size:23px;color:#fff;white-space:nowrap;}
+  .destaque-res{background:var(--vinho);border-radius:14px;padding:26px 28px;margin-top:24px;text-align:center;}
+  .destaque-res .dl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#f0c9a0;font-weight:600;}
+  .destaque-res .dv{font-family:'Playfair Display',serif;font-size:clamp(34px,8vw,46px);color:#fff;line-height:1.15;margin-top:8px;font-weight:600;}
+  .destaque-res .dn{font-size:13.5px;color:#f5e0e3;margin-top:8px;}
+  .aviso{font-size:12.5px;color:#79706a;font-style:italic;text-align:center;margin-top:20px;line-height:1.6;}
+
+  ul.lista{list-style:none;margin:22px 0;}
+  ul.lista li{padding:11px 0 11px 28px;position:relative;border-bottom:1px solid #f2ece3;}
+  ul.lista li:last-child{border-bottom:none;}
+  ul.lista li::before{content:'◆';position:absolute;left:0;top:16px;color:var(--vinho);font-size:9px;}
+
+  .encerra{text-align:center;padding:70px 0 30px;}
+  .encerra .brinde{font-family:'Playfair Display',serif;font-style:italic;font-size:25px;color:var(--vinho);margin-top:26px;}
+  .encerra .nome{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#a3988f;margin-top:8px;}
+  footer{text-align:center;padding:0 0 60px;}
+  footer .logo{font-family:'Playfair Display',serif;font-size:19px;color:var(--tinta);}
+  footer .logo span{color:var(--vinho);}
+  footer p{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#b8ada4;margin-top:8px;}
+
+  @media(max-width:480px){
+    .wrap{padding:0 20px;}
+    section{padding:48px 0;}
+    .calc{padding:30px 20px;border-radius:18px;}
+    .box,.box-escuro{padding:24px 20px;}
+    td,th{padding:11px 10px;font-size:13.5px;}
+    .passo{padding:18px 16px;gap:14px;}
+    .rl .b{font-size:20px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="selo">All Win Academy · Modelo de Recorrência</div>
+    <h1>Do pacote à <em>recorrência</em></h1>
+    <p class="sub">Como transformar pacientes que compram três meses em pacientes que ficam o ano inteiro, com receita previsível e sem cobrar ninguém.</p>
+    <div class="risco"></div>
+  </div>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="tag">O diagnóstico</div>
+    <h2>Você vende bem. E revende o tempo todo.</h2>
+    <p>Pacote de trinta, noventa ou cento e oitenta dias funciona. O problema aparece no que acontece depois: cada paciente que termina precisa ser convencida de novo, e o seu faturamento sobe e desce conforme o seu esforço comercial daquele mês.</p>
+    <p>Isso cria três desgastes que quase toda nutricionista carrega em silêncio:</p>
+    <ul class="lista">
+      <li><strong>Receita imprevisível</strong> · você nunca sabe quanto entra no mês que vem, porque depende de quantas renovações você conseguir</li>
+      <li><strong>Venda que nunca termina</strong> · você é nutricionista, e passa boa parte do tempo vendendo em vez de atender</li>
+      <li><strong>Paciente que some no meio</strong> · ela some quando o pacote acaba, muitas vezes antes do resultado consolidar</li>
+    </ul>
+    <div class="citacao">"A paciente que fica seis meses volta a engordar. A que fica doze meses muda de vida."</div>
+    <p>Existe ainda a perda invisível: a mulher que quis, gostou da avaliação, viu o valor do plano de cento e oitenta dias e não conseguiu comprometer aquele valor de uma vez. Ela some em silêncio e ninguém contabiliza.</p>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="tag">A virada</div>
+    <h2>O modelo de assinatura recorrente</h2>
+    <p>A ideia é simples e muda a natureza do seu negócio: em vez de vender blocos que terminam, você oferece um acompanhamento anual com pagamento mensal recorrente e consultas distribuídas ao longo dos doze meses.</p>
+
+    <div class="passos">
+      <div class="passo">
+        <div class="n">01</div>
+        <div class="t"><strong>A avaliação vira compromisso</strong>Ao agendar, a paciente paga um sinal de confirmação, depois abatido no plano. Isso reduz falta na agenda e já qualifica quem chega.</div>
+      </div>
+      <div class="passo">
+        <div class="n">02</div>
+        <div class="t"><strong>A primeira parcela é maior</strong>A primeira consulta é a mais densa: anamnese completa, montagem do plano alimentar e configuração do aplicativo. A parcela de entrada remunera esse trabalho e protege você desde o começo.</div>
+      </div>
+      <div class="passo">
+        <div class="n">03</div>
+        <div class="t"><strong>As consultas se distribuem no ano</strong>Encontros ao longo dos doze meses, com ajustes ilimitados e acesso contínuo ao app. A paciente sente acompanhamento de verdade, não um pacote correndo contra o relógio.</div>
+      </div>
+      <div class="passo">
+        <div class="n">04</div>
+        <div class="t"><strong>A cobrança sai das suas costas</strong>Uma empresa parceira administra toda a recorrência. Se a paciente atrasa, a próxima consulta e o acesso ao app ficam suspensos até regularizar. Você nunca precisa cobrar ninguém.</div>
+      </div>
+      <div class="passo">
+        <div class="n">05</div>
+        <div class="t"><strong>A receita vira base</strong>Cada paciente que entra hoje continua entrando na conta nos meses seguintes. O faturamento deixa de depender de quantas vendas novas você fez naquele mês.</div>
+      </div>
+    </div>
+
+    <div class="box-escuro">
+      <div class="bt">Por que é ainda mais seguro na nutrição</div>
+      <p>Diferente de um procedimento entregue de uma vez, aqui a entrega acontece ao longo do tempo. Se a paciente interrompe o pagamento, o atendimento seguinte simplesmente não acontece. <strong>Você nunca fica exposta a um serviço já prestado e não pago.</strong></p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="tag">Comparação</div>
+    <h2>O mesmo trabalho, outro resultado</h2>
+    <p>Veja o que acontece com uma paciente ao longo de um ano nos dois modelos.</p>
+    <table>
+      <tr><th>Modelo</th><th>Como funciona</th><th style="text-align:right">Receita no ano</th></tr>
+      <tr><td><strong>Pacote de 180 dias</strong></td><td>Ela compra, termina em seis meses e você precisa vender de novo. Boa parte não renova.</td><td class="v">R$ 1.380</td></tr>
+      <tr><td><strong>Dois pacotes seguidos</strong></td><td>No cenário ideal, com renovação e desconto, quando a paciente permanece.</td><td class="v">R$ 2.691</td></tr>
+      <tr class="forte"><td><strong>Assinatura anual</strong></td><td>Ela entra uma vez, permanece doze meses e você não vende de novo.</td><td class="v">R$ 2.988</td></tr>
+    </table>
+    <div class="box">
+      <div class="bt">A leitura honesta</div>
+      <p>Para a paciente, a diferença mensal é pequena, e ela ganha um ano inteiro de acompanhamento em vez de seis meses. Para você, <strong>o valor por paciente mais que dobra e o esforço comercial some</strong>. É o mesmo atendimento, com outra estrutura de entrada.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="tag">Simulador</div>
+    <h2>Quanto isso vale na sua agenda</h2>
+    <p>Mova os controles com os seus números reais e veja a conta se formar.</p>
+
+    <div class="calc">
+      <div class="calc-head">
+        <div class="ct">Calculadora de recorrência</div>
+        <h3>Simule o seu ano</h3>
+        <p>Ajuste os valores e acompanhe o resultado</p>
+      </div>
+
+      <div class="campo">
+        <label>Mensalidade do acompanhamento</label>
+        <div class="val" id="v-mens">R$ 249</div>
+        <input type="range" id="mens" min="99" max="800" step="10" value="249">
+        <div class="lim"><span>R$ 99</span><span>R$ 800</span></div>
+      </div>
+
+      <div class="campo">
+        <label>Peso da primeira parcela</label>
+        <div class="val" id="v-ent">2x a mensalidade</div>
+        <input type="range" id="ent" min="1" max="4" step="0.5" value="2">
+        <div class="lim"><span>1x</span><span>4x</span></div>
+      </div>
+
+      <div class="campo">
+        <label>Novas pacientes por mês</label>
+        <div class="val" id="v-nov">6 pacientes</div>
+        <input type="range" id="nov" min="1" max="30" step="1" value="6">
+        <div class="lim"><span>1</span><span>30</span></div>
+      </div>
+
+      <div class="campo">
+        <label>Permanência média no plano</label>
+        <div class="val" id="v-perm">12 meses</div>
+        <input type="range" id="perm" min="3" max="12" step="1" value="12">
+        <div class="lim"><span>3</span><span>12</span></div>
+      </div>
+
+      <div class="res">
+        <div class="rl"><span class="a">Primeira parcela de cada paciente</span><span class="b" id="r-prim">R$ 498</span></div>
+        <div class="rl"><span class="a">Valor total por paciente no plano</span><span class="b" id="r-total">R$ 0</span></div>
+        <div class="rl"><span class="a">Receita no primeiro mês</span><span class="b" id="r-m1">R$ 0</span></div>
+        <div class="rl"><span class="a">Receita no sexto mês</span><span class="b" id="r-m6">R$ 0</span></div>
+        <div class="rl"><span class="a">Receita no décimo segundo mês</span><span class="b" id="r-m12">R$ 0</span></div>
+        <div class="rl"><span class="a">Pacientes ativas ao fim do ano</span><span class="b" id="r-ativas">0</span></div>
+
+        <div class="destaque-res">
+          <div class="dl">Receita total em 12 meses</div>
+          <div class="dv" id="r-ano">R$ 0</div>
+          <div class="dn" id="r-nota">Base recorrente entrando todo mês</div>
+        </div>
+
+        <p class="aviso">A curva sobe porque cada nova paciente se soma às que já estão pagando. Essa é a diferença entre vender pacotes e construir base recorrente.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section>
+    <div class="tag">Além do dinheiro</div>
+    <h2>O que muda na sua entrega</h2>
+    <ul class="lista">
+      <li><strong>Resultado real</strong> · doze meses de acompanhamento consolidam mudança de hábito, e paciente com resultado vira depoimento e indicação</li>
+      <li><strong>Agenda previsível</strong> · você passa a saber quantas vagas tem disponíveis e quanto entra, o que permite planejar a sua vida</li>
+      <li><strong>Menos venda, mais clínica</strong> · o tempo que hoje vai para convencer volta para o que você realmente ama fazer</li>
+      <li><strong>Porta aberta</strong> · a mulher que não conseguia comprometer o valor de um pacote inteiro passa a conseguir entrar</li>
+    </ul>
+    <div class="box">
+      <div class="bt">Um cuidado importante</div>
+      <p>Recorrência não é baixar o preço. É manter o valor do seu trabalho intacto e mudar a forma de acesso. <strong>Quem barateia atrai quem busca o mais barato. Quem viabiliza atrai quem já desejava e precisava de estrutura.</strong></p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <div class="encerra">
+    <h2 style="font-size:clamp(26px,5.5vw,34px)">Suas pacientes já querem ficar.</h2>
+    <p style="max-width:540px;margin:0 auto;">O que falta é um caminho que caiba na vida delas e uma estrutura que não dependa de você cobrar ninguém. É exatamente isso que nós vamos montar juntas.</p>
+    <div class="brinde">Brindaremos,</div>
+    <div class="nome">Maria Clara · All Win Academy</div>
+  </div>
+
+  <footer>
+    <div class="logo">All Win <span>Academy</span></div>
+    <p>Modelo de Recorrência · Consultoria Business Core</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var ids=['mens','ent','nov','perm'],el={};
+  ids.forEach(function(i){el[i]=document.getElementById(i);});
+  function m(n){return 'R$ '+Math.round(n).toLocaleString('pt-BR');}
+
+  function calc(){
+    var M=+el.mens.value, E=+el.ent.value, N=+el.nov.value, P=+el.perm.value;
+    var primeira=M*E;
+    var totalPaciente=primeira+M*(P-1);
+
+    document.getElementById('v-mens').textContent=m(M);
+    document.getElementById('v-ent').textContent=E+'x a mensalidade';
+    document.getElementById('v-nov').textContent=N+(N===1?' paciente':' pacientes');
+    document.getElementById('v-perm').textContent=P+(P===1?' mês':' meses');
+
+    var mensal=[],ativasFim=0;
+    for(var mes=1;mes<=12;mes++){
+      var r=N*primeira, ativas=N;
+      for(var k=1;k<P;k++){
+        if(mes-k>=1){ r+=N*M; ativas+=N; }
+      }
+      mensal.push(r);
+      if(mes===12) ativasFim=ativas;
+    }
+    var ano=mensal.reduce(function(a,b){return a+b;},0);
+
+    document.getElementById('r-prim').textContent=m(primeira);
+    document.getElementById('r-total').textContent=m(totalPaciente);
+    document.getElementById('r-m1').textContent=m(mensal[0]);
+    document.getElementById('r-m6').textContent=m(mensal[5]);
+    document.getElementById('r-m12').textContent=m(mensal[11]);
+    document.getElementById('r-ativas').textContent=ativasFim+(ativasFim===1?' paciente':' pacientes');
+    document.getElementById('r-ano').textContent=m(ano);
+    document.getElementById('r-nota').textContent='Com '+ativasFim+' pacientes ativas entrando todo mês no fim do ano';
+  }
+  ids.forEach(function(i){el[i].addEventListener('input',calc);});
+  calc();
+})();
+</script>
+</body>
+</html>
