@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>21 Dias de Conteúdo · Renata Biolchi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --creme:#F6F0E9; --papel:#FCFAF6; --marsala:#7A2733; --marsala-esc:#571A24;
+    --terra:#A86B54; --terra-cl:#C08A6E; --nude:#E4CFC3; --nude-cl:#EFE1D8;
+    --tinta:#382622; --tinta-suave:#6E574F; --ouro:#C6A15B; --salvia:#7C8A69; --linha:#E7D7CB;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--creme); color:var(--tinta); font-family:'Jost',sans-serif; font-weight:400; line-height:1.6; -webkit-font-smoothing:antialiased; padding-bottom:80px}
+  .wrap{max-width:680px; margin:0 auto; padding:0 20px}
+
+  /* Cabeçalho */
+  header{background:linear-gradient(160deg,var(--marsala),var(--marsala-esc)); color:var(--creme); padding:44px 0 38px; position:relative; overflow:hidden}
+  header::after{content:"R"; position:absolute; right:-24px; bottom:-56px; font-family:'Cormorant Garamond',serif; font-size:280px; font-style:italic; font-weight:500; color:rgba(198,161,91,.10); line-height:1}
+  .eyebrow{font-size:12px; letter-spacing:.32em; text-transform:uppercase; font-weight:500; color:var(--ouro); margin-bottom:12px}
+  header h1{font-family:'Cormorant Garamond',serif; font-weight:500; font-size:41px; line-height:1.05; margin-bottom:12px; position:relative; z-index:1}
+  header h1 em{font-style:italic; color:var(--nude-cl)}
+  header p{max-width:440px; font-size:15px; font-weight:300; color:rgba(246,240,233,.85); position:relative; z-index:1}
+
+  /* Painel progresso */
+  .painel{background:var(--papel); border:1px solid var(--linha); border-radius:18px; padding:18px 22px 20px; margin:-24px auto 30px; position:relative; z-index:2; box-shadow:0 16px 38px -26px rgba(87,26,36,.5)}
+  .painel-topo{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:13px}
+  .painel-topo .rot{font-size:11.5px; letter-spacing:.22em; text-transform:uppercase; color:var(--terra); font-weight:500}
+  .cont{font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:var(--tinta-suave)}
+  .cont b{color:var(--marsala); font-style:normal; font-weight:600}
+  .barra{height:11px; border-radius:20px; background:var(--nude-cl); overflow:hidden}
+  .barra-in{height:100%; width:0; background:linear-gradient(90deg,var(--terra),var(--marsala) 80%); border-radius:20px; transition:width .5s cubic-bezier(.22,.61,.36,1)}
+
+  /* Núcleo */
+  .nucleo{background:linear-gradient(158deg,var(--marsala),var(--marsala-esc)); color:var(--creme); border-radius:22px; padding:30px 26px 32px; margin:8px 0 34px; position:relative; overflow:hidden; border:1px solid rgba(198,161,91,.35)}
+  .nucleo::before{content:"♥"; position:absolute; right:20px; top:16px; font-size:22px; color:rgba(198,161,91,.5)}
+  .nucleo .selo{font-size:11px; letter-spacing:.3em; text-transform:uppercase; font-weight:600; color:var(--ouro); margin-bottom:6px}
+  .nucleo h2{font-family:'Cormorant Garamond',serif; font-weight:500; font-style:italic; font-size:30px; margin-bottom:16px; line-height:1.1}
+  .nucleo p{font-size:15px; font-weight:300; color:rgba(246,240,233,.92); margin-bottom:13px; line-height:1.68}
+  .nucleo p:last-child{margin-bottom:0}
+  .nucleo b{font-weight:500; color:var(--nude-cl)}
+  .nucleo .assina{margin-top:18px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:var(--ouro)}
+
+  /* Maré / bloco de funil */
+  .mare{margin:34px 0 16px}
+  .mare .faixa{display:flex; align-items:center; gap:10px; margin-bottom:5px}
+  .mare .bolinha{width:11px; height:11px; border-radius:50%}
+  .mare h3{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:24px; color:var(--marsala)}
+  .mare .dias{font-size:12px; color:var(--terra); font-weight:500; letter-spacing:.05em}
+  .mare p{font-size:13.5px; font-weight:300; color:var(--tinta-suave); margin-left:21px; line-height:1.55}
+
+  /* Card de dia */
+  .dia{background:var(--papel); border:1px solid var(--linha); border-radius:16px; padding:0; margin-bottom:12px; overflow:hidden; transition:border-color .2s}
+  .dia.feito{background:#F1F0E7; border-color:#D9DCC9}
+  .dia-topo{display:flex; align-items:center; gap:13px; padding:15px 17px 12px}
+  .num{flex:0 0 auto; width:44px; height:44px; border-radius:12px; background:var(--nude-cl); display:flex; flex-direction:column; align-items:center; justify-content:center; line-height:1}
+  .num .d{font-family:'Cormorant Garamond',serif; font-weight:600; font-size:20px; color:var(--marsala)}
+  .num .l{font-size:8px; letter-spacing:.1em; text-transform:uppercase; color:var(--terra); margin-top:1px}
+  .dia.feito .num{background:#E3E5D6}
+  .cab-txt{flex:1; min-width:0}
+  .etiqueta{display:inline-block; font-size:9.5px; letter-spacing:.14em; text-transform:uppercase; font-weight:600; padding:2px 9px; border-radius:20px; color:#fff; margin-bottom:3px}
+  .cab-txt h4{font-family:'Jost',sans-serif; font-weight:500; font-size:15.5px; color:var(--tinta); line-height:1.25}
+  .dia.feito .cab-txt h4{text-decoration:line-through; text-decoration-color:var(--nude); color:var(--tinta-suave)}
+  .check{flex:0 0 auto; width:26px; height:26px; border-radius:50%; border:1.8px solid var(--terra); display:grid; place-items:center; cursor:pointer; transition:.25s}
+  .check svg{width:13px; height:13px; opacity:0; transform:scale(.4); transition:.25s}
+  .dia.feito .check{background:var(--salvia); border-color:var(--salvia)}
+  .dia.feito .check svg{opacity:1; transform:scale(1)}
+  .corpo{padding:0 17px 16px 74px}
+  .grava{font-size:13.5px; font-weight:300; color:var(--tinta); line-height:1.55; margin-bottom:12px}
+  .grava .g{font-size:10px; letter-spacing:.14em; text-transform:uppercase; color:var(--terra); font-weight:600; display:block; margin-bottom:3px}
+  .bilhete{background:var(--nude-cl); border-radius:12px; padding:12px 14px; position:relative}
+  .bilhete .aspas{font-family:'Cormorant Garamond',serif; font-size:30px; color:var(--terra-cl); line-height:.5; position:absolute; left:9px; top:14px}
+  .bilhete p{font-size:13.5px; font-weight:300; color:var(--marsala-esc); line-height:1.5; margin-left:16px; font-style:italic}
+  .bilhete .mc{display:block; margin-left:16px; margin-top:6px; font-size:11px; font-weight:500; color:var(--terra); font-style:normal; letter-spacing:.03em}
+  @media(max-width:480px){.corpo{padding-left:17px}}
+
+  /* Selo final */
+  .selo-fim{display:none; text-align:center; background:linear-gradient(158deg,var(--marsala),var(--marsala-esc)); color:var(--creme); border-radius:22px; padding:36px 28px; margin:20px 0}
+  .selo-fim.ver{display:block; animation:sobe .6s ease}
+  @keyframes sobe{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .selo-fim .e{font-family:'Cormorant Garamond',serif; font-size:38px; color:var(--ouro); margin-bottom:6px}
+  .selo-fim h2{font-family:'Cormorant Garamond',serif; font-style:italic; font-weight:500; font-size:29px; margin-bottom:10px}
+  .selo-fim p{font-weight:300; font-size:15px; color:rgba(246,240,233,.88); max-width:400px; margin:0 auto}
+
+  .rodape{text-align:center; margin-top:28px; padding-top:22px; border-top:1px solid var(--linha)}
+  .recomecar{background:none; border:none; cursor:pointer; font-size:12.5px; font-weight:400; letter-spacing:.12em; text-transform:uppercase; color:var(--terra); padding:8px 14px; border-radius:20px; transition:.2s}
+  .recomecar:hover{color:var(--marsala); background:var(--nude-cl)}
+  .assinatura{margin-top:16px; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:15px; color:var(--tinta-suave)}
+  .assinatura b{color:var(--marsala); font-style:normal; font-weight:600; letter-spacing:.3px}
+  :focus-visible{outline:2.5px solid var(--ouro); outline-offset:3px}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Desafio de Conteúdo · Renata Biolchi</div>
+    <h1>21 dias<br>de <em>coragem</em></h1>
+    <p>Um vídeo por dia, uma coragem por dia. Estou aqui com você em cada um deles. Marque o que já gravou e veja a sua constância crescer.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="painel">
+    <div class="painel-topo"><span class="rot">Sua constância</span><span class="cont"><b id="feitos">0</b> de 21 dias gravados</span></div>
+    <div class="barra"><div class="barra-in" id="barra"></div></div>
+  </div>
+
+  <div id="lista"></div>
+
+  <div class="selo-fim" id="selo">
+    <div class="e">✦</div>
+    <h2>Você atravessou</h2>
+    <p>Vinte e um dias, vinte e um atos de coragem. Você não é mais a mesma que começou. Agora a gente lê o que deu certo e transforma essa voz em demanda.</p>
+  </div>
+
+  <div class="rodape">
+    <button class="recomecar" id="recomecar">Recomeçar o desafio</button>
+    <div class="assinatura">com você em cada dia, <b>Maria Clara</b></div>
+  </div>
+</div>
+
+<script>
+const nucleo = {
+  historia: [
+    "Antes de gravar qualquer vídeo, lembre de onde você fala.",
+    "Você saiu da sua cidade sem ninguém saber. Terminou um relacionamento, arrumou as malas e foi pra Balneário recomeçar sozinha, queimando os barcos, sem deixar uma porta pra voltar atrás.",
+    "Repare na ordem das coisas. Antes de mudar o rosto, você mudou de vida. Antes de tocar na pele, você se posicionou com você mesma. O procedimento estético veio só depois, quando você já tinha tomado a decisão mais corajosa de todas, a de recomeçar.",
+    "E quando você foi, tudo mudou. A confiança, o cabelo, o rosto. Você virou a prova viva do que entrega pras suas pacientes, uma mulher que se escolheu primeiro.",
+    "Agora existe um novo barco pra queimar, a coragem de aparecer e produzir. É a mesma Renata que atravessou o desconhecido uma vez. Ela consegue de novo. É daqui, dessa história, que cada um desses 21 vídeos vai nascer."
+  ]
+};
+
+const dias = [
+  // TOPO — ser encontrada (1 a 7)
+  {f:"topo", t:"Dia 1 gravando pra esse perfil", g:"Olhe pra câmera e diga: dia 1 de 21 gravando pra esse perfil. Se apresente, diga seu nome, o que você faz e o que as pessoas vão ver por aqui nos próximos dias.", b:"Respira. O primeiro é sempre o mais difícil, e você vai fazer ele hoje mesmo. Ele não precisa estar perfeito, precisa existir. Grava, posta e vem comemorar comigo. Você acabou de sair do lugar."},
+  {f:"topo", t:"Mito x verdade", g:"Escolha um mito comum, como preenchimento deixar artificial ou botox congelar o rosto, e derrube com verdade e leveza.", b:"Você domina isso melhor do que imagina. Fala como se estivesse explicando pra uma amiga insegura. É assim que a confiança atravessa a tela."},
+  {f:"topo", t:"O erro que todo mundo comete", g:"Mostre um erro comum de autocuidado ou de pele que você vê no consultório, e o jeito certo de fazer.", b:"Ensinar é o jeito mais bonito de mostrar autoridade sem precisar se gabar. Entrega valor e deixa a pessoa querendo mais."},
+  {f:"topo", t:"3 sinais de que é hora de se cuidar", g:"Fale três sinais de que uma mulher está pronta pra voltar a cuidar de si. Toque no emocional, não só no estético.", b:"Hoje o vídeo toca o coração antes de tocar a técnica. Fala com a mulher, é ela quem decide."},
+  {f:"topo", t:"Um dia na clínica", g:"Mostre um pedacinho do seu dia, o ambiente, o preparo, o cuidado nos detalhes. Deixe o mundo ver o seu cantinho.", b:"As pessoas confiam no que conhecem. Mostra o cuidado que já é seu de nascença, ele fala por você."},
+  {f:"topo", t:"A pergunta que mais me fazem", g:"Responda a pergunta que mais te fazem no dia a dia. Você já sabe qual é.", b:"Essa você responde de olhos fechados. Transforma o que te perguntam todo dia em conteúdo que trabalha por você."},
+  {f:"topo", t:"Antes e depois com história", g:"Traga um antes e depois, mas conte a história da pessoa, o que ela sentia antes e como se sentiu depois.", b:"Uma semana inteira, olha até onde você chegou. O antes e depois é a prova, mas é a história por trás que emociona. Conta ela."},
+  // MEIO — criar vínculo (8 a 14)
+  {f:"meio", t:"O seu núcleo em vídeo", g:"Conte por que você faz o que faz e a sua história de recomeço. Leia o seu núcleo acima antes de gravar, ele é o roteiro do coração.", b:"Esse é o vídeo mais importante dos 21 dias. Respira fundo e conta a sua verdade. Ninguém no mundo faz o que você faz do jeito que você faz, porque ninguém viveu o que você viveu. Vai."},
+  {f:"meio", t:"No que eu acredito", g:"Diga uma crença sua sobre beleza e autoestima, algo que te separa de quem só vende procedimento.", b:"Diz no que você acredita sem medo. Quem concorda vira sua gente, e é a sua gente que a gente quer por perto."},
+  {f:"meio", t:"O que só existe em mim", g:"Mostre o que torna o seu trabalho único, o seu olhar, o seu método, o seu jeito de cuidar.", b:"Mostra o que só existe em você. A sua diferença não se copia, ela se sente."},
+  {f:"meio", t:"A transformação de uma paciente", g:"Conte a transformação de uma paciente real, com foco no que mudou pra além do espelho.", b:"Uma história real vale mais que mil argumentos. Conta a virada de alguém que confiou em você."},
+  {f:"meio", t:"O cuidado por trás da técnica", g:"Mostre como você avalia um rosto, o raciocínio por trás de uma harmonização bem feita.", b:"Deixa transparecer o cuidado que existe em cada decisão sua. É isso que separa a técnica da arte."},
+  {f:"meio", t:"Acolhendo o medo dela", g:"Acolha um medo comum, como ficar artificial ou exagerar, e explique como você conduz com naturalidade.", b:"Acolhe o medo dela antes de responder. Quem se sente compreendida abaixa a guarda e escuta."},
+  {f:"meio", t:"Quando eu me priorizei", g:"Conte o que mudou na sua vida quando você se priorizou. Conecte com o que suas pacientes buscam.", b:"Fala do que mudou em você quando você se escolheu. A sua história é a ponte pra história dela."},
+  // FUNDO — gerar demanda (15 a 21)
+  {f:"fundo", t:"O resultado e o sentimento", g:"Mostre um resultado e o sentimento por trás dele, a mulher voltando a se reconhecer no espelho.", b:"Hoje você desperta o desejo. Mostra o resultado e o sentimento que vem junto, porque é o sentimento que faz agir."},
+  {f:"fundo", t:"Deixa ela falar por você", g:"Traga um depoimento de paciente, em vídeo ou em print narrado por você.", b:"Deixa a sua paciente falar por você. A palavra de quem viveu vale mais que qualquer promessa."},
+  {f:"fundo", t:"Como é a primeira consulta", g:"Explique passo a passo como é a primeira consulta com você, pra tirar o medo do desconhecido.", b:"Tira o medo do desconhecido. Quando ela entende o caminho, marcar deixa de ser um salto no escuro."},
+  {f:"fundo", t:"O procedimento certo pra cada fase", g:"Fale do procedimento ideal pra cada momento da mulher, e convide a descobrir o dela.", b:"Mostra que existe o cuidado certo pra cada fase dela. Cuidar é personalizar."},
+  {f:"fundo", t:"O convite carinhoso", g:"Convide pra uma avaliação com acolhimento, mostrando que o primeiro passo é simples.", b:"Hoje você convida com carinho. Sem pressão, só a mão estendida de quem tem algo bom pra oferecer."},
+  {f:"fundo", t:"Prova e chamada", g:"Um antes e depois forte com chamada clara pra ação. Diga como agendar com você.", b:"Prova mais chamada. Mostra o resultado e diz o próximo passo com clareza. Quem quer, precisa saber como chegar até você."},
+  {f:"fundo", t:"Fechando o ciclo", g:"Feche o ciclo. Conte o que você aprendeu nesses 21 dias e convide quem chegou agora a te conhecer.", b:"Chegou ao fim e você não desistiu. Olha o tamanho disso. Fecha contando o que aprendeu e abre a porta pra quem chegou agora. Você não é mais a mesma de 21 dias atrás."}
+];
+
+const mares = {
+  topo:{nome:"Topo · Ser encontrada", cor:"#C08A6E", dias:"Dias 1 a 7", desc:"Vídeos que alcançam quem ainda não te conhece e criam a primeira faísca de curiosidade."},
+  meio:{nome:"Meio · Criar vínculo", cor:"#A86B54", dias:"Dias 8 a 14", desc:"Vídeos que aprofundam a relação, mostram quem você é e por que confiar em você."},
+  fundo:{nome:"Fundo · Gerar demanda", cor:"#7A2733", dias:"Dias 15 a 21", desc:"Vídeos que despertam o desejo e conduzem a mulher certa até o agendamento."}
+};
+
+const CHAVE = "desafio-21-dias-renata-v1";
+let estado = {};
+try{ estado = JSON.parse(localStorage.getItem(CHAVE)) || {}; }catch(e){ estado = {}; }
+
+const lista = document.getElementById('lista');
+
+function mareHTML(key){
+  const m = mares[key];
+  return `<div class="mare"><div class="faixa"><span class="bolinha" style="background:${m.cor}"></span><h3>${m.nome}</h3></div><div style="margin-left:21px"><span class="dias">${m.dias}</span><p style="margin-left:0">${m.desc}</p></div></div>`;
+}
+
+function nucleoHTML(){
+  const ps = nucleo.historia.map(p=>`<p>${p}</p>`).join('');
+  return `<div class="nucleo"><div class="selo">O seu núcleo</div><h2>De onde você fala</h2>${ps}<div class="assina">leia antes de cada vídeo</div></div>`;
+}
+
+let html = '';
+let marAtual = '';
+dias.forEach((dd, i)=>{
+  // insere titulo de maré quando muda
+  if(dd.f !== marAtual){
+    html += mareHTML(dd.f);
+    marAtual = dd.f;
+  }
+  // insere o núcleo entre topo e meio (antes do dia 8)
+  if(i === 7){ html = html.replace(mareHTML('meio'), nucleoHTML() + mareHTML('meio')); }
+
+  const key = 'd'+i;
+  const feito = !!estado[key];
+  const m = mares[dd.f];
+  html += `
+    <div class="dia ${feito?'feito':''}" data-k="${key}">
+      <div class="dia-topo">
+        <div class="num"><span class="d">${i+1}</span><span class="l">dia</span></div>
+        <div class="cab-txt">
+          <span class="etiqueta" style="background:${m.cor}">${dd.f}</span>
+          <h4>${dd.t}</h4>
+        </div>
+        <div class="check" role="button" tabindex="0" aria-pressed="${feito}">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="corpo">
+        <div class="grava"><span class="g">o que gravar</span>${dd.g}</div>
+        <div class="bilhete"><span class="aspas">&ldquo;</span><p>${dd.b}</p><span class="mc">Maria Clara</span></div>
+      </div>
+    </div>`;
+});
+lista.innerHTML = html;
+
+// interação
+document.querySelectorAll('.dia').forEach(el=>{
+  const check = el.querySelector('.check');
+  const toggle = ()=>{
+    const k = el.dataset.k;
+    const agora = !el.classList.contains('feito');
+    el.classList.toggle('feito', agora);
+    check.setAttribute('aria-pressed', agora);
+    estado[k] = agora;
+    salva(); atualiza();
+  };
+  check.addEventListener('click', toggle);
+  check.addEventListener('keydown', e=>{ if(e.key===' '||e.key==='Enter'){ e.preventDefault(); toggle(); }});
+});
+
+function salva(){ try{ localStorage.setItem(CHAVE, JSON.stringify(estado)); }catch(e){} }
+
+function atualiza(){
+  const feitos = Object.values(estado).filter(Boolean).length;
+  document.getElementById('feitos').textContent = feitos;
+  document.getElementById('barra').style.width = (feitos/21*100)+'%';
+  document.getElementById('selo').classList.toggle('ver', feitos===21);
+}
+
+document.getElementById('recomecar').addEventListener('click', ()=>{
+  if(confirm('Isso apaga todos os checks e recomeça o desafio do zero. Deseja continuar?')){
+    estado = {}; salva();
+    document.querySelectorAll('.dia').forEach(el=>{ el.classList.remove('feito'); el.querySelector('.check').setAttribute('aria-pressed','false'); });
+    atualiza(); window.scrollTo({top:0,behavior:'smooth'});
+  }
+});
+
+atualiza();
+</script>
+</body>
+</html>
