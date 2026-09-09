@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="IS">
+    <title>Isadora Silva | Brand & Business Intelligence</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%238B5A3C' width='192' height='192' rx='45'/%3E%3Ctext x='96' y='130' font-family='Georgia, serif' font-size='110' font-weight='700' text-anchor='middle' fill='%23FAFAF8'%3EIS%3C/text%3E%3C/svg%3E">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%238B5A3C' width='192' height='192' rx='45'/%3E%3Ctext x='96' y='130' font-family='Georgia, serif' font-size='110' font-weight='700' text-anchor='middle' fill='%23FAFAF8'%3EIS%3C/text%3E%3C/svg%3E">
+    <style>
+        :root {
+            --primary: #8B5A3C;
+            --primary-dark: #6B3E1F;
+            --primary-light: #A67C52;
+            --accent-gold: #D4AF37;
+            --accent-champagne: #E8D4B8;
+            --dark-bg: #0D0D0D;
+            --light-bg: #FAFAF8;
+            --text-dark: #1A1A1A;
+            --text-light: #6B6B6B;
+            --border-color: #E8E8E4;
+            --shadow-sm: 0 2px 8px rgba(13, 13, 13, 0.08);
+            --shadow-md: 0 4px 16px rgba(13, 13, 13, 0.12);
+            --font-serif: 'Georgia', 'Garamond', serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--dark-bg);
+            color: var(--light-bg);
+            padding: 40px 24px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-header {
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-mark {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--primary-light));
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--dark-bg);
+            font-family: var(--font-serif);
+            box-shadow: var(--shadow-md);
+        }
+
+        .brand-name {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .nav-section {
+            margin-bottom: 32px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px 12px;
+            margin-bottom: 4px;
+            color: rgba(250, 250, 248, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-gold);
+            border-left-color: var(--accent-gold);
+            padding-left: 16px;
+        }
+
+        .nav-link.active {
+            color: var(--accent-gold);
+            border-left-color: var(--accent-gold);
+            padding-left: 16px;
+            font-weight: 500;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            background-color: var(--light-bg);
+        }
+
+        .header {
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-title {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(139, 90, 60, 0.05);
+        }
+
+        .content-wrapper {
+            padding: 48px;
+            max-width: 1200px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            border-radius: 2px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .card-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .section-content {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 2px;
+            margin-bottom: 32px;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .content-block p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .content-block ul {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .content-block li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .content-block li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .framework-box {
+            background-color: rgba(139, 90, 60, 0.02);
+            border-left: 4px solid var(--primary);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 2px;
+        }
+
+        .framework-box strong {
+            color: var(--primary);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        .table th {
+            background-color: rgba(139, 90, 60, 0.05);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 13px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .table tr:hover {
+            background-color: rgba(139, 90, 60, 0.02);
+        }
+
+        .evidence-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: var(--accent-gold);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 2px;
+            margin: 8px 8px 8px 0;
+        }
+
+        .hypothesis-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: rgba(212, 175, 55, 0.2);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 2px;
+            margin: 8px 8px 8px 0;
+        }
+
+        .insight-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: rgba(139, 90, 60, 0.15);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 2px;
+            margin: 8px 8px 8px 0;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .text-accent {
+            color: var(--primary);
+        }
+
+        .text-gold {
+            color: var(--accent-gold);
+        }
+
+        .separator {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 32px 0;
+        }
+
+        .highlight-quote {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--primary);
+            padding: 24px;
+            background-color: rgba(139, 90, 60, 0.05);
+            border-left: 4px solid var(--accent-gold);
+            margin: 24px 0;
+        }
+
+        .manifesto {
+            background: linear-gradient(135deg, rgba(139, 90, 60, 0.03), rgba(212, 175, 55, 0.03));
+            padding: 48px;
+            border-radius: 2px;
+            border: 1px solid var(--border-color);
+        }
+
+        .manifesto h2 {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .manifesto p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+            .main-content {
+                margin-left: 240px;
+            }
+            .content-wrapper {
+                padding: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+                padding: 24px;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .header {
+                padding: 16px 24px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .content-wrapper {
+                padding: 24px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-mark">IS</div>
+                <div class="brand-name">Isadora Silva</div>
+                <div class="brand-subtitle">Brand & Business Intelligence</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Estratégia</div>
+                <div class="nav-link active" data-section="dashboard">Visão Geral</div>
+                <div class="nav-link" data-section="diagnostico">Diagnóstico Central</div>
+                <div class="nav-link" data-section="soberania">Universo Soberana</div>
+                <div class="nav-link" data-section="pmi">Framework PMI</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">A Mulher</div>
+                <div class="nav-link" data-section="necessidade">Em Necessidade</div>
+                <div class="nav-link" data-section="transicao">A Transição</div>
+                <div class="nav-link" data-section="consumidora">Mapa da Consumidora</div>
+                <div class="nav-link" data-section="valores">Os 5 Valores</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Marca</div>
+                <div class="nav-link" data-section="posicionamento">Posicionamento</div>
+                <div class="nav-link" data-section="mecanismo">O Mecanismo</div>
+                <div class="nav-link" data-section="narrativa">Grande Narrativa</div>
+                <div class="nav-link" data-section="vocabulario">Vocabulário</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Produtos</div>
+                <div class="nav-link" data-section="arquitetura">Arquitetura</div>
+                <div class="nav-link" data-section="consorcio">Consórcio Beauty</div>
+                <div class="nav-link" data-section="ltv">Motor de LTV</div>
+                <div class="nav-link" data-section="funil">Funil do Consórcio</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Conteúdo</div>
+                <div class="nav-link" data-section="arsenal">Arsenal de Conteúdo</div>
+                <div class="nav-link" data-section="pilares">Pilares Editoriais</div>
+                <div class="nav-link" data-section="pmi-conteudo">Matriz PMI</div>
+                <div class="nav-link" data-section="conversao">Alta Conversão</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Experiência</div>
+                <div class="nav-link" data-section="jornada">Mapa da Jornada</div>
+                <div class="nav-link" data-section="storytelling">Storytelling</div>
+                <div class="nav-link" data-section="experiencia">Experiência</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Performance</div>
+                <div class="nav-link" data-section="metricas">Métricas</div>
+                <div class="nav-link" data-section="gargalos">Gargalos</div>
+                <div class="nav-link" data-section="plano90">Plano 90 Dias</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Encerramento</div>
+                <div class="nav-link" data-section="mapa">O Grande Mapa</div>
+                <div class="nav-link" data-section="manifesto">Manifesto</div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- HEADER -->
+            <div class="header">
+                <div>
+                    <div class="header-title">Isadora Silva</div>
+                    <div class="header-subtitle">Da estética como procedimento à estética como expressão de uma mulher soberana</div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">Download PDF</button>
+                </div>
+            </div>
+
+            <!-- CONTENT WRAPPER -->
+            <div class="content-wrapper">
+
+                <!-- DASHBOARD -->
+                <section id="dashboard" class="section active">
+                    <h2 class="section-title">Visão Geral Estratégica</h2>
+                    <p class="section-subtitle">Os indicadores centrais que definem sua empresa</p>
+
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-label">Território de Marca</div>
+                            <div class="card-title">Soberania Feminina</div>
+                            <div class="card-text">Estética, planejamento, desejo, autoimagem e realização se encontram em um único território</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Produto High Ticket</div>
+                            <div class="card-title">Consórcio Beauty</div>
+                            <div class="card-text">Transforma um desejo em projeto, conectando planejamento e realização</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Motor de Resultado</div>
+                            <div class="card-title">Lifetime Value</div>
+                            <div class="card-text">Confiança, experiência, resultado, recorrência, indicação e comunidade</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Principal Desejo</div>
+                            <div class="card-title">Reconhecimento</div>
+                            <div class="card-text">A mulher quer voltar a se reconhecer como prioridade da própria vida</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Principal Barreira</div>
+                            <div class="card-title">Postergação</div>
+                            <div class="card-text">"Depois". A narrativa de que sua necessidade vem por último</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Maior Oportunidade</div>
+                            <div class="card-title">Educação</div>
+                            <div class="card-text">Ensinar a mulher a se colocar novamente no centro de suas próprias decisões</div>
+                        </div>
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O que você acredita que vende vs. O que a cliente acredita que está comprando</h3>
+                            <p>A Isadora acredita que vende procedimentos estéticos. Mas a realidade é mais profunda.</p>
+                            <p>A cliente está comprando a possibilidade de voltar a se reconhecer. Está investindo em uma imagem que sente ter perdido. Está preparando-se para uma nova fase. Está materializando um desejo que vem sendo adiado. Está priorizando a si mesma de forma concreta.</p>
+                            <div class="framework-box">
+                                <strong>O distinguidor estratégico:</strong> A diferença entre vender um procedimento e convidar uma mulher a investir em si mesma está no território em que você posiciona sua marca.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FOOTER -->
+                <div class="footer">
+                    <p>Isadora Silva | Brand & Business Intelligence | 2026</p>
+                    <p>Este documento é material estratégico proprietário. Não deve ser compartilhado sem autorização.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                link.classList.add('active');
+
+                // Get section ID
+                const sectionId = link.getAttribute('data-section');
+
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Show selected section
+                const selectedSection = document.getElementById(sectionId);
+                if (selectedSection) {
+                    selectedSection.classList.add('active');
+                }
+
+                // Update header
+                const headerTitle = document.querySelector('.header-title');
+                headerTitle.textContent = link.textContent;
+            });
+        });
+
+        window.addEventListener('load', () => {
+            const activeSection = document.querySelector('.section.active');
+            if (activeSection) {
+                activeSection.scrollIntoView();
+            }
+        });
+    </script>
+</body>
+</html>
