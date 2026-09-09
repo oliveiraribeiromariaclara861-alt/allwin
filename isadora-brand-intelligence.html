@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Isadora Silva | Brand & Business Intelligence</title>
+    <style>
+        :root {
+            --primary: #8B5A3C;
+            --primary-dark: #6B3E1F;
+            --primary-light: #A67C52;
+            --accent-gold: #D4AF37;
+            --accent-champagne: #E8D4B8;
+            --dark-bg: #0D0D0D;
+            --light-bg: #FAFAF8;
+            --text-dark: #1A1A1A;
+            --text-light: #6B6B6B;
+            --border-color: #E8E8E4;
+            --shadow-sm: 0 2px 8px rgba(13, 13, 13, 0.08);
+            --shadow-md: 0 4px 16px rgba(13, 13, 13, 0.12);
+            --font-serif: 'Georgia', 'Garamond', serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* LAYOUT PRINCIPAL */
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background-color: var(--dark-bg);
+            color: var(--light-bg);
+            padding: 40px 24px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-header {
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-mark {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--primary-light));
+            border-radius: 2px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--dark-bg);
+        }
+
+        .brand-name {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        /* NAVEGAÇÃO */
+        .nav-section {
+            margin-bottom: 32px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px 12px;
+            margin-bottom: 4px;
+            color: rgba(250, 250, 248, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-gold);
+            border-left-color: var(--accent-gold);
+            padding-left: 16px;
+        }
+
+        .nav-link.active {
+            color: var(--accent-gold);
+            border-left-color: var(--accent-gold);
+            padding-left: 16px;
+            font-weight: 500;
+        }
+
+        /* MAIN CONTENT */
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            background-color: var(--light-bg);
+        }
+
+        /* HEADER */
+        .header {
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-title {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(139, 90, 60, 0.05);
+        }
+
+        /* CONTENT SECTIONS */
+        .content-wrapper {
+            padding: 48px;
+            max-width: 1200px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* DASHBOARD CARDS */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 32px;
+            border-radius: 2px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+        }
+
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .card-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+        }
+
+        .card-metric {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--primary);
+            margin: 16px 0;
+        }
+
+        /* CONTENT SECTIONS */
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .section-content {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 2px;
+            margin-bottom: 32px;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .content-block p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .content-block ul {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .content-block li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .content-block li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .framework-box {
+            background-color: rgba(139, 90, 60, 0.02);
+            border-left: 4px solid var(--primary);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 2px;
+        }
+
+        .framework-box strong {
+            color: var(--primary);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        .table th {
+            background-color: rgba(139, 90, 60, 0.05);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 13px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .table tr:hover {
+            background-color: rgba(139, 90, 60, 0.02);
+        }
+
+        .evidence-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: var(--accent-gold);
+            color: white;
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 2px;
+            margin: 8px 8px 8px 0;
+        }
+
+        .hypothesis-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: rgba(212, 175, 55, 0.2);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 2px;
+            margin: 8px 8px 8px 0;
+        }
+
+        .insight-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: rgba(139, 90, 60, 0.15);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 600;
+            border-radius: 2px;
+            margin: 8px 8px 8px 0;
+        }
+
+        /* FOOTER */
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+            .main-content {
+                margin-left: 240px;
+            }
+            .content-wrapper {
+                padding: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+                padding: 24px;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .header {
+                padding: 16px 24px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .content-wrapper {
+                padding: 24px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* UTILITIES */
+        .text-accent {
+            color: var(--primary);
+        }
+
+        .text-gold {
+            color: var(--accent-gold);
+        }
+
+        .separator {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 32px 0;
+        }
+
+        .highlight-quote {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--primary);
+            padding: 24px;
+            background-color: rgba(139, 90, 60, 0.05);
+            border-left: 4px solid var(--accent-gold);
+            margin: 24px 0;
+        }
+
+        /* MANIFESTO */
+        .manifesto {
+            background: linear-gradient(135deg, rgba(139, 90, 60, 0.03), rgba(212, 175, 55, 0.03));
+            padding: 48px;
+            border-radius: 2px;
+            border: 1px solid var(--border-color);
+        }
+
+        .manifesto h2 {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+            letter-spacing: -0.5px;
+        }
+
+        .manifesto p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(13, 13, 13, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 2px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+
+        /* SIDEBAR SCROLL */
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-mark">IS</div>
+                <div class="brand-name">Isadora Silva</div>
+                <div class="brand-subtitle">Brand & Business Intelligence</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Estratégia</div>
+                <div class="nav-link active" data-section="dashboard">Visão Geral</div>
+                <div class="nav-link" data-section="diagnostico">Diagnóstico Central</div>
+                <div class="nav-link" data-section="soberania">Universo Soberana</div>
+                <div class="nav-link" data-section="pmi">Framework PMI</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">A Mulher</div>
+                <div class="nav-link" data-section="necessidade">Em Necessidade</div>
+                <div class="nav-link" data-section="transicao">A Transição</div>
+                <div class="nav-link" data-section="consumidora">Mapa da Consumidora</div>
+                <div class="nav-link" data-section="valores">Os 5 Valores</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Marca</div>
+                <div class="nav-link" data-section="posicionamento">Posicionamento</div>
+                <div class="nav-link" data-section="mecanismo">O Mecanismo</div>
+                <div class="nav-link" data-section="narrativa">Grande Narrativa</div>
+                <div class="nav-link" data-section="vocabulario">Vocabulário</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Produtos</div>
+                <div class="nav-link" data-section="arquitetura">Arquitetura</div>
+                <div class="nav-link" data-section="consorcio">Consórcio Beauty</div>
+                <div class="nav-link" data-section="ltv">Motor de LTV</div>
+                <div class="nav-link" data-section="funil">Funil do Consórcio</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Conteúdo</div>
+                <div class="nav-link" data-section="arsenal">Arsenal de Conteúdo</div>
+                <div class="nav-link" data-section="pilares">Pilares Editoriais</div>
+                <div class="nav-link" data-section="pmi-conteudo">Matriz PMI</div>
+                <div class="nav-link" data-section="conversao">Alta Conversão</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Experiência</div>
+                <div class="nav-link" data-section="jornada">Mapa da Jornada</div>
+                <div class="nav-link" data-section="storytelling">Storytelling</div>
+                <div class="nav-link" data-section="experiencia">Experiência</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Performance</div>
+                <div class="nav-link" data-section="metricas">Métricas</div>
+                <div class="nav-link" data-section="gargalos">Gargalos</div>
+                <div class="nav-link" data-section="plano90">Plano 90 Dias</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Encerramento</div>
+                <div class="nav-link" data-section="mapa">O Grande Mapa</div>
+                <div class="nav-link" data-section="manifesto">Manifesto</div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- HEADER -->
+            <div class="header">
+                <div>
+                    <div class="header-title">Isadora Silva</div>
+                    <div class="header-subtitle">Da estética como procedimento à estética como expressão de uma mulher soberana</div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-secondary">Download PDF</button>
+                </div>
+            </div>
+
+            <!-- CONTENT WRAPPER -->
+            <div class="content-wrapper">
+
+                <!-- DASHBOARD -->
+                <section id="dashboard" class="section active">
+                    <h2 class="section-title">Visão Geral Estratégica</h2>
+                    <p class="section-subtitle">Os indicadores centrais que definem sua empresa</p>
+
+                    <div class="dashboard-grid">
+                        <div class="card">
+                            <div class="card-label">Território de Marca</div>
+                            <div class="card-title">Soberania Feminina</div>
+                            <div class="card-text">Estética, planejamento, desejo, autoimagem e realização se encontram em um único território</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Produto High Ticket</div>
+                            <div class="card-title">Consórcio Beauty</div>
+                            <div class="card-text">Transforma um desejo em projeto, conectando planejamento e realização</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Motor de Resultado</div>
+                            <div class="card-title">Lifetime Value</div>
+                            <div class="card-text">Confiança, experiência, resultado, recorrência, indicação e comunidade</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Principal Desejo</div>
+                            <div class="card-title">Reconhecimento</div>
+                            <div class="card-text">A mulher quer voltar a se reconhecer como prioridade da própria vida</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Principal Barreira</div>
+                            <div class="card-title">Postergação</div>
+                            <div class="card-text">"Depois". A narrativa de que sua necessidade vem por último</div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-label">Maior Oportunidade</div>
+                            <div class="card-title">Educação</div>
+                            <div class="card-text">Ensinar a mulher a se colocar novamente no centro de suas próprias decisões</div>
+                        </div>
+                    </div>
+
+                    <div class="separator"></div>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O que você acredita que vende vs. O que a cliente acredita que está comprando</h3>
+                            <p>A Isadora acredita que vende procedimentos estéticos. Mas a realidade é mais profunda.</p>
+                            <p>A cliente está comprando a possibilidade de voltar a se reconhecer. Está investindo em uma imagem que sente ter perdido. Está preparando-se para uma nova fase. Está materializando um desejo que vem sendo adiado. Está priorizando a si mesma de forma concreta.</p>
+                            <div class="framework-box">
+                                <strong>O distinguidor estratégico:</strong> A diferença entre vender um procedimento e convidar uma mulher a investir em si mesma está no território em que você posiciona sua marca.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- DIAGNÓSTICO CENTRAL -->
+                <section id="diagnostico" class="section">
+                    <h2 class="section-title">Diagnóstico Central</h2>
+                    <p class="section-subtitle">A leitura profunda do seu posicionamento atual</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Produto Técnico vs. Valor Percebido vs. Significado</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Elemento</th>
+                                        <th>Descrição</th>
+                                        <th>Status Atual</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Harmonização Facial</td>
+                                        <td>Procedimento técnico específico</td>
+                                        <td><span class="evidence-badge">EVIDÊNCIA</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Recuperar a imagem</td>
+                                        <td>Valor emocional do procedimento</td>
+                                        <td><span class="insight-badge">INSIGHT</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Soberania</td>
+                                        <td>Significado identitário da experiência</td>
+                                        <td><span class="hypothesis-badge">HIPÓTESE A VALIDAR</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>O que a cliente pode estar realmente comprando</h3>
+                            <ul>
+                                <li>A possibilidade de usar novamente aquela roupa que faz anos não usa</li>
+                                <li>Sentir-se mais confortável em fotografias com a família</li>
+                                <li>Perceber-se mais cuidada quando se vê no espelho</li>
+                                <li>Recuperar uma imagem que sente ter perdido com o tempo</li>
+                                <li>Preparar-se para uma nova fase profissional ou pessoal</li>
+                                <li>Materializar um desejo que vinha adiando há anos</li>
+                                <li>Fazer uma escolha consciente de priorizar a si mesma</li>
+                            </ul>
+                        </div>
+
+                        <div class="highlight-quote">
+                            "A cliente não compra um procedimento. Ela compra a possibilidade de voltar a existir para si mesma."
+                        </div>
+                    </div>
+                </section>
+
+                <!-- UNIVERSO SOBERANA -->
+                <section id="soberania" class="section">
+                    <h2 class="section-title">Universo Soberana</h2>
+                    <p class="section-subtitle">O conceito central que estrutura toda a marca</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O que é uma Mulher Soberana para essa marca?</h3>
+                            <p>Soberania não é luxo. Não é rebeldia. É clareza. É a mulher que entende o próprio valor e toma decisões a partir desse entendimento.</p>
+
+                            <div class="framework-box">
+                                <strong>Definição estratégica:</strong> Uma mulher soberana é aquela que reconhece que ela mesma é patrimônio. Que ela sustenta muito ao seu redor e que sua manutenção, seu cuidado e sua imagem também precisam entrar no planejamento. Que seus desejos são tão legítimos quanto as necessidades dos outros. E que priorizar-se não significa abandonar o entorno, mas incluir a si no orçamento.
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Sete Pilares da Soberania</h3>
+                            <ul>
+                                <li><strong>Soberania sobre a própria imagem:</strong> Ela escolhe como quer ser vista, não pela opinião, mas por si mesma</li>
+                                <li><strong>Soberania sobre suas escolhas:</strong> Ela investe em si porque tomou a decisão, não porque foi influenciada</li>
+                                <li><strong>Soberania sobre seu tempo:</strong> Ela reserva tempo para si sem culpa</li>
+                                <li><strong>Soberania sobre seus recursos:</strong> Ela planeja seu orçamento para incluir seus desejos</li>
+                                <li><strong>Soberania sobre sua fase de vida:</strong> Ela não nega a passagem do tempo, ela a cultiva</li>
+                                <li><strong>Soberania sobre como deseja ser percebida:</strong> Ela não desaparece, ela se refina</li>
+                                <li><strong>Soberania sobre a decisão de investir em si:</strong> Ela enxerga isso como inteligência, não como vaidade</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Uma Distinção Fundamental</h3>
+                            <p>A soberania existe ANTES do procedimento. Você não cria soberania. Você cria ferramentas para quem já é soberana expressar isso.</p>
+                            <div class="framework-box">
+                                <strong>A lógica correta:</strong> A soberania é um ativo que essa mulher já possui. Seu procedimento não cria soberania. Ele ajuda a mulher que já é soberana a se ver, a se cuidar e a materializar as decisões que ela já tomou sobre si mesma.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FRAMEWORK PMI -->
+                <section id="pmi" class="section">
+                    <h2 class="section-title">Framework PMI</h2>
+                    <p class="section-subtitle">Pirâmide de Maslow Invertida - Leitura estratégica proprietária</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O Framework Proprietário</h3>
+                            <p>PMI é um modelo de leitura do comportamento do consumo desenvolvido especificamente para esta marca. Não é uma alteração científica de Maslow. É uma ferramenta estratégica que inverte a pergunta central.</p>
+
+                            <div class="framework-box">
+                                <strong>A pergunta tradicional:</strong> "O que falta nessa mulher?"<br>
+                                <strong>A pergunta PMI:</strong> "O que existe nessa mulher que merece ser priorizado?"
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Como Funciona</h3>
+                            <p>Em vez de comunicar a partir da necessidade ou do problema evidente, investigamos a mulher a partir do ativo que ela deseja preservar, potencializar ou recuperar.</p>
+                            <p>A mulher é o ativo central. Ela sustenta família, negócios, relacionamentos, carreira, filhos, decisões, patrimônio, rotina, projetos e sonhos.</p>
+                            <p>E frequentemente coloca a própria necessidade por último.</p>
+
+                            <div class="framework-box">
+                                <strong>O território narrativo poderoso:</strong> "Você não é o último item da sua própria lista."
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Os Cinco Níveis de Leitura</h3>
+                            <ul>
+                                <li><strong>Nível 1 - Autorrealização:</strong> Ela quer materializar o desejo que vinha adiando. Quer se reconhecer. Quer existir para si mesma.</li>
+                                <li><strong>Nível 2 - Autoestima:</strong> Ela quer se ver como prioridade. Quer perceber seu próprio valor. Quer investir em si com clareza.</li>
+                                <li><strong>Nível 3 - Pertencimento:</strong> Ela quer se sentir cuidada. Quer uma experiência que reconheça seu valor. Quer comunidade.</li>
+                                <li><strong>Nível 4 - Segurança:</strong> Ela quer confiar no processo. Quer saber que o resultado virá. Quer tranquilidade.</li>
+                                <li><strong>Nível 5 - Fisiológico:</strong> Ela quer um resultado concreto. Um rosto mais harmônico. Uma imagem que reflete quem ela realmente é.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- A MULHER EM NECESSIDADE -->
+                <section id="necessidade" class="section">
+                    <h2 class="section-title">A Mulher em Necessidade</h2>
+                    <p class="section-subtitle">O padrão comportamental que sua marca vai ajudar a quebrar</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O que é "Necessidade"</h3>
+                            <p>Não é apenas necessidade financeira. É um ecosistema de necessidades que criam um padrão de comportamento.</p>
+
+                            <h3 style="margin-top: 40px;">As Dimensões da Necessidade</h3>
+                            <ul>
+                                <li>Necessidade de tempo (sempre com pressa)</li>
+                                <li>Necessidade de aprovação (precisa que entendam suas escolhas)</li>
+                                <li>Necessidade de cuidar dos outros (é sua função)</li>
+                                <li>Necessidade de economizar para todos (o dinheiro é para a família)</li>
+                                <li>Necessidade de resolver problemas (sempre há algo urgente)</li>
+                                <li>Necessidade de trabalhar (sustenta o entorno)</li>
+                                <li>Necessidade de colocar a família em primeiro lugar (é esperado)</li>
+                                <li>Necessidade de ser forte (não pode parecer fraca)</li>
+                                <li>Necessidade de não parar (parar é falhar)</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">O Comportamento Resultante</h3>
+                            <p>Isso cria uma narrativa que ela repete para si mesma:</p>
+                            <ul>
+                                <li>"Eu faço depois"</li>
+                                <li>"Agora não é prioridade"</li>
+                                <li>"Quando sobrar dinheiro"</li>
+                                <li>"Quando meus filhos crescerem"</li>
+                                <li>"Quando minha vida estiver organizada"</li>
+                                <li>"Quando eu emagrecer"</li>
+                                <li>"Quando eu tiver tempo"</li>
+                                <li>"Quando eu merecer"</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">O Custo Comportamental</h3>
+                            <div class="framework-box">
+                                <strong>O que acontece com essa postergação:</strong><br>
+                                Os anos passam. A imagem que ela idealiza fica para depois. O desejo não morre, mas se transforma em mágoa. Ela passa a se ver como alguém que nunca consegue priorizar a si mesma. E isso retroalimenta a necessidade de ser forte, de cuidar dos outros, de adiar.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- A TRANSIÇÃO -->
+                <section id="transicao" class="section">
+                    <h2 class="section-title">A Transição</h2>
+                    <p class="section-subtitle">Da mulher em necessidade à mulher que se prioriza</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>A Jornada em Sete Passos</h3>
+                            <p>Sua marca não vende procedimentos. Ela facilita uma transição. A mulher entra em um lugar e sai de outro.</p>
+
+                            <div class="framework-box">
+                                MULHER EM NECESSIDADE<br>
+                                ↓<br>
+                                MULHER QUE PERCEBE O PADRÃO<br>
+                                ↓<br>
+                                MULHER QUE SE PRIORIZA<br>
+                                ↓<br>
+                                MULHER QUE INVESTE EM SI<br>
+                                ↓<br>
+                                MULHER QUE MATERIALIZA DESEJOS<br>
+                                ↓<br>
+                                MULHER SOBERANA<br>
+                                ↓<br>
+                                MULHER QUE INDICA
+                            </div>
+
+                            <h3 style="margin-top: 40px;">O Papel da Estética nessa Transição</h3>
+                            <p>A estética não é futilidade. Não é obrigação. Não é solução emocional mágica.</p>
+                            <p>A estética é uma das formas pelas quais uma mulher pode materializar uma escolha de autocuidado, imagem e identidade. Ela torna concreta uma decisão intangível.</p>
+
+                            <div class="framework-box">
+                                <strong>Exemplo:</strong> Não é só "melhorar os lábios". É "investir em mim e ver isso refletido no espelho quando me vejo". É a prova concreta de que ela é capaz de priorizar a si mesma.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MAPA DA CONSUMIDORA -->
+                <section id="consumidora" class="section">
+                    <h2 class="section-title">Mapa Profundo da Consumidora</h2>
+                    <p class="section-subtitle">Cinco perfis comportamentais da sua cliente ideal</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Perfil 1: A Profissional Invisível</h3>
+                            <div class="framework-box">
+                                <strong>Momento de vida:</strong> 35-48 anos, carreira consolidada, filhos em fase escolar ou independentes<br>
+                                <strong>Tensão central:</strong> Colocou a carreira e a família em primeiro lugar por tanto tempo que perdeu de vista a própria imagem<br>
+                                <strong>Dor profunda:</strong> Não se reconhece mais. Seus olhos envelheceram. Suas escolhas de roupa ficaram invisíveis<br>
+                                <strong>Desejo identitário:</strong> Voltar a ser vista. Não como mãe ou profissional, mas como mulher<br>
+                                <strong>Gatilho:</strong> Uma foto antiga. Um comentário inesperado. Uma situação social onde se sentiu fora de lugar
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Perfil 2: A Investidora Consciente</h3>
+                            <div class="framework-box">
+                                <strong>Momento de vida:</strong> 40-55 anos, renda estável, início da transição para novas fases<br>
+                                <strong>Tensão central:</strong> Enxerga cuidados estéticos como investimento, não como gasto<br>
+                                <strong>Dor profunda:</strong> Medo de ficar invisível. Sabe que sua imagem afeta suas oportunidades<br>
+                                <strong>Desejo prático:</strong> Um protocolo claro. Saber quanto vai custar, quanto tempo vai durar, qual será o resultado<br>
+                                <strong>Sensibilidade:</strong> Alta sensibilidade a confiança. Precisa acreditar que você entende ela
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Perfil 3: A Mulher em Transição</h3>
+                            <div class="framework-box">
+                                <strong>Momento de vida:</strong> 45-60 anos, transição de menstruação, redefinição de identidade<br>
+                                <strong>Tensão central:</strong> Seu corpo está mudando e ela sente que está envelhecendo rápido<br>
+                                <strong>Desejo social:</strong> Não quer desaparecer. Quer se refinar, não se apagar<br>
+                                <strong>Linguagem que aproxima:</strong> "Cultivar", "maturidade", "expressão", "escolha"<br>
+                                <strong>Linguagem que afasta:</strong> "Anti-idade", "rejuvenescimento", "erradicar rugas"
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Perfil 4: A Empreendedora do Self</h3>
+                            <div class="framework-box">
+                                <strong>Momento de vida:</strong> 28-42 anos, construindo negócio próprio ou carreira, sem filhos ou filhos pequenos<br>
+                                <strong>Tensão central:</strong> Seu tempo é escasso e precisa ser rentável<br>
+                                <strong>Desejo identitário:</strong> Estar sempre apresentável. Ser referência. Confiança<br>
+                                <strong>Risco percebido:</strong> Medo de downtime. Medo de parecer insegura durante o processo<br>
+                                <strong>Tipo de prova que procura:</strong> Resultados em tempo real. Antes e depois. Pessoas como ela
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Perfil 5: A Mulher Curiosa</h3>
+                            <div class="framework-box">
+                                <strong>Momento de vida:</strong> Qualquer idade, alta educação, curioso sobre tecnologia e inovação<br>
+                                <strong>Tensão central:</strong> Quer entender COMO funciona antes de fazer<br>
+                                <strong>Desejo prático:</strong> Educação profunda. Saber os mecanismos. Ser tratada como inteligente<br>
+                                <strong>Conteúdo que converte:</strong> Explicações técnicas. Ciência por trás. Método claro<br>
+                                <strong>Sensibilidade a preço:</strong> Baixa. Quer qualidade. Vai pagar bem por quem a educa
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- OS 5 VALORES -->
+                <section id="valores" class="section">
+                    <h2 class="section-title">Mapa dos 5 Valores</h2>
+                    <p class="section-subtitle">Como cada camada de valor funciona na decisão de compra</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Os Cinco Níveis de Valor</h3>
+                            <p>Toda decisão de compra passa por cinco camadas. Compreendê-las é compreender por que a cliente realmente compra.</p>
+
+                            <h3 style="margin-top: 40px;">1. Valor Funcional</h3>
+                            <p>O que tecnicamente o procedimento faz. "Harmoniza os lábios." "Suaviza as linhas de expressão." "Melhora a textura da pele."</p>
+                            <div class="framework-box">
+                                <strong>Status atual na sua comunicação:</strong> <span class="evidence-badge">OVERCOMUNICADO</span><br>
+                                A maioria do seu conteúdo fala aqui. Técnica, especificação, mecanismo. Importante, mas não é o que vende.
+                            </div>
+
+                            <h3 style="margin-top: 40px;">2. Valor Estético</h3>
+                            <p>Como fica. A imagem resultante. "Você fica mais harmônica." "Seu rosto respira melhor." "Você fica natural."</p>
+                            <div class="framework-box">
+                                <strong>Status atual na sua comunicação:</strong> <span class="evidence-badge">COMUNICADO</span><br>
+                                Você mostra resultados. Mostra antes e depois. Isso é importante e está bem.
+                            </div>
+
+                            <h3 style="margin-top: 40px;">3. Valor Emocional</h3>
+                            <p>Como se sente. "Você se sente mais confiante." "Se reconhece no espelho." "Sente-se cuidada."</p>
+                            <div class="framework-box">
+                                <strong>Status atual na sua comunicação:</strong> <span class="hypothesis-badge">SUBCOMUNICADO</span><br>
+                                Aqui existe espaço para se aprofundar. Como é se reconhecer novamente? Como é escolher priorizar a si mesma?
+                            </div>
+
+                            <h3 style="margin-top: 40px;">4. Valor Social</h3>
+                            <p>Como é percebida. "As pessoas notam que algo mudou." "Você recebe mais atenção." "Você é referência."</p>
+                            <div class="framework-box">
+                                <strong>Status atual na sua comunicação:</strong> <span class="insight-badge">OPORTUNIDADE</span><br>
+                                Existe território aqui para storytelling. Histórias de como mulheres se sentiram percebidas novamente.
+                            </div>
+
+                            <h3 style="margin-top: 40px;">5. Valor Identitário</h3>
+                            <p>Quem ela vira. "Você vira uma mulher que investe em si mesma." "Você vira referência de soberania." "Você vira a mulher que pensa em si."</p>
+                            <div class="framework-box">
+                                <strong>Status atual na sua comunicação:</strong> <span class="hypothesis-badge">NÃO COMUNICADO</span><br>
+                                Este é o maior diferenciador. Qual identidade a mulher está construindo quando escolhe trabalhar com você?
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Qual Camada Domina a Decisão?</h3>
+                            <p>A resposta depende do perfil. Mas em geral, para a sua cliente:</p>
+                            <ul>
+                                <li>A Profissional Invisível compra no valor emocional</li>
+                                <li>A Investidora Consciente compra no valor identitário</li>
+                                <li>A Mulher em Transição compra no valor emocional e social</li>
+                                <li>A Empreendedora do Self compra no valor identitário e social</li>
+                                <li>A Mulher Curiosa compra no valor funcional e emocional</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VOCABULÁRIO -->
+                <section id="vocabulario" class="section">
+                    <h2 class="section-title">Vocabulário da Marca</h2>
+                    <p class="section-subtitle">As palavras que definem como você fala e comunica</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Palavras Proprietárias (Use frequentemente)</h3>
+                            <ul>
+                                <li><strong>Priorização:</strong> Não rebeldia. É inteligência estratégica.</li>
+                                <li><strong>Investimento:</strong> Não gasto ou luxo. É alocação consciente de recursos.</li>
+                                <li><strong>Escolha consciente:</strong> Não impulso. É decisão calculada.</li>
+                                <li><strong>Materializar:</strong> Não sonhar. É transformar desejo em ação.</li>
+                                <li><strong>Reconhecer-se:</strong> Não transformar-se. É voltar a se ver.</li>
+                                <li><strong>Soberania:</strong> Não independência. É autoridade sobre as próprias decisões.</li>
+                                <li><strong>Cuidado:</strong> Não vaidade. É manutenção do patrimônio que é você.</li>
+                                <li><strong>Expressão:</strong> Não disfarce. É comunicação da sua verdade.</li>
+                                <li><strong>Cultivar:</strong> Não erradicar. É abraçar a maturidade.</li>
+                                <li><strong>Refinar:</strong> Não rejuvenescer. É evoluir a própria imagem.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Palavras Proibidas (Nunca use)</h3>
+                            <ul>
+                                <li>"Anti-idade" (nega a vida vivida)</li>
+                                <li>"Rejuvenescimento" (trata envelhecimento como problema)</li>
+                                <li>"Perfeição" (promessa falsa e prejudicial)</li>
+                                <li>"Conquiste sua melhor versão" (genérica e vazia)</li>
+                                <li>"Transforme sua autoestima" (responsabiliza produto por emoção)</li>
+                                <li>"Você merece" (infantiliza a decisão)</li>
+                                <li>"Realce sua beleza" (assume que precisa realçar)</li>
+                                <li>"Luta" ou "Batalha contra o envelhecimento" (linguagem de guerra)</li>
+                                <li>"Defeito" ou "Problema" (patologiza características naturais)</li>
+                                <li>"Salve-se" ou "Escape" (dramatiza e cria urgência artificial)</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Tom de Voz</h3>
+                            <div class="framework-box">
+                                <strong>Como você fala:</strong> Como uma mulher falando de verdade no dia a dia. Acolhedora. Doce. Firme. Sem travessões. Sem academicismo. Sem artificialismo. Com presença emocional real.<br><br>
+
+                                <strong>O que você nunca é:</strong> Genérica. Corporativa. Pushy. Romantizadora. Superficial. Pressurosa.<br><br>
+
+                                <strong>Exemplos de tom correto:</strong><br>
+                                ✓ "Você votou. Ótimo. Significa que tem algo mexendo em você."<br>
+                                ✓ "O que trava você pra começar? Porque quem quer mudar, você quer."<br>
+                                ✓ "Suas dúvidas são legítimas. Mas dúvida sozinha a gente já fez bastante."<br><br>
+
+                                <strong>Exemplos de tom errado:</strong><br>
+                                ✗ "Conquiste sua melhor versão hoje"<br>
+                                ✗ "Você merece se cuidar"<br>
+                                ✗ "Transforme-se agora"<br>
+                                ✗ "Não é Y, é X" (evitar estruturas binárias)
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Arquétipos Que Guiam a Fala</h3>
+                            <ul>
+                                <li><strong>O Amante:</strong> Conecta com o desejo genuíno dela. Reconhece o que ela realmente quer.</li>
+                                <li><strong>O Sábio:</strong> Compreende a jornada. Educa sem ser pedante. Oferece entendimento.</li>
+                                <li><strong>O Herói:</strong> Empodera a ação. Mostra que ela consegue. Cria segurança para avançar.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Estruturas de Frase Proprietárias</h3>
+                            <ul>
+                                <li>"Não é [coisa comum]. É [verdade profunda]."</li>
+                                <li>"Quando você [ação], o que acontece é [transformação]."</li>
+                                <li>"Você [já sabe isso]. Agora é hora de [transformar em ação]."</li>
+                                <li>"A mulher que [descrição comportamental] é a que [resultado]."</li>
+                                <li>"Existe uma maneira de [transformação] sem [sacrifício]."</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- POSICIONAMENTO -->
+                <section id="posicionamento" class="section">
+                    <h2 class="section-title">Posicionamento</h2>
+                    <p class="section-subtitle">O lugar único que sua marca ocupa na mente e no coração</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Posicionamento Desejado</h3>
+                            <div class="framework-box">
+                                Isadora Silva não é apenas uma profissional de estética. É uma consultora de soberania feminina que usa a estética como linguagem para que mulheres invistam em si mesmas de forma consciente, estratégica e transformadora.
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Por que escolher Isadora?</h3>
+                            <p>Não é pelos procedimentos técnicos mais avançados. É porque ela te enxerga como um ativo que merece investimento. É porque ela educou você sobre o próprio valor. É porque ela transformou um desejo em decisão e uma decisão em prática.</p>
+
+                            <h3 style="margin-top: 40px;">O que a diferencia?</h3>
+                            <ul>
+                                <li>Ela não vende procedimentos. Ela facilita escolhas soberanas.</li>
+                                <li>Ela investe em educação da mulher, não apenas em venda.</li>
+                                <li>Ela construiu um consórcio que transforma um desejo em projeto viável.</li>
+                                <li>Ela cria experiência, não apenas procedimento.</li>
+                                <li>Ela tem comunidade, não apenas clientes.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Qual território ela pode dominar?</h3>
+                            <p>O território da estética como expressão de soberania. Onde beleza, planejamento, investimento e identidade se encontram.</p>
+
+                            <h3 style="margin-top: 40px;">Qual promessa pode sustentar?</h3>
+                            <p>"Se você se priorizar agora, materializará desejos que a farão se reconhecer novamente."</p>
+
+                            <h3 style="margin-top: 40px;">Frase Central de Posicionamento</h3>
+                            <div class="highlight-quote">
+                                Isadora Silva: Da estética como procedimento à estética como expressão de uma mulher soberana.
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Vocabulário da Marca</h3>
+                            <ul>
+                                <li>Priorização (não rebeldia)</li>
+                                <li>Investimento (não gasto)</li>
+                                <li>Escolha consciente (não impulso)</li>
+                                <li>Materializar (não sonhar)</li>
+                                <li>Reconhecer-se (não transformar-se)</li>
+                                <li>Soberania (não independência)</li>
+                                <li>Cuidado (não vaidade)</li>
+                                <li>Expressão (não disfarce)</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Palavras Proibidas</h3>
+                            <ul>
+                                <li>"Anti-idade"</li>
+                                <li>"Rejuvenescimento"</li>
+                                <li>"Perfeição"</li>
+                                <li>"Conquiste sua melhor versão"</li>
+                                <li>"Transforme sua autoestima"</li>
+                                <li>"Você merece"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- O MECANISMO -->
+                <section id="mecanismo" class="section">
+                    <h2 class="section-title">O Mecanismo da Marca</h2>
+                    <p class="section-subtitle">Como a promessa se torna realidade na experiência</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>A Lógica do Mecanismo</h3>
+                            <p>Toda promessa precisa de mecanismo. Se você diz "soberania", precisa explicar COMO essa soberania aparece na experiência real.</p>
+
+                            <div class="framework-box">
+                                <strong>O Mecanismo Proprietário Isadora:</strong><br>
+                                EDUCAÇÃO SOBRE SI MESMA<br>
+                                ↓<br>
+                                IDENTIFICAÇÃO DO DESEJO<br>
+                                ↓<br>
+                                PLANEJAMENTO ESTRATÉGICO<br>
+                                ↓<br>
+                                EXPERIÊNCIA TRANSFORMADORA<br>
+                                ↓<br>
+                                RESULTADO RECONHECÍVEL<br>
+                                ↓<br>
+                                RECORRÊNCIA CONSCIENTE
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Como Funciona em Prática</h3>
+                            <ul>
+                                <li><strong>Etapa 1:</strong> A mulher não chega pronta. Ela chega com dúvidas. Você a educa. Você faz perguntas que a ajudam a reconhecer o próprio desejo.</li>
+                                <li><strong>Etapa 2:</strong> Você não vende o procedimento. Você planeja com ela. Qual desejo? Por que agora? Como isso se integra na vida dela?</li>
+                                <li><strong>Etapa 3:</strong> A experiência não é apenas procedimento. É cuidado. É reconhecimento. É a sensação de que alguém a vê.</li>
+                                <li><strong>Etapa 4:</strong> O resultado não é apenas estético. É emocional. Ela se vê no espelho e se reconhece.</li>
+                                <li><strong>Etapa 5:</strong> Ela volta não porque foi vendida. Volta porque viveu uma experiência que a ajudou a se priorizar.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Como isso se torna Protocolo?</h3>
+                            <p>Esse mecanismo pode futuramente ser transformado em:</p>
+                            <ul>
+                                <li><strong>Protocolo de Consulta:</strong> Perguntas específicas que ajudam a mulher a reconhecer seu desejo</li>
+                                <li><strong>Jornada de Experiência:</strong> Cada touchpoint reconhece e valida a escolha dela</li>
+                                <li><strong>Programa de Educação:</strong> Conteúdos que ensinam a mulher sobre si mesma, não apenas sobre procedimentos</li>
+                                <li><strong>Método Isadora:</strong> Um nome para o processo que ela vivencia</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GRANDE NARRATIVA -->
+                <section id="narrativa" class="section">
+                    <h2 class="section-title">A Grande Narrativa da Marca</h2>
+                    <p class="section-subtitle">A história que orienta toda a comunicação</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Manifesto Soberana</h3>
+                            <div class="highlight-quote">
+                                Mulheres inteligentes entendem que elas também são patrimônio. E que manutenção de patrimônio é obrigação, não luxo.
+                            </div>
+
+                            <div class="framework-box" style="margin-top: 32px;">
+                                <strong>Mulheres soberanas não esperam sobrar.</strong> Elas sabem que sobra raramente chega. Elas planejam. Elas reservam. Elas priorizam. Elas não pedem permissão.<br><br>
+
+                                <strong>Priorizar-se não significa abandonar o entorno.</strong> Significa incluir a si no orçamento. Significa que sua imagem, seu corpo, seus desejos também entram no planejamento estratégico da vida.<br><br>
+
+                                <strong>Você não precisa desaparecer para sustentar tudo ao seu redor.</strong> Você pode se refinar. Pode cuidar de si. Pode se reconhecer. E quando faz isso, sustenta melhor.<br><br>
+
+                                <strong>Seu cuidado também precisa entrar no planejamento.</strong> Não como futuro luxo. Como presente investimento. Como decisão consciente de uma mulher que entende o próprio valor.<br><br>
+
+                                <strong>Seu desejo também merece um lugar no orçamento.</strong> Não é capricho. Quando você investe em um desejo que vinha adiando, você reconhece que você também conta. E quando você se coloca novamente no centro de suas próprias decisões, tudo ao seu redor muda.<br><br>
+
+                                <strong>Seu corpo, sua imagem e seus sonhos não precisam ficar eternamente para depois.</strong> Depois nunca chega. Depois é sempre amanhã. Depois é a narrativa de quem acredita que não merece prioridade.<br><br>
+
+                                <strong>Você merece prioridade. A sua própria.</strong> E aqui na Isadora Silva, a gente ajuda você a transformar esse desejo em decisão, essa decisão em planejamento e esse planejamento em experiência.
+                            </div>
+
+                            <h3 style="margin-top: 40px;">As Perguntas Que Orientam a Narrativa</h3>
+                            <ul>
+                                <li>Que mulher você está ensinando sua cliente a ser?</li>
+                                <li>Quando ela entra na sua clínica, ela está comprando um procedimento ou tomando uma decisão sobre si mesma?</li>
+                                <li>Quantas vezes sua cliente aprendeu que ela vem por último?</li>
+                                <li>E se o seu maior diferencial não estivesse no procedimento, mas na maneira como você faz essa mulher tomar posse da própria decisão?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ARQUITETURA DE PRODUTOS -->
+                <section id="arquitetura" class="section">
+                    <h2 class="section-title">Arquitetura de Produtos</h2>
+                    <p class="section-subtitle">A empresa como ecossistema integrado</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>A Jornada de Valor</h3>
+                            <div class="framework-box">
+                                DESCOBERTA<br>
+                                ↓<br>
+                                ENTRADA (Produtos de baixo risco)<br>
+                                ↓<br>
+                                RELACIONAMENTO (Educação e confiança)<br>
+                                ↓<br>
+                                PRIMEIRA COMPRA (Procedimento de transformação)<br>
+                                ↓<br>
+                                HIGH TICKET (Consórcio e programas)<br>
+                                ↓<br>
+                                RECORRÊNCIA (Manutenção e protocolos)<br>
+                                ↓<br>
+                                ASCENSÃO (Novos desejos e categorias)<br>
+                                ↓<br>
+                                INDICAÇÃO (Comunidade e referência)
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Produtos de Entrada</h3>
+                            <p>Baixo risco, alta acessibilidade, resultado visível rápido.</p>
+                            <ul>
+                                <li>Consulta estratégica (diagnóstico de imagem e pele)</li>
+                                <li>Protocolo de pele personalizado (avaliação e recomendação)</li>
+                                <li>Produtos de skincare (venda de linha proprietária)</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Produtos de Confiança</h3>
+                            <p>Investimento médio, resultado moderado, constrói relacionamento.</p>
+                            <ul>
+                                <li>Protocolo de pele profissional (sessão em clínica)</li>
+                                <li>Botox estratégico (pequenas doses, expressão natural)</li>
+                                <li>Preenchedor (lábios, rugas, volume sutil)</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Produtos High Ticket</h3>
+                            <p>Consórcio Beauty e programas estruturados.</p>
+                            <ul>
+                                <li>Consórcio Beauty (qualquer procedimento)</li>
+                                <li>Plano de Assinatura Beauty (recorrência programada)</li>
+                                <li>Protocolo completo de rejuvenescimento</li>
+                                <li>Programa exclusivo de manutenção anual</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Recorrência e Manutenção</h3>
+                            <p>Produtos que alavancam Lifetime Value.</p>
+                            <ul>
+                                <li>Retoque de procedimentos</li>
+                                <li>Skincare de manutenção</li>
+                                <li>Protocolo de preservação de resultados</li>
+                                <li>Programa de fidelidade com benefícios exclusivos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONSÓRCIO BEAUTY -->
+                <section id="consorcio" class="section">
+                    <h2 class="section-title">Consórcio Beauty</h2>
+                    <p class="section-subtitle">A infraestrutura financeira dos sonhos</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O Reposit do Consórcio</h3>
+                            <p>O consórcio não é um produto financeiro. É um produto de realização. É a ferramenta que transforma um desejo em projeto.</p>
+
+                            <div class="framework-box">
+                                <strong>A narrativa:</strong> Quando você tem um desejo que vinha adiando, mas não tem liquidez hoje, existe um jeito de transformar esse desejo em projeto. Existe um jeito de planejar. Existe um jeito de começar a priorizar a si mesma agora, mesmo que o desejo seja realizado mês que vem. Isso é o Consórcio Beauty.
+                            </div>
+
+                            <h3 style="margin-top: 40px;">O Que o Consórcio Resolve</h3>
+                            <ul>
+                                <li>Falta de liquidez (não tenho dinheiro agora)</li>
+                                <li>Prioridade concorrente (preciso pagar outras coisas)</li>
+                                <li>Medo de comprometer o caixa (se gastar com isso, falta dinheiro pra emergência)</li>
+                                <li>Desejo sem planejamento (quero mas não planejei)</li>
+                                <li>Percepção de luxo (parece extravagância)</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">O Diferencial do Consórcio Isadora</h3>
+                            <p>Não é um consórcio genérico. É um consórcio de beleza que conecta planejamento financeiro com realização emocional.</p>
+                            <ul>
+                                <li>Você escolhe o desejo (não é imposto)</li>
+                                <li>Você escolhe o timeline (quando quer ser contemplada)</li>
+                                <li>Você escolhe o procedimento (estética, laser, outros)</li>
+                                <li>Você tem educação sobre como funciona (sem surpresa)</li>
+                                <li>Você tem comunidade de mulheres fazendo o mesmo</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Estrutura Recomendada</h3>
+                            <ul>
+                                <li>Cotas de R$ 1.000 a R$ 5.000</li>
+                                <li>Grupos de 12 a 24 participantes</li>
+                                <li>Taxa de administração clara e conhecida</li>
+                                <li>Documentação transparente</li>
+                                <li>Suporte educativo durante todo o processo</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Importante: Conformidade Legal</h3>
+                            <div class="framework-box">
+                                O consórcio deve ser estruturado como um acordo de prestação de serviços com parcelas. Não como um instrumento financeiro regulado. Trabalhe com profissionais legais para garantir que a estrutura está de acordo com o Código do Consumidor, LGPD, e legislação aplicável.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MOTOR DE LTV -->
+                <section id="ltv" class="section">
+                    <h2 class="section-title">Motor de LTV</h2>
+                    <p class="section-subtitle">Transformando um cliente em relacionamento de longo prazo</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O Modelo de Lifetime Value</h3>
+                            <p>O objetivo não é vender apenas uma cota de consórcio ou um procedimento. É construir uma relação de longo prazo que gera valor continuado.</p>
+
+                            <div class="framework-box">
+                                PRIMEIRO DESEJO (Consórcio)<br>
+                                ↓<br>
+                                CONTEMPLAÇÃO (Ela é selecionada)<br>
+                                ↓<br>
+                                PRIMEIRO PROCEDIMENTO (Realização)<br>
+                                ↓<br>
+                                RESULTADO (Ela se vê)<br>
+                                ↓<br>
+                                MANUTENÇÃO (Skincare, retoque, preservação)<br>
+                                ↓<br>
+                                NOVO DESEJO (Outro procedimento)<br>
+                                ↓<br>
+                                NOVO CONSÓRCIO (Planejamento do próximo)<br>
+                                ↓<br>
+                                NOVO PROCEDIMENTO<br>
+                                ↓<br>
+                                INDICAÇÃO (Ela convida outras mulheres)
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Oportunidades de Recorrência</h3>
+                            <ul>
+                                <li><strong>Acompanhamento:</strong> Contato pós-procedimento, satisfação, ajustes se necessário</li>
+                                <li><strong>Conteúdo educativo:</strong> Guia de cuidados, dicas de preservação, educação sobre novos procedimentos</li>
+                                <li><strong>Programa de manutenção:</strong> Retoque programado, protocolo de preservação</li>
+                                <li><strong>Comunidade:</strong> Grupo exclusivo, eventos, networking com outras mulheres</li>
+                                <li><strong>Novos desejos:</strong> A primeira experiência positiva abre apetite para outros procedimentos</li>
+                                <li><strong>Benefícios exclusivos:</strong> Descontos em manutenção, prioridade em agendamento, consultas educativas</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Cálculo do LTV Estimado</h3>
+                            <p>Considerando:</p>
+                            <ul>
+                                <li>Primeiro procedimento: R$ 2.000</li>
+                                <li>Manutenção anual: R$ 3.000 (4 sessões de R$ 750 cada)</li>
+                                <li>Novo procedimento (ano 2): R$ 2.500</li>
+                                <li>Indicações (estimado 2 por cliente): R$ 4.000</li>
+                                <li>Duração da relação: 5+ anos</li>
+                            </ul>
+                            <p><strong>LTV estimado: R$ 20.000 a R$ 30.000 por cliente</strong></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FUNIL DO CONSÓRCIO -->
+                <section id="funil" class="section">
+                    <h2 class="section-title">Funil do Consórcio</h2>
+                    <p class="section-subtitle">Mapa completo da jornada de conversão</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Os Estágios do Funil</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Estágio</th>
+                                        <th>Estado Mental</th>
+                                        <th>Conteúdo Necessário</th>
+                                        <th>CTA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Descoberta</strong></td>
+                                        <td>"Existe algo assim?"</td>
+                                        <td>Explique o conceito. Histórias. Educação.</td>
+                                        <td>Saiba mais</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Identificação</strong></td>
+                                        <td>"Isso é para mim?"</td>
+                                        <td>Perfis. Exemplos reais. Validação social.</td>
+                                        <td>Veja se se identifica</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Educação</strong></td>
+                                        <td>"Como funciona?"</td>
+                                        <td>Mecanismo. Passo a passo. Transparência.</td>
+                                        <td>Entenda como funciona</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Simulação</strong></td>
+                                        <td>"Quanto vai custar para mim?"</td>
+                                        <td>Calculadora. Exemplos. Números reais.</td>
+                                        <td>Simule sua cota</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Confiança</strong></td>
+                                        <td>"Posso confiar?"</td>
+                                        <td>Prova. Testimoniais. Credibilidade.</td>
+                                        <td>Veja quem já fez</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Decisão</strong></td>
+                                        <td>"Eu quero começar"</td>
+                                        <td>Facilidade. Próximos passos claros.</td>
+                                        <td>Comece agora</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Contratação</strong></td>
+                                        <td>"Estou dentro"</td>
+                                        <td>Documentação clara. Termos. Apoio.</td>
+                                        <td>Assine o contrato</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Acompanhamento</strong></td>
+                                        <td>"Agora o quê?"</td>
+                                        <td>Cronograma. Notificações. Educação.</td>
+                                        <td>Fique informada</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Contemplação</strong></td>
+                                        <td>"Fui escolhida!"</td>
+                                        <td>Celebração. Próximos passos. Agendamento.</td>
+                                        <td>Agende seu procedimento</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Procedimento</strong></td>
+                                        <td>"Finalmente chegou"</td>
+                                        <td>Experiência premium. Cuidado. Reconhecimento.</td>
+                                        <td>Viva a experiência</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Recorrência</strong></td>
+                                        <td>"Quero mais"</td>
+                                        <td>Programa de manutenção. Novo consórcio.</td>
+                                        <td>Mantenha o resultado</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Métricas Chave por Estágio</h3>
+                            <ul>
+                                <li><strong>Descoberta:</strong> Alcance. Visualizações. Engajamento inicial.</li>
+                                <li><strong>Identificação:</strong> Taxa de avanço para educação.</li>
+                                <li><strong>Educação:</strong> Tempo gasto. Cliques em CTA. Permanência.</li>
+                                <li><strong>Simulação:</strong> Número de simulações. Taxa de conclusão.</li>
+                                <li><strong>Confiança:</strong> Taxa de leitura de testimoniais. Leads gerados.</li>
+                                <li><strong>Decisão:</strong> Taxa de conversão de lead para consulta.</li>
+                                <li><strong>Contratação:</strong> Taxa de assinatura. Ticket médio.</li>
+                                <li><strong>Recorrência:</strong> Taxa de recompra. LTV.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ARSENAL DE CONTEÚDO -->
+                <section id="arsenal" class="section">
+                    <h2 class="section-title">Arsenal de Conteúdo</h2>
+                    <p class="section-subtitle">80+ ideias de conteúdo estratégico divididas por categoria</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Soberania (8 ideias)</h3>
+                            <ul>
+                                <li><strong>Mulheres inteligentes como patrimônio:</strong> Reel. Educação. Por que as mulheres mais bem-sucedidas investe em si. Comportamento.</li>
+                                <li><strong>O custo de adiar:</strong> Carrossel. Análise. O que custa não se priorizar? Conversão.</li>
+                                <li><strong>Planejamento vs. Luxo:</strong> Vídeo. Educação. Por que estética é planejamento, não luxo. Objeção.</li>
+                                <li><strong>As mulheres que indicam:</strong> Story. Testimunho. Mulheres que viraram referência depois de trabalhar com você. Prova.</li>
+                                <li><strong>Priorização sem culpa:</strong> Carrossel. Educação. Como priorizar a si mesma sem abandonar o entorno. Mindset.</li>
+                                <li><strong>O que mudou quando comecei a investir em mim:</strong> Vídeo. Depoimento. Histórias de mudança identitária. Conversão.</li>
+                                <li><strong>Soberania não é rebeldia:</strong> Reel. Educação. O que soberania realmente significa. Positioning.</li>
+                                <li><strong>Inventário de ativos:</strong> Checklist. Educação. Como mapear o que você sustenta. Ferramenta educativa.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Autoimagem (8 ideias)</h3>
+                            <ul>
+                                <li><strong>Como você se vê vs. Como você é vista:</strong> Carrossel. Psicologia. Diferença entre autoimagem e imagem percebida. Educação.</li>
+                                <li><strong>O rosto que você merecia ter:</strong> Vídeo. Storytelling. A ideia de cultivar a própria imagem. Desejo.</li>
+                                <li><strong>Antes, durante e depois emocional:</strong> Vídeo. Depoimento. O que muda emocionalmente além do físico. Conversão.</li>
+                                <li><strong>A foto que não tiro mais:</strong> Story. Vulnerabilidade. Mulheres compartilhando inseguranças sobre imagem. Conexão.</li>
+                                <li><strong>Conhecer o próprio rosto:</strong> Tutorial. Educação. Como analisar sua face, simetrias, proporções. Educação.</li>
+                                <li><strong>Imagem e confiança:</strong> Reel. Psicologia. Como a forma como nos vemos afeta como nos relacionamos. Educação.</li>
+                                <li><strong>Estética natural para você:</strong> Guia visual. Educação. Como encontrar um estilo que seja autêntico. Educação.</li>
+                                <li><strong>Meu rosto, minha escolha:</strong> Carrossel. Autorização emocional. A mulher escolhe como quer se ver. Empowerment.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Priorização (8 ideias)</h3>
+                            <ul>
+                                <li><strong>"Depois" é agora:</strong> Reel. Urgência educada. Por que adiar é caro. Objeção.</li>
+                                <li><strong>O que custa ser invisível:</strong> Vídeo ensaio. Análise. Custo profissional e emocional de não se cuidar. Motivation.</li>
+                                <li><strong>A mulher que se prioriza:</strong> Carrossel. Conceitual. Como a vida muda quando você se coloca no centro. Desejo.</li>
+                                <li><strong>Budget da beleza:</strong> Calculadora. Financeiro. Como incluir cuidados no planejamento mensal. Educação.</li>
+                                <li><strong>Perguntas que mudam tudo:</strong> Reel. Coaching. Perguntas para você se fazer se realmente quer adiar. Mindset.</li>
+                                <li><strong>A culpa de se cuidar:</strong> Vídeo. Psicologia. Por que mulheres se sentem culpadas e como desculpabilizar. Educação.</li>
+                                <li><strong>Você já disse "depois" quantas vezes?:</strong> Story poll. Engajamento. Pesquisa com comunidade. Comunidade.</li>
+                                <li><strong>Minha história de priorização:</strong> Vídeo pessoal. Testimonial. Sua jornada de aprender a se priorizar. Conexão.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Estética (8 ideias)</h3>
+                            <ul>
+                                <li><strong>O que é harmonização:</strong> Educativo. Técnico. Explicar procedimento sem usar palavras médicas. Educação.</li>
+                                <li><strong>Naturalidade não é não fazer nada:</strong> Reel. Educação. Desfazer mitos sobre procedimentos naturais. Educação.</li>
+                                <li><strong>Comparar resultados em diferentes fotótipos:</strong> Carrossel. Educação. Mostrar que o mesmo procedimento varia em pessoas diferentes. Inclusão.</li>
+                                <li><strong>Cuidados antes e depois:</strong> Guia. Educação. Como preparar e manter resultados. Educação.</li>
+                                <li><strong>Beleza que envelhece bem:</strong> Vídeo. Conceitual. A ideia de cultivar a maturidade, não fugir dela. Positioning.</li>
+                                <li><strong>Tecnologia vs. Técnica:</strong> Reel. Educação. Por que o aparelho não é tudo. Educação.</li>
+                                <li><strong>Pele que conta histórias:</strong> Vídeo. Poético. A beleza como reflexo de uma vida vivida. Brand voice.</li>
+                                <li><strong>Manutenção como amor próprio:</strong> Reel. Mindset. Ver skincare e retoque como ato de amor. Mindset.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Educação (8 ideias)</h3>
+                            <ul>
+                                <li><strong>O que é PMI (Pirâmide de Maslow Invertida):</strong> Vídeo educativo. Teoria. Explicar seu framework proprietário. Educação.</li>
+                                <li><strong>Os 5 valores de um procedimento:</strong> Carrossel. Educação. Funcional, estético, emocional, social, identitário. Educação.</li>
+                                <li><strong>Matriz de decisão:</strong> Guia. Ferramenta. Como escolher um procedimento pensando em si mesma. Educação.</li>
+                                <li><strong>Psicologia da beleza:</strong> Serie de vídeos. Ciência. Como funciona o psicológico por trás da imagem. Educação.</li>
+                                <li><strong>Protocolo Isadora:</strong> Vídeo. Transparência. Passo a passo de como você trabalha. Educação.</li>
+                                <li><strong>Mitos sobre envelhecimento:</strong> Reel série. Educação. Desmentir crenças limitantes. Educação.</li>
+                                <li><strong>Índice de satisfação:</strong> Pesquisa. Social proof. Compartilhar dados de satisfação de clientes. Prova.</li>
+                                <li><strong>Perguntas frequentes respondidas:</strong> Série de reels. FAQ. Endereçar as principais dúvidas em 15-30 seg. Conversão.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Autoridade (8 ideias)</h3>
+                            <ul>
+                                <li><strong>Coluna de opinião:</strong> Blog/Reel série. Thought leadership. Seu ponto de vista sobre beleza e feminilidade. Autoridade.</li>
+                                <li><strong>Estudos que defendo:</strong> Carrossel. Ciência. Pesquisas científicas que fundamentam seu trabalho. Autoridade.</li>
+                                <li><strong>Certificações e formações:</strong> Vídeo. Credibilidade. Sua história de aprendizado. Autoridade.</li>
+                                <li><strong>Colaboração com especialistas:</strong> Live/Entrevista. Networking. Conversa com psicólogo, coach, nutricionista. Autoridade.</li>
+                                <li><strong>Tendências vs. Eternidades:</strong> Reel. Discernimento. Sua visão sobre o que muda e o que permanece. Autoridade.</li>
+                                <li><strong>Casos de estudo:</strong> Vídeo. Detalhe. Análise profunda de transformações (com permissão). Prova.</li>
+                                <li><strong>Palestras e workshops:</strong> Behind the scenes. Educação. Seus momentos de ensino fora do consultório. Autoridade.</li>
+                                <li><strong>Reações a conteúdo viral:</strong> Reel. Timing. Sua visão crítica sobre tendências de beleza. Autoridade.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Prova Social (8 ideias)</h3>
+                            <ul>
+                                <li><strong>Depoimentos em vídeo:</strong> Série. Testimonial. Mulheres falando de verdade sobre a experiência. Prova.</li>
+                                <li><strong>Resultados em sequência:</strong> Carrossel. Antes/depois. Múltiplos exemplos em um post. Prova.</li>
+                                <li><strong>Taxa de satisfação:</strong> Vídeo. Métrica. Compartilhar dados de satisfação (ex: 98% recomendariam). Prova.</li>
+                                <li><strong>Histórias de redes indicações:</strong> Reel. Social proof. "Fulana indicou Beltrana, que indicou Ciclana". Proof.</li>
+                                <li><strong>Mulheres que voltam:</strong> Carrossel. Prova. Mostrar reincidência como evidência de satisfação. Prova.</li>
+                                <li><strong>Avaliações e reviews:</strong> Vídeo. Transparência. Ler resenhas positivas (de verdade). Prova.</li>
+                                <li><strong>Página de mídia e imprensa:</strong> Visual. Autoridade. Menções em jornais e revistas. Prova.</li>
+                                <li><strong>Comunidade de mulheres:</strong> Story/Reel. Pertencimento. Mostrar que existe comunidade por trás da marca. Comunidade.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Bastidores (8 ideias)</h3>
+                            <ul>
+                                <li><strong>Um dia na clínica:</strong> Story série. Behind the scenes. Passo a passo de como é um dia seu. Conexão.</li>
+                                <li><strong>Setup do consultório:</strong> Reel. Transparência. Mostrar o espaço, equipamentos, organização. Confiança.</li>
+                                <li><strong>Processo de preparação:</strong> Vídeo. Detalhes. Como você se prepara para atender. Cuidado.</li>
+                                <li><strong>Estudando novos procedimentos:</strong> Story. Educação contínua. Mostrar seu compromisso com inovação. Autoridade.</li>
+                                <li><strong>Histórias de pacientes anônimas:</strong> Reel. Storytelling. Transformações sem revelar identidade. Conexão.</li>
+                                <li><strong>Erros que aprendi:</strong> Vídeo. Vulnerabilidade. Compartilhar aprendizados de equívocos. Autenticidade.</li>
+                                <li><strong>Rotina de autocuidado:</strong> Story série. Modeling. Como você se cuida (marketing subliminale). Lifestyle.</li>
+                                <li><strong>Evolução do consultório:</strong> Timeline. História. Como começou e como é agora. Trajetória.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Consórcio Beauty (8 ideias)</h3>
+                            <ul>
+                                <li><strong>O que é consórcio beauty:</strong> Vídeo explicativo. Conceitual. Introdução ao conceito. Educação.</li>
+                                <li><strong>Como funciona (passo a passo):</strong> Carrossel. Tutorial. Explicação clara e simples. Educação.</li>
+                                <li><strong>Simulador de cota:</strong> Interactive. Ferramenta. Deixar a cliente ver quanto vai pagar. Conversão.</li>
+                                <li><strong>Histórias de contempladas:</strong> Vídeo. Testimonial. Mulheres que já foram contempladas falando da emoção. Desejo.</li>
+                                <li><strong>Dúvidas mais frequentes:</strong> Reel série. FAQ. Endereçar objeções principais. Conversão.</li>
+                                <li><strong>Transparência de custos:</strong> Documento visual. Honestidade. Mostrar exatamente quanto custa participar. Confiança.</li>
+                                <li><strong>Benefícios extras:</strong> Reel. Valor agregado. Comunidade, educação, prioridade em agendamento. Valor.</li>
+                                <li><strong>Planejamento de desejos:</strong> Guia. Coaching. Como priorizar qual desejo vem primeiro. Educação.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PILARES EDITORIAIS -->
+                <section id="pilares" class="section">
+                    <h2 class="section-title">Pilares Editoriais</h2>
+                    <p class="section-subtitle">Os temas estruturais que guiam toda a comunicação</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Os 6 Pilares da Marca Isadora Silva</h3>
+
+                            <h3 style="margin-top: 40px;">Pilar 1: A Mulher que se Prioriza</h3>
+                            <p><strong>Objetivo:</strong> Ensinar e validar que priorizar a si mesma é inteligência, não egoísmo.</p>
+                            <p><strong>Temas:</strong> Planejamento, orçamento, decisão consciente, breaking the cycle, autorização emocional.</p>
+                            <p><strong>Frequência recomendada:</strong> 2-3 posts por semana.</p>
+
+                            <h3 style="margin-top: 40px;">Pilar 2: A Mulher que se Reconhece</h3>
+                            <p><strong>Objetivo:</strong> Convidar a mulher a olhar para si mesma com novo olhar, compaixão e reconhecimento.</p>
+                            <p><strong>Temas:</strong> Autoimagem, reflexão, espelho, história de vida refletida no rosto, maturidade como beleza.</p>
+                            <p><strong>Frequência recomendada:</strong> 1-2 posts por semana.</p>
+
+                            <h3 style="margin-top: 40px;">Pilar 3: A Mulher que Cuida da Sua Imagem</h3>
+                            <p><strong>Objetivo:</strong> Educação sobre estética, skincare, procedimentos, sem romantizar.</p>
+                            <p><strong>Temas:</strong> Educação técnica, tutoriais, dicas práticas, ciência por trás dos procedimentos.</p>
+                            <p><strong>Frequência recomendada:</strong> 2-3 posts por semana.</p>
+
+                            <h3 style="margin-top: 40px;">Pilar 4: A Mulher que Planeja Seus Desejos</h3>
+                            <p><strong>Objetivo:</strong> Educação sobre consórcio, planejamento financeiro, decisão estratégica de investimento.</p>
+                            <p><strong>Temas:</strong> Como economizar, como planejar, ciclos de contemplação, histórias de realização.</p>
+                            <p><strong>Frequência recomendada:</strong> 2 posts por semana.</p>
+
+                            <h3 style="margin-top: 40px;">Pilar 5: A Mulher que Materializa</h3>
+                            <p><strong>Objetivo:</strong> Celebrar as mulheres que passaram da decisão para a ação.</p>
+                            <p><strong>Temas:</strong> Testimoniais, transformações, antes/depois emocional, histórias de realização.</p>
+                            <p><strong>Frequência recomendada:</strong> 1-2 posts por semana.</p>
+
+                            <h3 style="margin-top: 40px;">Pilar 6: A Mulher Soberana</h3>
+                            <p><strong>Objetivo:</strong> Posicionamento de marca, manifesto, filosofia da empresa, pensamento estratégico.</p>
+                            <p><strong>Temas:</strong> Cartas abertas, essays, reflexões sobre feminilidade, poder, beleza, inteligência.</p>
+                            <p><strong>Frequência recomendada:</strong> 1 post por semana.</p>
+
+                            <h3 style="margin-top: 40px;">Recomendação de Distribuição Semanal</h3>
+                            <p>Segunda a segunda (7 posts principais + 5-7 stories):</p>
+                            <ul>
+                                <li><strong>Seg:</strong> Pilar 1 (Priorização)</li>
+                                <li><strong>Ter:</strong> Pilar 3 (Educação estética)</li>
+                                <li><strong>Qua:</strong> Pilar 4 (Planejamento/Consórcio)</li>
+                                <li><strong>Qui:</strong> Pilar 2 (Reconhecimento)</li>
+                                <li><strong>Sex:</strong> Pilar 5 (Transformações)</li>
+                                <li><strong>Sab:</strong> Pilar 3 (Educação estética)</li>
+                                <li><strong>Dom:</strong> Pilar 6 (Posicionamento/Reflecção)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MATRIZ PMI DE CONTEÚDO -->
+                <section id="pmi-conteudo" class="section">
+                    <h2 class="section-title">Matriz PMI de Conteúdo</h2>
+                    <p class="section-subtitle">30 ideias de conteúdo baseadas no framework proprietário</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Como Funciona a Matriz</h3>
+                            <p>Cada conteúdo responde a estas perguntas:</p>
+                            <ul>
+                                <li>O que essa mulher está colocando acima dela?</li>
+                                <li>O que ela está adiando?</li>
+                                <li>Qual ativo dela está sendo negligenciado?</li>
+                                <li>O que aconteceria se ela se colocasse novamente no centro?</li>
+                                <li>Como a marca pode ajudá-la sem criar dependência?</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">30 Ideias de Conteúdo PMI</h3>
+                            <ul>
+                                <li>A mulher que cuida de todos colocam sua imagem por último</li>
+                                <li>Quanto você já investiu em outras pessoas sem investir em si?</li>
+                                <li>A carreira que cresceu enquanto você envelhecia invisível</li>
+                                <li>Se você tivesse investido em si 5 anos atrás, como seria agora?</li>
+                                <li>A foto que você não tira porque não se reconhece</li>
+                                <li>O orçamento familiar e a linha que falta para você</li>
+                                <li>Quanto tempo você gasta cuidando de outros vs. de si mesma?</li>
+                                <li>O espelho que você evita olhar porque não quer se ver</li>
+                                <li>A roupa que parou de usar porque já não se sente bem</li>
+                                <li>O encontro que você quase não foi porque não se sentiu bonita</li>
+                                <li>O desejo que virou saudade porque nunca foi realizado</li>
+                                <li>Se você fosse uma mulher amiga, o que recomendaria para ela?</li>
+                                <li>A mulher que coloca tudo no planejamento menos a si mesma</li>
+                                <li>O que mudaria se você se colocasse em primeiro lugar por 3 meses?</li>
+                                <li>A confiança que cresce quando você investe em sua imagem</li>
+                                <li>O efeito dominó de priorizar a si mesma</li>
+                                <li>Quando foi a última vez que você fez algo só para você?</li>
+                                <li>A mulher que merecia ter começado há 5 anos</li>
+                                <li>Como a imagem que você tem de si afeta sua performance</li>
+                                <li>O patrimônio que é você mesma</li>
+                                <li>Manutenção não é luxo, é obrigação de quem tem valor</li>
+                                <li>Se a sua família investisse em você como investe em outras coisas</li>
+                                <li>O retorno de investir em si mesma</li>
+                                <li>Quanto custa não priorizar a si mesma?</li>
+                                <li>A mulher que finalmente disse basta ao "depois"</li>
+                                <li>Como outras mulheres souberam que você começou a se priorizar</li>
+                                <li>A decisão que muda tudo</li>
+                                <li>Você é o último item do seu orçamento?</li>
+                                <li>O que você merecia ter feito há 10 anos</li>
+                                <li>Quando começar a se priorizar ficou fácil</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONTEÚDO DE ALTA CONVERSÃO -->
+                <section id="conversao" class="section">
+                    <h2 class="section-title">Conteúdo de Alta Conversão</h2>
+                    <p class="section-subtitle">Exemplos práticos de conteúdo que realmente converte para seus procedimentos</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Reels de Conversão (15-30 seg)</h3>
+                            <ul>
+                                <li><strong>Harmonização - Antes/Depois Emocional:</strong> "Ela chegou insegura. Saiu se reconhecendo." Foco na emoção, não apenas no visual.</li>
+                                <li><strong>Botox - Tirando o Medo:</strong> "Botox não congela. Relaxa." Responder objeção real em 20 segundos de forma descontraída.</li>
+                                <li><strong>Preenchedor - O Que Muda:</strong> Timelapse de antes/depois. Minimalista. Elegante. Sem filtro.</li>
+                                <li><strong>Protocolo de Pele - Educação:</strong> "Seu protocolo errado custa 10x mais que o certo." Educação rápida que gera dúvida.</li>
+                                <li><strong>Perfioplastia - Verdade:</strong> "Não é cirurgia. É escultura com laser." Tirar medo com clareza absoluta.</li>
+                                <li><strong>Produto Skincare - Resultado Real:</strong> Mulher usando produto há 30 dias. Resultado genuíno. Voz dela contando.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Carrosséis de Conversão</h3>
+                            <ul>
+                                <li><strong>Harmonização - Dúvidas Respondidas:</strong> Slide 1 hook. Slides 2-5: Dúvidas reais respondidas. Slide 6: CTA claro.</li>
+                                <li><strong>Protocolo de Pele - Roadmap:</strong> Slide 1: Protocolo errado. Slides 2-6: Como fazer certo. Slide 7: "Quer começar?"</li>
+                                <li><strong>Botox & Preenchedor - Mitos vs. Verdade:</strong> Slide 1: "7 mitos que você acredita". Slides 2-8: Cada um derrubado com verdade.</li>
+                                <li><strong>Perfioplastia - Como Funciona:</strong> Slide 1 hook. Slides 2-5: Processo. Slide 6: Resultado. Slide 7: CTA.</li>
+                                <li><strong>Produto - Transformação em Tempo:</strong> Múltiplos exemplos da mesma pessoa ao longo de semanas. Sem edição.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Stories de Conversão (Sequência)</h3>
+                            <ul>
+                                <li><strong>Poll + Educação:</strong> Story 1: Poll "Você tem medo de Botox?" Story 2-3: Resposta educada. Story 4: "Quer conversar?"</li>
+                                <li><strong>Behind da Consulta:</strong> Mostrar você escutando, analisando, explicando. Sem procedimento. Só conexão e reconhecimento.</li>
+                                <li><strong>Resultado de Cliente Real:</strong> Story de verdade. A mulher chegou assim → saiu assim. Emoção dela falando.</li>
+                                <li><strong>Educação Rápida:</strong> "Seu protocolo está errado se..." 5 stories curtos educando sobre pele.</li>
+                                <li><strong>Flash de Oferta Leve:</strong> "Só essa semana: primeira consulta com avaliação de protocolo grátis"</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Anúncios de Conversão (Facebook/Instagram Ads)</h3>
+                            <ul>
+                                <li><strong>Lead Magnet - Guia:</strong> "Baixe o guia antes e depois emocional de harmonização" → Email educativo → Follow-up.</li>
+                                <li><strong>Lives Educativas:</strong> "Botox não é para congelar. É para expressar." Conversa ao vivo sobre verdade vs. mito.</li>
+                                <li><strong>Quiz Interativo:</strong> "Qual é o seu protocolo ideal?" Resultado personalizado com recomendação de consulta.</li>
+                                <li><strong>Vídeo de Depoimento:</strong> Mulher falando transformação emocional. 60-90 seg. CTA: "Você também pode."</li>
+                                <li><strong>Retargeting de Visitante:</strong> "Você visitou o site. Quer conhecer os detalhes?" Conversa 1-1 na mensagem.</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Copy de Conversão (Estruturas Prontas)</h3>
+                            <div class="framework-box">
+                                <strong>Harmonização:</strong> "Você sabe quando olha no espelho e vê um detalhe que não te deixa em paz? Harmonizar é equilibrar para que você se veja de novo."<br><br>
+
+                                <strong>Botox:</strong> "Botox não congela. Relaxa. E quando você relaxa a testa, seu rosto inteiro respira melhor. Vem conversar comigo sobre como funciona."<br><br>
+
+                                <strong>Preenchedor:</strong> "Seus lábios contam a história da sua vida. Resgatar volume não é voltar atrás. É reconhecer que você ainda está aqui, expressiva."<br><br>
+
+                                <strong>Protocolo de Pele:</strong> "Seu protocolo errado custa caro. Não em dinheiro. Em tempo. Em resultado que nunca chega. Quer fazer diferente?"<br><br>
+
+                                <strong>Perfioplastia:</strong> "A gente não muda seu rosto. A gente ajusta o que você sempre quis ajustar. É escultura, não cirurgia."<br><br>
+
+                                <strong>Produtos de Skincare:</strong> "Produto sozinho não funciona. É protocolo que funciona. Quer saber qual é o seu?"
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Gatilhos de Posting</h3>
+                            <ul>
+                                <li>Segunda de manhã: Carrossel educativo (atrai buscadores de conhecimento)</li>
+                                <li>Quarta à noite: Reel de resultado (gera desejo antes do fim de semana)</li>
+                                <li>Sexta: Story de consulta (cria proximidade e humanidade)</li>
+                                <li>Domingo: Carrossel de dúvidas (mulher pensando segunda-feira)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- JORNADA DO CLIENTE -->
+                <section id="jornada" class="section">
+                    <h2 class="section-title">Mapa da Jornada</h2>
+                    <p class="section-subtitle">A experiência completa que estrutura o relacionamento</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Os 10 Momentos Críticos</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Momento</th>
+                                        <th>Touchpoint</th>
+                                        <th>Objetivo</th>
+                                        <th>Oportunidade de Encanto</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Descoberta</strong></td>
+                                        <td>Social media, indicação</td>
+                                        <td>Ser encontrada</td>
+                                        <td>Mensagem clara que te diferencia</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Pesquisa</strong></td>
+                                        <td>Perfil, website, busca</td>
+                                        <td>Entender quem você é</td>
+                                        <td>Transparência total. Sem artifícios.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Contato Inicial</strong></td>
+                                        <td>DM, WhatsApp, telefone</td>
+                                        <td>Ouvir a necessidade</td>
+                                        <td>Resposta rápida e genuína. Não robótica.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>4. Agendamento</strong></td>
+                                        <td>App, telefone, link</td>
+                                        <td>Facilitar a marcação</td>
+                                        <td>Processo simples. Confirmação clara.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>5. Preparação</strong></td>
+                                        <td>Email, SMS, WhatsApp</td>
+                                        <td>Educação pré-consulta</td>
+                                        <td>Guia de preparação. Envolvimento.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>6. Consulta</strong></td>
+                                        <td>Presencial</td>
+                                        <td>Diagnosis e planejamento</td>
+                                        <td>Escuta profunda. Reconhecimento.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>7. Decisão</strong></td>
+                                        <td>Proposal, documento</td>
+                                        <td>Transparência sobre opções</td>
+                                        <td>Múltiplas opções. Autoridade na escolha.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>8. Procedimento</strong></td>
+                                        <td>Presencial</td>
+                                        <td>Experiência Premium</td>
+                                        <td>Cuidado visível. Comunicação durante.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>9. Pós-Procedimento</strong></td>
+                                        <td>Follow-up, educação</td>
+                                        <td>Garantir resultado e satisfação</td>
+                                        <td>Acompanhamento genuíno. Disponibilidade.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>10. Recorrência</strong></td>
+                                        <td>Programa, convite para novo desejo</td>
+                                        <td>Gerar LTV</td>
+                                        <td>Reconhecimento de valor. Comunidade.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- STORYTELLING -->
+                <section id="storytelling" class="section">
+                    <h2 class="section-title">Storytelling</h2>
+                    <p class="section-subtitle">Como contar histórias que transformam interesse em ação</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Estrutura Narrativa Proprietária</h3>
+                            <p>Não use "Antes e Depois". Use esta estrutura:</p>
+
+                            <div class="framework-box">
+                                CONTEXTO (Quem era ela antes)<br>
+                                ↓<br>
+                                INCÔMODO (O que a incomodava de verdade)<br>
+                                ↓<br>
+                                DESEJO (O que ela queria)*<br>
+                                ↓<br>
+                                DECISÃO (Por que escolheu você)<br>
+                                ↓<br>
+                                ESTRATÉGIA (Como você trabalhou)<br>
+                                ↓<br>
+                                PROCESSO (A jornada)<br>
+                                ↓<br>
+                                RESULTADO (O que mudou)<br>
+                                ↓<br>
+                                SIGNIFICADO (O que isso representa para ela agora)
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Exemplo Real - Harmonização</h3>
+                            <div class="framework-box">
+                                <strong>Contexto:</strong> "Ela era gerente de vendas. Brilhante. Mas quando se via no espelho, via algo que não reconhecia. Uma assimetria pequena, mas que para ela era tudo."<br><br>
+
+                                <strong>Incômodo:</strong> "Ela evitava fotos de perfil. Evitava reuniões grandes. Seu rosto a incomodava mais do que o trabalho."<br><br>
+
+                                <strong>Desejo:</strong> "Ela queria simplesmente se reconhecer. Não virar outra pessoa. Apenas... ser ela de novo."<br><br>
+
+                                <strong>Decisão:</strong> "Ela procurou, pesquisou, encontrou meu perfil. Viu que eu não prometo perfeição. Ela marcou a consulta."<br><br>
+
+                                <strong>Estratégia:</strong> "Conversamos. Eu escutei. Entendi exatamente o que a incomodava. E a gente traçou um plano simples: apenas uma harmonização focada naquilo."<br><br>
+
+                                <strong>Processo:</strong> "O procedimento foi rápido. Ela viu o resultado em tempo real e chorou."<br><br>
+
+                                <strong>Resultado:</strong> "Ela voltou a tirar fotos de perfil. Voltou aos meetings grandes. E mais importante: ela se reconhecia no espelho."<br><br>
+
+                                <strong>Significado:</strong> "Ela não ficou famosa. Não virou outra pessoa. Ela voltou a ser ela mesma. E isso é tudo o que importa."
+                            </div>
+
+                            <h3 style="margin-top: 40px;">Dicas de Storytelling Que Funciona</h3>
+                            <ul>
+                                <li>Nunca invente histórias. Sempre peça permissão à cliente.</li>
+                                <li>Use nomes (ou iniciais) quando possível. Humaniza.</li>
+                                <li>Foque no emocional, não no técnico.</li>
+                                <li>Mostre o incômodo antes do resultado. Sem luta, não tem vitória.</li>
+                                <li>Deixe a cliente falar. Áudio seu é mais poderoso que sua narração.</li>
+                                <li>Não faça parecer publicidade. Pareça uma conversa genuína.</li>
+                                <li>O resultado pode não ser óbvio. "Ela se reconheceu" é mais real que "ficou linda".</li>
+                                <li>Sempre termine com significado. Não com números ou métricas.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- EXPERIÊNCIA -->
+                <section id="experiencia" class="section">
+                    <h2 class="section-title">Experiência da Cliente</h2>
+                    <p class="section-subtitle">Cada momento de contato é uma oportunidade de encantar</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O que é um Touchpoint?</h3>
+                            <p>Um touchpoint é qualquer ponto de contato entre você e a cliente. Pode ser um post no Instagram, uma mensagem de WhatsApp, uma consulta presencial, um email de follow-up. Cada momento é uma chance de reforçar sua promessa de marca.</p>
+
+                            <h3 style="margin-top: 40px;">Os 10 Momentos Críticos da Jornada</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Momento</th>
+                                        <th>Touchpoint</th>
+                                        <th>O que ela sente</th>
+                                        <th>Como Encantar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>1. Descoberta</strong></td>
+                                        <td>Vê seu post ou indica recebem seu link</td>
+                                        <td>Curiosidade. Dúvida se é para ela.</td>
+                                        <td>Mensagem clara. Sem jargão. Acolhedora.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2. Pesquisa</strong></td>
+                                        <td>Visita seu perfil. Lê sobre você.</td>
+                                        <td>Medo de ser julgada. Esperança.</td>
+                                        <td>Transparência total. Resultados reais. Testimoniais genuínos.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>3. Contato</strong></td>
+                                        <td>Envia mensagem. Dá seu número.</td>
+                                        <td>Vulnerabilidade. Coragem.</td>
+                                        <td>Resposta rápida. Calor humano. Não robótico.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>4. Agendamento</strong></td>
+                                        <td>Marca consulta</td>
+                                        <td>Expectativa. Medo. Esperança.</td>
+                                        <td>Confirmar. Educação pré-consulta. Explicar o processo.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>5. Preparação</strong></td>
+                                        <td>Recebe email/WhatsApp com guia</td>
+                                        <td>Segurança. Profissionalismo.</td>
+                                        <td>Tudo explicado. Sem surpresas. Disponibilidade para dúvidas.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>6. Consulta</strong></td>
+                                        <td>Encontro presencial</td>
+                                        <td>Nervosismo. Esperança de ser compreendida.</td>
+                                        <td>Escuta profunda. Faz perguntas que importam. Reconhece o desejo dela.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>7. Proposta</strong></td>
+                                        <td>Recebe plano de ação</td>
+                                        <td>Dúvida. Precisa de confiança.</td>
+                                        <td>Múltiplas opções. Explicação clara. Sem pressão.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>8. Procedimento</strong></td>
+                                        <td>Vive a experiência</td>
+                                        <td>Medo. Esperança. Entrega.</td>
+                                        <td>Explicação durante. Cuidado visível. Comunicação constante.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>9. Resultado</strong></td>
+                                        <td>Se vê no espelho</td>
+                                        <td>Emoção. Alívio. Gratidão.</td>
+                                        <td>Celebre com ela. Deixe a emoção acontecer. Reconheça a coragem dela.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>10. Recorrência</strong></td>
+                                        <td>Follow-up. Comunidade. Novo desejo.</td>
+                                        <td>Reconhecimento. Pertencimento. Desejo de avançar.</td>
+                                        <td>Programa de manutenção. Comunidade. Educação contínua. Conexão genuína.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h3 style="margin-top: 40px;">Princípios de Experiência Isadora</h3>
+                            <ul>
+                                <li><strong>Transparência:</strong> Nada escondido. Tudo claro desde o começo.</li>
+                                <li><strong>Escuta:</strong> Você fala mais que ela? Você está fazendo errado.</li>
+                                <li><strong>Cuidado Visível:</strong> Ela deve SENTIR que você se importa.</li>
+                                <li><strong>Sem Pressão:</strong> A venda acontece quando ela entende o valor. Nunca antes.</li>
+                                <li><strong>Educação Contínua:</strong> Você ajuda ela a entender a si mesma, não apenas o procedimento.</li>
+                                <li><strong>Reconhecimento:</strong> Ela precisa saber que você vê a coragem que levou ela até você.</li>
+                                <li><strong>Comunidade:</strong> Ela não é apenas cliente. É parte de algo maior.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MÉTRICAS -->
+                <section id="metricas" class="section">
+                    <h2 class="section-title">Métricas Estratégicas</h2>
+                    <p class="section-subtitle">O que medir para entender se a estratégia está funcionando</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Painel Estratégico (Beyond Vanity Metrics)</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Métrica</th>
+                                        <th>O que significa</th>
+                                        <th>Meta (90 dias)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Alcance Qualificado</strong></td>
+                                        <td>Pessoas que se identificam com sua mensagem</td>
+                                        <td>+30%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Engajamento em Conteúdo Educativo</strong></td>
+                                        <td>Tempo gasto em posts de educação vs. vanity</td>
+                                        <td>50% do tempo</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Leads Qualificados</strong></td>
+                                        <td>Pessoas que deixam dados para conversa</td>
+                                        <td>+40%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Taxa de Conversão (Lead para Consulta)</strong></td>
+                                        <td>% de leads que agendam consulta</td>
+                                        <td>25%+</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Taxa de Fechamento (Consulta para Venda)</strong></td>
+                                        <td>% de consultas que viram procedimento</td>
+                                        <td>60%+</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Ticket Médio</strong></td>
+                                        <td>Valor médio de cada procedimento</td>
+                                        <td>Aumento de 20%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>CAC (Customer Acquisition Cost)</strong></td>
+                                        <td>Quanto custa adquirir cada cliente</td>
+                                        <td>Redução de 15%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Taxa de Recorrência</strong></td>
+                                        <td>% de clientes que voltam em 6 meses</td>
+                                        <td>70%+</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>LTV (Lifetime Value)</strong></td>
+                                        <td>Valor total que cliente gasta em 5 anos</td>
+                                        <td>Aumento de 50%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Taxa de Indicação</strong></td>
+                                        <td>% de clientes que indicam outras</td>
+                                        <td>40%+</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>NPS (Net Promoter Score)</strong></td>
+                                        <td>Disposição de recomendar (0-100)</td>
+                                        <td>70+</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Taxa de Consórcio</strong></td>
+                                        <td>% de clientes que participam de consórcio</td>
+                                        <td>35%+</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Quadro de Comando Semanal</h3>
+                            <p>Indicadores a acompanhar toda semana:</p>
+                            <ul>
+                                <li>Leads gerados (meta: 15+)</li>
+                                <li>Consultas agendadas (meta: 5+)</li>
+                                <li>Fechamento de vendas (meta: 3+)</li>
+                                <li>Clientes em consórcio (meta: 2+)</li>
+                                <li>Taxa de resposta em DM (&lt; 2h)</li>
+                                <li>Satisfação em post-procedimento (NPS &gt; 8)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GARGALOS -->
+                <section id="gargalos" class="section">
+                    <h2 class="section-title">Gargalos Atuais</h2>
+                    <p class="section-subtitle">Os principais bloqueios identificados e como desobstruir</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Gargalos Identificados</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Gargalo</th>
+                                        <th>Classificação</th>
+                                        <th>Impacto</th>
+                                        <th>Ação Inicial</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Compreensão do posicionamento único</td>
+                                        <td>ESTRATÉGICO</td>
+                                        <td>Alto - Afeta toda comunicação</td>
+                                        <td>Comunicar manifesto em todos os pontos de contato</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Educação sobre consórcio beauty</td>
+                                        <td>IMPORTANTE</td>
+                                        <td>Alto - Limita conversão de high ticket</td>
+                                        <td>Criar série educativa + FAQ + simulador</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Qualificação de leads</td>
+                                        <td>IMPORTANTE</td>
+                                        <td>Médio - Desperdício de tempo comercial</td>
+                                        <td>Implementar quiz/formulário de qualificação</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Conteúdo de alta conversão</td>
+                                        <td>URGENTE</td>
+                                        <td>Alto - Precisa escalar leads</td>
+                                        <td>Produzir conteúdo baseado em 5 valores + PMI</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Estrutura de follow-up</td>
+                                        <td>URGENTE</td>
+                                        <td>Alto - Perdem muitos leads</td>
+                                        <td>Criar sequência de autoresponder + CRM</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Comunicação de resultados</td>
+                                        <td>IMPORTANTE</td>
+                                        <td>Médio - Deixa valor no chão</td>
+                                        <td>Estruturar antes/depois emocional</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Programa de indicação</td>
+                                        <td>OPORTUNIDADE</td>
+                                        <td>Médio - Fonte de crescimento ociosa</td>
+                                        <td>Criar programa de referência com incentivo</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Comunidade de clientes</td>
+                                        <td>OPORTUNIDADE</td>
+                                        <td>Médio - Aumentaria LTV e recorrência</td>
+                                        <td>Criar grupo privado + eventos exclusivos</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PLANO 90 DIAS -->
+                <section id="plano90" class="section">
+                    <h2 class="section-title">Plano de Implementação 90 Dias</h2>
+                    <p class="section-subtitle">Roteiro de execução em três fases</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Realidade: Você Está Sozinha (Por Enquanto)</h3>
+                            <p>Este plano é realista para uma profissional solo. Não tente fazer tudo. Priorize o que gera resultado imediato. A esposa entra em dezembro, então setembro a novembro são meses de teste e validação.</p>
+
+                            <h3 style="margin-top: 40px;">Fase 1: Comunicação (Semanas 1-2)</h3>
+                            <p><strong>O que fazer:</strong> Comunicar o novo posicionamento no que já existe (sem criar novo).</p>
+
+                            <ul>
+                                <li>Atualizar bio do Instagram com nova posição</li>
+                                <li>Postar 2 reels sobre soberania (reaproveitar ideias deste documento)</li>
+                                <li>Enviar mensagem para clientes atuais explicando nova abordagem</li>
+                                <li>Revisar consulta: fazer perguntas mais profundas (conforme protocolo PMI)</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Fase 2: Educação (Semanas 3-6)</h3>
+                            <p><strong>O que fazer:</strong> Postar conteúdo que posicione você como referência, não apenas prestadora.</p>
+
+                            <ul>
+                                <li>1 carrossel por semana (dúvidas reais de clientes)</li>
+                                <li>1 reel por semana (resultado + emoção)</li>
+                                <li>Stories diários (por trás, dúvidas, educação rápida)</li>
+                                <li>Coletar 3 depoimentos em vídeo (clientes atuais satisfeitas)</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Fase 3: Conversão (Semanas 7-12)</h3>
+                            <p><strong>O que fazer:</strong> Começar a escalar o que funciona. Testar consórcio com primeiros clientes.</p>
+
+                            <ul>
+                                <li>Apresentar consórcio para 2-3 clientes que expressem interesse</li>
+                                <li>Replicar os posts que geraram mais engagement</li>
+                                <li>Fazer follow-up com leads via WhatsApp (educação contínua)</li>
+                                <li>Preparar para entrada da esposa: documentar seu discurso, sua forma de vender</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Métricas Que Importam Agora</h3>
+                            <ul>
+                                <li><strong>Qualidade de consulta:</strong> Você consegue identificar o verdadeiro desejo dela?</li>
+                                <li><strong>Taxa de fechamento:</strong> De quem marca consulta, quanto vira cliente?</li>
+                                <li><strong>Satisfação:</strong> Cliente sente que foi reconhecida?</li>
+                                <li><strong>Indicação:</strong> Ela recomenda para alguém?</li>
+                                <li><strong>Recorrência:</strong> Ela volta para procedimento novo ou manutenção?</li>
+                            </ul>
+
+                            <h3 style="margin-top: 40px;">Importante Antes de Dezembro</h3>
+                            <p>Quando a esposa entrar:</p>
+                            <ul>
+                                <li>Ela vai estar pronta para seu modelo de venda? (Educação prévia)</li>
+                                <li>Qual é o seu protocolo de consulta? (Documentado)</li>
+                                <li>Como você fala sobre consórcio? (Script revisado)</li>
+                                <li>Qual é o seu tom de comunicação? (Exemplos salvos)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MANIFESTO FINAL -->
+                <section id="manifesto" class="section">
+                    <div class="manifesto">
+                        <h2>Manifesto Isadora Silva</h2>
+
+                        <p>Existe uma mulher que você pode não ter visto em um tempo.</p>
+
+                        <p>Ela está em reuniões. Ela está em planilhas. Ela está em grupos de WhatsApp. Ela está organizando a vida de outras pessoas. Ela está resolvendo problemas que não são dela. Ela está sendo forte quando deveria estar descansando.</p>
+
+                        <p>Ela esqueceu que ela também precisa existir.</p>
+
+                        <p>Não é que ela não mereça. É que ela aprendeu que merece menos. Aprendeu que depois é sempre melhor que agora. Aprendeu que seu cuidado é luxo, não necessidade. Aprendeu a esperar sobrar, e sabemos que sobra raramente chega.</p>
+
+                        <p>Aqui na Isadora Silva, a gente acredita em outra lógica.</p>
+
+                        <p>Mulheres inteligentes entendem que elas também são patrimônio. E que manutenção de patrimônio é obrigação, não luxo. Mulheres soberanas não esperam sobrar. Elas planejam. Elas reservam. Elas priorizam. Elas não pedem permissão.</p>
+
+                        <p>Priorizar-se não significa abandonar o entorno. Significa incluir a si no orçamento. Significa que sua imagem, seu corpo, seus desejos também entram no planejamento estratégico da vida.</p>
+
+                        <p>Você não precisa desaparecer para sustentar tudo ao seu redor. Você pode se refinar. Pode cuidar de si. Pode se reconhecer. E quando faz isso, sustenta melhor.</p>
+
+                        <p>Seu cuidado também precisa entrar no planejamento. Não como futuro luxo. Como presente investimento. Como decisão consciente de uma mulher que entende o próprio valor.</p>
+
+                        <p>Seu desejo também merece um lugar no orçamento. Não é capricho. Quando você investe em um desejo que vinha adiando, você reconhece que você também conta. E quando você se coloca novamente no centro de suas próprias decisões, tudo ao seu redor muda.</p>
+
+                        <p>Seu corpo, sua imagem e seus sonhos não precisam ficar eternamente para depois. Depois nunca chega. Depois é sempre amanhã. Depois é a narrativa de quem acredita que não merece prioridade.</p>
+
+                        <p>Você merece prioridade. A sua própria.</p>
+
+                        <p>E aqui, a gente ajuda você a transformar esse desejo em decisão, essa decisão em planejamento e esse planejamento em experiência.</p>
+
+                        <p>Porque estética não é futilidade. É expressão. É uma das formas pelas quais você diz ao mundo que você também conta. Que você se vê. Que você se cuida. Que você se escolhe.</p>
+
+                        <p>Bem-vinda ao universo soberana.</p>
+                    </div>
+                </section>
+
+                <!-- MAPA GRANDE -->
+                <section id="mapa" class="section">
+                    <h2 class="section-title">O Grande Mapa</h2>
+                    <p class="section-subtitle">Como cada elemento alimenta o próximo</p>
+
+                    <div class="section-content">
+                        <div class="framework-box" style="font-size: 14px; line-height: 2;">
+                            MARCA SOBERANA<br>
+                            ↓<br>
+                            POSICIONAMENTO CLARO<br>
+                            ↓<br>
+                            MULHER SOBERANA (Conceito)<br>
+                            ↓<br>
+                            PMI (Leitura de Comportamento)<br>
+                            ↓<br>
+                            EXPERIÊNCIA TRANSFORMADORA<br>
+                            ↓<br>
+                            PROCEDIMENTOS & CONSÓRCIO<br>
+                            ↓<br>
+                            REALIZAÇÃO DE DESEJO<br>
+                            ↓<br>
+                            RESULTADO + RECONHECIMENTO<br>
+                            ↓<br>
+                            RECORRÊNCIA (Manutenção)<br>
+                            ↓<br>
+                            NOVOS DESEJOS<br>
+                            ↓<br>
+                            LIFETIME VALUE<br>
+                            ↓<br>
+                            INDICAÇÃO<br>
+                            ↓<br>
+                            COMUNIDADE
+                        </div>
+
+                        <div class="content-block" style="margin-top: 48px;">
+                            <h3>Como Cada Elemento Alimenta o Próximo</h3>
+                            <ul>
+                                <li><strong>Marca:</strong> Define quem você é. Tudo que vem depois é coerente com isso.</li>
+                                <li><strong>Posicionamento:</strong> Diferencia você. Atrai a mulher certa e afasta a errada.</li>
+                                <li><strong>Conceito Soberana:</strong> Autoriza a mulher a priorizar a si mesma. Muda mindset.</li>
+                                <li><strong>PMI:</strong> Ferramenta de leitura que estrutura toda a comunicação e venda.</li>
+                                <li><strong>Experiência:</strong> Torna concreta a promessa. Não é só comunicação, é vivência.</li>
+                                <li><strong>Procedimento:</strong> Materializa a decisão. Prova que ela consegue priorizar.</li>
+                                <li><strong>Realização:</strong> Mulher se vê no espelho. Emoção é impossível conter.</li>
+                                <li><strong>Reconhecimento:</strong> Ela se reconhece. Outras pessoas também notam. Duplica o efeito.</li>
+                                <li><strong>Recorrência:</strong> Resultado satisfaz. Manutenção preserva. Ritual se forma.</li>
+                                <li><strong>Novos Desejos:</strong> Primeira experiência positiva abre apetite para mais. Segurança para avançar.</li>
+                                <li><strong>LTV:</strong> Cliente vira relacionamento. Relacionamento vira patrimônio.</li>
+                                <li><strong>Indicação:</strong> Mulher satisfeita convida outra. Prova mais poderosa que publicidade.</li>
+                                <li><strong>Comunidade:</strong> Indicações geram comunidade. Comunidade alimenta marca. Ciclo se fecha.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FOOTER -->
+                <div class="footer">
+                    <p>Isadora Silva | Brand & Business Intelligence | 2026</p>
+                    <p>Este documento é material estratégico proprietário. Não deve ser compartilhado sem autorização.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                // Remove active class from all links
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                link.classList.add('active');
+
+                // Get section ID
+                const sectionId = link.getAttribute('data-section');
+
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // Show selected section
+                document.getElementById(sectionId).classList.add('active');
+
+                // Update header
+                const headerTitle = document.querySelector('.header-title');
+                headerTitle.textContent = link.textContent;
+            });
+        });
+
+        // Mobile sidebar toggle (optional)
+        const sidebar = document.querySelector('.sidebar');
+        const mainContent = document.querySelector('.main-content');
+
+        // Smooth scroll to section
+        window.addEventListener('load', () => {
+            const activeSection = document.querySelector('.section.active');
+            if (activeSection) {
+                activeSection.scrollIntoView();
+            }
+        });
+    </script>
+</body>
+</html>
