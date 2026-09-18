@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#FAF7F2">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Mapa de Priscila · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  html { background-color: #FAF7F2 !important; }
+  html, body { background: #FAF7F2 !important; color: #1F1A18; -webkit-text-size-adjust: 100%; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root{
+    --creme:#FAF7F2;
+    --branco:#FFFFFF;
+    --vinho:#360000;
+    --vinho-texto:#4E0D16;
+    --ouro:#C9A15A;
+    --marinho:#15294D;
+    --madeira:#7E4C22;
+    --marrom:#3E2513;
+    --tinta:#1F1A18;
+    --linha:rgba(78,13,22,0.14);
+  }
+
+  body{
+    font-family:'DM Sans', sans-serif;
+    font-weight:300;
+    line-height:1.75;
+    font-size:17px;
+  }
+  h1,h2,h3{ font-family:'Playfair Display', serif; color:var(--vinho-texto); line-height:1.18; }
+  .script{ font-family:'Pinyon Script', cursive; color:var(--marinho); }
+  strong{ font-weight:500; color:var(--vinho-texto); }
+  .wrap{ max-width:760px; margin:0 auto; padding:0 26px; }
+
+  /* CAPA */
+  .capa{
+    min-height:100svh;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    text-align:center; padding:60px 26px;
+    background:var(--creme);
+  }
+  .capa .kicker{ font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color:var(--madeira); margin-bottom:26px; }
+  .capa h1{ font-size:clamp(38px,9vw,60px); font-weight:500; }
+  .capa .assina{ font-size:clamp(34px,8vw,52px); margin-top:2px; }
+  .capa p{ max-width:440px; margin:28px auto 0; color:var(--tinta); font-size:17px; }
+  .capa .setinha{ margin-top:60px; font-size:13px; letter-spacing:0.1em; color:var(--vinho-texto); opacity:0.55; }
+
+  /* CARTA */
+  section{ padding:70px 0; border-bottom:1px solid var(--linha); }
+  .carta p{ margin-bottom:18px; max-width:62ch; }
+  .carta .assinatura{ margin-top:36px; font-family:'Playfair Display',serif; font-style:italic; color:var(--vinho-texto); }
+
+  h2.titulo-secao{ font-size:clamp(26px,5vw,34px); margin-bottom:8px; }
+  .sub-secao{ color:var(--madeira); font-size:14px; letter-spacing:0.06em; margin-bottom:28px; }
+
+  /* QUADRANTES - acordeão */
+  .quad{
+    border:1px solid var(--linha);
+    border-radius:4px;
+    margin-bottom:16px;
+    overflow:hidden;
+    background:var(--branco);
+  }
+  .quad-head{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:22px 24px;
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+  }
+  .quad-head .qn{ font-family:'Playfair Display',serif; font-size:13px; color:var(--ouro); letter-spacing:0.08em; display:block; margin-bottom:4px; }
+  .quad-head h3{ font-size:21px; }
+  .quad-head .plus{ font-size:22px; color:var(--vinho-texto); transition:transform .3s ease; flex-shrink:0; margin-left:16px; }
+  .quad.open .plus{ transform:rotate(45deg); }
+  .quad-body{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .45s ease;
+    background:var(--creme);
+  }
+  .quad-body-inner{ padding:6px 24px 26px; }
+  .quad-body-inner p{ margin-bottom:14px; max-width:60ch; }
+  .quad-body-inner p:last-child{ margin-bottom:0; }
+
+  /* TELA DE VIRADA (madeira) */
+  .virada{
+    background:var(--madeira);
+    color:var(--creme);
+    padding:76px 0;
+    border-bottom:none;
+  }
+  .virada h2{ color:var(--creme); }
+  .virada p{ color:rgba(250,247,242,0.9); max-width:60ch; margin-bottom:16px; }
+  .virada strong{ color:var(--creme); }
+
+  /* FIO CONDUTOR */
+  .fio{ background:var(--marrom); color:var(--creme); }
+  .fio h2{ color:var(--creme); }
+  .fio p{ color:rgba(250,247,242,0.88); max-width:60ch; margin-bottom:16px; }
+  .fio strong{ color:var(--ouro); }
+
+  /* PROVAS VIVAS */
+  .prova-lista{ display:flex; flex-direction:column; gap:14px; margin-top:22px; }
+  .prova{
+    display:flex; gap:16px; align-items:flex-start;
+    padding:16px 20px;
+    background:var(--branco);
+    border-left:3px solid var(--ouro);
+    border-radius:2px;
+  }
+  .prova p{ margin:0; color:var(--tinta) !important; }
+  .prova strong{ color:var(--vinho-texto) !important; }
+
+  /* CONVITE FINAL */
+  .convite{
+    background:var(--vinho);
+    color:var(--creme);
+    text-align:center;
+    padding:90px 26px;
+    border-bottom:none;
+  }
+  .convite h2{ color:var(--creme); font-size:clamp(28px,6vw,40px); max-width:none; }
+  .convite p{ color:rgba(250,247,242,0.88); max-width:56ch; margin:22px auto 0; }
+  .convite .frase{ font-family:'Playfair Display',serif; font-style:italic; font-size:22px; color:var(--ouro); margin:32px auto 0; max-width:46ch; }
+  .convite .assina-final{ margin-top:50px; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:rgba(250,247,242,0.55); }
+
+  @media(max-width:600px){
+    section{ padding:52px 0; }
+    .quad-head{ padding:18px 18px; }
+    .quad-body-inner{ padding:2px 18px 20px; }
+  }
+  @media(prefers-reduced-motion:reduce){ .quad-body{ transition:none; } }
+</style>
+</head>
+<body>
+
+  <header class="capa">
+    <p class="kicker">All Win Academy · Business Core</p>
+    <h1>O Mapa de</h1>
+    <h1 class="assina script">Priscila</h1>
+    <p>Um retrato de como você funciona por dentro, escrito pra você se reconhecer com carinho, não pra se julgar de novo.</p>
+    <p class="setinha">toque em cada quadrante pra abrir</p>
+  </header>
+
+  <section class="carta">
+    <div class="wrap">
+      <h2 class="titulo-secao">Antes de você abrir</h2>
+      <p>Priscila, o que você vai ler aqui não é um diagnóstico. É um espelho, feito com tudo que você já trouxe pra nossa primeira sessão, pra você enxergar o desenho por trás do que sente todos os dias.</p>
+      <p>Você vai reconhecer padrões antigos. Alguns vão doer um pouco de ler, porque são verdadeiros. Mas nenhum deles é uma sentença. São só o ponto de partida do trabalho que a gente vai fazer juntas.</p>
+      <p class="assinatura">Com carinho e verdade, Maria Clara.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="titulo-secao">Seu Temperamento e Seus Bloqueios</h2>
+      <p class="sub-secao">a base antes dos quadrantes</p>
+
+      <div class="quad">
+        <div class="quad-head" onclick="toggle(this)">
+          <div><span class="qn">TEMPERAMENTO</span><h3>Primário e Secundário</h3></div>
+          <span class="plus">+</span>
+        </div>
+        <div class="quad-body">
+          <div class="quad-body-inner">
+            <p><strong>Primário: Melancólico.</strong> Ama rotina, analisa antes de agir, sente dificuldade em ambiente desconhecido, e quando precisa decidir, simula primeiro tudo que pode dar errado. É o temperamento de quem processa fundo e por dentro.</p>
+            <p><strong>Secundário: Colérico.</strong> Não tem dificuldade em dizer não, e seu maior medo é não sair do lugar. É a fome de avançar que empurra o melancólico pra fora da própria zona seguras, mesmo quando ele ainda está com medo.</p>
+            <p>Juntos, formam uma combinação que cobra demais de si mesma: um lado trava analisando risco, o outro exige resultado ao mesmo tempo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-head" onclick="toggle(this)">
+          <div><span class="qn">FERIDAS EMOCIONAIS</span><h3>As Duas Latentes</h3></div>
+          <span class="plus">+</span>
+        </div>
+        <div class="quad-body">
+          <div class="quad-body-inner">
+            <p>Das cinco feridas emocionais possíveis, rejeição, abandono, humilhação, traição e injustiça, duas aparecem ativas na sua história.</p>
+            <p><strong>Humilhação.</strong> Nasceu na escola, quando a dificuldade virou o rótulo de burra. Hoje se manifesta como vergonha de receber, elogio, reconhecimento, conquista material. Você se diminui pra caber, evita ocupar espaço, e sente que precisa se provar antes de merecer.</p>
+            <p><strong>Abandono.</strong> Nasceu na perda repentina da sua mãe, aos 24 anos. Hoje se manifesta como a busca intensa por autonomia, financeira e emocional, o desejo de nunca mais precisar depender de ninguém pra continuar de pé. É a ferida que te faz correr pra frente, mesmo cansada.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-head" onclick="toggle(this)">
+          <div><span class="qn">RECURSOS</span><h3>Pontos Fortes</h3></div>
+          <span class="plus">+</span>
+        </div>
+        <div class="quad-body">
+          <div class="quad-body-inner">
+            <p><strong>Resiliência comprovada.</strong> Já atravessou reprovação escolar, perda da mãe, e duas tentativas de negócio que não deram certo, e seguiu de pé nas três.</p>
+            <p><strong>Sensibilidade fina.</strong> Seu melancólico enxerga nuances que passam despercebidas pra maioria, o que a torna naturalmente cuidadosa com quem atende.</p>
+            <p><strong>Lealdade e cuidado genuíno.</strong> O valor que mais admira em alguém, tratar bem quem está abaixo, é o mesmo valor que ela já pratica todos os dias.</p>
+            <p><strong>Disciplina natural.</strong> Ama rotina e se organiza bem dentro dela, uma base sólida pra qualquer estrutura nova que a consultoria trouxer.</p>
+            <p><strong>Capacidade de se recompor.</strong> Mesmo cansada, ela cozinha, treina, se arruma, atende, aparece pra filha. O corpo dela já sabe seguir, mesmo quando a mente ainda duvida.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-head" onclick="toggle(this)">
+          <div><span class="qn">LAPIDAÇÃO</span><h3>Pontos de Atenção</h3></div>
+          <span class="plus">+</span>
+        </div>
+        <div class="quad-body">
+          <div class="quad-body-inner">
+            <p><strong>Dificuldade em receber.</strong> Elogio, dinheiro, reconhecimento, tudo isso ainda esbarra na vergonha antiga. Precisa aprender a ficar em pé diante do que já conquistou.</p>
+            <p><strong>Paralisia decisória.</strong> O hábito de simular o pior antes de agir trava decisões que poderiam ser simples, principalmente em venda e em exposição.</p>
+            <p><strong>Autocobrança sem pausa.</strong> O colérico secundário não dá trégua, e isso, somado à ferida de abandono, faz com que ela raramente sinta que já fez o suficiente.</p>
+            <p><strong>Excesso de responsabilização por outros.</strong> Desde o irmão mais novo até o marido, há um padrão de carregar peso que não é só seu de carregar, e que precisa ser revisto com cuidado.</p>
+            <p><strong>Se diminuir pra evitar conflito.</strong> Escolher o silêncio em vez do próprio espaço, mesmo quando o espaço já é dela por direito.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2 class="titulo-secao">Os quatro quadrantes</h2>
+      <p class="sub-secao">o eu · o negócio · o propósito · o fundo emocional</p>
+
+      <div class="quad">
+        <div class="quad-head" onclick="toggle(this)">
+          <div><span class="qn">QUADRANTE 1</span><h3>O Eu</h3></div>
+          <span class="plus">+</span>
+        </div>
+        <div class="quad-body">
+          <div class="quad-body-inner">
+            <p>Lá atrás, por volta dos seus 8 anos, a escola foi difícil. Você teve dificuldade, chegou a reprovar, e em casa não havia paciência pra sustentar essa dificuldade ao seu lado. O que sobrou daquele momento não foi só uma lembrança ruim, foi um nome: burra.</p>
+            <p>Sua mente guardou aquilo como inadequação, não como um episódio isolado. E é por isso que hoje, quando alguém elogia seu padrão de vida, sua casa, seu carro, suas roupas, uma parte sua não consegue simplesmente receber. Aparece vergonha onde deveria aparecer orgulho, e você se esconde, como se não pudesse ter o que já é seu.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-head" onclick="toggle(this)">
+          <div><span class="qn">QUADRANTE 2</span><h3>O Negócio</h3></div>
+          <span class="plus">+</span>
+        </div>
+        <div class="quad-body">
+          <div class="quad-body-inner">
+            <p>Aos 24 anos você perdeu sua mãe, de repente. Antes disso já existia um atrito entre vocês, porque você foi colocada pra cuidar do seu irmão mais novo, um peso que não era seu de carregar. Quando ele também perdeu a mãe, ainda criança, a dó que você sentiu por ele se misturou pra sempre com o seu jeito de entender cuidado e responsabilidade.</p>
+            <p>Hoje sua ambição tem nome: liberdade. Não só financeira, autonomia mesmo, de ser quem você quer ser, inclusive dentro do seu casamento, ficar por escolha e não por dependência. A meta que colocamos como primeiro degrau é um pró-labore médio de R$20.000 e um faturamento na empresa de até R$50.000, o suficiente pra você olhar pra sua própria vida e dizer, com verdade: estou bem.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-head" onclick="toggle(this)">
+          <div><span class="qn">QUADRANTE 3</span><h3>O Propósito</h3></div>
+          <span class="plus">+</span>
+        </div>
+        <div class="quad-body">
+          <div class="quad-body-inner">
+            <p>Você foi criada pra ser independente. Seu pai sempre incentivou o estudo e o trabalho. Você se formou, foi trabalhar com seu esposo, e passou dois anos ali sem receber salário, o suficiente pra sentir, no corpo, que aquele não era o seu lugar. Tentou montar sua própria loja duas vezes, uma delas dentro de um shopping, e as duas vezes não deu certo, enquanto seu marido projetava você em casa, perto dos filhos.</p>
+            <p>Hoje você é reservada, e o que você busca em casa não é fuga, é aconchego, o silêncio que é só seu. Você mesma se descreve como uma pessoa de 110, e seu marido como alguém de 220, e essa diferença de voltagem não é só um jeito de falar, é o retrato exato do seu temperamento melancólico dividindo casa com o colérico dele. Você processa por dentro, em baixa voltagem, pesando cada passo antes de dar. Ele processa por fora, em alta voltagem, agindo primeiro e pensando depois.</p>
+            <p>E é aqui que mora uma das raízes mais profundas do seu cansaço. Um melancólico do seu lado colérico não é só diferente, é oposto na fonte de energia. Você recarrega em silêncio, ele descarrega em movimento, e o convívio diário de duas voltagens tão distintas, sem tradução entre elas, é o que faz você se sentir exausta mesmo sem saber nomear o motivo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="quad">
+        <div class="quad-head" onclick="toggle(this)">
+          <div><span class="qn">QUADRANTE 4</span><h3>O Fundo Emocional</h3></div>
+          <span class="plus">+</span>
+        </div>
+        <div class="quad-body">
+          <div class="quad-body-inner">
+            <p>Existe um eco entre a forma como seu marido cobra de você e a forma como sua mãe cobrava. Ele é agitado, quer fazer, mas nem sempre sabe como, e vai de qualquer jeito. Em casa, ele é carente. No seu trabalho, ele diz que apoia, mas você não sente esse apoio virar ação, ele não abraça, não vai junto, não investe, não insiste.</p>
+            <p>Quando algo dá certo pra você, falta nele aquela vibração genuína. Quando dá errado, o peso cai inteiro sobre você. Vocês até conversam, mas você sente que não é ouvida de verdade. E aí se instala o teto invisível, a sensação de precisar se diminuir pra caber.</p>
+            <p>Seu melancólico já entra em qualquer situação nova simulando o que pode dar errado. A cobrança dele, em alta voltagem, cai exatamente em cima dessa simulação, e confirma pra você aquilo que sua mente já temia antes mesmo dele abrir a boca. Não é só a cobrança dele que dói, é ela encontrando um terreno que você já tinha preparado sozinha, lá atrás, na escola.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fio">
+    <div class="wrap">
+      <h2 class="titulo-secao">O fio que amarra tudo</h2>
+      <p>Desde o início do seu casamento, quando a família dele resistiu à união, o mesmo padrão se repetiu ao longo dos anos, reforçando sempre a mesma identidade: inadequação, não ser suficiente, se sentir burra, se sentir menor.</p>
+      <p>Não é sobre um vilão. É sobre uma sentença que você deu a si mesma ainda criança, e que ninguém nunca revisou com você, até agora. É exatamente essa reprogramação de identidade que a nossa consultoria existe pra fazer.</p>
+    </div>
+  </section>
+
+  <section class="virada">
+    <div class="wrap">
+      <h2 class="titulo-secao">O que essa semana já provou</h2>
+      <p>Enquanto a gente trabalhava esses quatro quadrantes, você já estava, sem perceber, fazendo o caminho de volta pra você mesma.</p>
+      <div class="prova-lista">
+        <div class="prova"><p>Você se mostrou <strong>cozinhando</strong>, dentro da sua própria casa, do seu próprio aconchego.</p></div>
+        <div class="prova"><p>Você brincou com seu marido, o "mereço um Pix", e ele disse que sim. Uma prova pequena, e real, de reconhecimento.</p></div>
+        <div class="prova"><p>Você se mostrou <strong>linda, se arrumando</strong> pra atender, e depois mostrou o próprio atendimento acontecendo.</p></div>
+        <div class="prova"><p>Você se mostrou <strong>treinando</strong>, cuidando de si em movimento, não só em repouso.</p></div>
+        <div class="prova"><p>Você viveu o Rock in Rio com sua filha, um momento de presença genuína, fora do script de sempre.</p></div>
+      </div>
+      <p style="margin-top:26px">Cada uma dessas cenas é você testando o território, dentro de um perímetro que já começa a sentir seguro, provando pra si mesma que pode ocupar espaço sem pagar o preço antigo.</p>
+    </div>
+  </section>
+
+  <section class="convite" style="border-bottom:none;">
+    <div class="wrap">
+      <h2>Olhe pra você com o amor que cura</h2>
+      <p>Você não é o que aconteceu com você. A menina que reprovou, que não foi ouvida, que aprendeu a se diminuir pra caber, ela fez o melhor que podia com o que tinha. Agora é a sua vez de reescrever, com verdade e com tempo, quem você decide ser.</p>
+      <p class="frase">Você não precisa se provar. Você só precisa se lembrar.</p>
+      <p class="assina-final">All Win Academy · Business Core</p>
+    </div>
+  </section>
+
+<script>
+function toggle(head){
+  const quad = head.parentElement;
+  const body = quad.querySelector('.quad-body');
+  const isOpen = quad.classList.contains('open');
+  document.querySelectorAll('.quad.open').forEach(q=>{
+    q.classList.remove('open');
+    q.querySelector('.quad-body').style.maxHeight = null;
+  });
+  if(!isOpen){
+    quad.classList.add('open');
+    body.style.maxHeight = body.scrollHeight + 'px';
+  }
+}
+</script>
+</body>
+</html>
