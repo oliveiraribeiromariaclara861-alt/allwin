@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F2">
+<title>Rotina Comercial | May</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Pinyon+Script&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+html{background:#FAF7F2!important}
+html,body{background:#FAF7F2!important;color:#1F1A18;margin:0;padding:0;-webkit-text-size-adjust:100%;font-family:'Lora',Georgia,serif;line-height:1.7}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+--creme:#FAF7F2;--branco:#FFFFFF;--vinho:#360000;--vinhotx:#4E0D16;
+--ouro:#C9A15A;--marinho:#15294D;--madeira:#7E4C22;--espresso:#3E2513;--tinta:#1F1A18;
+--linha:#E8DFD2;
+}
+.wrap{max-width:720px;margin:0 auto;padding:0 20px calc(70px + env(safe-area-inset-bottom))}
+
+/* CAPA */
+.capa{text-align:center;padding:58px 0 40px}
+.kicker{font-family:'Playfair Display',serif;font-size:10.5px;letter-spacing:5px;text-transform:uppercase;color:var(--madeira);margin-bottom:20px}
+.capa h1{font-family:'Playfair Display',serif;font-weight:600;font-size:42px;line-height:1.1;letter-spacing:.5px;text-transform:uppercase;color:var(--vinhotx);margin:0}
+.capa .manu{font-family:'Pinyon Script',cursive;font-size:44px;color:var(--marinho);line-height:1;margin:6px 0 18px;text-transform:none}
+.capa .sub{font-size:14.5px;color:var(--espresso);font-style:italic;max-width:400px;margin:0 auto}
+.capa .data{font-size:10.5px;letter-spacing:3px;text-transform:uppercase;color:#9d8f80;margin-top:22px}
+.rule{height:1px;background:var(--linha);margin:34px 0}
+
+/* SEÇÕES */
+h2{font-family:'Playfair Display',serif;font-size:27px;font-weight:600;color:var(--vinhotx);line-height:1.2;margin:0 0 6px}
+.h2k{font-family:'Playfair Display',serif;font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--ouro);margin-bottom:8px}
+section{padding:34px 0;border-top:1px solid var(--linha)}
+p{font-size:15px;margin:0 0 14px}
+b,strong{font-weight:700;color:var(--vinhotx)}
+
+.aviso{background:var(--branco);border-left:4px solid var(--vinho);border-radius:0 12px 12px 0;padding:16px 18px;margin:20px 0;font-size:14.5px}
+.aviso .t{font-family:'Playfair Display',serif;font-weight:600;font-size:16px;color:var(--vinhotx);margin-bottom:6px}
+
+.meta{background:var(--vinho);color:#f7ece9;border-radius:16px;padding:24px 20px;margin:22px 0;text-align:center}
+.meta .n{font-family:'Playfair Display',serif;font-size:52px;line-height:1;color:var(--ouro);font-weight:700}
+.meta .l{font-size:11px;letter-spacing:4px;text-transform:uppercase;margin-top:6px;color:#e3cfb0}
+.meta .d{font-size:13.5px;margin-top:14px;color:#efe0da;font-style:italic}
+.tri{display:flex;gap:10px;margin-top:18px}
+.tri div{flex:1;background:rgba(255,255,255,.08);border-radius:10px;padding:12px 6px}
+.tri .s{font-family:'Playfair Display',serif;font-size:22px;color:#fff}
+.tri .t{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#dcc9ab;margin-top:3px}
+
+/* GRADE DOS DIAS */
+.dia{background:var(--branco);border:1px solid var(--linha);border-left:5px solid var(--ac);border-radius:0 14px 14px 0;padding:18px;margin-bottom:14px}
+.dia-h{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.dia-h .d{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;color:var(--ac)}
+.dia-h .tema{font-family:'Pinyon Script',cursive;font-size:24px;color:var(--madeira)}
+.dia .pq{font-size:13px;color:var(--espresso);font-style:italic;margin-bottom:12px}
+.bloco{display:flex;gap:12px;padding:9px 0;border-top:1px dashed var(--linha);font-size:14px}
+.bloco .hr{flex:none;width:92px;font-weight:700;color:var(--ac);font-size:13px}
+.bloco .ac{flex:1}
+
+/* CANAIS */
+.canal{display:flex;align-items:center;gap:12px;background:var(--branco);border:1px solid var(--linha);border-radius:12px;padding:13px 15px;margin-bottom:9px}
+.canal .q{flex:none;width:44px;height:44px;border-radius:10px;background:var(--marinho);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:19px;font-weight:700}
+.canal .i{flex:1}
+.canal .n{font-weight:700;font-size:14.5px;color:var(--vinhotx)}
+.canal .o{font-size:12.5px;color:var(--espresso)}
+
+/* ROTEIROS */
+.rot{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:17px;margin-bottom:14px}
+.rot .tt{font-family:'Playfair Display',serif;font-size:18px;font-weight:600;color:var(--vinhotx);margin-bottom:10px}
+.msg{background:var(--creme);border-radius:10px;padding:13px 14px;font-size:13.5px;margin-bottom:9px;line-height:1.65;border-left:3px solid var(--ouro)}
+.msg .v{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--madeira);display:block;margin-bottom:5px}
+
+/* CADENCIA */
+.toque{display:flex;gap:13px;margin-bottom:12px}
+.toque .dn{flex:none;width:52px;text-align:center}
+.toque .dn .b{background:var(--madeira);color:#fff;border-radius:9px;padding:7px 0;font-family:'Playfair Display',serif;font-weight:700;font-size:15px}
+.toque .dn .l{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#9d8f80;margin-top:3px}
+.toque .c{flex:1;background:var(--branco);border:1px solid var(--linha);border-radius:12px;padding:12px 14px;font-size:13.5px}
+.toque .c .nm{font-weight:700;color:var(--vinhotx);font-size:13px;margin-bottom:4px}
+
+/* PERGUNTAS */
+ol.perg{padding-left:22px;margin:0}
+ol.perg li{font-size:14.5px;margin-bottom:11px;padding-left:4px}
+ol.perg li::marker{color:var(--ouro);font-family:'Playfair Display',serif;font-weight:700}
+
+/* MATEMATICA */
+.funil{background:var(--branco);border:1px solid var(--linha);border-radius:14px;overflow:hidden;margin:18px 0}
+.fl{display:flex;align-items:center;gap:14px;padding:13px 16px;border-top:1px solid var(--linha)}
+.fl:first-child{border-top:none;background:#fdfbf7}
+.fl .v{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--vinhotx);min-width:62px}
+.fl .t{font-size:13.5px;flex:1}
+.fl:last-child .v{color:var(--madeira)}
+
+/* CONTADOR */
+.cont{background:var(--branco);border:2px solid var(--ouro);border-radius:16px;padding:20px;text-align:center;margin:20px 0}
+.cont .tt{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:var(--vinhotx);margin-bottom:3px}
+.cont .dt{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9d8f80;margin-bottom:14px}
+.cont .big{font-family:'Playfair Display',serif;font-size:62px;line-height:1;font-weight:700;color:var(--vinho)}
+.cont .de{font-size:13px;color:var(--espresso);margin-top:2px}
+.barra{height:12px;border-radius:999px;background:#efe6d7;overflow:hidden;margin:16px 0 8px}
+.fill{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,var(--ouro),var(--madeira));transition:width .45s ease}
+.frase{font-size:12.5px;font-style:italic;color:var(--espresso);min-height:20px}
+.bts{display:flex;gap:9px;margin-top:16px}
+.bt{flex:1;padding:14px 0;border:none;border-radius:999px;background:var(--vinho);color:#fff;font-family:'Lora',serif;font-size:14.5px;font-weight:600;cursor:pointer}
+.bt.sec{background:var(--branco);border:1px solid var(--linha);color:var(--espresso);font-weight:400;font-size:13px}
+.duplo{display:flex;gap:10px;margin-top:10px}
+.mini{flex:1;background:var(--creme);border:1px solid var(--linha);border-radius:12px;padding:12px}
+.mini .n{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--marinho)}
+.mini .l{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#9d8f80}
+.mini button{margin-top:8px;width:100%;padding:8px 0;border:1px solid var(--linha);border-radius:999px;background:#fff;font-family:'Lora',serif;font-size:12px;color:var(--vinhotx);cursor:pointer}
+
+.fim{text-align:center;padding:46px 0 10px;border-top:1px solid var(--linha);margin-top:30px}
+.fim .f{font-family:'Pinyon Script',cursive;font-size:30px;color:var(--vinhotx);line-height:1.3;max-width:420px;margin:0 auto 20px}
+.fim .m{font-family:'Playfair Display',serif;font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--ouro)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="capa">
+    <div class="kicker">All Win Academy · Business Core</div>
+    <h1>Rotina<br>Comercial</h1>
+    <div class="manu">da May</div>
+    <div class="sub">A ponte entre ser autônoma e ser empresa. Volume com direção, no seu ritmo de blocos.</div>
+    <div class="data">Setembro de 2026</div>
+  </div>
+
+  <section>
+    <div class="h2k">Antes de tudo</div>
+    <h2>A verdade que sustenta esta rotina</h2>
+    <p>Prestação de serviço de alto valor no online não vende por presença. Vende por <b>conversa provocada</b>. Postar e esperar que a cliente ideal apareça perguntando o preço é um sonho bonito que não paga conta.</p>
+    <p>A sua empresa já tem marca, já tem método, já tem produto de alto valor. O que falta é <b>máquina de abordagem</b>. E máquina se constrói com número, não com inspiração.</p>
+    <div class="aviso">
+      <div class="t">O combinado</div>
+      Esta rotina foi desenhada para o seu temperamento. Ela tem piso baixo e inegociável, tema diferente a cada dia e liberdade total no resto. Você não vai se sentir presa aqui. Você vai se sentir no comando.
+    </div>
+  </section>
+
+  <section>
+    <div class="h2k">A meta</div>
+    <h2>O número que muda o jogo</h2>
+    <div class="meta">
+      <div class="n">30</div>
+      <div class="l">abordagens novas por dia</div>
+      <div class="d">Em três sprints de dez, quinze minutos cada. Mais dez follow ups.</div>
+      <div class="tri">
+        <div><div class="s">150</div><div class="t">por semana</div></div>
+        <div><div class="s">600</div><div class="t">por mês</div></div>
+        <div><div class="s">40min</div><div class="t">por dia</div></div>
+      </div>
+    </div>
+    <p>Trinta parece muito e é justamente por isso que funciona. Com volume, a rejeição perde peso. Quando você fala com trinta pessoas por dia, um "não" deixa de doer, porque virou estatística e não julgamento.</p>
+    <div class="aviso">
+      <div class="t">O segredo do volume</div>
+      Nunca construa lista e aborde no mesmo bloco. Montar lista é trabalho mecânico e cansa. Abordar é conversa, e é ali que você brilha. Misturar os dois é o que faz a rotina morrer na quarta-feira.
+    </div>
+  </section>
+
+  <section>
+    <div class="h2k">A grade</div>
+    <h2>Segunda a sexta, pela manhã</h2>
+    <p>Cada dia tem um tema próprio, para a rotina nunca virar repetição. O bloco comercial é sempre de manhã, quando a sua energia está no ponto.</p>
+
+    <div class="dia" style="--ac:#4E0D16">
+      <div class="dia-h"><div class="d">Segunda</div><div class="tema">caça</div></div>
+      <div class="pq">Hoje você enche o celeiro da semana inteira. Nenhuma abordagem, só matéria-prima.</div>
+      <div class="bloco"><div class="hr">1º bloco</div><div class="ac">Montar o banco de listas: <b>150 nomes qualificados</b> para a semana toda. Nome, canal, contexto e gancho de abordagem.</div></div>
+      <div class="bloco"><div class="hr">2º bloco</div><div class="ac">Escolher os três roteiros que vai usar na semana e deixar prontos no bloco de notas do celular.</div></div>
+      <div class="bloco"><div class="hr">3º bloco</div><div class="ac">Primeiro sprint de 10 abordagens, só para aquecer a mão.</div></div>
+    </div>
+
+    <div class="dia" style="--ac:#15294D">
+      <div class="dia-h"><div class="d">Terça</div><div class="tema">conexão</div></div>
+      <div class="pq">Dia de puro volume e relacionamento. A lista já está pronta, você só executa.</div>
+      <div class="bloco"><div class="hr">1º bloco</div><div class="ac">Três sprints de 10 abordagens, com pausa entre eles. <b>30 no total.</b></div></div>
+      <div class="bloco"><div class="hr">2º bloco</div><div class="ac">10 follow ups da cadência.</div></div>
+      <div class="bloco"><div class="hr">3º bloco</div><div class="ac">Disparar o formulário de pesquisa para quem respondeu e não avançou. Quem responde pesquisa já levantou a mão.</div></div>
+    </div>
+
+    <div class="dia" style="--ac:#7E4C22">
+      <div class="dia-h"><div class="d">Quarta</div><div class="tema">sala</div></div>
+      <div class="pq">Agenda aberta para reunião de diagnóstico. Este é o dia que gera dinheiro.</div>
+      <div class="bloco"><div class="hr">1º bloco</div><div class="ac">30 abordagens e 10 follow ups, antes de abrir a sala.</div></div>
+      <div class="bloco"><div class="hr">2º bloco</div><div class="ac">Reuniões de diagnóstico, blocos de 45 minutos com 15 de respiro entre uma e outra.</div></div>
+      <div class="bloco"><div class="hr">3º bloco</div><div class="ac">Registrar cada conversa: dor central, nível de urgência e próximo passo combinado.</div></div>
+    </div>
+
+    <div class="dia" style="--ac:#360000">
+      <div class="dia-h"><div class="d">Quinta</div><div class="tema">proposta</div></div>
+      <div class="pq">Dia de pedir o sim. Nada de esperar que a cliente volte sozinha.</div>
+      <div class="bloco"><div class="hr">1º bloco</div><div class="ac">30 abordagens e 10 follow ups.</div></div>
+      <div class="bloco"><div class="hr">2º bloco</div><div class="ac">Montar e enviar as propostas das reuniões de quarta, no mesmo dia da conversa sempre que possível.</div></div>
+      <div class="bloco"><div class="hr">3º bloco</div><div class="ac">Cobrar resposta de toda proposta em aberto. Silêncio não é não, silêncio é falta de toque.</div></div>
+    </div>
+
+    <div class="dia" style="--ac:#3E2513">
+      <div class="dia-h"><div class="d">Sexta</div><div class="tema">território</div></div>
+      <div class="pq">Dia de olhar o número de frente e cuidar do terreno da marca.</div>
+      <div class="bloco"><div class="hr">1º bloco</div><div class="ac">20 abordagens, volume reduzido de propósito.</div></div>
+      <div class="bloco"><div class="hr">2º bloco</div><div class="ac">Leitura da semana: quantas abordagens, quantas conversas, quantas reuniões, quantas propostas. O que funcionou fica, o que não funcionou sai.</div></div>
+      <div class="bloco"><div class="hr">3º bloco</div><div class="ac">Conteúdo de território de marca: bastidor, conexão e autoridade, para quem chegar no perfil já encontrar a casa arrumada.</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2k">Distribuição</div>
+    <h2>Onde ficam as 30 abordagens</h2>
+    <p>Tudo num único canal queima a conta. A divisão protege o perfil e amplia o alcance.</p>
+    <div class="canal"><div class="q">12</div><div class="i"><div class="n">Direct do Instagram</div><div class="o">Perfis que já interagiram, seguidoras e nomes do nicho</div></div></div>
+    <div class="canal"><div class="q">8</div><div class="i"><div class="n">Comentário qualificado</div><div class="o">Comentar com substância em perfis do ICP e depois puxar para o direct</div></div></div>
+    <div class="canal"><div class="q">6</div><div class="i"><div class="n">LinkedIn</div><div class="o">Terreno quase vazio para branding de alto valor. Se o perfil ainda não está ativo, essa é a tarefa da primeira segunda-feira</div></div></div>
+    <div class="canal"><div class="q">4</div><div class="i"><div class="n">Rede quente e indicação</div><div class="o">Clientes antigas, parcerias, gente que já confia em você</div></div></div>
+    <div class="aviso">
+      <div class="t">Cuidado técnico</div>
+      Nunca envie o mesmo texto idêntico trinta vezes. A plataforma entende como spam e limita o alcance. Use as variações de abertura dos roteiros abaixo, alternando entre elas.
+    </div>
+  </section>
+
+  <section>
+    <div class="h2k">Os roteiros</div>
+    <h2>O que dizer em cada canal</h2>
+
+    <div class="rot">
+      <div class="tt">Direct do Instagram</div>
+      <div class="msg"><span class="v">Abertura 1 · observação</span>Oi [nome], vi que você está construindo [algo específico do perfil dela]. Fiquei com uma curiosidade: hoje o seu posicionamento está atraindo o cliente que você quer, ou está vindo muita gente pedindo desconto?</div>
+      <div class="msg"><span class="v">Abertura 2 · elogio com pergunta</span>Oi [nome], acompanhei o seu conteúdo sobre [tema] e gostei da forma como você conduz. Você já estruturou a sua marca para vender alto valor ou ainda está vendendo pelo esforço?</div>
+      <div class="msg"><span class="v">Abertura 3 · direta e leve</span>Oi [nome], trabalho com branding para consultoria de alto valor. Vi o seu perfil e enxerguei três coisas que mudariam o seu preço médio. Quer que eu te conte?</div>
+    </div>
+
+    <div class="rot">
+      <div class="tt">LinkedIn</div>
+      <div class="msg"><span class="v">Convite com contexto</span>[nome], estou me conectando com consultoras que vendem alto valor. Trabalho o branding que sustenta esse preço. Seria bom ter você por aqui.</div>
+      <div class="msg"><span class="v">Após aceitar</span>Obrigada por aceitar, [nome]. Uma pergunta honesta: quando alguém chega até você hoje, ela já chega sabendo o seu valor ou você precisa convencer no meio da conversa? É exatamente aí que eu atuo.</div>
+    </div>
+
+    <div class="rot">
+      <div class="tt">Comentário que puxa para o direct</div>
+      <div class="msg"><span class="v">No comentário</span>Comente com uma camada nova sobre o assunto dela, nunca com emoji ou "arrasou". Traga um ângulo que ninguém trouxe. Depois entre no direct: "comentei ali no seu post e queria te falar uma coisa que não cabia no comentário".</div>
+    </div>
+
+    <div class="rot">
+      <div class="tt">Rede quente e indicação</div>
+      <div class="msg"><span class="v">Pedido de indicação</span>[nome], estou abrindo agenda para consultoria de branding de alto valor este mês. Conhece alguém que vende serviço bom e ainda cobra pouco? Queria conversar com essa pessoa.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2k">Onde está o dinheiro</div>
+    <h2>A cadência de follow up</h2>
+    <p>Venda de alto valor acontece entre o <b>terceiro e o quinto toque</b>. Quem aborda uma vez, não recebe resposta e considera perdido está entregando o cliente para o concorrente que insistiu. Este banco vale mais que a lista nova.</p>
+
+    <div class="toque"><div class="dn"><div class="b">1</div><div class="l">dia</div></div><div class="c"><div class="nm">Abordagem</div>O primeiro contato, com uma das aberturas acima.</div></div>
+    <div class="toque"><div class="dn"><div class="b">3</div><div class="l">dia</div></div><div class="c"><div class="nm">Valor sem cobrança</div>Enviar algo útil: um print, um insight sobre o perfil dela, um conteúdo seu. Sem perguntar nada.</div></div>
+    <div class="toque"><div class="dn"><div class="b">7</div><div class="l">dia</div></div><div class="c"><div class="nm">Pergunta aberta</div>"[nome], fiquei pensando no seu caso. O que hoje mais te incomoda no seu posicionamento?"</div></div>
+    <div class="toque"><div class="dn"><div class="b">15</div><div class="l">dia</div></div><div class="c"><div class="nm">Convite direto</div>Propor a conversa de diagnóstico com data e hora na mesa, nunca "quando você puder".</div></div>
+    <div class="toque"><div class="dn"><div class="b">30</div><div class="l">dia</div></div><div class="c"><div class="nm">Encerramento elegante</div>"[nome], vou parar de te escrever para não incomodar. Se um dia quiser retomar, minha porta fica aberta." Este toque costuma ser o que faz responder.</div></div>
+  </section>
+
+  <section>
+    <div class="h2k">Pesquisa</div>
+    <h2>As perguntas que abrem a porta</h2>
+    <p>O formulário serve para três coisas ao mesmo tempo: conhecer o público de verdade, abrir conversa sem cara de venda e criar a ponte natural para a reunião.</p>
+    <ol class="perg">
+      <li>Como você descreve o que faz hoje, em uma frase?</li>
+      <li>Qual o seu ticket médio atual e qual ticket você gostaria de praticar?</li>
+      <li>Quando alguém chega até você, ela já chega sabendo o seu valor ou você precisa convencer?</li>
+      <li>O que você já tentou para se posicionar melhor e não funcionou?</li>
+      <li>Se a sua marca estivesse resolvida, o que mudaria no seu negócio em seis meses?</li>
+      <li>De 0 a 10, quanta urgência você sente de resolver isso agora?</li>
+      <li>Deixe seu WhatsApp caso queira receber a leitura da sua resposta.</li>
+    </ol>
+    <div class="aviso">
+      <div class="t">O ouro da pesquisa</div>
+      A pergunta 6 é o seu filtro. Quem marca 8, 9 ou 10 vai direto para o convite de reunião no mesmo dia. Quem marca abaixo de 6 entra na cadência de relacionamento e espera o momento.
+    </div>
+  </section>
+
+  <section>
+    <div class="h2k">A matemática</div>
+    <h2>Onde 600 contatos viram venda</h2>
+    <div class="funil">
+      <div class="fl"><div class="v">600</div><div class="t">abordagens no mês</div></div>
+      <div class="fl"><div class="v">150</div><div class="t">respondem e conversam</div></div>
+      <div class="fl"><div class="v">20</div><div class="t">reuniões de diagnóstico</div></div>
+      <div class="fl"><div class="v">7</div><div class="t">propostas apresentadas</div></div>
+      <div class="fl"><div class="v">2 a 3</div><div class="t">vendas de alto valor</div></div>
+    </div>
+    <p>Esse mapa precisa estar na sua mesa toda sexta. Sem ele você vai sentir que trabalhou muito e vendeu pouco, sem saber em qual etapa furou. <b>Com ele, você descobre exatamente onde ajustar.</b></p>
+  </section>
+
+  <section>
+    <div class="h2k">Execução</div>
+    <h2>Seu contador do dia</h2>
+    <div class="cont">
+      <div class="tt">Abordagens de hoje</div>
+      <div class="dt" id="hoje"></div>
+      <div class="big" id="num">0</div>
+      <div class="de">de 30</div>
+      <div class="barra"><div class="fill" id="fill"></div></div>
+      <div class="frase" id="frase">O celeiro está cheio. Agora é conversa.</div>
+      <div class="bts">
+        <button class="bt" onclick="mais(1)">+1 abordagem</button>
+        <button class="bt" onclick="mais(10)">+ sprint de 10</button>
+      </div>
+      <div class="duplo">
+        <div class="mini">
+          <div class="n" id="fnum">0</div>
+          <div class="l">follow ups</div>
+          <button onclick="maisF(1)">+1</button>
+        </div>
+        <div class="mini">
+          <div class="n" id="snum">0</div>
+          <div class="l">semana</div>
+          <button onclick="zerarSemana()">zerar</button>
+        </div>
+      </div>
+      <button class="bt sec" style="margin-top:10px" onclick="zerarDia()">zerar o dia</button>
+    </div>
+    <p>Marque aqui a cada sprint. Ver o número subir é o que sustenta o volume em dia de pouca vontade.</p>
+  </section>
+
+  <div class="fim">
+    <div class="f">Quem fala com trinta pessoas por dia não depende de sorte.</div>
+    <div class="m">All Win Academy</div>
+  </div>
+</div>
+
+<script>
+const K='may-comercial-v1';
+let d={dia:'',ab:0,fu:0,sem:0};
+function hojeStr(){const x=new Date();return x.toISOString().slice(0,10)}
+function bonito(){
+  const x=new Date();
+  const dd=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'][x.getDay()];
+  const mm=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'][x.getMonth()];
+  return dd+', '+x.getDate()+' de '+mm;
+}
+function carregar(){
+  try{const s=localStorage.getItem(K);if(s)d=JSON.parse(s)}catch(e){}
+  if(d.dia!==hojeStr()){d.dia=hojeStr();d.ab=0;d.fu=0;guardar()}
+}
+function guardar(){try{localStorage.setItem(K,JSON.stringify(d))}catch(e){}}
+function pintar(){
+  document.getElementById('hoje').textContent=bonito();
+  document.getElementById('num').textContent=d.ab;
+  document.getElementById('fnum').textContent=d.fu;
+  document.getElementById('snum').textContent=d.sem;
+  const p=Math.min(100,Math.round(d.ab/30*100));
+  document.getElementById('fill').style.width=p+'%';
+  let f='';
+  if(d.ab===0)f='O celeiro está cheio. Agora é conversa.';
+  else if(d.ab<10)f='Primeiro sprint em movimento. Segue.';
+  else if(d.ab<20)f='Dez na conta. O ritmo já pegou.';
+  else if(d.ab<30)f='Falta pouco para o dia estar cumprido.';
+  else f='Meta do dia batida. Isso é empresa, não autônoma.';
+  document.getElementById('frase').textContent=f;
+}
+function mais(n){d.ab+=n;d.sem+=n;guardar();pintar()}
+function maisF(n){d.fu+=n;guardar();pintar()}
+function zerarDia(){d.ab=0;d.fu=0;guardar();pintar()}
+function zerarSemana(){d.sem=0;guardar();pintar()}
+carregar();pintar();
+</script>
+</body>
+</html>
