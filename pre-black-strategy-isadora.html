@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="IS">
+    <title>Isadora Silva | Pré-Black Strategy</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect fill='%238B5A3C' width='192' height='192' rx='45'/%3E%3Ctext x='96' y='130' font-family='Georgia, serif' font-size='110' font-weight='700' text-anchor='middle' fill='%23FAFAF8'%3EIS%3C/text%3E%3C/svg%3E">
+    <style>
+        :root {
+            --primary: #8B5A3C;
+            --primary-dark: #6B3E1F;
+            --primary-light: #A67C52;
+            --accent-gold: #D4AF37;
+            --accent-champagne: #E8D4B8;
+            --dark-bg: #0D0D0D;
+            --light-bg: #FAFAF8;
+            --text-dark: #1A1A1A;
+            --text-light: #6B6B6B;
+            --border-color: #E8E8E4;
+            --success: #4A7C59;
+            --shadow-sm: 0 2px 8px rgba(13, 13, 13, 0.08);
+            --shadow-md: 0 4px 16px rgba(13, 13, 13, 0.12);
+            --font-serif: 'Georgia', 'Garamond', serif;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 280px;
+            background-color: var(--dark-bg);
+            color: var(--light-bg);
+            padding: 40px 24px;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            border-right: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        .sidebar-header {
+            margin-bottom: 48px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .logo-mark {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-gold), var(--primary-light));
+            border-radius: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 24px;
+            color: var(--dark-bg);
+            font-family: var(--font-serif);
+            box-shadow: var(--shadow-md);
+        }
+
+        .brand-name {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .brand-subtitle {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 400;
+            line-height: 1.4;
+        }
+
+        .nav-section {
+            margin-bottom: 32px;
+        }
+
+        .nav-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            opacity: 0.8;
+        }
+
+        .nav-link {
+            display: block;
+            padding: 10px 12px;
+            margin-bottom: 4px;
+            color: rgba(250, 250, 248, 0.7);
+            text-decoration: none;
+            font-size: 13px;
+            border-left: 2px solid transparent;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--accent-gold);
+            border-left-color: var(--accent-gold);
+            padding-left: 16px;
+        }
+
+        .nav-link.active {
+            color: var(--accent-gold);
+            border-left-color: var(--accent-gold);
+            padding-left: 16px;
+            font-weight: 500;
+        }
+
+        .main-content {
+            margin-left: 280px;
+            flex: 1;
+            background-color: var(--light-bg);
+        }
+
+        .header {
+            background-color: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-title {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 400;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .header-subtitle {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+
+        .content-wrapper {
+            padding: 48px;
+            max-width: 1200px;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        .section-content {
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            border-radius: 2px;
+            margin-bottom: 32px;
+        }
+
+        .content-block {
+            margin-bottom: 40px;
+        }
+
+        .content-block h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .content-block p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 12px;
+        }
+
+        .content-block ul {
+            list-style: none;
+            margin: 16px 0;
+        }
+
+        .content-block li {
+            padding: 8px 0 8px 24px;
+            position: relative;
+            font-size: 14px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .content-block li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .framework-box {
+            background-color: rgba(139, 90, 60, 0.02);
+            border-left: 4px solid var(--primary);
+            padding: 24px;
+            margin: 24px 0;
+            border-radius: 2px;
+        }
+
+        .framework-box strong {
+            color: var(--primary);
+        }
+
+        .framework-box p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-light);
+        }
+
+        .highlight-quote {
+            font-family: var(--font-serif);
+            font-size: 18px;
+            font-style: italic;
+            color: var(--primary);
+            padding: 24px;
+            background-color: rgba(139, 90, 60, 0.05);
+            border-left: 4px solid var(--accent-gold);
+            margin: 24px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin: 24px 0;
+        }
+
+        .comparison-card {
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            border-radius: 2px;
+        }
+
+        .comparison-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 12px;
+        }
+
+        .comparison-card p {
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .success-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: rgba(74, 124, 89, 0.1);
+            color: var(--success);
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 2px;
+            margin: 8px 0;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+
+        .table th {
+            background-color: rgba(139, 90, 60, 0.05);
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 13px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-light);
+        }
+
+        .table tr:hover {
+            background-color: rgba(139, 90, 60, 0.02);
+        }
+
+        .separator {
+            height: 1px;
+            background-color: var(--border-color);
+            margin: 32px 0;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border-color);
+            padding: 40px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+            .main-content {
+                margin-left: 240px;
+            }
+            .content-wrapper {
+                padding: 32px;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+                padding: 24px;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .header {
+                padding: 16px 24px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            .content-wrapper {
+                padding: 24px;
+            }
+            .section-title {
+                font-size: 28px;
+            }
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(212, 175, 55, 0.3);
+            border-radius: 3px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(212, 175, 55, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-mark">IS</div>
+                <div class="brand-name">Isadora Silva</div>
+                <div class="brand-subtitle">Pré-Black Strategy</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Estratégia</div>
+                <div class="nav-link active" data-section="visao-geral">Visão Geral</div>
+                <div class="nav-link" data-section="o-que-nao-e">O Que Não É</div>
+                <div class="nav-link" data-section="o-que-e">O Que É</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">A Estrutura</div>
+                <div class="nav-link" data-section="o-gatilho">O Gatilho</div>
+                <div class="nav-link" data-section="a-oferta">A Oferta</div>
+                <div class="nav-link" data-section="viabilizar">Viabilizar vs Vender</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Conceitos</div>
+                <div class="nav-link" data-section="soberania">Soberania e Black</div>
+                <div class="nav-link" data-section="pmi-black">PMI na Pré-Black</div>
+                <div class="nav-link" data-section="agregar-valor">Agregar Valor</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Financeiro</div>
+                <div class="nav-link" data-section="receio">O Receio</div>
+                <div class="nav-link" data-section="gestao">Gestão Financeira</div>
+                <div class="nav-link" data-section="modelo">Modelo Viável</div>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Implementação</div>
+                <div class="nav-link" data-section="grupo">O Grupo</div>
+                <div class="nav-link" data-section="comunicacao">Comunicação</div>
+                <div class="nav-link" data-section="metricas">Métricas</div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <!-- HEADER -->
+            <div class="header">
+                <div>
+                    <div class="header-title">Pré-Black Strategy</div>
+                    <div class="header-subtitle">Quando a oferta especial é na verdade uma visão macro de negócio</div>
+                </div>
+            </div>
+
+            <!-- CONTENT WRAPPER -->
+            <div class="content-wrapper">
+
+                <!-- VISÃO GERAL -->
+                <section id="visao-geral" class="section active">
+                    <h2 class="section-title">A Proposta</h2>
+                    <p class="section-subtitle">Antes de falar de preço, vamos mudar de lugar</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Por que a gente faz pré-Black</h3>
+                            <p>Não é por desconto. Não é por desespero de venda. Não é por não saber precificar.</p>
+                            <p>A pré-Black existe porque você, Isadora, acredita que viabilizar um procedimento para uma mulher que ainda não conseguiu materializar aquele desejo é um ato de cuidado. É reconhecimento dela. É priorizar ela novamente, mas de uma forma que seja sustentável financeiramente pra você.</p>
+
+                            <div class="highlight-quote">
+                                "A diferença entre descontar e viabilizar é que em um você perde, em outro você estrutura bem pra não perder nada."
+                            </div>
+
+                            <p>Essa pré-Black é um convite para que a cliente entre em um grupo exclusivo onde ela vai ter acesso às melhores condições. Mas a magnífica parte? Que algumas dessas condições não aparecem no Instagram. Elas só existem pra quem está dentro.</p>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>O lugar de quem você é</h3>
+                            <p>Você não é vendedora de procedimentos. Você é uma gestora de priorização. Você olha para uma mulher que já sabe que quer, já respondeu uma enquete dizendo que se pudesse começar esse mês faria com certeza, e você oferece um caminho que torna aquilo possível.</p>
+                            <p>Gestores fazem estrutura. Não fazem desconto.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- O QUE NÃO É -->
+                <section id="o-que-nao-e" class="section">
+                    <h2 class="section-title">O Que Não É</h2>
+                    <p class="section-subtitle">Deixando claro aonde a gente não vai</p>
+
+                    <div class="section-content">
+                        <div class="comparison-grid">
+                            <div class="comparison-card">
+                                <h4>❌ Desconto por Desconto</h4>
+                                <p>Você não está reduzindo seu valor porque o mercado está caro. Você não está regalando. Você não está tendo prejuízo.</p>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>❌ Estratégia Desesperada</h4>
+                                <p>Isso não é "conseguir vender antes do fim do ano". É usar uma ferramenta de marca para comunicar uma visão diferente.</p>
+                            </div>
+                        </div>
+
+                        <div class="comparison-grid">
+                            <div class="comparison-card">
+                                <h4>❌ Abrir Mão da Gestão</h4>
+                                <p>Você não vai aceitar qualquer forma de pagamento que não dê conta de seus custos reais. Pix, cartão, débito, instituição financeira. Tudo com segurança.</p>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>❌ Procedimento Apressado</h4>
+                                <p>Você vai gastar seus 2h a 2h30 fazendo um bom procedimento. Não é "rápido em vista da oferta especial". É padrão seu mesmo.</p>
+                            </div>
+                        </div>
+
+                        <div class="framework-box">
+                            <strong>A verdade que ninguém fala:</strong>
+                            <p>Quando você aceita fazer desconto, você treina a cliente a acreditar que seu serviço vale menos. Quando você estrutura uma oferta, você treina a cliente a acreditar que você é estrategista e que ela está tendo acesso a algo especial porque se reconheceu como prioridade.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- O QUE É -->
+                <section id="o-que-e" class="section">
+                    <h2 class="section-title">O Que É, Na Verdade</h2>
+                    <p class="section-subtitle">A estrutura real por trás dessa oferta</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Uma oferta especial com 3 camadas</h3>
+                            <p>Primeiro: Você reconhece que essa mulher já quer. Ela respondeu. Ela se viu na enquete. Ela se reconheceu. Agora ela está no limiar entre querer e fazer. Você vai oferecer um caminho que torna aquilo viável.</p>
+                            <p>Segundo: Você entra em um grupo exclusivo onde acesso antecipado a ofertas é a moeda. Não é "só pra quem entra agora". É privilégio de estar no grupo. É comunidade. É pertencimento.</p>
+                            <p>Terceiro: Algumas ofertas não saem no Instagram. Elas só existem pra quem está dentro. Isso cria gatilho de FOMO? Sim. Mas não da forma suja. Da forma que diz: "se você reconhece seu valor, você entra no grupo onde seu valor é reconhecido também".</p>
+
+                            <div class="success-badge">✓ Isso é estratégia de marca legitimamente sustentada</div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Você não perde nada. Você ganha gestão</h3>
+                            <p>Se você já tem produto estocado, isso é seu ativo. Se você vai comprar o produto pra fazer o procedimento, você compra com tempo. A diferença entre você gastar R$ 500 em produto no começo do mês ou no meio do mês é uma questão de gestão financeira, não de prejuízo.</p>
+                            <p>O que você ganha é: visão macro. Você começa a se ver como gestora. Você começa a negociar com sua fornecedora sabendo que vai usar aquele produto em um prazo específico. Você planeja. Você estrutura. Você lucra.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- O GATILHO -->
+                <section id="o-gatilho" class="section">
+                    <h2 class="section-title">O Gatilho</h2>
+                    <p class="section-subtitle">Por que alguém entraria no grupo</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Transparência absoluta</h3>
+                            <p>No Instagram você comunica que existe uma pré-Black. Que tem um grupo exclusivo. Que quem entra vai ter acesso a ofertas que não aparecem na rede.</p>
+                            <p>Você NÃO diz qual é a oferta. Você não diz o preço. Você não diz as condições.</p>
+                            <p>Você diz: "Tem algo pra quem reconhece seu próprio valor. Tá lá no grupo. Quer saber?"</p>
+
+                            <div class="framework-box">
+                                <strong>O gatilho real:</strong>
+                                <p>Não é "você vai economizar dinheiro". É "você vai ter acesso a algo que não aparece pra todo mundo". Porque é verdade. É exclusivo. É especial. E a cliente sente que merecia ser especial mesmo.</p>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Quem entra</h3>
+                            <ul>
+                                <li>Mulher que já respondeu a enquete dizendo que faria agora</li>
+                                <li>Mulher que enviou mensagem com dúvida ou objeção (significa que está pensando)</li>
+                                <li>Mulher que reagiu, curtiu, comentou no conteúdo de soberania</li>
+                                <li>Mulher que já traz referência (indicação)</li>
+                            </ul>
+                            <p>Essas são as mulheres que já estão quentes. O grupo exclusivo é só pra dar um caminho a elas.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- A OFERTA -->
+                <section id="a-oferta" class="section">
+                    <h2 class="section-title">A Oferta</h2>
+                    <p class="section-subtitle">Como você estrutura isso sem se sacrificar</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>A forma que funciona</h3>
+                            <p>Você oferece parcelamento em até 3x no plano de assinatura beauty (consórcio). A primeira parcela pode ser reduzida (não um desconto absurdo, uma redução que torne viável). As parcelas seguintes são preço cheio. A cliente paga e já começa o procedimento.</p>
+                            <p>Exemplo: Ao invés de 3x de R$ 3.000, você oferece 1x de R$ 2.500 + 2x de R$ 3.000. Você ganha dinheiro, a cliente sente que teve acesso especial, todo mundo reconhece o valor real.</p>
+
+                            <div class="success-badge">✓ Isso não é desconto. É priorização de fluxo de caixa da cliente.</div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Por que a primeira parcela é diferente</h3>
+                            <p>Porque é a primeira. Porque nela você está reconhecendo o desejo dela. Porque nela você está dizendo: "eu acredito em você, então vou viabilizar". Mas você não está perdendo nada porque as próximas parcelas compensam financeiramente.</p>
+                            <p>Você consegue fazer 2h do procedimento com essa mulher. Você consegue fazer bem. Você consegue fazer gerando resultado que gera indicação. E a indicação vale ouro.</p>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>O que muda na comunicação</h3>
+                            <p>Você não diz "primeira parcela com desconto". Você diz: "reconhecemos seu desejo, então abrimos um acesso especial pra você que já sabe que quer, já respondeu que faria agora, já se reconheceu como prioridade".</p>
+                            <p>A cliente entra sabendo que é uma estrutura especial. Não entra achando que você está desemalhando de preço.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- VIABILIZAR VS VENDER -->
+                <section id="viabilizar" class="section">
+                    <h2 class="section-title">Viabilizar vs Vender</h2>
+                    <p class="section-subtitle">Aonde muda sua relação com o dinheiro</p>
+
+                    <div class="section-content">
+                        <div class="comparison-grid">
+                            <div class="comparison-card">
+                                <h4>Vender (Lugar Antigo)</h4>
+                                <p>Você está oferecendo uma coisa. Ela está decidindo se quer. Preço é o empecilho. Quanto menos preço, mais venda. Desconto é ferramenta.</p>
+                            </div>
+                            <div class="comparison-card">
+                                <h4>Viabilizar (Lugar Novo)</h4>
+                                <p>Você conhece o desejo dela. Você sabe que ela quer. Você está oferecendo um caminho que torna aquilo possível pra ela agora. Preço é segurança. Estrutura é ferramenta.</p>
+                            </div>
+                        </div>
+
+                        <div class="framework-box">
+                            <strong>A mudança que importa:</strong>
+                            <p>Quando você viabiliza, você não está oferecendo menos. Você está oferecendo inteligência de gestão. Você está dizendo: "eu sei como fazer com que isso funcione pra você e pra mim ao mesmo tempo, sem ninguém perder".</p>
+                        </div>
+
+                        <div class="content-block">
+                            <p>Isso muda TUDO na forma como a cliente te vê. De vendedora que tira preço você vira gestora que abre caminho. De alguém que tá tentando fechar a venda você vira alguém que reconhece o desejo dela e diz "então vem, eu faço funcionar".</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SOBERANIA E BLACK -->
+                <section id="soberania" class="section">
+                    <h2 class="section-title">Soberania e Black</h2>
+                    <p class="section-subtitle">Como a Black se encaixa no território de marca</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Você não está vendendo desconto. Você está vendendo reconhecimento</h3>
+                            <p>A mulher soberana reconhece seu próprio valor. O procedimento não cria soberania. A soberania que decide fazer o procedimento. Você entra nesse lugar da cliente já soberana e oferece um caminho que materializa uma decisão que ela já tomou.</p>
+                            <p>A Black encaixa nisso porque diz: "nesse período você tem acesso exclusivo porque você reconhece que merece prioridade". Não é "tá tudo mais barato". É "você reconhece seu valor, nós reconhecemos seu valor, então tem um caminho especial".</p>
+
+                            <div class="success-badge">✓ Isso está 100% alinhado com o conceito central da sua marca</div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>A inversão que torna tudo real</h3>
+                            <p>Você não está dizendo "compre comigo na Black porque está barato". Você está dizendo "a Black é uma ferramenta de marca que permite que mulheres soberanas que já queriam materializar aquilo consigam fazer agora, sem comprometer sua gestão financeira".</p>
+                            <p>Sutil? Parece. Mas essa diferença muda a cliente de "consumidora que procura deal" para "mulher que se reconhece como prioridade e está agindo sobre isso".</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PMI NA BLACK -->
+                <section id="pmi-black" class="section">
+                    <h2 class="section-title">PMI na Pré-Black</h2>
+                    <p class="section-subtitle">Quando Maslow invertido encontra Black Friday</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Por que PMI funciona aqui</h3>
+                            <p>PMI não pergunta "o que essa mulher precisa". Pergunta "o que existe nessa mulher que merece ser priorizado". A oferta de Black que você faz vem dessa pergunta, não de "ela não tem grana".</p>
+                            <p>Você está olhando para a cliente e dizendo: "você já decidiu que quer, você já respondeu a enquete, você já se reconheceu como prioridade, então agora eu vou estruturar um caminho que materializa essa decisão que já existe em você".</p>
+
+                            <div class="framework-box">
+                                <strong>Isso é PMI em ação:</strong>
+                                <p>Você não descobre a necessidade. Você já conhece o desejo. Você reconhece ele. Você oferece uma estrutura que permite que a cliente aja sobre aquilo que ela já SABE que quer.</p>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Os 5 valores entram aqui</h3>
+                            <p>A cliente quer reconhecimento (emocional). Quer expressar uma imagem que é ela mesma (identitário). Quer vir de uma decisão consciente (existencial). Quer passar mensagem visual (social). E claro, quer resultado (funcional).</p>
+                            <p>A pré-Black entra no emocional e no identitário. Ela diz: "você reconheceu que merecia. Você decidiu. Agora você materializa". É tudo ali.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- AGREGAR VALOR -->
+                <section id="agregar-valor" class="section">
+                    <h2 class="section-title">Agregar Valor</h2>
+                    <p class="section-subtitle">Quando "estruturar bem" É o valor agregado</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>A mudança de perspectiva</h3>
+                            <p>Você sempre pensou: "eu vendo procedimento, agrego valor com meu conhecimento, resultado, cuidado, técnica". Tudo verdade. Mas tem um nível antes disso.</p>
+                            <p>Agregue valor ajudando a cliente a materializar um desejo sem comprometer a segurança financeira dela. Agregue valor com uma estrutura de pagamento inteligente. Agregue valor mostrando que você entende ela não como consumidora, mas como mulher que toma decisão.</p>
+
+                            <div class="success-badge">✓ Isso é viabilizar. Isso é cuidado genuíno com a cliente.</div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>O que muda no seu tempo (2h a 2h30)</h3>
+                            <p>Você não está fazendo procedimento mais rápido. Você está investindo aquele tempo de qualidade em alguém que está tendo sua decisão soberana materializada. Essa energia é diferente. Resultado é diferente. Indicação é melhor.</p>
+                            <p>Agregue valor conhecendo o contexto dela. Agregue valor tendo segurança financeira. Agregue valor oferecendo um caminho que funciona pra os dois lados.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- O RECEIO -->
+                <section id="receio" class="section">
+                    <h2 class="section-title">O Receio</h2>
+                    <p class="section-subtitle">Vamos falar de verdade sobre o medo</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Você tem medo de perder dinheiro</h3>
+                            <p>Lógico. É legítimo. Você trabalhou pra saber seu valor, pra cobrar certo, pra não regalar. Então quando vem uma Black ouvindo sobre "oferta especial", o primeiro lugar que vai é: "mas eu vou perder?".</p>
+                            <p>Aqui está o ponto: Você não vai perder. Porque essa não é uma oferta onde você perde. É uma oferta onde você estrutura melhor.</p>
+
+                            <div class="framework-box">
+                                <strong>A verdade do dinheiro:</strong>
+                                <p>A cliente paga R$ 2.500 agora e R$ 3.000 em 30 e 60 dias é diferente de pagar R$ 3.000 em 30, 60 e 90 dias? Financeiramente sim. Pra seu fluxo de caixa sim. Pra sua segurança sim. Mas você recebeu quanto total? Os mesmos R$ 8.500. Ninguém perdeu.</p>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>O receio transformado em gestão</h3>
+                            <p>Ao invés de temer a Black, você começa a pensar: "que produto eu tenho em estoque? Que fornecedor eu consigo negociar prazo? Quanto eu gasto em material em tempo? Como eu planejo?". Essas perguntas transformam medo em gestão.</p>
+                            <p>Você vira gestora. Você para de ter medo e passa a ter segurança porque você conhece os números.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- GESTÃO FINANCEIRA -->
+                <section id="gestao" class="section">
+                    <h2 class="section-title">Gestão Financeira</h2>
+                    <p class="section-subtitle">Os números que seguem para você não ter medo</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O modelo real</h3>
+                            <p>Cliente quer fazer procedimento no valor de R$ 9.000. Seu custo em material é R$ 1.500 (estocado ou a comprar). Seu tempo vale R$ 2.500 (é o seu conhecimento, sua clínica, sua reputação). Seu lucro bruto é R$ 5.000.</p>
+                            <p>Você oferece: R$ 2.500 na entrada + R$ 3.250 + R$ 3.250 (3 parcelas). Total: R$ 9.000. Ninguém perdeu.</p>
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Parcela</th>
+                                        <th>Valor</th>
+                                        <th>Quando</th>
+                                        <th>Seu Custo</th>
+                                        <th>Seu Lucro Nessa Parcela</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1ª (Entrada)</td>
+                                        <td>R$ 2.500</td>
+                                        <td>Imediato</td>
+                                        <td>R$ 1.500 (material)</td>
+                                        <td>R$ 1.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>2ª</td>
+                                        <td>R$ 3.250</td>
+                                        <td>30 dias</td>
+                                        <td>R$ 0 (já pagou)</td>
+                                        <td>R$ 3.250</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3ª</td>
+                                        <td>R$ 3.250</td>
+                                        <td>60 dias</td>
+                                        <td>R$ 0 (já pagou)</td>
+                                        <td>R$ 3.250</td>
+                                    </tr>
+                                    <tr style="font-weight: 600; background-color: rgba(74, 124, 89, 0.05);">
+                                        <td>Total</td>
+                                        <td>R$ 9.000</td>
+                                        <td>-</td>
+                                        <td>R$ 1.500</td>
+                                        <td>R$ 7.500</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="success-badge">✓ Você recebeu R$ 9.000. Gastou R$ 1.500. Lucrou R$ 7.500. Onde está o prejuízo?</div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Os números que você precisa saber</h3>
+                            <ul>
+                                <li>Quanto você gasta em material real (não "acho que gasto")</li>
+                                <li>Quanto você gasta em insumo (agulhas, fios, etc)</li>
+                                <li>Qual é seu valor mínimo pra fazer um procedimento e não sentir que regala</li>
+                                <li>Quanto você consegue receber de entrada sem comprometer fluxo de caixa</li>
+                                <li>Qual é o prazo máximo que você oferece (30, 60, 90 dias)</li>
+                            </ul>
+                            <p>Conhecendo esses números você nunca mais tem medo de Black. Você tem segurança.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MODELO VIÁVEL -->
+                <section id="modelo" class="section">
+                    <h2 class="section-title">Modelo Viável</h2>
+                    <p class="section-subtitle">O que você oferece sem perder nada</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>Opção 1: Pré-Black com Entrada Diferenciada</h3>
+                            <p>Cliente paga uma primeira parcela reduzida (30 a 40% do total) imediatamente. As demais parcelas são o preço cheio em 30 e 60 dias. Você já cobriu seu custo de material na primeira parcela e lucra normalmente nas demais.</p>
+                            <div class="framework-box">
+                                <strong>Exemplo:</strong>
+                                <p>Procedimento de R$ 10.000. Primeira parcela R$ 3.500 (você gasta R$ 1.500 em material, ganha R$ 2.000 na entrada). Próximas parcelas R$ 3.250 cada. Total: R$ 10.000 pra você receber, prejuízo zero.</p>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Opção 2: Pré-Black com Cashback Interno</h3>
+                            <p>Cliente contrata o consórcio. Você oferece desconto no valor só se ela virar embaixadora seu no Instagram (convida amigas). Você não reduz o valor, você tira de um lugar (marketing que ela faz) e coloca em outro (desconto que ela recebe).</p>
+                            <div class="framework-box">
+                                <strong>Isso funciona porque:</strong>
+                                <p>Você não perdeu nada. Você tirou de marketing e colocou em desconto. E a cliente virou sua amplificadora. Win-win genuíno.</p>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Opção 3: Pré-Black com Combo</h3>
+                            <p>Cliente contrata procedimento + retorno 30 dias + protocolo de skincare de manutenção. Você oferece essa jornada com estrutura especial de pagamento. Não é desconto no procedimento. É agregar valor com serviços que já vale R$ 2.000 a mais.</p>
+                            <div class="framework-box">
+                                <strong>Por que funciona:</strong>
+                                <p>Você não desconta. Você agrega. E uma cliente que já tem protocolo de skincare seu é cliente pra sempre. O LTV fica enorme.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- O GRUPO -->
+                <section id="grupo" class="section">
+                    <h2 class="section-title">O Grupo</h2>
+                    <p class="section-subtitle">Onde a estratégia acontece</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O que é exatamente</h3>
+                            <p>É um grupo de WhatsApp privado (ou Telegram) com mulheres que já responderam à enquete positivamente. Que têm interesse genuíno. Que já estão quentes. O grupo não é pra vender. É pra informar sobre ofertas que só existem ali.</p>
+
+                            <div class="framework-box">
+                                <strong>Comunicação do grupo:</strong>
+                                <p>"Esse é um espaço exclusivo pra quem reconhece seu valor e quer materializar sua decisão agora. Aqui você tem acesso a ofertas e estruturas que não aparecem no Instagram. Porque aqui é diferente."</p>
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>O que você comunica no grupo</h3>
+                            <ul>
+                                <li>Resultado de procedimentos (histórias de antes e depois, emoção)</li>
+                                <li>Ofertas exclusivas (que não saem no Instagram)</li>
+                                <li>Disponibilidade (quando você tem agenda pra Black)</li>
+                                <li>Dúvidas respondidas (bate-papo genuíno, suas objeções)</li>
+                                <li>Comunidade (outras mulheres do grupo contando histórias)</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>O que NÃO é no grupo</h3>
+                            <ul>
+                                <li>Lugar de fazer desconto todo dia</li>
+                                <li>Comunidade genérica de conteúdo</li>
+                                <li>Venda por desespero</li>
+                                <li>Spam de oferta</li>
+                            </ul>
+                        </div>
+
+                        <div class="success-badge">✓ O grupo é uma ferramenta de marca, não de dumping de preço</div>
+                    </div>
+                </section>
+
+                <!-- COMUNICAÇÃO -->
+                <section id="comunicacao" class="section">
+                    <h2 class="section-title">Comunicação</h2>
+                    <p class="section-subtitle">Como você fala disso sem parecer vendedora</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>No Instagram (Antes da Black)</h3>
+                            <p>Você começa a conversa sobre soberania. Sobre priorização. Sobre o medo de começar. Você não fala de Black ainda. Você toca em "tem algo que eu gostaria que você conhecesse. Algo que so pra quem reconhece seu valor mesmo". Pura curiosidade. Gatilho de FOMO legítimo.</p>
+
+                            <div class="highlight-quote">
+                                "Tem mulher aqui que já respondeu que se pudesse começar agora faria. Mas algo trava. Pode ser medo, pode ser segurança financeira, pode ser o 'depois'. A gente foi criada pra deixar a gente por último. E eu quero mudar isso. Tenho algo pra quem quer tentar diferente."
+                            </div>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Na CTA</h3>
+                            <p>Você não pede pra comprar. Você pede pra entrar no grupo: "Tem um grupo exclusivo de mulheres que já responderam que queriam. Quer conhecer?". Simples. Curiosidade. Sem pressão.</p>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>No Grupo (Durante a Black)</h3>
+                            <p>Você fala diretamente. Comunica a oferta. Comunica como funciona. Responde dúvida. E deixa claro: "isso só pra quem tá aqui. Porque aqui a gente reconhece que você merecia ser prioridade".</p>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>Nos Stories</h3>
+                            <p>Mostra resultado. Mostra felicidade de quem já fez. Comunica "pré-Black com ofertas exclusivas no grupo". Cria ritmo. Sem desespero. Com genuinidade.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- MÉTRICAS -->
+                <section id="metricas" class="section">
+                    <h2 class="section-title">Métricas</h2>
+                    <p class="section-subtitle">Como você sabe se está funcionando</p>
+
+                    <div class="section-content">
+                        <div class="content-block">
+                            <h3>O que importa rastrear</h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Métrica</th>
+                                        <th>O Que Mede</th>
+                                        <th>Bom Resultado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Pessoas que entraram no grupo</td>
+                                        <td>Taxa de conversão do Instagram pro grupo</td>
+                                        <td>40% das pessoas que você mandou o link</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pessoas que fecharam contrato</td>
+                                        <td>Taxa de conversão do grupo pra venda</td>
+                                        <td>30% do grupo contrata na Black</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receita total recebida</td>
+                                        <td>Se o modelo financeiro está funcionando</td>
+                                        <td>Entrada + parcelas = 100% do que planejou</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Indicações do grupo</td>
+                                        <td>Se a Black gera indicação pra adiante</td>
+                                        <td>20% do grupo traz nova cliente</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Satisfação (resposta no grupo)</td>
+                                        <td>Se o resultado foi bom mesmo</td>
+                                        <td>Histórias positivas, antes e depois funcionando</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="content-block">
+                            <h3>O que NÃO medir</h3>
+                            <p>Não meça "quanto eu desconto". Meça "quanto eu vendo com estrutura inteligente". Não meça "quantos clicks no Instagram". Meça "quantos contratos fecha com bom resultado".</p>
+                            <p>Essas métricas erradas que fazem você pensar que está perdendo quando na verdade está ganhando gestão.</p>
+                        </div>
+
+                        <div class="success-badge">✓ Sucesso = Receita recebida no tempo planejado + Cliente satisfeita + Indicação + Você sem medo</div>
+                    </div>
+                </section>
+
+                <!-- FOOTER -->
+                <div class="footer">
+                    <p>Isadora Silva | Pré-Black Strategy | 2026</p>
+                    <p>Esse documento é convite pra você expandir sua visão de gestora. Não é obrigação. É possibilidade.</p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                const sectionId = link.getAttribute('data-section');
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                const selectedSection = document.getElementById(sectionId);
+                if (selectedSection) {
+                    selectedSection.classList.add('active');
+                    selectedSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+
+                const headerTitle = document.querySelector('.header-title');
+                headerTitle.textContent = link.textContent;
+            });
+        });
+    </script>
+</body>
+</html>
