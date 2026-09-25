@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F2">
+<title>Calculadora HTB · Consórcio Beauty · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --marinho:#16284A;
+    --marinho-claro:#27406E;
+    --creme:#FAF7F2;
+    --tinta:#0E1A2E;
+    --dourado:#C9A15A;
+  }
+  html{background:var(--creme)!important;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--creme);color:#3f4653;font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.7;-webkit-text-size-adjust:100%;}
+  .wrap{max-width:660px;margin:0 auto;padding:0 22px 70px;}
+
+  .topo{padding:56px 0 30px;text-align:center;}
+  .selo{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--marinho);font-weight:600;margin-bottom:20px;}
+  h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(32px,7.5vw,46px);line-height:1.14;color:var(--tinta);}
+  h1 em{font-style:italic;color:var(--marinho);}
+  .topo p{font-family:'Playfair Display',serif;font-style:italic;font-size:17.5px;color:#7d8494;margin-top:16px;}
+  .risco{width:48px;height:2px;background:var(--dourado);margin:26px auto 0;}
+
+  .painel{background:#fff;border:1px solid #e3e6ec;border-radius:20px;padding:30px 26px;margin-top:30px;}
+  .painel .pt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--marinho);font-weight:700;margin-bottom:22px;}
+
+  .campo{margin-bottom:24px;}
+  .campo label{display:block;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--marinho);font-weight:700;margin-bottom:8px;}
+  .campo input[type=number]{
+    width:100%;padding:15px 16px;border:1.5px solid #dde1e9;border-radius:12px;
+    font-family:'DM Sans',sans-serif;font-size:18px;color:var(--tinta);background:#fbfcfd;font-weight:600;
+  }
+  .campo input:focus{outline:none;border-color:var(--marinho);background:#fff;}
+  .campo .dica{font-size:13px;color:#7d8494;margin-top:6px;font-style:italic;}
+  .valAtual{font-family:'Playfair Display',serif;font-size:25px;color:var(--tinta);margin-bottom:8px;font-weight:600;}
+  input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:3px;border-radius:3px;background:#dde1e9;outline:none;}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:var(--marinho);cursor:pointer;border:3px solid #fff;box-shadow:0 2px 8px rgba(22,40,74,.35);}
+  input[type=range]::-moz-range-thumb{width:24px;height:24px;border-radius:50%;background:var(--marinho);cursor:pointer;border:3px solid #fff;}
+  .lim{display:flex;justify-content:space-between;font-size:11.5px;color:#9aa2b1;margin-top:8px;}
+
+  .modos{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;}
+  .modo{
+    border:1.5px solid #dde1e9;background:#fbfcfd;border-radius:12px;padding:14px 10px;
+    font-family:'DM Sans',sans-serif;font-size:14.5px;font-weight:600;color:#5a6275;cursor:pointer;
+    transition:all .18s;
+  }
+  .modo.ativo{background:var(--marinho);border-color:var(--marinho);color:#fff;}
+
+  .selo-taxa{
+    display:inline-block;background:rgba(22,40,74,.09);color:var(--marinho);
+    font-size:12.5px;font-weight:700;padding:5px 14px;border-radius:20px;margin-top:10px;
+  }
+
+  .avancado{border-top:1px solid #eef0f4;margin-top:8px;padding-top:18px;}
+  .avancado summary{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9aa2b1;font-weight:700;cursor:pointer;list-style:none;}
+  .avancado summary::-webkit-details-marker{display:none;}
+  .avancado summary::after{content:' +';color:var(--marinho);}
+  .avancado[open] summary::after{content:' –';}
+  .avancado .grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px;}
+  .avancado .campo{margin-bottom:0;}
+  .avancado input[type=number]{font-size:16px;padding:12px 14px;}
+  .switch{display:flex;align-items:center;gap:12px;margin-top:18px;font-size:14.5px;color:#5a6275;}
+  .switch input{width:20px;height:20px;accent-color:var(--marinho);}
+
+  .resultado{background:var(--marinho);border-radius:20px;padding:32px 26px;margin-top:26px;color:#c3ccdd;}
+  .resultado .rt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dourado);font-weight:700;margin-bottom:6px;}
+  .bloco-res{margin-bottom:26px;}
+  .bloco-res:last-child{margin-bottom:0;}
+  .subt{font-family:'Playfair Display',serif;font-size:19px;color:#fff;margin-bottom:12px;font-weight:600;border-bottom:1px solid #2a3f66;padding-bottom:8px;}
+  .linha{display:flex;justify-content:space-between;align-items:baseline;padding:11px 0;border-bottom:1px solid #223558;gap:12px;}
+  .linha:last-child{border-bottom:none;}
+  .linha .a{font-size:14.5px;color:#93a1bb;flex:1;}
+  .linha .b{font-family:'Playfair Display',serif;font-size:21px;color:#fff;white-space:nowrap;}
+
+  .grande{background:var(--marinho-claro);border-radius:14px;padding:24px;text-align:center;margin-top:18px;}
+  .grande .gl{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--dourado);font-weight:700;}
+  .grande .gv{font-family:'Playfair Display',serif;font-size:clamp(32px,8vw,42px);color:#fff;line-height:1.15;margin-top:6px;font-weight:600;}
+  .grande .gn{font-size:13.5px;color:#c3ccdd;margin-top:6px;}
+
+  .alerta{border-radius:12px;padding:16px 18px;margin-top:16px;font-size:14.5px;line-height:1.6;}
+  .alerta.ok{background:rgba(201,161,90,.15);border:1px solid rgba(201,161,90,.42);color:#e8d5b2;}
+  .alerta.atencao{background:rgba(196,96,70,.18);border:1px solid rgba(196,96,70,.5);color:#f3c9bb;}
+  .alerta b{color:#fff;}
+
+  .tabela{background:#fff;border:1px solid #e3e6ec;border-radius:18px;padding:26px 22px;margin-top:26px;}
+  .tabela .tt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--marinho);font-weight:700;margin-bottom:16px;}
+  table{width:100%;border-collapse:collapse;font-size:14.5px;}
+  th{background:var(--marinho);color:#eef2f8;font-weight:600;text-align:left;padding:11px 10px;font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;}
+  th:first-child{border-radius:8px 0 0 0;}
+  th:last-child{border-radius:0 8px 0 0;text-align:right;}
+  td{padding:11px 10px;border-bottom:1px solid #eef0f4;}
+  td:last-child{text-align:right;font-weight:700;color:var(--tinta);white-space:nowrap;}
+  tr:nth-child(even) td{background:#fafbfc;}
+  tr.baixa td{color:#a8624c;}
+  tr.baixa td:first-child::after{content:' · abaixo da mínima';font-size:11px;font-weight:600;}
+
+  .nota{background:#fff;border:1px solid #e3e6ec;border-radius:14px;padding:22px 24px;margin-top:24px;font-size:15px;line-height:1.7;}
+  .nota .nt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--marinho);font-weight:700;margin-bottom:10px;}
+  .nota p{margin-bottom:12px;}
+  .nota p:last-child{margin-bottom:0;}
+  .nota b{color:var(--tinta);}
+
+  footer{text-align:center;padding:44px 0 0;}
+  footer .logo{font-family:'Playfair Display',serif;font-size:18px;color:var(--tinta);}
+  footer .logo span{color:var(--marinho);}
+  footer p{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#9aa2b1;margin-top:8px;}
+
+  @media(max-width:480px){
+    .wrap{padding:0 18px 60px;}
+    .painel,.resultado,.tabela{padding:24px 18px;}
+    .avancado .grid{grid-template-columns:1fr;}
+    .linha .b{font-size:19px;}
+    td,th{padding:9px 7px;font-size:13px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="topo">
+    <div class="selo">All Win Academy</div>
+    <h1>Calculadora <em>HTB</em></h1>
+    <p>Consórcio Beauty · simule o plano da sua paciente e veja o líquido que entra na clínica.</p>
+    <div class="risco"></div>
+  </div>
+
+  <div class="painel">
+    <div class="pt">Dados do procedimento</div>
+
+    <div class="campo">
+      <label>Valor total do procedimento</label>
+      <input type="number" id="valor" value="1000" min="100" step="50" inputmode="decimal">
+      <div class="dica">O valor cheio que a clínica cobra</div>
+    </div>
+
+    <div class="campo">
+      <label>Modo de pagamento</label>
+      <div class="modos">
+        <button type="button" class="modo ativo" data-modo="iguais">Parcelas iguais</button>
+        <button type="button" class="modo" data-modo="personalizada">Entrada personalizada</button>
+      </div>
+      <div class="dica" id="dica-modo">A entrada tem o mesmo valor das parcelas, como a plataforma mostra para a paciente.</div>
+    </div>
+
+    <div class="campo" id="bloco-entrada" style="display:none">
+      <label>Entrada</label>
+      <div class="valAtual" id="v-entrada">50% · R$ 5.000,00</div>
+      <input type="range" id="entrada" min="0" max="80" step="5" value="50">
+      <div class="lim"><span>0%</span><span>80%</span></div>
+    </div>
+
+    <div class="campo">
+      <label>Número de parcelas</label>
+      <div class="valAtual" id="v-parcelas">12 parcelas</div>
+      <input type="range" id="parcelas" min="2" max="36" step="1" value="12">
+      <div class="lim"><span>2</span><span>36</span></div>
+      <div class="selo-taxa" id="selo-taxa">Juros de 2,92% ao mês</div>
+      <div class="dica">Até 12x aplica 2,92% ao mês. Acima de 12x aplica 3,50% ao mês.</div>
+    </div>
+
+    <details class="avancado">
+      <summary>Ajustar taxas</summary>
+      <div class="grid">
+        <div class="campo">
+          <label>Juros até 12x (%)</label>
+          <input type="number" id="juros1" value="2.92" step="0.01" inputmode="decimal">
+        </div>
+        <div class="campo">
+          <label>Juros acima de 12x (%)</label>
+          <input type="number" id="juros2" value="3.50" step="0.01" inputmode="decimal">
+        </div>
+        <div class="campo">
+          <label>Taxa da clínica (%)</label>
+          <input type="number" id="adm" value="5" step="0.5" inputmode="decimal">
+        </div>
+        <div class="campo">
+          <label>Parcela mínima (R$)</label>
+          <input type="number" id="minima" value="250" step="10" inputmode="decimal">
+        </div>
+      </div>
+    </details>
+  </div>
+
+  <div class="resultado">
+    <div class="bloco-res">
+      <div class="rt">O que a paciente paga</div>
+      <div class="subt">Plano dela</div>
+      <div class="linha"><span class="a">Entrada no ato</span><span class="b" id="r-entrada">R$ 0</span></div>
+      <div class="linha"><span class="a">Saldo a pagar nas parcelas</span><span class="b" id="r-saldo">R$ 0</span></div>
+      <div class="linha"><span class="a">Parcelas mensais</span><span class="b" id="r-parcela">R$ 0</span></div>
+      <div class="linha"><span class="a">Custo do parcelamento</span><span class="b" id="r-juros">R$ 0</span></div>
+
+      <div class="grande">
+        <div class="gl">Total pago pela paciente</div>
+        <div class="gv" id="r-total">R$ 0</div>
+        <div class="gn" id="r-resumo">Entrada mais parcelas</div>
+      </div>
+
+      <div class="alerta ok" id="alerta">Parcela dentro da mínima recomendada.</div>
+    </div>
+
+    <div class="bloco-res">
+      <div class="rt">O que entra na clínica</div>
+      <div class="subt">Seu líquido</div>
+      <div class="linha"><span class="a">Valor do procedimento</span><span class="b" id="r-base">R$ 0</span></div>
+      <div class="linha"><span class="a">Taxa da clínica</span><span class="b" id="r-adm">R$ 0</span></div>
+      <div class="linha"><span class="a">Recebido junto com a entrada</span><span class="b" id="r-rep-entrada">R$ 0</span></div>
+      <div class="linha"><span class="a">Recebido a cada boleto pago</span><span class="b" id="r-rep-parcela">R$ 0</span></div>
+      <div class="grande">
+        <div class="gl">Líquido total para a clínica</div>
+        <div class="gv" id="r-repasse">R$ 0</div>
+        <div class="gn">Liberado conforme os boletos são pagos, disponível para saque em D+2</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabela">
+    <div class="tt">Comparativo de planos</div>
+    <table>
+      <thead>
+        <tr><th>Plano</th><th>Como fica</th><th>Total da paciente</th></tr>
+      </thead>
+      <tbody id="corpo-tabela"></tbody>
+    </table>
+  </div>
+
+  <div class="nota">
+    <div class="nt">Como usar na conversa</div>
+    <p>Apresente sempre começando pela entrada, porque <b>é ela que protege a sua margem e reduz o custo total para a paciente.</b> Quanto maior a entrada, menor a parcela.</p>
+    <p>Até 12 parcelas os juros são menores. Acima disso a taxa sobe, então antes de alongar demais o plano vale testar menos parcelas.</p>
+    <p><b>Uma entrada maior não reduz o total, ela reduz o valor mensal.</b> O que encarece o plano é o número de parcelas, porque cada mês a mais soma juros. Então quando a paciente disser que quer pagar menos no total, a conversa é sobre reduzir prazo, e quando ela disser que quer caber no bolso, a conversa é sobre aumentar a entrada.</p>
+    <p>Se a parcela ficar abaixo da mínima, reduza o número de parcelas ou aumente a entrada. Parcela muito baixa alonga o plano, encarece para ela e atrasa o seu caixa.</p>
+    <p>A clínica recebe o valor do procedimento menos a taxa de 5%, liberado conforme os boletos são pagos, com saque em D+2 após cada pagamento. <b>Sem mensalidade, sem anuidade e sem fidelidade.</b> Os juros ficam entre a paciente e a instituição, nunca saem do seu bolso.</p>
+  </div>
+
+  <footer>
+    <div class="logo">All Win <span>Academy</span></div>
+    <p>Calculadora HTB · Consórcio Beauty</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var ids=['valor','entrada','parcelas','juros1','juros2','adm','minima'],el={};
+  ids.forEach(function(i){el[i]=document.getElementById(i);});
+  var modo='iguais';
+
+  function m(n){
+    return 'R$ ' + n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function price(pv,i,n){            // parcelas comuns, primeira daqui a um mês
+    if(n<=0) return 0;
+    if(i===0) return pv/n;
+    return pv * i / (1 - Math.pow(1+i,-n));
+  }
+  function parcelaIgual(V,i,N){      // N pagamentos iguais, o primeiro no ato
+    if(N<=0) return 0;
+    if(i===0) return V/N;
+    var fator = 1 + (1 - Math.pow(1+i,-(N-1)))/i;
+    return V * (1+i) / fator;
+  }
+  function taxaDe(n,j1,j2){ return n<=12 ? j1 : j2; }
+
+  function plano(V,N,i,pe){
+    // devolve {entrada, nBoletos, parcela, total}
+    if(modo==='iguais'){
+      var p=parcelaIgual(V,i,N);
+      return {entrada:p, nBoletos:Math.max(N-1,0), parcela:p, total:p*N};
+    }
+    // O total é o mesmo do plano de parcelas iguais. A entrada apenas redistribui o restante.
+    var total=parcelaIgual(V,i,N)*N;
+    var ent=V*pe/100, nb=Math.max(N-1,0);
+    var par=nb>0 ? (total-ent)/nb : 0;
+    return {entrada:ent, nBoletos:nb, parcela:par, total:total};
+  }
+
+  function calcular(){
+    var V=parseFloat(el.valor.value)||0;
+    var pe=parseInt(el.entrada.value,10);
+    var N=parseInt(el.parcelas.value,10);
+    var j1=(parseFloat(el.juros1.value)||0)/100;
+    var j2=(parseFloat(el.juros2.value)||0)/100;
+    var adm=(parseFloat(el.adm.value)||0)/100;
+    var min=parseFloat(el.minima.value)||0;
+    var i=taxaDe(N,j1,j2);
+
+    var r=plano(V,N,i,pe);
+    var custoJuros=r.total-V;
+
+    var taxaAdm=V*adm;
+    var liquido=V-taxaAdm;
+    var liqEntrada, liqParcela;
+    if(modo==='iguais'){
+      liqEntrada=liquido/N;
+      liqParcela=liquido/N;
+    } else {
+      liqEntrada=liquido*(r.entrada/r.total);
+      liqParcela=r.nBoletos>0 ? liquido*(r.parcela/r.total) : 0;
+    }
+
+    document.getElementById('v-entrada').textContent=pe+'% · '+m(V*pe/100);
+    document.getElementById('v-parcelas').textContent=N+(N===1?' parcela':' parcelas');
+    document.getElementById('selo-taxa').textContent='Juros de '+(i*100).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'% ao mês';
+
+    document.getElementById('r-entrada').textContent=m(r.entrada);
+    document.getElementById('r-saldo').textContent=m(r.total-r.entrada);
+    document.getElementById('r-parcela').textContent=r.nBoletos+'x de '+m(r.parcela);
+    document.getElementById('r-juros').textContent=m(custoJuros);
+    document.getElementById('r-total').textContent=m(r.total);
+    document.getElementById('r-resumo').textContent='Entrada de '+m(r.entrada)+' mais '+r.nBoletos+'x de '+m(r.parcela);
+
+    document.getElementById('r-base').textContent=m(V);
+    document.getElementById('r-adm').textContent='- '+m(taxaAdm);
+    document.getElementById('r-rep-entrada').textContent=m(liqEntrada);
+    document.getElementById('r-rep-parcela').textContent=m(liqParcela);
+    document.getElementById('r-repasse').textContent=m(liquido);
+
+    var al=document.getElementById('alerta');
+    if(r.nBoletos===0){
+      al.className='alerta ok';
+      al.innerHTML='Pagamento <b>integral no ato</b>, sem parcelamento.';
+    } else if(r.parcela<min){
+      al.className='alerta atencao';
+      al.innerHTML='Atenção: a parcela ficou em <b>'+m(r.parcela)+'</b>, abaixo da mínima de '+m(min)+'. Reduza o número de parcelas'+(modo==='personalizada'?' ou aumente a entrada.':'.');
+    } else {
+      al.className='alerta ok';
+      al.innerHTML='Parcela de <b>'+m(r.parcela)+'</b>, dentro da mínima de '+m(min)+'.';
+    }
+
+    var corpo=document.getElementById('corpo-tabela');
+    corpo.innerHTML='';
+    [2,4,6,10,12,18,24,36].forEach(function(n){
+      var ii=taxaDe(n,j1,j2);
+      var x=plano(V,n,ii,pe);
+      var tr=document.createElement('tr');
+      if(x.parcela<min && x.nBoletos>0) tr.className='baixa';
+      tr.innerHTML='<td>'+n+'x</td><td>entrada de '+m(x.entrada)+' + '+x.nBoletos+'x de '+m(x.parcela)+'</td><td>'+m(x.total)+'</td>';
+      corpo.appendChild(tr);
+    });
+  }
+
+  document.querySelectorAll('.modo').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.modo').forEach(function(x){x.classList.remove('ativo');});
+      b.classList.add('ativo');
+      modo=b.dataset.modo;
+      document.getElementById('bloco-entrada').style.display = modo==='personalizada' ? 'block' : 'none';
+      document.getElementById('dica-modo').textContent = modo==='personalizada'
+        ? 'Você define a entrada e o restante se divide nas parcelas seguintes. O total continua o mesmo, a entrada apenas alivia o valor mensal.'
+        : 'A entrada tem o mesmo valor das parcelas, como a plataforma mostra para a paciente.';
+      calcular();
+    });
+  });
+
+  ids.forEach(function(i){
+    el[i].addEventListener('input',calcular);
+    el[i].addEventListener('change',calcular);
+  });
+  calcular();
+})();
+</script>
+</body>
+</html>
