@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#7E1F31">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="All Win Time">
+<title>Central do Time · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--vinho:#7E1F31;--vinho-fundo:#F3E9EB;--ouro:#C9A15A;--creme:#FAF7F2;--tinta:#1F1A18;}
+  html{background:var(--creme)!important;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--creme);color:#4a423d;
+    font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.65;
+    -webkit-text-size-adjust:100%;
+    padding-bottom:calc(76px + env(safe-area-inset-bottom));
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:0 18px;}
+
+  /* CABEÇALHO */
+  header{
+    background:var(--vinho);color:#fff;padding:calc(env(safe-area-inset-top) + 26px) 0 22px;
+    text-align:center;position:relative;
+  }
+  header .marca{font-size:10.5px;letter-spacing:4px;text-transform:uppercase;color:#e9c9a0;font-weight:600;}
+  header h1{font-family:'Playfair Display',serif;font-size:27px;font-weight:600;margin-top:6px;}
+  header .sub{font-size:13px;color:#e3c3c9;margin-top:4px;}
+
+  /* NAVEGAÇÃO */
+  nav{
+    position:sticky;top:0;z-index:20;background:var(--creme);
+    border-bottom:1px solid #e8dfd5;overflow-x:auto;-webkit-overflow-scrolling:touch;
+  }
+  nav .linha{display:flex;gap:6px;padding:12px 18px;min-width:max-content;}
+  nav button{
+    background:#fff;border:1.5px solid #e5ddd3;border-radius:30px;padding:9px 16px;
+    font-family:'DM Sans',sans-serif;font-size:13.5px;font-weight:600;color:#6b6259;
+    cursor:pointer;white-space:nowrap;transition:all .15s;
+  }
+  nav button.ativo{background:var(--vinho);border-color:var(--vinho);color:#fff;}
+
+  /* ABAS */
+  .aba{display:none;padding:26px 0 40px;}
+  .aba.ativa{display:block;animation:entra .28s ease;}
+  @keyframes entra{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+  h2{font-family:'Playfair Display',serif;font-size:25px;font-weight:600;color:var(--tinta);margin-bottom:8px;line-height:1.25;}
+  .intro{font-size:15px;color:#6b6259;margin-bottom:22px;}
+  h3{font-family:'Playfair Display',serif;font-size:19px;font-weight:600;color:var(--vinho);margin:30px 0 10px;}
+  p{margin-bottom:14px;}
+  strong{font-weight:700;color:var(--vinho);}
+
+  .card{background:#fff;border:1px solid #ece4d9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .card .ct{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--vinho);font-weight:700;margin-bottom:10px;}
+  .card p:last-child{margin-bottom:0;}
+  .card-escuro{background:var(--tinta);color:#d5cbc0;border:none;}
+  .card-escuro .ct{color:var(--ouro);}
+  .card-escuro strong{color:#fff;}
+
+  /* SCRIPT */
+  .script{background:#fff;border:1px solid #ece4d9;border-radius:14px;margin-bottom:16px;overflow:hidden;}
+  .script .topo{
+    background:var(--vinho-fundo);padding:12px 18px;display:flex;justify-content:space-between;
+    align-items:center;gap:10px;
+  }
+  .script .nome{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--vinho);font-weight:700;}
+  .script .copiar{
+    background:var(--vinho);color:#fff;border:none;border-radius:20px;padding:7px 15px;
+    font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;
+  }
+  .script .copiar.feito{background:#4a7c59;}
+  .script .corpo{padding:18px;font-size:15.5px;line-height:1.7;white-space:pre-line;}
+  .script .corpo v{color:var(--vinho);font-weight:700;}
+  .script .porque{
+    background:var(--tinta);color:#b9afa6;padding:14px 18px;font-size:13.5px;line-height:1.6;
+  }
+  .script .porque b{color:var(--ouro);}
+
+  /* PASSOS */
+  .passo{display:flex;gap:16px;background:#fff;border:1px solid #ece4d9;border-radius:14px;padding:18px 20px;margin-bottom:12px;align-items:flex-start;}
+  .passo .n{
+    background:var(--vinho);color:#fff;min-width:30px;height:30px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;
+  }
+  .passo .t{font-size:15px;line-height:1.6;}
+  .passo .t strong{display:block;color:var(--tinta);margin-bottom:2px;}
+
+  /* GARGALO */
+  .gargalo{background:#fff;border:1px solid #ece4d9;border-radius:14px;padding:20px 22px;margin-bottom:14px;}
+  .gargalo .cab{display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;}
+  .gargalo .cab h4{font-family:'Playfair Display',serif;font-size:20px;color:var(--tinta);font-weight:600;}
+  .gargalo .eng{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;background:var(--vinho-fundo);color:var(--vinho);padding:3px 10px;border-radius:20px;font-weight:700;}
+  .frases{list-style:none;margin:10px 0;}
+  .frases li{padding:7px 0 7px 18px;position:relative;font-size:14.5px;font-style:italic;color:#6b6259;}
+  .frases li::before{content:'"';position:absolute;left:0;top:10px;color:var(--vinho);font-family:'Playfair Display',serif;font-size:19px;line-height:0;}
+  .chave{background:#faf5ec;border-radius:10px;padding:12px 15px;font-size:14.5px;margin-top:8px;}
+  .chave b{color:var(--vinho);}
+
+  table{width:100%;border-collapse:collapse;font-size:14.5px;margin:14px 0;}
+  th{background:var(--tinta);color:#f5efe3;text-align:left;padding:11px 12px;font-size:11.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:600;}
+  th:first-child{border-radius:8px 0 0 0;}
+  th:last-child{border-radius:0 8px 0 0;}
+  td{padding:11px 12px;border-bottom:1px solid #f0ead9;vertical-align:top;}
+  tr:nth-child(even) td{background:#fdfbf7;}
+
+  .lista{list-style:none;margin:12px 0;}
+  .lista li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid #f2ece3;font-size:15px;}
+  .lista li:last-child{border-bottom:none;}
+  .lista li::before{content:'◆';position:absolute;left:0;top:14px;color:var(--vinho);font-size:8px;}
+
+  .botao{
+    display:block;background:var(--vinho);color:#fff;text-decoration:none;text-align:center;
+    padding:16px;border-radius:14px;font-size:14px;font-weight:600;letter-spacing:1px;
+    text-transform:uppercase;margin-bottom:12px;
+  }
+  .botao.claro{background:#fff;color:var(--vinho);border:1.5px solid var(--vinho);}
+
+  /* FICHA */
+  .ficha textarea{
+    width:100%;border:1.5px solid #e5ddd3;border-radius:12px;padding:14px;
+    font-family:'DM Sans',sans-serif;font-size:15px;color:var(--tinta);background:#fff;
+    min-height:44px;resize:vertical;
+  }
+  .ficha textarea:focus{outline:none;border-color:var(--vinho);}
+  .ficha label{display:block;font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--vinho);font-weight:700;margin:16px 0 6px;}
+
+  /* RODAPÉ FIXO */
+  .rodape{
+    position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #e8dfd5;
+    padding:10px 18px calc(10px + env(safe-area-inset-bottom));z-index:30;
+    display:flex;justify-content:center;gap:8px;
+  }
+  .rodape .aviso{font-size:12px;color:#9c9184;text-align:center;line-height:1.5;}
+
+  footer{text-align:center;padding:30px 0 10px;}
+  footer .logo{font-family:'Playfair Display',serif;font-size:17px;color:var(--tinta);}
+  footer .logo span{color:var(--vinho);}
+  footer p{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:#b8ada4;margin-top:6px;}
+
+  @media(max-width:480px){
+    .wrap{padding:0 15px;}
+    .card,.gargalo,.passo{padding:17px 16px;}
+    .script .corpo{padding:16px;font-size:15px;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="marca">All Win Academy</div>
+  <h1>Central do Time</h1>
+  <div class="sub">Prospecção fria · Consultoria Business Core</div>
+</header>
+
+<nav>
+  <div class="linha">
+    <button class="ativo" data-aba="essencia">Essência</button>
+    <button data-aba="abordagens">Abordagens</button>
+    <button data-aba="audios">Áudios</button>
+    <button data-aba="diagnostico">Diagnóstico</button>
+    <button data-aba="followup">Follow-up</button>
+    <button data-aba="objecoes">Objeções</button>
+    <button data-aba="consorcio">Consórcio</button>
+    <button data-aba="ficha">Ficha</button>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= ESSÊNCIA ================= -->
+<section class="aba ativa" id="essencia">
+  <h2>O que nós fazemos</h2>
+  <p class="intro">Antes de qualquer mensagem, você precisa saber responder isso de cabeça.</p>
+
+  <div class="card">
+    <div class="ct">Em uma frase</div>
+    <p>Nós reestruturamos negócio de dentro para fora. Primeiro a mulher, depois o dinheiro, depois a estrutura. O objetivo final tem três palavras: <strong>lucro, previsibilidade e liberdade</strong>.</p>
+  </div>
+
+  <div class="card-escuro card">
+    <div class="ct">O diferencial que ninguém entrega junto</div>
+    <p>A Maria Clara é terapeuta comportamental e consultora ao mesmo tempo. Consultoria comum entrega planilha bonita e a execução continua parada, porque ninguém olhou para quem carrega o negócio. <strong>Aqui as duas coisas acontecem na mesma sessão.</strong></p>
+  </div>
+
+  <h3>As quatro engrenagens</h3>
+  <div class="passo"><div class="n">1</div><div class="t"><strong>Marketing</strong>O que atrai. Conteúdo com intenção, posicionamento e calendário.</div></div>
+  <div class="passo"><div class="n">2</div><div class="t"><strong>Produto</strong>O que entrega. Protocolos precificados com margem calculada antes do orçamento.</div></div>
+  <div class="passo"><div class="n">3</div><div class="t"><strong>Comercial</strong>O que conduz. Roteiro da avaliação ao fechamento, com sinal de confirmação.</div></div>
+  <div class="passo"><div class="n">4</div><div class="t"><strong>Vendas</strong>O que fecha. O modelo de pagamento que faz a paciente conseguir dizer sim.</div></div>
+
+  <div class="card">
+    <div class="ct">Por que as quatro juntas</div>
+    <p>Quando uma engrenagem para, as outras giram no vazio. Clínica com marketing bom e comercial travado enche a agenda de avaliação e fecha pouco. <strong>Nós não vendemos consultoria de marketing nem curso de vendas.</strong></p>
+  </div>
+
+  <h3>O perfil que procuramos</h3>
+  <ul class="lista">
+    <li><strong>Dona da clínica</strong>, com poder de decisão sobre investimento</li>
+    <li><strong>Negócio rodando</strong>, com atendimento acontecendo</li>
+    <li><strong>Entrega boa</strong>, protocolo de qualidade e clientes satisfeitas</li>
+    <li><strong>Resultado abaixo do potencial</strong>, trabalha muito e fatura menos do que poderia</li>
+    <li><strong>Aberta a mudar</strong>, cansada do jeito atual</li>
+  </ul>
+
+  <div class="card">
+    <div class="ct">Quem não é para nós</div>
+    <p>Clínica que ainda não abriu. Quem quer resultado sem processo. Quem culpa a crise e a concorrência por tudo. Quem pergunta só o preço e ignora o resto. Quem não decide sozinha.</p>
+  </div>
+
+  <h3>A oferta atual</h3>
+  <div class="card-escuro card">
+    <div class="ct">Valor</div>
+    <p>R$ 15.000 à vista, ou 12x de R$ 1.500. Acompanhamento de seis meses com renovação no ano seguinte.</p>
+    <p><strong>Nunca passe valor por mensagem antes da call.</strong> Se perguntarem, a resposta está na aba de Objeções.</p>
+  </div>
+</section>
+
+<!-- ================= ABORDAGENS ================= -->
+<section class="aba" id="abordagens">
+  <h2>Abordagens</h2>
+  <p class="intro">Primeiro contato direto no WhatsApp. Toque em copiar e personalize os campos em destaque antes de enviar.</p>
+
+  <div class="card-escuro card">
+    <div class="ct">As três chaves de toda abordagem</div>
+    <p><strong>Diga quem você é e de onde veio</strong> na primeira linha. Número desconhecido no WhatsApp gera desconfiança, e dizer onde você encontrou a clínica resolve isso em uma frase.</p>
+    <p><strong>A pergunta de demanda</strong> inverte a posição da conversa. Você deixa de pedir atenção e passa a oferecer algo, e dona de clínica responde a isso quase por reflexo.</p>
+    <p><strong>O nome do modelo</strong> entra já na primeira mensagem. Ela nunca ouviu falar, fica curiosa, e o Consórcio Beauty ocupa um espaço na cabeça dela mesmo que a conversa não avance hoje. Nomear sim, explicar não.</p>
+  </div>
+
+  <h3>Contato com nome e especialidade conhecidos</h3>
+  <div class="script">
+    <div class="topo"><span class="nome">01 · Elogio e demanda</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">Oi <v>[NOME]</v>, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do time da Maria Clara. Cheguei até você pelo Instagram da clínica e fiquei um tempo olhando o seu trabalho com <v>[PROCEDIMENTO]</v>. Muito bonito o resultado que você entrega.
+
+Nós implementamos o Consórcio Beauty nas clínicas aqui do Brasil.
+
+Te faço uma pergunta: hoje você conseguiria atender uma demanda maior de pacientes?</div>
+    <div class="porque"><b>Por que funciona:</b> apresenta quem fala e de onde veio, elogia com detalhe real, planta o nome do modelo e termina na pergunta de demanda. A conversa nasce com ela pensando em capacidade, e não em preço.</div>
+  </div>
+
+  <div class="script">
+    <div class="topo"><span class="nome">02 · Demanda reprimida</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">Oi <v>[NOME]</v>, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do time da Maria Clara. Peguei seu contato pelo perfil da clínica e gostei muito do seu trabalho com <v>[PROCEDIMENTO]</v>.
+
+Eu trabalho com o Consórcio Beauty, um modelo que a gente implementa nas clínicas para destravar as pacientes que fazem avaliação, adoram o protocolo e somem na hora de fechar.
+
+Isso acontece por aí também?</div>
+    <div class="porque"><b>Por que funciona:</b> nomeia a dor com as palavras dela e o modelo na mesma mensagem. Quem vive isso responde na hora, e quem não vive se desqualifica sozinha.</div>
+  </div>
+
+  <h3>Contato comercial da clínica, sem saber quem atende</h3>
+  <div class="script">
+    <div class="topo"><span class="nome">03 · Buscando a decisora</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">Olá, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do time da Maria Clara. Estava vendo o trabalho de vocês com <v>[PROCEDIMENTO]</v> e achei muito bonito o padrão de entrega.
+
+Nós implementamos o Consórcio Beauty nas clínicas e queria falar com quem cuida da gestão aí.
+
+Com quem eu tenho o prazer de falar por aqui?</div>
+    <div class="porque"><b>Por que funciona:</b> em número comercial quase sempre quem responde é recepção. Pedir a decisora com educação evita a conversa morrer na secretária.</div>
+  </div>
+
+  <h3>Clínica com movimento visível</h3>
+  <div class="script">
+    <div class="topo"><span class="nome">04 · Capacidade e estrutura</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">Oi <v>[NOME]</v>, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do time da Maria Clara. Dá pra ver que a clínica tem movimento e que você entrega muito bem.
+
+A gente implementa o Consórcio Beauty em clínicas que já estão nesse ponto, quando o atendimento vai bem e o faturamento não acompanha.
+
+Se entrasse mais paciente amanhã, a sua estrutura daria conta?</div>
+    <div class="porque"><b>Por que funciona:</b> fala com quem já tem volume, que é o nosso perfil ideal. A pergunta de capacidade puxa orgulho e incômodo ao mesmo tempo.</div>
+  </div>
+
+  <h3>Pouca informação sobre a clínica</h3>
+  <div class="script">
+    <div class="topo"><span class="nome">05 · Curiosidade que qualifica</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">Oi <v>[NOME]</v>, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do time da Maria Clara. A gente implementa o Consórcio Beauty nas clínicas e está abrindo algumas implementações em <v>[CIDADE]</v>.
+
+Antes de te explicar qualquer coisa, me conta uma coisa: hoje você atende em espaço próprio?</div>
+    <div class="porque"><b>Por que funciona:</b> quando você não confirma nada de antemão, deixe ela se qualificar. A resposta já diz se vale seguir.</div>
+  </div>
+
+  <h3>Depois de uma indicação</h3>
+  <div class="script">
+    <div class="topo"><span class="nome">06 · Chegando por alguém</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">Oi <v>[NOME]</v>, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do time da Maria Clara. Cheguei até você por <v>[QUEM INDICOU]</v>, que comentou do seu trabalho com <v>[PROCEDIMENTO]</v>.
+
+Nós implementamos o Consórcio Beauty nas clínicas, e ela achou que faria sentido a gente se conhecer.
+
+Hoje você conseguiria atender uma demanda maior de pacientes?</div>
+    <div class="porque"><b>Por que funciona:</b> indicação quebra a barreira do número desconhecido, e a pergunta de demanda mantém o ritmo da conversa.</div>
+  </div>
+
+  <h3>Quando ela perguntar o que é o Consórcio Beauty</h3>
+  <div class="script">
+    <div class="topo"><span class="nome">07 · Resposta curta que segura o mistério</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">É um modelo de pagamento recorrente que a gente implementa dentro da clínica.
+
+Ele resolve aquele momento exato em que a paciente quer, confia no seu trabalho, e trava na hora de passar o cartão. A clínica recebe, a paciente é atendida, e uma equipe cuida de toda a cobrança.
+
+O funcionamento em detalhe quem explica é a Maria Clara, porque muda conforme o seu tipo de protocolo.
+
+Hoje você conseguiria atender uma demanda maior de pacientes?</div>
+    <div class="porque"><b>Por que funciona:</b> entrega o suficiente para ela sentir o valor e devolve o detalhe para a call. Termina de novo na pergunta de demanda, mantendo a conversa em movimento.</div>
+  </div>
+
+  <div class="card">
+    <div class="ct">O que nunca fazer no primeiro contato</div>
+    <p>Mandar áudio antes de ter resposta em texto. Falar de preço. Explicar a mecânica do Consórcio Beauty, o nome pode e deve aparecer, o funcionamento não. Mandar link. Enviar mensagem copiada sem personalizar o detalhe real da clínica dela.</p>
+  </div>
+</section>
+
+<!-- ================= ÁUDIOS ================= -->
+<section class="aba" id="audios">
+  <h2>Os três áudios</h2>
+  <p class="intro">Só depois de ela responder em texto. Um de cada vez, sempre esperando a resposta do anterior.</p>
+
+  <div class="card-escuro card">
+    <div class="ct">Como gravar</div>
+    <p>Fale como quem conversa com uma colega, sem ler. Até um minuto, com o nome dela no começo. <strong>Grave uma vez só.</strong> Áudio regravado perde a naturalidade, que é o que gera conexão.</p>
+  </div>
+
+  <div class="script">
+    <div class="topo"><span class="nome">Áudio 1 · Abertura · até 40s</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">Oi <v>[NOME]</v>, tudo bem? Aqui é a <v>[SEU NOME]</v>, faço parte do time da Maria Clara.
+
+Vou ser bem sincera com você: eu não vim te oferecer nada agora. A gente trabalha com poucas clínicas por vez e faz questão de entender o momento antes de qualquer conversa.
+
+Me conta rapidinho: como está o momento da sua clínica hoje, na parte de faturamento e de agenda?</div>
+    <div class="porque"><b>Intenção:</b> tirar a pressão de venda e abrir espaço. A pergunta é ampla de propósito, porque o que ela escolhe contar primeiro já aponta o gargalo.</div>
+  </div>
+
+  <div class="script">
+    <div class="topo"><span class="nome">Áudio 2 · Aprofundamento · até 60s</span><button class="copiar">Copiar</button></div>
+    <div class="corpo"><v>[NOME]</v>, obrigada por compartilhar isso comigo, de verdade.
+
+Escuto muita dona de clínica falando exatamente o que você falou, e sempre me chama atenção porque nunca é falta de competência. Você claramente entrega bem, isso aparece no seu trabalho.
+
+Me conta uma coisa: <v>[PERGUNTA CHAVE DO GARGALO]</v></div>
+    <div class="porque"><b>Intenção:</b> validar sem julgar e confirmar o diagnóstico. A pergunta chave está na aba Diagnóstico, escolha pela dor que ela trouxe.</div>
+  </div>
+
+  <div class="script">
+    <div class="topo"><span class="nome">Áudio 3 · Convite · até 60s</span><button class="copiar">Copiar</button></div>
+    <div class="corpo"><v>[NOME]</v>, depois de te ouvir eu tenho uma certeza: isso que está acontecendo na sua clínica tem solução, e não passa por trabalhar mais do que você já trabalha.
+
+Quem faz esse trabalho é a Maria Clara. Ela reestrutura clínica de dentro para fora, da precificação ao modelo de pagamento, e abre poucas conversas por semana.
+
+Ela vai olhar o seu caso com calma e te mostrar exatamente onde o seu dinheiro está ficando parado. Sem compromisso nenhum de fechar nada.
+
+Me diz qual desses horários funciona melhor pra você: <v>[HORÁRIO 1]</v> ou <v>[HORÁRIO 2]</v>?</div>
+    <div class="porque"><b>Intenção:</b> transferir autoridade, criar escassez real e fechar com escolha entre dois horários. <b>Nunca pergunte se ela quer conversar</b>, pergunte qual horário funciona.</div>
+  </div>
+</section>
+
+<!-- ================= DIAGNÓSTICO ================= -->
+<section class="aba" id="diagnostico">
+  <h2>Os quatro gargalos</h2>
+  <p class="intro">Cada gargalo é uma engrenagem parada. Escute e identifique qual está no comando, porque a conversa muda conforme a resposta.</p>
+
+  <div class="gargalo">
+    <div class="cab"><h4>01 · Caixa Represado</h4><span class="eng">Vendas</span></div>
+    <p>A paciente quer, gostou da avaliação, e some por falta de limite ou do valor à vista.</p>
+    <ul class="frases">
+      <li>Elas fazem a avaliação, adoram, e somem</li>
+      <li>Escuto toda semana que não tem limite no cartão</li>
+      <li>Minha agenda de avaliação é cheia, a de procedimento não</li>
+      <li>Só fecha quem tem dinheiro guardado</li>
+    </ul>
+    <div class="chave"><b>Pergunta chave:</b> de cada dez avaliações que você faz, quantas viram procedimento de verdade?</div>
+  </div>
+
+  <div class="gargalo">
+    <div class="cab"><h4>02 · Precificação sem Margem</h4><span class="eng">Produto</span></div>
+    <p>Ela fatura e não sobra. Cobra pelo que a concorrente cobra, sem saber o custo real.</p>
+    <ul class="frases">
+      <li>Trabalho o mês inteiro e no fim não sobra nada</li>
+      <li>Não sei se meu preço está certo</li>
+      <li>Tenho medo de aumentar e perder paciente</li>
+      <li>Misturo o dinheiro da clínica com o meu</li>
+    </ul>
+    <div class="chave"><b>Pergunta chave:</b> você sabe quanto sobra para você depois de pagar tudo, todo mês?</div>
+  </div>
+
+  <div class="gargalo">
+    <div class="cab"><h4>03 · Comercial Travado</h4><span class="eng">Comercial</span></div>
+    <p>Excelente na técnica e travada na hora de conduzir a venda.</p>
+    <ul class="frases">
+      <li>Eu não sei vender, sou boa no procedimento</li>
+      <li>Fico sem graça de falar de preço</li>
+      <li>Passo o orçamento e a pessoa some</li>
+      <li>Quando falo o valor eu já vou baixando</li>
+    </ul>
+    <div class="chave"><b>Pergunta chave:</b> como termina hoje a sua conversa de avaliação, na prática?</div>
+  </div>
+
+  <div class="gargalo">
+    <div class="cab"><h4>04 · Dependência</h4><span class="eng">Marketing e Vendas</span></div>
+    <p>Tudo depende das mãos dela. Sem base recorrente, sem previsibilidade.</p>
+    <ul class="frases">
+      <li>Um mês é ótimo, o outro é péssimo</li>
+      <li>Se eu tirar férias, não entra nada</li>
+      <li>Não sei quanto vou faturar mês que vem</li>
+      <li>Estou exausta, faço tudo sozinha</li>
+    </ul>
+    <div class="chave"><b>Pergunta chave:</b> se você ficasse quinze dias fora, o que aconteceria com o faturamento?</div>
+  </div>
+
+  <div class="card-escuro card">
+    <div class="ct">A camada por baixo</div>
+    <p>Por trás de todo gargalo tem um comportamento. Quem baixa o preço na hora tem questão de merecimento. Quem não cobra tem medo de julgamento. Quem faz tudo sozinha não confia em delegar. <strong>Você não trata isso, só percebe e anota.</strong> É essa camada que faz a call da Maria Clara ser diferente.</p>
+  </div>
+
+  <div class="card">
+    <div class="ct">Como registrar</div>
+    <p>Anote a frase <strong>com as palavras exatas que ela usou</strong>, sem traduzir para termo técnico. A frase crua vale ouro na call, porque a Maria Clara devolve a mesma frase e o efeito é imediato.</p>
+  </div>
+</section>
+
+<!-- ================= FOLLOW-UP ================= -->
+<section class="aba" id="followup">
+  <h2>Quando ela não responde</h2>
+  <p class="intro">Lead frio quase nunca responde de primeira. O follow-up é onde a maioria das conversas nasce. Nunca mais de três tentativas.</p>
+
+  <div class="script">
+    <div class="topo"><span class="nome">2 dias depois</span><button class="copiar">Copiar</button></div>
+    <div class="corpo">Oi <v>[NOME]</v>, passando aqui de novo rapidinho.
+
+Sei que a rotina de clínica é corrida, então não vou tomar seu tempo.
+
+Só queria saber uma coisa: hoje você conseguiria atender uma demanda maior de pacientes se ela aparecesse?</div>
+    <div class="porque"><b>Por que funciona:</b> reconhece a rotina dela sem cobrar resposta, e faz uma pergunta de capacidade que é fácil e gostosa de responder.</div>
+  </div>
+
+  <div class="script">
+    <div class="topo"><span class="nome">5 dias depois</span><button class="copiar">Copiar</button></div>
+    <div class="corpo"><v>[NOME]</v>, vou te contar em uma frase o que a gente faz e depois te deixo em paz.
+
+A gente resolve aquele momento em que a paciente quer, confia no seu trabalho, e vai embora porque não tem limite no cartão.
+
+Se isso acontece aí, me responde que eu te explico. Se não acontece, me avisa também que eu paro de te incomodar.</div>
+    <div class="porque"><b>Por que funciona:</b> entrega valor real, dá permissão pra ela dizer não, e isso aumenta muito a taxa de resposta. Quem responde "não acontece" também te dá informação.</div>
+  </div>
+
+  <div class="script">
+    <div class="topo"><span class="nome">10 dias depois · encerramento</span><button class="copiar">Copiar</button></div>
+    <div class="corpo"><v>[NOME]</v>, essa é a minha última mensagem, prometo.
+
+Vou deixar a porta aberta aqui. Se em algum momento você olhar para a sua agenda de avaliação e sentir que muita gente boa está indo embora sem fechar, me chama.
+
+Sucesso com a clínica, de verdade.</div>
+    <div class="porque"><b>Por que funciona:</b> encerrar com elegância converte mais que insistir. Muita gente responde justamente na despedida, porque some a pressão.</div>
+  </div>
+
+  <div class="card">
+    <div class="ct">Regra do time</div>
+    <p>Três tentativas e para. Depois disso, ela entra na lista de reativação para daqui a três meses. Insistência queima o perfil e queima a marca.</p>
+  </div>
+</section>
+
+<!-- ================= OBJEÇÕES ================= -->
+<section class="aba" id="objecoes">
+  <h2>O que responder quando ela disser</h2>
+  <p class="intro">Respostas prontas para as objeções que mais aparecem antes da call.</p>
+
+  <table>
+    <tr><th>Ela diz</th><th>Você responde</th></tr>
+    <tr><td><strong>Quanto custa?</strong></td><td>É uma consultoria conduzida pela Maria Clara, e o investimento depende do que a sua clínica precisa. É exatamente por isso que existe a conversa antes.</td></tr>
+    <tr><td><strong>Me manda por escrito</strong></td><td>Consigo te adiantar o que a gente faz, mas o que vale mesmo é ela olhar os seus números. Em trinta minutos você já sai sabendo onde está o seu dinheiro parado.</td></tr>
+    <tr><td><strong>Agora não é o momento</strong></td><td>Entendo. Só te faço uma pergunta: o que precisaria mudar para ser o momento? Porque geralmente quando a clínica está apertada é justamente quando a estrutura mais faz falta.</td></tr>
+    <tr><td><strong>Já tenho consultoria</strong></td><td>Que bom que você já investe nisso. E me diz uma coisa: essa consultoria mexeu na sua precificação e na forma de pagamento das suas pacientes, ou trabalha mais a parte de marketing?</td></tr>
+    <tr><td><strong>Preciso pensar</strong></td><td>Claro. E a conversa com a Maria Clara é justamente para você pensar com informação na mão, sem compromisso de fechar nada.</td></tr>
+    <tr><td><strong>Não tenho dinheiro agora</strong></td><td>Faz sentido, e é por isso que a conversa é gratuita. Ela vai te mostrar de onde esse dinheiro pode sair dentro da sua própria clínica, sem você tirar do bolso.</td></tr>
+    <tr><td><strong>O que é esse Consórcio Beauty?</strong></td><td>É um modelo de pagamento recorrente que a gente implementa dentro da clínica, para a paciente que quer e trava na hora de passar o cartão. Como funciona na prática depende do seu tipo de protocolo, e é isso que a Maria Clara te mostra na conversa.</td></tr>
+    <tr><td><strong>Isso é golpe?</strong></td><td>Pergunta justa. Olha o perfil da Maria Clara com calma, veja os resultados das clínicas que já passaram por lá, e depois me diz se faz sentido conversar.</td></tr>
+  </table>
+
+  <div class="card-escuro card">
+    <div class="ct">A regra que protege a venda</div>
+    <p>Nomeie o Consórcio Beauty desde a primeira mensagem, porque isso cria curiosidade e ocupa espaço na cabeça dela. O que fica para a call é <strong>a mecânica, as taxas, as modalidades de contrato e os números</strong>. Esse é o principal argumento da Maria Clara e perde força se chegar mastigado antes.</p>
+  </div>
+</section>
+
+<!-- ================= CONSÓRCIO ================= -->
+<section class="aba" id="consorcio">
+  <h2>Consórcio Beauty</h2>
+  <p class="intro">O modelo de negócio no centro das quatro engrenagens. Estude para entender, use com parcimônia na conversa.</p>
+
+  <div class="card-escuro card">
+    <div class="ct">A frase que resume</div>
+    <p>Enquanto o mercado inteiro deixa <strong>o cartão de crédito ser o porteiro da clínica</strong>, o Consórcio Beauty tira essa decisão das mãos da bandeira e devolve para a paciente.</p>
+  </div>
+
+  <div class="card">
+    <div class="ct">Como funciona</div>
+    <p>A paciente entra por um plano recorrente, a clínica recebe com margem protegida desde a primeira parcela, e uma equipe parceira administra toda a cobrança. Se a paciente atrasa, o próximo procedimento não acontece até regularizar.</p>
+  </div>
+
+  <h3>As taxas</h3>
+  <table>
+    <tr><th>Para a clínica</th><th>Para a paciente</th></tr>
+    <tr>
+      <td>5% sobre o valor do procedimento, já diluído nas parcelas. Sem mensalidade, sem anuidade e sem fidelidade. Líquido liberado conforme os boletos são pagos, com saque em D+2.</td>
+      <td>2,92% ao mês até 12x e 3,50% ao mês acima de 12x, com parcelamento em até 36 meses. A entrada conta como a primeira parcela.</td>
+    </tr>
+  </table>
+
+  <h3>As três modalidades de contrato</h3>
+  <ul class="lista">
+    <li><strong>Começa hoje</strong> · entrada de 50% e o procedimento começa imediatamente, restante parcelado</li>
+    <li><strong>No seu ritmo</strong> · entrada maior que 50% e os protocolos acontecem conforme as parcelas são pagas</li>
+    <li><strong>Mais leve no bolso</strong> · entrada menor e mais parcelas, começando ao atingir 50% pago</li>
+  </ul>
+
+  <div class="card">
+    <div class="ct">O detalhe que muda a conversa</div>
+    <p>A entrada não reduz o total, ela reduz o valor mensal. <strong>O que encarece o plano é o número de parcelas.</strong> Quando a paciente quiser pagar menos no total, encurte o prazo. Quando quiser caber no bolso, aumente a entrada.</p>
+  </div>
+
+  <h3>Ferramentas</h3>
+  <a class="botao" href="calculadora-htb.html">Calculadora HTB · para as clínicas</a>
+  <a class="botao claro" href="calculadora-parcelamento.html">Calculadora de parcelamento</a>
+</section>
+
+<!-- ================= FICHA ================= -->
+<section class="aba ficha" id="ficha">
+  <h2>Ficha da lead</h2>
+  <p class="intro">Preencha antes de cada call agendada e envie no nosso grupo. Sem isso, a Maria Clara entra no escuro.</p>
+
+  <label>Nome, clínica e @ do perfil</label>
+  <textarea rows="2"></textarea>
+  <label>Especialidade e tempo de mercado</label>
+  <textarea rows="2"></textarea>
+  <label>Gargalo identificado (1, 2, 3 ou 4)</label>
+  <textarea rows="1"></textarea>
+  <label>Frase exata que ela usou</label>
+  <textarea rows="3"></textarea>
+  <label>Ticket médio ou faixa de valor, se citou</label>
+  <textarea rows="1"></textarea>
+  <label>Avaliações por semana e quantas fecham</label>
+  <textarea rows="2"></textarea>
+  <label>Comportamento que você percebeu por baixo</label>
+  <textarea rows="2"></textarea>
+  <label>Data e horário confirmados</label>
+  <textarea rows="1"></textarea>
+  <label>Observação sobre o clima da conversa</label>
+  <textarea rows="2"></textarea>
+
+  <button class="botao" id="copiar-ficha" style="border:none;width:100%;cursor:pointer;margin-top:20px;">Copiar ficha para o grupo</button>
+
+  <h3>Sinais de lead quente</h3>
+  <ul class="lista">
+    <li>Responde rápido e manda áudio de volta</li>
+    <li>Cita número sem você pedir</li>
+    <li>Pergunta como funciona antes de você oferecer</li>
+    <li>Usa palavras de cansaço: exausta, faz anos, não aguento mais</li>
+    <li>Fala de expansão, sala nova, contratar equipe</li>
+  </ul>
+
+  <h3>Sinais de esfriar</h3>
+  <ul class="lista">
+    <li>Pergunta o preço na primeira mensagem e ignora o resto</li>
+    <li>Responde por monossílabos ou some por dias</li>
+    <li>Culpa a crise e a concorrência por tudo</li>
+    <li>Quer garantia de faturamento antes da conversa</li>
+    <li>Não é ela quem decide sobre investimento</li>
+  </ul>
+</section>
+
+<footer>
+  <div class="logo">All Win <span>Academy</span></div>
+  <p>Central do Time · Material interno</p>
+</footer>
+
+</div>
+
+<div class="rodape">
+  <div class="aviso">Conexão antes de conversão. Nós diagnosticamos, a Maria Clara apresenta o caminho.</div>
+</div>
+
+<script>
+(function(){
+  // Navegação
+  document.querySelectorAll('nav button').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('nav button').forEach(function(x){x.classList.remove('ativo');});
+      document.querySelectorAll('.aba').forEach(function(x){x.classList.remove('ativa');});
+      b.classList.add('ativo');
+      document.getElementById(b.dataset.aba).classList.add('ativa');
+      window.scrollTo({top:0,behavior:'smooth'});
+      b.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+    });
+  });
+
+  // Copiar script
+  function copiar(texto,botao,rotulo){
+    var t=document.createElement('textarea');
+    t.value=texto; t.style.position='fixed'; t.style.opacity='0';
+    document.body.appendChild(t); t.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(t);
+    var antigo=botao.textContent;
+    botao.textContent=rotulo||'Copiado'; botao.classList.add('feito');
+    setTimeout(function(){ botao.textContent=antigo; botao.classList.remove('feito'); },1600);
+  }
+
+  document.querySelectorAll('.script .copiar').forEach(function(b){
+    b.addEventListener('click',function(){
+      var corpo=b.closest('.script').querySelector('.corpo');
+      copiar(corpo.innerText.trim(),b);
+    });
+  });
+
+  // Copiar ficha
+  var btnFicha=document.getElementById('copiar-ficha');
+  if(btnFicha){
+    btnFicha.addEventListener('click',function(){
+      var linhas=[];
+      document.querySelectorAll('#ficha label').forEach(function(l){
+        var ta=l.nextElementSibling;
+        if(ta && ta.tagName==='TEXTAREA' && ta.value.trim()){
+          linhas.push(l.textContent+': '+ta.value.trim());
+        }
+      });
+      if(!linhas.length){
+        btnFicha.textContent='Preencha a ficha primeiro';
+        setTimeout(function(){ btnFicha.textContent='Copiar ficha para o grupo'; },1800);
+        return;
+      }
+      copiar('FICHA DA LEAD\n\n'+linhas.join('\n'),btnFicha,'Ficha copiada');
+    });
+  }
+})();
+</script>
+</body>
+</html>
