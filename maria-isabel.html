@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#360000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Maria Isabel">
+<title>Maria Isabel · Mapa de Presença</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --creme:#FAF7F2; --branco:#FFFFFF; --vinho:#360000; --vinho-txt:#4E0D16;
+    --ouro:#C9A15A; --marinho:#15294D; --madeira:#7E4C22; --espresso:#3E2513;
+    --tinta:#1F1A18; --corpo:#4a423c; --linha:rgba(54,0,0,.14);
+    --sb:260px; --maxw:720px;
+    --safe-top:env(safe-area-inset-top,0px);
+    --safe-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box}
+  html{background-color:var(--creme)!important;scroll-behavior:smooth}
+  html,body{background:var(--creme)!important;color:var(--tinta);-webkit-text-size-adjust:100%;margin:0}
+  body{font-family:"DM Sans",system-ui,sans-serif;line-height:1.6;font-size:16.5px}
+  ::selection{background:var(--vinho);color:var(--creme)}
+  a{color:var(--vinho-txt)}
+  h1,h2,h3{font-family:"Playfair Display",Georgia,serif;color:var(--vinho);font-weight:600;line-height:1.14;letter-spacing:.2px}
+  :focus-visible{outline:2.5px solid var(--ouro);outline-offset:3px;border-radius:3px}
+
+  .app{display:flex;min-height:100vh;min-height:100dvh}
+
+  /* ---------- Sidebar (desktop) ---------- */
+  .sidebar{
+    width:var(--sb);flex:0 0 var(--sb);background:var(--vinho);color:#efe3da;
+    position:fixed;inset:0 auto 0 0;height:100vh;height:100dvh;
+    display:flex;flex-direction:column;padding:34px 0 calc(22px + var(--safe-bottom));
+    border-right:1px solid rgba(201,161,90,.25);z-index:20;
+  }
+  .brand{padding:0 28px 26px;border-bottom:1px solid rgba(201,161,90,.22);margin-bottom:18px}
+  .brand .kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);font-weight:600}
+  .brand .name{font-family:"Playfair Display",serif;color:#fbf2ea;font-size:27px;font-weight:600;margin-top:7px;line-height:1.05}
+  .brand .sub{font-size:12.5px;color:#c9b4a6;margin-top:6px;letter-spacing:.3px}
+  nav{display:flex;flex-direction:column;gap:2px;padding:0 14px;overflow-y:auto;flex:1}
+  .navbtn{
+    appearance:none;border:0;background:transparent;color:#e4d3c7;text-align:left;
+    font-family:inherit;font-size:14.5px;font-weight:500;letter-spacing:.2px;
+    padding:12px 16px;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:12px;
+    width:100%;transition:background .18s ease,color .18s ease;
+  }
+  .navbtn .idx{font-family:"Playfair Display",serif;font-style:italic;font-size:15px;color:var(--ouro);opacity:.75;width:18px;flex:0 0 18px}
+  .navbtn:hover{background:rgba(201,161,90,.12);color:#fff}
+  .navbtn.active{background:var(--creme);color:var(--vinho);font-weight:600}
+  .navbtn.active .idx{color:var(--madeira);opacity:1}
+  .sidefoot{padding:18px 28px 0;font-size:11.5px;color:#b59d8f;letter-spacing:.4px;border-top:1px solid rgba(201,161,90,.18);margin:14px 14px 0}
+
+  /* ---------- Content ---------- */
+  .content{margin-left:var(--sb);flex:1;min-width:0}
+  .view{display:none;padding:66px 46px 100px;max-width:calc(var(--maxw) + 92px);margin:0 auto;animation:rise .45s ease both}
+  .view.active{display:block}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  .eyebrow{font-family:"Playfair Display",serif;font-style:italic;color:var(--madeira);font-size:17px;margin:0 0 10px}
+  h1.page{font-size:40px;margin:0 0 8px}
+  h2{font-size:26px;margin:46px 0 14px}
+  h3{font-size:19px;margin:26px 0 8px}
+  p{margin:0 0 15px;max-width:66ch;color:var(--corpo)}
+  p strong,li strong{color:var(--vinho-txt);font-weight:600}
+  .lead{font-size:18.5px;color:var(--tinta);max-width:60ch}
+  .rule{height:1px;background:var(--linha);border:0;margin:30px 0}
+  .sig{display:inline-block;width:52px;height:2px;background:var(--ouro);margin:4px 0 18px;border-radius:2px}
+
+  /* Hero */
+  .hero{position:relative;padding:14px 0 6px}
+  .hero .kick{font-size:12px;letter-spacing:4px;text-transform:uppercase;color:var(--madeira);font-weight:600}
+  .hero h1{font-size:clamp(46px,8vw,76px);margin:12px 0 0;line-height:.98}
+  .hero .script{font-family:"Pinyon Script",cursive;font-weight:400;color:var(--vinho);font-size:clamp(44px,8vw,70px);display:block;margin:-6px 0 0 6px;line-height:1}
+  .hero .lead{margin-top:24px}
+
+  /* Movement cards */
+  .moves{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0 8px}
+  .move{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:22px 20px;position:relative;overflow:hidden}
+  .move::before{content:"";position:absolute;inset:0 auto 0 0;width:4px;background:var(--vinho)}
+  .move .n{font-family:"Playfair Display",serif;font-style:italic;color:var(--madeira);font-size:20px}
+  .move h3{margin:8px 0 6px;font-size:18px}
+  .move p{font-size:14.5px;margin:0}
+
+  /* Soft / strong blocks */
+  .card{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:24px 24px}
+  .card + .card{margin-top:16px}
+  .strong{background:var(--vinho);color:#f0e4db;border-radius:16px;padding:30px 30px}
+  .strong h2,.strong h3{color:#fbeee5}
+  .strong p{color:#e3cfc3}
+  .strong .sig{background:var(--ouro)}
+  .wood{background:var(--madeira);color:#fff4e9;border-radius:16px;padding:26px 28px}
+  .wood h3{color:#fff4e9}
+  .wood p{color:#f3e2d2}
+
+  ul.clean{list-style:none;padding:0;margin:0 0 6px}
+  ul.clean li{position:relative;padding:11px 0 11px 26px;border-bottom:1px solid var(--linha);max-width:66ch;color:var(--corpo)}
+  ul.clean li:last-child{border-bottom:0}
+  ul.clean li::before{content:"";position:absolute;left:4px;top:19px;width:8px;height:8px;background:var(--ouro);border-radius:50%}
+  ul.clean.vinho li::before{background:#e9c988}
+  ul.clean.vinho li{color:#e3cfc3;border-color:rgba(201,161,90,.22)}
+
+  /* Editable fields */
+  .field{margin:14px 0}
+  .field label{display:block;font-size:12.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--madeira);font-weight:600;margin-bottom:7px}
+  input.ff,textarea.ff{
+    width:100%;font-family:inherit;font-size:16px;color:var(--tinta);background:var(--creme);
+    border:1px solid var(--linha);border-radius:10px;padding:12px 14px;resize:vertical;
+  }
+  textarea.ff{min-height:86px;line-height:1.5}
+  .ff::placeholder{color:#b7a99b}
+  .ff:focus{border-color:var(--ouro);background:var(--branco)}
+  .saved{font-size:12px;color:var(--madeira);opacity:0;transition:opacity .3s;margin-top:6px;height:14px;letter-spacing:.3px}
+  .saved.on{opacity:1}
+
+  .beliefrow{display:flex;align-items:center;gap:12px;margin:8px 0}
+  .beliefrow .num{font-family:"Playfair Display",serif;font-style:italic;color:var(--madeira);width:22px;flex:0 0 22px;text-align:center;font-size:17px}
+  .beliefrow input{flex:1}
+
+  /* Calculator */
+  .calc{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+  .calc .pane{background:var(--branco);border:1px solid var(--linha);border-radius:14px;padding:20px}
+  .calc .pane.meta{background:#fbf5ec;border-color:rgba(126,76,34,.3)}
+  .calc .pane h3{margin:0 0 4px;font-size:16px}
+  .calc .pane .tag{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--madeira);font-weight:600}
+  .calc .inp{margin:12px 0}
+  .calc .inp label{display:block;font-size:12.5px;color:var(--corpo);margin-bottom:5px}
+  .calc .inp input{width:100%;font-family:inherit;font-size:17px;padding:10px 12px;border:1px solid var(--linha);border-radius:9px;background:var(--creme);color:var(--tinta)}
+  .calc .inp input:focus{border-color:var(--ouro)}
+  .calc .result{font-family:"Playfair Display",serif;font-size:26px;color:var(--vinho);margin-top:4px}
+  .calc .result span{font-size:14px;color:var(--corpo);font-family:"DM Sans",sans-serif}
+  .verdict{background:var(--vinho);color:#f0e4db;border-radius:14px;padding:20px 24px;margin-top:6px;font-size:16px}
+  .verdict b{color:#f4d99a}
+
+  /* Plano / checklist */
+  .blockh{font-family:"Playfair Display",serif;font-style:italic;color:var(--madeira);font-size:16px;margin:28px 0 10px}
+  .check{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--linha);cursor:pointer}
+  .check:last-child{border-bottom:0}
+  .check input{appearance:none;width:22px;height:22px;flex:0 0 22px;margin-top:1px;border:1.6px solid var(--madeira);border-radius:6px;cursor:pointer;position:relative;background:var(--branco)}
+  .check input:checked{background:var(--vinho);border-color:var(--vinho)}
+  .check input:checked::after{content:"";position:absolute;left:7px;top:3px;width:5px;height:10px;border:solid var(--ouro);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+  .check span{font-size:15.5px;color:var(--corpo)}
+  .check input:checked + span{color:var(--vinho-txt)}
+
+  /* Diário */
+  .diary-list{margin-top:20px}
+  .entry{background:var(--branco);border:1px solid var(--linha);border-left:3px solid var(--ouro);border-radius:10px;padding:14px 16px;margin-bottom:12px}
+  .entry .d{font-size:12px;color:var(--madeira);letter-spacing:.5px;margin-bottom:6px;font-weight:600}
+  .entry .t{font-size:15px;color:var(--corpo);white-space:pre-wrap}
+  .entry .del{float:right;font-size:12px;color:#b7a99b;background:none;border:0;cursor:pointer}
+  .entry .del:hover{color:var(--vinho-txt)}
+  .btn{appearance:none;border:0;background:var(--vinho);color:#f6ece3;font-family:inherit;font-size:15px;font-weight:600;letter-spacing:.3px;padding:12px 24px;border-radius:10px;cursor:pointer;transition:background .18s}
+  .btn:hover{background:#4a0808}
+  .empty{color:#b7a99b;font-style:italic;padding:18px 0}
+
+  /* ---------- Mobile ---------- */
+  .menutoggle{display:none}
+  @media (max-width:899px){
+    .app{flex-direction:column}
+    .sidebar{
+      position:sticky;top:0;width:100%;height:auto;flex:none;inset:auto;
+      padding:calc(14px + var(--safe-top)) 0 0;border-right:0;border-bottom:1px solid rgba(201,161,90,.3);
+    }
+    .brand{padding:0 20px 12px;margin-bottom:0;border-bottom:0;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+    .brand .kicker{display:none}
+    .brand .name{font-size:21px}
+    .brand .sub{display:none}
+    nav{flex-direction:row;overflow-x:auto;gap:6px;padding:4px 14px 12px;-webkit-overflow-scrolling:touch}
+    nav::-webkit-scrollbar{display:none}
+    .navbtn{white-space:nowrap;padding:9px 15px;font-size:13.5px;border-radius:999px;background:rgba(201,161,90,.12)}
+    .navbtn .idx{display:none}
+    .navbtn.active{background:var(--creme)}
+    .sidefoot{display:none}
+    .content{margin-left:0}
+    .view{padding:34px 20px 80px}
+    h1.page{font-size:31px}
+    .hero h1{line-height:1.02}
+    .moves{grid-template-columns:1fr;gap:12px}
+    .calc{grid-template-columns:1fr}
+    h2{font-size:22px}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="kicker">Mapa de Presença</div>
+      <div class="name">Maria Isabel</div>
+      <div class="sub">All Win Academy</div>
+    </div>
+    <nav id="nav" aria-label="Seções">
+      <button class="navbtn active" data-target="inicio"><span class="idx">i</span>Início</button>
+      <button class="navbtn" data-target="identidade"><span class="idx">I</span>Identidade</button>
+      <button class="navbtn" data-target="merecimento"><span class="idx">II</span>Merecimento e números</button>
+      <button class="navbtn" data-target="marca"><span class="idx">III</span>Marca e conteúdo</button>
+      <button class="navbtn" data-target="plano"><span class="idx">✦</span>Plano</button>
+      <button class="navbtn" data-target="diario"><span class="idx">✎</span>Diário</button>
+    </nav>
+    <div class="sidefoot">by Maria Clara</div>
+  </aside>
+
+  <main class="content">
+
+    <!-- ===== INÍCIO ===== -->
+    <section id="inicio" class="view active">
+      <div class="hero">
+        <div class="kick">Mapa de Presença</div>
+        <h1>Maria Isabel<span class="script">renascer</span></h1>
+        <span class="sig"></span>
+        <p class="lead">Você se despediu de uma relação que já não cabia em você, e isso foi coragem de verdade. Agora começa a parte mais bonita e mais firme, reconstruir a vida com as suas próprias mãos, sabendo onde quer chegar. Este mapa é o caminho, do seu jeito, no seu tempo.</p>
+      </div>
+
+      <hr class="rule">
+
+      <h2>O fio que liga tudo</h2>
+      <p>Tudo o que a gente trabalhou aponta pra um mesmo centro. A sua relação com o seu pai é a raiz, e o resto são galhos que nascem dali. A culpa de sair, o medo de se mostrar, a insegurança de cobrar o que o seu trabalho vale. Todos falam a mesma língua, e o nome dela é <strong>merecimento</strong>.</p>
+      <p>Por isso o caminho tem uma ordem, e ela importa. Primeiro a gente firma quem você é. Depois o quanto você merece receber. Só então o mundo vai te ver. Cada degrau só segura o próximo quando o de baixo já está de pé.</p>
+
+      <div class="moves">
+        <div class="move"><div class="n">I</div><h3>Identidade</h3><p>Quem você é, a sua força e a sua ferida, olhadas com carinho.</p></div>
+        <div class="move"><div class="n">II</div><h3>Merecimento e números</h3><p>O quanto o seu trabalho vale, e o direito de receber por ele.</p></div>
+        <div class="move"><div class="n">III</div><h3>Marca e conteúdo</h3><p>O mundo conhecendo a mulher que existe por trás das mãos.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== IDENTIDADE ===== -->
+    <section id="identidade" class="view">
+      <p class="eyebrow">Movimento I</p>
+      <h1 class="page">Identidade</h1>
+      <span class="sig"></span>
+      <p class="lead">Antes de qualquer estratégia, o espelho. Você precisa se ver inteira, a luz e a sombra, pra decidir de onde vai construir.</p>
+
+      <div class="card">
+        <div class="field">
+          <label>Temperamento (registro em sessão)</label>
+          <textarea class="ff" data-save="mi_temperamento" placeholder="Anotar aqui a leitura de temperamento da Maria Isabel conforme o trabalho em sessão."></textarea>
+          <div class="saved" data-for="mi_temperamento">salvo</div>
+        </div>
+      </div>
+
+      <h2>A sua força</h2>
+      <p>Aquilo que você tem de mais potente, e que já está em você mesmo quando o medo fala mais alto.</p>
+      <ul class="clean">
+        <li><strong>Coragem de quem rompe.</strong> Você saiu de um casamento que já não te cabia, carregando a culpa nas costas, e mesmo assim saiu. Pouca gente tem essa coragem.</li>
+        <li><strong>Mãos que o mercado procura.</strong> Você está num salão conceituado da cidade, entregando um trabalho que as pessoas querem. A demanda represada é a prova viva de que elas já te escolhem.</li>
+        <li><strong>Sabedoria de recomeçar com os olhos abertos.</strong> Você está refazendo tudo com calma e cautela, conhecendo os riscos. Isso é maturidade, e maturidade constrói casa que fica de pé.</li>
+        <li><strong>Alma de quem cuida.</strong> O seu negócio é o seu mundo, feito perto de gente que te eleva. Esse cuidado aparece em cada atendimento, e é raro.</li>
+      </ul>
+
+      <h2>A sua sombra, olhada com carinho</h2>
+      <p>Não pra te diminuir, e sim pra você saber exatamente onde a gente põe a mão.</p>
+      <ul class="clean">
+        <li>A dependência emocional ainda respira por baixo, pedindo colo onde você já consegue se sustentar sozinha.</li>
+        <li>A criança interior ainda procura no seu pai a aprovação que precisa começar a vir de dentro de você.</li>
+        <li>O medo de se mostrar tem nome, e o nome é ele.</li>
+        <li>A insegurança de cobrar. Você diz que não pagaria o seu valor, e quem não se sente digna do próprio preço está falando da própria autoestima.</li>
+      </ul>
+
+      <div class="strong">
+        <h3>A criança interior e a chave</h3>
+        <span class="sig"></span>
+        <p>Repara numa coisa. Você mora na casa do seu pai, recebida como filha, de graça. E ao mesmo tempo ele tem a chave, guarda o carro ali, entra quando precisa. Você está livre do casamento e ainda não está livre de tudo, porque o seu espaço ainda não é só seu, nem pra ter intimidade.</p>
+        <p>A sua casa está contando a mesma história que a sua identidade. Livre por fora, ainda vigiada por dentro. O trabalho aqui é devolver pra você a chave da sua própria vida. Separar o olhar do seu pai do olhar que você tem sobre você mesma, pra que a menina que buscava aprovação possa enfim ser cuidada por você, mulher, adulta, inteira.</p>
+      </div>
+    </section>
+
+    <!-- ===== MERECIMENTO E NÚMEROS ===== -->
+    <section id="merecimento" class="view">
+      <p class="eyebrow">Movimento II</p>
+      <h1 class="page">Merecimento e números</h1>
+      <span class="sig"></span>
+      <p class="lead">Os seus números estão esperando a sua autoestima alcançar o tamanho do seu talento.</p>
+
+      <p>Hoje você faz entre cinquenta e sessenta atendimentos por mês. É muita mão, muito corpo, pouco descanso. O seu corpo está pagando a conta que a sua autoestima ainda não quis cobrar.</p>
+      <p>O caminho é simples de dizer e corajoso de fazer, <strong>menos atendimentos e mais valor</strong>. Cobrar o que o seu trabalho vale pede uma coisa só, que você se sinta digna de receber. O preço é um espelho da autoestima, e o seu merece subir.</p>
+
+      <h2>A conta do merecimento</h2>
+      <p>Mexe nos números e veja com os próprios olhos. Menos mãos, mesmo faturamento, outra vida.</p>
+      <div class="calc">
+        <div class="pane hoje">
+          <div class="tag">Hoje</div>
+          <h3>Como está</h3>
+          <div class="inp"><label>Atendimentos no mês</label><input type="number" id="h_at" value="55" min="0"></div>
+          <div class="inp"><label>Ticket médio (R$)</label><input type="number" id="h_tk" value="150" min="0"></div>
+          <div class="result" id="h_out">R$ 8.250 <span>no mês</span></div>
+        </div>
+        <div class="pane meta">
+          <div class="tag">Merecendo</div>
+          <h3>Onde você chega</h3>
+          <div class="inp"><label>Atendimentos no mês</label><input type="number" id="m_at" value="35" min="0"></div>
+          <div class="inp"><label>Ticket médio (R$)</label><input type="number" id="m_tk" value="240" min="0"></div>
+          <div class="result" id="m_out">R$ 8.400 <span>no mês</span></div>
+        </div>
+      </div>
+      <div class="verdict" id="verdict"></div>
+    </section>
+
+    <!-- ===== MARCA E CONTEÚDO ===== -->
+    <section id="marca" class="view">
+      <p class="eyebrow">Movimento III</p>
+      <h1 class="page">Marca e conteúdo</h1>
+      <span class="sig"></span>
+      <p class="lead">Hoje o seu Instagram mostra o seu trabalho, e mostra bem. Ainda falta mostrar você.</p>
+
+      <p>O mundo já conhece as suas mãos e ainda não conhece a mulher. E é ela, a mulher por trás do trabalho, que faz as pessoas quererem pagar mais pra estar perto de você.</p>
+
+      <div class="wood">
+        <h3>O movimento que não te força</h3>
+        <p>Em vez de inventar um personagem, a gente parte do que você já acredita. Cinco verdades do seu trabalho e cinco da sua vida. Pronto, dez fios de narrativa pros seus stories, sem precisar inventar nada.</p>
+      </div>
+
+      <h2>As minhas cinco crenças profissionais</h2>
+      <div id="belief-prof"></div>
+
+      <h2>As minhas cinco crenças pessoais</h2>
+      <div id="belief-pess"></div>
+
+      <div class="card">
+        <h3>Como cada crença vira story</h3>
+        <p>Cada uma delas é um story. Mostra o durante, a técnica, a mistura, o processo das suas mãos, e amarra com aquilo em que você acredita. Os reels entram mostrando o seu desejo e o seu dia a dia, o que você usa, como você faz.</p>
+      </div>
+
+      <div class="strong">
+        <span class="sig"></span>
+        <p>E guarda isso com carinho. Se mostrar deixou de ser se entregar ao julgamento do seu pai. Agora é se mostrar de um lugar novo, o lugar de quem já sabe o próprio valor.</p>
+      </div>
+    </section>
+
+    <!-- ===== PLANO ===== -->
+    <section id="plano" class="view">
+      <p class="eyebrow">O caminho, em passos</p>
+      <h1 class="page">Plano</h1>
+      <span class="sig"></span>
+      <p class="lead">Um degrau de cada vez. Marque conforme for vivendo, sem pressa e sem cobrança de perfeição.</p>
+
+      <div class="blockh">Movimento I · Identidade (começa agora)</div>
+      <div id="plan-1"></div>
+
+      <div class="blockh">Movimento II · Merecimento e números</div>
+      <div id="plan-2"></div>
+
+      <div class="blockh">Movimento III · Marca e conteúdo</div>
+      <div id="plan-3"></div>
+    </section>
+
+    <!-- ===== DIÁRIO ===== -->
+    <section id="diario" class="view">
+      <p class="eyebrow">Entre uma sessão e outra</p>
+      <h1 class="page">Diário</h1>
+      <span class="sig"></span>
+      <p class="lead">Um espaço só seu. Escreve o que vier, do jeito que vier.</p>
+
+      <div class="field">
+        <textarea class="ff" id="diary-input" placeholder="O que está vivo em você hoje?"></textarea>
+      </div>
+      <button class="btn" id="diary-save">Guardar no diário</button>
+
+      <div class="diary-list" id="diary-list"></div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var LS = window.localStorage;
+  function get(k,d){ try{ var v=LS.getItem(k); return v===null?d:v; }catch(e){ return d; } }
+  function set(k,v){ try{ LS.setItem(k,v); }catch(e){} }
+
+  /* ---- Navigation ---- */
+  var btns = document.querySelectorAll(".navbtn");
+  var views = document.querySelectorAll(".view");
+  function show(id){
+    views.forEach(function(v){ v.classList.toggle("active", v.id===id); });
+    btns.forEach(function(b){ b.classList.toggle("active", b.dataset.target===id); });
+    window.scrollTo({top:0, behavior:"instant" in window ? "instant" : "auto"});
+    set("mi_tab", id);
+  }
+  btns.forEach(function(b){ b.addEventListener("click", function(){ show(b.dataset.target); }); });
+  var last = get("mi_tab","inicio");
+  if(document.getElementById(last)) show(last);
+
+  /* ---- Autosave text fields ---- */
+  document.querySelectorAll("[data-save]").forEach(function(el){
+    var key = el.getAttribute("data-save");
+    el.value = get(key, "");
+    var tag = document.querySelector('.saved[data-for="'+key+'"]');
+    var t;
+    el.addEventListener("input", function(){
+      set(key, el.value);
+      if(tag){ tag.classList.add("on"); clearTimeout(t); t=setTimeout(function(){ tag.classList.remove("on"); },1100); }
+    });
+  });
+
+  /* ---- Beliefs ---- */
+  function buildBeliefs(containerId, prefix){
+    var c = document.getElementById(containerId);
+    for(var i=1;i<=5;i++){
+      (function(n){
+        var key = prefix+"_"+n;
+        var row = document.createElement("div");
+        row.className = "beliefrow";
+        var num = document.createElement("div"); num.className="num"; num.textContent=n;
+        var inp = document.createElement("input"); inp.className="ff"; inp.type="text";
+        inp.placeholder = (prefix==="prof"?"No meu trabalho eu acredito que...":"Na minha vida eu acredito que...");
+        inp.value = get(key,"");
+        inp.addEventListener("input", function(){ set(key, inp.value); });
+        row.appendChild(num); row.appendChild(inp); c.appendChild(row);
+      })(i);
+    }
+  }
+  buildBeliefs("belief-prof","prof");
+  buildBeliefs("belief-pess","pess");
+
+  /* ---- Calculator ---- */
+  var brl = function(n){ return "R$ " + (Math.round(n)||0).toLocaleString("pt-BR"); };
+  var hAt=document.getElementById("h_at"), hTk=document.getElementById("h_tk"),
+      mAt=document.getElementById("m_at"), mTk=document.getElementById("m_tk"),
+      hOut=document.getElementById("h_out"), mOut=document.getElementById("m_out"),
+      verdict=document.getElementById("verdict");
+  ["c_hat","c_htk","c_mat","c_mtk"].forEach(function(k,i){
+    var el=[hAt,hTk,mAt,mTk][i]; var sv=get(k,null); if(sv!==null) el.value=sv;
+  });
+  function calc(){
+    var ha=+hAt.value||0, ht=+hTk.value||0, ma=+mAt.value||0, mt=+mTk.value||0;
+    var hf=ha*ht, mf=ma*mt;
+    hOut.innerHTML = brl(hf)+' <span>no mês</span>';
+    mOut.innerHTML = brl(mf)+' <span>no mês</span>';
+    set("c_hat",ha); set("c_htk",ht); set("c_mat",ma); set("c_mtk",mt);
+    var menos = ha-ma, difF = mf-hf;
+    var txt="";
+    if(menos>0){
+      txt = "São <b>"+menos+" atendimentos a menos</b> por mês, "+Math.round(menos/ (ha||1)*100)+"% de mão poupada, ";
+      if(difF>=0){ txt += "e ainda <b>"+brl(difF)+" a mais</b> no caixa. Menos corpo, mais vida, mesmo merecimento no bolso."; }
+      else { txt += "com <b>"+brl(-difF)+"</b> de diferença pra cobrir. Um pequeno ajuste no ticket fecha a conta e te devolve o tempo."; }
+    } else if(menos<0){
+      txt = "Esse cenário aumenta a sua agenda. Lembra do caminho, menos mãos e mais valor.";
+    } else {
+      txt = "Mesma agenda. Experimenta baixar os atendimentos e subir o ticket, e olha o que acontece.";
+    }
+    verdict.innerHTML = txt;
+  }
+  [hAt,hTk,mAt,mTk].forEach(function(el){ el.addEventListener("input", calc); });
+  calc();
+
+  /* ---- Plano / checklists ---- */
+  var plans = {
+    "plan-1":[
+      "Nomear a criança interior e começar a reparentalizar em sessão.",
+      "Escrever as dez crenças, cinco do trabalho e cinco da vida.",
+      "Postar o primeiro story a partir de uma crença, sem cobrança de perfeição.",
+      "Conversar com o pai sobre o combinado da chave e do espaço, no seu tempo."
+    ],
+    "plan-2":[
+      "Definir o novo ticket e o número de atendimentos que você merece.",
+      "Subir o valor de um serviço como teste, e sustentar.",
+      "Observar o merecimento, e não só a venda, a cada cobrança nova."
+    ],
+    "plan-3":[
+      "Narrar um fio por dia nos stories, a partir das dez crenças.",
+      "Um reel por semana mostrando processo, técnica e desejo.",
+      "Deixar a mulher aparecer ao lado do trabalho, um pouco mais a cada post."
+    ]
+  };
+  Object.keys(plans).forEach(function(cid){
+    var c=document.getElementById(cid);
+    plans[cid].forEach(function(label,i){
+      var key=cid+"_"+i;
+      var lab=document.createElement("label"); lab.className="check";
+      var inp=document.createElement("input"); inp.type="checkbox";
+      inp.checked = get(key,"0")==="1";
+      inp.addEventListener("change", function(){ set(key, inp.checked?"1":"0"); });
+      var sp=document.createElement("span"); sp.textContent=label;
+      lab.appendChild(inp); lab.appendChild(sp); c.appendChild(lab);
+    });
+  });
+
+  /* ---- Diário ---- */
+  var di=document.getElementById("diary-input"),
+      dsave=document.getElementById("diary-save"),
+      dlist=document.getElementById("diary-list");
+  function loadDiary(){ try{ return JSON.parse(get("mi_diary","[]")); }catch(e){ return []; } }
+  function saveDiary(a){ set("mi_diary", JSON.stringify(a)); }
+  function fmt(ts){
+    var d=new Date(ts);
+    return d.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"})+" · "+
+           d.toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"});
+  }
+  function render(){
+    var arr=loadDiary();
+    dlist.innerHTML="";
+    if(!arr.length){ dlist.innerHTML='<div class="empty">Ainda sem registros. O primeiro pode ser agora.</div>'; return; }
+    arr.slice().reverse().forEach(function(e){
+      var div=document.createElement("div"); div.className="entry";
+      var del=document.createElement("button"); del.className="del"; del.textContent="apagar";
+      del.addEventListener("click", function(){
+        var a=loadDiary().filter(function(x){ return x.id!==e.id; }); saveDiary(a); render();
+      });
+      var d=document.createElement("div"); d.className="d"; d.textContent=fmt(e.id);
+      var t=document.createElement("div"); t.className="t"; t.textContent=e.text;
+      div.appendChild(del); div.appendChild(d); div.appendChild(t); dlist.appendChild(div);
+    });
+  }
+  dsave.addEventListener("click", function(){
+    var v=di.value.trim(); if(!v) return;
+    var a=loadDiary(); a.push({id:Date.now(), text:v}); saveDiary(a); di.value=""; render();
+  });
+  render();
+})();
+</script>
+</body>
+</html>
