@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#360000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Samera | Plano de evolução</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Playfair+Display:wght@500;600;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --creme:#FAF7F2; --branco:#FFFFFF; --vinho:#360000; --vinhoTxt:#4E0D16;
+  --ouro:#C9A15A; --marinho:#15294D; --madeira:#7E4C22; --espresso:#3E2513; --tinta:#1F1A18;
+  --linha:#E7DFD3; --suave:#6B5E55; --verde:#3F6B4E;
+  --serif:"Playfair Display", Georgia, "Times New Roman", serif;
+  --sans:"DM Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --script:"Pinyon Script", "Snell Roundhand", cursive;
+  --s1:#F7F2EC; --s2:#D8A7A0; --s3:#8E5A62; --s4:#9AAE97; --s5:#2B2522;
+  --side:270px;
+}
+html{ background-color:var(--creme) !important; }
+html, body{ background:var(--creme) !important; color:var(--tinta); -webkit-text-size-adjust:100%; }
+*{ box-sizing:border-box; }
+body{ margin:0; font-family:var(--sans); font-size:17px; line-height:1.6; }
+button{ font:inherit; }
+:focus-visible{ outline:2px solid var(--marinho); outline-offset:3px; }
+
+/* Barra superior (celular) */
+.topo{ position:sticky; top:0; z-index:30; background:var(--vinho); color:var(--creme);
+  padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px; display:flex; align-items:center; gap:12px; }
+.topo .nome{ font-family:var(--serif); font-size:22px; font-weight:600; }
+.topo .atual{ font-size:14px; color:#E3CDBA; margin-left:auto; text-align:right; }
+.menu-btn{ background:transparent; border:1px solid rgba(250,247,242,.35); color:var(--creme); border-radius:8px; width:44px; height:40px; display:grid; place-items:center; cursor:pointer; }
+.menu-btn span{ display:block; width:18px; height:2px; background:var(--creme); box-shadow:0 6px 0 var(--creme), 0 -6px 0 var(--creme); }
+
+/* Abas laterais */
+.lateral{ position:fixed; top:0; left:0; bottom:0; width:var(--side); background:var(--vinho); color:var(--creme);
+  padding:calc(env(safe-area-inset-top,0px) + 26px) 0 calc(env(safe-area-inset-bottom,0px) + 24px); overflow-y:auto; z-index:50;
+  transform:translateX(-100%); transition:transform .28s ease; }
+.lateral.aberta{ transform:translateX(0); }
+.lateral .marca{ padding:0 24px 18px; }
+.lateral .marca b{ font-family:var(--serif); font-size:30px; font-weight:600; display:block; line-height:1; }
+.lateral .marca i{ font-family:var(--script); font-style:normal; font-size:32px; color:#F1E1CF; display:block; line-height:1.1; }
+.grupo{ padding:14px 0 4px; }
+.grupo > span{ display:block; padding:0 24px 6px; font-size:13px; color:#CDAF97; }
+.aba{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:transparent; border:0; color:#F4E8DC;
+  padding:10px 24px; cursor:pointer; border-left:3px solid transparent; font-size:16px; }
+.aba svg{ width:18px; height:18px; flex:none; opacity:.85; }
+.aba:hover{ background:rgba(250,247,242,.06); }
+.aba[aria-selected="true"]{ background:rgba(250,247,242,.12); border-left-color:var(--creme); color:#fff; font-weight:500; }
+.veu{ position:fixed; inset:0; background:rgba(31,26,24,.45); z-index:40; opacity:0; pointer-events:none; transition:opacity .25s; }
+.veu.ativo{ opacity:1; pointer-events:auto; }
+
+main{ min-height:100vh; }
+.painel{ display:none; padding:34px 22px calc(60px + env(safe-area-inset-bottom,0px)); max-width:760px; }
+.painel.ativo{ display:block; }
+
+@media (min-width:960px){
+  .topo{ display:none; }
+  .lateral{ transform:none; }
+  .veu{ display:none; }
+  main{ margin-left:var(--side); }
+  .painel{ padding:56px 56px 80px; }
+}
+
+/* Tipografia */
+h1{ font-family:var(--serif); font-weight:600; margin:0; }
+h2{ font-family:var(--serif); font-weight:600; color:var(--vinhoTxt); font-size:34px; line-height:1.15; margin:0 0 10px; }
+h3{ font-family:var(--serif); font-weight:600; font-size:22px; line-height:1.25; margin:34px 0 10px; color:var(--tinta); }
+h4{ font-family:var(--sans); font-weight:700; font-size:16px; margin:0 0 4px; color:var(--vinhoTxt); }
+p{ margin:0 0 14px; }
+.intro{ color:var(--suave); max-width:56ch; margin-bottom:26px; }
+strong{ color:var(--vinhoTxt); }
+.nota{ font-size:15px; color:var(--suave); }
+.script{ font-family:var(--script); font-weight:400; }
+
+/* Capa do início */
+.capa{ background:var(--vinho); color:var(--creme); border-radius:10px; padding:38px 28px 34px; margin-bottom:28px; }
+.capa h1{ font-size:clamp(64px,17vw,104px); line-height:.9; letter-spacing:-.02em; }
+.capa .script{ font-size:clamp(46px,12vw,70px); color:#F3E6D6; display:block; line-height:1; margin:-4px 0 0 4px; }
+.capa p{ color:#F1E4D6; max-width:36ch; margin:22px 0 0; }
+.capa small{ display:block; margin-top:18px; color:#D8BFA8; font-size:14px; }
+
+.ancora{ border-left:3px solid var(--vinho); padding:6px 0 6px 18px; font-family:var(--serif); font-size:24px; line-height:1.4; color:var(--vinhoTxt); margin:8px 0 30px; }
+
+/* Blocos */
+.bloco{ background:var(--branco); border:1px solid var(--linha); border-radius:8px; padding:20px; margin-bottom:16px; }
+.grade{ display:grid; gap:14px; }
+@media (min-width:640px){ .grade.duas{ grid-template-columns:1fr 1fr; } .grade.tres{ grid-template-columns:repeat(3,1fr); } }
+.linhas{ list-style:none; margin:0; padding:0; border-top:1px solid var(--linha); }
+.linhas li{ padding:14px 0; border-bottom:1px solid var(--linha); }
+.linhas.marcadas li{ display:grid; grid-template-columns:28px 1fr; gap:10px; }
+.dot{ width:22px; height:22px; border-radius:50%; background:var(--marinho); color:var(--creme); display:grid; place-items:center; font-size:12px; margin-top:3px; }
+.dot.vinho{ background:var(--vinho); }
+.tag{ display:inline-block; font-size:13px; padding:3px 10px; border-radius:20px; background:#EFE6DA; color:var(--madeira); margin:0 6px 6px 0; }
+
+/* Trilha */
+.trilha{ list-style:none; margin:0; padding:0; position:relative; }
+.trilha::before{ content:""; position:absolute; left:11px; top:8px; bottom:8px; width:2px; background:var(--marinho); opacity:.35; }
+.trilha li{ position:relative; padding:0 0 24px 42px; }
+.trilha li::before{ content:""; position:absolute; left:4px; top:7px; width:16px; height:16px; border-radius:50%; background:var(--creme); border:2px solid var(--marinho); }
+.trilha li.feito::before{ background:var(--marinho); }
+.trilha li.horizonte::before{ background:var(--ouro); border-color:var(--ouro); }
+.trilha .quando{ font-size:14px; color:var(--marinho); font-weight:500; }
+.trilha h4{ font-family:var(--serif); font-size:20px; color:var(--tinta); font-weight:600; margin:2px 0 4px; }
+.trilha p{ color:var(--suave); margin:0; }
+
+/* Texto da história */
+.carta{ background:var(--branco); border:1px solid var(--linha); border-radius:8px; padding:24px 22px; font-family:var(--serif); font-size:19px; line-height:1.7; }
+.carta p{ margin:0 0 14px; }
+.botao{ display:inline-flex; align-items:center; gap:8px; background:var(--vinho); color:var(--creme); border:0; border-radius:8px; padding:12px 18px; cursor:pointer; font-weight:500; text-decoration:none; }
+.botao.claro{ background:transparent; color:var(--vinhoTxt); border:1px solid var(--vinhoTxt); }
+.feedback{ font-size:14px; color:var(--verde); margin-left:10px; }
+
+/* Faixa escura (gargalos) */
+.escuro{ background:var(--espresso); color:#F3E9DE; border-radius:10px; padding:10px 22px 14px; }
+details{ border-bottom:1px solid rgba(243,233,222,.18); }
+details:last-child{ border-bottom:0; }
+summary{ list-style:none; cursor:pointer; padding:16px 36px 16px 0; position:relative; font-family:var(--serif); font-size:20px; color:#F7EEE3; }
+summary::-webkit-details-marker{ display:none; }
+summary::after{ content:"+"; position:absolute; right:2px; top:12px; font-family:var(--sans); font-size:26px; color:var(--ouro); transition:transform .2s; }
+details[open] summary::after{ transform:rotate(45deg); }
+.garg{ padding:0 0 18px; color:#E6D7C7; }
+.garg .caminho{ border-left:2px solid var(--ouro); padding-left:14px; color:#F7EEE3; margin:0; }
+
+/* Antes e depois */
+.duo{ display:grid; grid-template-columns:1fr 1fr; gap:0; border:1px solid var(--linha); border-radius:8px; overflow:hidden; background:var(--branco); }
+.duo > div{ padding:14px 16px; border-bottom:1px solid var(--linha); font-size:15px; }
+.duo > div:nth-child(odd){ background:#F6EFE6; color:var(--vinhoTxt); }
+.duo > div:nth-child(even){ color:var(--verde); }
+.duo .cab{ font-weight:700; font-size:14px; }
+.duo > div:nth-last-child(-n+2){ border-bottom:0; }
+
+/* Jornada */
+.jornada{ counter-reset:j; list-style:none; margin:0; padding:0; }
+.jornada li{ counter-increment:j; position:relative; padding:0 0 20px 50px; }
+.jornada li::before{ content:counter(j); position:absolute; left:0; top:0; width:34px; height:34px; border-radius:50%; border:1.5px solid var(--vinho); color:var(--vinhoTxt); font-family:var(--serif); font-weight:600; display:grid; place-items:center; }
+.jornada p{ margin:0; color:var(--suave); }
+
+/* Pirâmide invertida */
+.piramide{ display:flex; flex-direction:column; align-items:center; gap:6px; margin:10px 0 18px; }
+.camada{ border:0; color:#FBF3E8; cursor:pointer; padding:14px 12px; text-align:center; font-family:var(--serif); font-size:18px; border-radius:4px; transition:filter .2s, transform .2s; }
+.camada small{ display:block; font-family:var(--sans); font-size:13px; opacity:.85; }
+.camada[data-c="1"]{ width:100%; background:var(--vinho); }
+.camada[data-c="2"]{ width:82%; background:var(--madeira); }
+.camada[data-c="3"]{ width:64%; background:var(--marinho); }
+.camada[data-c="4"]{ width:46%; background:var(--espresso); }
+.camada[aria-pressed="false"]{ filter:saturate(.55) brightness(1.15); }
+.camada-det{ display:none; }
+.camada-det.ativo{ display:block; }
+
+/* Semana */
+.semana{ display:grid; gap:10px; }
+.dia{ display:grid; grid-template-columns:62px 1fr; gap:12px; background:var(--branco); border:1px solid var(--linha); border-radius:8px; padding:12px 14px; }
+.dia b{ font-family:var(--serif); color:var(--vinhoTxt); font-size:18px; }
+.dia span{ font-size:15px; }
+.dia em{ display:block; font-style:normal; font-size:13px; color:var(--marinho); }
+
+/* Perfil */
+.perfil-mock{ background:var(--s1); border-radius:14px; padding:20px; border:1px solid var(--linha); }
+.perfil-mock .topo-p{ display:flex; gap:14px; align-items:center; margin-bottom:12px; }
+.avatar{ width:64px; height:64px; border-radius:50%; background:var(--s2); border:3px solid var(--s3); display:grid; place-items:center; color:var(--s1); font-family:var(--serif); font-size:26px; flex:none; }
+.perfil-mock .nm{ font-weight:700; color:var(--s5); }
+.perfil-mock .bio{ white-space:pre-line; font-size:15px; color:var(--s5); line-height:1.55; }
+.destaques{ display:flex; gap:14px; overflow-x:auto; padding:16px 2px 6px; }
+.dest{ flex:none; width:72px; text-align:center; font-size:12px; color:var(--s5); }
+.dest .c{ width:64px; height:64px; border-radius:50%; margin:0 auto 6px; background:var(--s2); border:2px solid var(--s1); box-shadow:0 0 0 2px var(--s3); display:grid; place-items:center; }
+.dest:nth-child(even) .c{ background:var(--s4); }
+.dest svg{ width:26px; height:26px; stroke:var(--s1); fill:none; stroke-width:1.6; }
+
+/* Paletas */
+.paletas{ display:grid; gap:12px; }
+.paleta{ display:flex; align-items:center; gap:14px; background:var(--branco); border:1.5px solid var(--linha); border-radius:10px; padding:14px; cursor:pointer; text-align:left; width:100%; }
+.paleta[aria-checked="true"]{ border-color:var(--vinho); box-shadow:0 0 0 2px rgba(54,0,0,.12); }
+.amostras{ display:flex; flex:none; }
+.amostras i{ width:26px; height:26px; border-radius:50%; margin-left:-6px; border:2px solid #fff; display:block; }
+.amostras i:first-child{ margin-left:0; }
+.paleta b{ display:block; font-family:var(--serif); font-size:18px; color:var(--tinta); }
+.paleta span{ font-size:14px; color:var(--suave); }
+
+/* Perguntas */
+.pergunta{ margin-bottom:18px; }
+.pergunta label{ display:block; font-weight:500; margin-bottom:6px; }
+textarea, input[type=text], select{ width:100%; font:inherit; font-size:16px; color:var(--tinta); background:var(--branco); border:1px solid #D8CDBF; border-radius:8px; padding:12px 14px; }
+textarea{ min-height:84px; resize:vertical; line-height:1.5; }
+textarea:focus, input[type=text]:focus, select:focus{ outline:2px solid var(--marinho); outline-offset:1px; border-color:transparent; }
+.status{ font-size:15px; margin-top:12px; }
+
+/* Parceiros */
+.parc-linha{ display:grid; grid-template-columns:1fr 150px; gap:8px; margin-bottom:8px; }
+@media (max-width:420px){ .parc-linha{ grid-template-columns:1fr; } }
+.msg{ background:#F3ECE2; border-radius:8px; padding:18px; font-size:16px; white-space:pre-line; }
+
+/* Números */
+.livro{ background:var(--branco); border:1px solid var(--linha); border-radius:8px; padding:6px 18px; }
+.livro .l{ display:flex; justify-content:space-between; gap:14px; padding:11px 0; border-bottom:1px dashed var(--linha); }
+.livro .l:last-child{ border-bottom:0; }
+.livro .v{ font-variant-numeric:tabular-nums; white-space:nowrap; }
+.livro .obs{ display:block; font-size:13px; color:var(--suave); }
+.total{ display:flex; justify-content:space-between; align-items:baseline; margin:14px 4px 6px; }
+.total b{ font-family:var(--serif); font-size:32px; color:var(--marinho); font-weight:600; }
+.aberto{ margin-top:16px; padding:14px 16px; background:#F3ECE2; border-radius:8px; font-size:15px; }
+.aberto b{ color:var(--madeira); }
+.clinica{ border-left:3px solid var(--vinho); padding:2px 0 2px 16px; margin-bottom:16px; }
+.clinica ul{ margin:4px 0 0; padding-left:18px; color:var(--suave); }
+
+/* Calculadora */
+.calc h4{ margin-top:4px; }
+.campo{ margin-bottom:14px; }
+.campo label{ display:flex; justify-content:space-between; font-size:15px; margin-bottom:4px; }
+.campo output{ font-weight:700; color:var(--marinho); font-variant-numeric:tabular-nums; }
+input[type=range]{ width:100%; accent-color:var(--vinho); height:28px; }
+.sep{ border:0; border-top:1px solid var(--linha); margin:18px 0; }
+.grande{ font-family:var(--serif); font-size:clamp(40px,10vw,54px); color:var(--vinhoTxt); font-weight:600; line-height:1; font-variant-numeric:tabular-nums; }
+.barra{ height:10px; background:#EFE6DA; border-radius:6px; overflow:hidden; margin:12px 0 6px; }
+.barra i{ display:block; height:100%; width:0; background:var(--marinho); transition:width .4s ease; }
+.barra.ok i{ background:var(--ouro); }
+.mini{ display:grid; grid-template-columns:1fr 1fr; gap:12px 16px; margin-top:16px; }
+.mini div{ font-size:14px; color:var(--suave); }
+.mini b{ display:block; font-family:var(--serif); font-size:23px; color:var(--tinta); font-weight:600; font-variant-numeric:tabular-nums; }
+.ritmo{ margin-top:16px; padding:13px 15px; border-radius:8px; font-size:15px; }
+.ritmo.leve{ background:#E8EEF6; color:var(--marinho); }
+.ritmo.firme{ background:#F4EADB; color:var(--madeira); }
+.ritmo.intenso{ background:#F3E1E1; color:var(--vinhoTxt); }
+
+/* Passos */
+.passos{ list-style:none; margin:0; padding:0; }
+.passos li{ border-bottom:1px solid var(--linha); }
+.passos label{ display:grid; grid-template-columns:30px 1fr; gap:10px; padding:14px 0; cursor:pointer; }
+.passos input{ width:22px; height:22px; accent-color:var(--vinho); margin-top:3px; }
+.passos input:checked + span{ color:var(--suave); text-decoration:line-through; text-decoration-color:var(--ouro); }
+.passos .grupo-p{ font-family:var(--serif); font-size:19px; color:var(--vinhoTxt); padding:22px 0 6px; border-bottom:0; }
+.progresso{ font-size:15px; color:var(--marinho); }
+
+/* Diário */
+.entrada{ padding:18px 0; border-bottom:1px solid var(--linha); }
+.entrada time{ font-size:14px; color:var(--marinho); font-weight:500; }
+.entrada p{ margin:4px 0 0; }
+
+/* Assinatura */
+.assinatura{ background:var(--madeira); color:#FBF3E8; border-radius:10px; padding:30px 26px; margin-top:34px; }
+.assinatura p{ font-family:var(--serif); font-size:20px; line-height:1.5; margin:0 0 12px; }
+.assinatura .ass{ font-family:var(--script); font-size:44px; color:var(--ouro); line-height:1; margin-top:12px; }
+.assinatura small{ display:block; color:#E8D3B8; font-size:14px; margin-top:6px; }
+
+/* Navegação entre abas */
+.seguir{ display:flex; justify-content:space-between; gap:12px; margin-top:40px; padding-top:20px; border-top:1px solid var(--linha); }
+.seguir button{ background:transparent; border:1px solid var(--linha); border-radius:8px; padding:12px 14px; cursor:pointer; color:var(--vinhoTxt); font-size:15px; max-width:48%; text-align:left; }
+.seguir button.prox{ margin-left:auto; text-align:right; }
+.seguir small{ display:block; color:var(--suave); font-size:12px; }
+
+/* Financeiro */
+.seg{ display:inline-flex; background:#EFE6DA; border-radius:10px; padding:4px; gap:4px; margin-bottom:10px; }
+.seg button{ border:0; background:transparent; padding:10px 20px; border-radius:8px; cursor:pointer; color:var(--vinhoTxt); font-weight:500; }
+.seg button[aria-pressed="true"]{ background:var(--vinho); color:var(--creme); }
+.meses{ display:flex; gap:8px; overflow-x:auto; padding:2px 2px 10px; margin:6px 0 10px; }
+.meses button{ flex:none; border:1px solid var(--linha); background:var(--branco); border-radius:20px; padding:8px 14px; cursor:pointer; font-size:14px; color:var(--tinta); }
+.meses button[aria-pressed="true"]{ background:var(--marinho); color:#fff; border-color:var(--marinho); }
+.meses button .pt{ display:inline-block; width:7px; height:7px; border-radius:50%; background:var(--ouro); margin-left:6px; vertical-align:middle; }
+.kpis{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+@media (min-width:640px){ .kpis.quatro{ grid-template-columns:repeat(4,1fr); } .kpis.tres{ grid-template-columns:repeat(3,1fr); } }
+.kpi{ background:var(--branco); border:1px solid var(--linha); border-radius:8px; padding:12px 14px; font-size:13px; color:var(--suave); }
+.kpi b{ display:block; font-family:var(--serif); font-size:21px; color:var(--tinta); font-weight:600; font-variant-numeric:tabular-nums; line-height:1.25; }
+.kpi.ent b{ color:var(--verde); } .kpi.sai b{ color:var(--vinhoTxt); } .kpi.res b{ color:var(--marinho); }
+.form-lanc{ display:grid; gap:8px; grid-template-columns:1fr 1fr; }
+.form-lanc .full{ grid-column:1 / -1; }
+.form-lanc label.chk{ display:flex; align-items:center; gap:8px; font-size:15px; }
+.form-lanc label.chk input{ width:20px; height:20px; accent-color:var(--vinho); }
+input[type=month]{ width:100%; font:inherit; font-size:16px; color:var(--tinta); background:var(--branco); border:1px solid #D8CDBF; border-radius:8px; padding:11px 14px; }
+.cfg label{ display:block; font-size:14px; color:var(--suave); margin-bottom:4px; }
+.lanc{ display:grid; grid-template-columns:1fr auto 34px; gap:10px; align-items:center; padding:12px 0; border-bottom:1px solid var(--linha); }
+.lanc small{ display:block; color:var(--suave); font-size:13px; }
+.lanc .val{ font-variant-numeric:tabular-nums; white-space:nowrap; font-weight:500; }
+.val.entrada{ color:var(--verde); } .val.saida{ color:var(--vinhoTxt); } .val.reserva{ color:var(--marinho); }
+.lanc .x{ border:0; background:transparent; color:var(--suave); font-size:22px; cursor:pointer; width:34px; height:34px; border-radius:6px; }
+.lanc .x:hover{ background:#F3ECE2; }
+.vazio{ color:var(--suave); font-size:15px; padding:14px 0; }
+.acoes{ display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+.barras{ display:grid; grid-template-columns:repeat(6,1fr); gap:10px; align-items:end; height:150px; border-bottom:1px solid var(--linha); margin-top:8px; }
+.barras .col{ display:flex; flex-direction:column; justify-content:flex-end; align-items:center; height:100%; font-size:11px; color:var(--suave); font-variant-numeric:tabular-nums; }
+.barras .b{ width:100%; max-width:44px; border-radius:4px 4px 0 0; background:var(--marinho); min-height:2px; transition:height .4s ease; }
+.barras .b.neg{ background:var(--vinho); }
+.rotulos{ display:grid; grid-template-columns:repeat(6,1fr); gap:10px; text-align:center; font-size:13px; color:var(--suave); margin:6px 0 18px; }
+.tab-wrap{ overflow-x:auto; border:1px solid var(--linha); border-radius:8px; background:var(--branco); }
+.tabela{ width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums; min-width:520px; }
+.tabela th, .tabela td{ padding:10px 12px; border-bottom:1px solid var(--linha); text-align:right; white-space:nowrap; }
+.tabela th:first-child, .tabela td:first-child{ text-align:left; }
+.tabela th{ font-weight:700; color:var(--vinhoTxt); font-size:13px; background:#F6EFE6; }
+.tabela tr.tot td{ font-weight:700; border-bottom:0; background:#FBF7F1; }
+.tabela .neg{ color:var(--vinhoTxt); }
+.leitura{ border-left:3px solid var(--marinho); padding:4px 0 4px 16px; margin:18px 0; }
+
+@media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header class="topo">
+  <button class="menu-btn" id="abrir" aria-label="Abrir menu" aria-controls="lateral" aria-expanded="false"><span></span></button>
+  <div class="nome">Samera</div>
+  <div class="atual" id="titulo-atual">Início</div>
+</header>
+<div class="veu" id="veu"></div>
+<style>
+.aba svg, .dest svg, .ico{ stroke:currentColor; fill:none; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; }
+.dest svg{ stroke:var(--s1); }
+</style>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-casa" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+<symbol id="i-trilha" viewBox="0 0 24 24"><circle cx="6" cy="5" r="2"/><circle cx="18" cy="19" r="2"/><path d="M8 5h6a3.5 3.5 0 0 1 0 7h-4a3.5 3.5 0 0 0 0 7h6"/></symbol>
+<symbol id="i-coracao" viewBox="0 0 24 24"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/></symbol>
+<symbol id="i-joia" viewBox="0 0 24 24"><path d="M6 4h12l3 5-9 11L3 9z"/><path d="M3 9h18M9 4l3 16 3-16"/></symbol>
+<symbol id="i-pessoa" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+<symbol id="i-gota" viewBox="0 0 24 24"><path d="M12 3c3 4 5.5 6.8 5.5 10a5.5 5.5 0 0 1-11 0C6.5 9.8 9 7 12 3z"/></symbol>
+<symbol id="i-piramide" viewBox="0 0 24 24"><path d="M3 5h18l-9 15z"/><path d="M6.5 10h11M9.5 15h5"/></symbol>
+<symbol id="i-celular" viewBox="0 0 24 24"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></symbol>
+<symbol id="i-paleta" viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0 0 18c1.2 0 1.8-.8 1.8-1.8 0-1.3-1-1.6-1-2.7 0-1 .8-1.5 1.8-1.5H17a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></symbol>
+<symbol id="i-elos" viewBox="0 0 24 24"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></symbol>
+<symbol id="i-cifrao" viewBox="0 0 24 24"><path d="M12 3v18M16.5 7.5C16 6 14.3 5 12 5 9.5 5 7.5 6.3 7.5 8.3c0 4.7 9 2.6 9 7.4 0 2-2 3.3-4.5 3.3-2.5 0-4.3-1.1-4.8-2.8"/></symbol>
+<symbol id="i-lista" viewBox="0 0 24 24"><path d="M10 6h10M10 12h10M10 18h10"/><path d="M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/></symbol>
+<symbol id="i-livro" viewBox="0 0 24 24"><path d="M4 4.5A1.5 1.5 0 0 1 5.5 3H20v16H5.5A1.5 1.5 0 0 0 4 20.5z"/><path d="M4 20.5A1.5 1.5 0 0 0 5.5 22H20"/></symbol>
+<symbol id="i-cal" viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></symbol>
+<symbol id="i-lua" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></symbol>
+<symbol id="i-corpo" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><path d="M5 9h14M12 9v6l-4 6M12 15l4 6"/></symbol>
+<symbol id="i-carteira" viewBox="0 0 24 24"><path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H18v3"/><rect x="4" y="8" width="16" height="11" rx="2"/><circle cx="16" cy="13.5" r="1.2"/></symbol>
+</defs></svg>
+
+<nav class="lateral" id="lateral" aria-label="Seções do plano">
+  <div class="marca"><b>Samera</b><i>preciosa</i></div>
+  <div role="tablist" aria-orientation="vertical">
+    <div class="grupo"><span>Você</span>
+      <button class="aba" role="tab" data-tab="inicio" aria-selected="true"><svg><use href="#i-casa"/></svg>Início</button>
+      <button class="aba" role="tab" data-tab="historia" aria-selected="false"><svg><use href="#i-trilha"/></svg>Sua história</button>
+      <button class="aba" role="tab" data-tab="essencia" aria-selected="false"><svg><use href="#i-coracao"/></svg>Quem é você</button>
+    </div>
+    <div class="grupo"><span>Caminho</span>
+      <button class="aba" role="tab" data-tab="avancos" aria-selected="false"><svg><use href="#i-check"/></svg>Avanços e gargalos</button>
+      <button class="aba" role="tab" data-tab="diferencial" aria-selected="false"><svg><use href="#i-joia"/></svg>Diferencial e narrativa</button>
+    </div>
+    <div class="grupo"><span>Sua cliente</span>
+      <button class="aba" role="tab" data-tab="persona" aria-selected="false"><svg><use href="#i-pessoa"/></svg>Quem é ela</button>
+      <button class="aba" role="tab" data-tab="atendimento" aria-selected="false"><svg><use href="#i-gota"/></svg>O atendimento</button>
+      <button class="aba" role="tab" data-tab="parcerias" aria-selected="false"><svg><use href="#i-elos"/></svg>Parcerias</button>
+    </div>
+    <div class="grupo"><span>Comunicação</span>
+      <button class="aba" role="tab" data-tab="conteudo" aria-selected="false"><svg><use href="#i-piramide"/></svg>Conteúdo PMI</button>
+      <button class="aba" role="tab" data-tab="perfil" aria-selected="false"><svg><use href="#i-celular"/></svg>Perfil e destaques</button>
+      <button class="aba" role="tab" data-tab="marca" aria-selected="false"><svg><use href="#i-paleta"/></svg>Sua marca</button>
+    </div>
+    <div class="grupo"><span>Plano</span>
+      <button class="aba" role="tab" data-tab="numeros" aria-selected="false"><svg><use href="#i-cifrao"/></svg>Números e 10K</button>
+      <button class="aba" role="tab" data-tab="financeiro" aria-selected="false"><svg><use href="#i-carteira"/></svg>Financeiro</button>
+      <button class="aba" role="tab" data-tab="passos" aria-selected="false"><svg><use href="#i-lista"/></svg>Próximos passos</button>
+      <button class="aba" role="tab" data-tab="diario" aria-selected="false"><svg><use href="#i-livro"/></svg>Diário das sessões</button>
+    </div>
+  </div>
+</nav>
+
+<main id="conteudo-principal">
+
+<!-- INÍCIO -->
+<section class="painel ativo" id="p-inicio" role="tabpanel" data-titulo="Início">
+  <div class="capa">
+    <h1>Samera</h1>
+    <span class="script">preciosa</span>
+    <p>Seu plano de evolução. Tudo o que já construímos juntas e o caminho daqui pra frente, num só lugar.</p>
+    <small>Atualizado em 1 de outubro de 2026</small>
+  </div>
+
+  <p class="ancora">Eu cuido do corpo da mulher que virou mãe, porque eu também virei.</p>
+
+  <h3 style="margin-top:0">Seu foco agora</h3>
+  <div class="grade tres">
+    <div class="bloco"><h4>Cuidar do seu corpo</h4><p class="nota" style="margin:0">Exames das vitaminas e a dor nas pernas avaliada pelo médico. Seu corpo é a sua ferramenta.</p></div>
+    <div class="bloco"><h4>Assumir quem você é</h4><p class="nota" style="margin:0">Contar sua história no perfil e responder as perguntas da aba Sua marca.</p></div>
+    <div class="bloco"><h4>Suas primeiras mães</h4><p class="nota" style="margin:0">Montar o Protocolo Mãe Preciosa e abrir as primeiras parcerias da cidade.</p></div>
+  </div>
+
+  <div class="bloco" style="margin-top:4px">
+    <h4>Seus passos</h4>
+    <p class="progresso" id="prog-inicio" style="margin:0"></p>
+  </div>
+
+  <h3>Como usar este espaço</h3>
+  <p>As abas ao lado guardam cada parte do seu plano. No celular, toque no menu no alto da tela. O que você marcar e escrever aqui fica salvo no seu aparelho, e a cada sessão este mesmo link ganha novidades, registradas no diário.</p>
+
+  <div class="assinatura">
+    <p>Samera, cada linha aqui foi escrita pra você lembrar de quem está se tornando.</p>
+    <p>Tem dia que pesa, e tem mulher que segue mesmo assim, com a filha no colo e a cabeça erguida. Essa mulher é você.</p>
+    <div class="ass">Maria Clara</div>
+    <small>All Win Academy</small>
+  </div>
+</section>
+
+<!-- HISTÓRIA -->
+<section class="painel" id="p-historia" role="tabpanel" data-titulo="Sua história">
+  <h2>Sua história</h2>
+  <p class="intro">Cada ponto dessa linha é uma versão sua que teve coragem de dar o próximo passo.</p>
+  <ol class="trilha">
+    <li class="feito"><div class="quando">A formação</div><h4>Fisioterapeuta dermatofuncional e instrutora de Pilates</h4><p>Anos cuidando do corpo de outras mulheres com técnica e atendimento em casa.</p></li>
+    <li class="feito"><div class="quando">Maio de 2026</div><h4>O sonho a dois ganhou forma</h4><p>Na Evolutiva com o Marco, vocês olharam para o propósito e para a prosperidade da família.</p></li>
+    <li class="feito"><div class="quando">Novo capítulo</div><h4>Monte Carmelo e a chegada da Ana Helena</h4><p>Você deixou Uberaba e recebeu sua filha. Ela trouxe alegria, paz e uma nova identidade que você escolheu assumir.</p></li>
+    <li class="feito"><div class="quando">Setembro de 2026</div><h4>Os números na mesa</h4><p>Você mapeou os custos da casa e pesquisou os valores das clínicas da cidade.</p></li>
+    <li class="feito"><div class="quando">30 de setembro</div><h4>Firmeza diante da crítica</h4><p>Num dia pesado, você respondeu com fé e cabeça erguida.</p></li>
+    <li class="feito"><div class="quando">1 de outubro</div><h4>Seu lugar ganhou nome</h4><p>A fisioterapeuta que cuida das mães de Monte Carmelo, na casa delas.</p></li>
+    <li class="horizonte"><div class="quando">Próximo horizonte</div><h4>R$ 10 mil por mês, no ritmo do seu corpo</h4><p>Com mães fixas, protocolo próprio, Pilates e uma rotina que caiba na sua maternidade.</p></li>
+  </ol>
+
+  <h3>A história que você vai contar</h3>
+  <p class="nota">Um rascunho pra você ajustar com a sua voz. Troque qualquer palavra que não soe como você. Ele vira seu post fixado, seu destaque Minha história e um vídeo seu falando pra câmera.</p>
+  <div class="carta" id="texto-historia">
+    <p>Eu sou a Samera. Fisioterapeuta dermatofuncional, instrutora de Pilates e mãe.</p>
+    <p>Durante anos eu cuidei do corpo de outras mulheres. Até que o meu corpo virou casa da minha filha.</p>
+    <p>Depois que ela nasceu, eu senti na pele o que tantas mães sentem caladas: o inchaço, as pernas pesadas, as noites sem dormir e um espelho que mostra alguém que a gente ainda está aprendendo a reconhecer.</p>
+    <p>Foi aí que eu entendi o meu lugar. Eu sei tratar esse corpo com técnica, e agora sei com o coração também.</p>
+    <p>Hoje eu atendo mães e gestantes aqui em Monte Carmelo, na sua casa e no seu tempo, com drenagem e Pilates pensados pra essa fase.</p>
+    <p>Porque toda mãe merece uma hora em que alguém cuida dela. E eu quero ser essa pessoa pra você.</p>
+  </div>
+  <p style="margin-top:14px"><button class="botao" data-copiar="texto-historia">Copiar texto</button><span class="feedback" aria-live="polite"></span></p>
+</section>
+
+<!-- ESSÊNCIA -->
+<section class="painel" id="p-essencia" role="tabpanel" data-titulo="Quem é você">
+  <h2>Quem é você</h2>
+  <p class="intro">Sua personalidade é o que faz uma mãe escolher você entre todas as opções da cidade. Ela precisa aparecer escrita, à vista, sem se esconder atrás de conteúdo dos outros.</p>
+
+  <h3 style="margin-top:0">Sua essência em palavras</h3>
+  <p><span class="tag">Cuidadora</span><span class="tag">Mulher de fé</span><span class="tag">Mãe</span><span class="tag">Técnica</span><span class="tag">Firme</span><span class="tag">Acolhedora</span><span class="tag">Família</span><span class="tag">Comunidade</span></p>
+
+  <div class="grade duas">
+    <div class="bloco"><h4>O que te move</h4><p class="nota" style="margin:0">Fé, família e a certeza de que o corpo da mulher merece ser tratado como joia.</p></div>
+    <div class="bloco"><h4>Como você fala</h4><p class="nota" style="margin:0">Acolhedora e simples, firme quando precisa, com fé no coração e técnica nas mãos.</p></div>
+    <div class="bloco"><h4>O que você mostra</h4><p class="nota" style="margin:0">Seu rosto, seu jaleco, suas mãos trabalhando, sua rotina real de mãe e a sua fé.</p></div>
+    <div class="bloco"><h4>O que fica de lado</h4><p class="nota" style="margin:0">Reposts de outras marcas e conteúdos soltos que não contam quem você é.</p></div>
+  </div>
+
+  <h3>O fio que já existe no seu feed</h3>
+  <p>Dois posts seus falam a mesma língua sem você perceber. Um traz a ideia do Joseph Pilates de cuidar do corpo como pedra preciosa que a gente lapida. O outro traz a mulher virtuosa de Provérbios, cujo valor passa o de qualquer joia.</p>
+  <p>Você já escolhia esse símbolo. Ele vira o fio da sua marca: <strong>o corpo como joia, a mãe como preciosa e o seu cuidado como lapidação.</strong></p>
+  <div class="bloco" style="text-align:center">
+    <span class="script" style="font-size:54px; color:var(--marinho); line-height:1">preciosa</span>
+    <p class="nota" style="margin:6px 0 0">A palavra que conecta tudo o que você comunica.</p>
+  </div>
+</section>
+
+<!-- AVANÇOS E GARGALOS -->
+<section class="painel" id="p-avancos" role="tabpanel" data-titulo="Avanços e gargalos">
+  <h2>Avanços e gargalos</h2>
+  <p class="intro">O que você já conquistou, pra lembrar nos dias difíceis, e o que hoje segura o seu fluxo.</p>
+  <ul class="linhas marcadas">
+    <li><span class="dot">✓</span><span>Recomeçou em Monte Carmelo, com coragem de construir algo seu.</span></li>
+    <li><span class="dot">✓</span><span>Se tornou mãe e encontrou <strong>alegria, paz e um novo motivo</strong>.</span></li>
+    <li><span class="dot">✓</span><span>Tem uma formação que as clínicas de drenagem da cidade não têm: fisioterapia dermatofuncional e Pilates.</span></li>
+    <li><span class="dot">✓</span><span>Abriu os números da casa com clareza. Quem enxerga o próprio dinheiro começa a governar a própria vida.</span></li>
+    <li><span class="dot">✓</span><span>Pesquisou os valores da concorrência em Monte Carmelo.</span></li>
+    <li><span class="dot">✓</span><span>Sustentou sua voz com firmeza e fé num dia de cobrança.</span></li>
+    <li><span class="dot">✓</span><span>Decidiu cuidar da saúde e fazer os exames.</span></li>
+  </ul>
+
+  <h3>Onde o fluxo pede cuidado</h3>
+  <div class="escuro">
+    <details><summary>O seu corpo</summary><div class="garg"><p>Noites acordadas com a bebê, dor forte nas pernas e nos pés por ficar em pé, e a dúvida sobre as vitaminas.</p><p class="caminho">Exames feitos, dor avaliada pelo médico e uma agenda que respeite o que o seu corpo sustenta hoje. O Pilates entra como aliado, porque exige menos das suas pernas do que a drenagem.</p></div></details>
+    <details><summary>O ambiente de casa</summary><div class="garg"><p>Morar perto da família e ouvir cobranças no dia a dia pesa, e a falta de apoio que você sentiu dói de verdade.</p><p class="caminho">Sua energia precisa de um lugar protegido. Vamos trabalhar juntas como guardar o que serve das palavras que chegam e deixar ir o resto.</p></div></details>
+    <details><summary>O motivo que te move</summary><div class="garg"><p>Quando a vontade de mostrar resultado pra alguém vira combustível, ela acende rápido e cansa rápido.</p><p class="caminho">Sua força cresce quando o motivo mora dentro de você, no sorriso da Ana Helena e na vida que você escolheu.</p></div></details>
+    <details><summary>O espaço de atendimento</summary><div class="garg"><p>As duas salas estão com entulho, e por isso o aluguel não aconteceu.</p><p class="caminho">Uma sala organizada pode virar o seu espaço de Pilates. Começar por uma só já muda o cenário.</p></div></details>
+    <details><summary>Um perfil que ainda esconde você</summary><div class="garg"><p>Muitos reposts de outras marcas, assuntos misturados, bio sem cidade e sem dizer pra quem você atende, e um destaque só.</p><p class="caminho">A aba Perfil e destaques traz a nova bio, os destaques e o que arquivar.</p></div></details>
+    <details><summary>Números que ainda faltam</summary><div class="garg"><p>A contribuição do Marco, os custos do seu atendimento, as horas que você consegue atender e onde estão hoje os seus aparelhos de Pilates.</p><p class="caminho">Com esses números, o plano dos 10K deixa de ser estimativa e vira mapa.</p></div></details>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section class="painel" id="p-diferencial" role="tabpanel" data-titulo="Diferencial e narrativa">
+  <h2>Diferencial e narrativa</h2>
+  <p class="intro">O motivo pelo qual uma mãe vai escolher você, e a história que sustenta cada post, cada conversa e cada preço.</p>
+
+  <h3 style="margin-top:0">O que a cidade oferece hoje</h3>
+  <p>Drenagem como serviço de estética, dentro da clínica, vendida por sessão ou pacote. A cliente se desloca, deixa o bebê com alguém e recebe um procedimento.</p>
+
+  <h3>O que só você reúne</h3>
+  <div class="grade duas">
+    <div class="bloco"><h4>Olhar de fisioterapeuta</h4><p class="nota" style="margin:0">Avaliação antes de tocar, técnica dermatofuncional e segurança pra fase do pós-parto e da gestação.</p></div>
+    <div class="bloco"><h4>Mãe que acabou de viver isso</h4><p class="nota" style="margin:0">Você conhece o inchaço, o cansaço e a dor nas pernas por dentro. Essa empatia ninguém ensina.</p></div>
+    <div class="bloco"><h4>Cuidado na casa dela</h4><p class="nota" style="margin:0">A mãe que não consegue sair de casa recebe você, sem precisar deixar o bebê com ninguém.</p></div>
+    <div class="bloco"><h4>Pilates pra recuperar a força</h4><p class="nota" style="margin:0">Além do alívio, você devolve força, postura e confiança no próprio corpo.</p></div>
+  </div>
+
+  <h3>Seu posicionamento</h3>
+  <p class="ancora">A fisioterapeuta que cuida das mães de Monte Carmelo, na casa delas.</p>
+
+  <h3>A narrativa que sustenta tudo</h3>
+  <ol class="jornada">
+    <li><h4>Antes</h4><p>Por anos você cuidou do corpo de outras mulheres, com técnica e dedicação.</p></li>
+    <li><h4>A virada</h4><p>A Ana Helena chegou, e você sentiu na pele o inchaço, o cansaço, as pernas pesadas e o espelho estranho.</p></li>
+    <li><h4>O entendimento</h4><p>Técnica nas mãos e coração de quem viveu. Você entendeu qual mulher veio cuidar.</p></li>
+    <li><h4>A promessa</h4><p>Toda mãe merece ser cuidada como joia. Você vai até ela e devolve leveza ao corpo e a ela mesma.</p></li>
+  </ol>
+
+  <h3>Por que você pode acreditar nisso</h3>
+  <div class="bloco">
+    <p>Os últimos meses pareceram só peso. Só que cada noite sem dormir e cada dor nas pernas te deram exatamente o que uma mãe procura: alguém que sabe tratar e que entende o que ela sente.</p>
+    <ul class="linhas marcadas" style="margin-top:6px">
+      <li><span class="dot vinho">✓</span><span>Você tem a formação, e a formação certa pra essa fase.</span></li>
+      <li><span class="dot vinho">✓</span><span>Você viveu o pós-parto agora, e sabe falar dele sem decorar nada.</span></li>
+      <li><span class="dot vinho">✓</span><span>Você já atende em casa, e conhece esse formato.</span></li>
+      <li><span class="dot vinho">✓</span><span>Você sustentou sua voz num dia difícil. A firmeza já mora em você.</span></li>
+    </ul>
+  </div>
+  <div class="bloco" style="background:var(--marinho); border-color:var(--marinho); color:#F3EEE6">
+    <h4 style="color:#F3EEE6">Sua frase de cada manhã</h4>
+    <p style="font-family:var(--serif); font-size:22px; margin:0">Eu sei o que essa mãe sente, e sei como cuidar dela.</p>
+  </div>
+</section>
+
+<!-- PERSONA -->
+<section class="painel" id="p-persona" role="tabpanel" data-titulo="Quem é ela">
+  <h2>Quem é ela</h2>
+  <p class="intro">A mãe preciosa. Quanto melhor você conhece o que ela sente, mais natural fica falar com ela.</p>
+
+  <div class="bloco">
+    <p style="margin:0">Mãe de bebê de até um ano, ou gestante a partir do segundo trimestre com liberação médica. Entre 25 e 40 anos, em Monte Carmelo e região. A rotina inteira gira em torno do bebê, e ela ficou por último na própria lista.</p>
+  </div>
+
+  <h3>O que ela sente</h3>
+  <ul class="linhas">
+    <li>Um cansaço que não passa nem quando o bebê dorme.</li>
+    <li>Um corpo que ela ainda não reconhece como dela.</li>
+    <li>Inchaço, pernas pesadas e dor nas costas de tanto amamentar e carregar.</li>
+    <li>Culpa por pensar em si mesma quando o bebê precisa tanto.</li>
+    <li>Solidão: todo mundo pergunta do bebê, quase ninguém pergunta dela.</li>
+    <li>Saudade da mulher que ela era.</li>
+  </ul>
+
+  <h3>Como ela sabe que precisa</h3>
+  <ul class="linhas">
+    <li>A aliança aperta e o sapato não entra no fim do dia.</li>
+    <li>Ela foge das fotos e evita o espelho.</li>
+    <li>Deita à noite e as pernas latejam.</li>
+    <li>Não consegue sair de casa nem pra cuidar de si.</li>
+    <li>Percebe que faz meses que ninguém cuida dela.</li>
+  </ul>
+
+  <h3>O que ela pensa antes de comprar</h3>
+  <div class="duo">
+    <div class="cab">O que ela pensa</div><div class="cab">Como você responde</div>
+    <div>Não tenho com quem deixar o bebê.</div><div>Eu vou até a sua casa. Ele fica pertinho de você.</div>
+    <div>Será que pode no pós-parto?</div><div>Sou fisioterapeuta. Eu avalio antes e respeito a liberação do seu médico.</div>
+    <div>Agora a prioridade é o bebê.</div><div>Mãe cuidada cuida melhor. Essa hora também é pra ele.</div>
+    <div>Não tenho tempo.</div><div>A sessão acontece no seu horário, na sua sala, sem deslocamento.</div>
+  </div>
+
+  <h3>O que ela deseja de verdade</h3>
+  <p>Se sentir leve, voltar a caber nas próprias roupas, ter uma hora só dela, se reconhecer no espelho e ter energia pra viver a maternidade com alegria.</p>
+
+  <h3>Onde ela está</h3>
+  <p><span class="tag">Grupos de mães no WhatsApp</span><span class="tag">Igreja</span><span class="tag">Consultório do obstetra e do pediatra</span><span class="tag">Chá de bebê</span><span class="tag">Instagram de Monte Carmelo</span><span class="tag">Lojas de bebê</span></p>
+
+  <h3>Quem compra junto</h3>
+  <p>O marido, a mãe, a sogra e as amigas. Eles querem ajudar e não sabem como. O vale-presente de cuidado responde isso.</p>
+
+  <div class="aberto"><b>Cuidado importante:</b> se uma mãe contar de tristeza profunda, choro que não passa ou pensamentos que assustam, você acolhe e orienta que ela procure o médico. Seu cuidado soma com o dele.</div>
+</section>
+<!-- ATENDIMENTO -->
+<section class="painel" id="p-atendimento" role="tabpanel" data-titulo="O atendimento">
+  <h2>O atendimento</h2>
+  <p class="intro">Quando o atendimento ganha forma, nome e etapas, a mãe enxerga o valor antes mesmo da primeira sessão.</p>
+
+  <h3 style="margin-top:0">Por que você está lá</h3>
+  <p class="ancora">Pra que, por uma hora, alguém cuide de quem cuida o dia inteiro. Você entra numa casa cansada e sai deixando uma mulher mais leve.</p>
+
+  <h3>Protocolo Mãe Preciosa</h3>
+  <div class="bloco">
+    <p style="margin:0">Oito sessões na casa dela, duas por semana, com avaliação fisioterapêutica, escalda pés, drenagem linfática manual e orientações pensadas pra essa fase.</p>
+    <p class="nota" style="margin:10px 0 0">Outros nomes possíveis pra você sentir: Colo de Mãe, Lapidar. Escolha o que fizer seu coração bater mais forte.</p>
+  </div>
+
+  <h3>Como ela vive a experiência</h3>
+  <ol class="jornada">
+    <li><h4>A primeira conversa</h4><p>No WhatsApp, você pergunta como ela está, de quanto tempo é o bebê e o que mais incomoda.</p></li>
+    <li><h4>A avaliação</h4><p>Na primeira visita: queixas, inchaço, medidas, postura e a liberação médica quando necessário.</p></li>
+    <li><h4>O ritual</h4><p>Você monta o espaço na sala dela, prepara o escalda pés e cria um ambiente de calma.</p></li>
+    <li><h4>A drenagem</h4><p>Técnica de fisioterapeuta, no ritmo do corpo dela, com o bebê por perto.</p></li>
+    <li><h4>As orientações</h4><p>Postura pra amamentar e carregar o bebê, como elevar as pernas e respirar melhor.</p></li>
+    <li><h4>O cuidado depois</h4><p>No dia seguinte, uma mensagem sua perguntando como ela acordou.</p></li>
+    <li><h4>A evolução</h4><p>A cada quatro sessões, medidas e fotos pra ela enxergar o caminho.</p></li>
+    <li><h4>O fechamento</h4><p>Na oitava sessão, uma devolutiva e o convite pra continuar, na manutenção ou no Pilates.</p></li>
+  </ol>
+
+  <h3>O que muda na vida dela</h3>
+  <div class="duo">
+    <div class="cab">Antes</div><div class="cab">Depois</div>
+    <div>Inchaço e pernas latejando</div><div>Leveza pra atravessar o dia</div>
+    <div>Noites pesadas de dor</div><div>Um descanso mais tranquilo</div>
+    <div>Culpa por pensar em si</div><div>Entende que mãe cuidada cuida melhor</div>
+    <div>Evita o espelho</div><div>Volta a se reconhecer</div>
+    <div>Sozinha com o próprio corpo</div><div>Acompanhada por quem entende</div>
+  </div>
+
+  <h3>O que ela leva nas mãos</h3>
+  <ul class="linhas">
+    <li>A ficha de avaliação com o ponto de partida dela.</li>
+    <li>Um cartão de evolução com medidas e fotos.</li>
+    <li>Um guia simples de cuidados pra essa fase.</li>
+    <li>Um mimo no fim do protocolo, como um sachê de escalda pés ou um óleo.</li>
+  </ul>
+
+  <h3>Suas ofertas</h3>
+  <div class="grade duas">
+    <div class="bloco"><h4>Mãe Preciosa</h4><p class="nota" style="margin:0">8 sessões em casa. <strong>R$ 880</strong>, R$ 110 por sessão.</p></div>
+    <div class="bloco"><h4>Gestante Preciosa</h4><p class="nota" style="margin:0">4 sessões em casa, com liberação médica. <strong>R$ 460</strong>.</p></div>
+    <div class="bloco"><h4>Pilates Mãe Forte</h4><p class="nota" style="margin:0">Mensal, 8 aulas. <strong>R$ 280</strong> como referência a confirmar.</p></div>
+    <div class="bloco"><h4>Vale-presente</h4><p class="nota" style="margin:0">Uma sessão de cuidado pra presentear. <strong>R$ 130</strong>.</p></div>
+  </div>
+  <p class="nota">Valores de partida pra validarmos juntas. O deslocamento do atendimento em casa entra no seu tempo e no seu custo.</p>
+</section>
+
+<!-- PARCERIAS -->
+<section class="painel" id="p-parcerias" role="tabpanel" data-titulo="Parcerias">
+  <h2>Parcerias</h2>
+  <p class="intro">Uma boa parceria leva você até a mãe antes mesmo de ela te procurar.</p>
+
+  <h3 style="margin-top:0">Quem já conversa com a sua cliente</h3>
+  <ul class="linhas">
+    <li><h4>Obstetras e ginecologistas</h4><span class="nota">Encaminham gestantes e puérperas. Você devolve uma devolutiva técnica de cada paciente.</span></li>
+    <li><h4>Pediatras e consultoras de amamentação</h4><span class="nota">Você complementa com postura pra amamentar e alívio das costas.</span></li>
+    <li><h4>Doulas e enfermeiras obstétricas</h4><span class="nota">Elas acompanham a mãe de perto e confiam em quem cuida com técnica.</span></li>
+    <li><h4>Fotógrafas de gestante e newborn</h4><span class="nota">Pacote de cuidado antes do ensaio, ou vale-presente na entrega das fotos.</span></li>
+    <li><h4>Lojas de bebê e enxoval</h4><span class="nota">Seu vale-presente entra como item da lista do chá de bebê.</span></li>
+    <li><h4>Igreja e grupos de mães</h4><span class="nota">Uma roda de conversa gratuita sobre cuidar do corpo depois do parto.</span></li>
+    <li><h4>Cirurgiões plásticos e clínicas de estética</h4><span class="nota">Um segundo caminho: drenagem de pós-operatório, área da fisioterapia dermatofuncional, com valor mais alto.</span></li>
+  </ul>
+
+  <h3>Como faremos</h3>
+  <ol class="jornada">
+    <li><h4>Listar dez nomes reais</h4><p>Pessoas e lugares de Monte Carmelo, usando a lista abaixo.</p></li>
+    <li><h4>Visitar com um kit simples</h4><p>Cartão, um folheto do Mãe Preciosa e um vale cortesia pra alguém da equipe conhecer na prática.</p></li>
+    <li><h4>Combinar a troca</h4><p>Indicação de mão dupla, devolutiva pra quem indicou e cashback de 10% pros parceiros comerciais.</p></li>
+    <li><h4>Entregar resultado</h4><p>Cada mãe indicada gera um retorno por escrito pra quem confiou em você.</p></li>
+    <li><h4>Agradecer todo mês</h4><p>Reveja quem indicou e mantenha a relação viva.</p></li>
+  </ol>
+
+  <h3>Mensagem pra abrir a conversa</h3>
+  <div class="msg" id="msg-parceria">Oi, [nome], tudo bem? Sou a Samera, fisioterapeuta dermatofuncional aqui em Monte Carmelo. Atendo gestantes e mães no pós-parto na casa delas, com drenagem e Pilates.
+
+Admiro o seu trabalho com as mães da cidade e queria te apresentar o meu cuidado. Posso passar aí essa semana e deixar um vale cortesia pra você conhecer na prática?</div>
+  <p style="margin-top:12px"><button class="botao claro" data-copiar="msg-parceria">Copiar mensagem</button><span class="feedback" aria-live="polite"></span></p>
+
+  <h3>Seus dez parceiros</h3>
+  <p class="nota">Escreva o nome e acompanhe a conversa. Fica salvo no seu celular.</p>
+  <div id="parceiros"></div>
+</section>
+
+<!-- CONTEÚDO PMI -->
+<section class="painel" id="p-conteudo" role="tabpanel" data-titulo="Conteúdo PMI">
+  <h2>Núcleo de conteúdo</h2>
+  <p class="intro">Na Pirâmide de Maslow Invertida, a conversa começa pelo topo, pela autoestima da mulher. Primeiro ela se sente vista, depois acompanhada, então confia e só aí decide. Toque em cada camada.</p>
+
+  <div class="piramide" role="group" aria-label="Camadas da pirâmide">
+    <button class="camada" data-c="1" aria-pressed="true">Autoestima<small>ela se sente vista</small></button>
+    <button class="camada" data-c="2" aria-pressed="false">Pertencimento<small>ela se sente acompanhada</small></button>
+    <button class="camada" data-c="3" aria-pressed="false">Segurança<small>ela confia</small></button>
+    <button class="camada" data-c="4" aria-pressed="false">Alívio<small>ela decide</small></button>
+  </div>
+
+  <div class="bloco camada-det ativo" data-det="1">
+    <h4>Autoestima: 4 de cada 10 conteúdos</h4>
+    <p class="nota">Devolver a mulher a ela mesma. É a porta de entrada, o que faz ela parar o dedo.</p>
+    <ul class="linhas">
+      <li>Mãe, quando foi a última vez que alguém cuidou de você?</li>
+      <li>Você continua aí dentro, mesmo quando o espelho ainda não te mostra.</li>
+      <li>Seu corpo gerou uma vida. Ele merece ser tratado como joia.</li>
+      <li>Você virou mãe, e continua sendo mulher.</li>
+    </ul>
+    <p class="nota" style="margin:10px 0 0">Formatos: você falando pra câmera, frase sobre foto sua, carrossel.</p>
+  </div>
+  <div class="bloco camada-det" data-det="2">
+    <h4>Pertencimento: 2 a 3 de cada 10</h4>
+    <p class="nota">Maternidade real, mães de Monte Carmelo, fé e família. Ela percebe que não está sozinha.</p>
+    <ul class="linhas">
+      <li>Ninguém me contou que o pós-parto seria assim.</li>
+      <li>Se você também amamenta com dor nas costas, esse é pra você.</li>
+      <li>Mãe de Monte Carmelo, eu te entendo.</li>
+      <li>A minha noite de ontem, e o que me fez continuar.</li>
+    </ul>
+    <p class="nota" style="margin:10px 0 0">Formatos: bastidores nos stories, caixinha de perguntas, relatos seus.</p>
+  </div>
+  <div class="bloco camada-det" data-det="3">
+    <h4>Segurança: 2 de cada 10</h4>
+    <p class="nota">Sua autoridade de fisioterapeuta. Ela confia porque entende que você sabe o que faz.</p>
+    <ul class="linhas">
+      <li>Drenagem no pós-parto: quando pode e quando esperar.</li>
+      <li>Por que a fisioterapeuta avalia antes de drenar.</li>
+      <li>Três sinais de que o seu inchaço merece atenção.</li>
+      <li>O que acontece numa sessão do Mãe Preciosa.</li>
+    </ul>
+    <p class="nota" style="margin:10px 0 0">Formatos: carrossel explicativo, vídeo de jaleco, depoimentos.</p>
+  </div>
+  <div class="bloco camada-det" data-det="4">
+    <h4>Alívio: 1 a 2 de cada 10</h4>
+    <p class="nota">A base da pirâmide, onde ela decide. Oferta clara, sem rodeio.</p>
+    <ul class="linhas">
+      <li>Abri a agenda de outubro pra quatro mães.</li>
+      <li>Como funciona o Mãe Preciosa na sua casa.</li>
+      <li>Dê de presente uma hora de cuidado.</li>
+      <li>Grávida? O Gestante Preciosa tem vaga essa semana.</li>
+    </ul>
+    <p class="nota" style="margin:10px 0 0">Formatos: stories com link do WhatsApp, post de oferta, mensagem direta.</p>
+  </div>
+
+  <h3>A palavra que conecta tudo</h3>
+  <p>Cada conteúdo, de qualquer camada, volta pra mesma ideia: <strong>a mãe é preciosa</strong>. É isso que faz o seu perfil parecer uma coisa só.</p>
+
+  <h3>Semana modelo</h3>
+  <div class="semana">
+    <div class="dia"><b>Seg</b><span>Vídeo falando pra câmera<em>Autoestima</em></span></div>
+    <div class="dia"><b>Ter</b><span>Carrossel com uma dica técnica<em>Segurança</em></span></div>
+    <div class="dia"><b>Qua</b><span>Bastidores e caixinha nos stories<em>Pertencimento</em></span></div>
+    <div class="dia"><b>Qui</b><span>Frase sobre uma foto sua<em>Autoestima</em></span></div>
+    <div class="dia"><b>Sex</b><span>Agenda aberta nos stories<em>Alívio</em></span></div>
+    <div class="dia"><b>Sáb</b><span>Fé, família e maternidade real<em>Pertencimento</em></span></div>
+    <div class="dia"><b>Dom</b><span>Descanso. Mãe também para.<em>Livre</em></span></div>
+  </div>
+
+  <h3>Stories de todo dia</h3>
+  <ol class="jornada">
+    <li><h4>Conexão</h4><p>Seu rosto, um bom dia e como você está hoje.</p></li>
+    <li><h4>Identificação</h4><p>Uma pergunta pra mãe responder na caixinha ou na enquete.</p></li>
+    <li><h4>Autoridade</h4><p>Uma dica curta de fisioterapeuta.</p></li>
+    <li><h4>Prova</h4><p>Bastidor de atendimento ou o print de uma mãe agradecendo.</p></li>
+    <li><h4>Convite</h4><p>Link do WhatsApp com uma frase simples.</p></li>
+  </ol>
+
+  <h3>Combinados do seu conteúdo</h3>
+  <ul class="linhas marcadas">
+    <li><span class="dot vinho">✓</span><span>Seu rosto aparece em pelo menos três de cada cinco posts.</span></li>
+    <li><span class="dot vinho">✓</span><span>Monte Carmelo aparece com frequência. A mãe precisa saber que você está perto.</span></li>
+    <li><span class="dot vinho">✓</span><span>Repost de outras marcas sai do seu feed.</span></li>
+    <li><span class="dot vinho">✓</span><span>A Ana Helena aparece só se e como você quiser.</span></li>
+    <li><span class="dot vinho">✓</span><span>Cada post termina com um convite simples.</span></li>
+  </ul>
+</section>
+
+<!-- PERFIL -->
+<section class="painel" id="p-perfil" role="tabpanel" data-titulo="Perfil e destaques">
+  <h2>Perfil e destaques</h2>
+  <p class="intro">Seu perfil é a sua sala de visitas. Quem chega precisa entender em segundos quem você é, pra quem atende e onde.</p>
+
+  <h3 style="margin-top:0">Como ele está hoje</h3>
+  <ul class="linhas">
+    <li>19 posts e 3.539 seguidores, seguindo 7.525 perfis, mais que o dobro de quem te segue.</li>
+    <li>A bio lista o que você faz, sem dizer pra quem nem em qual cidade.</li>
+    <li>O feed mistura reposts de outra marca, cabelo, receita e igreja, e quase não mostra você trabalhando.</li>
+    <li>Um destaque só, sem nome.</li>
+    <li><strong>Pontos fortes:</strong> sua foto de perfil, a foto de jaleco e o link direto pro WhatsApp.</li>
+  </ul>
+
+  <h3>Como ele fica</h3>
+  <div class="perfil-mock">
+    <div class="topo-p"><div class="avatar">S</div><div><div class="nm">Samera Darlen | Fisioterapia pós-parto</div><div style="font-size:13px; color:var(--s3)">@sameradarlen_fisio</div></div></div>
+    <div class="bio" id="bio-nova">Fisioterapeuta dermatofuncional e mãe 🤍
+Cuido do corpo da mulher que virou mãe
+Drenagem e Pilates na sua casa
+📍 Monte Carmelo, MG
+Agende sua avaliação 👇</div>
+    <div class="destaques" aria-label="Capas dos destaques">
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-coracao"/></svg></div>Minha história</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-joia"/></svg></div>Mãe Preciosa</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-gota"/></svg></div>Drenagem</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-corpo"/></svg></div>Pilates</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-lua"/></svg></div>Gestantes</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-check"/></svg></div>Resultados</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-cal"/></svg></div>Agende</div>
+    </div>
+  </div>
+  <p class="nota" style="margin-top:10px">As cores das capas mudam conforme a paleta que você escolher na aba Sua marca.</p>
+  <p><button class="botao" data-copiar="bio-nova">Copiar a nova bio</button><span class="feedback" aria-live="polite"></span></p>
+
+  <h3>O que fazer, em ordem</h3>
+  <ol class="jornada">
+    <li><h4>Trocar o nome e a bio</h4><p>O nome do perfil entra na busca do Instagram. Com "Fisioterapia pós-parto", a mãe te encontra.</p></li>
+    <li><h4>Arquivar o que não conta sua história</h4><p>Arquivar guarda sem apagar. Saem os reposts e os posts soltos.</p></li>
+    <li><h4>Postar e fixar três posts</h4><p>Minha história, Como funciona o Mãe Preciosa e o primeiro depoimento.</p></li>
+    <li><h4>Montar os sete destaques</h4><p>Com as capas na sua paleta, na ordem acima.</p></li>
+    <li><h4>Ajustar quem você segue</h4><p>Deixar de seguir aos poucos os perfis que não têm relação com você nem com a sua cliente.</p></li>
+  </ol>
+</section>
+
+<!-- MARCA -->
+<section class="painel" id="p-marca" role="tabpanel" data-titulo="Sua marca">
+  <h2>Sua marca</h2>
+  <p class="intro">Escolha a paleta que mais tem a sua cara e responda as perguntas com calma. Suas respostas afinam cada parte do plano.</p>
+
+  <h3 style="margin-top:0">Suas cores</h3>
+  <div class="paletas" role="radiogroup" aria-label="Paletas">
+    <button class="paleta" role="radio" data-paleta="preciosa" aria-checked="true">
+      <span class="amostras"><i style="background:#F7F2EC"></i><i style="background:#D8A7A0"></i><i style="background:#8E5A62"></i><i style="background:#9AAE97"></i><i style="background:#2B2522"></i></span>
+      <span><b>Preciosa</b><span>Rosa quartzo, malva e sálvia. Delicada e acolhedora.</span></span>
+    </button>
+    <button class="paleta" role="radio" data-paleta="leveza" aria-checked="false">
+      <span class="amostras"><i style="background:#FBFAF7"></i><i style="background:#A9BFCC"></i><i style="background:#2F4A5E"></i><i style="background:#D9C7AE"></i><i style="background:#22282C"></i></span>
+      <span><b>Leveza</b><span>Azul névoa e areia. Calma, limpa e clínica.</span></span>
+    </button>
+    <button class="paleta" role="radio" data-paleta="raiz" aria-checked="false">
+      <span class="amostras"><i style="background:#F6F0E6"></i><i style="background:#C49A5A"></i><i style="background:#4A3426"></i><i style="background:#8A9466"></i><i style="background:#2A211B"></i></span>
+      <span><b>Raiz</b><span>Mel, café e oliva. Quente, de casa e de família.</span></span>
+    </button>
+  </div>
+  <div class="perfil-mock" style="margin-top:14px; padding:12px 16px">
+    <div class="destaques" style="padding-top:6px">
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-coracao"/></svg></div>Minha história</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-joia"/></svg></div>Mãe Preciosa</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-gota"/></svg></div>Drenagem</div>
+      <div class="dest"><div class="c"><svg viewBox="0 0 24 24"><use href="#i-corpo"/></svg></div>Pilates</div>
+    </div>
+  </div>
+
+  <h3>Perguntas pra você</h3>
+  <div id="perguntas">
+    <h4 style="margin:6px 0 12px">Sua história</h4>
+    <div class="pergunta"><label for="q1">Por que você escolheu a fisioterapia?</label><textarea id="q1" data-q="Por que escolheu a fisioterapia"></textarea></div>
+    <div class="pergunta"><label for="q2">Qual foi o momento mais difícil do seu pós-parto até agora?</label><textarea id="q2" data-q="Momento mais difícil do pós-parto"></textarea></div>
+    <div class="pergunta"><label for="q3">O que você gostaria que alguém tivesse feito por você nessa fase?</label><textarea id="q3" data-q="O que gostaria que tivessem feito por ela"></textarea></div>
+    <h4 style="margin:22px 0 12px">Seu atendimento</h4>
+    <div class="pergunta"><label for="q4">Qual atendimento te deu mais orgulho até hoje? Por quê?</label><textarea id="q4" data-q="Atendimento de mais orgulho"></textarea></div>
+    <div class="pergunta"><label for="q5">O que você quer que a mãe sinta quando você sai da casa dela?</label><textarea id="q5" data-q="O que a mãe deve sentir"></textarea></div>
+    <div class="pergunta"><label for="q6">Qual nome você sente pro seu protocolo? Mãe Preciosa, Colo de Mãe, Lapidar ou outro?</label><textarea id="q6" data-q="Nome do protocolo"></textarea></div>
+    <h4 style="margin:22px 0 12px">Sua essência</h4>
+    <div class="pergunta"><label for="q7">Três palavras que te definem.</label><textarea id="q7" data-q="Três palavras"></textarea></div>
+    <div class="pergunta"><label for="q8">Como a sua fé aparece no seu trabalho?</label><textarea id="q8" data-q="Fé no trabalho"></textarea></div>
+    <div class="pergunta"><label for="q9">A Ana Helena pode aparecer no seu perfil? Como você se sente com isso?</label><textarea id="q9" data-q="Ana Helena no perfil"></textarea></div>
+    <h4 style="margin:22px 0 12px">Sua rotina</h4>
+    <div class="pergunta"><label for="q10">Quantas horas por dia você consegue atender hoje, e em quais horários?</label><textarea id="q10" data-q="Horas e horários"></textarea></div>
+    <div class="pergunta"><label for="q11">Onde estão hoje os seus aparelhos de Pilates?</label><textarea id="q11" data-q="Aparelhos de Pilates"></textarea></div>
+    <div class="pergunta"><label for="q12">Quais custos você tem pra atender: produtos, deslocamento, outros?</label><textarea id="q12" data-q="Custos do atendimento"></textarea></div>
+  </div>
+  <p class="nota">Suas respostas ficam salvas aqui enquanto você escreve.</p>
+  <button class="botao" id="enviar">Enviar minhas respostas pra Maria Clara</button>
+  <div class="status" id="status-envio" aria-live="polite"></div>
+</section>
+
+<!-- NÚMEROS -->
+<section class="painel" id="p-numeros" role="tabpanel" data-titulo="Números e 10K">
+  <h2>Números e 10K</h2>
+  <p class="intro">Os custos da sua casa, o mercado da cidade e o caminho até os 10K, no ritmo do seu corpo.</p>
+
+  <h3 style="margin-top:0">Custos fixos da casa</h3>
+  <div class="livro">
+    <div class="l"><span>TMB</span><span class="v">R$ 381,75</span></div>
+    <div class="l"><span>Prestação do apartamento</span><span class="v">R$ 540,00</span></div>
+    <div class="l"><span>Condomínio</span><span class="v">R$ 230,00</span></div>
+    <div class="l"><span>Internet</span><span class="v">R$ 104,90</span></div>
+    <div class="l"><span>Energia</span><span class="v">R$ 160,00</span></div>
+    <div class="l"><span>Comida</span><span class="v">R$ 800,00</span></div>
+    <div class="l"><span>Academia<span class="obs">Meta: cross e musculação juntos</span></span><span class="v">R$ 250,00</span></div>
+    <div class="l"><span>Hidroginástica</span><span class="v">R$ 160,00</span></div>
+  </div>
+  <div class="total"><span>Total por mês</span><b>R$ 2.626,65</b></div>
+  <p class="nota">Em outubro entra a vacina Pneumo 20 da Ana Helena, de R$ 550,00, e o mês fecha em R$ 3.176,65.</p>
+  <div class="aberto"><b>Em definição:</b> a contribuição do Marco na renda da casa e os custos do seu atendimento.</div>
+
+  <h3>O mercado de Monte Carmelo</h3>
+  <div class="clinica"><h4>Clínica da cidade</h4><ul><li>Drenagem de 50 min: R$ 120,00</li><li>Pacote de 4: R$ 90,00 cada, R$ 360,00</li><li>Com manta térmica, 1h20: R$ 159,90</li></ul></div>
+  <div class="clinica"><h4>Micheli Martins Clinic &amp; SPA</h4><ul><li>Drenagem com escalda pés: R$ 355,00</li><li>Drenagem relaxante: R$ 420,00</li><li>Parecem pacotes. Vale confirmar quantas sessões incluem.</li></ul></div>
+  <p class="nota">Todas atendem na clínica. Nenhuma oferece avaliação fisioterapêutica nem cuidado na casa da mãe.</p>
+
+  <h3>Seu caminho até os 10K</h3>
+  <div class="bloco calc">
+    <h4>Mãe Preciosa (drenagem em casa)</h4>
+    <div class="campo"><label for="dv">Valor do protocolo <output id="o-dv"></output></label><input type="range" id="dv" min="400" max="1600" step="20" value="880"></div>
+    <div class="campo"><label for="ds">Sessões por protocolo <output id="o-ds"></output></label><input type="range" id="ds" min="4" max="12" step="1" value="8"></div>
+    <div class="campo"><label for="dc">Mães atendidas no mês <output id="o-dc"></output></label><input type="range" id="dc" min="0" max="25" step="1" value="8"></div>
+    <div class="campo"><label for="dd">Duração com deslocamento <output id="o-dd"></output></label><input type="range" id="dd" min="50" max="120" step="10" value="90"></div>
+    <hr class="sep">
+    <h4>Pilates Mãe Forte</h4>
+    <div class="campo"><label for="pv">Mensalidade <output id="o-pv"></output></label><input type="range" id="pv" min="150" max="600" step="10" value="280"></div>
+    <div class="campo"><label for="pa">Alunas no mês <output id="o-pa"></output></label><input type="range" id="pa" min="0" max="40" step="1" value="12"></div>
+    <div class="campo"><label for="pq">Aulas por aluna no mês <output id="o-pq"></output></label><input type="range" id="pq" min="4" max="12" step="1" value="8"></div>
+    <div class="campo"><label for="pg">Alunas por aula <output id="o-pg"></output></label><input type="range" id="pg" min="1" max="4" step="1" value="2"></div>
+    <hr class="sep">
+    <div class="campo"><label for="dias">Dias de trabalho no mês <output id="o-dias"></output></label><input type="range" id="dias" min="8" max="26" step="1" value="20"></div>
+
+    <div style="margin-top:10px">
+      <div class="nota">Faturamento no mês</div>
+      <div class="grande" id="r-fat">R$ 0</div>
+      <div class="barra" id="barra"><i id="barra-i"></i></div>
+      <div class="nota" id="r-meta"></div>
+      <div class="mini">
+        <div><b id="r-dren">0</b>da drenagem</div>
+        <div><b id="r-pil">0</b>do Pilates</div>
+        <div><b id="r-dd">0</b>drenagens por dia</div>
+        <div><b id="r-pd">0</b>aulas por dia</div>
+        <div><b id="r-h">0</b>horas de trabalho por dia</div>
+        <div><b id="r-casa">0</b>vezes os custos da casa</div>
+      </div>
+      <div class="ritmo" id="r-ritmo"></div>
+    </div>
+  </div>
+  <p class="nota">Valores de partida pra validarmos juntas. A drenagem pede mais das suas pernas, e o Pilates equilibra a rotina.</p>
+</section>
+
+<!-- FINANCEIRO -->
+<section class="painel" id="p-financeiro" role="tabpanel" data-titulo="Financeiro">
+  <h2>Financeiro</h2>
+  <p class="intro">Seis meses de controle, mês a mês, lado a lado comigo. Você lança, e o app faz as contas sozinho.</p>
+
+  <div class="seg" role="group" aria-label="Escolha o controle">
+    <button data-livro="pf" aria-pressed="true">Casa</button>
+    <button data-livro="pj" aria-pressed="false">Empresa</button>
+  </div>
+  <p class="nota" id="fin-desc"></p>
+
+  <h3 style="margin-top:18px">Ponto de partida</h3>
+  <div class="bloco cfg">
+    <div class="grade duas">
+      <div><label for="fin-inicio">Primeiro mês do acompanhamento</label><input type="month" id="fin-inicio"></div>
+      <div><label for="fin-saldo" id="fin-saldo-lbl">Saldo na conta no início</label><input type="text" inputmode="decimal" id="fin-saldo" placeholder="0,00"></div>
+      <div><label for="fin-resini">Reserva de emergência que já existe</label><input type="text" inputmode="decimal" id="fin-resini" placeholder="0,00"></div>
+      <div><label for="fin-meta">Meta da reserva de emergência</label><input type="text" inputmode="decimal" id="fin-meta" placeholder="0,00"></div>
+    </div>
+    <p style="margin:12px 0 0"><button class="botao claro" id="fin-calc-meta">Calcular a meta: 6 meses de gastos</button></p>
+  </div>
+
+  <h3>Lançamentos do mês</h3>
+  <div class="meses" id="fin-meses" role="group" aria-label="Meses"></div>
+  <div class="kpis quatro" id="fin-kpis-mes"></div>
+
+  <div class="bloco">
+    <div class="form-lanc">
+      <div class="full"><input type="text" id="fin-desc-in" placeholder="Descrição, ex: protocolo da Juliana" aria-label="Descrição"></div>
+      <div><input type="text" inputmode="decimal" id="fin-valor" placeholder="Valor, ex: 880,00" aria-label="Valor"></div>
+      <div><select id="fin-tipo" aria-label="Tipo"><option value="entrada">Entrada</option><option value="saida" selected>Saída</option><option value="reserva">Guardar na reserva</option></select></div>
+      <div class="full"><select id="fin-cat" aria-label="Categoria"></select></div>
+      <label class="chk full"><input type="checkbox" id="fin-fixo"> Esse valor se repete todo mês</label>
+      <div class="full"><button class="botao" id="fin-add">Adicionar lançamento</button></div>
+    </div>
+  </div>
+  <div class="acoes">
+    <button class="botao claro" id="fin-trazer">Trazer os fixos do mês anterior</button>
+    <button class="botao claro" id="fin-usar-fixos">Usar os custos fixos que você me enviou</button>
+  </div>
+  <div class="status" id="fin-status" aria-live="polite"></div>
+  <div id="fin-lista"></div>
+
+  <h3>Resumo dos seis meses</h3>
+  <p class="nota">Calculado automaticamente a cada lançamento.</p>
+  <div class="kpis tres" id="fin-kpis-res"></div>
+  <h4 style="margin-top:8px">Sobra de cada mês</h4>
+  <div class="barras" id="fin-barras"></div>
+  <div class="rotulos" id="fin-rotulos"></div>
+  <div class="tab-wrap"><table class="tabela" id="fin-tabela"></table></div>
+  <div class="leitura" id="fin-leitura"></div>
+  <div id="fin-cats"></div>
+
+  <div class="acoes" style="margin-top:20px">
+    <button class="botao" id="fin-enviar">Enviar meu resumo pra Maria Clara</button>
+    <button class="botao claro" id="fin-csv">Baixar meus lançamentos</button>
+  </div>
+  <div class="status" id="fin-envio-status" aria-live="polite"></div>
+</section>
+
+<!-- PASSOS -->
+<section class="painel" id="p-passos" role="tabpanel" data-titulo="Próximos passos">
+  <h2>Próximos passos</h2>
+  <p class="intro">Marque conforme for concluindo. Fica salvo no seu celular.</p>
+  <p class="progresso" id="prog-passos"></p>
+  <ul class="passos" id="lista-passos">
+    <li class="grupo-p">Seu corpo</li>
+    <li><label><input type="checkbox" data-id="exames"><span>Fazer os exames de vitaminas.</span></label></li>
+    <li><label><input type="checkbox" data-id="medico"><span>Levar a dor nas pernas e nos pés ao médico.</span></label></li>
+    <li class="grupo-p">Seus números</li>
+    <li><label><input type="checkbox" data-id="horas"><span>Anotar quantas horas por dia você consegue atender, com a rotina da Ana Helena.</span></label></li>
+    <li><label><input type="checkbox" data-id="custos"><span>Levantar os custos do seu atendimento.</span></label></li>
+    <li><label><input type="checkbox" data-id="marco"><span>Definir com o Marco a contribuição dele na renda da casa.</span></label></li>
+    <li><label><input type="checkbox" data-id="aparelhos"><span>Confirmar onde estão e como estão os seus aparelhos de Pilates.</span></label></li>
+    <li><label><input type="checkbox" data-id="financeiro"><span>Lançar as entradas e saídas do primeiro mês na aba Financeiro.</span></label></li>
+    <li><label><input type="checkbox" data-id="pacotes"><span>Confirmar se os R$ 355 e R$ 420 da concorrência são pacotes.</span></label></li>
+    <li class="grupo-p">Sua identidade</li>
+    <li><label><input type="checkbox" data-id="perguntas"><span>Responder as perguntas da aba Sua marca e enviar.</span></label></li>
+    <li><label><input type="checkbox" data-id="paleta"><span>Escolher a sua paleta.</span></label></li>
+    <li><label><input type="checkbox" data-id="historia"><span>Ajustar o texto Minha história com a sua voz.</span></label></li>
+    <li class="grupo-p">Seu perfil</li>
+    <li><label><input type="checkbox" data-id="bio"><span>Trocar o nome e a bio.</span></label></li>
+    <li><label><input type="checkbox" data-id="arquivar"><span>Arquivar os reposts e posts soltos.</span></label></li>
+    <li><label><input type="checkbox" data-id="fixados"><span>Postar e fixar o post Minha história.</span></label></li>
+    <li><label><input type="checkbox" data-id="destaques"><span>Montar os sete destaques.</span></label></li>
+    <li class="grupo-p">Suas primeiras mães</li>
+    <li><label><input type="checkbox" data-id="protocolo"><span>Escolher o nome do seu protocolo.</span></label></li>
+    <li><label><input type="checkbox" data-id="parceiros"><span>Listar dez parceiros na aba Parcerias.</span></label></li>
+    <li><label><input type="checkbox" data-id="visita"><span>Fazer a primeira visita de parceria.</span></label></li>
+    <li><label><input type="checkbox" data-id="sala"><span>Escolher uma das salas pra organizar primeiro.</span></label></li>
+  </ul>
+</section>
+
+<!-- DIÁRIO -->
+<section class="painel" id="p-diario" role="tabpanel" data-titulo="Diário das sessões">
+  <h2>Diário das sessões</h2>
+  <p class="intro">O registro de cada encontro, do mais recente para o primeiro.</p>
+  <div class="entrada"><time datetime="2026-10-01">1 de outubro de 2026</time><p>Seu posicionamento ganhou forma: a fisioterapeuta que cuida das mães de Monte Carmelo, na casa delas. Desenhamos o Protocolo Mãe Preciosa, sua cliente, o núcleo de conteúdo pela Pirâmide de Maslow Invertida, o novo perfil com destaques e o caminho das parcerias. O Pilates entrou no plano dos 10K pra equilibrar o seu corpo, e abrimos o seu controle financeiro de seis meses, da casa e da empresa.</p></div>
+  <div class="entrada"><time datetime="2026-09-30">30 de setembro de 2026</time><p>Organizamos seus custos fixos, estudamos os valores de Monte Carmelo e desenhamos o primeiro caminho dos 10K. Olhamos com carinho para o seu corpo e para o peso do ambiente de casa, e celebramos a firmeza com que você se posicionou.</p></div>
+  <div class="entrada"><time datetime="2026-05">Maio de 2026</time><p>Evolutiva do casal com o Marco: propósito de cada um, atividade de casa e a calculadora da prosperidade da família.</p></div>
+
+  <div class="assinatura">
+    <p>Eu sigo ao seu lado, um passo de cada vez.</p>
+    <div class="ass">Maria Clara</div>
+    <small>All Win Academy</small>
+  </div>
+</section>
+
+</main>
+<script>
+(function(){
+  'use strict';
+  function $(s){ return document.querySelector(s); }
+  function $$(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+  function ler(k, d){ try{ var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } }
+  function salvar(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+  /* Navegação pelas abas */
+  var abas = $$('.aba');
+  var ordem = abas.map(function(a){ return a.dataset.tab; });
+  var lateral = $('#lateral'), veu = $('#veu'), abrir = $('#abrir');
+  function menu(aberto){
+    lateral.classList.toggle('aberta', aberto);
+    veu.classList.toggle('ativo', aberto);
+    abrir.setAttribute('aria-expanded', aberto ? 'true' : 'false');
+  }
+  abrir.addEventListener('click', function(){ menu(!lateral.classList.contains('aberta')); });
+  veu.addEventListener('click', function(){ menu(false); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') menu(false); });
+
+  function mostrar(id, rolar){
+    if(ordem.indexOf(id) < 0) id = 'inicio';
+    abas.forEach(function(a){ a.setAttribute('aria-selected', a.dataset.tab === id ? 'true' : 'false'); });
+    $$('.painel').forEach(function(p){ p.classList.toggle('ativo', p.id === 'p-' + id); });
+    $('#titulo-atual').textContent = $('#p-' + id).dataset.titulo;
+    if(location.hash !== '#' + id){ try{ history.replaceState(null, '', '#' + id); }catch(e){} }
+    menu(false);
+    if(rolar !== false) window.scrollTo(0, 0);
+  }
+  abas.forEach(function(a){ a.addEventListener('click', function(){ mostrar(a.dataset.tab); }); });
+
+  $$('.painel').forEach(function(p){
+    var id = p.id.slice(2), i = ordem.indexOf(id);
+    var nav = document.createElement('div'); nav.className = 'seguir';
+    if(i > 0){
+      var ant = ordem[i-1], b1 = document.createElement('button');
+      b1.innerHTML = '<small>Anterior</small>' + $('#p-' + ant).dataset.titulo;
+      b1.addEventListener('click', function(){ mostrar(ant); });
+      nav.appendChild(b1);
+    }
+    if(i < ordem.length - 1){
+      var prox = ordem[i+1], b2 = document.createElement('button');
+      b2.className = 'prox';
+      b2.innerHTML = '<small>Próxima</small>' + $('#p-' + prox).dataset.titulo;
+      b2.addEventListener('click', function(){ mostrar(prox); });
+      nav.appendChild(b2);
+    }
+    p.appendChild(nav);
+  });
+  mostrar((location.hash || '').slice(1) || 'inicio', false);
+  window.addEventListener('hashchange', function(){ mostrar(location.hash.slice(1)); });
+
+  /* Copiar textos */
+  $$('[data-copiar]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var txt = $('#' + b.dataset.copiar).innerText.trim();
+      var fb = b.nextElementSibling;
+      function ok(){ fb.textContent = 'Copiado'; setTimeout(function(){ fb.textContent = ''; }, 2500); }
+      function alternativo(){
+        var ta = document.createElement('textarea');
+        ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try{ document.execCommand('copy'); ok(); }catch(e){ fb.textContent = 'Selecione o texto e copie'; }
+        document.body.removeChild(ta);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok, alternativo); }
+      else alternativo();
+    });
+  });
+
+  /* Pirâmide */
+  $$('.camada').forEach(function(c){
+    c.addEventListener('click', function(){
+      $$('.camada').forEach(function(x){ x.setAttribute('aria-pressed', x === c ? 'true' : 'false'); });
+      $$('.camada-det').forEach(function(d){ d.classList.toggle('ativo', d.dataset.det === c.dataset.c); });
+    });
+  });
+
+  /* Paletas */
+  var PALETAS = {
+    preciosa:['#F7F2EC','#D8A7A0','#8E5A62','#9AAE97','#2B2522'],
+    leveza:['#FBFAF7','#A9BFCC','#2F4A5E','#D9C7AE','#22282C'],
+    raiz:['#F6F0E6','#C49A5A','#4A3426','#8A9466','#2A211B']
+  };
+  var paletaAtual = ler('samera-paleta-v1', 'preciosa');
+  function aplicar(nome){
+    if(!PALETAS[nome]) nome = 'preciosa';
+    PALETAS[nome].forEach(function(c, i){ document.documentElement.style.setProperty('--s' + (i+1), c); });
+    $$('.paleta').forEach(function(b){ b.setAttribute('aria-checked', b.dataset.paleta === nome ? 'true' : 'false'); });
+  }
+  aplicar(paletaAtual);
+  $$('.paleta').forEach(function(b){
+    b.addEventListener('click', function(){ paletaAtual = b.dataset.paleta; salvar('samera-paleta-v1', paletaAtual); aplicar(paletaAtual); });
+  });
+
+  /* Perguntas */
+  var resp = ler('samera-respostas-v1', {});
+  var campos = $$('#perguntas textarea');
+  campos.forEach(function(t){
+    t.value = resp[t.id] || '';
+    t.addEventListener('input', function(){ resp[t.id] = t.value; salvar('samera-respostas-v1', resp); });
+  });
+  var btnEnviar = $('#enviar'), status = $('#status-envio');
+  btnEnviar.addEventListener('click', function(){
+    var linhas = [], algum = false;
+    campos.forEach(function(t){
+      var v = (t.value || '').trim();
+      if(v) algum = true;
+      linhas.push(t.dataset.q + ': ' + (v || '(sem resposta)'));
+    });
+    if(!algum){ status.style.color = 'var(--vinhoTxt)'; status.textContent = 'Escreva pelo menos uma resposta antes de enviar.'; return; }
+    var texto = 'Respostas da Samera\nPaleta escolhida: ' + paletaAtual + '\n\n' + linhas.join('\n\n');
+    btnEnviar.disabled = true; status.style.color = 'var(--suave)'; status.textContent = 'Enviando...';
+    fetch('https://formspree.io/f/mjgjrzpq', {
+      method:'POST',
+      headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify({ cliente:'Samera Darlen', _subject:'Respostas da Samera | Plano de evolução', paleta:paletaAtual, respostas:texto })
+    }).then(function(r){
+      if(!r.ok) throw new Error('falha');
+      status.style.color = 'var(--verde)';
+      status.textContent = 'Respostas enviadas pra Maria Clara. Obrigada por abrir o coração.';
+    }).catch(function(){
+      status.style.color = 'var(--vinhoTxt)';
+      status.innerHTML = 'O envio não foi agora. Use o WhatsApp: <a href="https://wa.me/5534974004799?text=' + encodeURIComponent(texto) + '" target="_blank" rel="noopener">enviar pelo WhatsApp</a>.';
+    }).then(function(){ btnEnviar.disabled = false; });
+  });
+
+  /* Parceiros */
+  var parc = ler('samera-parceiros-v1', []);
+  var caixa = $('#parceiros');
+  var estados = ['A contatar','Mensagem enviada','Visita feita','Parceria fechada'];
+  for(var i = 0; i < 10; i++){
+    (function(i){
+      var item = parc[i] || { nome:'', estado:estados[0] };
+      var linha = document.createElement('div'); linha.className = 'parc-linha';
+      var inp = document.createElement('input'); inp.type = 'text'; inp.value = item.nome;
+      inp.placeholder = 'Parceiro ' + (i+1) + ': nome e área'; inp.setAttribute('aria-label', 'Parceiro ' + (i+1));
+      var sel = document.createElement('select'); sel.setAttribute('aria-label', 'Andamento do parceiro ' + (i+1));
+      estados.forEach(function(e){ var o = document.createElement('option'); o.textContent = e; if(e === item.estado) o.selected = true; sel.appendChild(o); });
+      function guardar(){ parc[i] = { nome:inp.value, estado:sel.value }; salvar('samera-parceiros-v1', parc); }
+      inp.addEventListener('input', guardar); sel.addEventListener('change', guardar);
+      linha.appendChild(inp); linha.appendChild(sel); caixa.appendChild(linha);
+    })(i);
+  }
+
+  /* Calculadora */
+  var brl = new Intl.NumberFormat('pt-BR', { style:'currency', currency:'BRL', maximumFractionDigits:0 });
+  var num = new Intl.NumberFormat('pt-BR', { maximumFractionDigits:1 });
+  var CASA = 2626.65, META = 10000;
+  var ids = ['dv','ds','dc','dd','pv','pa','pq','pg','dias'];
+  var el = {}; ids.forEach(function(k){ el[k] = document.getElementById(k); });
+  function calc(){
+    var dv=+el.dv.value, ds=+el.ds.value, dc=+el.dc.value, dd=+el.dd.value;
+    var pv=+el.pv.value, pa=+el.pa.value, pq=+el.pq.value, pg=+el.pg.value, dias=+el.dias.value;
+    $('#o-dv').textContent = brl.format(dv); $('#o-ds').textContent = ds; $('#o-dc').textContent = dc; $('#o-dd').textContent = dd + ' min';
+    $('#o-pv').textContent = brl.format(pv); $('#o-pa').textContent = pa; $('#o-pq').textContent = pq; $('#o-pg').textContent = pg; $('#o-dias').textContent = dias;
+    var dren = dv*dc, pil = pv*pa, fat = dren + pil;
+    var drenDia = ds*dc/dias, aulasDia = Math.ceil(pa*pq/pg)/dias;
+    var horas = drenDia*dd/60 + aulasDia*55/60;
+    $('#r-fat').textContent = brl.format(fat);
+    $('#r-dren').textContent = brl.format(dren); $('#r-pil').textContent = brl.format(pil);
+    $('#r-dd').textContent = num.format(drenDia); $('#r-pd').textContent = num.format(aulasDia);
+    $('#r-h').textContent = num.format(horas); $('#r-casa').textContent = num.format(fat/CASA);
+    $('#barra-i').style.width = Math.min(100, fat/META*100) + '%';
+    $('#barra').classList.toggle('ok', fat >= META);
+    $('#r-meta').textContent = fat >= META ? 'Meta dos 10K alcançada neste cenário.' : 'Faltam ' + brl.format(META - fat) + ' para os 10K.';
+    var r = $('#r-ritmo'), msg;
+    if(drenDia <= 2.5){ r.className = 'ritmo leve'; msg = 'Ritmo leve pras suas pernas. Cabe no momento do seu corpo e da sua maternidade.'; }
+    else if(drenDia <= 4){ r.className = 'ritmo firme'; msg = 'Ritmo firme. Pede pausas, pernas pra cima entre os atendimentos e um dia mais leve na semana.'; }
+    else { r.className = 'ritmo intenso'; msg = 'Ritmo intenso pras suas pernas agora. Vale levar mais mães pro Pilates ou subir o valor do protocolo.'; }
+    if(horas > 7) msg += ' A carga total do dia está alta, proteja o seu descanso.';
+    r.textContent = msg;
+  }
+  ids.forEach(function(k){ el[k].addEventListener('input', calc); });
+  calc();
+
+  /* Próximos passos: mesma chave da versão anterior, para nunca perder marcações */
+  var KEY = 'samera-passos-v1', estado = ler(KEY, {});
+  var boxes = $$('#lista-passos input');
+  function progresso(){
+    var feitos = boxes.filter(function(b){ return b.checked; }).length;
+    var t = feitos + ' de ' + boxes.length + ' passos concluídos';
+    $('#prog-passos').textContent = t; $('#prog-inicio').textContent = t;
+  }
+  boxes.forEach(function(b){
+    b.checked = !!estado[b.dataset.id];
+    b.addEventListener('change', function(){ estado[b.dataset.id] = b.checked; salvar(KEY, estado); progresso(); });
+  });
+  progresso();
+
+  /* Financeiro: seis meses, casa e empresa */
+  var FIN_KEY = 'samera-financeiro-v1';
+  var CATS = {
+    pf:['Renda','Moradia','Alimentação','Saúde','Filhos','Transporte','Educação','Lazer','Dívidas','Outros'],
+    pj:['Faturamento','Produtos e insumos','Espaço e aluguel','Deslocamento','Marketing','Impostos e taxas','Pró-labore','Equipamentos','Outros']
+  };
+  var DESC = {
+    pf:'Pessoa física: a renda da família, os gastos da casa e a sua reserva de emergência.',
+    pj:'Pessoa jurídica: o faturamento, os custos do atendimento, o caixa da empresa e a reserva do negócio.'
+  };
+  var FIXOS_PF = [['TMB',381.75,'Outros'],['Prestação do apartamento',540,'Moradia'],['Condomínio',230,'Moradia'],['Internet',104.9,'Moradia'],['Energia',160,'Moradia'],['Comida',800,'Alimentação'],['Academia',250,'Saúde'],['Hidroginástica',160,'Saúde']];
+  function novoLivro(meta){ return { saldoInicial:0, reservaInicial:0, meta:meta, meses:[[],[],[],[],[],[]] }; }
+  var fin = ler(FIN_KEY, null);
+  if(!fin || !fin.livros){ fin = { inicio:'2026-10', livro:'pf', mes:0, livros:{ pf:novoLivro(15759.9), pj:novoLivro(0) } }; }
+  function guardarFin(){ salvar(FIN_KEY, fin); }
+  var moeda = new Intl.NumberFormat('pt-BR', { style:'currency', currency:'BRL' });
+  var simples = new Intl.NumberFormat('pt-BR', { minimumFractionDigits:2, maximumFractionDigits:2 });
+  function parseValor(s){
+    s = String(s || '').replace(/R\$|\s/g, '');
+    if(s.indexOf(',') >= 0) s = s.replace(/\./g, '').replace(',', '.');
+    else if(/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, '');
+    var n = parseFloat(s); return isNaN(n) ? 0 : Math.round(n*100)/100;
+  }
+  function dataMes(i){ var p = fin.inicio.split('-'); return new Date(+p[0], +p[1] - 1 + i, 1); }
+  function cap(t){ return t.charAt(0).toUpperCase() + t.slice(1); }
+  function nomeMes(i){ return cap(dataMes(i).toLocaleDateString('pt-BR', { month:'long', year:'numeric' })); }
+  function curto(i){ return cap(dataMes(i).toLocaleDateString('pt-BR', { month:'short' }).replace('.', '')); }
+  function somaMes(L, i){
+    var r = { ent:0, sai:0, res:0 };
+    L.meses[i].forEach(function(l){ if(l.tipo === 'entrada') r.ent += l.valor; else if(l.tipo === 'saida') r.sai += l.valor; else r.res += l.valor; });
+    r.sobra = r.ent - r.sai - r.res; return r;
+  }
+  function kpi(cls, rot, val){ return '<div class="kpi ' + cls + '"><b>' + val + '</b>' + rot + '</div>'; }
+  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+  function avisar(id, txt, cor){ var s = $(id); s.style.color = cor || 'var(--suave)'; s.textContent = txt; }
+
+  function calcularResumo(L){
+    var linhas = [], tot = { ent:0, sai:0, res:0, sobra:0 }, caixa = L.saldoInicial, reserva = L.reservaInicial, usados = 0, cats = {};
+    for(var i = 0; i < 6; i++){
+      var s = somaMes(L, i);
+      if(L.meses[i].length) usados++;
+      caixa += s.sobra; reserva += s.res;
+      tot.ent += s.ent; tot.sai += s.sai; tot.res += s.res; tot.sobra += s.sobra;
+      L.meses[i].forEach(function(l){ if(l.tipo === 'saida') cats[l.cat] = (cats[l.cat] || 0) + l.valor; });
+      linhas.push({ ent:s.ent, sai:s.sai, res:s.res, sobra:s.sobra, caixa:caixa, reserva:reserva });
+    }
+    return { linhas:linhas, tot:tot, caixa:caixa, reserva:reserva, usados:usados, cats:cats };
+  }
+
+  function renderFin(){
+    var pf = fin.livro === 'pf', L = fin.livros[fin.livro];
+    $$('.seg button').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.livro === fin.livro ? 'true' : 'false'); });
+    $('#fin-desc').textContent = DESC[fin.livro];
+    $('#fin-saldo-lbl').textContent = pf ? 'Saldo na conta no início' : 'Caixa da empresa no início';
+    $('#fin-inicio').value = fin.inicio;
+    $('#fin-saldo').value = L.saldoInicial ? simples.format(L.saldoInicial) : '';
+    $('#fin-resini').value = L.reservaInicial ? simples.format(L.reservaInicial) : '';
+    $('#fin-meta').value = L.meta ? simples.format(L.meta) : '';
+    $('#fin-usar-fixos').style.display = pf ? '' : 'none';
+
+    var cat = $('#fin-cat'), atual = cat.value;
+    cat.innerHTML = CATS[fin.livro].map(function(c){ return '<option>' + c + '</option>'; }).join('');
+    if(CATS[fin.livro].indexOf(atual) >= 0) cat.value = atual;
+
+    $('#fin-meses').innerHTML = [0,1,2,3,4,5].map(function(i){
+      return '<button data-mes="' + i + '" aria-pressed="' + (i === fin.mes) + '">Mês ' + (i+1) + ': ' + curto(i) + (L.meses[i].length ? '<span class="pt" aria-label="com lançamentos"></span>' : '') + '</button>';
+    }).join('');
+
+    var s = somaMes(L, fin.mes);
+    $('#fin-kpis-mes').innerHTML = kpi('ent', 'entradas', moeda.format(s.ent)) + kpi('sai', 'saídas', moeda.format(s.sai)) + kpi('res', 'guardado na reserva', moeda.format(s.res)) + kpi(s.sobra < 0 ? 'sai' : '', 'sobra do mês', moeda.format(s.sobra));
+
+    var lista = L.meses[fin.mes];
+    $('#fin-lista').innerHTML = lista.length ? lista.map(function(l){
+      var sinal = l.tipo === 'entrada' ? '+ ' : '- ';
+      var tipoTxt = l.tipo === 'entrada' ? 'Entrada' : l.tipo === 'saida' ? 'Saída' : 'Reserva';
+      return '<div class="lanc"><div>' + esc(l.desc) + '<small>' + tipoTxt + ', ' + esc(l.cat) + (l.fixo ? ', fixo' : '') + '</small></div><span class="val ' + l.tipo + '">' + sinal + moeda.format(l.valor) + '</span><button class="x" data-id="' + l.id + '" aria-label="Apagar ' + esc(l.desc) + '">×</button></div>';
+    }).join('') : '<p class="vazio">Nenhum lançamento em ' + nomeMes(fin.mes) + '. Comece pelo que entrou e pelo que já saiu.</p>';
+
+    var R = calcularResumo(L);
+    var mediaSai = R.usados ? R.tot.sai / R.usados : 0;
+    var mediaSobra = R.usados ? R.tot.sobra / R.usados : 0;
+    var pct = L.meta ? Math.min(999, R.reserva / L.meta * 100) : 0;
+    var cobre = mediaSai ? R.reserva / mediaSai : 0;
+    $('#fin-kpis-res').innerHTML =
+      kpi('ent', 'entrou nos seis meses', moeda.format(R.tot.ent)) +
+      kpi('sai', 'saiu nos seis meses', moeda.format(R.tot.sai)) +
+      kpi('', 'sobra média por mês', moeda.format(mediaSobra)) +
+      kpi('res', 'reserva acumulada' + (L.meta ? ', ' + Math.round(pct) + '% da meta' : ''), moeda.format(R.reserva)) +
+      kpi('', pf ? 'saldo acumulado da casa' : 'caixa acumulado da empresa', moeda.format(R.caixa)) +
+      kpi('', 'meses que a reserva cobre', cobre ? cobre.toLocaleString('pt-BR', { maximumFractionDigits:1 }) : '0');
+
+    var max = Math.max.apply(null, R.linhas.map(function(l){ return Math.abs(l.sobra); }).concat([1]));
+    $('#fin-barras').innerHTML = R.linhas.map(function(l){
+      var h = Math.round(Math.abs(l.sobra) / max * 100);
+      return '<div class="col"><span>' + (l.sobra ? Math.round(l.sobra).toLocaleString('pt-BR') : '') + '</span><div class="b' + (l.sobra < 0 ? ' neg' : '') + '" style="height:' + h + '%"></div></div>';
+    }).join('');
+    $('#fin-rotulos').innerHTML = [0,1,2,3,4,5].map(function(i){ return '<span>' + curto(i) + '</span>'; }).join('');
+
+    var t = '<tr><th>Mês</th><th>Entradas</th><th>Saídas</th><th>Reserva</th><th>Sobra</th><th>' + (pf ? 'Saldo' : 'Caixa') + '</th></tr>';
+    R.linhas.forEach(function(l, i){
+      t += '<tr><td>' + nomeMes(i) + '</td><td>' + moeda.format(l.ent) + '</td><td>' + moeda.format(l.sai) + '</td><td>' + moeda.format(l.res) + '</td><td class="' + (l.sobra < 0 ? 'neg' : '') + '">' + moeda.format(l.sobra) + '</td><td>' + moeda.format(l.caixa) + '</td></tr>';
+    });
+    t += '<tr class="tot"><td>Total</td><td>' + moeda.format(R.tot.ent) + '</td><td>' + moeda.format(R.tot.sai) + '</td><td>' + moeda.format(R.tot.res) + '</td><td class="' + (R.tot.sobra < 0 ? 'neg' : '') + '">' + moeda.format(R.tot.sobra) + '</td><td>' + moeda.format(R.caixa) + '</td></tr>';
+    $('#fin-tabela').innerHTML = t;
+
+    var leitura;
+    if(!R.usados) leitura = 'Assim que você lançar o primeiro mês, o resumo ganha vida aqui.';
+    else if(R.tot.sobra < 0) leitura = 'Até aqui os gastos passaram as entradas em ' + moeda.format(-R.tot.sobra) + '. Vamos olhar juntas as categorias que mais pesam e decidir onde ajustar.';
+    else leitura = 'Até aqui sobraram ' + moeda.format(R.tot.sobra) + ' e você guardou ' + moeda.format(R.tot.res) + ' na reserva. Cada mês lançado é você governando o seu dinheiro.';
+    if(R.usados && L.meta && R.reserva < L.meta && mediaSobra > 0){
+      var falta = L.meta - R.reserva;
+      leitura += ' No ritmo atual, a meta da reserva chega em cerca de ' + Math.ceil(falta / Math.max(mediaSobra, 1)) + ' meses.';
+    }
+    $('#fin-leitura').textContent = leitura;
+
+    var ordemCats = Object.keys(R.cats).sort(function(a, b){ return R.cats[b] - R.cats[a]; }).slice(0, 3);
+    $('#fin-cats').innerHTML = ordemCats.length ? '<h4>Onde o dinheiro mais sai</h4><ul class="linhas">' + ordemCats.map(function(c){
+      return '<li>' + esc(c) + ': ' + moeda.format(R.cats[c]) + ' <span class="nota">(' + Math.round(R.cats[c] / R.tot.sai * 100) + '% das saídas)</span></li>';
+    }).join('') + '</ul>' : '';
+  }
+
+  $$('.seg button').forEach(function(b){ b.addEventListener('click', function(){ fin.livro = b.dataset.livro; guardarFin(); renderFin(); }); });
+  $('#fin-meses').addEventListener('click', function(e){ var b = e.target.closest('button'); if(!b) return; fin.mes = +b.dataset.mes; guardarFin(); renderFin(); });
+  $('#fin-inicio').addEventListener('change', function(){ if(this.value){ fin.inicio = this.value; guardarFin(); renderFin(); } });
+  [['#fin-saldo','saldoInicial'],['#fin-resini','reservaInicial'],['#fin-meta','meta']].forEach(function(par){
+    $(par[0]).addEventListener('change', function(){ fin.livros[fin.livro][par[1]] = parseValor(this.value); guardarFin(); renderFin(); });
+  });
+  $('#fin-calc-meta').addEventListener('click', function(){
+    var L = fin.livros[fin.livro], R = calcularResumo(L), media = R.usados ? R.tot.sai / R.usados : 0;
+    if(!media && fin.livro === 'pf') media = FIXOS_PF.reduce(function(a, f){ return a + f[1]; }, 0);
+    if(!media){ avisar('#fin-status', 'Lance pelo menos um mês de saídas pra eu calcular a meta.', 'var(--vinhoTxt)'); return; }
+    L.meta = Math.round(media * 6 * 100) / 100; guardarFin(); renderFin();
+    avisar('#fin-status', 'Meta calculada: 6 meses de gastos, ' + moeda.format(L.meta) + '.', 'var(--verde)');
+  });
+  $('#fin-add').addEventListener('click', function(){
+    var desc = $('#fin-desc-in').value.trim(), valor = parseValor($('#fin-valor').value);
+    if(!desc || valor <= 0){ avisar('#fin-status', 'Escreva a descrição e um valor maior que zero.', 'var(--vinhoTxt)'); return; }
+    fin.livros[fin.livro].meses[fin.mes].push({ id:String(Date.now()) + Math.floor(Math.random()*1000), desc:desc, valor:valor, tipo:$('#fin-tipo').value, cat:$('#fin-cat').value, fixo:$('#fin-fixo').checked });
+    guardarFin(); renderFin();
+    $('#fin-desc-in').value = ''; $('#fin-valor').value = ''; $('#fin-fixo').checked = false; $('#fin-desc-in').focus();
+    avisar('#fin-status', 'Lançamento adicionado em ' + nomeMes(fin.mes) + '.', 'var(--verde)');
+  });
+  $('#fin-lista').addEventListener('click', function(e){
+    var b = e.target.closest('.x'); if(!b) return;
+    var m = fin.livros[fin.livro].meses[fin.mes];
+    fin.livros[fin.livro].meses[fin.mes] = m.filter(function(l){ return l.id !== b.dataset.id; });
+    guardarFin(); renderFin(); avisar('#fin-status', 'Lançamento apagado.');
+  });
+  function juntar(itens){
+    var m = fin.livros[fin.livro].meses[fin.mes], n = 0;
+    itens.forEach(function(it){
+      if(m.some(function(l){ return l.desc.toLowerCase() === it.desc.toLowerCase(); })) return;
+      m.push({ id:String(Date.now()) + Math.floor(Math.random()*100000), desc:it.desc, valor:it.valor, tipo:it.tipo, cat:it.cat, fixo:true }); n++;
+    });
+    guardarFin(); renderFin(); return n;
+  }
+  $('#fin-trazer').addEventListener('click', function(){
+    if(fin.mes === 0){ avisar('#fin-status', 'O primeiro mês não tem mês anterior. Marque os fixos aqui pra trazer no próximo.'); return; }
+    var fixos = fin.livros[fin.livro].meses[fin.mes - 1].filter(function(l){ return l.fixo; });
+    if(!fixos.length){ avisar('#fin-status', 'O mês anterior não tem lançamentos marcados como fixos.'); return; }
+    var n = juntar(fixos);
+    avisar('#fin-status', n ? n + ' fixos trazidos. Confira se algum valor mudou.' : 'Os fixos já estão neste mês.', 'var(--verde)');
+  });
+  $('#fin-usar-fixos').addEventListener('click', function(){
+    var n = juntar(FIXOS_PF.map(function(f){ return { desc:f[0], valor:f[1], tipo:'saida', cat:f[2] }; }));
+    avisar('#fin-status', n ? n + ' custos fixos adicionados em ' + nomeMes(fin.mes) + '.' : 'Esses custos já estão neste mês.', 'var(--verde)');
+  });
+
+  function textoResumo(){
+    var partes = ['Resumo financeiro da Samera, a partir de ' + nomeMes(0)];
+    ['pf','pj'].forEach(function(k){
+      var L = fin.livros[k], R = calcularResumo(L);
+      if(!R.usados) return;
+      partes.push('\n' + (k === 'pf' ? 'CASA' : 'EMPRESA'));
+      R.linhas.forEach(function(l, i){ if(fin.livros[k].meses[i].length) partes.push(nomeMes(i) + ': entradas ' + moeda.format(l.ent) + ', saídas ' + moeda.format(l.sai) + ', reserva ' + moeda.format(l.res) + ', sobra ' + moeda.format(l.sobra)); });
+      partes.push('Total: entradas ' + moeda.format(R.tot.ent) + ', saídas ' + moeda.format(R.tot.sai) + ', sobra ' + moeda.format(R.tot.sobra));
+      partes.push('Reserva acumulada: ' + moeda.format(R.reserva) + (L.meta ? ' de ' + moeda.format(L.meta) : ''));
+      partes.push((k === 'pf' ? 'Saldo acumulado: ' : 'Caixa acumulado: ') + moeda.format(R.caixa));
+    });
+    return partes.length > 1 ? partes.join('\n') : '';
+  }
+  $('#fin-enviar').addEventListener('click', function(){
+    var texto = textoResumo(), b = this;
+    if(!texto){ avisar('#fin-envio-status', 'Lance pelo menos um mês antes de enviar.', 'var(--vinhoTxt)'); return; }
+    b.disabled = true; avisar('#fin-envio-status', 'Enviando...');
+    fetch('https://formspree.io/f/mjgjrzpq', { method:'POST', headers:{ 'Content-Type':'application/json', 'Accept':'application/json' },
+      body: JSON.stringify({ cliente:'Samera Darlen', _subject:'Resumo financeiro da Samera', resumo:texto }) })
+    .then(function(r){ if(!r.ok) throw new Error('falha'); avisar('#fin-envio-status', 'Resumo enviado pra Maria Clara.', 'var(--verde)'); })
+    .catch(function(){
+      var s = $('#fin-envio-status'); s.style.color = 'var(--vinhoTxt)';
+      s.innerHTML = 'O envio não foi agora. Use o WhatsApp: <a href="https://wa.me/5534974004799?text=' + encodeURIComponent(texto) + '" target="_blank" rel="noopener">enviar pelo WhatsApp</a>.';
+    }).then(function(){ b.disabled = false; });
+  });
+  $('#fin-csv').addEventListener('click', function(){
+    var linhas = ['Controle;Mês;Descrição;Categoria;Tipo;Valor;Fixo'];
+    ['pf','pj'].forEach(function(k){
+      fin.livros[k].meses.forEach(function(m, i){
+        m.forEach(function(l){
+          linhas.push([k === 'pf' ? 'Casa' : 'Empresa', nomeMes(i), '"' + l.desc.replace(/"/g, '""') + '"', l.cat, l.tipo === 'entrada' ? 'Entrada' : l.tipo === 'saida' ? 'Saída' : 'Reserva', simples.format(l.valor), l.fixo ? 'Sim' : 'Não'].join(';'));
+        });
+      });
+    });
+    var blob = new Blob(['\ufeff' + linhas.join('\n')], { type:'text/csv;charset=utf-8' });
+    var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'financeiro-samera.csv';
+    document.body.appendChild(a); a.click(); setTimeout(function(){ URL.revokeObjectURL(a.href); a.remove(); }, 500);
+  });
+  renderFin();
+
+})();
+</script>
+</body>
+</html>
