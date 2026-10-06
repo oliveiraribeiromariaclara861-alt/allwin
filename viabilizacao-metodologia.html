@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light">
+<title>Do desejo à realização · Business Core</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=DM+Sans:wght@400;500;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+:root{
+  --branco:#FFFFFF; --creme:#FAF7F2; --vinho:#360000; --vinho-txt:#4E0D16;
+  --ouro:#C9A15A; --marinho:#15294D; --madeira:#7E4C22; --espresso:#3E2513;
+  --tinta:#1F1A18; --suave:#6B5F58; --linha:#EADFD2;
+  --verde:#2F5D46; --verde-fundo:#EEF3EE; --vinho-fundo:#F7EDEC;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*,*::before,*::after{box-sizing:inherit}
+html{background:#FFFFFF !important;scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{margin:0;background:#FFFFFF !important;color:var(--tinta);font-family:'DM Sans',system-ui,-apple-system,sans-serif;font-size:17px;line-height:1.6}
+.wrap{max-width:640px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;color:var(--vinho-txt);font-weight:600;line-height:1.2;margin:0}
+h2{font-size:30px;margin-bottom:18px}
+h3{font-size:21px}
+p{margin:0 0 14px}
+strong{color:var(--vinho-txt)}
+section{padding:56px 0}
+.script{font-family:'Pinyon Script',cursive;color:var(--marinho);font-weight:400}
+
+.abre{padding:72px 0 56px;background:var(--creme);border-bottom:1px solid var(--linha)}
+.abre .para{font-size:15px;color:var(--suave);margin-bottom:28px}
+.abre h1{font-size:44px;letter-spacing:.5px;text-transform:uppercase}
+.abre .script{display:block;font-size:64px;line-height:1;margin:6px 0 28px}
+.abre .lead{font-family:'Playfair Display',Georgia,serif;font-size:23px;line-height:1.4;color:var(--vinho-txt);border-left:3px solid var(--ouro);padding-left:18px;margin-bottom:22px}
+
+.eng{display:grid;gap:0;margin-top:26px;border-top:1px solid var(--linha)}
+.eng .item{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:20px 0;border-bottom:1px solid var(--linha)}
+.eng .n{width:44px;height:44px;border-radius:50%;border:1px solid var(--ouro);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',Georgia,serif;font-size:20px;color:var(--vinho-txt)}
+.eng h3 span{font-family:'DM Sans',system-ui,sans-serif;font-size:16px;font-weight:500;color:var(--marinho)}
+.eng p{margin:4px 0 0;color:var(--suave);font-size:16px}
+.eng .comp{margin-top:18px;border:1px solid var(--marinho);border-radius:16px;padding:20px;grid-template-columns:44px 1fr}
+.eng .comp .n{background:var(--marinho);border-color:var(--marinho);color:#fff;font-size:22px}
+.eng .comp h3{color:var(--marinho)}
+
+.ponte{background:var(--vinho);color:#F4E9E4}
+.ponte h2{color:#fff}
+.ponte .frase{font-family:'Playfair Display',Georgia,serif;font-size:24px;line-height:1.4;color:#fff;margin:6px 0 26px}
+.ponte .frase strong{color:var(--ouro);font-weight:600}
+.ponte p{color:#E9D9D3}
+
+.ordem p.sub{color:var(--suave)}
+.passos{list-style:none;margin:26px 0 0;padding:0;position:relative}
+.passos li{position:relative;padding:0 0 22px 40px}
+.passos li::before{content:"";position:absolute;left:9px;top:8px;width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid var(--vinho-txt)}
+.passos li::after{content:"";position:absolute;left:15px;top:24px;bottom:2px;width:1px;background:var(--linha)}
+.passos li:last-child::after{display:none}
+.passos li.decide::before{background:var(--vinho-txt)}
+.passos li.acesso::before{background:var(--marinho);border-color:var(--marinho)}
+.passos li.acesso{color:var(--marinho)}
+.passos .quem{display:block;font-size:14px;color:var(--suave)}
+
+.cenarios{background:var(--creme)}
+.cen{border-radius:18px;padding:24px 22px;margin-top:20px}
+.cen .selo{display:inline-block;font-size:13px;font-weight:700;color:#fff;padding:4px 12px;border-radius:30px;margin-bottom:14px}
+.cen blockquote{margin:0 0 18px;font-family:'Playfair Display',Georgia,serif;font-style:italic;font-size:20px;line-height:1.45}
+.cen p{font-size:16px;margin:0}
+.cen p + p{margin-top:10px}
+.nao{background:var(--vinho-fundo);border:1px solid #E4CFCB}
+.nao .selo{background:var(--vinho)}
+.nao blockquote{color:var(--vinho-txt)}
+.sim{background:var(--verde-fundo);border:1px solid #CFDDD3}
+.sim .selo{background:var(--verde)}
+.sim blockquote{color:var(--verde)}
+.sim strong{color:var(--verde)}
+
+.lugar dl{margin:22px 0 0;display:grid;gap:1px;background:var(--linha);border:1px solid var(--linha);border-radius:14px;overflow:hidden}
+.lugar dl div{background:#fff;padding:18px 18px;display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:baseline}
+.lugar dt{font-family:'Playfair Display',Georgia,serif;font-size:19px;color:var(--vinho-txt)}
+.lugar dd{margin:0;color:var(--suave);font-size:16px}
+.lugar .cuidado{margin-top:24px;padding:20px;background:var(--creme);border-radius:14px;font-size:16px}
+.lugar .cuidado p{margin:0}
+
+.fecho{background:var(--espresso);color:#EFE3D6}
+.fecho h2{color:#fff}
+.fecho strong{color:var(--ouro)}
+.fecho .final{font-family:'Playfair Display',Georgia,serif;font-size:22px;line-height:1.45;color:#fff;margin:26px 0 8px}
+.fecho .script{display:block;font-size:52px;color:var(--ouro);line-height:1;margin:18px 0 4px}
+.fecho .assina{margin:0;color:#CDBBA8}
+.fecho .rodape{margin-top:30px;font-size:13px;color:#A8957F;letter-spacing:.5px}
+
+@media (max-width:480px){
+  .abre h1{font-size:36px}
+  .abre .script{font-size:54px}
+  h2{font-size:27px}
+  .lugar dl div{grid-template-columns:1fr;gap:4px}
+}
+</style>
+</head>
+<body>
+
+<section class="abre">
+  <div class="wrap">
+    <p class="para">Business Core · All Win Academy</p>
+    <h1>Do desejo à</h1>
+    <span class="script">realização</span>
+    <p class="lead">Não basta gerar desejo. É preciso construir uma empresa capaz de transformar desejo em realização.</p>
+    <p>Na metodologia, cada parte da sua empresa tem uma função clara no caminho da sua cliente. Quando todas giram juntas, uma solução de alto valor fica ao alcance de quem a deseja, e o preço do seu trabalho continua de pé.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>As engrenagens de uma venda de alto valor</h2>
+    <p>Quatro engrenagens formam a base da estrutura. A quinta entra como complemento, no momento exato em que a decisão precisa de um caminho.</p>
+    <div class="eng">
+      <div class="item"><span class="n">1</span><div><h3>Marketing <span>gera desejo</span></h3><p>Posicionamento, comunicação e percepção de valor que atraem as pessoas certas.</p></div></div>
+      <div class="item"><span class="n">2</span><div><h3>Produto <span>entrega valor</span></h3><p>Oferta, experiência, ticket, diferenciação e a transformação que a sua empresa entrega.</p></div></div>
+      <div class="item"><span class="n">3</span><div><h3>Comercial <span>conduz a oportunidade</span></h3><p>Processo, atendimento e uma jornada organizada do primeiro contato até a proposta.</p></div></div>
+      <div class="item"><span class="n">4</span><div><h3>Vendas <span>transforma intenção em decisão</span></h3><p>Conversão, negociação, fechamento e mecanismos que permitem à cliente acessar uma solução de maior valor.</p></div></div>
+      <div class="item comp"><span class="n">+</span><div><h3>Viabilização <span>cria caminhos para a decisão</span></h3><p>A engrenagem complementar. Ela aparece quando a decisão já existe e o pagamento ainda pede uma estrutura para acontecer.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="ponte">
+  <div class="wrap">
+    <h2>Preço firme, acesso possível</h2>
+    <p class="frase">Você não precisa necessariamente baixar o preço para tornar uma solução de alto valor acessível. <strong>Você precisa construir uma estrutura empresarial capaz de viabilizar a decisão de compra.</strong></p>
+    <p>Quando a sua empresa existe para realizar sonhos, cuidar da autoestima e mudar a vida de quem chega, oferecer caminhos que ampliem o acesso pode fazer parte da própria cultura da marca.</p>
+    <p style="margin:0">Desconto corrói margem e posicionamento. Estrutura protege os dois e permite trabalhar com tickets maiores sem depender de volume.</p>
+  </div>
+</section>
+
+<section class="ordem">
+  <div class="wrap">
+    <h2>A ordem que sustenta tudo</h2>
+    <p class="sub">Cada etapa tem a sua dona. A viabilização só aparece no final, quando a decisão já foi tomada.</p>
+    <ol class="passos">
+      <li>A empresa gera desejo e apresenta a sua solução.<span class="quem">Marketing e Produto</span></li>
+      <li>A cliente demonstra interesse.<span class="quem">Comercial</span></li>
+      <li>A profissional faz a avaliação e define o que é adequado para aquela pessoa.<span class="quem">Decisão técnica da profissional</span></li>
+      <li class="decide">A cliente conhece a proposta e <strong>decide realizar</strong>.<span class="quem">Vendas</span></li>
+      <li class="acesso">A partir dessa decisão, surgem alternativas para viabilizar o pagamento.<span class="quem">Viabilização</span></li>
+      <li class="acesso">A solução financeira funciona como meio de acesso. O procedimento segue sendo da clínica, e o pagamento ganha uma estrutura própria.<span class="quem">Separação preservada</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="cenarios">
+  <div class="wrap">
+    <h2>Dois cenários, uma diferença decisiva</h2>
+    <p>Na prática, tudo se resume a quem vende o quê e em que momento.</p>
+
+    <div class="cen nao">
+      <span class="selo">O que não pode</span>
+      <blockquote>“Faça sua abdominoplastia com a Dra. X. Pague R$ X por mês através da nossa empresa e garanta sua cirurgia.”</blockquote>
+      <p>Aqui a estrutura financeira está comercializando um procedimento médico. Ela vincula a profissional àquela oferta, promete a cirurgia antes de qualquer avaliação e trata um ato de saúde como um produto financeiro à venda.</p>
+      <p>A indicação deixa de nascer na consulta e passa a nascer no anúncio.</p>
+    </div>
+
+    <div class="cen sim">
+      <span class="selo">O que pode</span>
+      <blockquote>“A paciente passou pela avaliação, recebeu a indicação médica, decidiu realizar o procedimento e recebeu o orçamento da clínica. A partir da decisão de realizar, existem alternativas independentes para viabilizar o pagamento.”</blockquote>
+      <p><strong>A decisão médica continua com a profissional.</strong> A escolha da clínica e da profissional continua com a paciente.</p>
+      <p>E a solução financeira cumpre uma única função: ser o mecanismo de pagamento, sem vender nem prometer o procedimento.</p>
+    </div>
+  </div>
+</section>
+
+<section class="lugar">
+  <div class="wrap">
+    <h2>Cada decisão no seu lugar</h2>
+    <p>Esse é o modelo que preserva a separação entre a decisão médica e a solução financeira. Simples assim:</p>
+    <dl>
+      <div><dt>A indicação</dt><dd>vem da profissional, depois da avaliação.</dd></div>
+      <div><dt>A escolha</dt><dd>é da paciente, com liberdade sobre onde e com quem realizar.</dd></div>
+      <div><dt>O pagamento</dt><dd>ganha alternativas independentes, depois que a decisão já existe.</dd></div>
+    </dl>
+    <div class="cuidado">
+      <p><strong>Um cuidado que faz parte da estrutura:</strong> cada operação tem as suas particularidades, e por isso o formato deve ser validado juridicamente conforme o contrato e a forma de trabalho de cada empresa. Estrutura adequada é aquela que nasce clara e segura para todos os lados.</p>
+    </div>
+  </div>
+</section>
+
+<section class="fecho">
+  <div class="wrap">
+    <h2>Uma ferramenta dentro de algo maior</h2>
+    <p>A viabilização é uma das ferramentas disponíveis na metodologia. O centro do trabalho segue sendo a sua empresa: <strong>mais estratégica, mais lucrativa</strong>, com percepção de valor e preparada para tickets maiores sem depender de desconto ou de volume excessivo.</p>
+    <p class="final">Desejo bem construído merece um caminho até a realização. É esse caminho que a gente constrói junto.</p>
+    <span class="script">Brindaremos</span>
+    <p class="assina">Maria Clara</p>
+    <p class="rodape">All Win Academy</p>
+  </div>
+</section>
+
+</body>
+</html>
