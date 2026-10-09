@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#7E1F31">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Treinamento">
+<title>Treinamento Comercial · All Win Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--vinho:#7E1F31;--vinho-fundo:#F3E9EB;--ouro:#C9A15A;--creme:#FAF7F2;--tinta:#1F1A18;}
+  html{background:var(--creme)!important;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{
+    background:var(--creme);color:#4a423d;
+    font-family:'DM Sans',sans-serif;font-size:17px;line-height:1.78;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:780px;margin:0 auto;padding:0 26px;}
+
+  /* CAPA */
+  .capa{min-height:85vh;display:flex;flex-direction:column;justify-content:center;text-align:center;padding:70px 0 50px;}
+  .selo{font-size:11px;letter-spacing:5px;text-transform:uppercase;color:var(--vinho);font-weight:600;margin-bottom:26px;}
+  .capa h1{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(38px,8.5vw,60px);line-height:1.1;color:var(--tinta);}
+  .capa h1 em{font-style:italic;color:var(--vinho);}
+  .capa .sub{font-family:'Playfair Display',serif;font-style:italic;font-size:20px;color:#8a7f78;margin-top:22px;max-width:520px;margin-left:auto;margin-right:auto;}
+  .capa-fig{margin:44px auto 0;width:130px;}
+  .capa .rodape{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#b8ada4;margin-top:36px;}
+
+  .numeros{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#e5ddd3;border:1px solid #e5ddd3;border-radius:12px;overflow:hidden;margin-top:40px;}
+  .numeros div{background:var(--creme);padding:18px 10px;text-align:center;}
+  .numeros .nn{font-family:'Playfair Display',serif;font-size:27px;color:var(--vinho);font-weight:600;}
+  .numeros .nl{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7f78;margin-top:4px;line-height:1.4;}
+
+  /* SUMÁRIO */
+  .sumario{background:#fff;border:1px solid #ece4d9;border-radius:16px;padding:28px 26px;margin:40px 0;}
+  .sumario .st{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--vinho);font-weight:700;margin-bottom:18px;}
+  .sumario ol{list-style:none;counter-reset:s;}
+  .sumario li{counter-increment:s;padding:11px 0;border-bottom:1px solid #f2ece3;display:flex;gap:16px;align-items:baseline;font-size:15.5px;}
+  .sumario li:last-child{border-bottom:none;}
+  .sumario li::before{content:counter(s,decimal-leading-zero);font-family:'Playfair Display',serif;color:var(--vinho);font-size:15px;font-weight:600;min-width:26px;}
+  .sumario li b{color:var(--tinta);}
+
+  section{padding:62px 0;}
+  .divider{width:100%;height:1px;background:linear-gradient(to right,transparent,#e5ddd3,transparent);}
+  .parte{display:inline-block;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#fff;background:var(--vinho);padding:6px 18px;border-radius:30px;margin-bottom:20px;font-weight:600;}
+  h2{font-family:'Playfair Display',serif;font-weight:600;font-size:clamp(28px,6vw,40px);color:var(--tinta);line-height:1.2;margin-bottom:22px;}
+  h3{font-family:'Playfair Display',serif;font-weight:600;font-size:23px;color:var(--vinho);margin:38px 0 12px;}
+  h4{font-family:'Playfair Display',serif;font-weight:600;font-size:19px;color:var(--tinta);margin:24px 0 8px;}
+  p{margin-bottom:18px;}
+  strong{font-weight:700;color:var(--vinho);}
+
+  .citacao{font-family:'Playfair Display',serif;font-style:italic;font-size:23px;line-height:1.6;color:var(--tinta);border-left:3px solid var(--vinho);padding:12px 0 12px 28px;margin:34px 0;}
+
+  .box{background:#fff;border:1px solid #ece4d9;border-radius:14px;padding:26px 28px;margin:26px 0;}
+  .box .bt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--vinho);font-weight:700;margin-bottom:12px;}
+  .box p:last-child{margin-bottom:0;}
+  .escuro{background:var(--tinta);border:none;color:#d5cbc0;border-radius:16px;}
+  .escuro .bt{color:var(--ouro);}
+  .escuro strong{color:#fff;}
+  .alerta{background:#fdf4f1;border:1px solid #f0d8ce;}
+  .alerta .bt{color:#a8543a;}
+
+  .passo{display:flex;gap:18px;background:#fff;border:1px solid #ece4d9;border-radius:14px;padding:20px 22px;margin-bottom:12px;align-items:flex-start;}
+  .passo .n{background:var(--vinho);color:#fff;min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;}
+  .passo .t{font-size:15.5px;line-height:1.65;}
+  .passo .t strong{display:block;color:var(--tinta);margin-bottom:3px;font-size:16.5px;}
+
+  ul.lista{list-style:none;margin:20px 0;}
+  ul.lista li{padding:10px 0 10px 26px;position:relative;border-bottom:1px solid #f2ece3;font-size:15.5px;}
+  ul.lista li:last-child{border-bottom:none;}
+  ul.lista li::before{content:'◆';position:absolute;left:0;top:16px;color:var(--vinho);font-size:9px;}
+
+  table{width:100%;border-collapse:collapse;margin:24px 0;font-size:15px;}
+  th{background:var(--tinta);color:#f5efe3;text-align:left;padding:13px 14px;font-size:11.5px;letter-spacing:.8px;text-transform:uppercase;font-weight:600;}
+  th:first-child{border-radius:9px 0 0 0;}
+  th:last-child{border-radius:0 9px 0 0;}
+  td{padding:12px 14px;border-bottom:1px solid #f0ead9;vertical-align:top;}
+  tr:nth-child(even) td{background:#fdfbf7;}
+  td.c{text-align:center;font-weight:700;color:var(--vinho);white-space:nowrap;}
+
+  /* SCRIPT */
+  .script{background:#fff;border:1px solid #ece4d9;border-radius:14px;margin-bottom:16px;overflow:hidden;}
+  .script .topo{background:var(--vinho-fundo);padding:12px 18px;display:flex;justify-content:space-between;align-items:center;gap:10px;}
+  .script .nome{font-size:11.5px;letter-spacing:1.5px;text-transform:uppercase;color:var(--vinho);font-weight:700;}
+  .script .copiar{background:var(--vinho);color:#fff;border:none;border-radius:20px;padding:7px 15px;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:600;cursor:pointer;white-space:nowrap;}
+  .script .copiar.feito{background:#4a7c59;}
+  .script .corpo{padding:18px;font-size:15.5px;line-height:1.75;white-space:pre-line;}
+  .script .corpo v{color:var(--vinho);font-weight:700;}
+  .script .porque{background:var(--tinta);color:#b9afa6;padding:14px 18px;font-size:13.5px;line-height:1.6;}
+  .script .porque b{color:var(--ouro);}
+
+  .camadas{background:#faf5ec;border:1px solid #ecdfc6;border-radius:12px;padding:18px 20px;margin:18px 0;font-size:14.5px;}
+  .camadas .ct{font-size:10.5px;letter-spacing:2.5px;text-transform:uppercase;color:#a07f42;font-weight:700;margin-bottom:10px;}
+  .camadas code{background:#fff;border:1px solid #e8dcc4;border-radius:6px;padding:2px 8px;font-family:'DM Sans',sans-serif;font-size:13.5px;color:var(--vinho);font-weight:700;}
+
+  .meta{background:var(--vinho);border-radius:16px;padding:28px 26px;color:#f5e0e3;margin:24px 0;text-align:center;}
+  .meta .ml{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#f0c9a0;font-weight:700;}
+  .meta .mv{font-family:'Playfair Display',serif;font-size:clamp(30px,8vw,42px);color:#fff;line-height:1.2;margin-top:8px;font-weight:600;}
+  .meta p{color:#f0d5d9;font-size:15px;margin:10px 0 0;}
+
+  .checklist{list-style:none;margin:18px 0;}
+  .checklist li{padding:13px 0 13px 36px;position:relative;border-bottom:1px solid #f2ece3;font-size:15.5px;}
+  .checklist li:last-child{border-bottom:none;}
+  .checklist li::before{
+    content:'';position:absolute;left:0;top:16px;width:20px;height:20px;
+    border:1.8px solid var(--vinho);border-radius:5px;
+  }
+
+  .encerra{text-align:center;padding:76px 0 30px;}
+  .encerra .brinde{font-family:'Playfair Display',serif;font-style:italic;font-size:26px;color:var(--vinho);margin-top:26px;}
+  .encerra .nome{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#a3988f;margin-top:8px;}
+
+  footer{text-align:center;padding:0 0 60px;}
+  footer .logo{font-family:'Playfair Display',serif;font-size:19px;color:var(--tinta);}
+  footer .logo span{color:var(--vinho);}
+  footer p{font-size:10.5px;letter-spacing:2px;text-transform:uppercase;color:#b8ada4;margin-top:8px;}
+
+  @media(max-width:480px){
+    .wrap{padding:0 20px;}
+    section{padding:50px 0;}
+    .box,.escuro,.alerta{padding:22px 18px;}
+    .script .corpo{padding:16px;font-size:15px;}
+    td,th{padding:10px 9px;font-size:13.5px;}
+    .numeros{grid-template-columns:1fr;}
+    .passo{padding:17px 16px;gap:14px;}
+  }
+  @media print{
+    .capa{min-height:auto;page-break-after:always;}
+    section{page-break-inside:avoid;}
+    .script .copiar{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ CAPA ============ -->
+  <div class="capa">
+    <div class="selo">All Win Academy · Material de Treinamento</div>
+    <h1>O Comercial que<br><em>Sustenta a Clínica</em></h1>
+    <p class="sub">Identidade, posicionamento e prospecção ativa para a equipe da Dra. Renata V Biolchi.</p>
+    <div class="capa-fig">
+      <svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="10,12 130,12 70,108" fill="none" stroke="#7E1F31" stroke-width="2.5"/>
+        <line x1="30" y1="44" x2="110" y2="44" stroke="#7E1F31" stroke-width="1.2"/>
+        <line x1="48" y1="76" x2="92" y2="76" stroke="#7E1F31" stroke-width="1.2"/>
+        <circle cx="70" cy="108" r="4.5" fill="#C9A15A"/>
+      </svg>
+    </div>
+    <div class="numeros">
+      <div><div class="nn">3</div><div class="nl">Pilares do método</div></div>
+      <div><div class="nn">12</div><div class="nl">Scripts prontos</div></div>
+      <div><div class="nn">1</div><div class="nl">Diferencial competitivo</div></div>
+    </div>
+    <div class="rodape">Uso interno · Outubro de 2026</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============ SUMÁRIO ============ -->
+  <div class="sumario">
+    <div class="st">O que você vai encontrar</div>
+    <ol>
+      <li><b>Por que o comercial sustenta a clínica</b> · a verdade que ninguém fala</li>
+      <li><b>Leitura de identidade</b> · o que toda paciente precisa sentir</li>
+      <li><b>Os três P</b> · planejamento, posicionamento e prospecção</li>
+      <li><b>Onde encontrar as pacientes</b> · mapa de prospecção da região</li>
+      <li><b>Plano de metas</b> · os números do dia, da semana e do mês</li>
+      <li><b>Scripts prontos</b> · copiar, substituir e enviar</li>
+      <li><b>O diferencial competitivo</b> · como apresentar a viabilização</li>
+      <li><b>Follow-up</b> · a escada que faz a venda acontecer</li>
+      <li><b>Objeções</b> · respostas que mantêm a conversa viva</li>
+      <li><b>Ritual de acompanhamento</b> · indicadores e checklist diário</li>
+    </ol>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 01 ============ -->
+  <section>
+    <div class="parte">Parte 01</div>
+    <h2>Sem comercial, a clínica morre</h2>
+    <p>Vamos começar pela verdade que quase ninguém diz em voz alta dentro de uma clínica de estética.</p>
+    <p>A Dra. Renata pode ter a melhor técnica da cidade. Pode entregar o resultado mais bonito de Balneário Camboriú. Pode estudar, se atualizar, investir em equipamento e em produto de primeira linha. <strong>Nada disso paga a conta de luz no dia cinco.</strong></p>
+    <p>O que paga é a paciente que senta na cadeira. E a paciente só senta na cadeira quando alguém conversou com ela, entendeu o que ela deseja, construiu confiança e conduziu a decisão até o fim.</p>
+
+    <div class="citacao">"O trabalho clínico cuida de quem já chegou. O trabalho comercial é o que faz alguém chegar."</div>
+
+    <p>Por isso o comercial não é uma função de apoio. É a função que sustenta todas as outras. Quando o comercial para, a agenda esvazia em três semanas e a clínica inteira sente, da recepção ao estoque.</p>
+
+    <div class="box escuro">
+      <div class="bt">O que você precisa entender hoje</div>
+      <p>Você não está aqui para mandar mensagem. Você está aqui para <strong>encher a cadeira da Dra. Renata com as pacientes certas</strong>, de forma previsível, todos os meses. Esse é o trabalho. Tudo o mais é detalhe de execução.</p>
+    </div>
+
+    <h3>A diferença entre atender e prospectar</h3>
+    <table>
+      <tr><th>Atendimento passivo</th><th>Prospecção ativa</th></tr>
+      <tr><td>Espera a paciente chamar</td><td>Vai até onde a paciente está</td></tr>
+      <tr><td>Responde dúvida e informa preço</td><td>Desperta desejo e conduz à avaliação</td></tr>
+      <tr><td>O resultado depende do movimento do perfil</td><td>O resultado depende do seu esforço do dia</td></tr>
+      <tr><td>Mês bom e mês ruim sem explicação</td><td>Mês previsível, porque você controla a entrada</td></tr>
+    </table>
+    <p>A clínica precisa das duas coisas. Mas é a segunda coluna que constrói crescimento, porque é a única em que você decide o resultado.</p>
+
+    <div class="box alerta">
+      <div class="bt">A conta que você precisa carregar na cabeça</div>
+      <p>Cada dia sem prospecção ativa é uma agenda que ficará vazia daqui a três semanas. O que você faz hoje aparece no caixa do mês que vem. <strong>Prospecção é plantio, e plantio atrasado não se recupera com esforço dobrado depois.</strong></p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 02 ============ -->
+  <section>
+    <div class="parte">Parte 02</div>
+    <h2>Leitura de identidade</h2>
+    <p>Toda paciente que entra em contato precisa sentir a mesma coisa, independente de quem responde, de que horas são e de qual canal ela usou. Isso se chama identidade, e identidade se transmite por repetição.</p>
+
+    <h3>O que a marca da Dra. Renata comunica</h3>
+    <ul class="lista">
+      <li><strong>Técnica avançada e segura</strong> · harmonização, preenchimento facial, toxina e procedimentos corporais feitos com critério médico, nunca por moda</li>
+      <li><strong>Naturalidade acima de tudo</strong> · o resultado valoriza a mulher que ela já é, sem apagar os traços dela</li>
+      <li><strong>Autoridade que também ensina</strong> · a Dra. Renata forma outros profissionais em preenchimento, e isso coloca a clínica em outro patamar</li>
+      <li><strong>Acolhimento sem informalidade</strong> · a paciente é tratada com carinho e com respeito profissional ao mesmo tempo</li>
+      <li><strong>Acesso com dignidade</strong> · existe um caminho para a mulher que deseja e precisa de estrutura para decidir</li>
+    </ul>
+
+    <div class="box">
+      <div class="bt">A frase que resume a identidade</div>
+      <p>Aqui a paciente encontra técnica de alto nível, resultado natural e um caminho possível para realizar o que ela já sonhava.</p>
+    </div>
+
+    <h3>Como isso aparece na sua escrita</h3>
+    <table>
+      <tr><th>Sempre</th><th>Nunca</th></tr>
+      <tr><td>Chamar pelo nome, desde a primeira linha</td><td>Mensagem genérica que serve para qualquer pessoa</td></tr>
+      <tr><td>Escrever com calma, frases curtas e claras</td><td>Textão corrido sem respiro</td></tr>
+      <tr><td>Falar do resultado e de como ela vai se sentir</td><td>Listar técnica e produto como catálogo</td></tr>
+      <tr><td>Tratar a decisão médica como da Dra. Renata</td><td>Prometer resultado, quantidade ou prazo clínico</td></tr>
+      <tr><td>Oferecer a avaliação como próximo passo</td><td>Empurrar preço antes da conversa</td></tr>
+      <tr><td>Usar o nome completo da doutora na apresentação</td><td>Apelido, abreviação ou intimidade excessiva</td></tr>
+    </table>
+
+    <div class="box alerta">
+      <div class="bt">Linha que o comercial nunca cruza</div>
+      <p>Você não indica procedimento, não diz quantos mililitros, não garante resultado e não dá prazo clínico. <strong>Quem avalia e indica é a Dra. Renata.</strong> O seu papel é despertar o desejo, construir confiança e levar a paciente até a avaliação.</p>
+    </div>
+
+    <div class="box escuro">
+      <div class="bt">O teste da identidade</div>
+      <p>Antes de enviar qualquer mensagem, leia em voz alta e pergunte: <strong>se a Dra. Renata lesse isso, ela assinaria embaixo?</strong> Se a resposta demorar, reescreva.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 03 ============ -->
+  <section>
+    <div class="parte">Parte 03</div>
+    <h2>Os três P</h2>
+    <p>Todo comercial que funciona se apoia em três pilares. Quando um deles falha, os outros dois giram no vazio.</p>
+
+    <div class="passo">
+      <div class="n">P1</div>
+      <div class="t"><strong>Planejamento</strong>Saber quantas conversas você precisa abrir hoje para a agenda da semana que vem estar cheia. Planejamento é transformar meta em número diário, e número diário em tarefa com horário marcado. Sem isso, o dia some em responder mensagem e a prospecção nunca acontece.</div>
+    </div>
+    <div class="passo">
+      <div class="n">P2</div>
+      <div class="t"><strong>Posicionamento</strong>Fazer a paciente entender, em segundos, por que a Dra. Renata e não a clínica do lado. Posicionamento é o que você comunica antes de falar de preço: técnica avançada, resultado natural, autoridade que forma outros profissionais e um caminho possível para realizar.</div>
+    </div>
+    <div class="passo">
+      <div class="n">P3</div>
+      <div class="t"><strong>Prospecção</strong>Ir buscar quem ainda não chegou. Prospecção é ação diária, com lista, com horário e com meta. É o único dos três que depende exclusivamente do seu esforço, e por isso é o que separa o comercial comum do comercial que sustenta a clínica.</div>
+    </div>
+
+    <div class="box escuro">
+      <div class="bt">A ordem importa</div>
+      <p>Planejamento define o quanto. Posicionamento define o como. Prospecção faz acontecer. <strong>Prospecção sem posicionamento vira mensagem chata. Posicionamento sem prospecção vira perfil bonito e agenda vazia.</strong></p>
+    </div>
+
+    <h3>Os três P no seu dia</h3>
+    <table>
+      <tr><th>Pilar</th><th>Pergunta que ele responde</th><th>Prática diária</th></tr>
+      <tr><td><strong>Planejamento</strong></td><td>Quantas conversas preciso abrir hoje?</td><td>Abrir a planilha e definir a lista antes de mandar a primeira mensagem</td></tr>
+      <tr><td><strong>Posicionamento</strong></td><td>Por que ela escolheria a Dra. Renata?</td><td>Toda mensagem carrega técnica, naturalidade e caminho possível</td></tr>
+      <tr><td><strong>Prospecção</strong></td><td>Onde estão as mulheres da região que desejam isso?</td><td>Buscar perfis novos todos os dias, sem exceção</td></tr>
+    </table>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 04 ============ -->
+  <section>
+    <div class="parte">Parte 04</div>
+    <h2>Onde encontrar as pacientes</h2>
+    <p>Prospecção ativa começa com uma pergunta simples: onde estão, agora, as mulheres da região que já desejam um procedimento e ainda não vieram até a Dra. Renata?</p>
+
+    <h3>O perfil que procuramos</h3>
+    <ul class="lista">
+      <li><strong>Mulher da região</strong> · Balneário Camboriú, Itajaí, Camboriú, Itapema e cidades vizinhas</li>
+      <li><strong>Cuida da aparência</strong> · frequenta salão, academia, estética básica, posta foto de si mesma</li>
+      <li><strong>Demonstra interesse em estética avançada</strong> · segue perfis de harmonização, comenta, curte, salva</li>
+      <li><strong>Tem renda compatível ou potencial de viabilização</strong> · trabalha, empreende ou tem padrão de consumo visível</li>
+      <li><strong>Está em um momento de vida que puxa a decisão</strong> · aniversário, casamento, formatura, separação, nova fase</li>
+    </ul>
+
+    <h3>Os sete territórios de busca</h3>
+    <div class="passo"><div class="n">1</div><div class="t"><strong>Seguidoras do perfil da clínica</strong>Quem já segue e nunca agendou é a lista mais quente que existe. Comece sempre por aqui, das mais recentes para as mais antigas.</div></div>
+    <div class="passo"><div class="n">2</div><div class="t"><strong>Quem curte e comenta</strong>Cada publicação deixa uma lista pronta de mulheres interessadas. Abra os últimos posts e trabalhe nome por nome.</div></div>
+    <div class="passo"><div class="n">3</div><div class="t"><strong>Pacientes antigas sem retorno</strong>Quem já veio uma vez conhece a entrega e confia. É o grupo com a maior taxa de conversão de todos.</div></div>
+    <div class="passo"><div class="n">4</div><div class="t"><strong>Localização geográfica no Instagram</strong>Busque pela localização de Balneário Camboriú e cidades vizinhas e veja quem marcou lugares de alto padrão: restaurantes, academias, praias, eventos.</div></div>
+    <div class="passo"><div class="n">5</div><div class="t"><strong>Parceiros da região</strong>Salões, academias, lojas de roupa e clínicas odontológicas. Público idêntico ao nosso, sem concorrência direta.</div></div>
+    <div class="passo"><div class="n">6</div><div class="t"><strong>Indicação de paciente atual</strong>Depois de cada procedimento bem avaliado, peça uma indicação. É a prospecção mais barata e mais eficaz que existe.</div></div>
+    <div class="passo"><div class="n">7</div><div class="t"><strong>Seguidoras de concorrentes da região</strong>Quem segue outras clínicas de estética avançada já declarou interesse. Aborde pelo diferencial, nunca falando mal de ninguém.</div></div>
+
+    <div class="box">
+      <div class="bt">Como montar a lista do dia</div>
+      <p>Toda manhã, separe <strong>vinte perfis novos</strong> antes de enviar a primeira mensagem. Anote nome, arroba, de onde veio e um detalhe pessoal que você viu no perfil. Lista pronta antes de começar é o que impede o dia de virar só resposta de direct.</p>
+    </div>
+
+    <div class="box alerta">
+      <div class="bt">Cuidado que protege a marca</div>
+      <p>Nunca comente no perfil de concorrente oferecendo a clínica. Nunca mande mensagem em massa com texto idêntico. Nunca fale mal de outro profissional. <strong>Prospecção agressiva queima a reputação da Dra. Renata na cidade inteira</strong>, e cidade de praia é pequena para fofoca.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 05 ============ -->
+  <section>
+    <div class="parte">Parte 05</div>
+    <h2>Plano de metas</h2>
+    <p>Meta sem número é desejo. Aqui estão os números que transformam esforço em agenda cheia.</p>
+
+    <div class="meta">
+      <div class="ml">Meta diária de prospecção</div>
+      <div class="mv">20 novas conversas</div>
+      <p>Mais os follow-ups do dia e as respostas pendentes</p>
+    </div>
+
+    <h3>A escada de conversão</h3>
+    <p>Esses são os números de referência para começar. Depois de trinta dias, substituímos pelos números reais da clínica.</p>
+    <table>
+      <tr><th>Etapa</th><th>Por dia</th><th>Por semana</th><th>Por mês</th></tr>
+      <tr><td>Conversas abertas</td><td class="c">20</td><td class="c">100</td><td class="c">400</td></tr>
+      <tr><td>Respostas recebidas</td><td class="c">6</td><td class="c">30</td><td class="c">120</td></tr>
+      <tr><td>Conversas qualificadas</td><td class="c">3</td><td class="c">15</td><td class="c">60</td></tr>
+      <tr><td>Avaliações agendadas</td><td class="c">1 a 2</td><td class="c">8</td><td class="c">32</td></tr>
+      <tr><td>Avaliações realizadas</td><td class="c">1</td><td class="c">6</td><td class="c">24</td></tr>
+      <tr><td>Procedimentos fechados</td><td class="c">—</td><td class="c">3</td><td class="c">12</td></tr>
+    </table>
+
+    <div class="box escuro">
+      <div class="bt">Leia essa tabela de trás para frente</div>
+      <p>Para fechar doze procedimentos no mês, a clínica precisa de vinte e quatro avaliações realizadas. Para isso, trinta e duas agendadas. Para isso, quatrocentas conversas abertas. <strong>Quando o fechamento cai, o problema quase sempre está lá em cima, no número de conversas abertas.</strong></p>
+    </div>
+
+    <h3>As metas da semana</h3>
+    <ul class="lista">
+      <li><strong>Segunda</strong> · montar a lista da semana e abrir vinte conversas novas</li>
+      <li><strong>Terça a quinta</strong> · vinte conversas novas por dia mais todos os follow-ups vencidos</li>
+      <li><strong>Sexta</strong> · vinte conversas novas e confirmação de todas as avaliações da semana seguinte</li>
+      <li><strong>Sábado</strong> · reativação de pacientes antigas, sem oferta, só relacionamento</li>
+      <li><strong>Fim do dia, todo dia</strong> · atualizar a planilha e registrar o que aconteceu com cada conversa</li>
+    </ul>
+
+    <div class="box alerta">
+      <div class="bt">A regra que não se quebra</div>
+      <p>Avaliação agendada é confirmada na véspera, sempre. <strong>Avaliação não confirmada é avaliação que não acontece</strong>, e cada buraco na agenda da Dra. Renata é dinheiro que não volta.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 06 ============ -->
+  <section>
+    <div class="parte">Parte 06</div>
+    <h2>Scripts prontos</h2>
+    <p>Toque em copiar, substitua as camadas e envie. Cada script foi escrito na voz da clínica, então você só personaliza o que está em destaque.</p>
+
+    <div class="camadas">
+      <div class="ct">As camadas de substituição</div>
+      <p><code>[NOME]</code> primeiro nome dela, sempre. <code>[SEU NOME]</code> quem está escrevendo. <code>[DETALHE]</code> algo real que você viu no perfil dela. <code>[PROCEDIMENTO]</code> o procedimento que faz sentido para o perfil. <code>[CIDADE]</code> a cidade dela. <code>[DATA 1]</code> e <code>[DATA 2]</code> duas opções de horário.</p>
+      <p style="margin-top:10px"><strong>Regra de ouro:</strong> mensagem enviada com colchete ainda no texto queima a conversa e a marca. Revise antes de enviar, sempre.</p>
+    </div>
+
+    <h3>Camada de procedimentos</h3>
+    <p>Escolha o procedimento pela leitura do perfil dela, e fale sempre pelo resultado, nunca pela técnica.</p>
+    <table>
+      <tr><th>Procedimento</th><th>Como falar dele</th></tr>
+      <tr><td><strong>Harmonização facial</strong></td><td>Equilíbrio e harmonia no rosto, mantendo os traços dela</td></tr>
+      <tr><td><strong>Preenchimento labial</strong></td><td>Contorno definido e volume natural, do jeito que combina com o rosto dela</td></tr>
+      <tr><td><strong>Toxina botulínica</strong></td><td>Expressão mais leve e descansada, sem perder o movimento</td></tr>
+      <tr><td><strong>Bioestimulador</strong></td><td>Firmeza que vem de dentro, com resultado que aparece com o tempo</td></tr>
+      <tr><td><strong>Procedimentos corporais</strong></td><td>Contorno e firmeza corporal com acompanhamento da doutora</td></tr>
+      <tr><td><strong>Protocolo completo</strong></td><td>Um plano desenhado para o rosto dela, em etapas, com acompanhamento</td></tr>
+    </table>
+
+    <h3>Primeiro contato</h3>
+
+    <div class="script">
+      <div class="topo"><span class="nome">01 · Seguidora que nunca agendou</span><button class="copiar">Copiar</button></div>
+      <div class="corpo">Oi <v>[NOME]</v>, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do consultório da Dra. Renata Biolchi.
+
+Vi que você acompanha a gente por aqui e não queria deixar passar em branco. 🤍
+
+Me conta uma coisa: tem algum procedimento que você já pensou em fazer e ainda não realizou?</div>
+      <div class="porque"><b>Por que funciona:</b> apresenta quem fala, reconhece a presença dela e termina com uma pergunta de desejo. <b>Quase toda mulher tem uma resposta guardada para essa pergunta.</b></div>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">02 · Quem curtiu ou comentou</span><button class="copiar">Copiar</button></div>
+      <div class="corpo">Oi <v>[NOME]</v>, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do consultório da Dra. Renata Biolchi.
+
+Vi seu carinho na nossa publicação sobre <v>[PROCEDIMENTO]</v> e fiquei curiosa.
+
+Isso é algo que você já pensou em fazer?</div>
+      <div class="porque"><b>Por que funciona:</b> ela já demonstrou interesse publicamente, então a mensagem só nomeia o que ela mesma sinalizou. A curiosidade abre a conversa sem pressão.</div>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">03 · Prospecção fria da região</span><button class="copiar">Copiar</button></div>
+      <div class="corpo">Oi <v>[NOME]</v>, tudo bem?
+
+Aqui é a <v>[SEU NOME]</v>, do consultório da Dra. Renata Biolchi, aqui em Balneário Camboriú.
+
+Cheguei até o seu perfil e <v>[DETALHE]</v>. 🤍
+
+A gente trabalha com estética avançada, com foco em resultado natural, e está com uma condição especial de acesso para mulheres de <v>[CIDADE]</v> esse mês.
+
+Posso te contar rapidinho?</div>
+      <div class="porque"><b>Por que funciona:</b> o detalhe real do perfil prova que não é mensagem em massa. O pedido de permissão no final gera compromisso na resposta e evita soar invasivo.</div>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">04 · Paciente antiga sem retorno</span><button class="copiar">Copiar</button></div>
+      <div class="corpo">Oi <v>[NOME]</v>, tudo bem? 🤍
+
+Aqui é a <v>[SEU NOME]</v>, do consultório da Dra. Renata.
+
+Estava olhando aqui e vi que faz um tempinho desde o seu último atendimento com a gente. Fiquei com saudade de te ver por aqui.
+
+Como você está se sentindo com o resultado hoje?</div>
+      <div class="porque"><b>Por que funciona:</b> relacionamento antes de oferta. Perguntar sobre o resultado abre a porta para a manutenção sem você precisar oferecer nada.</div>
+    </div>
+
+    <h3>Conduzindo para a avaliação</h3>
+
+    <div class="script">
+      <div class="topo"><span class="nome">05 · Quando ela demonstra interesse</span><button class="copiar">Copiar</button></div>
+      <div class="corpo">Que bom, <v>[NOME]</v>! Faz todo sentido.
+
+O jeito certo de começar é com a avaliação presencial com a Dra. Renata. Ela olha o seu rosto, entende o que você deseja e desenha o que faz sentido para você, sem fórmula pronta.
+
+É nessa conversa também que ela te mostra as formas de realizar, porque a gente trabalha com o Consórcio Beauty e isso muda completamente o acesso.
+
+Tenho <v>[DATA 1]</v> ou <v>[DATA 2]</v>. Qual fica melhor pra você?</div>
+      <div class="porque"><b>Por que funciona:</b> posiciona a avaliação como decisão médica, planta o diferencial sem explicar a mecânica e fecha com escolha entre dois horários. <b>Nunca pergunte se ela quer agendar, pergunte qual horário.</b></div>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">06 · Quando ela pergunta o preço antes</span><button class="copiar">Copiar</button></div>
+      <div class="corpo"><v>[NOME]</v>, te respondo com sinceridade.
+
+O valor depende do que a Dra. Renata vai indicar para o seu caso, porque cada rosto pede uma coisa diferente e ela não trabalha com pacote fechado.
+
+O que eu posso te garantir é o seguinte: a gente tem o Consórcio Beauty, que é a nossa estrutura de acesso, e ela faz caber no seu planejamento de um jeito que o cartão sozinho não faz.
+
+Vem fazer a avaliação, que ali você sai com tudo na mão. Tenho <v>[DATA 1]</v> ou <v>[DATA 2]</v>.</div>
+      <div class="porque"><b>Por que funciona:</b> não foge da pergunta, explica a razão real, entrega a solução de acesso e devolve a conversa para o agendamento.</div>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">07 · Confirmação na véspera</span><button class="copiar">Copiar</button></div>
+      <div class="corpo">Oi <v>[NOME]</v>, boa tarde! 🤍
+
+Passando para confirmar a sua avaliação com a Dra. Renata amanhã, <v>[DATA 1]</v>.
+
+Está tudo certo para você?
+
+Qualquer coisa me avisa com antecedência que eu remarco com carinho.</div>
+      <div class="porque"><b>Por que funciona:</b> confirmação na véspera reduz drasticamente a falta. Oferecer remarcação evita que ela simplesmente não apareça por vergonha.</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 07 ============ -->
+  <section>
+    <div class="parte">Parte 07</div>
+    <h2>O diferencial competitivo</h2>
+    <p>Existe um momento que se repete em toda clínica de estética da cidade. A paciente faz a avaliação, ama o plano, confia na doutora, e vai embora. O motivo quase nunca é o preço em si. É que não existia um caminho para ela realizar aquilo naquele momento.</p>
+
+    <div class="citacao">"Ela não desistiu do procedimento. Ela desistiu porque ninguém mostrou um caminho."</div>
+
+    <p>Enquanto as outras clínicas deixam o limite do cartão decidir quem senta na cadeira, a Dra. Renata trabalha com o <strong>Consórcio Beauty</strong>, uma estrutura de viabilização que devolve essa decisão para a paciente.</p>
+
+    <div class="box escuro">
+      <div class="bt">O que isso significa na prática</div>
+      <p>A paciente entra por um plano, a clínica recebe com segurança e uma equipe especializada cuida de toda a parte financeira. <strong>A decisão clínica continua sendo da Dra. Renata. A solução financeira é uma estrutura separada</strong>, que existe para que o sim seja possível.</p>
+    </div>
+
+    <h3>Como falar disso com a paciente</h3>
+    <ul class="lista">
+      <li><strong>Nomeie, não explique</strong> · dizer que existe o Consórcio Beauty é o suficiente para gerar curiosidade e confiança</li>
+      <li><strong>Fale de acesso, não de parcelamento</strong> · a palavra que vende é realizar, não dever</li>
+      <li><strong>Separe sempre as duas decisões</strong> · o que ela vai fazer é com a doutora, como ela vai realizar é com a gente</li>
+      <li><strong>Nunca prometa valor de parcela por mensagem</strong> · isso se desenha na avaliação, com o protocolo em mãos</li>
+      <li><strong>Nunca cite empresa parceira ou operadora</strong> · o nome que a paciente precisa conhecer é Consórcio Beauty</li>
+    </ul>
+
+    <h3>As frases que posicionam</h3>
+    <table>
+      <tr><th>Em vez de dizer</th><th>Diga</th></tr>
+      <tr><td>A gente parcela no boleto</td><td>A gente tem o Consórcio Beauty, que é a nossa estrutura de acesso</td></tr>
+      <tr><td>Dá para dividir em várias vezes</td><td>Dá para desenhar um plano que caiba no seu planejamento</td></tr>
+      <tr><td>É mais barato assim</td><td>É mais possível assim, sem abrir mão do que você quer fazer</td></tr>
+      <tr><td>Se você não tiver limite a gente dá um jeito</td><td>Aqui o limite do cartão não decide por você</td></tr>
+    </table>
+
+    <div class="box alerta">
+      <div class="bt">O erro que tira o valor do diferencial</div>
+      <p>Transformar a conversa em venda de parcelamento. <strong>A paciente não está comprando um plano de pagamento, ela está comprando o resultado que a Dra. Renata entrega.</strong> A viabilização entra depois do desejo, nunca antes.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 08 ============ -->
+  <section>
+    <div class="parte">Parte 08</div>
+    <h2>Follow-up</h2>
+    <p>A maior parte das vendas acontece depois da terceira mensagem, e a maior parte dos comerciais para na primeira. É aqui que o dinheiro fica.</p>
+
+    <div class="box escuro">
+      <div class="bt">A escada do follow-up</div>
+      <p>Três tentativas, com intervalos crescentes e intenção diferente em cada uma. Depois disso, a paciente entra na lista de reativação para daqui a sessenta dias. <strong>Insistir mais que isso queima a marca na cidade.</strong></p>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">Follow-up 1 · dois dias depois</span><button class="copiar">Copiar</button></div>
+      <div class="corpo">Oi <v>[NOME]</v>, passando aqui rapidinho. 🤍
+
+Sei que a correria do dia a dia toma conta, então não vou tomar seu tempo.
+
+Só queria saber: aquele <v>[PROCEDIMENTO]</v> ainda está nos seus planos?</div>
+      <div class="porque"><b>Intenção:</b> reconhecer a rotina dela sem cobrar e reabrir o desejo com uma pergunta simples, fácil de responder com uma palavra.</div>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">Follow-up 2 · cinco dias depois</span><button class="copiar">Copiar</button></div>
+      <div class="corpo"><v>[NOME]</v>, te conto uma coisa em uma frase e depois te deixo em paz. 🤍
+
+Muita mulher adia o procedimento achando que o momento financeiro não permite, e descobre na avaliação que permitia sim, por causa do Consórcio Beauty.
+
+A avaliação com a Dra. Renata é justamente para você decidir com tudo na mão.
+
+Quer que eu veja um horário pra você?</div>
+      <div class="porque"><b>Intenção:</b> entregar informação de valor, dar permissão para ela recusar e trazer o diferencial como motivo para a avaliação acontecer.</div>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">Follow-up 3 · dez dias depois</span><button class="copiar">Copiar</button></div>
+      <div class="corpo"><v>[NOME]</v>, essa é a minha última mensagem, prometo. 🤍
+
+Vou deixar a porta aberta aqui com a gente. Quando você sentir que chegou a hora de cuidar de você, me chama que eu organizo tudo.
+
+Um beijo, e qualquer coisa estou por aqui.</div>
+      <div class="porque"><b>Intenção:</b> encerrar com elegância. <b>Muita paciente responde justamente nessa mensagem</b>, porque some a pressão e sobra o acolhimento.</div>
+    </div>
+
+    <div class="script">
+      <div class="topo"><span class="nome">Pós-avaliação sem fechamento</span><button class="copiar">Copiar</button></div>
+      <div class="corpo">Oi <v>[NOME]</v>, tudo bem? 🤍
+
+Foi muito bom te receber aqui com a Dra. Renata.
+
+Fiquei pensando na nossa conversa e queria saber como você está se sentindo em relação ao plano que ela desenhou pra você.
+
+Tem alguma coisa que ficou em aberto e que eu possa te ajudar a organizar?</div>
+      <div class="porque"><b>Intenção:</b> reabrir sem pressionar. A pergunta sobre o que ficou em aberto revela a objeção real, que quase sempre é viabilização.</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 09 ============ -->
+  <section>
+    <div class="parte">Parte 09</div>
+    <h2>Objeções</h2>
+    <p>Objeção não é não. Objeção é um pedido de ajuda disfarçado. Aqui estão as respostas que mantêm a conversa viva.</p>
+
+    <table>
+      <tr><th>Ela diz</th><th>Você responde</th></tr>
+      <tr><td><strong>Está caro</strong></td><td>Eu entendo, e é por isso que a gente tem o Consórcio Beauty. Ele existe justamente para o procedimento caber no seu planejamento sem você precisar adiar. Vem fazer a avaliação que a Dra. Renata desenha o caminho com você.</td></tr>
+      <tr><td><strong>Não tenho limite no cartão</strong></td><td>Fica tranquila, aqui o limite do cartão não decide por você. A nossa estrutura de acesso foi feita exatamente para isso.</td></tr>
+      <tr><td><strong>Vou pensar</strong></td><td>Claro, pensa com calma. Só te pergunto uma coisa para eu te ajudar melhor: o que está pesando mais na sua decisão hoje, o momento ou o valor?</td></tr>
+      <tr><td><strong>Agora não é o momento</strong></td><td>Entendo. E me diz, o que precisaria acontecer para ser o momento? Pergunto porque às vezes a gente adia uma coisa que já era possível.</td></tr>
+      <tr><td><strong>Preciso falar com meu marido</strong></td><td>Faz todo sentido. Quer que eu te mande um resumo bonitinho do que a Dra. Renata desenhou, para vocês olharem juntos?</td></tr>
+      <tr><td><strong>Tenho medo de ficar artificial</strong></td><td>Esse é exatamente o cuidado da Dra. Renata. O trabalho dela é valorizar os seus traços, não mudar o seu rosto. Na avaliação ela te mostra isso com calma.</td></tr>
+      <tr><td><strong>Vi mais barato em outro lugar</strong></td><td>Existe mesmo diferença de valor no mercado, e ela costuma estar na técnica, no produto e em quem segura a seringa. A Dra. Renata forma outros profissionais em preenchimento, e isso diz muito sobre o padrão daqui.</td></tr>
+      <tr><td><strong>Depois eu te chamo</strong></td><td>Combinado! Só para eu não te perder de vista, posso te dar um toque na <v>[DATA 1]</v>?</td></tr>
+    </table>
+
+    <div class="box">
+      <div class="bt">A técnica que resolve metade das objeções</div>
+      <p>Quando ela trouxer uma objeção, <strong>devolva com uma pergunta antes de responder</strong>. Pergunta revela a objeção real, e a objeção real quase sempre é diferente da que ela falou.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ PARTE 10 ============ -->
+  <section>
+    <div class="parte">Parte 10</div>
+    <h2>Ritual de acompanhamento</h2>
+    <p>O que não se mede não melhora. Esse é o ritual que mantém o comercial funcionando mesmo nos dias difíceis.</p>
+
+    <h3>Checklist diário</h3>
+    <ul class="checklist">
+      <li>Montar a lista de vinte perfis novos antes da primeira mensagem</li>
+      <li>Abrir as vinte conversas novas do dia</li>
+      <li>Responder todas as mensagens pendentes em até duas horas no horário comercial</li>
+      <li>Fazer todos os follow-ups vencidos</li>
+      <li>Confirmar as avaliações do dia seguinte</li>
+      <li>Atualizar a planilha com o que aconteceu em cada conversa</li>
+      <li>Registrar quantas avaliações foram agendadas hoje</li>
+    </ul>
+
+    <h3>Os quatro indicadores da semana</h3>
+    <table>
+      <tr><th>Indicador</th><th>O que ele revela</th></tr>
+      <tr><td><strong>Conversas abertas</strong></td><td>Se o esforço de prospecção aconteceu de verdade</td></tr>
+      <tr><td><strong>Taxa de resposta</strong></td><td>Se a abordagem está boa. Abaixo de vinte por cento, o script precisa mudar</td></tr>
+      <tr><td><strong>Avaliações agendadas</strong></td><td>Se a condução para o próximo passo está firme</td></tr>
+      <tr><td><strong>Comparecimento</strong></td><td>Se a confirmação de véspera está sendo feita</td></tr>
+    </table>
+
+    <div class="box escuro">
+      <div class="bt">Onde o número cair, é ali o gargalo</div>
+      <p>Poucas conversas abertas é problema de rotina. Poucas respostas é problema de abordagem. Poucos agendamentos é problema de condução. Muitas faltas é problema de confirmação. <strong>Cada queda tem um endereço, e nenhuma delas é falta de sorte.</strong></p>
+    </div>
+
+    <h3>Reunião semanal de dez minutos</h3>
+    <div class="passo"><div class="n">1</div><div class="t"><strong>Os quatro números da semana</strong>Lidos em voz alta, sem justificativa antes da hora.</div></div>
+    <div class="passo"><div class="n">2</div><div class="t"><strong>Uma conversa que deu certo</strong>O que foi dito, para repetir na semana seguinte.</div></div>
+    <div class="passo"><div class="n">3</div><div class="t"><strong>Uma conversa que travou</strong>Onde parou, para ajustar o script juntas.</div></div>
+    <div class="passo"><div class="n">4</div><div class="t"><strong>A meta da semana que vem</strong>Escrita, com número, antes de encerrar.</div></div>
+
+    <div class="box alerta">
+      <div class="bt">O compromisso que você assume hoje</div>
+      <p>Prospecção não é tarefa de quando sobra tempo. É a primeira coisa do dia, todos os dias, mesmo quando a agenda está cheia. <strong>Agenda cheia hoje é resultado da prospecção de três semanas atrás</strong>, e agenda vazia daqui a três semanas é resultado do dia em que você não prospectou.</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============ ENCERRAMENTO ============ -->
+  <div class="encerra">
+    <div class="parte">Encerramento</div>
+    <h2 style="font-size:clamp(26px,5.5vw,36px)">Você é a porta de entrada</h2>
+    <p style="max-width:560px;margin:0 auto 18px;">Cada mulher que senta na cadeira da Dra. Renata passou por você primeiro. Você foi quem fez ela se sentir vista, quem construiu a confiança e quem mostrou que era possível.</p>
+    <p style="max-width:560px;margin:0 auto;">Isso não é pouco. Isso é o que sustenta a clínica inteira.</p>
+    <div class="brinde">Brindaremos,</div>
+    <div class="nome">Maria Clara · All Win Academy</div>
+  </div>
+
+  <footer>
+    <div class="logo">All Win <span>Academy</span></div>
+    <p>Treinamento Comercial · Material licenciado · Uso interno</p>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  function copiar(texto,botao){
+    var t=document.createElement('textarea');
+    t.value=texto; t.style.position='fixed'; t.style.opacity='0';
+    document.body.appendChild(t); t.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(t);
+    var antigo=botao.textContent;
+    botao.textContent='Copiado'; botao.classList.add('feito');
+    setTimeout(function(){ botao.textContent=antigo; botao.classList.remove('feito'); },1600);
+  }
+  document.querySelectorAll('.script .copiar').forEach(function(b){
+    b.addEventListener('click',function(){
+      var corpo=b.closest('.script').querySelector('.corpo');
+      copiar(corpo.innerText.trim(),b);
+    });
+  });
+})();
+</script>
+</body>
+</html>
