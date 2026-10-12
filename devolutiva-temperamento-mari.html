@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0f0e0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Desvendando sua Essência · Mari</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@400;500;700&family=Pinyon+Script&display=swap" rel="stylesheet">
+<style>
+html { background-color: #0f0e0b !important; }
+html, body { background: #0f0e0b !important; color: #b0a896; -webkit-text-size-adjust: 100%; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; line-height: 1.7; font-size: 16px; }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+section { padding: 56px 0; border-bottom: 1px solid rgba(201,161,90,.15); }
+.kicker { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #c9a15a; margin-bottom: 14px; }
+h1 { font-family: 'Playfair Display', serif; color: #f3ece0; font-size: clamp(34px, 8vw, 54px); line-height: 1.1; font-weight: 700; }
+h2 { font-family: 'Playfair Display', serif; color: #f3ece0; font-size: clamp(26px, 6vw, 36px); line-height: 1.2; margin-bottom: 20px; font-weight: 500; }
+.script { font-family: 'Pinyon Script', cursive; color: #c9a15a; font-size: 1.25em; font-weight: 400; }
+p { margin-bottom: 16px; }
+b, strong { color: #f3ece0; font-weight: 700; }
+.hero { padding: 80px 0 64px; text-align: center; }
+.hero p { max-width: 520px; margin: 22px auto 0; }
+.sign { margin-top: 30px; font-size: 12px; letter-spacing: 3px; color: #c9a15a; }
+
+.temps { display: grid; gap: 16px; margin-top: 26px; }
+.temp { border: 1px solid rgba(201,161,90,.3); border-radius: 14px; padding: 26px; background: #16130f; }
+.temp.primary { background: linear-gradient(160deg, #360000, #1c0a08); border-color: #5a1a1a; }
+.temp .lbl { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #c9a15a; }
+.temp h3 { font-family: 'Playfair Display', serif; color: #f3ece0; font-size: 30px; margin: 6px 0 4px; }
+.temp .sub { font-style: italic; font-family: 'Playfair Display', serif; color: #d9c9a8; margin-bottom: 14px; }
+.bar { height: 6px; background: rgba(255,255,255,.08); border-radius: 6px; overflow: hidden; margin: 10px 0 6px; }
+.bar span { display: block; height: 100%; background: #c9a15a; border-radius: 6px; }
+.pct { font-size: 13px; color: #c9a15a; }
+
+.hook { border-left: 2px solid #c9a15a; padding: 4px 0 4px 18px; margin: 26px 0; }
+.hook .quote { font-family: 'Playfair Display', serif; font-style: italic; color: #e8dcc4; font-size: 18px; margin-bottom: 8px; }
+.hook p { margin: 0; }
+
+.skills { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-top: 22px; }
+.skill { background: #16130f; border: 1px solid rgba(201,161,90,.2); border-radius: 12px; padding: 20px; }
+.skill .n { font-family: 'Playfair Display', serif; color: #c9a15a; font-size: 26px; }
+.skill h4 { color: #f3ece0; font-size: 16px; margin: 4px 0 6px; }
+.skill p { font-size: 14px; margin: 0; }
+
+.cage { background: linear-gradient(180deg, #360000 0%, #1a0806 100%); border-radius: 18px; padding: 40px 26px; margin-top: 10px; }
+.cage h2 { color: #fff; }
+.cage p { color: #e6d8c6; }
+
+.brain { display: grid; gap: 14px; margin-top: 24px; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.box { border-radius: 12px; padding: 18px; font-size: 14px; }
+.box.child { background: #2a120e; border: 1px solid #5a1a1a; }
+.box.adult { background: #101826; border: 1px solid #15294D; }
+.box .t { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+.box.child .t { color: #e0a090; }
+.box.adult .t { color: #8fb0e0; }
+.box p { margin: 0; color: #e0d6c6; }
+
+.question { text-align: center; padding: 70px 0; }
+.question .big { font-family: 'Playfair Display', serif; font-size: clamp(24px, 6vw, 34px); color: #f3ece0; line-height: 1.35; max-width: 600px; margin: 0 auto; }
+.question .big i { color: #c9a15a; }
+footer { text-align: center; padding: 40px 0 60px; font-size: 12px; letter-spacing: 3px; color: #7a705f; }
+@media (max-width: 520px) { .row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<section class="hero">
+  <div class="kicker">Devolutiva de Temperamento</div>
+  <h1>Desvendando sua <span class="script">essência</span></h1>
+  <p>Mari, esse documento foi construído a partir das suas próprias palavras. Cada leitura aqui tem uma fala sua por trás. Lê com calma, com o coração aberto e a mente desperta.</p>
+  <div class="sign">ALL WIN ACADEMY · MARIA CLARA</div>
+</section>
+
+<section>
+  <div class="kicker">01 · O seu mapa</div>
+  <h2>Uma leoa com alma de <span class="script">arquiteta</span></h2>
+  <p>Seu temperamento carrega duas forças que conversam o tempo todo: <b>a que quer liderar e avançar</b> e <b>a que quer fazer com profundidade e perfeição</b>. Quando as duas estão em paz, você é imparável. Quando uma abafa a outra, nasce o cansaço de andar em círculo.</p>
+
+  <div class="temps">
+    <div class="temp primary">
+      <div class="lbl">Temperamento primário</div>
+      <h3>Colérico</h3>
+      <div class="sub">A leoa. Liderança, direção, iniciativa.</div>
+      <div class="bar"><span style="width:62%"></span></div>
+      <div class="pct">Projeção · 62%</div>
+    </div>
+    <div class="temp">
+      <div class="lbl">Temperamento secundário</div>
+      <h3>Melancólico</h3>
+      <div class="sub">A arquiteta. Excelência, valores, profundidade.</div>
+      <div class="bar"><span style="width:38%"></span></div>
+      <div class="pct">Projeção · 38%</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">02 · Os ganchinhos de força</div>
+  <h2>Onde a sua <span class="script">força</span> aparece</h2>
+
+  <div class="hook">
+    <div class="quote">"Eu era a aluna da cadeira da frente… se era trabalho em grupo, eu quem alinhava tudo."</div>
+    <p>Aqui mora a leoa. Desde menina você ocupa o lugar de quem organiza, puxa e conduz. <b>Liderança natural</b>, sem precisar de cargo.</p>
+  </div>
+
+  <div class="hook">
+    <div class="quote">"Pintei a casa com a tinta roxa de mata-bicheira."</div>
+    <p>Uma criança que age antes de pedir licença. Isso tem nome: <b>iniciativa e ousadia criativa</b>. A mesma energia que hoje quer construir algo seu.</p>
+  </div>
+
+  <div class="hook">
+    <div class="quote">"Tive uma festa de 10 anos. Eu estava me sentindo uma rainha."</div>
+    <p>A memória de rainha revela o que a sua essência pede: <b>ser vista no lugar de valor</b>. Reino, presença, reconhecimento. Guarda essa imagem, ela vai voltar.</p>
+  </div>
+
+  <div class="hook">
+    <div class="quote">"A chegada do meu irmão… eu fiquei feliz e cuidava dele."</div>
+    <p>Responsabilidade que chegou cedo. Você aprendeu a <b>proteger e sustentar</b> antes mesmo de entender o que era isso.</p>
+  </div>
+
+  <div class="hook">
+    <div class="quote">"Descobri minha gravidez e já coloquei no coração: agora preciso abrir o meu próprio negócio."</div>
+    <p>Decisão de leoa. Um propósito claro, um filho como motivo, e a coragem de sair de 9 anos de CLT. <b>Você decide rápido quando o porquê é forte.</b></p>
+  </div>
+
+  <div class="hook">
+    <div class="quote">"Entre rapidez e excelência, fico com a excelência."</div>
+    <p>Essa é a arquiteta falando. Seu secundário melancólico traz <b>padrão alto, olhar de detalhe e compromisso com o bem feito</b>.</p>
+  </div>
+
+  <div class="hook">
+    <div class="quote">"Tenho poucos amigos porque os filtro. Gosto muito da minha solitude."</div>
+    <p>Profundidade nas relações e seletividade. Você confia em poucos e entrega muito para esses poucos. Isso é <b>lealdade</b>.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">03 · Suas habilidades</div>
+  <h2>O que você já <span class="script">carrega</span></h2>
+  <div class="skills">
+    <div class="skill"><div class="n">I</div><h4>Organização de caos</h4><p>Você coloca ordem onde há confusão. Isso combina perfeitamente com contabilidade e com quem você quer ser para o seu público.</p></div>
+    <div class="skill"><div class="n">II</div><h4>Liderança silenciosa</h4><p>Chega de mansinho, com fala mansa, e mesmo assim conduz. Uma autoridade que inspira confiança.</p></div>
+    <div class="skill"><div class="n">III</div><h4>Ética inegociável</h4><p>Respeito, responsabilidade, honestidade e justiça. Seus valores são o alicerce do seu escritório.</p></div>
+    <div class="skill"><div class="n">IV</div><h4>Visão estratégica</h4><p>Você pensa o suficiente para decidir com segurança. Profundidade sem paralisia.</p></div>
+    <div class="skill"><div class="n">V</div><h4>Limites conquistados</h4><p>Hoje você diz não. Três "sins" indesejados em 365 dias mostram uma mulher que já se escolhe.</p></div>
+    <div class="skill"><div class="n">VI</div><h4>Perseverança</h4><p>Você segue mesmo cansada. Agora é hora de colocar essa força a seu favor, com estrutura.</p></div>
+  </div>
+</section>
+
+<section style="border:none;">
+  <div class="cage">
+    <div class="kicker">04 · A leoa na jaula</div>
+    <h2>O rugido que ficou <span class="script">guardado</span></h2>
+    <p>Mari, olha com carinho para a sua história. Uma menina que perdeu o pai aos 3 anos, cresceu na roça ouvindo que precisava <b>respeitar os mais velhos</b>, nunca foi respondona, levou puxões para domar os cachos que cresceram livres por três dias.</p>
+    <p>Uma leoa que aprendeu cedo a <b>baixar a voz para ser aceita</b>. A força continuou ali, inteira, só que contida. E tudo que é contido por muito tempo procura uma saída.</p>
+    <p>Hoje essa força aparece como <b>indignação</b>. Seu maior medo é ficar estagnada, e você descreve sua vida agora como andar em círculo, 100% no operacional, sem ver resultado. Para uma colérica, estagnação dói como jaula. Essa angústia tem origem antiga: é a leoa pedindo espaço para rugir.</p>
+    <p><b>E é justamente na hora de cobrar que a jaula fecha.</b> Na proposta, o medo de o cliente achar caro faz sua estabilidade sair de cena. Quem está falando ali é a menina que aprendeu a não incomodar. A mulher de hoje sabe o valor que entrega.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">05 · Leitura racional</div>
+  <h2>Quem está no <span class="script">comando</span>?</h2>
+  <p>Quando a emoção dispara, a parte mais antiga do nosso cérebro assume e repete o que aprendeu na infância. Quando você consegue <b>nomear</b> o que sente, o córtex pré frontal volta para a cadeira da frente, aquela que sempre foi sua.</p>
+
+  <div class="brain">
+    <div class="row">
+      <div class="box child"><div class="t">A criança fala</div><p>"Se eu cobrar o justo, ele não fecha."</p></div>
+      <div class="box adult"><div class="t">A leoa responde</div><p>"Quem me escolhe por preço não sustenta meu escritório."</p></div>
+    </div>
+    <div class="row">
+      <div class="box child"><div class="t">A criança fala</div><p>"Preciso dar conta de tudo sozinha."</p></div>
+      <div class="box adult"><div class="t">A leoa responde</div><p>"Líder estrutura, delega e protege o próprio tempo."</p></div>
+    </div>
+    <div class="row">
+      <div class="box child"><div class="t">A criança fala</div><p>"Investir em mim é arriscado."</p></div>
+      <div class="box adult"><div class="t">A leoa responde</div><p>"Escassez me mantém no círculo. Crescimento pede movimento."</p></div>
+    </div>
+    <div class="row">
+      <div class="box child"><div class="t">A criança fala</div><p>"Relaxar é luxo que eu não tenho."</p></div>
+      <div class="box adult"><div class="t">A leoa responde</div><p>"Meu descanso também é estratégia. O banho demorado é meu direito."</p></div>
+    </div>
+  </div>
+
+  <p style="margin-top:26px;">Repara num detalhe precioso: o que mais te incomoda no seu nicho é <b>contabilidade escolhida por preço</b>. E o seu maior travamento é justamente cobrar o seu valor. A dor que você vê lá fora é um espelho da leoa que quer sair aqui dentro.</p>
+</section>
+
+<section>
+  <div class="kicker">06 · O caminho</div>
+  <h2>Da jaula para o <span class="script">reino</span></h2>
+  <p><b>Primeiro passo:</b> reconhecer a voz da menina sem obedecer a ela. Ela merece acolhimento, e a decisão fica com a mulher.</p>
+  <p><b>Segundo passo:</b> estrutura antes de esforço. Sua rotina ideal é organizada e fluida, e você merece ver resultado nela. Vamos desenhar isso juntas.</p>
+  <p><b>Terceiro passo:</b> proposta com postura de rainha. Você escolheu ser vista como <b>autoridade refinada, mente visionária e especialista estratégica</b>. É assim que a sua proposta vai soar.</p>
+</section>
+
+<section class="question" style="border:none;">
+  <div class="kicker">Para levar com você</div>
+  <p class="big">Se a menina de 10 anos que se sentiu rainha olhasse para o seu escritório hoje, <i>o que ela pediria para você ter coragem de fazer?</i></p>
+</section>
+
+<footer>ALL WIN ACADEMY · BY MARIA CLARA</footer>
+</div>
+</body>
+</html>
