@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Business Core | Consultoria estratégica para clínicas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marfim:#FAF7F2; --branco:#FFFFFF; --bege:#EDE4D6; --bege2:#E2D5C1;
+  --tinta:#1F1A18; --espresso:#3E2513; --madeira:#7E4C22;
+  --vinho:#360000; --vinhoTx:#4E0D16; --ouro:#C9A15A; --ouroSuave:rgba(201,161,90,.45);
+  --cinza:#6E625A; --linha:rgba(31,26,24,.14);
+  --page:#1F1A18;
+  --serif:'Playfair Display', Georgia, 'Times New Roman', serif;
+  --sans:'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --page:#120E0C; } }
+:root[data-theme="dark"]{ --page:#120E0C; }
+html{ scroll-padding-top:env(safe-area-inset-top,0px); height:100%; }
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+body{ height:100%; background:var(--page); font-family:var(--sans); color:var(--tinta); overflow:hidden; -webkit-font-smoothing:antialiased; }
+img{ max-width:100%; }
+button,input{ font:inherit; color:inherit; }
+:focus-visible{ outline:2px solid var(--ouro); outline-offset:3px; }
+
+/* ---------- palco ---------- */
+.deck{ position:relative; height:100%; width:100%; overflow:hidden; }
+.slide{
+  position:absolute; inset:0; overflow-y:auto; overflow-x:hidden;
+  padding:clamp(28px,6vh,80px) clamp(22px,6.5vw,120px) calc(clamp(28px,6vh,80px) + 64px);
+  display:flex; flex-direction:column; justify-content:center;
+  opacity:0; visibility:hidden; transition:opacity .55s ease, visibility 0s linear .55s;
+  background:var(--marfim);
+}
+.slide.ativo{ opacity:1; visibility:visible; transition:opacity .55s ease; }
+@media (prefers-reduced-motion: reduce){ .slide,.slide.ativo{ transition:none; } }
+.claro{ background:var(--marfim); color:var(--tinta); }
+.bege{ background:var(--bege); color:var(--tinta); }
+.branco{ background:var(--branco); color:var(--tinta); }
+.escuro{ background:var(--tinta); color:var(--marfim); }
+.cafe{ background:var(--espresso); color:var(--marfim); }
+.vinho{ background:var(--vinho); color:var(--marfim); }
+
+.marca{ position:absolute; top:clamp(20px,4vh,44px); left:clamp(22px,6.5vw,120px); font-family:var(--serif); font-size:15px; letter-spacing:.02em; opacity:.75; }
+.marca i{ color:var(--ouro); font-style:italic; }
+.fio{ display:block; width:56px; height:1px; background:var(--ouro); margin:0 0 clamp(18px,3vh,30px); }
+
+.conteudo{ width:100%; max-width:1480px; margin:0 auto; }
+h1,h2,h3{ font-family:var(--serif); font-weight:400; letter-spacing:-.01em; }
+h1{ font-size:clamp(3rem,8.4vw,8.4rem); line-height:.98; }
+h2{ font-size:clamp(2rem,4.2vw,4.4rem); line-height:1.08; max-width:22ch; }
+h3{ font-size:clamp(1.25rem,1.7vw,1.75rem); line-height:1.2; }
+.lead{ font-size:clamp(1.05rem,1.45vw,1.45rem); line-height:1.6; max-width:52ch; font-weight:300; margin-top:clamp(16px,2.6vh,28px); }
+.lead b,.txt b{ font-weight:600; }
+.txt{ font-size:clamp(.95rem,1.08vw,1.1rem); line-height:1.6; font-weight:400; }
+.suave{ color:var(--cinza); }
+.escuro .suave,.cafe .suave,.vinho .suave{ color:rgba(250,247,242,.66); }
+.vinhoTx{ color:var(--vinhoTx); }
+.ouro{ color:var(--ouro); }
+
+/* ---------- capa ---------- */
+.capa .conteudo{ display:grid; grid-template-columns:1.25fr .75fr; gap:6vw; align-items:end; }
+.capa h1{ color:var(--vinho); }
+.capa h1 span{ display:block; font-style:italic; color:var(--tinta); font-size:.42em; line-height:1.2; margin-top:.35em; }
+.capa .lado{ border-left:1px solid var(--ouroSuave); padding-left:clamp(18px,2.4vw,36px); }
+.capa .assina{ margin-top:clamp(20px,4vh,40px); font-family:var(--serif); font-size:clamp(1rem,1.3vw,1.3rem); }
+.capa .assina small{ display:block; font-family:var(--sans); font-size:.78em; color:var(--cinza); margin-top:6px; }
+
+/* ---------- premissa ---------- */
+.premissa blockquote{ font-family:var(--serif); font-size:clamp(2.2rem,5.6vw,6rem); line-height:1.08; max-width:17ch; font-weight:400; }
+.premissa blockquote em{ color:var(--ouro); }
+.premissa .lead{ color:rgba(250,247,242,.78); }
+
+/* ---------- cenário ---------- */
+.ponte{ margin-top:clamp(28px,6vh,64px); display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:clamp(12px,2vw,28px); max-width:1100px; }
+.ponte .pol{ font-family:var(--serif); font-size:clamp(1.2rem,2vw,2rem); }
+.ponte .pol small{ display:block; font-family:var(--sans); font-size:.5em; color:var(--cinza); margin-top:4px; letter-spacing:.01em; }
+.ponte .vao{ position:relative; height:1px; background:repeating-linear-gradient(90deg,var(--vinho) 0 8px,transparent 8px 16px); }
+.ponte .vao span{ position:absolute; left:50%; top:14px; transform:translateX(-50%); white-space:nowrap; font-size:clamp(.85rem,1vw,1rem); color:var(--vinhoTx); font-style:italic; font-family:var(--serif); }
+.falas{ margin-top:clamp(48px,8vh,88px); display:flex; gap:clamp(12px,2vw,24px); flex-wrap:wrap; align-items:center; }
+.falas p{ font-family:var(--serif); font-style:italic; font-size:clamp(1rem,1.4vw,1.4rem); padding:12px 22px; border:1px solid var(--linha); border-radius:40px; background:var(--branco); }
+.falas small{ color:var(--cinza); font-size:.95rem; }
+
+/* ---------- A para B ---------- */
+.ab{ margin-top:clamp(28px,6vh,60px); display:grid; grid-template-columns:1fr auto 1fr; gap:clamp(16px,3vw,48px); align-items:stretch; }
+.ab .bloco{ padding:clamp(22px,3vw,40px); border-top:1px solid var(--tinta); }
+.ab .bloco.b{ background:var(--vinho); color:var(--marfim); border-top-color:var(--ouro); }
+.ab .letra{ font-family:var(--serif); font-size:clamp(3rem,6vw,6rem); line-height:1; }
+.ab .bloco.b .letra{ color:var(--ouro); }
+.ab .seta{ align-self:center; width:clamp(40px,7vw,120px); height:1px; background:var(--ouro); position:relative; }
+.ab .seta::after{ content:""; position:absolute; right:0; top:-4px; border-left:9px solid var(--ouro); border-top:4.5px solid transparent; border-bottom:4.5px solid transparent; }
+.ab .bloco p{ margin-top:14px; }
+
+/* ---------- engrenagens ---------- */
+.eng{ margin-top:clamp(28px,6vh,64px); display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--linha); }
+.eng > div{ padding:clamp(18px,2.6vw,34px) clamp(14px,1.8vw,28px) 0 0; position:relative; }
+.eng > div + div{ padding-left:clamp(14px,1.8vw,28px); border-left:1px solid var(--linha); }
+.eng .n{ font-family:var(--serif); font-style:italic; color:var(--ouro); font-size:1.1rem; }
+.eng h3{ margin:12px 0 10px; font-size:clamp(1.5rem,2.3vw,2.4rem); }
+.rodape-frase{ margin-top:clamp(32px,6vh,64px); font-family:var(--serif); font-style:italic; font-size:clamp(1.05rem,1.5vw,1.5rem); color:var(--vinhoTx); }
+
+/* ---------- três pilares (posicionamento / comportamento) ---------- */
+.tri{ margin-top:clamp(28px,5vh,56px); display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.4vw,36px); }
+.tri > div{ background:var(--branco); padding:clamp(22px,2.6vw,36px); border-radius:2px; box-shadow:0 1px 0 var(--linha); }
+.bege .tri > div{ background:var(--marfim); }
+.cafe .tri > div{ background:rgba(250,247,242,.06); box-shadow:inset 0 0 0 1px rgba(201,161,90,.3); }
+.tri h3{ margin-bottom:10px; }
+.cafe .tri h3{ color:var(--ouro); }
+
+/* ---------- beauty nas engrenagens ---------- */
+.beauty-grid{ margin-top:clamp(24px,4.5vh,48px); display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(201,161,90,.35); border:1px solid rgba(201,161,90,.35); }
+.beauty-grid > div{ background:var(--tinta); padding:clamp(18px,2.2vw,32px); }
+.beauty-grid h3{ color:var(--ouro); font-size:clamp(1.15rem,1.6vw,1.6rem); margin-bottom:10px; }
+.beauty-grid p{ color:rgba(250,247,242,.82); }
+
+/* ---------- jornada ---------- */
+.jornada{ margin-top:clamp(36px,7vh,80px); display:grid; grid-template-columns:repeat(8,1fr); position:relative; }
+.jornada::before{ content:""; position:absolute; left:0; right:0; top:11px; height:1px; background:var(--linha); }
+.jornada .p{ position:relative; padding-right:10px; }
+.jornada .p i{ display:block; width:23px; height:23px; border-radius:50%; background:var(--marfim); border:1px solid var(--tinta); position:relative; }
+.jornada .p.foco i{ background:var(--vinho); border-color:var(--vinho); box-shadow:0 0 0 6px rgba(54,0,0,.12); }
+.jornada .p span{ display:block; margin-top:16px; font-size:clamp(.72rem,.95vw,1rem); color:var(--cinza); font-family:var(--serif); font-style:italic; }
+.jornada .p b{ display:block; margin-top:4px; font-family:var(--serif); font-weight:400; font-size:clamp(.95rem,1.35vw,1.45rem); }
+.jornada .p.foco b{ color:var(--vinhoTx); font-weight:500; }
+.nota-jornada{ margin-top:clamp(36px,6vh,64px); max-width:62ch; padding-left:18px; border-left:2px solid var(--vinho); }
+
+/* ---------- modelos ---------- */
+.modelos{ margin-top:clamp(24px,4.5vh,52px); display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2vw,30px); }
+.modelo{ background:var(--branco); padding:clamp(20px,2.4vw,34px); display:flex; flex-direction:column; gap:14px; border-top:2px solid var(--vinho); }
+.modelo .tag{ font-family:var(--serif); font-style:italic; color:var(--madeira); font-size:1.02rem; }
+.modelo h3{ font-size:clamp(1.3rem,1.9vw,2rem); }
+.fluxo{ display:flex; gap:3px; height:34px; align-items:stretch; margin-top:6px; position:relative; }
+.fluxo span{ background:var(--bege2); border-radius:1px; }
+.fluxo span.ent{ background:var(--vinho); }
+.fluxo span.ent2{ background:var(--madeira); }
+.fluxo span.cont{ background:repeating-linear-gradient(90deg,var(--bege2) 0 10px,transparent 10px 14px); }
+.fluxo-leg{ display:flex; justify-content:space-between; font-size:.82rem; color:var(--cinza); }
+.marco{ position:absolute; top:-8px; bottom:-8px; width:0; border-left:1px solid var(--tinta); }
+.marco.tracejado{ border-left:1px dashed var(--madeira); }
+.marco small{ position:absolute; top:100%; margin-top:6px; transform:translateX(-50%); white-space:nowrap; font-size:.76rem; color:var(--tinta); }
+.marco.tracejado small{ color:var(--madeira); }
+.antecipa{ margin-top:clamp(20px,3.5vh,36px); display:flex; gap:18px; align-items:baseline; flex-wrap:wrap; }
+.antecipa b{ font-family:var(--serif); font-size:clamp(1.6rem,2.4vw,2.4rem); font-weight:400; color:var(--vinho); }
+
+/* ---------- calculadora ---------- */
+.calc{ margin-top:clamp(16px,3vh,32px); display:grid; grid-template-columns:minmax(260px,.9fr) 1fr 1fr; gap:clamp(14px,1.8vw,26px); align-items:start; }
+.painel{ background:var(--branco); padding:clamp(16px,1.8vw,26px); }
+.painel h4{ font-family:var(--serif); font-weight:400; font-size:1.2rem; margin-bottom:14px; }
+.painel h4 small{ font-family:var(--sans); font-size:.78rem; color:var(--cinza); display:block; margin-top:2px; }
+.campo{ margin-bottom:16px; }
+.campo label{ display:flex; justify-content:space-between; font-size:.86rem; color:var(--cinza); margin-bottom:6px; gap:10px; }
+.campo label output{ color:var(--tinta); font-weight:600; }
+.campo input[type=number]{ width:100%; border:1px solid var(--linha); background:var(--marfim); padding:10px 12px; font-size:1.15rem; border-radius:2px; font-family:var(--serif); }
+.prefixo{ position:relative; }
+.prefixo::before{ content:"R$"; position:absolute; left:12px; top:50%; transform:translateY(-50%); color:var(--cinza); font-size:.95rem; }
+.prefixo input[type=number]{ padding-left:40px; }
+input[type=range]{ width:100%; accent-color:var(--vinho); height:24px; }
+.modos{ display:grid; grid-template-columns:1fr 1fr; border:1px solid var(--linha); border-radius:2px; overflow:hidden; }
+.modos button{ border:0; background:transparent; padding:9px 6px; font-size:.86rem; cursor:pointer; }
+.modos button.ativo{ background:var(--vinho); color:var(--marfim); }
+.dica{ font-size:.8rem; color:var(--cinza); margin-top:8px; line-height:1.45; }
+.selo{ display:inline-block; font-size:.8rem; padding:5px 12px; border:1px solid var(--ouro); border-radius:30px; color:var(--espresso); }
+details{ margin-top:12px; font-size:.86rem; }
+details summary{ cursor:pointer; color:var(--cinza); }
+.taxas{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px; }
+.taxas label{ font-size:.75rem; color:var(--cinza); display:block; margin-bottom:4px; }
+.taxas input{ width:100%; border:1px solid var(--linha); background:var(--marfim); padding:7px 9px; border-radius:2px; }
+.linhas div{ display:flex; justify-content:space-between; gap:12px; padding:9px 0; border-bottom:1px solid var(--linha); font-size:.92rem; }
+.linhas div span:first-child{ color:var(--cinza); }
+.linhas div span:last-child{ font-variant-numeric:tabular-nums; text-align:right; }
+.total{ margin-top:14px; }
+.total small{ font-size:.8rem; color:var(--cinza); display:block; }
+.total strong{ font-family:var(--serif); font-weight:400; font-size:clamp(1.7rem,2.4vw,2.4rem); display:block; line-height:1.15; font-variant-numeric:tabular-nums; }
+.painel.clinica{ background:var(--tinta); color:var(--marfim); }
+.painel.clinica .linhas div{ border-color:rgba(250,247,242,.14); }
+.painel.clinica .linhas div span:first-child,.painel.clinica h4 small,.painel.clinica .total small{ color:rgba(250,247,242,.62); }
+.painel.clinica .total strong{ color:var(--ouro); }
+.alerta{ margin-top:12px; font-size:.82rem; padding:9px 12px; border-left:2px solid #4F6B45; background:rgba(79,107,69,.08); }
+.alerta.atencao{ border-left-color:var(--vinho); background:rgba(54,0,0,.07); color:var(--vinhoTx); }
+.tabela{ grid-column:2 / 4; }
+table{ width:100%; border-collapse:collapse; font-size:.86rem; font-variant-numeric:tabular-nums; }
+th{ text-align:left; font-weight:500; color:var(--cinza); padding:8px 6px; border-bottom:1px solid var(--tinta); font-size:.78rem; }
+td{ padding:8px 6px; border-bottom:1px solid var(--linha); }
+tr.sel td{ background:rgba(201,161,90,.16); }
+tr.baixa td{ color:#a08f84; }
+td:last-child,th:last-child{ text-align:right; }
+
+/* ---------- desconto x beauty ---------- */
+.dx{ margin-top:clamp(18px,3.5vh,36px); display:grid; grid-template-columns:minmax(240px,.7fr) 1.3fr; gap:clamp(18px,3vw,48px); align-items:start; }
+.cols{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(14px,2vw,28px); }
+.cenario{ padding:clamp(18px,2vw,28px); background:var(--branco); }
+.cenario.bty{ background:var(--tinta); color:var(--marfim); }
+.cenario h3{ font-size:clamp(1.15rem,1.5vw,1.5rem); margin-bottom:16px; }
+.cenario.bty h3{ color:var(--ouro); }
+.barra{ height:clamp(150px,24vh,250px); display:flex; flex-direction:column; justify-content:flex-end; border-bottom:1px solid currentColor; margin-bottom:14px; position:relative; }
+.barra .seg{ width:100%; transition:height .4s ease; }
+.barra .custo{ background:var(--bege2); }
+.cenario.bty .barra .custo{ background:rgba(250,247,242,.18); }
+.barra .marg{ background:var(--vinho); }
+.cenario.bty .barra .marg{ background:var(--ouro); }
+.barra .perda{ background:repeating-linear-gradient(135deg,rgba(54,0,0,.35) 0 6px,transparent 6px 12px); border:1px dashed var(--vinho); border-bottom:0; }
+.barra .tx{ background:repeating-linear-gradient(135deg,rgba(201,161,90,.5) 0 6px,transparent 6px 12px); }
+.leg{ display:flex; gap:14px; flex-wrap:wrap; font-size:.78rem; margin-top:14px; color:var(--cinza); }
+.leg i{ display:inline-block; width:10px; height:10px; margin-right:6px; vertical-align:-1px; }
+.diferenca{ margin-top:clamp(16px,3vh,28px); padding:16px 20px; border-left:2px solid var(--ouro); background:var(--branco); }
+.diferenca strong{ font-family:var(--serif); font-weight:400; font-size:clamp(1.5rem,2.2vw,2.2rem); color:var(--vinho); display:block; }
+.mini{ font-size:.8rem; color:var(--cinza); line-height:1.5; margin-top:10px; }
+
+/* ---------- meses / sessões ---------- */
+.lista-traco{ margin-top:clamp(22px,4vh,40px); list-style:none; display:grid; gap:0; max-width:760px; }
+.lista-traco li{ padding:clamp(12px,2vh,18px) 0; border-bottom:1px solid var(--linha); font-size:clamp(1rem,1.3vw,1.3rem); display:grid; grid-template-columns:44px 1fr; align-items:baseline; }
+.escuro .lista-traco li,.cafe .lista-traco li{ border-color:rgba(250,247,242,.14); }
+.lista-traco li em{ font-family:var(--serif); color:var(--ouro); font-size:.95em; }
+.duas{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,5vw,90px); align-items:center; }
+.grande-num{ font-family:var(--serif); font-size:clamp(5rem,13vw,13rem); line-height:.9; color:var(--ouro); }
+.grande-num small{ display:block; font-size:.14em; color:inherit; opacity:.8; font-style:italic; margin-top:12px; }
+
+.trilho{ margin-top:clamp(32px,6vh,64px); }
+.trilho .fases{ display:grid; grid-template-columns:1fr 5fr; gap:4px; }
+.trilho .fase{ padding:14px 16px; font-size:.92rem; }
+.trilho .fase b{ display:block; font-family:var(--serif); font-weight:400; font-size:clamp(1.1rem,1.5vw,1.5rem); margin-bottom:2px; }
+.trilho .f1{ background:var(--vinho); color:var(--marfim); }
+.trilho .f2{ background:var(--bege); }
+.pontos{ margin-top:22px; display:grid; grid-template-columns:repeat(20,1fr); gap:clamp(4px,.6vw,10px); }
+.pontos i{ aspect-ratio:1; border-radius:50%; border:1px solid var(--espresso); display:block; }
+.pontos i:nth-child(-n+5){ background:var(--vinho); border-color:var(--vinho); }
+.pontos-leg{ display:flex; justify-content:space-between; margin-top:10px; font-size:.82rem; color:var(--cinza); }
+.meses{ margin-top:clamp(28px,5vh,48px); display:grid; grid-template-columns:repeat(6,1fr); border-top:1px solid var(--tinta); }
+.meses div{ padding:14px 12px 0 0; }
+.meses div b{ font-family:var(--serif); font-weight:400; font-size:clamp(1rem,1.4vw,1.4rem); display:block; }
+.meses div span{ font-size:.85rem; color:var(--cinza); }
+
+/* ---------- equipe ---------- */
+.caminhos{ margin-top:clamp(26px,5vh,52px); display:grid; grid-template-columns:1fr 1fr; gap:clamp(16px,2.6vw,40px); }
+.caminho{ padding:clamp(22px,2.8vw,40px); background:var(--branco); }
+.caminho .se{ font-family:var(--serif); font-style:italic; color:var(--madeira); font-size:1.05rem; }
+.caminho h3{ font-size:clamp(1.4rem,2.1vw,2.2rem); margin:8px 0 14px; }
+.passos{ display:flex; gap:10px; margin-top:18px; flex-wrap:wrap; }
+.passos span{ font-size:.85rem; padding:6px 14px; border:1px solid var(--linha); border-radius:30px; }
+.passos span.on{ background:var(--vinho); color:var(--marfim); border-color:var(--vinho); }
+.olhar{ margin-top:clamp(22px,4vh,40px); max-width:70ch; padding-left:18px; border-left:2px solid var(--ouro); }
+
+/* ---------- entregas ---------- */
+.entregas{ margin-top:clamp(24px,5vh,52px); display:grid; grid-template-columns:repeat(4,1fr); column-gap:clamp(16px,2.4vw,36px); }
+.entregas div{ padding:clamp(12px,2vh,18px) 0; border-bottom:1px solid rgba(250,247,242,.16); display:flex; gap:14px; align-items:baseline; font-family:var(--serif); font-size:clamp(1rem,1.45vw,1.5rem); }
+.entregas div em{ font-size:.7em; color:var(--ouro); font-variant-numeric:tabular-nums; min-width:22px; }
+
+/* ---------- resultado ---------- */
+.result{ margin-top:clamp(26px,5vh,52px); display:grid; grid-template-columns:repeat(3,1fr); border-top:1px solid var(--linha); }
+.result div{ padding:clamp(18px,3vh,30px) clamp(10px,1.4vw,22px) clamp(18px,3vh,30px) 0; border-bottom:1px solid var(--linha); font-family:var(--serif); font-size:clamp(1.15rem,1.8vw,1.9rem); line-height:1.25; }
+.result div::before{ content:""; display:block; width:8px; height:8px; background:var(--vinho); border-radius:50%; margin-bottom:14px; }
+.aviso{ margin-top:clamp(20px,4vh,36px); font-size:.9rem; color:var(--cinza); max-width:70ch; }
+
+/* ---------- papéis ---------- */
+.papeis{ margin-top:clamp(26px,5vh,52px); display:grid; grid-template-columns:1.2fr 1fr 1fr; gap:clamp(14px,2vw,30px); }
+.papel{ padding:clamp(20px,2.4vw,34px); background:var(--branco); }
+.papel.meu{ background:var(--vinho); color:var(--marfim); }
+.papel h3{ font-size:clamp(1.2rem,1.7vw,1.8rem); margin-bottom:12px; }
+.papel.meu h3{ color:var(--ouro); }
+.papel ul{ list-style:none; }
+.papel li{ padding:7px 0; border-bottom:1px solid var(--linha); font-size:.95rem; }
+.papel.meu li{ border-color:rgba(250,247,242,.18); }
+
+/* ---------- fechamento ---------- */
+.fecho h2{ max-width:18ch; font-size:clamp(2.4rem,5.4vw,5.8rem); }
+.fecho .cta{ display:inline-block; margin-top:clamp(28px,5vh,52px); background:var(--ouro); color:var(--tinta); text-decoration:none; padding:18px 34px; font-size:1.05rem; font-weight:500; border-radius:2px; }
+.fecho .cta:hover{ background:#d8b46f; }
+.fecho .assin{ margin-top:clamp(36px,7vh,80px); font-family:var(--serif); font-style:italic; font-size:clamp(1.2rem,1.6vw,1.6rem); color:var(--ouro); }
+.fecho .assin small{ display:block; font-style:normal; font-family:var(--sans); font-size:.6em; color:rgba(250,247,242,.6); margin-top:6px; }
+
+/* ---------- navegação ---------- */
+.nav{ position:fixed; left:0; right:0; bottom:0; padding:0 clamp(16px,6.5vw,120px) calc(env(safe-area-inset-bottom,0px) + 16px); display:flex; align-items:center; gap:16px; z-index:20; pointer-events:none; }
+.nav > *{ pointer-events:auto; }
+.progresso{ position:fixed; left:0; top:env(safe-area-inset-top,0px); height:2px; background:var(--ouro); transition:width .5s ease; z-index:21; }
+.nav .num{ font-family:var(--serif); font-size:.95rem; font-variant-numeric:tabular-nums; padding:6px 12px; border-radius:30px; background:rgba(250,247,242,.85); color:var(--tinta); backdrop-filter:blur(6px); }
+.nav .esp{ flex:1; }
+.nav button{ width:44px; height:44px; border-radius:50%; border:1px solid rgba(201,161,90,.6); background:rgba(250,247,242,.85); color:var(--tinta); cursor:pointer; backdrop-filter:blur(6px); display:grid; place-items:center; }
+.nav button:hover{ background:var(--marfim); }
+.nav button svg{ width:18px; height:18px; }
+
+/* ---------- responsivo ---------- */
+@media (max-width: 980px){
+  .slide{ justify-content:flex-start; padding-top:calc(clamp(28px,6vh,80px) + 28px); }
+  .capa .conteudo,.duas,.dx,.caminhos{ grid-template-columns:1fr; }
+  .eng,.beauty-grid{ grid-template-columns:1fr 1fr; }
+  .eng > div:nth-child(3){ border-left:0; padding-left:0; }
+  .eng > div{ padding-bottom:20px; }
+  .tri,.modelos,.papeis,.result{ grid-template-columns:1fr; }
+  .calc{ grid-template-columns:1fr; }
+  .tabela{ grid-column:auto; overflow-x:auto; }
+  .entregas{ grid-template-columns:1fr 1fr; }
+  .jornada{ grid-template-columns:1fr; gap:14px; }
+  .jornada::before{ left:11px; right:auto; top:0; bottom:0; width:1px; height:auto; }
+  .jornada .p{ display:grid; grid-template-columns:23px auto 1fr; gap:14px; align-items:center; }
+  .jornada .p span,.jornada .p b{ margin-top:0; }
+  .ab{ grid-template-columns:1fr; }
+  .ab .seta{ justify-self:center; width:1px; height:36px; }
+  .ab .seta::after{ right:-4px; top:auto; bottom:0; border-top:9px solid var(--ouro); border-left:4.5px solid transparent; border-right:4.5px solid transparent; border-bottom:0; }
+  .meses{ grid-template-columns:repeat(3,1fr); row-gap:16px; }
+  .trilho .fases{ grid-template-columns:1fr; }
+  .pontos{ grid-template-columns:repeat(10,1fr); }
+}
+@media (max-width: 560px){
+  .eng,.beauty-grid,.entregas,.cols{ grid-template-columns:1fr; }
+  .eng > div + div{ border-left:0; padding-left:0; border-top:1px solid var(--linha); }
+  .ponte{ grid-template-columns:1fr; }
+  .ponte .vao{ height:40px; width:1px; background:repeating-linear-gradient(180deg,var(--vinho) 0 6px,transparent 6px 12px); }
+  .ponte .vao span{ left:16px; top:50%; transform:translateY(-50%); }
+}
+</style>
+</head>
+<body>
+<div class="progresso" id="progresso"></div>
+<main class="deck" id="deck">
+
+<!-- 1 CAPA -->
+<section class="slide claro capa" aria-label="Capa">
+  <div class="marca">All Win <i>Academy</i></div>
+  <div class="conteudo">
+    <div>
+      <span class="fio"></span>
+      <h1>Business Core<span>consultoria estratégica para clínicas</span></h1>
+    </div>
+    <div class="lado">
+      <p class="lead" style="margin-top:0">Para clínicas que querem crescer com <b>estrutura, posicionamento e estratégia comercial.</b></p>
+      <p class="assina">Maria Clara<small>Terapeuta comportamental e Practitioner em PNL</small></p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 PREMISSA -->
+<section class="slide vinho premissa" aria-label="A premissa">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <blockquote>O negócio só cresce até onde <em>a dona do negócio</em> cresce.</blockquote>
+    <p class="lead">Por isso o meu olhar caminha nas duas direções: para a estrutura da clínica e para a mulher que conduz essa estrutura.</p>
+  </div>
+</section>
+
+<!-- 3 CENÁRIO -->
+<section class="slide claro" aria-label="O cenário da clínica">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>Procedimento bom, profissional preparada e demanda chegando.</h2>
+    <p class="lead">Mesmo assim, parte das vendas se perde no caminho. Ela fica na <b>distância entre o desejo da paciente e a capacidade de pagamento</b> dela naquele momento.</p>
+    <div class="ponte" aria-hidden="true">
+      <div class="pol">Desejo<small>ela quer o protocolo</small></div>
+      <div class="vao"><span>onde a venda se perde</span></div>
+      <div class="pol" style="text-align:right">Pagamento<small>o valor ainda não cabe hoje</small></div>
+    </div>
+    <div class="falas">
+      <small>O que a clínica costuma ouvir</small>
+      <p>“Está caro demais.”</p>
+      <p>“Não tenho limite no cartão.”</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 PONTO B -->
+<section class="slide bege" aria-label="O ponto B">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>Primeiro entendemos onde você está. Depois definimos onde quer chegar.</h2>
+    <div class="ab">
+      <div class="bloco">
+        <div class="letra">A</div>
+        <h3 style="margin-top:12px">A clínica hoje</h3>
+        <p class="txt suave">Números, rotina, equipe, posicionamento, gargalos e o que está pesando na sua mão.</p>
+      </div>
+      <div class="seta" aria-hidden="true"></div>
+      <div class="bloco b">
+        <div class="letra">B</div>
+        <h3 style="margin-top:12px">A clínica em 6 meses</h3>
+        <p class="txt" style="color:rgba(250,247,242,.82)">Um destino claro, com metas, estrutura e o seu papel definido dentro do negócio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 ENGRENAGENS -->
+<section class="slide claro" aria-label="As quatro engrenagens">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>Quatro engrenagens que precisam girar juntas.</h2>
+    <div class="eng">
+      <div><span class="n">1</span><h3>Marketing</h3><p class="txt suave">Gera desejo e atrai a paciente certa para a clínica.</p></div>
+      <div><span class="n">2</span><h3>Produto</h3><p class="txt suave">Organiza protocolos que entregam valor e sustentam margem.</p></div>
+      <div><span class="n">3</span><h3>Comercial</h3><p class="txt suave">Conduz a oportunidade com processo, roteiro e acompanhamento.</p></div>
+      <div><span class="n">4</span><h3>Vendas</h3><p class="txt suave">Transforma intenção em decisão, com segurança na proposta.</p></div>
+    </div>
+    <p class="rodape-frase">Quando uma delas para, as outras sentem.</p>
+  </div>
+</section>
+
+<!-- 6 POSICIONAMENTO -->
+<section class="slide branco" aria-label="Posicionamento">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>Procedimentos parecidos. Escolhas diferentes.</h2>
+    <p class="lead">Quando várias clínicas oferecem técnicas semelhantes, a paciente escolhe por confiança. E essa confiança começa a ser construída <b>antes mesmo da consulta.</b></p>
+    <div class="tri">
+      <div style="background:var(--marfim)"><h3>Marca pessoal</h3><p class="txt suave">Quem você é e por que a paciente quer ser cuidada por você.</p></div>
+      <div style="background:var(--marfim)"><h3>Autoridade</h3><p class="txt suave">O que você demonstra saber e as transformações que já entregou.</p></div>
+      <div style="background:var(--marfim)"><h3>Posicionamento</h3><p class="txt suave">O lugar que a sua clínica ocupa na mente da paciente.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 7 COMPORTAMENTO -->
+<section class="slide cafe" aria-label="Comportamento de consumo">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>Entender como a paciente decide faz parte da estratégia comercial.</h2>
+    <p class="lead" style="color:rgba(250,247,242,.78)">A forma como ela compra, o que pesa na hora do sim e a relação que ela tem com o próprio cuidado mudam a maneira de comunicar, apresentar e fechar.</p>
+    <div class="tri">
+      <div><h3>Como ela decide</h3><p class="txt suave">O caminho entre o primeiro interesse e a decisão de agendar.</p></div>
+      <div><h3>O que a faz adiar</h3><p class="txt suave">Insegurança, valor, momento de vida, medo do resultado.</p></div>
+      <div><h3>O que a faz voltar</h3><p class="txt suave">Vínculo, acompanhamento e a experiência que fica depois.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8 CONSÓRCIO BEAUTY -->
+<section class="slide escuro" aria-label="Consórcio Beauty">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>Consórcio Beauty, uma engrenagem comercial dentro da estratégia.</h2>
+    <p class="lead" style="color:rgba(250,247,242,.78)">Estrutura possibilidades de pagamento para pacientes que desejam protocolos de maior valor e ainda não têm o valor total disponível ou limite de crédito suficiente. Foi desenvolvido a partir de estudos de comportamento de consumo.</p>
+    <div class="beauty-grid">
+      <div><h3>No marketing</h3><p class="txt">A clínica comunica que existe um caminho possível para o protocolo que a paciente deseja.</p></div>
+      <div><h3>No produto</h3><p class="txt">Os protocolos já nascem com a estrutura de pagamento pensada para cada um.</p></div>
+      <div><h3>No comercial</h3><p class="txt">A proposta é conduzida com segurança, preservando o valor do procedimento.</p></div>
+      <div><h3>Nas vendas</h3><p class="txt">A decisão da paciente encontra uma forma viável de acontecer.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 9 JORNADA -->
+<section class="slide claro" aria-label="Jornada da paciente">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>A jornada da paciente, do primeiro olhar ao acompanhamento.</h2>
+    <div class="jornada">
+      <div class="p"><i></i><span>1</span><b>Atração</b></div>
+      <div class="p"><i></i><span>2</span><b>Interesse</b></div>
+      <div class="p"><i></i><span>3</span><b>Filtro</b></div>
+      <div class="p"><i></i><span>4</span><b>Consulta</b></div>
+      <div class="p"><i></i><span>5</span><b>Proposta</b></div>
+      <div class="p foco"><i></i><span>6</span><b>Viabilização</b></div>
+      <div class="p"><i></i><span>7</span><b>Fechamento</b></div>
+      <div class="p"><i></i><span>8</span><b>Acompanhamento</b></div>
+    </div>
+    <p class="nota-jornada txt">O Consórcio Beauty entra na viabilização, quando a paciente já entendeu o valor do protocolo. <b>A indicação do procedimento continua sendo uma decisão clínica</b>, separada da solução de pagamento.</p>
+  </div>
+</section>
+
+<!-- 10 MODELOS -->
+<section class="slide bege" aria-label="Os três modelos do Beauty">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>Três modelos para estruturar a decisão.</h2>
+    <div class="modelos">
+      <div class="modelo">
+        <span class="tag">Modelo 1</span>
+        <h3>Entrada de 50%</h3>
+        <div class="fluxo" aria-hidden="true">
+          <span class="ent" style="flex:50"></span><span style="flex:10"></span><span style="flex:10"></span><span style="flex:10"></span><span style="flex:10"></span><span style="flex:10"></span>
+        </div>
+        <div class="fluxo-leg"><span>50% de entrada</span><span>saldo parcelado</span></div>
+        <p class="txt suave">Metade do valor na entrada e o saldo restante parcelado.</p>
+      </div>
+      <div class="modelo">
+        <span class="tag">Modelo 2</span>
+        <h3>Entrada escalonada</h3>
+        <div class="fluxo" aria-hidden="true">
+          <span class="ent" style="flex:30"></span><span class="ent2" style="flex:20"></span><span class="cont" style="flex:50"></span>
+        </div>
+        <div class="fluxo-leg"><span>até 30%</span><span>+20% em 30 dias</span><span>continuidade</span></div>
+        <p class="txt suave">Até 30% de entrada, mais 20% após 30 dias e continuidade conforme a estrutura definida para o protocolo.</p>
+      </div>
+      <div class="modelo">
+        <span class="tag">Modelo 3</span>
+        <h3>Parcelas menores</h3>
+        <div class="fluxo" aria-hidden="true" style="margin-bottom:22px">
+          <span class="ent" style="flex:12"></span><span style="flex:11"></span><span style="flex:11"></span><span style="flex:11"></span><span style="flex:11"></span><span style="flex:11"></span><span style="flex:11"></span><span style="flex:11"></span><span style="flex:11"></span>
+          <div class="marco tracejado" style="left:50%"><small>50% em protocolos específicos</small></div>
+          <div class="marco" style="left:100%"><small style="transform:translateX(-100%)">início em 100%</small></div>
+        </div>
+        <p class="txt suave">Entrada menor e parcelas menores. O procedimento acontece após 100% do pagamento. Em protocolos específicos, o início pode ocorrer ao atingir 50%, conforme a regra definida com a clínica.</p>
+      </div>
+    </div>
+    <div class="antecipa">
+      <b>Antecipação</b>
+      <p class="txt suave" style="max-width:70ch">Existe possibilidade de antecipação, atualmente considerando 20%, mediante análise de crédito e autorização.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11 CALCULADORA -->
+<section class="slide claro" aria-label="Calculadora HTB">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2 style="max-width:none">Simule o plano da paciente e o líquido da clínica.</h2>
+    <div class="calc">
+      <div class="painel">
+        <h4>Dados do procedimento<small>Calculadora HTB</small></h4>
+        <div class="campo">
+          <label for="valor">Valor do procedimento</label>
+          <div class="prefixo"><input type="number" id="valor" value="5000" min="100" step="50" inputmode="decimal"></div>
+        </div>
+        <div class="campo">
+          <label>Modo de pagamento</label>
+          <div class="modos" role="group" aria-label="Modo de pagamento">
+            <button type="button" class="modo ativo" data-modo="iguais">Parcelas iguais</button>
+            <button type="button" class="modo" data-modo="personalizada">Entrada personalizada</button>
+          </div>
+          <p class="dica" id="dica-modo">A entrada tem o mesmo valor das parcelas, como a plataforma mostra para a paciente.</p>
+        </div>
+        <div class="campo" id="bloco-entrada" style="display:none">
+          <label for="entrada">Entrada <output id="v-entrada">50%</output></label>
+          <input type="range" id="entrada" min="0" max="80" step="5" value="50">
+        </div>
+        <div class="campo">
+          <label for="parcelas">Número de parcelas <output id="v-parcelas">12 parcelas</output></label>
+          <input type="range" id="parcelas" min="2" max="36" step="1" value="12">
+        </div>
+        <span class="selo" id="selo-taxa">Juros de 2,92% ao mês</span>
+        <p class="dica">Até 12x aplica 2,92% ao mês. Acima de 12x aplica 3,50% ao mês.</p>
+        <details>
+          <summary>Ajustar taxas</summary>
+          <div class="taxas">
+            <div><label for="juros1">Juros até 12x (%)</label><input type="number" id="juros1" value="2.92" step="0.01" inputmode="decimal"></div>
+            <div><label for="juros2">Juros acima de 12x (%)</label><input type="number" id="juros2" value="3.50" step="0.01" inputmode="decimal"></div>
+            <div><label for="adm">Taxa da clínica (%)</label><input type="number" id="adm" value="5" step="0.5" inputmode="decimal"></div>
+            <div><label for="minima">Parcela mínima (R$)</label><input type="number" id="minima" value="250" step="10" inputmode="decimal"></div>
+          </div>
+        </details>
+      </div>
+
+      <div class="painel">
+        <h4>A paciente<small>Plano dela</small></h4>
+        <div class="linhas">
+          <div><span>Valor do procedimento</span><span id="r-valor">R$ 0</span></div>
+          <div><span>Entrada no ato</span><span id="r-entrada">R$ 0</span></div>
+          <div><span>Saldo nas parcelas</span><span id="r-saldo">R$ 0</span></div>
+          <div><span>Parcelas</span><span id="r-parcela">R$ 0</span></div>
+          <div><span>Juros do parcelamento</span><span id="r-juros">R$ 0</span></div>
+        </div>
+        <div class="total"><small>Total pago pela paciente</small><strong id="r-total">R$ 0</strong><small id="r-resumo"></small></div>
+        <div class="alerta" id="alerta"></div>
+      </div>
+
+      <div class="painel clinica">
+        <h4>A clínica<small>Seu líquido</small></h4>
+        <div class="linhas">
+          <div><span>Valor do procedimento</span><span id="r-base">R$ 0</span></div>
+          <div><span>Taxa da clínica</span><span id="r-adm">R$ 0</span></div>
+          <div><span>Recebido com a entrada</span><span id="r-rep-entrada">R$ 0</span></div>
+          <div><span>Recebido a cada boleto pago</span><span id="r-rep-parcela">R$ 0</span></div>
+        </div>
+        <div class="total"><small>Líquido total para a clínica</small><strong id="r-repasse">R$ 0</strong><small>Liberado conforme os boletos são pagos, disponível para saque em D+2.</small></div>
+      </div>
+
+      <div class="painel tabela">
+        <h4>Comparação entre condições<small>Mesmo procedimento, prazos diferentes</small></h4>
+        <table>
+          <thead><tr><th>Prazo</th><th>Como fica</th><th>Juros</th><th>Total da paciente</th></tr></thead>
+          <tbody id="corpo-tabela"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 DESCONTO X BEAUTY -->
+<section class="slide bege" aria-label="Desconto versus Beauty">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2 style="max-width:none">Venda com desconto × venda estruturada com Consórcio Beauty.</h2>
+    <div class="dx">
+      <div class="painel">
+        <h4>Simulação<small>Usa o valor e o prazo da calculadora</small></h4>
+        <div class="campo">
+          <label for="dx-desc">Desconto oferecido <output id="dx-desc-v">15%</output></label>
+          <input type="range" id="dx-desc" min="0" max="40" step="1" value="15">
+        </div>
+        <div class="campo">
+          <label for="dx-custo">Custo do protocolo <output id="dx-custo-v">40%</output></label>
+          <input type="range" id="dx-custo" min="10" max="80" step="1" value="40">
+          <p class="dica">Insumos, sala e profissional. Ajuste para a realidade da sua clínica.</p>
+        </div>
+        <div class="linhas">
+          <div><span>Valor do procedimento</span><span id="dx-valor">R$ 0</span></div>
+          <div><span>Custo do protocolo</span><span id="dx-c">R$ 0</span></div>
+          <div><span>Prazo no Beauty</span><span id="dx-prazo">12x</span></div>
+        </div>
+      </div>
+      <div>
+        <div class="cols">
+          <div class="cenario">
+            <h3>Com desconto</h3>
+            <div class="barra" id="b1" aria-hidden="true">
+              <div class="seg perda" id="b1-perda"></div>
+              <div class="seg marg" id="b1-marg"></div>
+              <div class="seg custo" id="b1-custo"></div>
+            </div>
+            <div class="linhas">
+              <div><span>A clínica recebe</span><span id="d1-rec">R$ 0</span></div>
+              <div><span>Margem da clínica</span><span id="d1-marg">R$ 0</span></div>
+              <div><span>A paciente paga</span><span id="d1-pac">R$ 0</span></div>
+            </div>
+          </div>
+          <div class="cenario bty">
+            <h3>Com Consórcio Beauty</h3>
+            <div class="barra" id="b2" aria-hidden="true">
+              <div class="seg tx" id="b2-tx"></div>
+              <div class="seg marg" id="b2-marg"></div>
+              <div class="seg custo" id="b2-custo"></div>
+            </div>
+            <div class="linhas">
+              <div><span style="color:rgba(250,247,242,.62)">A clínica recebe</span><span id="d2-rec">R$ 0</span></div>
+              <div style="border-color:rgba(250,247,242,.14)"><span style="color:rgba(250,247,242,.62)">Margem da clínica</span><span id="d2-marg">R$ 0</span></div>
+              <div style="border-color:rgba(250,247,242,.14)"><span style="color:rgba(250,247,242,.62)">A paciente paga</span><span id="d2-pac">R$ 0</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="leg">
+          <span><i style="background:var(--bege2)"></i>Custo</span>
+          <span><i style="background:var(--vinho)"></i>Margem</span>
+          <span><i style="border:1px dashed var(--vinho)"></i>Margem cedida no desconto</span>
+          <span><i style="background:rgba(201,161,90,.6)"></i>Taxa da clínica no Beauty</span>
+        </div>
+        <div class="diferenca">
+          <small class="suave">Margem preservada com a venda estruturada</small>
+          <strong id="dx-dif">R$ 0</strong>
+          <p class="mini" id="dx-frase"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 13 PRIMEIRO MÊS -->
+<section class="slide vinho" aria-label="Primeiro mês">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo duas">
+    <div>
+      <span class="fio"></span>
+      <h2>No primeiro mês, eu entro junto.</h2>
+      <p class="lead" style="color:rgba(250,247,242,.8)">Participo diretamente da implementação e acompanho a primeira aplicação da estratégia na rotina da clínica.</p>
+    </div>
+    <ul class="lista-traco" style="border-top:1px solid rgba(250,247,242,.2)">
+      <li style="border-color:rgba(250,247,242,.18)"><em>1</em>Diagnóstico e definição do ponto B</li>
+      <li style="border-color:rgba(250,247,242,.18)"><em>2</em>Estrutura das quatro engrenagens</li>
+      <li style="border-color:rgba(250,247,242,.18)"><em>3</em>Consórcio Beauty integrado à operação</li>
+      <li style="border-color:rgba(250,247,242,.18)"><em>4</em>Primeira aplicação acompanhada de perto</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 14 MESES 2 A 6 -->
+<section class="slide claro" aria-label="Meses 2 a 6">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo duas">
+    <div>
+      <span class="fio"></span>
+      <h2>Do segundo ao sexto mês, a clínica executa e eu acompanho.</h2>
+      <p class="lead">A estrutura passa a rodar nas mãos da clínica. Meu papel é ler os números com você e ajustar o que precisa.</p>
+    </div>
+    <ul class="lista-traco" style="border-top:1px solid var(--linha)">
+      <li><em>1</em>Análise de dados, conversões e margens</li>
+      <li><em>2</em>Identificação de gargalos e erros</li>
+      <li><em>3</em>Leitura de novas oportunidades</li>
+      <li><em>4</em>Ajustes de rota na estratégia</li>
+      <li><em>5</em>Novo treinamento quando necessário</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 15 EQUIPE -->
+<section class="slide bege" aria-label="Equipe">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>O trabalho se adapta ao momento da sua operação.</h2>
+    <div class="caminhos">
+      <div class="caminho">
+        <span class="se">Se a clínica já tem equipe</span>
+        <h3>Treinamento por engrenagem</h3>
+        <p class="txt suave">Cada pessoa recebe treinamento específico para a parte que conduz: atração, atendimento, proposta e fechamento.</p>
+        <div class="passos"><span class="on">Marketing</span><span class="on">Produto</span><span class="on">Comercial</span><span class="on">Vendas</span></div>
+      </div>
+      <div class="caminho">
+        <span class="se">Se a proprietária ainda executa tudo</span>
+        <h3>Estruturar e depois delegar</h3>
+        <p class="txt suave">Primeiro organizamos a operação. Depois construímos a delegação, com processos claros para quem chegar.</p>
+        <div class="passos"><span class="on">Estruturação</span><span>Delegação</span></div>
+      </div>
+    </div>
+    <p class="olhar txt">Em qualquer cenário, olho também para o comportamento e para os bloqueios que podem estar impedindo a proprietária de executar, vender, se posicionar ou crescer.</p>
+  </div>
+</section>
+
+<!-- 16 20 SESSÕES -->
+<section class="slide branco" aria-label="Vinte sessões em seis meses">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <div class="duas" style="align-items:end">
+      <div>
+        <span class="fio"></span>
+        <h2>Seis meses de acompanhamento, com evolução medida.</h2>
+      </div>
+      <div class="grande-num" style="color:var(--vinho)">20<small style="color:var(--tinta)">sessões em 6 meses</small></div>
+    </div>
+    <div class="trilho">
+      <div class="fases">
+        <div class="fase f1"><b>Mês 1</b>Implementação junto</div>
+        <div class="fase f2"><b>Meses 2 a 6</b>Execução da clínica, análise e ajustes</div>
+      </div>
+      <div class="pontos" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="pontos-leg"><span>Sessão 1</span><span>Sessão 20</span></div>
+    </div>
+    <div class="meses">
+      <div><b>Mês 1</b><span>Diagnóstico, ponto B e implementação</span></div>
+      <div><b>Mês 2</b><span>Primeiros dados e correções</span></div>
+      <div><b>Mês 3</b><span>Treinamento e ritmo da equipe</span></div>
+      <div><b>Mês 4</b><span>Otimização de conversão e margem</span></div>
+      <div><b>Mês 5</b><span>Consolidação da estrutura</span></div>
+      <div><b>Mês 6</b><span>Leitura do ponto B e próximos passos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 17 ENTREGAS -->
+<section class="slide escuro" aria-label="Entregas">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>O que a consultoria entrega.</h2>
+    <div class="entregas">
+      <div><em>01</em>Diagnóstico</div>
+      <div><em>02</em>Definição do ponto B</div>
+      <div><em>03</em>Estrutura estratégica</div>
+      <div><em>04</em>Marketing</div>
+      <div><em>05</em>Produto</div>
+      <div><em>06</em>Comercial</div>
+      <div><em>07</em>Vendas</div>
+      <div><em>08</em>Posicionamento</div>
+      <div><em>09</em>Treinamento</div>
+      <div><em>10</em>Implementação</div>
+      <div><em>11</em>Acompanhamento</div>
+      <div><em>12</em>Análise de dados</div>
+      <div><em>13</em>Ajustes</div>
+    </div>
+  </div>
+</section>
+
+<!-- 18 RESULTADO -->
+<section class="slide claro" aria-label="Resultado esperado">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>O que você pode esperar ao final do processo.</h2>
+    <div class="result">
+      <div>Mais clareza sobre o negócio</div>
+      <div>Mais estrutura na operação</div>
+      <div>Melhor execução no dia a dia</div>
+      <div>Maior capacidade comercial</div>
+      <div>Mais controle sobre a clínica</div>
+      <div>Crescimento sustentado pela estrutura da empresa</div>
+    </div>
+    <p class="aviso">Os números de cada clínica dependem da execução e da realidade de cada operação. Por isso o compromisso desta consultoria é com estrutura e acompanhamento, sem promessa de faturamento.</p>
+  </div>
+</section>
+
+<!-- 19 PAPÉIS -->
+<section class="slide bege" aria-label="Papéis">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>Cada parte com o seu papel bem definido.</h2>
+    <div class="papeis">
+      <div class="papel meu">
+        <h3>A consultoria Business Core</h3>
+        <ul>
+          <li>Diagnóstico e definição do ponto B</li>
+          <li>Estratégia das quatro engrenagens</li>
+          <li>Posicionamento e marca pessoal</li>
+          <li>Treinamento e implementação</li>
+          <li>Acompanhamento, análise de dados e ajustes</li>
+        </ul>
+      </div>
+      <div class="papel">
+        <h3>A estrutura financeira parceira</h3>
+        <ul>
+          <li>Análise de crédito</li>
+          <li>Cobranças da paciente</li>
+          <li>Repasses à clínica</li>
+          <li>Condições conforme contrato próprio</li>
+        </ul>
+      </div>
+      <div class="papel">
+        <h3>A clínica</h3>
+        <ul>
+          <li>Indicação clínica do procedimento</li>
+          <li>Atendimento e cuidado com a paciente</li>
+          <li>Execução da estratégia com a equipe</li>
+        </ul>
+      </div>
+    </div>
+    <p class="aviso">A consultoria orienta a estratégia e a integração do Beauty na operação. As condições financeiras, a análise de crédito e as cobranças ficam sob responsabilidade da estrutura financeira parceira, conforme o contrato firmado com ela.</p>
+  </div>
+</section>
+
+<!-- 20 FECHAMENTO -->
+<section class="slide escuro fecho" aria-label="Próximo passo">
+  <div class="marca">Business <i>Core</i></div>
+  <div class="conteudo">
+    <span class="fio"></span>
+    <h2>O próximo passo é um diagnóstico estratégico da sua clínica.</h2>
+    <p class="lead" style="color:rgba(250,247,242,.78)">Olhamos juntas para o seu ponto A, definimos com precisão o ponto B e você sai sabendo qual engrenagem pede atenção primeiro.</p>
+    <a class="cta" href="https://wa.me/5534974004799?text=Ol%C3%A1%2C%20Maria%20Clara!%20Quero%20agendar%20o%20diagn%C3%B3stico%20estrat%C3%A9gico%20da%20minha%20cl%C3%ADnica." target="_blank" rel="noopener">Agendar meu diagnóstico</a>
+    <p class="assin">Brindaremos.<small>Maria Clara, All Win Academy</small></p>
+  </div>
+</section>
+
+</main>
+
+<nav class="nav" aria-label="Navegação da apresentação">
+  <span class="num" id="contador">1 / 20</span>
+  <span class="esp"></span>
+  <button type="button" id="ant" aria-label="Slide anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 5l-7 7 7 7"/></svg></button>
+  <button type="button" id="prox" aria-label="Próximo slide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 5l7 7-7 7"/></svg></button>
+  <button type="button" id="tela" aria-label="Tela cheia"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</nav>
+
+<script>
+/* ===== navegação ===== */
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var atual=0, total=slides.length;
+  var cont=document.getElementById('contador'), prog=document.getElementById('progresso');
+  function ir(n){
+    n=Math.max(0,Math.min(total-1,n));
+    slides[atual].classList.remove('ativo');
+    atual=n;
+    slides[atual].classList.add('ativo');
+    slides[atual].scrollTop=0;
+    cont.textContent=(atual+1)+' / '+total;
+    prog.style.width=((atual+1)/total*100)+'%';
+    try{ history.replaceState(null,'','#'+(atual+1)); }catch(e){}
+  }
+  var h=parseInt((location.hash||'').replace('#',''),10);
+  slides[0].classList.add('ativo');
+  ir(isNaN(h)?0:h-1);
+  document.getElementById('prox').addEventListener('click',function(){ir(atual+1);});
+  document.getElementById('ant').addEventListener('click',function(){ir(atual-1);});
+  document.getElementById('tela').addEventListener('click',function(){
+    try{
+      if(!document.fullscreenElement){ document.documentElement.requestFullscreen(); }
+      else { document.exitFullscreen(); }
+    }catch(e){}
+  });
+  function emCampo(t){ return t && (t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.tagName==='SELECT'||t.isContentEditable); }
+  document.addEventListener('keydown',function(e){
+    if(emCampo(e.target)) return;
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){ e.preventDefault(); ir(atual+1); }
+    if(e.key==='ArrowLeft'||e.key==='PageUp'){ e.preventDefault(); ir(atual-1); }
+    if(e.key==='Home'){ ir(0); } if(e.key==='End'){ ir(total-1); }
+  });
+  var x0=null,y0=null;
+  document.addEventListener('touchstart',function(e){
+    if(emCampo(e.target)){ x0=null; return; }
+    x0=e.touches[0].clientX; y0=e.touches[0].clientY;
+  },{passive:true});
+  document.addEventListener('touchend',function(e){
+    if(x0===null) return;
+    var dx=e.changedTouches[0].clientX-x0, dy=e.changedTouches[0].clientY-y0;
+    if(Math.abs(dx)>60 && Math.abs(dx)>Math.abs(dy)*1.4){ ir(atual+(dx<0?1:-1)); }
+    x0=null;
+  },{passive:true});
+})();
+
+/* ===== calculadora HTB (mesma lógica da calculadora original) ===== */
+var estadoCalc={};
+(function(){
+  var ids=['valor','entrada','parcelas','juros1','juros2','adm','minima'],el={};
+  ids.forEach(function(i){el[i]=document.getElementById(i);});
+  var modo='iguais';
+
+  function m(n){
+    return 'R$ ' + n.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+  }
+  function parcelaIgual(V,i,N){      // N pagamentos iguais, o primeiro no ato
+    if(N<=0) return 0;
+    if(i===0) return V/N;
+    var fator = 1 + (1 - Math.pow(1+i,-(N-1)))/i;
+    return V * (1+i) / fator;
+  }
+  function taxaDe(n,j1,j2){ return n<=12 ? j1 : j2; }
+
+  function plano(V,N,i,pe){
+    if(modo==='iguais'){
+      var p=parcelaIgual(V,i,N);
+      return {entrada:p, nBoletos:Math.max(N-1,0), parcela:p, total:p*N};
+    }
+    // O total é o mesmo do plano de parcelas iguais. A entrada apenas redistribui o restante.
+    var total=parcelaIgual(V,i,N)*N;
+    var ent=V*pe/100, nb=Math.max(N-1,0);
+    var par=nb>0 ? (total-ent)/nb : 0;
+    return {entrada:ent, nBoletos:nb, parcela:par, total:total};
+  }
+  window.htbMoeda=m;
+
+  function calcular(){
+    var V=parseFloat(el.valor.value)||0;
+    var pe=parseInt(el.entrada.value,10);
+    var N=parseInt(el.parcelas.value,10);
+    var j1=(parseFloat(el.juros1.value)||0)/100;
+    var j2=(parseFloat(el.juros2.value)||0)/100;
+    var adm=(parseFloat(el.adm.value)||0)/100;
+    var min=parseFloat(el.minima.value)||0;
+    var i=taxaDe(N,j1,j2);
+
+    var r=plano(V,N,i,pe);
+    var custoJuros=r.total-V;
+
+    var taxaAdm=V*adm;
+    var liquido=V-taxaAdm;
+    var liqEntrada, liqParcela;
+    if(modo==='iguais'){
+      liqEntrada=liquido/N;
+      liqParcela=liquido/N;
+    } else {
+      liqEntrada=liquido*(r.entrada/r.total);
+      liqParcela=r.nBoletos>0 ? liquido*(r.parcela/r.total) : 0;
+    }
+
+    document.getElementById('v-entrada').textContent=pe+'% · '+m(V*pe/100);
+    document.getElementById('v-parcelas').textContent=N+(N===1?' parcela':' parcelas');
+    document.getElementById('selo-taxa').textContent='Juros de '+(i*100).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'% ao mês';
+
+    document.getElementById('r-valor').textContent=m(V);
+    document.getElementById('r-entrada').textContent=m(r.entrada);
+    document.getElementById('r-saldo').textContent=m(r.total-r.entrada);
+    document.getElementById('r-parcela').textContent=r.nBoletos+'x de '+m(r.parcela);
+    document.getElementById('r-juros').textContent=m(custoJuros);
+    document.getElementById('r-total').textContent=m(r.total);
+    document.getElementById('r-resumo').textContent='Entrada de '+m(r.entrada)+' mais '+r.nBoletos+'x de '+m(r.parcela);
+
+    document.getElementById('r-base').textContent=m(V);
+    document.getElementById('r-adm').textContent='- '+m(taxaAdm);
+    document.getElementById('r-rep-entrada').textContent=m(liqEntrada);
+    document.getElementById('r-rep-parcela').textContent=m(liqParcela);
+    document.getElementById('r-repasse').textContent=m(liquido);
+
+    var al=document.getElementById('alerta');
+    if(r.nBoletos===0){
+      al.className='alerta';
+      al.innerHTML='Pagamento <b>integral no ato</b>, sem parcelamento.';
+    } else if(r.parcela<min){
+      al.className='alerta atencao';
+      al.innerHTML='A parcela ficou em <b>'+m(r.parcela)+'</b>, abaixo da mínima de '+m(min)+'. Reduza o número de parcelas'+(modo==='personalizada'?' ou aumente a entrada.':'.');
+    } else {
+      al.className='alerta';
+      al.innerHTML='Parcela de <b>'+m(r.parcela)+'</b>, dentro da mínima de '+m(min)+'.';
+    }
+
+    var corpo=document.getElementById('corpo-tabela');
+    corpo.innerHTML='';
+    [2,4,6,10,12,18,24,36].forEach(function(n){
+      var ii=taxaDe(n,j1,j2);
+      var x=plano(V,n,ii,pe);
+      var tr=document.createElement('tr');
+      var cls=[];
+      if(x.parcela<min && x.nBoletos>0) cls.push('baixa');
+      if(n===N) cls.push('sel');
+      tr.className=cls.join(' ');
+      tr.innerHTML='<td>'+n+'x</td><td>entrada de '+m(x.entrada)+' + '+x.nBoletos+'x de '+m(x.parcela)+'</td><td>'+(ii*100).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})+'% a.m.</td><td>'+m(x.total)+'</td>';
+      corpo.appendChild(tr);
+    });
+
+    estadoCalc={V:V,N:N,total:r.total,parcela:r.parcela,entrada:r.entrada,nBoletos:r.nBoletos,adm:adm,taxaAdm:taxaAdm,liquido:liquido};
+    if(window.atualizarDX) window.atualizarDX();
+  }
+
+  document.querySelectorAll('.modo').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.modo').forEach(function(x){x.classList.remove('ativo');});
+      b.classList.add('ativo');
+      modo=b.dataset.modo;
+      document.getElementById('bloco-entrada').style.display = modo==='personalizada' ? 'block' : 'none';
+      document.getElementById('dica-modo').textContent = modo==='personalizada'
+        ? 'Você define a entrada e o restante se divide nas parcelas seguintes. O total continua o mesmo, a entrada apenas alivia o valor mensal.'
+        : 'A entrada tem o mesmo valor das parcelas, como a plataforma mostra para a paciente.';
+      calcular();
+    });
+  });
+
+  ids.forEach(function(i){
+    el[i].addEventListener('input',calcular);
+    el[i].addEventListener('change',calcular);
+  });
+  window.calcularHTB=calcular;
+})();
+
+/* ===== desconto x beauty ===== */
+(function(){
+  var d=document.getElementById('dx-desc'), c=document.getElementById('dx-custo');
+  function pct(x){ return Math.max(0,x*100)+'%'; }
+  window.atualizarDX=function(){
+    var m=window.htbMoeda, s=estadoCalc;
+    if(!m||!s||!s.V) return;
+    var V=s.V, desc=parseInt(d.value,10)/100, custoP=parseInt(c.value,10)/100;
+    var C=V*custoP;
+    var rec1=V*(1-desc), marg1=rec1-C;
+    var rec2=s.liquido, marg2=rec2-C;
+    var dif=marg2-marg1;
+
+    document.getElementById('dx-desc-v').textContent=Math.round(desc*100)+'%';
+    document.getElementById('dx-custo-v').textContent=Math.round(custoP*100)+'%';
+    document.getElementById('dx-valor').textContent=m(V);
+    document.getElementById('dx-c').textContent=m(C);
+    document.getElementById('dx-prazo').textContent=s.N+'x';
+
+    document.getElementById('d1-rec').textContent=m(rec1);
+    document.getElementById('d1-marg').textContent=m(marg1);
+    document.getElementById('d1-pac').textContent=m(rec1)+' à vista';
+    document.getElementById('d2-rec').textContent=m(rec2);
+    document.getElementById('d2-marg').textContent=m(marg2);
+    document.getElementById('d2-pac').textContent='entrada + '+s.nBoletos+'x de '+m(s.parcela);
+
+    // barras em proporção do valor cheio do procedimento
+    document.getElementById('b1-custo').style.height=pct(Math.min(C,V)/V);
+    document.getElementById('b1-marg').style.height=pct(Math.max(marg1,0)/V);
+    document.getElementById('b1-perda').style.height=pct((V-rec1)/V);
+    document.getElementById('b2-custo').style.height=pct(Math.min(C,V)/V);
+    document.getElementById('b2-marg').style.height=pct(Math.max(marg2,0)/V);
+    document.getElementById('b2-tx').style.height=pct(s.taxaAdm/V);
+
+    document.getElementById('dx-dif').textContent=(dif>=0?'+ ':'- ')+m(Math.abs(dif));
+    var perdaMarg = (V-C)>0 ? ((V-rec1)/(V-C))*100 : 0;
+    document.getElementById('dx-frase').textContent =
+      'Com '+Math.round(desc*100)+'% de desconto, a clínica cede '+perdaMarg.toLocaleString('pt-BR',{maximumFractionDigits:0})+'% da própria margem. '+
+      'Na venda estruturada, o valor do procedimento se mantém, a clínica arca com a taxa de '+(s.adm*100).toLocaleString('pt-BR',{maximumFractionDigits:2})+'% e o líquido entra conforme os boletos são pagos.';
+  };
+  d.addEventListener('input',window.atualizarDX);
+  c.addEventListener('input',window.atualizarDX);
+  window.calcularHTB();
+})();
+</script>
+</body>
+</html>
